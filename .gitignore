@@ -1,27 +1,7 @@
-# built application files
-*.apk
-*.ap_
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
+# Android Studio project files
+.gradle/
+.idea/
+app/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
-
-# Eclipse project files
-.classpath
-.project
-
-# Android Studio project files
-*.iml
-.gradle
-.idea
-build
-import-summary.txt
