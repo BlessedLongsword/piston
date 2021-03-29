@@ -2,4 +2,24 @@
     <string name="app_name">Piston</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <!-- Create Post Strings -->
+    <string name="txt_activity_title_createPost">CREATE POST</string>
+    <string name="txt_choose_ambit">Ambit:</string>
+    <string name="txt_choose_category">Category:</string>
+    <string name="txt_choose_picture">Picture:</string>
+    <string name="txt_input_title">Title:</string>
+    <string name="txt_choose_attach_file">Attach File:</string>
+    <string name="txt_input_post_content">Content:</string>
+    <string name="txt_hint_input_post_content">Tell what happened</string>
+    <string name="txt_hint_input_title">Insert your Title</string>
+    <string name="txt_btn_upload_post">Upload</string>
+    <string-array name="txt_ambit_entries">
+        <item><string name="txt_ambit_personal">Personal</string></item>
+        <item><string name="txt_ambit_group">Group</string></item>
+        <item><string name="txt_ambit_flobal">Global</string></item>
+    </string-array>
+    <string name="txt_btn_choose_picture">Browse Image</string>
+    <string name="txt_btn_choose_attach_file">Browse File</string>
+
 </resources>
