@@ -2,6 +2,15 @@
     <string name="app_name">Piston</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="user_hint">Email</string>
+    <string name="pass_hint">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_pass">Forgot password?</string>
+    <string name="sign_up_msg">Don\&apos;t have an account?</string>
+    <string name="sign_up_button"> Sign up Now!</string>
+
 
     <!-- Create Post Strings -->
     <string name="txt_activity_title_createPost">CREATE POST</string>
