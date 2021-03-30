@@ -2,6 +2,8 @@
     <string name="app_name">Piston</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <!-- Sign in strings -->
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
     <string name="user_hint">Email</string>
