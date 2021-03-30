@@ -63,4 +63,13 @@
     <string name="txt_btn_choose_attach_file">Browse File</string>
     <string name="add">Add</string>
 
+    <!-- Edit Post Strings -->
+    <string name="txt_activity_title_editPost">EDIT POST</string>
+    <string name="txt_activity_btn1_editPost">Edit</string>
+    <string name="txt_activity_btn2_editPost">Delete</string>
+
+    <!-- Reply Post Strings -->
+    <string name="txt_activity_title_replyPost">REPLY POST</string>
+    <string name="txt_activity_btn1_replyPost">Reply</string>
+
 </resources>
