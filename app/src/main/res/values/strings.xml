@@ -38,6 +38,11 @@
     <string name="edit_profile_btn">Save changes</string>
     <string name="edit_profile_explore">Explore</string>
 
+    <!-- View Profile Strings -->
+    <string name="view_profile_title">PROFILE</string>
+    <string name="view_profile_post">Featured post:</string>
+    <string name="view_profile_edit">Edit profile</string>
+
     <!-- Create Post Strings -->
     <string name="txt_activity_title_createPost">CREATE POST</string>
     <string name="txt_choose_ambit">Ambit:</string>
