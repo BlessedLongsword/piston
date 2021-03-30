@@ -11,6 +11,30 @@
     <string name="sign_up_msg">Don\&apos;t have an account?</string>
     <string name="sign_up_button"> Sign up Now!</string>
 
+    <!-- Register strings -->
+    <string name="reg_title">REGISTER</string>
+    <string name="reg_username">Username:</string>
+    <string name="reg_email">Email:</string>
+    <string name="reg_pwd">Password:</string>
+    <string name="reg_pwd2">Confirm password:</string>
+    <string name="reg_date">Date of Birth:</string>
+    <string name="terms_text">I have read and accept the privacy policy</string>
+    <string name="reg_btn">Register</string>
+
+    <!-- Edit profile strings -->
+    <string name="edit_profile_title">EDIT PROFILE</string>
+    <string name="edit_profile_username">Username:</string>
+    <string name="edit_profile_name">Name:</string>
+    <string name="edit_profile_surname">Surname:</string>
+    <string name="edit_profile_phone">Phone number:</string>
+    <string name="edit_profile_email">Email:</string>
+    <string name="edit_profile_icon">Icon:</string>
+    <string name="edit_profile_date">Date of Birth:</string>
+    <string name="edit_profile_pwd">New password:</string>
+    <string name="edit_profile_pwd2">Confirm password:</string>
+    <string name="edit_profile_currentPWD">Current password:</string>
+    <string name="edit_profile_btn">Save changes</string>
+    <string name="edit_profile_explore">Explore</string>
 
     <!-- Create Post Strings -->
     <string name="txt_activity_title_createPost">CREATE POST</string>
