@@ -63,14 +63,20 @@
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@id/label_0"
         android:layout_alignStart="@id/pass_editText"
         android:layout_alignLeft="@id/pass_editText"
         android:layout_alignEnd="@id/pass_editText"
         android:layout_alignRight="@id/pass_editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginLeft="-1dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:text="@string/sign_in"
-        android:layout_below="@id/label_0" />
+        android:onClick="login"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,14 +88,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_msg" />
+
         <TextView
             android:id="@+id/sign_up_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:text="@string/sign_up_button"
-            android:textColor="#0000EE" />
+            android:textColor="#0000EE"
+            android:onClick="register"/>
     </LinearLayout>
 
 </RelativeLayout>

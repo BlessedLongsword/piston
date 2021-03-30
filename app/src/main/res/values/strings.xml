@@ -54,5 +54,6 @@
     </string-array>
     <string name="txt_btn_choose_picture">Browse Image</string>
     <string name="txt_btn_choose_attach_file">Browse File</string>
+    <string name="add">Add</string>
 
 </resources>

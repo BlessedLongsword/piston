@@ -136,10 +136,11 @@
         android:layout_height="50dp"
         android:layout_marginBottom="61dp"
         android:text="@string/reg_btn"
+        android:onClick="register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/registerCheck"/>
 
     <CheckBox
         android:id="@+id/registerCheck"

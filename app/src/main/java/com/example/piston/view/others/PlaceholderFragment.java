@@ -1,4 +1,4 @@
-package com.example.piston.ui.main;
+package com.example.piston.view.others;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
