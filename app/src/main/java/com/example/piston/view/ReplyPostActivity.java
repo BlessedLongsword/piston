@@ -7,15 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
 
-public class CreatePostActivity extends AppCompatActivity {
+public class ReplyPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_post);
+        setContentView(R.layout.activity_reply_post);
     }
 
-    public void createPost(View view) {
+    public void replyPost(View view) {
         onBackPressed();
     }
 

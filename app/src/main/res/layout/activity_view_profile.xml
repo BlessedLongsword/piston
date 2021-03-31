@@ -105,8 +105,9 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="31dp"
-        android:layout_height="34dp"
+        android:layout_width="24dp"
+        android:layout_height="26dp"
+        android:onClick="editProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"

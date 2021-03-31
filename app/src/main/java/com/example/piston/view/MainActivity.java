@@ -11,10 +11,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.piston.R;
 import com.example.piston.view.others.SectionsPagerAdapter;
 import com.example.piston.viewmodel.PistonViewModel;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    MaterialToolbar topAppBar;
     PistonViewModel pistonViewModel;
 
     @Override
@@ -29,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         initView();
+
+        topAppBar = findViewById(R.id.top_app_bar);
+        topAppBar.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.navigation_profile) {
+                Intent intent = new Intent(this, ViewProfileActivity.class);
+                startActivity(intent);
+            }
+            return false;
+        });
     }
 
     private void initView() {

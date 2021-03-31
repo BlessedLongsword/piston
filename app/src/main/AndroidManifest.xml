@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Piston">
+        <activity android:name=".view.CreatePostActivity"/>
+        <activity android:name=".view.EditPostActivity"/>
+        <activity android:name=".view.EditProfileActivity"/>
         <activity
             android:name=".view.LoginActivity">
             <intent-filter>
@@ -16,12 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.RegisterActivity"/>
         <activity
             android:name=".view.MainActivity"
             android:theme="@style/Theme.Piston.NoActionBar">
         </activity>
-        <activity android:name=".view.CreatePostActivity"/>
+        <activity android:name=".view.RegisterActivity"/>
+        <activity android:name=".view.ReplyPostActivity"/>
+        <activity android:name=".view.ViewProfileActivity"/>
     </application>
 
 </manifest>
