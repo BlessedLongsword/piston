@@ -3,6 +3,7 @@ package com.example.piston.model;
 
 import android.util.Patterns;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,6 +62,20 @@ public class UserList {
                users.put(username, user);
                emails.add(email);
       }
+    }
+
+    public Result<User> login(String username, String password) {
+        if (users.containsKey(username)){
+            if (users.get(username).getPwd().equals(password)) {
+                return new Result.Success<>(users.get(username));
+            }
+            else {
+                return new Result.Error(new IOException("Wrong password"));
+            }
+        }
+        else {
+            return new Result.Error(new IOException("This user does not exist"));
+        }
     }
 
     public boolean loginUser(String username, String pwd) throws Exception{

@@ -8,7 +8,7 @@
     <!-- Sign in strings -->
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
-    <string name="user_hint">Email</string>
+    <string name="user_hint">Username or Email</string>
     <string name="pass_hint">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_pass">Forgot password?</string>
@@ -106,6 +106,8 @@
     <string name="configuration_sub">Default suscription to posts</string>
     <string name="configuration_dark">Dark mode</string>
     <string name="configuration_savebtn">Save changes</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="wrong_user">This user does not exist</string>
     <string-array name="config_options_entries">
         <item><string name="config_options_size">Size</string></item>
     </string-array>
