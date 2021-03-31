@@ -4,14 +4,13 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="30dp"
     card_view:cardPreventCornerOverlap="false">
     <!-- A CardView that contains a TextView -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp"
         card_view:cardUseCompatPadding="true">
@@ -45,7 +44,7 @@
                     android:layout_toRightOf="@+id/card_image"
                     android:layout_weight="0.25"
                     android:padding="10dp"
-                    android:text="hello worl22d" />
+                    android:text="hello world" />
 
                 <TextView
                     android:id="@+id/card_content"

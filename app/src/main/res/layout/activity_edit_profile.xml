@@ -37,11 +37,12 @@
     <EditText
         android:id="@+id/editProfile_currentPWD"
         android:layout_width="232dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,10 +63,11 @@
     <EditText
         android:id="@+id/editProfile_newPWD2"
         android:layout_width="236dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="480dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,11 +89,13 @@
     <EditText
         android:id="@+id/editProfile_newPWD"
         android:layout_width="266dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="436dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,11 +116,13 @@
     <EditText
         android:id="@+id/editProfile_email"
         android:layout_width="285dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="272dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,11 +143,13 @@
     <EditText
         android:id="@+id/editProfile_phone"
         android:layout_width="262dp"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="236dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -162,11 +170,13 @@
     <EditText
         android:id="@+id/editProfile_surname"
         android:layout_width="285dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="204dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -187,11 +197,13 @@
     <EditText
         android:id="@+id/editProfile_name"
         android:layout_width="285dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="168dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,11 +224,13 @@
     <EditText
         android:id="@+id/editProfile_username"
         android:layout_width="285dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:drawable/editbox_background"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
