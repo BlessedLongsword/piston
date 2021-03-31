@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Piston</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+
+    <string name="tab_text_1">Personal</string>
+    <string name="tab_text_2">Grupal</string>
+    <string name="tab_text_3">Global</string>
 
     <!-- Sign in strings -->
     <string name="sign_in">Sign in</string>
@@ -71,5 +73,8 @@
     <!-- Reply Post Strings -->
     <string name="txt_activity_title_replyPost">REPLY POST</string>
     <string name="txt_activity_btn1_replyPost">Reply</string>
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
 
 </resources>

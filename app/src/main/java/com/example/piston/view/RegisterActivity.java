@@ -1,6 +1,5 @@
 package com.example.piston.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,7 +16,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
 }
