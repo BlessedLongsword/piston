@@ -16,25 +16,47 @@
         card_view:cardElevation="10dp"
         card_view:cardUseCompatPadding="true">
         <LinearLayout
+            android:id="@+id/card_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layoutDirection="ltr"
             android:weightSum="1">
+
             <ImageView
                 android:id="@+id/card_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="4dp"
+                android:layout_weight="0.5"
                 android:background="@drawable/jojo"
-                android:layout_weight="0.5"/>
-            <TextView
-                android:id="@+id/info_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/card_image"
-                android:padding="10dp"
-                android:text="hello worl22d"
-                android:layout_weight="0.5"/>
+                android:padding="4dp" />
+
+            <LinearLayout
+                android:id="@+id/text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/card_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/card_image"
+                    android:layout_weight="0.25"
+                    android:padding="10dp"
+                    android:text="hello worl22d" />
+
+                <TextView
+                    android:id="@+id/card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.75"
+                    android:paddingLeft="10dp"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
