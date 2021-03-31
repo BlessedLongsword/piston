@@ -1,16 +1,22 @@
 package com.example.piston.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.model.PistonModel;
+import com.example.piston.model.PostStorage;
 
 public class PistonViewModel extends ViewModel {
 
-    private MutableLiveData<PistonModel> modelMutableLiveData;
+    private MutableLiveData<PostStorage> postStorageMLD;
 
     public PistonViewModel() {
-        modelMutableLiveData = new MutableLiveData<>();
+        postStorageMLD = new MutableLiveData<>();
+    }
+
+    public LiveData<PostStorage> getPostStorageMLD() {
+        return postStorageMLD;
     }
 
 }

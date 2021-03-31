@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends PistonActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

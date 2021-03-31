@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
 
-public class EditPostActivity extends AppCompatActivity {
+public class EditPostActivity extends PistonActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
