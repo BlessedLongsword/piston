@@ -22,9 +22,9 @@ public class CreatePostActivity extends PistonActivity {
         content = findViewById(R.id.card_content);
     }
 
-    public void createPost(View view) {
+   /* public void createPost(View view) {
         pistonViewModel.createPost(title.getText().toString(), content.getText().toString(), picturePath);
         onBackPressed();
-    }
+    }*/
 
 }
