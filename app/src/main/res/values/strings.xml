@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Piston</string>
 
-    <string name="tab_text_1">Personal</string>
-    <string name="tab_text_2">Grupal</string>
-    <string name="tab_text_3">Global</string>
+    <string name="tab_personal">Personal</string>
+    <string name="tab_group">Grupal</string>
+    <string name="tab_global">Global</string>
 
     <!-- Sign in strings -->
     <string name="sign_in">Sign in</string>

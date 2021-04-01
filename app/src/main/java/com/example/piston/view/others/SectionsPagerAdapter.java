@@ -9,6 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.piston.R;
+import com.example.piston.view.GlobalFragment;
+import com.example.piston.view.GroupFragment;
+import com.example.piston.view.PersonalFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -18,7 +23,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]
-            {R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+            {R.string.tab_personal, R.string.tab_group, R.string.tab_global};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -26,11 +31,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        if (position == 0)
+            return new PersonalFragment();
+        if (position == 1)
+            return new GroupFragment();
+        return new GlobalFragment();
     }
 
     @Nullable

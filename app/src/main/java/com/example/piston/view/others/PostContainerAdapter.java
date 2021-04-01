@@ -82,7 +82,7 @@ public class PostContainerAdapter extends RecyclerView.Adapter<PostContainerAdap
     @Override
     public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_cardview, parent, false);
+                .inflate(R.layout.post_item, parent, false);
         return new PostHolder(view);
     }
 
