@@ -4,6 +4,8 @@ package com.example.piston.model;
 import android.util.Patterns;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +17,7 @@ public class UserList {
 
     public UserList (){
         users = new HashMap<>();
+        users.put("admin", new User("admin", "admin@gmail.com", new Date(System.currentTimeMillis()), "admin"));
         emails = new HashSet<>();
     }
 

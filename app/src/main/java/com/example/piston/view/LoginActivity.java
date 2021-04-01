@@ -1,9 +1,11 @@
 package com.example.piston.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,12 +27,20 @@ public class LoginActivity extends PistonActivity {
         signInButton.setEnabled(false);
 
         pistonViewModel.getLoginResult().observe(this, loginResult -> {
-            if (loginResult.getError().equals(R.string.wrong_user))
-                username.setError(getString(R.string.wrong_user));
-            else if (loginResult.getError().equals(R.string.wrong_password))
-                pwd.setError(getString(R.string.wrong_password));
-            else
+            if (loginResult == null) {
+                return;
+            }
+            if (loginResult.getError() != null) {
+                if (loginResult.getError() == R.string.wrong_user)
+                    username.setError(getString(R.string.wrong_user));
+                else if (loginResult.getError()== R.string.wrong_password)
+                    pwd.setError(getString(R.string.wrong_password));
+            }
+            if (loginResult.getSuccess() != null) {
+                setResult(Activity.RESULT_OK);
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
         });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
