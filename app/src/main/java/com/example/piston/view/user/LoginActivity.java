@@ -1,16 +1,17 @@
-package com.example.piston.view;
+package com.example.piston.view.user;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.piston.R;
+import com.example.piston.view.PistonActivity;
+import com.example.piston.view.main.MainActivity;
 
 public class LoginActivity extends PistonActivity {
 

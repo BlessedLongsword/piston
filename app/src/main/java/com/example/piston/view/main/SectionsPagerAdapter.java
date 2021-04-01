@@ -1,4 +1,4 @@
-package com.example.piston.view.others;
+package com.example.piston.view.main;
 
 import android.content.Context;
 
@@ -9,16 +9,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.piston.R;
-import com.example.piston.view.GlobalFragment;
-import com.example.piston.view.GroupFragment;
-import com.example.piston.view.PersonalFragment;
+import com.example.piston.view.main.global.GlobalFragment;
+import com.example.piston.view.main.group.GroupFragment;
+import com.example.piston.view.main.personal.PersonalFragment;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
@@ -27,7 +23,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
-        super(fm);
+        super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
     }
 
@@ -36,9 +32,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0)
             return new PersonalFragment();
-        if (position == 1)
+        else if (position == 1)
             return new GroupFragment();
-        return new GlobalFragment();
+        else
+            return new GlobalFragment();
     }
 
     @Nullable
@@ -49,6 +46,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3; // Show 3 total pages.
+        return 3;
     }
 }

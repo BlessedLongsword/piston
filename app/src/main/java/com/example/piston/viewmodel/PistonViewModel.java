@@ -1,7 +1,5 @@
 package com.example.piston.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,6 +14,7 @@ import java.util.Date;
 
 public class PistonViewModel extends ViewModel {
 
+    private MutableLiveData<Integer> activeTab = new MutableLiveData<>();
     private MutableLiveData<PostStorage> postStorageMLD;
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
 
@@ -65,5 +64,13 @@ public class PistonViewModel extends ViewModel {
 
     public void loginDataChanged(String username, String password) {
 
+    }
+
+    public Integer getActiveTab() {
+        return activeTab.getValue();
+    }
+
+    public void setActiveTab(int activeTab) {
+        this.activeTab.setValue(activeTab);
     }
 }

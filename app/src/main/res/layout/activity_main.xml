@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.Piston.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_app_bar"
@@ -20,10 +19,10 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:layout_height="wrap_content"/>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -43,5 +42,4 @@
         android:contentDescription="@string/add"
         android:onClick="add"/>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

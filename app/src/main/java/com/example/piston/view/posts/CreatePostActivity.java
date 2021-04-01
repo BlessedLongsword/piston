@@ -1,4 +1,4 @@
-package com.example.piston.view;
+package com.example.piston.view.posts;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
+import com.example.piston.view.PistonActivity;
 
 public class CreatePostActivity extends PistonActivity {
 

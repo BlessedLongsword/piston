@@ -9,7 +9,7 @@ import com.example.piston.viewmodel.PistonViewModel;
 
 public class PistonActivity extends AppCompatActivity {
 
-    PistonViewModel pistonViewModel;
+    public PistonViewModel pistonViewModel;
     
     @Override
     protected void onCreate(Bundle savedInstances) {

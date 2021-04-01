@@ -1,12 +1,12 @@
-package com.example.piston.view;
+package com.example.piston.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.piston.R;
+import com.example.piston.view.PistonActivity;
+import com.example.piston.view.user.EditProfileActivity;
 
 public class ViewProfileActivity extends PistonActivity {
 
