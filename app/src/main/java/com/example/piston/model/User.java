@@ -2,18 +2,27 @@ package com.example.piston.model;
 
 import android.media.Image;
 
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 public class User {
-    private String username;
+    @Nullable
     private String name;
+    @Nullable
     private String surname;
-    private String email;
-    private String phoneNumber;
-    private String pwd;
+    @Nullable
     private Image icon;
-    private Date birthDate;
+    @Nullable
     private Post featuredPost;
+    @Nullable
+    private String phoneNumber;
+
+    private String username;
+    private String email;
+    private String pwd;
+    private Date birthDate;
+
 
     public User (String username, String email, Date birthDate, String pwd){
         this.username = username;
@@ -31,6 +40,7 @@ public class User {
         this.username = username;
     }
 
+    @Nullable
     public String getName() {
         return name;
     }
@@ -39,6 +49,7 @@ public class User {
         this.name = name;
     }
 
+    @Nullable
     public String getSurname() {
         return surname;
     }
@@ -55,6 +66,7 @@ public class User {
         this.email = email;
     }
 
+    @Nullable
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -71,6 +83,7 @@ public class User {
         this.pwd = pwd;
     }
 
+    @Nullable
     public Image getIcon() {
         return icon;
     }
@@ -87,6 +100,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    @Nullable
     public Post getFeaturedPost() {
         return featuredPost;
     }
@@ -95,6 +109,7 @@ public class User {
         this.featuredPost = featuredPost;
     }
 
+    @Nullable
     public String getFullName(){
         return name + " " + surname;
     }

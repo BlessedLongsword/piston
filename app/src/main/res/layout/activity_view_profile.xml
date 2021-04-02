@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/profileFeatPost"
+        android:id="@+id/viewProfile_featPost"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="@string/view_profile_post"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.64" />
 
     <TextView
-        android:id="@+id/profileDate"
+        android:id="@+id/viewProfile_date"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="*fecha de nacimiento*"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.445" />
 
     <TextView
-        android:id="@+id/profileMail"
+        android:id="@+id/viewProfile_Email"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="*mail*"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.385" />
 
     <TextView
-        android:id="@+id/profilePhone"
+        android:id="@+id/viewProfile_phone"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="*numero de telefono*"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.318" />
 
     <TextView
-        android:id="@+id/profileName"
+        android:id="@+id/viewProfile_fullName"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="*nombre y apellidos*"
@@ -68,7 +68,7 @@
         app:layout_constraintVertical_bias="0.263" />
 
     <TextView
-        android:id="@+id/viewProfileTitle"
+        android:id="@+id/viewProfile_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/view_profile_title"
@@ -80,7 +80,7 @@
         app:layout_constraintVertical_bias="0.082" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/viewProfile_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,7 +92,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/profileUsername"
+        android:id="@+id/viewProfile_username"
         android:layout_width="202dp"
         android:layout_height="21dp"
         android:text="*nombre de usuario*"
@@ -104,7 +104,7 @@
         app:layout_constraintVertical_bias="0.202" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/viewProfile_editBtn"
         android:layout_width="24dp"
         android:layout_height="26dp"
         android:onClick="editProfile"

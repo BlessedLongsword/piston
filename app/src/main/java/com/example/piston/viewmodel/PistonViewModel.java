@@ -60,6 +60,7 @@ public class PistonViewModel extends ViewModel {
         if (result instanceof Result.Success) {
             User user = ((Result.Success<User>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(user.getName())));
+            currentUser = user.getUsername();
         } else {
             if (result.toString().equals("Error[exception=Wrong password]")) {
                 loginResult.setValue(new LoginResult(R.string.wrong_password));
