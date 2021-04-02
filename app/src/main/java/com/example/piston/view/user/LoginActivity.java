@@ -7,34 +7,36 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.piston.R;
 import com.example.piston.view.PistonActivity;
 import com.example.piston.view.main.MainActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends PistonActivity {
 
-    private EditText username, pwd;
+    private TextInputLayout username, pwd;
     private Button signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.username = findViewById(R.id.user_editText);
-        this.pwd = findViewById(R.id.pass_editText);
+        this.username = findViewById(R.id.user_textField);
+        this.pwd = findViewById(R.id.pass_textField);
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.setEnabled(false);
 
         pistonViewModel.getLoginResult().observe(this, loginResult -> {
+            username.setError(null);
+            pwd.setError(null);
             if (loginResult == null) {
                 return;
             }
             if (loginResult.getError() != null) {
-                if (loginResult.getError() == R.string.wrong_user)
+                if (loginResult.getError() == R.string.wrong_user) {
                     username.setError(getString(R.string.wrong_user));
+                }
                 else if (loginResult.getError()== R.string.wrong_password)
                     pwd.setError(getString(R.string.wrong_password));
             }
@@ -58,16 +60,16 @@ public class LoginActivity extends PistonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                boolean enabled = username.length()>0 && pwd.length()>0;
+                boolean enabled = username.getEditText().length()>0 && pwd.getEditText().length()>0;
                 signInButton.setEnabled(enabled);
             }
         };
-        username.addTextChangedListener(afterTextChangedListener);
-        pwd.addTextChangedListener(afterTextChangedListener);
+        username.getEditText().addTextChangedListener(afterTextChangedListener);
+        pwd.getEditText().addTextChangedListener(afterTextChangedListener);
     }
 
     public void login(View view) {
-        pistonViewModel.login(username.getText().toString(), pwd.getText().toString());
+        pistonViewModel.login(username.getEditText().getText().toString(), pwd.getEditText().getText().toString());
     }
 
 

@@ -38,9 +38,6 @@ public class PersonalFragment extends PistonFragment {
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mRecyclerView.setAdapter(new FolderContainerAdapter(view.getContext(), recyclerList));
-        pistonViewModel.getFolderChooser().observe(getViewLifecycleOwner(), folderChooser -> {
-            recyclerList = folderChooser;
-        });
         return view;
     }
 
