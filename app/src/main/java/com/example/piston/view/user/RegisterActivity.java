@@ -50,17 +50,11 @@ public class RegisterActivity extends PistonActivity {
             else if (registerFormState.getUsernameError() != null) {
                 username.setError(getString(registerFormState.getUsernameError()));
             }
-            else{
-                username.setError(null);
-            }
             if (registerFormState.getEmailError() != null) {
                 email.setError(getString(registerFormState.getEmailError()));
             }
             else if (registerFormState.getEmailExistError() != null) {
                 email.setError(getString(registerFormState.getEmailExistError()));
-            }
-            else {
-                email.setError(null);
             }
             if (registerFormState.getEmptyPwdError() != null) {
                 pwd.setError(getString(registerFormState.getEmptyPwdError()));
@@ -68,14 +62,8 @@ public class RegisterActivity extends PistonActivity {
             else if (registerFormState.getPasswordError() != null) {
                 pwd.setError(getString(registerFormState.getPasswordError()));
             }
-            else {
-                pwd.setError(null);
-            }
             if (registerFormState.getPassword2Error() != null) {
                 pwd2.setError(getString(registerFormState.getPassword2Error()));
-            }
-            else {
-                pwd2.setError(null);
             }
         });
 

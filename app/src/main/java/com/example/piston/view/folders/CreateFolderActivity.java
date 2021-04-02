@@ -11,7 +11,6 @@ import com.example.piston.view.PistonActivity;
 
 public class CreateFolderActivity extends PistonActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

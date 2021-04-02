@@ -61,7 +61,7 @@ public class FolderContainerAdapter extends RecyclerView.Adapter<FolderContainer
 
     @Override
     public void onBindViewHolder(@NonNull FolderContainerAdapter.FolderHolder holder, int position) {
-        holder.getFolderTitle().setText(localDataSet.get(position));
+        //holder.getFolderTitle().setText(localDataSet.get(position));
     }
 
     @Override
