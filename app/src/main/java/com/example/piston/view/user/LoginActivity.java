@@ -1,21 +1,33 @@
 package com.example.piston.view.user;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.piston.R;
+import com.example.piston.model.User;
 import com.example.piston.view.PistonActivity;
 import com.example.piston.view.main.MainActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Date;
+
 public class LoginActivity extends PistonActivity {
 
     private TextInputLayout username, pwd;
+    private final String userCachePath = "logged_user";
     private Button signInButton;
 
     @Override
@@ -43,6 +55,20 @@ public class LoginActivity extends PistonActivity {
             if (loginResult.getSuccess() != null) {
                 setResult(Activity.RESULT_OK);
                 startActivity(new Intent(this, MainActivity.class));
+                try {
+                    File cacheFile = new File(getApplicationContext().getCacheDir(), userCachePath);
+                    String userFile = "userFile";
+                    FileOutputStream fOut = openFileOutput(userFile, Context.MODE_PRIVATE);
+                    User user = new User("admin", "admin@gmail.com",
+                            new Date(System.currentTimeMillis()), "admin");
+                    ObjectOutputStream oos = new ObjectOutputStream(fOut);
+                    oos.writeObject(user);
+                    oos.close();
+                    fOut.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 finish();
             }
         });

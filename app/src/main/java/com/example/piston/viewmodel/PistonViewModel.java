@@ -39,6 +39,7 @@ public class PistonViewModel extends ViewModel {
         users = new UserList();
         categoryManager = new CategoryManager();
         setActiveTab(0);
+        Log.d("Test3", "I am created");
     }
 
     public LiveData<LoginResult> getLoginResult() {
@@ -60,7 +61,6 @@ public class PistonViewModel extends ViewModel {
         if (result instanceof Result.Success) {
             User user = ((Result.Success<User>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(user.getName())));
-            currentUser = user.getUsername();
         } else {
             if (result.toString().equals("Error[exception=Wrong password]")) {
                 loginResult.setValue(new LoginResult(R.string.wrong_password));
