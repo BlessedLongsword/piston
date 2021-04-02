@@ -14,6 +14,7 @@
     <string name="forgot_pass">Forgot password?</string>
     <string name="sign_up_msg">Don\&apos;t have an account?</string>
     <string name="sign_up_button"> Sign up Now!</string>
+    <string name="welcome">Welcome</string>
 
     <!-- Register strings -->
     <string name="reg_title">REGISTER</string>
@@ -24,6 +25,7 @@
     <string name="reg_date">Date of Birth:</string>
     <string name="terms_text">I have read and accept the privacy policy</string>
     <string name="reg_btn">Register</string>
+    <string name="reg_succesful">Registration Successful</string>
 
     <!-- Edit profile strings -->
     <string name="edit_profile_title">EDIT PROFILE</string>
@@ -106,14 +108,23 @@
     <!-- Notifications Strings -->
     <string name="notifications_title">NOTIFICATIONS</string>
 
+    <!-- Error Strings -->
+    <string name="wrong_user">This user does not exist</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="invalid_username">This username is already taken</string>
+    <string name="invalid_password">Password must be at least 6 characters</string>
+    <string name="invalid_password2">Passwords do not match</string>
+    <string name="email_taken">This email already is taken</string>
+    <string name="username_req">Username required</string>
+    <string name="email_req">Not a valid Email</string>
+    <string name="pwd_req">Password required</string>
+    <string name="verify_reg_field">Please confirm the fields and try again</string>
 
     <!-- Configuration Strings -->
     <string name="configuration_title">CONFIGURATION</string>
     <string name="configuration_sub">Default suscription to posts</string>
     <string name="configuration_dark">Dark mode</string>
     <string name="configuration_savebtn">Save changes</string>
-    <string name="wrong_password">Wrong password</string>
-    <string name="wrong_user">This user does not exist</string>
     <string-array name="config_options_entries">
         <item><string name="config_options_size">Size</string></item>
     </string-array>

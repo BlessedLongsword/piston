@@ -1,6 +1,7 @@
 package com.example.piston.model;
 
 
+import android.util.Log;
 import android.util.Patterns;
 
 import java.io.IOException;
@@ -19,10 +20,11 @@ public class UserList {
         users = new HashMap<>();
         users.put("admin", new User("admin", "admin@gmail.com", new Date(System.currentTimeMillis()), "admin"));
         emails = new HashSet<>();
+        emails.add("admin@gmail.com");
     }
 
     public boolean isValidPwd(String pwd1, String pwd2){
-        return pwd1.equals(pwd2) && pwd1.length()>=7;
+        return pwd1.equals(pwd2) && pwd1.length() >= 6;
     }
 
     public boolean isValidUsername(String username){
@@ -30,45 +32,48 @@ public class UserList {
     }
 
     public boolean isValidEmail(String email){
-        return (Patterns.EMAIL_ADDRESS.matcher(email).matches()) && !emails.contains(email);
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public boolean isValidRegister (String username, String pwd1, String pwd2,  String email) throws Exception{
+    public boolean emailExists(String email){
+        return emails.contains(email);
+    }
+
+    public Result<String> register(String username, String pwd1, String pwd2,  String email, Date birthDate) {
         if (username.trim().isEmpty()){
-            throw new Exception("Username required");
-        }
-        if (email.trim().isEmpty()){
-            throw new Exception("Email required");
+            return new Result.Error(new IOException("Username required"));
         }
         if (pwd1.trim().isEmpty()){
-            throw new Exception("Password required");
-        }
-        if (pwd2.trim().isEmpty()){
-            throw new Exception("Please, verify you password");
+            return new Result.Error(new IOException("Password required"));
         }
         if (isValidUsername(username)){
-            throw new Exception ("Username already taken");
+            return new Result.Error(new IOException("This username is already taken"));
         }
         if (! isValidEmail(email)){
-            throw new Exception ("Not a valid email");
+            return new Result.Error(new IOException("Not a valid email"));
+        }
+        if ( emailExists(email)){
+            return new Result.Error(new IOException("This email is already taken"));
+        }
+        if (pwd1.length() < 6){
+            return new Result.Error(new IOException("Password must be at least 6 characters"));
         }
         if (! isValidPwd(pwd1,pwd2)){
-            throw new Exception("Those passwords didn’t match. Try again.");
+            return new Result.Error(new IOException("Passwords do not match"));
         }
-
-        return true;
+        User user = new User(username, email, birthDate, pwd1);
+        addUser(user);
+        return new Result.Success<>("Registration Successful");
     }
 
-    public void registerUser(String username, String pwd1, String pwd2,  String email, Date birthDate) throws Exception {
-      if (isValidRegister(username,pwd1,pwd2,email)){
-               User user = new User (username, email, birthDate, pwd1);
-               users.put(username, user);
-               emails.add(email);
-      }
+    public void addUser(User user){
+        users.put(user.getUsername(), user);
+        emails.add(user.getEmail());
     }
 
     public Result<User> login(String username, String password) {
-        if (users.containsKey(username)){
+        Log.d("what", username + " not added?? " + users);
+        if (isValidUsername(username)){
             if (users.get(username).getPwd().equals(password)) {
                 return new Result.Success<>(users.get(username));
             }
@@ -80,19 +85,4 @@ public class UserList {
             return new Result.Error(new IOException("This user does not exist"));
         }
     }
-
-    public boolean loginUser(String username, String pwd) throws Exception{
-        if (users.containsKey(username)){
-            if (users.get(username).getPwd().equals(pwd)){
-                return true;
-            }
-            else{
-                throw new Exception("Wrong password");
-            }
-        }
-        throw new Exception ("This user does not exist");
-    }
-
-
-
 }

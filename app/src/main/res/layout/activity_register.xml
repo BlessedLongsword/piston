@@ -140,14 +140,15 @@
         android:layout_height="50dp"
         android:layout_marginBottom="61dp"
         android:text="@string/reg_btn"
-        android:onClick="register"
+        android:onClick="registerUser"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerCheck"/>
+        app:layout_constraintTop_toBottomOf="@+id/tosCheck"/>
 
     <CheckBox
-        android:id="@+id/registerCheck"
+        android:id="@+id/tosCheck"
         android:layout_width="301dp"
         android:layout_height="0dp"
         android:layout_marginStart="27dp"
@@ -163,7 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="51dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerCheck"
+        app:layout_constraintBottom_toTopOf="@+id/tosCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pwd2"
