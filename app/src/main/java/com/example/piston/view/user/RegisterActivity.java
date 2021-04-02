@@ -16,16 +16,18 @@ import androidx.annotation.Nullable;
 
 import com.example.piston.R;
 import com.example.piston.view.PistonActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RegisterActivity extends PistonActivity {
 
-    EditText username;
-    EditText email;
-    EditText pwd;
-    EditText pwd2;
+    TextInputLayout username;
+    TextInputLayout email;
+    TextInputLayout pwd;
+    TextInputLayout pwd2;
+    TextInputLayout birthday;
     CheckBox tos;
     Button signUpBtn;
 
@@ -33,10 +35,11 @@ public class RegisterActivity extends PistonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        this.username = findViewById(R.id.username);
-        this.email = findViewById(R.id.email);
-        this.pwd = findViewById(R.id.pwd);
-        this.pwd2 = findViewById(R.id.pwd2);
+        this.username = findViewById(R.id.userText);
+        this.email = findViewById(R.id.emailText);
+        this.pwd = findViewById(R.id.pwdText);
+        this.pwd2 = findViewById(R.id.pwd2Text);
+        this.birthday = findViewById(R.id.bdayText);
         this.tos = findViewById(R.id.tosCheck);
         this.signUpBtn = findViewById(R.id.registerBtn);
 
@@ -65,6 +68,9 @@ public class RegisterActivity extends PistonActivity {
             if (registerFormState.getPassword2Error() != null) {
                 pwd2.setError(getString(registerFormState.getPassword2Error()));
             }
+            if (registerFormState.getIsBdayValidError() != null) {
+                birthday.setError(getString(registerFormState.getIsBdayValidError()));
+            }
         });
 
         pistonViewModel.getRegisterResult().observe(this, registerResult -> {
@@ -87,7 +93,7 @@ public class RegisterActivity extends PistonActivity {
             }
         });
 
-        username.addTextChangedListener(new TextWatcher() {
+        username.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -100,11 +106,12 @@ public class RegisterActivity extends PistonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                pistonViewModel.registerUsernameChanged(username.getText().toString());
+                username.setError(null);
+                pistonViewModel.registerUsernameChanged(username.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        pwd.addTextChangedListener(new TextWatcher() {
+        pwd.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -117,11 +124,12 @@ public class RegisterActivity extends PistonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                pistonViewModel.registerPwd1Changed(pwd.getText().toString());
+                pwd.setError(null);
+                pistonViewModel.registerPwd1Changed(pwd.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        pwd2.addTextChangedListener(new TextWatcher() {
+        pwd2.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -134,11 +142,13 @@ public class RegisterActivity extends PistonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                pistonViewModel.registerPwd2Changed(pwd.getText().toString(), pwd2.getText().toString());
+                pwd2.setError(null);
+                pistonViewModel.registerPwd2Changed(pwd.getEditText().getText().toString(),
+                        pwd2.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        email.addTextChangedListener(new TextWatcher() {
+        email.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -151,7 +161,27 @@ public class RegisterActivity extends PistonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                pistonViewModel.registerEmailChanged(email.getText().toString());
+                email.setError(null);
+                pistonViewModel.registerEmailChanged(email.getEditText().getText().toString());
+                signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
+            }
+        });
+
+        birthday.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                birthday.setError(null);
+                pistonViewModel.registerBdayChanged(birthday.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
@@ -168,20 +198,29 @@ public class RegisterActivity extends PistonActivity {
     public void registerUser(View view) {
             SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(System.currentTimeMillis());
-            pistonViewModel.register(username.getText().toString(), pwd.getText().toString(),
-                    pwd2.getText().toString(), email.getText().toString(), date);
+            pistonViewModel.register(username.getEditText().getText().toString(),
+                    pwd.getEditText().getText().toString(), pwd2.getEditText().getText().toString(),
+                    email.getEditText().getText().toString(), date);
     }
 
     private boolean showRegBtn(){
-        boolean isEmpty = username.getText().toString().trim().length() == 0 ||
-                pwd.getText().toString().trim().length() == 0 ||
-                pwd2.getText().toString().trim().length() == 0 ||
-                email.getText().toString().trim().length() == 0;
+        boolean isEmpty = username.getEditText().getText().toString().trim().length() == 0 ||
+                pwd.getEditText().getText().toString().trim().length() == 0 ||
+                pwd2.getEditText().getText().toString().trim().length() == 0 ||
+                email.getEditText().getText().toString().trim().length() == 0;
 
         boolean error = username.getError() != null || pwd.getError() != null ||
                 pwd2.getError() != null || pwd2.getError() != null || email.getError() != null;
         String a = username.getError() == null ? "null": "noNull";
         Log.d("what", "showbtn " + a);
         return !isEmpty && !error;
+    }
+
+    public void setErrors() {
+        username.setError(null);
+        pwd.setError(null);
+        pwd2.setError(null);
+        email.setError(null);
+        birthday.setError(null);
     }
 }

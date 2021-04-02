@@ -23,12 +23,15 @@ public class RegisterFormState {
     private Integer emptyPwd;
     @Nullable
     private Integer emptyEmail;
+    @Nullable
+    private Integer isBdayValid;
+
     private boolean isDataValid;
 
     RegisterFormState(@Nullable Integer usernameError, @Nullable Integer passwordError,
                                   @Nullable Integer password2Error, @Nullable Integer isEmailValid,
                                   @Nullable Integer emptyUsername, @Nullable Integer emptyPwd,
-                                  @Nullable Integer emptyEmail) {
+                                  @Nullable Integer emptyEmail, @Nullable Integer isBdayValid) {
         this.usernameError = usernameError;
         this.passwordError = passwordError;
         this.password2Error = password2Error;
@@ -36,6 +39,7 @@ public class RegisterFormState {
         this.emptyEmail = emptyEmail;
         this.emptyUsername = emptyUsername;
         this.emptyPwd = emptyPwd;
+        this.isBdayValid = isBdayValid;
         this.isDataValid = false;
     }
 
@@ -74,6 +78,9 @@ public class RegisterFormState {
 
     @Nullable
     public Integer getEmailExistError() { return emptyEmail; }
+
+    @Nullable
+    public Integer getIsBdayValidError() { return isBdayValid; }
 
     public boolean isDataValid() {
         return isDataValid;

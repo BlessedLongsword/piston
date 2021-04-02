@@ -1,8 +1,8 @@
 package com.example.piston.viewmodel;
 
 import android.util.Log;
-import android.util.Patterns;
-import android.widget.Toast;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -110,15 +110,18 @@ public class PistonViewModel extends ViewModel {
         else if (username.trim().length() == 0){
             Log.d("what"," registerUsernameChanged1");
             registerFormState.setValue(new RegisterFormState(null,null,
-                    null,null, R.string.username_req,null,null));
+                    null,null, R.string.username_req,null,
+                    null,null));
         }
         else if (users.isValidUsername(username)) {
             Log.d("what"," registerUsernameChanged2");
             registerFormState.setValue(new RegisterFormState(R.string.invalid_username,
-                    null,null,null,null,null,null));
+                    null,null,null,null,
+                    null,null,null));
         }else {
             registerFormState.setValue(new RegisterFormState(null,
-                    null,null,null,null,null,null));
+                    null,null,null,null,
+                    null,null,null));
             Log.d("what"," registerUsernameChanged3");
         }
     }
@@ -129,11 +132,12 @@ public class PistonViewModel extends ViewModel {
         }
         else if (pwd1.trim().length() == 0) {
             registerFormState.setValue(new RegisterFormState(null,null,
-                    null,null,null, R.string.pwd_req,null));
+                    null,null,null, R.string.pwd_req,
+                    null,null));
         }
         else if (pwd1.length() < 6) {
             registerFormState.setValue(new RegisterFormState(null, R.string.invalid_password,
-                    null, null,null,null,null));
+                    null, null,null,null,null,null));
         }
     }
 
@@ -143,7 +147,7 @@ public class PistonViewModel extends ViewModel {
         }
         else if (!pwd2.equals(pwd1)) {
             registerFormState.setValue(new RegisterFormState(null,null,
-                    R.string.invalid_password2,null, null,null,null));
+                    R.string.invalid_password2,null, null,null,null,null));
         }
     }
 
@@ -153,14 +157,25 @@ public class PistonViewModel extends ViewModel {
         }
         else if ( !users.isValidEmail(email)) {
             registerFormState.setValue((new RegisterFormState(null,null,null,
-                    null,null,null, R.string.email_req)));
+                    null,null,null, R.string.email_req,null)));
         }
         else if (users.emailExists(email)) {
             registerFormState.setValue(new RegisterFormState(null,null,null,
-                    R.string.email_taken,null,null,null));
+                    R.string.email_taken,null,null,null,null));
         }
     }
 
+    public void registerBdayChanged(String bday) {
+        if (bday == null){
+            return;
+        }
+        Pattern pattern = Pattern.compile("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)");
+        Matcher matcher = pattern.matcher(bday);
+        if (!matcher.matches()) {
+            registerFormState.setValue(new RegisterFormState(null,null,null,
+                    null,null,null,null,R.string.invalid_date));
+        }
+    }
     public MutableLiveData<ArrayList<String>> getFolderChooser () {
         return folderChooser;
     }
@@ -177,4 +192,6 @@ public class PistonViewModel extends ViewModel {
     public void setActiveTab ( int activeTab) {
         this.activeTab.setValue(activeTab);
     }
+
+
 }

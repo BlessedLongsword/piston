@@ -23,6 +23,7 @@
     <string name="reg_pwd">Password:</string>
     <string name="reg_pwd2">Confirm password:</string>
     <string name="reg_date">Date of Birth:</string>
+    <string name="reg_date_format">dd/mm/yyyy</string>
     <string name="terms_text">I have read and accept the privacy policy</string>
     <string name="reg_btn">Register</string>
     <string name="reg_succesful">Registration Successful</string>
@@ -114,6 +115,7 @@
     <string name="invalid_username">This username is already taken</string>
     <string name="invalid_password">Password must be at least 6 characters</string>
     <string name="invalid_password2">Passwords do not match</string>
+    <string name="invalid_date">Enter a valid date: dd/mm/yyyy</string>
     <string name="email_taken">This email already is taken</string>
     <string name="username_req">Username required</string>
     <string name="email_req">Not a valid Email</string>
