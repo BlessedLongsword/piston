@@ -25,7 +25,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10" />
+        android:layout_weight="15" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,11 +45,6 @@
             android:layout_height="wrap_content"
             android:inputType="textShortMessage" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pass_textField"
