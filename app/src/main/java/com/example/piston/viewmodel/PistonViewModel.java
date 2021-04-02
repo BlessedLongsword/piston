@@ -108,12 +108,18 @@ public class PistonViewModel extends ViewModel {
             return;
         }
         else if (username.trim().length() == 0){
+            Log.d("what"," registerUsernameChanged1");
             registerFormState.setValue(new RegisterFormState(null,null,
                     null,null, R.string.username_req,null,null));
         }
         else if (users.isValidUsername(username)) {
+            Log.d("what"," registerUsernameChanged2");
             registerFormState.setValue(new RegisterFormState(R.string.invalid_username,
                     null,null,null,null,null,null));
+        }else {
+            registerFormState.setValue(new RegisterFormState(null,
+                    null,null,null,null,null,null));
+            Log.d("what"," registerUsernameChanged3");
         }
     }
 

@@ -21,6 +21,7 @@ public class UserList {
         users.put("admin", new User("admin", "admin@gmail.com", new Date(System.currentTimeMillis()), "admin"));
         emails = new HashSet<>();
         emails.add("admin@gmail.com");
+        Log.d("userList", " Creating hash");
     }
 
     public boolean isValidPwd(String pwd1, String pwd2){

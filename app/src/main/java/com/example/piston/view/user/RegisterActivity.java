@@ -50,11 +50,17 @@ public class RegisterActivity extends PistonActivity {
             else if (registerFormState.getUsernameError() != null) {
                 username.setError(getString(registerFormState.getUsernameError()));
             }
+            else{
+                username.setError(null);
+            }
             if (registerFormState.getEmailError() != null) {
                 email.setError(getString(registerFormState.getEmailError()));
             }
-            else if(registerFormState.getEmailExistError() != null) {
+            else if (registerFormState.getEmailExistError() != null) {
                 email.setError(getString(registerFormState.getEmailExistError()));
+            }
+            else {
+                email.setError(null);
             }
             if (registerFormState.getEmptyPwdError() != null) {
                 pwd.setError(getString(registerFormState.getEmptyPwdError()));
@@ -62,12 +68,15 @@ public class RegisterActivity extends PistonActivity {
             else if (registerFormState.getPasswordError() != null) {
                 pwd.setError(getString(registerFormState.getPasswordError()));
             }
+            else {
+                pwd.setError(null);
+            }
             if (registerFormState.getPassword2Error() != null) {
                 pwd2.setError(getString(registerFormState.getPassword2Error()));
             }
-            Log.d("what",username.getText().toString() + " FormState");
-            if (username.getError() != null)
-                Log.d("what",username.getError().toString());
+            else {
+                pwd2.setError(null);
+            }
         });
 
         pistonViewModel.getRegisterResult().observe(this, registerResult -> {
@@ -183,8 +192,8 @@ public class RegisterActivity extends PistonActivity {
 
         boolean error = username.getError() != null || pwd.getError() != null ||
                 pwd2.getError() != null || pwd2.getError() != null || email.getError() != null;
-        String a = username.getError() != null ? "shit": "no";
-        Log.d("what",a);
+        String a = username.getError() == null ? "null": "noNull";
+        Log.d("what", "showbtn " + a);
         return !isEmpty && !error;
     }
 }
