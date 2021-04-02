@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.319" />
 
     <EditText
-        android:id="@+id/moderateGroup_name"
+        android:id="@+id/input_category_name"
         android:layout_width="241dp"
         android:layout_height="24dp"
         android:background="@android:drawable/editbox_background"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
         android:onClick="editPost"
-        android:text="@string/moderate_group_savebtn"
+        android:text="@string/moderate_group_save_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.167"

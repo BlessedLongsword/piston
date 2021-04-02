@@ -11,6 +11,10 @@
         android:allowBackup="true"
         android:fullBackupContent="true">
 
+        <activity
+            android:name=".view.folders.CreateFolderActivity"
+            android:theme="@style/Theme.Piston.Invisible"/>
+
         <activity android:name=".view.main.global.CreateCategoryActivity"/>
         <activity android:name=".view.main.group.CreateGroupActivity"/>
         <activity

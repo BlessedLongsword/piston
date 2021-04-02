@@ -4,26 +4,32 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.model.PostStorage;
+import com.example.piston.model.CategoryManager;
 import com.example.piston.model.Result;
 import com.example.piston.model.User;
 import com.example.piston.model.UserList;
 import com.example.piston.R;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PistonViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> activeTab = new MutableLiveData<>();
-    private MutableLiveData<PostStorage> postStorageMLD;
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private MutableLiveData<Integer> activeTab;
+    private MutableLiveData<ArrayList<String>> folderChooser;
+    private MutableLiveData<LoginResult> loginResult;
 
     private String currentUser;
     private UserList users;
+    private CategoryManager categoryManager;
 
     public PistonViewModel() {
-        postStorageMLD = new MutableLiveData<>();
+        activeTab = new MutableLiveData<>();
+        folderChooser = new MutableLiveData<>();
+        loginResult = new MutableLiveData<>();
         users = new UserList();
+        categoryManager = new CategoryManager();
+        setActiveTab(0);
     }
 
     public LiveData<LoginResult> getLoginResult() {
@@ -47,23 +53,18 @@ public class PistonViewModel extends ViewModel {
         }
     }
 
-    public LiveData<PostStorage> getPostStorageMLD() {
-        return postStorageMLD;
-    }
-
     public void registerUser(String username, String pwd1, String pwd2, String email, Date birthDate) throws Exception {
         users.registerUser(username,pwd1,pwd2,email,birthDate);
 
     }
 
-    public void loginUser(String username, String pwd) throws Exception {
-       users.loginUser(username,pwd);
-       currentUser = username;
-
+    public MutableLiveData<ArrayList<String>> getFolderChooser() {
+        return folderChooser;
     }
 
-    public void loginDataChanged(String username, String password) {
-
+    public void setFolderChooser(String title, String description) {
+        categoryManager.createFolder(title, description);
+        this.folderChooser.postValue(categoryManager.getFolderNames());
     }
 
     public Integer getActiveTab() {

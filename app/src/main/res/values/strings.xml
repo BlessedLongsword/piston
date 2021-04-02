@@ -77,6 +77,12 @@
     <string name="notifications">Notifications</string>
     <string name="settings">Settings</string>
 
+    <!-- Create and edit Folder Strings -->
+    <string name="create_folder_activity_title">CREATE FOLDER</string>
+    <string name="create_folder_title">Group name:</string>
+    <string name="create_folder_description">Description:</string>
+    <string name="edit_folder_activity_title">EDIT FOLDER</string>
+
     <!-- Create Group Strings -->
     <string name="create_group_title">CREATE GROUP</string>
     <string name="create_group_name">Group name:</string>
@@ -87,7 +93,7 @@
 
     <!-- Moderate Group Strings -->
     <string name="moderate_group_title">MODERATE GROUP</string>
-    <string name="moderate_group_savebtn">Save changes</string>
+    <string name="moderate_group_save_btn">Save changes</string>
     <string name="moderate_group_deletebtn">Delete group</string>
     <string name="moderate_group_deleteselected">Delete selected</string>
 

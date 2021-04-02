@@ -1,12 +1,19 @@
 package com.example.piston.view.main;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.piston.R;
+import com.example.piston.view.folders.CreateFolderActivity;
 import com.example.piston.view.main.global.CreateCategoryActivity;
 import com.example.piston.view.main.group.CreateGroupActivity;
 import com.example.piston.view.others.NotificationsActivity;
@@ -73,7 +80,7 @@ public class MainActivity extends PistonActivity {
 
     public void add(View view) {
         if (pistonViewModel.getActiveTab() == 0) {
-            Intent intent = new Intent(this, CreatePostActivity.class);
+            Intent intent = new Intent(this, CreateFolderActivity.class);
             startActivity(intent);
         }
         else if (pistonViewModel.getActiveTab() == 1) {
@@ -85,4 +92,5 @@ public class MainActivity extends PistonActivity {
             startActivity(intent);
         }
     }
+
 }

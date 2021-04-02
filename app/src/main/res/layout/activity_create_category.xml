@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/moderateGroup_name"
+        android:id="@+id/input_category_name"
         android:layout_width="241dp"
         android:layout_height="24dp"
         android:background="@android:drawable/editbox_background"
@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.137" />
 
     <EditText
-        android:id="@+id/moderateGroup_members"
+        android:id="@+id/input_category_rules"
         android:layout_width="361dp"
         android:layout_height="69dp"
         android:background="@android:drawable/editbox_background"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.584" />
 
     <EditText
-        android:id="@+id/moderateGroup_desc"
+        android:id="@+id/input_category_desc"
         android:layout_width="367dp"
         android:layout_height="121dp"
         android:background="@android:drawable/editbox_background"
@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.332" />
 
     <Button
-        android:id="@+id/moderateGroup_btn"
+        android:id="@+id/create_category_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="68dp"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.319" />
 
     <TextView
-        android:id="@+id/moderateGroup_zelda_TV"
+        android:id="@+id/get_category_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_group_zelda"
@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.785" />
 
     <TextView
-        android:id="@+id/moderateGroup_zeldaContainer_TV"
+        android:id="@+id/text_link_container"
         android:layout_width="292dp"
         android:layout_height="19dp"
         android:text="*insertar zelda*"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.785" />
 
     <TextView
-        android:id="@+id/moderateGroup_members_TV"
+        android:id="@+id/text_rules"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_category_kinro"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/moderateGroup_name_TV"
+        android:id="@+id/text_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_category_name"

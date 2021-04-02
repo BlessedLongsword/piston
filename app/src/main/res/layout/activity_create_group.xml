@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/moderateGroup_name"
+        android:id="@+id/input_category_name"
         android:layout_width="241dp"
         android:layout_height="24dp"
         android:background="@android:drawable/editbox_background"

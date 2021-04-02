@@ -23,10 +23,10 @@
             android:weightSum="1">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/card_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.05"
+                android:layout_weight="0.25"
                 card_view:srcCompat="@drawable/baseline_folder_open_black_24dp" />
 
             <TextView
@@ -34,11 +34,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/card_image"
-                android:layout_weight="0.95"
+                android:layout_weight="0.75"
                 android:paddingLeft="20dp"
                 android:paddingTop="15dp"
                 android:paddingRight="15dp"
-                android:paddingBottom="15dp"
                 android:text="hello world" />
 
         </LinearLayout>
