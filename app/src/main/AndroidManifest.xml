@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         android:allowBackup="true"
-        android:fullBackupContent="true">
+        android:fullBackupContent="true"
+        android:screenOrientation="sensorPortrait">
 
         <activity
             android:name=".view.folders.CreateFolderActivity"

@@ -64,6 +64,10 @@ public class MainActivity extends PistonActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) { //Canviar icona en cadascun?
                 pistonViewModel.setActiveTab(tab.getPosition());
+                if (tab.getPosition() == 0)
+                    addButton.setImageResource(R.drawable.baseline_create_new_folder_black_24);
+                if (tab.getPosition() == 1)
+                    addButton.setImageResource(R.drawable.baseline_group_add_black_24);
                 if (tab.getPosition() != 2)
                     addButton.setVisibility(View.VISIBLE);
             }
