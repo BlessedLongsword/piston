@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1013687056437",
+    "project_id": "piston-48298",
+    "storage_bucket": "piston-48298.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013687056437:android:a9a994b48b420d73f0197c",
+        "android_client_info": {
+          "package_name": "com.example.piston"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013687056437-oe5hsfgnlmnugkrualvealgur1gjpid3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfI0tJRiD9TS1JyWkBtQiNGxargRCw1rA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013687056437-oe5hsfgnlmnugkrualvealgur1gjpid3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
