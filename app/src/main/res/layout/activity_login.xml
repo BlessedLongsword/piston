@@ -6,6 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
+    android:paddingHorizontal="@dimen/activity_horizontal_margin"
     android:weightSum="100">
 
     <Space
@@ -33,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="@string/user_hint"
-        android:paddingHorizontal="59dp"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,7 +48,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingHorizontal="59dp"
         android:hint="@string/pass_hint"
         app:errorEnabled="true">
 

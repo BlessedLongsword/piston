@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="50dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:weightSum="100">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/activity_vertical_margin"
             android:layout_weight="30" />
 
         <TextView
@@ -29,7 +29,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/activity_vertical_margin"
             android:layout_weight="30" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -121,7 +121,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/activity_vertical_margin"
             android:layout_weight="20" />
 
         <Button
@@ -135,7 +135,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/activity_vertical_margin"
             android:layout_weight="20" />
 
     </LinearLayout>

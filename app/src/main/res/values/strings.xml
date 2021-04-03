@@ -83,7 +83,7 @@
     <!-- Create and edit Folder Strings -->
     <string name="create_folder_activity_title">CREATE FOLDER</string>
     <string name="create_folder_title">Group name:</string>
-    <string name="create_folder_description">Description:</string>
+    <string name="create_folder_description">Description</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
 
     <!-- Create Group Strings -->
@@ -102,7 +102,7 @@
 
     <!-- Create Category Strings -->
     <string name="create_category_title">CREATE CATEGORY</string>
-    <string name="create_category_name">Category name:</string>
+    <string name="create_category_name">Category Name</string>
     <string name="create_category_kinro">Rules:</string>
     <string name="create_category_nsfw">NSFW Category</string>
 
