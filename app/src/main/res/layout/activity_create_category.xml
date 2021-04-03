@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginHorizontal="30dp">
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:id="@+id/createGroup_title"
+        android:id="@+id/createCategory_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_category_title"
         android:layout_gravity="center_horizontal"
         android:textSize="24sp"
-        android:layout_marginVertical="15dp"/>
+        android:layout_marginVertical="@dimen/activity_vertical_margin"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_category_name"
@@ -36,13 +36,13 @@
         android:layout_height="150dp"
         android:hint="@string/create_folder_description"
         app:counterEnabled="true"
-        app:counterMaxLength="2000"
+        app:counterMaxLength="@integer/description_max_length"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textImeMultiLine"
+            android:inputType="textPersonName|textImeMultiLine"
             android:gravity="start"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,14 +51,34 @@
         android:id="@+id/nsfwCheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/textfield_separator"
         android:text="@string/create_category_nsfw" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/category_link"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="@string/create_group_zelda"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/baseline_content_copy_black_24"
+        app:helperText="@string/category_link_help"
+        app:helperTextEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/create_category_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="createCategory"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/create_group_btn"
         android:layout_gravity="center_horizontal"/>
 

@@ -88,10 +88,10 @@
 
     <!-- Create Group Strings -->
     <string name="create_group_title">CREATE GROUP</string>
-    <string name="create_group_name">Group name:</string>
+    <string name="create_group_name">Group name</string>
     <string name="create_group_description">Description:</string>
     <string name="create_group_members">Members:</string>
-    <string name="create_group_zelda">Link:</string>
+    <string name="create_group_zelda">Link</string>
     <string name="create_group_btn">CREATE </string>
 
     <!-- Moderate Group Strings -->
@@ -127,6 +127,9 @@
     <string name="configuration_sub">Default suscription to posts</string>
     <string name="configuration_dark">Dark mode</string>
     <string name="configuration_savebtn">Save changes</string>
+    <string name="category_link_help">Use this to share category</string>
+    <string name="link_copied">Link Copied</string>
+    <string name="group_link_help">Use this to invite members</string>
     <string-array name="config_options_entries">
         <item><string name="config_options_size">Size</string></item>
     </string-array>
