@@ -31,17 +31,22 @@ public class RegisterActivity extends PistonActivity {
     CheckBox tos;
     Button signUpBtn;
 
+    Bundle mSavedInstanceState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        this.username = findViewById(R.id.userText);
+        this.username = (TextInputLayout) findViewById(R.id.userText);
         this.email = findViewById(R.id.emailText);
         this.pwd = findViewById(R.id.pwdText);
         this.pwd2 = findViewById(R.id.pwd2Text);
         this.birthday = findViewById(R.id.bdayText);
         this.tos = findViewById(R.id.tosCheck);
         this.signUpBtn = findViewById(R.id.registerBtn);
+
+        if(savedInstanceState != null){
+            mSavedInstanceState = savedInstanceState;
+        }
 
         pistonViewModel.getRegisterFormState().observe(this, registerFormState -> {
             if (registerFormState == null){

@@ -12,10 +12,10 @@
         android:orientation="vertical"
         android:weightSum="100">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="30" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30" />
 
         <TextView
             android:id="@+id/registerTitle"
@@ -111,15 +111,14 @@
             android:layout_gravity="center_horizontal"
             android:paddingHorizontal="59dp"
             android:hint="@string/reg_date"
+            app:placeholderText="@string/reg_date_format"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_bday_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/reg_date_format"
-                android:inputType="date"
-                android:textColorHint="@drawable/selector" />
+                android:hint="@string/reg_date_format" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
