@@ -1,289 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center_horizontal"
-    android:orientation="vertical"
-    android:weightSum="100">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <Space
+    <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="30" />
+        android:orientation="vertical"
+        android:weightSum="100">
 
-    <TextView
-        android:id="@+id/registerTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reg_title"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"/>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="30" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userText"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/reg_username"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_username_editText"
+        <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="30" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailText"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/reg_email"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <TextView
+            android:id="@+id/registerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/reg_title"
+            android:textSize="24sp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_email_editText"
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="30" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="59dp"
+            android:hint="@string/reg_username"
+            app:errorEnabled="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwdText"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/reg_pwd"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_username_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_pwd_editText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="59dp"
+            android:hint="@string/reg_email"
+            app:errorEnabled="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwd2Text"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/reg_pwd2"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_email_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_pwd2_editText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pwdText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="59dp"
+            android:hint="@string/reg_pwd"
+            app:errorEnabled="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/bdayText"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/reg_date"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_pwd_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_bday_editText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pwd2Text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/reg_date_format"
-            android:textColorHint="@drawable/selector"
-            android:inputType="date" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="59dp"
+            android:hint="@string/reg_pwd2"
+            app:errorEnabled="true">
 
-    <CheckBox
-        android:id="@+id/tosCheck"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/terms_text" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_pwd2_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="20" />
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/reg_btn"
-        android:onClick="registerUser"
-        android:enabled="false" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bdayText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingHorizontal="59dp"
+            android:hint="@string/reg_date"
+            app:errorEnabled="true">
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reg_bday_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reg_date_format"
+                android:inputType="date"
+                android:textColorHint="@drawable/selector" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!--  <TextView
-        android:id="@+id/textDate"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:text="@string/reg_date"
-        app:layout_constraintBottom_toBottomOf="@+id/calendarBtn"
-        app:layout_constraintEnd_toEndOf="@+id/calendarBtn"
-        app:layout_constraintStart_toStartOf="@+id/pwd2"
-        app:layout_constraintTop_toTopOf="@+id/calendarBtn" />
+        <CheckBox
+            android:id="@+id/tosCheck"
+            android:layout_width="293dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/terms_text" />
 
-    <EditText
-        android:id="@+id/pwd2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textPWD2"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/calendarBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPWD2" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="20" />
 
-    <TextView
-        android:id="@+id/textPWD2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="17dp"
-        android:text="@string/reg_pwd2"
-        app:layout_constraintBottom_toTopOf="@+id/pwd2"
-        app:layout_constraintEnd_toEndOf="@+id/calendarBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwd" />
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false"
+            android:onClick="registerUser"
+            android:text="@string/reg_btn" />
 
-    <EditText
-        android:id="@+id/pwd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textPWD"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/textPWD2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPWD" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textPWD"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/reg_pwd"
-        app:layout_constraintBottom_toTopOf="@+id/pwd"
-        app:layout_constraintEnd_toEndOf="@+id/textPWD2"
-        app:layout_constraintStart_toStartOf="@+id/pwd"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+</ScrollView>
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textEmail"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/textPWD"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmail" />
-
-    <TextView
-        android:id="@+id/textEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:text="@string/reg_email"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintEnd_toEndOf="@+id/textPWD"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textEmail"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/textEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textName" />
-
-
-
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="184dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="61dp"
-        android:text="@string/reg_btn"
-        android:onClick="registerUser"
-        android:enabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tosCheck"/>
-
-    <CheckBox
-        android:id="@+id/tosCheck"
-        android:layout_width="301dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginBottom="64dp"
-        android:text="@string/terms_text"
-        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarBtn" />
-
-    <ImageButton
-        android:id="@+id/calendarBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="51dp"
-        app:layout_constraintBottom_toTopOf="@+id/tosCheck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwd2"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout> -->

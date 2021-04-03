@@ -36,7 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.user.RegisterActivity"/>
+        <activity
+            android:name=".view.user.RegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".view.user.ViewProfileActivity"/>
     </application>
 
