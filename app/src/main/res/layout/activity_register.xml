@@ -55,6 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:paddingHorizontal="59dp"
             android:hint="@string/reg_email"
+            app:endIconMode="clear_text"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -72,6 +73,8 @@
             android:layout_gravity="center_horizontal"
             android:paddingHorizontal="59dp"
             android:hint="@string/reg_pwd"
+            app:endIconMode="password_toggle"
+            app:passwordToggleEnabled="true"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -89,6 +92,8 @@
             android:layout_gravity="center_horizontal"
             android:paddingHorizontal="59dp"
             android:hint="@string/reg_pwd2"
+            app:endIconMode="password_toggle"
+            app:passwordToggleEnabled="true"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText

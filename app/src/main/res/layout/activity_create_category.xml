@@ -18,18 +18,6 @@
         app:layout_constraintVertical_bias="0.137" />
 
     <EditText
-        android:id="@+id/input_category_rules"
-        android:layout_width="361dp"
-        android:layout_height="69dp"
-        android:background="@android:drawable/editbox_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.584" />
-
-    <EditText
         android:id="@+id/input_category_desc"
         android:layout_width="367dp"
         android:layout_height="121dp"
@@ -76,17 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.785" />
-
-    <TextView
-        android:id="@+id/text_rules"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_category_kinro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_category_name"
