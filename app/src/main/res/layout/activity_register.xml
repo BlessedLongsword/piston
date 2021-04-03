@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginHorizontal="50dp"
         android:weightSum="100">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="30" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_weight="30" />
 
         <TextView
             android:id="@+id/registerTitle"
@@ -26,8 +28,8 @@
             android:textSize="24sp" />
 
         <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
             android:layout_weight="30" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -36,10 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="59dp"
             android:hint="@string/reg_username"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_username_editText"
                 android:layout_width="match_parent"
@@ -53,11 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="59dp"
             android:hint="@string/reg_email"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_email_editText"
                 android:layout_width="match_parent"
@@ -71,12 +69,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="59dp"
             android:hint="@string/reg_pwd"
             app:endIconMode="password_toggle"
             app:passwordToggleEnabled="true"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_pwd_editText"
                 android:layout_width="match_parent"
@@ -90,12 +86,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="59dp"
             android:hint="@string/reg_pwd2"
             app:endIconMode="password_toggle"
             app:passwordToggleEnabled="true"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_pwd2_editText"
                 android:layout_width="match_parent"
@@ -109,11 +103,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="59dp"
             android:hint="@string/reg_date"
             app:placeholderText="@string/reg_date_format"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_bday_editText"
                 android:layout_width="match_parent"
@@ -122,14 +114,14 @@
 
         <CheckBox
             android:id="@+id/tosCheck"
-            android:layout_width="293dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/terms_text" />
 
         <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
             android:layout_weight="20" />
 
         <Button
@@ -141,7 +133,11 @@
             android:onClick="registerUser"
             android:text="@string/reg_btn" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_weight="20" />
+
     </LinearLayout>
 
 </ScrollView>
-
