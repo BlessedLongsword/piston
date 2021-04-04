@@ -1,6 +1,7 @@
 package com.example.piston.view.posts;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,18 +10,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
 import com.example.piston.view.PistonActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class CreatePostActivity extends PistonActivity {
 
-    TextView title, content;
-    String picturePath;
+    TextInputLayout title;
+    TextInputLayout postContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
-        title = findViewById(R.id.card_title);
-        content = findViewById(R.id.card_content);
+        postContent = findViewById(R.id.post_content);
+        postContent.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
     }
 
    /* public void createPost(View view) {

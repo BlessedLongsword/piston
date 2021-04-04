@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:layout_marginVertical="@dimen/activity_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -14,48 +16,37 @@
         android:text="@string/create_folder_activity_title"
         android:textSize="24sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_folder_name"
-            android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_folder_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:text="@string/create_folder_title" />
+            android:hint="@string/create_folder_title"
+            app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/input_folder_name"
-            android:layout_width="238dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="35dp"
-            android:background="@android:drawable/editbox_background"
-            android:inputType="textShortMessage" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textShortMessage" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/create_folder_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="25dp"
-        android:text="@string/create_folder_description" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_folder_description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="@string/create_folder_description"
+            app:counterEnabled="true"
+            app:counterMaxLength="@integer/description_max_length">
 
-    <EditText
-        android:id="@+id/input_folder_desc"
-        android:layout_width="361dp"
-        android:layout_height="119dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="35dp"
-        android:background="@android:drawable/editbox_background"
-        android:inputType="textMultiLine" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:gravity="start" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/create_folder_btn"

@@ -62,7 +62,9 @@
     <string name="txt_input_title">Title:</string>
     <string name="txt_choose_attach_file">Attach File:</string>
     <string name="txt_input_post_content">Content:</string>
+    <string name="post_content">Content</string>
     <string name="txt_hint_input_post_content">Tell what happened</string>
+    <string name="title">Title</string>
     <string name="txt_hint_input_title">Insert your Title</string>
     <string name="txt_btn_upload_post">Upload</string>
     <string-array name="txt_ambit_entries">
@@ -70,8 +72,8 @@
         <item><string name="txt_ambit_group">Group</string></item>
         <item><string name="txt_ambit_flobal">Global</string></item>
     </string-array>
-    <string name="txt_btn_choose_picture">Browse Image</string>
-    <string name="txt_btn_choose_attach_file">Browse File</string>
+    <string name="txt_btn_choose_picture">Choose Picture</string>
+    <string name="txt_btn_choose_attach_file">Attach File</string>
     <string name="add">Add</string>
 
     <!-- Edit Post Strings -->
@@ -88,9 +90,10 @@
 
     <!-- Create and edit Folder Strings -->
     <string name="create_folder_activity_title">CREATE FOLDER</string>
-    <string name="create_folder_title">Group name:</string>
+    <string name="create_folder_title">Folder Name</string>
     <string name="create_folder_description">Description</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
+    <string name="edit_btn_text">Edit</string>
 
     <!-- Create Group Strings -->
     <string name="create_group_title">CREATE GROUP</string>
@@ -136,6 +139,10 @@
     <string name="category_link_help">Use this to share category</string>
     <string name="link_copied">Link Copied</string>
     <string name="group_link_help">Use this to invite members</string>
+    <string name="file_path">File Path</string>
+    <string name="txt_btn_edit_picture">Change Picture</string>
+    <string name="txt_btn_change_attach_file">Change File</string>
+    <string name="delete">Delete</string>
     <string-array name="config_options_entries">
         <item><string name="config_options_size">Size</string></item>
     </string-array>

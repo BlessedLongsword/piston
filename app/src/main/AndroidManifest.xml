@@ -20,7 +20,7 @@
         <activity
             android:name=".view.main.global.CreateCategoryActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.Dialog"/>
-        <activity android:name=".view.main.group.CreateGroupActivity"/>
+        <activity android:name=".view.main.group.CreateGroupActivity" />
         <activity android:name=".view.main.MainActivity"/>
 
         <activity android:name=".view.others.NotificationsActivity"/>

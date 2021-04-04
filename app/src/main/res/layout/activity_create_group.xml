@@ -1,213 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/createGroup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_title"
-        android:layout_gravity="center_horizontal"
-        android:textSize="24sp"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_group_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/create_group_name"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textShortMessage" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_group_desc"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="@string/create_folder_description"
-        app:counterEnabled="true"
-        app:counterMaxLength="@integer/description_max_length"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:inputType="textPersonName|textImeMultiLine"
-            android:gravity="start"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/group_link"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/create_group_zelda"
-        android:layout_marginTop="@dimen/textfield_separator"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/baseline_content_copy_black_24"
-        app:helperText="@string/group_link_help"
-        app:helperTextEnabled="true">
-
-    <com.google.android.material.textfield.TextInputEditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="false"
-        android:editable="false"
-        android:text="Tonto el que lo lea xd"
-        android:gravity="start" />
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/createGroup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:text="@string/create_group_title"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_group_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/create_group_name"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textShortMessage" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
-        android:id="@+id/create_group_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:onClick="createCategory"
-        android:text="@string/create_group_btn"
-        android:layout_gravity="center_horizontal"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_group_desc"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="@string/create_folder_description"
+            app:counterEnabled="true"
+            app:counterMaxLength="@integer/description_max_length">
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:maxLength="@integer/description_max_length"
+                android:gravity="start" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/group_link"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/create_group_zelda"
+            app:endIconDrawable="@drawable/baseline_content_copy_black_24"
+            app:endIconMode="custom"
+            app:helperText="@string/group_link_help"
+            app:helperTextEnabled="true">
 
-    <EditText
-        android:id="@+id/input_category_name"
-        android:layout_width="241dp"
-        android:layout_height="24dp"
-        android:background="@android:drawable/editbox_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:focusable="false"
+                android:gravity="start"
+                android:maxLength="@integer/description_max_length" />
 
-    <EditText
-        android:id="@+id/moderateGroup_members"
-        android:layout_width="363dp"
-        android:layout_height="86dp"
-        android:background="@android:drawable/editbox_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/moderateGroup_desc"
-        android:layout_width="367dp"
-        android:layout_height="121dp"
-        android:background="@android:drawable/editbox_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332" />
 
-    <Button
-        android:id="@+id/moderateGroup_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:onClick="createGroup"
-        android:text="@string/create_group_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
+        <Button
+            android:id="@+id/create_group_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:onClick="createCategory"
+            android:text="@string/create_group_btn" />
 
-    <TextView
-        android:id="@+id/moderateGroup_zelda_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_zelda"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/moderateGroup_zeldaContainer_TV"
-        android:layout_width="292dp"
-        android:layout_height="19dp"
-        android:text="*insertar zelda*"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
 
-    <TextView
-        android:id="@+id/moderateGroup_members_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_members"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/moderateGroup_name_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
-    <TextView
-        android:id="@+id/moderateGroup_desc_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_description"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
-
-    <TextView
-        android:id="@+id/createGroup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_group_title"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04" />
-
-</androidx.constraintlayout.widget.ConstraintLayout-->
+</ScrollView>
