@@ -109,19 +109,12 @@
     <string name="pwd_req">Password required</string>
     <string name="verify_reg_field">Please confirm the fields and try again</string>
 
-    <!-- Configuration Strings -->
-    <string name="configuration_activity_title">CONFIGURATION</string>
-    <string name="configuration_sub">Default suscription to posts</string>
-    <string name="configuration_dark">Dark mode</string>
-    <string-array name="config_options_entries">
-        <item><string name="config_options_size">Size</string></item>
-    </string-array>
-    <string-array name="config_sizes_entries">
-        <item><string name="config_size_12">12</string></item>
-        <item><string name="config_size_14">14</string></item>
-        <item><string name="config_size_16">16</string></item>
-    </string-array>
-
+    <!-- Settings Strings -->
+    <string name="settings_activity_title">SETTINGS</string>
+    <string name="settings_sub">Default suscription to posts</string>
+    <string name="settings_dark">Dark mode</string>
+    <string name="settings_sfw">Show NSFW content (I am over 18)</string>
+    <string name="settings_blur_nsfw">Blur NSFW Images</string>
     <!--Default -->
 
 </resources>
