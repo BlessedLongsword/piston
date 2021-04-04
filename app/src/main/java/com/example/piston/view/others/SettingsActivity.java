@@ -3,10 +3,11 @@ package com.example.piston.view.others;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingsActivity extends PistonActivity {
+import com.example.piston.R;
+
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

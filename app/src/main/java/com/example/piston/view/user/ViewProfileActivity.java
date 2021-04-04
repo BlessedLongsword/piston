@@ -2,23 +2,20 @@ package com.example.piston.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
 import com.example.piston.model.User;
-import com.example.piston.view.PistonActivity;
-import com.example.piston.view.user.EditProfileActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 
-public class ViewProfileActivity extends PistonActivity {
+public class ViewProfileActivity extends AppCompatActivity {
 
     TextInputLayout username;
     TextInputLayout fullName;
@@ -33,7 +30,7 @@ public class ViewProfileActivity extends PistonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        setContentView(R.layout.activity_profile);
 
         username = findViewById(R.id.viewProfile_username);
         fullName = findViewById(R.id.viewProfile_fullName);
@@ -84,11 +81,6 @@ public class ViewProfileActivity extends PistonActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void editProfile(View view) {
-        Intent intent = new Intent(this, EditProfileActivity.class);
-        startActivity(intent);
     }
 
     private void cancel() {

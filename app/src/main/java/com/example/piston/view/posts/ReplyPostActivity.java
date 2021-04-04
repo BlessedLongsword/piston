@@ -6,9 +6,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
 
-public class ReplyPostActivity extends PistonActivity {
+public class ReplyPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

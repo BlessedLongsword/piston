@@ -9,10 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class CreatePostActivity extends PistonActivity {
+public class CreatePostActivity extends AppCompatActivity {
 
     TextInputLayout title;
     TextInputLayout postContent;

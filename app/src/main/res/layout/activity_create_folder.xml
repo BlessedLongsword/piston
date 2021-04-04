@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
     android:layout_marginVertical="@dimen/activity_vertical_margin"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +16,6 @@
         android:text="@string/create_folder_activity_title"
         android:textSize="24sp" />
 
-
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_folder_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -24,7 +23,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/create_folder_title"
             app:errorEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,12 +38,10 @@
             android:hint="@string/create_folder_description"
             app:counterEnabled="true"
             app:counterMaxLength="@integer/description_max_length">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
                 android:gravity="start" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -55,7 +51,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:onClick="createFolder"
         android:text="@string/create_group_btn" />
 
 </LinearLayout>

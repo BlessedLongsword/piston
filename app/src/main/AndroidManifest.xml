@@ -8,14 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+        android:theme="@style/Theme.Piston"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
-
-        <activity
-            android:name=".view.folders.CreateFolderActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.Dialog"/>
 
         <activity
             android:name=".view.main.global.CreateCategoryActivity"
@@ -30,7 +26,6 @@
         <activity android:name=".view.posts.EditPostActivity"/>
         <activity android:name=".view.posts.ReplyPostActivity"/>
 
-        <activity android:name=".view.user.EditProfileActivity"/>
         <activity
             android:name=".view.user.LoginActivity">
             <intent-filter>
