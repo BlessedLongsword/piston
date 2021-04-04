@@ -2,6 +2,7 @@ package com.example.piston.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,21 +18,60 @@ import java.io.ObjectInputStream;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
-    TextInputLayout username;
-    TextInputLayout fullName;
-    TextInputLayout phoneNumber;
-    TextInputLayout email;
-    TextInputLayout bday;
+    TextInputLayout username, fullName, phoneNumber, email, bday;
     TextView featuredPost;
-    Button cancel;
-    Button edit;
-    Button save;
+    Button cancel, edit, save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        init();
+    }
+
+    public void cancel (View v) {
+        save.setEnabled(false);
+        save.setVisibility(View.INVISIBLE);
+        edit.setEnabled(true);
+        edit.setVisibility(View.VISIBLE);
+        cancel.setVisibility(View.INVISIBLE);
+        cancel.setEnabled(false);
+
+        fullName.getEditText().setInputType(InputType.TYPE_NULL);
+        phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
+        bday.getEditText().setInputType(InputType.TYPE_NULL);
+
+        fullName.getEditText().setFocusableInTouchMode(false);
+        phoneNumber.getEditText().setFocusableInTouchMode(false);
+        bday.getEditText().setFocusableInTouchMode(false);
+
+        fullName.getEditText().clearFocus();
+        phoneNumber.getEditText().clearFocus();
+        bday.getEditText().clearFocus();
+    }
+
+    public void edit (View v) {
+        save.setEnabled(true);
+        save.setVisibility(View.VISIBLE);
+        edit.setEnabled(false);
+        edit.setVisibility(View.INVISIBLE);
+        cancel.setVisibility(View.VISIBLE);
+        cancel.setEnabled(true);
+
+
+        fullName.getEditText().setFocusableInTouchMode(true);
+        phoneNumber.getEditText().setFocusableInTouchMode(true);
+        bday.getEditText().setFocusableInTouchMode(true);
+
+        fullName.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        phoneNumber.getEditText().setInputType(InputType.TYPE_CLASS_PHONE);
+        bday.getEditText().setInputType(InputType.TYPE_CLASS_DATETIME);
+
+        fullName.getEditText().requestFocus();
+    }
+
+    private void init () {
         username = findViewById(R.id.viewProfile_username);
         fullName = findViewById(R.id.viewProfile_fullName);
         phoneNumber = findViewById(R.id.viewProfile_phone);
@@ -42,33 +82,13 @@ public class ViewProfileActivity extends AppCompatActivity {
         edit = findViewById(R.id.viewProfile_edit);
         save = findViewById(R.id.viewProfile_save);
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edit.getText().toString().equals(getString(R.string.view_profile_edit))) {
-                    edit();
-                }
-                else {
-                    cancel();
-                }
-            }
-        });
+        username.getEditText().setInputType(InputType.TYPE_NULL);
+        fullName.getEditText().setInputType(InputType.TYPE_NULL);
+        phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
+        email.getEditText().setInputType(InputType.TYPE_NULL);
+        bday.getEditText().setInputType(InputType.TYPE_NULL);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-            }
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-            }
-        });
-
-        try {
+        /*try {
             String userFile = "userFile";
             FileInputStream fin = openFileInput(userFile);
             ObjectInputStream ois = new ObjectInputStream(fin);
@@ -80,33 +100,6 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private void cancel() {
-        save.setEnabled(true);
-        save.setVisibility(View.INVISIBLE);
-        edit.setEnabled(true);
-        edit.setVisibility(View.VISIBLE);
-        fullName.getEditText().clearFocus();
-        fullName.getEditText().setFocusableInTouchMode(false);
-        phoneNumber.getEditText().clearFocus();
-        phoneNumber.getEditText().setFocusableInTouchMode(false);
-        bday.getEditText().clearFocus();
-        bday.getEditText().setFocusableInTouchMode(false);
-        cancel.setVisibility(View.INVISIBLE);
-        cancel.setEnabled(false);
-    }
-
-    private void edit(){
-        save.setEnabled(true);
-        save.setVisibility(View.VISIBLE);
-        edit.setEnabled(false);
-        edit.setVisibility(View.INVISIBLE);
-        fullName.getEditText().setFocusableInTouchMode(true);
-        phoneNumber.getEditText().setFocusableInTouchMode(true);
-        bday.getEditText().setFocusableInTouchMode(true);
-        cancel.setVisibility(View.VISIBLE);
-        cancel.setEnabled(true);
+        }*/
     }
 }

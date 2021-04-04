@@ -16,8 +16,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
 
     ClipboardManager clipboard;
     ClipData clip;
-    TextInputLayout link;
-    TextInputLayout desc;
+    TextInputLayout link, desc;
 
     @Override
     protected void onCreate(Bundle savedInstances) {

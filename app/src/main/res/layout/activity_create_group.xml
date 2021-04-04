@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:text="@string/create_group_activity_title"
-            android:textSize="24sp" />
+            android:textSize="@dimen/title" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_group_name"
@@ -34,7 +34,6 @@
                 android:layout_height="match_parent"
                 android:inputType="textShortMessage" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_group_desc"
@@ -52,7 +51,6 @@
                 android:gravity="start" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/group_link"
@@ -75,7 +73,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <Button
             android:id="@+id/create_group_btn"
             android:layout_width="wrap_content"
@@ -86,7 +83,5 @@
             android:text="@string/create" />
 
     </LinearLayout>
-
-
 
 </ScrollView>

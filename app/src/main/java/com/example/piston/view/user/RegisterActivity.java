@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,11 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RegisterActivityViewModel registerActivityViewModel;
 
-    TextInputLayout username;
-    TextInputLayout email;
-    TextInputLayout pwd;
-    TextInputLayout pwd2;
-    TextInputLayout birthday;
+    TextInputLayout username, email, pwd, pwd2, birthday;
     CheckBox tos;
     Button signUpBtn;
 
@@ -223,13 +220,5 @@ public class RegisterActivity extends AppCompatActivity {
         String a = username.getError() == null ? "null": "noNull";
         Log.d("what", "showbtn " + a);
         return !isEmpty && !error;
-    }
-
-    public void setErrors() {
-        username.setError(null);
-        pwd.setError(null);
-        pwd2.setError(null);
-        email.setError(null);
-        birthday.setError(null);
     }
 }
