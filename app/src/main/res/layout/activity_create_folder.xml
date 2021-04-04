@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="10dp"
+        android:padding="@dimen/tiny_separator"
         android:text="@string/create_folder_activity_title"
-        android:textSize="24sp" />
+        android:textSize="@dimen/title" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -22,7 +22,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/create_folder_title"
+            android:hint="@string/folder_name"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -36,14 +36,14 @@
             android:id="@+id/create_folder_description"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:hint="@string/create_folder_description"
+            android:layout_height="@dimen/big_text_field_description"
+            android:hint="@string/description"
             app:counterEnabled="true"
             app:counterMaxLength="@integer/description_max_length">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="@dimen/big_edit_text_description"
                 android:gravity="start" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,9 +53,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/tiny_separator"
+        android:layout_marginBottom="@dimen/tiny_separator"
         android:onClick="createFolder"
-        android:text="@string/create_group_btn" />
+        android:text="@string/create" />
 
 </LinearLayout>

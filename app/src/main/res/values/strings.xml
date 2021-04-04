@@ -8,13 +8,31 @@
     <!-- General propuse -->
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="link">Link</string>
+    <string name="description">Description</string>
+    <string name="create">Create</string>
+    <string name="upload">Upload</string>
+    <string name="title">Title</string>
+    <string name="add">Add</string>
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="link_copied">Link Copied</string>
+    <string name="file_path">File Path</string>
+
+    <!-- User Data -->
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="birth_date">Date of Birth</string>
 
     <!-- Sign in strings -->
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
     <string name="user_hint">Username or Email</string>
-    <string name="pass_hint">Password</string>
-    <string name="remember_me">Remember me</string>
     <string name="forgot_pass">Forgot password?</string>
     <string name="sign_up_msg">Don\&apos;t have an account?</string>
     <string name="sign_up_button"> Sign up Now!</string>
@@ -22,101 +40,61 @@
 
     <!-- Register strings -->
     <string name="reg_title">REGISTER</string>
-    <string name="reg_username">Username</string>
-    <string name="reg_email">Email</string>
-    <string name="reg_pwd">Password</string>
-    <string name="reg_pwd2">Confirm password</string>
-    <string name="reg_date">Date of Birth</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="reg_date_format">dd/mm/yyyy</string>
     <string name="terms_text">I have read and accept the privacy policy</string>
     <string name="reg_btn">Register</string>
     <string name="reg_succesful">Registration Successful</string>
 
-    <!-- Edit profile strings -->
-    <string name="edit_profile_title">EDIT PROFILE</string>
-    <string name="edit_profile_username">Username</string>
-    <string name="edit_profile_name">Name:</string>
-    <string name="edit_profile_surname">Surname</string>
-    <string name="edit_profile_phone">Phone number</string>
-    <string name="edit_profile_email">Email</string>
-    <string name="edit_profile_icon">Icon</string>
-    <string name="edit_profile_date">Date of Birth</string>
-    <string name="edit_profile_pwd">New password</string>
-    <string name="edit_profile_pwd2">Confirm password</string>
-    <string name="edit_profile_currentPWD">Current password</string>
-    <string name="edit_profile_btn">Save changes</string>
-    <string name="edit_profile_explore">Explore</string>
-
     <!-- View Profile Strings -->
     <string name="view_profile_fullName">Full Name</string>
     <string name="view_profile_phone">Phone</string>
-    <string name="view_profile_title">PROFILE</string>
+    <string name="view_profile_activity_title">PROFILE</string>
     <string name="view_profile_post">Featured post</string>
     <string name="view_profile_edit">Edit profile</string>
 
     <!-- Create Post Strings -->
-    <string name="txt_activity_title_createPost">CREATE POST</string>
-    <string name="txt_choose_ambit">Ambit:</string>
-    <string name="txt_choose_category">Category:</string>
-    <string name="txt_choose_picture">Picture:</string>
-    <string name="txt_input_title">Title:</string>
-    <string name="txt_choose_attach_file">Attach File:</string>
-    <string name="txt_input_post_content">Content:</string>
+    <string name="create_post_activity_title">CREATE POST</string>
     <string name="post_content">Content</string>
-    <string name="txt_hint_input_post_content">Tell what happened</string>
-    <string name="title">Title</string>
-    <string name="txt_hint_input_title">Insert your Title</string>
-    <string name="txt_btn_upload_post">Upload</string>
-    <string-array name="txt_ambit_entries">
-        <item><string name="txt_ambit_personal">Personal</string></item>
-        <item><string name="txt_ambit_group">Group</string></item>
-        <item><string name="txt_ambit_flobal">Global</string></item>
-    </string-array>
-    <string name="txt_btn_choose_picture">Choose Picture</string>
-    <string name="txt_btn_choose_attach_file">Attach File</string>
-    <string name="add">Add</string>
+    <string name="hint_post_content">Tell what happened</string>
+    <string name="hint_input_title">Insert your Title</string>
+    <string name="choose_picture">Choose Picture</string>
+    <string name="attach_file">Attach File</string>
 
     <!-- Edit Post Strings -->
-    <string name="txt_activity_title_editPost">EDIT POST</string>
-    <string name="txt_activity_btn1_editPost">Edit</string>
-    <string name="txt_activity_btn2_editPost">Delete</string>
+    <string name="edit_post_activity_title">EDIT POST</string>
+    <string name="edit_post_btn">Edit</string>
+    <string name="change_picture">Change Picture</string>
+    <string name="change_file">Change File</string>
 
     <!-- Reply Post Strings -->
-    <string name="txt_activity_title_replyPost">REPLY POST</string>
-    <string name="txt_activity_btn1_replyPost">Reply</string>
-    <string name="profile">Profile</string>
-    <string name="notifications">Notifications</string>
-    <string name="settings">Settings</string>
+    <string name="reply_post_activity_title">REPLY POST</string>
+    <string name="reply_btn">Reply</string>
 
     <!-- Create and edit Folder Strings -->
     <string name="create_folder_activity_title">CREATE FOLDER</string>
-    <string name="create_folder_title">Folder Name</string>
-    <string name="create_folder_description">Description</string>
+    <string name="folder_name">Folder Name</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
-    <string name="edit_btn_text">Edit</string>
 
-    <!-- Create Group Strings -->
-    <string name="create_group_title">CREATE GROUP</string>
+    <!-- Create and edit Group Strings -->
+    <string name="create_group_activity_title">CREATE GROUP</string>
     <string name="create_group_name">Group name</string>
-    <string name="create_group_description">Description:</string>
-    <string name="create_group_members">Members:</string>
-    <string name="create_group_zelda">Link</string>
-    <string name="create_group_btn">CREATE </string>
+    <string name="create_group_members">Members</string>
+    <string name="group_link_help">Use this to invite members</string>
 
     <!-- Moderate Group Strings -->
-    <string name="moderate_group_title">MODERATE GROUP</string>
-    <string name="moderate_group_save_btn">Save changes</string>
-    <string name="moderate_group_deletebtn">Delete group</string>
-    <string name="moderate_group_deleteselected">Delete selected</string>
+    <string name="group_settings_activity_title">GROUP SETTINGS</string>
+    <string name="delete_group_btn">Delete Group</string>
+    <string name="delete_selected">Delete selected</string>
 
     <!-- Create Category Strings -->
-    <string name="create_category_title">CREATE CATEGORY</string>
+    <string name="create_category_activity_title">CREATE CATEGORY</string>
     <string name="create_category_name">Category Name</string>
-    <string name="create_category_kinro">Rules:</string>
     <string name="create_category_nsfw">NSFW Category</string>
+    <string name="category_link_help">Use this to share category</string>
 
     <!-- Notifications Strings -->
-    <string name="notifications_title">NOTIFICATIONS</string>
+    <string name="notifications_activity_title">NOTIFICATIONS</string>
 
     <!-- Error Strings -->
     <string name="wrong_user">This user does not exist</string>
@@ -132,17 +110,9 @@
     <string name="verify_reg_field">Please confirm the fields and try again</string>
 
     <!-- Configuration Strings -->
-    <string name="configuration_title">CONFIGURATION</string>
+    <string name="configuration_activity_title">CONFIGURATION</string>
     <string name="configuration_sub">Default suscription to posts</string>
     <string name="configuration_dark">Dark mode</string>
-    <string name="configuration_savebtn">Save changes</string>
-    <string name="category_link_help">Use this to share category</string>
-    <string name="link_copied">Link Copied</string>
-    <string name="group_link_help">Use this to invite members</string>
-    <string name="file_path">File Path</string>
-    <string name="txt_btn_edit_picture">Change Picture</string>
-    <string name="txt_btn_change_attach_file">Change File</string>
-    <string name="delete">Delete</string>
     <string-array name="config_options_entries">
         <item><string name="config_options_size">Size</string></item>
     </string-array>
@@ -151,5 +121,7 @@
         <item><string name="config_size_14">14</string></item>
         <item><string name="config_size_16">16</string></item>
     </string-array>
+
+    <!--Default -->
 
 </resources>

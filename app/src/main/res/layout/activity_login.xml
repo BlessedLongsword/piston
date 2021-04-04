@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/sign_in"
-        android:textSize="45sp" />
+        android:textSize="@dimen/huge" />
 
     <Space
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:hint="@string/pass_hint"
+        android:hint="@string/password"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -93,11 +93,11 @@
             android:id="@+id/sign_up_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="@dimen/micro_separator"
+            android:layout_marginLeft="@dimen/micro_separator"
             android:onClick="register"
             android:text="@string/sign_up_button"
-            android:textColor="#0000EE" />
+            android:textColor="@color/dark_blue" />
     </LinearLayout>
 
     <Space

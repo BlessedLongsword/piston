@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/reg_title"
-            android:textSize="24sp" />
+            android:textSize="@dimen/title" />
 
         <Space
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/reg_username"
+            android:hint="@string/username"
             app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_username_editText"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/reg_email"
+            android:hint="@string/email"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/reg_pwd"
+            android:hint="@string/password"
             app:endIconMode="password_toggle"
             app:passwordToggleEnabled="true"
             app:errorEnabled="true">
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/reg_pwd2"
+            android:hint="@string/confirm_password"
             app:endIconMode="password_toggle"
             app:passwordToggleEnabled="true"
             app:errorEnabled="true">
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:hint="@string/reg_date"
+            android:hint="@string/birth_date"
             app:placeholderText="@string/reg_date_format"
             app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
@@ -126,8 +126,8 @@
 
         <Button
             android:id="@+id/registerBtn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/medium_wide_btn"
+            android:layout_height="@dimen/medium_high_btn"
             android:layout_gravity="center_horizontal"
             android:enabled="false"
             android:onClick="registerUser"

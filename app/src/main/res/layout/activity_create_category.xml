@@ -15,9 +15,9 @@
             android:id="@+id/createCategory_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_category_title"
+            android:text="@string/create_category_activity_title"
             android:layout_gravity="center_horizontal"
-            android:textSize="24sp"
+            android:textSize="@dimen/title"
             android:layout_marginVertical="@dimen/activity_vertical_margin"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -38,15 +38,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_category_desc"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:hint="@string/create_folder_description"
+            android:layout_height="@dimen/big_text_field_description"
+            android:hint="@string/description"
             app:counterEnabled="true"
             app:counterMaxLength="@integer/description_max_length"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="@dimen/big_edit_text_description"
                 android:maxLength="@integer/description_max_length"
                 android:gravity="start"/>
 
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
-            android:hint="@string/create_group_zelda"
+            android:hint="@string/link"
             app:endIconMode="custom"
             app:endIconDrawable="@drawable/baseline_content_copy_black_24"
             app:helperText="@string/category_link_help"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:onClick="createCategory"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/create_group_btn"
+            android:text="@string/create"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
