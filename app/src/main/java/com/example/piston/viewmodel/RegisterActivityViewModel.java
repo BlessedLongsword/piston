@@ -1,49 +1,29 @@
 package com.example.piston.viewmodel;
 
 import android.util.Log;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.model.CategoryManager;
-import com.example.piston.model.Result;
-import com.example.piston.model.User;
-import com.example.piston.model.UserList;
 import com.example.piston.R;
+import com.example.piston.model.Result;
+import com.example.piston.model.UserList;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PistonViewModel extends ViewModel {
+public class RegisterActivityViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> activeTab;
-    private MutableLiveData<ArrayList<String>> folderChooser;
-    private MutableLiveData<LoginResult> loginResult;
     private MutableLiveData<RegisterResult> registerResult;
     private MutableLiveData<RegisterFormState> registerFormState;
-
-    private String currentUser;
     private UserList users;
-    private CategoryManager categoryManager;
 
-    public PistonViewModel() {
-        activeTab = new MutableLiveData<>();
-        folderChooser = new MutableLiveData<>();
-        loginResult = new MutableLiveData<>();
+    public RegisterActivityViewModel() {
         registerResult = new MutableLiveData<>();
         registerFormState = new MutableLiveData<>();
         users = new UserList();
-        categoryManager = new CategoryManager();
-        setActiveTab(0);
-        Log.d("Test3", "I am created");
-    }
-
-    public LiveData<LoginResult> getLoginResult() {
-        return loginResult;
     }
 
     public LiveData<RegisterResult> getRegisterResult() {
@@ -52,23 +32,6 @@ public class PistonViewModel extends ViewModel {
 
     public LiveData<RegisterFormState> getRegisterFormState() {
         return registerFormState;
-    }
-
-    public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<User> result = users.login(username, password);
-
-        if (result instanceof Result.Success) {
-            User user = ((Result.Success<User>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(user.getName())));
-        } else {
-            if (result.toString().equals("Error[exception=Wrong password]")) {
-                loginResult.setValue(new LoginResult(R.string.wrong_password));
-            }
-            else if (result.toString().equals("Error[exception=This user does not exist]")) {
-                loginResult.setValue(new LoginResult(R.string.wrong_user));
-            }
-        }
     }
 
     public void register(String username, String pwd1, String pwd2, String email, Date birthDate) {
@@ -176,22 +139,5 @@ public class PistonViewModel extends ViewModel {
                     null,null,null,null,R.string.invalid_date));
         }
     }
-    public MutableLiveData<ArrayList<String>> getFolderChooser () {
-        return folderChooser;
-    }
-
-    public void setFolderChooser (String title, String description){
-        categoryManager.createFolder(title, description);
-        this.folderChooser.postValue(categoryManager.getFolderNames());
-    }
-
-    public Integer getActiveTab () {
-        return activeTab.getValue();
-    }
-
-    public void setActiveTab ( int activeTab) {
-        this.activeTab.setValue(activeTab);
-    }
-
 
 }

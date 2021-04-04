@@ -9,19 +9,21 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
+import com.example.piston.viewmodel.RegisterActivityViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RegisterActivity extends PistonActivity {
+public class RegisterActivity extends AppCompatActivity {
+
+    private RegisterActivityViewModel registerActivityViewModel;
 
     TextInputLayout username;
     TextInputLayout email;
@@ -36,6 +38,8 @@ public class RegisterActivity extends PistonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        registerActivityViewModel = new ViewModelProvider(this).get(RegisterActivityViewModel.class);
+
         this.username = (TextInputLayout) findViewById(R.id.userText);
         this.email = findViewById(R.id.emailText);
         this.pwd = findViewById(R.id.pwdText);
@@ -48,7 +52,7 @@ public class RegisterActivity extends PistonActivity {
             mSavedInstanceState = savedInstanceState;
         }
 
-        pistonViewModel.getRegisterFormState().observe(this, registerFormState -> {
+        registerActivityViewModel.getRegisterFormState().observe(this, registerFormState -> {
             if (registerFormState == null){
                 return;
             }
@@ -78,7 +82,7 @@ public class RegisterActivity extends PistonActivity {
             }
         });
 
-        pistonViewModel.getRegisterResult().observe(this, registerResult -> {
+        registerActivityViewModel.getRegisterResult().observe(this, registerResult -> {
             if (registerResult == null) {
                 return;
             }
@@ -112,7 +116,7 @@ public class RegisterActivity extends PistonActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 username.setError(null);
-                pistonViewModel.registerUsernameChanged(username.getEditText().getText().toString());
+                registerActivityViewModel.registerUsernameChanged(username.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
@@ -130,7 +134,7 @@ public class RegisterActivity extends PistonActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 pwd.setError(null);
-                pistonViewModel.registerPwd1Changed(pwd.getEditText().getText().toString());
+                registerActivityViewModel.registerPwd1Changed(pwd.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
@@ -148,7 +152,7 @@ public class RegisterActivity extends PistonActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 pwd2.setError(null);
-                pistonViewModel.registerPwd2Changed(pwd.getEditText().getText().toString(),
+                registerActivityViewModel.registerPwd2Changed(pwd.getEditText().getText().toString(),
                         pwd2.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
@@ -167,7 +171,7 @@ public class RegisterActivity extends PistonActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 email.setError(null);
-                pistonViewModel.registerEmailChanged(email.getEditText().getText().toString());
+                registerActivityViewModel.registerEmailChanged(email.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
@@ -186,7 +190,7 @@ public class RegisterActivity extends PistonActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 birthday.setError(null);
-                pistonViewModel.registerBdayChanged(birthday.getEditText().getText().toString());
+                registerActivityViewModel.registerBdayChanged(birthday.getEditText().getText().toString());
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
@@ -201,9 +205,9 @@ public class RegisterActivity extends PistonActivity {
     }
 
     public void registerUser(View view) {
-            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date(System.currentTimeMillis());
-            pistonViewModel.register(username.getEditText().getText().toString(),
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        registerActivityViewModel.register(username.getEditText().getText().toString(),
                     pwd.getEditText().getText().toString(), pwd2.getEditText().getText().toString(),
                     email.getEditText().getText().toString(), date);
     }

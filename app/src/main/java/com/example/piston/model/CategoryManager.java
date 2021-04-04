@@ -2,12 +2,11 @@ package com.example.piston.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CategoryManager {
 
-    private Map<String, Section> folders;
+    private final Map<String, Section> folders;
 
     public CategoryManager() {
         folders = new HashMap<>();

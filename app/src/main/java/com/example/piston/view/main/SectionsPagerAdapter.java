@@ -18,8 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]
-            {R.string.tab_personal, R.string.tab_group, R.string.tab_global};
+    private static final int[] TAB_TITLES = new int[] {R.string.tab_personal, R.string.tab_group, R.string.tab_global};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {

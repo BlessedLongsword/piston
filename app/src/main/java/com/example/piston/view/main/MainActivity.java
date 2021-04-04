@@ -1,36 +1,37 @@
 package com.example.piston.view.main;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.PopupWindow;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.piston.R;
-import com.example.piston.view.folders.CreateFolderActivity;
+import com.example.piston.view.folders.CreateFolderDialogFragment;
 import com.example.piston.view.main.global.CreateCategoryActivity;
 import com.example.piston.view.main.group.CreateGroupActivity;
 import com.example.piston.view.others.NotificationsActivity;
-import com.example.piston.view.PistonActivity;
 import com.example.piston.view.others.SettingsActivity;
-import com.example.piston.view.posts.CreatePostActivity;
 import com.example.piston.view.user.ViewProfileActivity;
+import com.example.piston.viewmodel.MainActivityViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends PistonActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(
                 this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -61,8 +62,8 @@ public class MainActivity extends PistonActivity {
         FloatingActionButton addButton = findViewById(R.id.add_button);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) { //Canviar icona en cadascun?
-                pistonViewModel.setActiveTab(tab.getPosition());
+            public void onTabSelected(TabLayout.Tab tab) {
+                mainActivityViewModel.setActiveTab(tab.getPosition());
                 if (tab.getPosition() == 0)
                     addButton.setImageResource(R.drawable.baseline_create_new_folder_black_24);
                 if (tab.getPosition() == 1)
@@ -82,11 +83,12 @@ public class MainActivity extends PistonActivity {
     }
 
     public void add(View view) {
-        if (pistonViewModel.getActiveTab() == 0) {
-            Intent intent = new Intent(this, CreateFolderActivity.class);
-            startActivity(intent);
+        if (mainActivityViewModel.getActiveTab() == 0) {
+            FragmentManager fm = getSupportFragmentManager();
+            DialogFragment personalFragment = new CreateFolderDialogFragment();
+            personalFragment.show(fm, "Where am I");
         }
-        else if (pistonViewModel.getActiveTab() == 1) {
+        else if (mainActivityViewModel.getActiveTab() == 1) {
             Intent intent = new Intent(this, CreateGroupActivity.class);
             startActivity(intent);
         }

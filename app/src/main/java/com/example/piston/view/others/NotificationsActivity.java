@@ -2,10 +2,11 @@ package com.example.piston.view.others;
 
 import android.os.Bundle;
 
-import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class NotificationsActivity extends PistonActivity {
+import com.example.piston.R;
+
+public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,8 +2,7 @@ package com.example.piston.model;
 
 public class Section {
 
-    private String title;
-    private String description;
+    private String title, description;
 
     public Section(String title, String description)  {
         setTitle(title);

@@ -7,11 +7,12 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.piston.R;
-import com.example.piston.view.PistonActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class CreateGroupActivity extends PistonActivity {
+public class CreateGroupActivity extends AppCompatActivity {
 
     ClipboardManager clipboard;
     ClipData clip;

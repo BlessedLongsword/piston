@@ -6,25 +6,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.piston.R;
 import com.example.piston.model.User;
-import com.example.piston.view.PistonActivity;
 import com.example.piston.view.main.MainActivity;
+import com.example.piston.viewmodel.LoginActivityViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 
-public class LoginActivity extends PistonActivity {
+public class LoginActivity extends AppCompatActivity {
+
+    private LoginActivityViewModel loginActivityViewModel;
 
     private TextInputLayout username, pwd;
     private final String userCachePath = "logged_user";
@@ -34,12 +35,14 @@ public class LoginActivity extends PistonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
+
         this.username = findViewById(R.id.user_textField);
         this.pwd = findViewById(R.id.pass_textField);
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.setEnabled(false);
 
-        pistonViewModel.getLoginResult().observe(this, loginResult -> {
+        loginActivityViewModel.getLoginResult().observe(this, loginResult -> {
             username.setError(null);
             pwd.setError(null);
             if (loginResult == null) {
@@ -95,7 +98,7 @@ public class LoginActivity extends PistonActivity {
     }
 
     public void login(View view) {
-        pistonViewModel.login(username.getEditText().getText().toString(), pwd.getEditText().getText().toString());
+        loginActivityViewModel.login(username.getEditText().getText().toString(), pwd.getEditText().getText().toString());
     }
 
 
