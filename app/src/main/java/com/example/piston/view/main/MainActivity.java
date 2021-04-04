@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 sectionsPagerAdapter.getItem(tab.getPosition()).select(addButton);
                 mainActivityViewModel.setActiveTab(tab.getPosition());
+                Integer a = tab.getPosition();
+                Log.d("what", a.toString() + " pressed");
             }
 
             @Override
