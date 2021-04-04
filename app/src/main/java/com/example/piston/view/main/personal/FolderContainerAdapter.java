@@ -1,4 +1,4 @@
-package com.example.piston.view.folders;
+package com.example.piston.view.main.personal;
 
 import android.content.Intent;
 import android.view.LayoutInflater;

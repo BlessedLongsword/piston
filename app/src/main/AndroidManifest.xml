@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.piston">
 
     <application
@@ -13,10 +12,10 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
-        <activity
-            android:name=".view.main.global.CreateCategoryActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.Dialog"/>
-        <activity android:name=".view.main.group.CreateGroupActivity" />
+        <activity android:name=".view.main.personal.CreateFolderActivity"/>
+        <activity android:name=".view.main.global.CreateCategoryActivity"/>
+        <activity android:name=".view.main.group.CreateGroupActivity"/>
+
         <activity android:name=".view.main.MainActivity"/>
 
         <activity android:name=".view.others.NotificationsActivity"/>

@@ -1,7 +1,5 @@
 package com.example.piston.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,10 +10,11 @@ public class PersonalFragmentViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<String>> folders;
     //private final CategoryManager categoryManager;
+    private final ArrayList<String> folders_array;
 
     public PersonalFragmentViewModel() {
-        Log.d("nowaybro", "Created PersonalFragmentViewModel");
-        folders = new MutableLiveData<>(new ArrayList<>());
+        folders = new MutableLiveData<>();
+        folders_array = new ArrayList<>();
         //categoryManager = new CategoryManager();
     }
 
@@ -26,10 +25,8 @@ public class PersonalFragmentViewModel extends ViewModel {
     public void createFolder(String title, String description){
         //categoryManager.createFolder(title, description);
         //folders.postValue(categoryManager.getFolderNames());
-        Log.d("nowaybro", "Added: " + title);
-        folders.getValue().add(title);
-        for (String folder : folders.getValue())
-            Log.d("nowaybro", folder);
+        folders_array.add(title);
+        folders.setValue(folders_array);
     }
 
 }
