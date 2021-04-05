@@ -22,11 +22,12 @@
             android:textSize="@dimen/title" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/post_content"
+            android:id="@+id/reply_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="@dimen/big_text_field_post"
-            android:hint="@string/description"
+            android:hint="@string/reply_content"
+            app:placeholderText="@string/hint_reply_button"
             app:counterEnabled="true"
             app:counterMaxLength="@integer/post_max_length">
 

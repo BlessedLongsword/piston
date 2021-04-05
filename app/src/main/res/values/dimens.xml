@@ -11,6 +11,7 @@
     <dimen name="small_separator">16dp</dimen>
     <dimen name="tiny_separator">10dp</dimen>
     <dimen name="micro_separator">5dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
 
     <!-- Component sizes-->
     <dimen name="zero">0dp</dimen>
@@ -34,5 +35,6 @@
     <dimen name="text">14sp</dimen>
     <dimen name="small">10sp</dimen>
     <dimen name="huge">45sp</dimen>
+    <dimen name="card_image">194dp</dimen>
 
 </resources>
