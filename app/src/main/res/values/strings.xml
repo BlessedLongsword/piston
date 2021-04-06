@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Piston</string>
 
+    <!-- Tab names -->
     <string-array name="tab_titles">
         <item><string name="tab_personal">Personal</string></item>
         <item><string name="tab_groups">Grupal</string></item>
         <item><string name="tab_global">Global</string></item>
     </string-array>
 
-    <!-- General propuse -->
+    <!-- General purpose -->
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="save_changes">Save Changes</string>
@@ -121,6 +122,5 @@
     <string name="hint_reply_button">Insert your reply</string>
     <string name="content_description_media">Sample content description</string>
     <string name="reply">reply</string>
-    <!--Default -->
 
 </resources>

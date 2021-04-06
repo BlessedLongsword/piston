@@ -81,6 +81,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void saveSettings(View view) {
-        onBackPressed();
+        finish();
     }
 }

@@ -12,15 +12,6 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
-        <activity android:name=".view.main.global.CreateCategoryActivity"/>
-
-        <activity android:name=".view.main.group.CreateGroupActivity"/>
-        <activity android:name=".view.main.group.ModerateGroupActivity"/>
-
-        <activity android:name=".view.main.personal.CreateFolderActivity"/>
-
-        <activity android:name=".view.main.MainActivity"/>
-
         <activity android:name=".view.others.NotificationsActivity"/>
         <activity android:name=".view.others.SettingsActivity"/>
 
@@ -28,6 +19,13 @@
         <activity android:name=".view.posts.EditPostActivity"/>
         <activity android:name=".view.posts.ReplyPostActivity"/>
         <activity android:name=".view.posts.ViewPostsActivity"/>
+
+        <activity android:name=".view.sections.global.CreateCategoryActivity"/>
+
+        <activity android:name=".view.sections.group.CreateGroupActivity"/>
+        <activity android:name=".view.sections.group.ModerateGroupActivity"/>
+
+        <activity android:name=".view.sections.personal.CreateFolderActivity"/>
 
         <activity
             android:name=".view.user.LoginActivity">
@@ -38,6 +36,8 @@
         </activity>
         <activity android:name=".view.user.RegisterActivity"/>
         <activity android:name=".view.user.ViewProfileActivity"/>
+
+        <activity android:name=".view.MainActivity"/>
 
     </application>
 

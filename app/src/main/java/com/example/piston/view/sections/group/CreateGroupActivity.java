@@ -1,4 +1,4 @@
-package com.example.piston.view.main.group;
+package com.example.piston.view.sections.group;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -36,6 +36,6 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     public void createGroup(View view) {
-        onBackPressed();
+        finish();
     }
 }

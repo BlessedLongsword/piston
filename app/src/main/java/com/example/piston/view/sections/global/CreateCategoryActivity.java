@@ -1,10 +1,10 @@
-package com.example.piston.view.main.global;
+package com.example.piston.view.sections.global;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +37,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
 
     }
 
-    public void createCategory(View view) {
-        onBackPressed();
+    public void createCategory(MenuItem item) {
+        finish();
     }
 }

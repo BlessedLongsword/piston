@@ -25,7 +25,7 @@ public class ReplyPostActivity extends AppCompatActivity {
     }
 
     public void replyPost(View view) {
-        onBackPressed();
+        finish();
     }
 
 }

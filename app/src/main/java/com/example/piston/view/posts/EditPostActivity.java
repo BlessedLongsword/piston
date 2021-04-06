@@ -16,7 +16,7 @@ public class EditPostActivity extends AppCompatActivity {
     }
 
     public void editPost(View view) {
-        onBackPressed();
+        finish();
     }
 
 }

@@ -1,10 +1,10 @@
-package com.example.piston.view.main.global;
+package com.example.piston.view.sections.global;
 
 import android.content.Intent;
 import android.view.View;
 
 import com.example.piston.R;
-import com.example.piston.view.main.SectionFragment;
+import com.example.piston.view.sections.SectionFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class GlobalFragment extends SectionFragment {

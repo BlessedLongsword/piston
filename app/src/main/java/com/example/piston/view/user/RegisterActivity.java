@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-                onBackPressed();
+                finish();
             }
         });
 

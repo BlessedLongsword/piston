@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.sections.global.CreateCategoryActivity">
 
     <item
         android:id="@+id/create_category_btn"
         android:title="@string/create"
-        app:showAsAction="always">
+        app:showAsAction="always"
+        android:onClick="createCategory">
     </item>
-
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.piston.view.main.personal;
+package com.example.piston.view.sections.personal;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.piston.view.main.group;
+package com.example.piston.view.sections.group;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -39,10 +39,10 @@ public class ModerateGroupActivity extends AppCompatActivity {
     }
 
     public void saveChanges (View v) {
-        onBackPressed();
+        finish();
     }
 
     public void deleteGroup (View v) {
-        onBackPressed();
+        finish();
     }
 }

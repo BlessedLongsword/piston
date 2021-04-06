@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.model.User;
-import com.example.piston.view.main.MainActivity;
+import com.example.piston.view.MainActivity;
 import com.example.piston.viewmodel.LoginActivityViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
