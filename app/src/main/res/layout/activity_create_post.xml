@@ -1,134 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".view.posts.CreatePostActivity">
+    tools:context=".view.sections.global.CreateCategoryActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/create_category_topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/create_post_activity_title"
+            app:navigationIcon="@drawable/outline_close_black_24"
+            app:menu="@menu/create_post_top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/create_post_activity_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:text="@string/create_post_activity_title"
-            android:textSize="@dimen/title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/choose_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/title"
-            app:placeholderText="@string/hint_post_content"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/title_max_length"
-            android:inputType="textPersonName" >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="@integer/title_max_length"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/choose_picture_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/choose_picture" />
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:weightSum="0.5">
 
             <Space
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/post_picture"
-                android:layout_width="@dimen/big_square"
-                android:layout_height="@dimen/big_square"
-                android:background="@drawable/jojo" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <Button
-                android:id="@+id/btn_attach_file"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="@dimen/zero"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.4"
-                android:text="@string/attach_file" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.2" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/file_path"
-                android:layout_width="@dimen/zero"
+                android:id="@+id/choose_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:enabled="false"
-                android:hint="@string/file_path"
-                android:inputType="textPersonName">
+                android:hint="@string/title"
+                app:placeholderText="@string/hint_post_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/title_max_length"
+                android:inputType="textPersonName" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:maxLength="@integer/title_max_length"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/choose_picture_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/choose_picture" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/post_picture"
+                    android:layout_width="@dimen/big_square"
+                    android:layout_height="@dimen/big_square"
+                    android:background="@drawable/jojo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/btn_attach_file"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.4"
+                    android:text="@string/attach_file" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/file_path"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:enabled="false"
+                    android:hint="@string/file_path"
+                    android:inputType="textPersonName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/post_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/big_text_field_post"
+                android:hint="@string/post_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                app:placeholderText="@string/hint_post_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/post_max_length"
+                android:inputType="textMultiLine" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:maxLength="@integer/post_max_length"
+                    android:layout_height="@dimen/big_edit_text_post"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/post_content"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/big_text_field_post"
-            android:hint="@string/post_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            app:placeholderText="@string/hint_post_content"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/post_max_length"
-            android:inputType="textMultiLine" >
+    </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:gravity="start"
-                android:maxLength="@integer/post_max_length"
-                android:layout_height="@dimen/big_edit_text_post"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/edit_post_button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="createPost"
-            android:text="@string/upload" />
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
