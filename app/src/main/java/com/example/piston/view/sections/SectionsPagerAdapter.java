@@ -1,7 +1,5 @@
 package com.example.piston.view.sections;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -14,22 +12,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
 
-    FloatingActionButton actionButton;
-
     public SectionsPagerAdapter(@NonNull FragmentActivity fragmentActivity, FloatingActionButton actionButton) {
         super(fragmentActivity);
-        this.actionButton = actionButton;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         if (position == 0)
-            return new PersonalFragment(actionButton);
+            return new PersonalFragment();
         if (position == 1)
-            return new GroupFragment(actionButton);
+            return new GroupFragment();
         else
-            return new GlobalFragment(actionButton);
+            return new GlobalFragment();
     }
 
     @Override

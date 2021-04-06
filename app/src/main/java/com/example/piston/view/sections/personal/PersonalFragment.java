@@ -2,18 +2,18 @@ package com.example.piston.view.sections.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.view.sections.SectionFragment;
 import com.example.piston.viewmodel.PersonalFragmentViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,16 +21,15 @@ public class PersonalFragment extends SectionFragment {
 
     private PersonalFragmentViewModel viewModel;
 
-    public PersonalFragment(FloatingActionButton actionButton) {
-        super(R.layout.fragment_personal, actionButton);
-    }
-
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_personal, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(PersonalFragmentViewModel.class);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_personal);
         recyclerView.setAdapter(new FolderAdapter(requireActivity()));
+        return view;
     }
 
     @Override

@@ -27,14 +27,14 @@
 
         <activity android:name=".view.sections.personal.CreateFolderActivity"/>
 
-        <activity
-            android:name=".view.user.LoginActivity">
+        <activity android:name=".view.user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.user.RegisterActivity"/>
+        <activity android:name=".view.user.RegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".view.user.ViewProfileActivity"/>
 
         <activity android:name=".view.MainActivity"/>
