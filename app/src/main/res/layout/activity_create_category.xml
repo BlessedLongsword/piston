@@ -1,95 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true" >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin" >
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/createCategory_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/create_category_activity_title"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/title"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/create_category_topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/create_category_activity_title"
+            app:navigationIcon="@drawable/baseline_arrow_back_white_36"
+            app:menu="@menu/create_category_top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_category_name"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/create_category_name"
-            app:errorEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/small_separator"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textShortMessage" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_category_desc"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/big_text_field_description"
-            android:hint="@string/description"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/description_max_length"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_category_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/big_edit_text_description"
-                android:maxLength="@integer/description_max_length"
-                android:gravity="start"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/create_category_name"
+                app:errorEnabled="true">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/nsfwCheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_category_nsfw" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/category_link"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:hint="@string/link"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/baseline_content_copy_black_24"
-            app:helperText="@string/category_link_help"
-            app:helperTextEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_category_desc"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start" />
+                android:layout_height="@dimen/big_text_field_description"
+                android:hint="@string/description"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/description_max_length">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_edit_text_description"
+                    android:gravity="start"
+                    android:maxLength="@integer/description_max_length" />
 
-        <Button
-            android:id="@+id/create_category_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="createCategory"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/create"
-            android:layout_gravity="center_horizontal"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/nsfwCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_category_nsfw" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/category_link"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="@string/link"
+                app:endIconDrawable="@drawable/baseline_content_copy_black_24"
+                app:endIconMode="custom"
+                app:helperText="@string/category_link_help"
+                app:helperTextEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 
