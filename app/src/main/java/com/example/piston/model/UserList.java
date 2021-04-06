@@ -23,6 +23,17 @@ public class UserList {
         emails.add("admin@gmail.com");
         Log.d("userList", " Creating hash");
     }
+    public String getUserUsername (String username){
+        return username;
+    }
+
+    public String getUserName (String username){
+        return users.get(username).getFullName();
+    }
+
+    public String getUserPhone (String username){
+        return users.get(username).getPhoneNumber();
+    }
 
     public boolean isValidPwd(String pwd1, String pwd2){
         return pwd1.equals(pwd2) && pwd1.length() >= 6;

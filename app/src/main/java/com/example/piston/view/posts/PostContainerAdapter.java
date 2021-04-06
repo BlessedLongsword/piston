@@ -25,40 +25,19 @@ public class PostContainerAdapter extends RecyclerView.Adapter<PostContainerAdap
 
     public static class PostHolder extends RecyclerView.ViewHolder {
 
-        private final LinearLayout containerLayout;
-        private final LinearLayout cardLayout;
-        private final LinearLayout textLayout;
-        private final CardView cardView;
         private final ImageView postPicture;
         private final TextView postTitle;
+        private final TextView postOwner;
         private final TextView postContent;
 
         public PostHolder(View view) {
             super(view);
-            containerLayout = view.findViewById(R.id.layout);
-            cardLayout = view.findViewById(R.id.card_layout);
-            textLayout = view.findViewById(R.id.text_layout);
-            cardView = view.findViewById(R.id.card_view);
-            postPicture = view.findViewById(R.id.card_image);
-            postTitle = view.findViewById(R.id.card_title);
-            postContent = view.findViewById(R.id.card_content);
+            postPicture = view.findViewById(R.id.post_picture);
+            postTitle = view.findViewById(R.id.post_title);
+            postOwner = view.findViewById(R.id.post_owner);
+            postContent = view.findViewById(R.id.post_content);
         }
 
-        public LinearLayout getContainerLayout() {
-            return containerLayout;
-        }
-
-        public LinearLayout getCardLayout() {
-            return cardLayout;
-        }
-
-        public LinearLayout getTextLayout() {
-            return textLayout;
-        }
-
-        public CardView getCardView() {
-            return cardView;
-        }
 
         public ImageView getPostPicture() {
             return postPicture;
@@ -66,6 +45,10 @@ public class PostContainerAdapter extends RecyclerView.Adapter<PostContainerAdap
 
         public TextView getPostTitle() {
             return postTitle;
+        }
+
+        public TextView getPostOwner() {
+            return postOwner;
         }
 
         public TextView getPostContent() {
