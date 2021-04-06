@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Piston</string>
 
-    <string name="tab_personal">Personal</string>
-    <string name="tab_group">Grupal</string>
-    <string name="tab_global">Global</string>
+    <string-array name="tab_titles">
+        <item><string name="tab_personal">Personal</string></item>
+        <item><string name="tab_groups">Grupal</string></item>
+        <item><string name="tab_global">Global</string></item>
+    </string-array>
 
     <!-- General propuse -->
     <string name="cancel">Cancel</string>
