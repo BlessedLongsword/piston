@@ -1,6 +1,7 @@
 package com.example.piston.view.sections.personal;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.view.user.ViewProfileActivity;
+import com.example.piston.viewmodel.PersonalFragmentViewModel;
 
-import java.util.ArrayList;
+public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
 
-public class FolderContainerAdapter extends RecyclerView.Adapter<FolderContainerAdapter.FolderHolder>{
-
-    private final ArrayList<String> localDataSet;
     private final FragmentActivity localActivity;
+    private final PersonalFragmentViewModel viewModel;
 
     public static class FolderHolder extends RecyclerView.ViewHolder {
 
@@ -41,9 +42,10 @@ public class FolderContainerAdapter extends RecyclerView.Adapter<FolderContainer
         }
     }
 
-    public FolderContainerAdapter(FragmentActivity activity, ArrayList<String> dataSet) {
+    public FolderAdapter(FragmentActivity activity) {
         localActivity = activity;
-        localDataSet = dataSet;
+        viewModel = new ViewModelProvider(activity).get(PersonalFragmentViewModel.class);
+        viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());
     }
 
     @NonNull
@@ -56,7 +58,7 @@ public class FolderContainerAdapter extends RecyclerView.Adapter<FolderContainer
 
     @Override
     public void onBindViewHolder(@NonNull FolderHolder folderHolder, int position) {
-        folderHolder.getFolderTitle().setText(localDataSet.get(position));
+        folderHolder.getFolderTitle().setText(viewModel.getFolders().getValue().get(position));
         folderHolder.getLayout().setOnClickListener(view -> {
             Intent intent = new Intent(localActivity, ViewProfileActivity.class);
             localActivity.startActivity(intent);
@@ -65,9 +67,7 @@ public class FolderContainerAdapter extends RecyclerView.Adapter<FolderContainer
 
     @Override
     public int getItemCount() {
-        if (localDataSet != null)
-            return localDataSet.size();
-        return 0;
+        return viewModel.getFolders().getValue().size();
     }
 
 }

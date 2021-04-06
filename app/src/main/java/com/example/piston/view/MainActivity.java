@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
+import com.example.piston.view.others.NotificationsActivity;
+import com.example.piston.view.others.SettingsActivity;
 import com.example.piston.view.sections.SectionFragment;
 import com.example.piston.view.sections.SectionsPagerAdapter;
 import com.example.piston.view.user.ViewProfileActivity;
@@ -48,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openNotifications(MenuItem item) {
-        Intent intent = new Intent(this, ViewProfileActivity.class);
+        Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
     }
 
     public void openSettings(MenuItem item) {
-        Intent intent = new Intent(this, ViewProfileActivity.class);
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

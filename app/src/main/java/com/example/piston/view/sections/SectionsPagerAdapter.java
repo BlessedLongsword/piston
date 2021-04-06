@@ -24,7 +24,6 @@ public class SectionsPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Log.d("nowaybro", "Created: " + position);
         if (position == 0)
             return new PersonalFragment(actionButton);
         if (position == 1)
