@@ -2,13 +2,14 @@ package com.example.piston.view.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
+import com.example.piston.view.main.sections.SectionFragment;
+import com.example.piston.view.main.sections.SectionsPagerAdapter;
 import com.example.piston.view.others.NotificationsActivity;
 import com.example.piston.view.others.SettingsActivity;
 import com.example.piston.view.user.ViewProfileActivity;

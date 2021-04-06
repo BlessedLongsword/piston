@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
-    android:weightSum="100">
+    android:weightSum="100"
+    tools:context=".view.user.LoginActivity">
 
     <Space
         android:layout_width="match_parent"

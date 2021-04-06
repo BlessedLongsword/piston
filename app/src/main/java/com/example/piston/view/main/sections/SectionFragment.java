@@ -1,4 +1,4 @@
-package com.example.piston.view.main;
+package com.example.piston.view.main.sections;
 
 import androidx.annotation.LayoutRes;
 import androidx.fragment.app.Fragment;
@@ -14,5 +14,5 @@ public abstract class SectionFragment extends Fragment {
         this.actionButton = actionButton;
     }
 
-    protected abstract void add();
+    public abstract void add();
 }

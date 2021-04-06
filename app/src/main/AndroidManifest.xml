@@ -12,9 +12,9 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
-        <activity android:name=".view.main.personal.CreateFolderActivity"/>
-        <activity android:name=".view.main.global.CreateCategoryActivity"/>
-        <activity android:name=".view.main.group.CreateGroupActivity"/>
+        <activity android:name=".view.main.sections.personal.CreateFolderActivity"/>
+        <activity android:name=".view.main.sections.global.CreateCategoryActivity"/>
+        <activity android:name=".view.main.sections.group.CreateGroupActivity"/>
 
         <activity android:name=".view.main.MainActivity"/>
 

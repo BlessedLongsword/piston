@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- UTILITZAR EL MATEIX LAYOUT QUE CREAR CATEGORIA?? -->
+<!-- UTILITZAR EL MATEIX LAYOUT QUE CREAR CATEGORIA?? -->
+<!-- UTILITZAR EL MATEIX LAYOUT QUE CREAR CATEGORIA?? -->
+<!-- UTILITZAR EL MATEIX LAYOUT QUE CREAR CATEGORIA?? -->
+<!-- UTILITZAR EL MATEIX LAYOUT QUE CREAR CATEGORIA?? -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
     android:layout_marginVertical="@dimen/activity_vertical_margin"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.main.sections.personal.CreateFolderActivity">
 
     <TextView
         android:id="@+id/edit_folder_title"

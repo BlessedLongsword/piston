@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    tools:context=".view.others.NotificationsActivity">
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -25,7 +28,6 @@
             android:layout_marginHorizontal="16dp"
             android:orientation="vertical"
             android:weightSum="100">
-
 
             <TextView
                 android:id="@+id/notificationsTitle"
@@ -50,7 +52,6 @@
                 android:layout_height="@dimen/list_item_height"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?attr/textAppearanceBody2" />
-
 
         </LinearLayout>
 

@@ -1,8 +1,7 @@
-package com.example.piston.view.main.personal;
+package com.example.piston.view.main.sections.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +38,7 @@ public class CreateFolderActivity extends AppCompatActivity {
 }
 
 
-/*package com.example.piston.view.main.personal;
+/*package com.example.piston.view.main.sections.personal;
 
 import android.os.Bundle;
 import android.text.InputType;

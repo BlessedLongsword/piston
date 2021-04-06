@@ -1,4 +1,4 @@
-package com.example.piston.view.main.global;
+package com.example.piston.view.main.sections.group;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -12,21 +12,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.piston.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class CreateCategoryActivity extends AppCompatActivity {
+public class ModerateGroupActivity extends AppCompatActivity {
 
+    TextInputLayout groupName, desc, members, link;
     ClipboardManager clipboard;
     ClipData clip;
-    TextInputLayout link, desc;
 
     @Override
     protected void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
-        setContentView(R.layout.activity_create_category);
+        setContentView(R.layout.activity_moderate_group);
 
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        link = findViewById(R.id.category_link);
+        link = findViewById(R.id.group_link);
+        groupName = findViewById(R.id.moderate_group_name);
+        members = findViewById(R.id.moderate_group_members);
+        desc = findViewById(R.id.input_group_desc);
 
-        desc = findViewById(R.id.input_category_desc);
         desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         link.setEndIconOnClickListener(v -> {
@@ -34,10 +36,13 @@ public class CreateCategoryActivity extends AppCompatActivity {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
         });
-
     }
 
-    public void createCategory(View view) {
+    public void saveChanges (View v) {
+        onBackPressed();
+    }
+
+    public void deleteGroup (View v) {
         onBackPressed();
     }
 }
