@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.sections.global.CreateCategoryActivity">
+    tools:context=".view.sections.personal.CreateFolderActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,10 +22,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -50,7 +47,6 @@
                     android:inputType="textShortMessage" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/create_folder_description"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -70,6 +66,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.65"/>
 
-
     </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
