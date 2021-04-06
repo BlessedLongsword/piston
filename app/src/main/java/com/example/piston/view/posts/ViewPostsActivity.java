@@ -1,4 +1,4 @@
-package com.example.piston.view.main.posts;
+package com.example.piston.view.posts;
 
 import androidx.appcompat.app.AppCompatActivity;
 

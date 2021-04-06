@@ -1,13 +1,9 @@
 package com.example.piston.view.posts;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 

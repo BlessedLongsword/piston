@@ -1,4 +1,4 @@
-package com.example.piston.view.main.sections.personal;
+package com.example.piston.view.main.personal;
 
 import android.content.Intent;
 import android.view.LayoutInflater;

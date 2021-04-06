@@ -12,9 +12,12 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
-        <activity android:name=".view.main.sections.personal.CreateFolderActivity"/>
-        <activity android:name=".view.main.sections.global.CreateCategoryActivity"/>
-        <activity android:name=".view.main.sections.group.CreateGroupActivity"/>
+        <activity android:name=".view.main.global.CreateCategoryActivity"/>
+
+        <activity android:name=".view.main.group.CreateGroupActivity"/>
+        <activity android:name=".view.main.group.ModerateGroupActivity"/>
+
+        <activity android:name=".view.main.personal.CreateFolderActivity"/>
 
         <activity android:name=".view.main.MainActivity"/>
 
@@ -24,18 +27,18 @@
         <activity android:name=".view.posts.CreatePostActivity"/>
         <activity android:name=".view.posts.EditPostActivity"/>
         <activity android:name=".view.posts.ReplyPostActivity"/>
+        <activity android:name=".view.posts.ViewPostsActivity"/>
 
         <activity
             android:name=".view.user.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.user.RegisterActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".view.user.RegisterActivity"/>
         <activity android:name=".view.user.ViewProfileActivity"/>
+
     </application>
 
 </manifest>

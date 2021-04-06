@@ -2,9 +2,6 @@ package com.example.piston.view.posts;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 

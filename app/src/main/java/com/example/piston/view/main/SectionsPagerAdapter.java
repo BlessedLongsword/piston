@@ -1,4 +1,4 @@
-package com.example.piston.view.main.sections;
+package com.example.piston.view.main;
 
 import android.util.Log;
 
@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.piston.view.main.sections.global.GlobalFragment;
-import com.example.piston.view.main.sections.group.GroupFragment;
-import com.example.piston.view.main.sections.personal.PersonalFragment;
+import com.example.piston.view.main.global.GlobalFragment;
+import com.example.piston.view.main.group.GroupFragment;
+import com.example.piston.view.main.personal.PersonalFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {

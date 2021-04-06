@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".view.main.sections.group.CreateGroupActivity">
+    tools:context=".view.main.group.ModerateGroupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

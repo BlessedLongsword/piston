@@ -1,6 +1,5 @@
 package com.example.piston.view.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -10,11 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
-import com.example.piston.model.User;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 
 public class ViewProfileActivity extends AppCompatActivity {
 

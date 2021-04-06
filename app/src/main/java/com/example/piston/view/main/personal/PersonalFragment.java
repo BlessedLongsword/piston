@@ -1,10 +1,10 @@
-package com.example.piston.view.main.sections.personal;
+package com.example.piston.view.main.personal;
 
 import android.content.Intent;
 import android.view.View;
 
 import com.example.piston.R;
-import com.example.piston.view.main.sections.SectionFragment;
+import com.example.piston.view.main.SectionFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static android.app.Activity.RESULT_OK;
