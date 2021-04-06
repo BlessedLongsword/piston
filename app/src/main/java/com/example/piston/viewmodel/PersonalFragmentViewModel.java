@@ -26,6 +26,7 @@ public class PersonalFragmentViewModel extends ViewModel {
         //categoryManager.createFolder(title, description);
         //folders.postValue(categoryManager.getFolderNames());
         folders_array.add(title);
+        folders.setValue(folders_array);
     }
 
 }

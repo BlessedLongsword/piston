@@ -45,7 +45,10 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
     public FolderAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PersonalFragmentViewModel.class);
-        viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getFolders().observe(activity, cosa -> {
+            Log.d("nowaybro", "Updated");
+            notifyDataSetChanged();
+        });
     }
 
     @NonNull

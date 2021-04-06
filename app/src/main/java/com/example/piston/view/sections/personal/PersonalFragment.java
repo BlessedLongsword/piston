@@ -31,7 +31,6 @@ public class PersonalFragment extends SectionFragment {
         viewModel = new ViewModelProvider(requireActivity()).get(PersonalFragmentViewModel.class);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_personal);
         recyclerView.setAdapter(new FolderAdapter(requireActivity()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 
     @Override
