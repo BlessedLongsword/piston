@@ -6,10 +6,10 @@
     <item
         android:id="@+id/notif_read"
         android:icon="@drawable/outline_mark_email_read_black_36"
-        android:title="Mark as read"/>
+        android:title="@string/notifications_mark_as_read"/>
     <item
         android:id="@+id/notif_delete"
         android:icon="@drawable/outline_delete_black_36"
-        android:title="Delete"/>
+        android:title="@string/delete"/>
 
 </menu>

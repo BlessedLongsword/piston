@@ -98,6 +98,7 @@
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICATIONS</string>
+    <string name="notifications_mark_as_read">Mark as read</string>
 
     <!-- Error Strings -->
     <string name="wrong_user">This user does not exist</string>

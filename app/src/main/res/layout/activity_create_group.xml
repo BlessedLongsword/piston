@@ -1,89 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    tools:context=".view.sections.group.CreateGroupActivity">
+    android:layout_height="match_parent"
+    tools:context=".view.sections.global.CreateCategoryActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/create_category_topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/create_group_activity_title"
+            app:navigationIcon="@drawable/outline_close_black_24"
+            app:menu="@menu/create_group_top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        tools:context=".view.sections.group.CreateGroupActivity">
 
-        <TextView
-            android:id="@+id/createGroup_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:text="@string/create_group_activity_title"
-            android:textSize="@dimen/title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_group_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/create_group_name"
-            app:errorEnabled="true">
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/small_separator"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textShortMessage" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="0.35" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_group_desc"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/big_text_field_description"
-            android:hint="@string/description"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/description_max_length">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_group_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/big_edit_text_description"
-                android:maxLength="@integer/description_max_length"
-                android:gravity="start" />
+                android:layout_height="wrap_content"
+                android:hint="@string/create_group_name"
+                app:errorEnabled="true">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/group_link"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/link"
-            app:endIconDrawable="@drawable/baseline_content_copy_black_24"
-            app:endIconMode="custom"
-            app:helperText="@string/group_link_help"
-            app:helperTextEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_group_desc"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:editable="false"
-                android:focusable="false"
-                android:gravity="start"
-                android:maxLength="@integer/description_max_length" />
+                android:layout_height="@dimen/big_text_field_description"
+                android:hint="@string/description"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/description_max_length">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_edit_text_description"
+                    android:maxLength="@integer/description_max_length"
+                    android:gravity="start" />
 
-        <Button
-            android:id="@+id/create_group_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:onClick="createGroup"
-            android:text="@string/create" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/group_link"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/link"
+                app:endIconDrawable="@drawable/baseline_content_copy_black_24"
+                app:endIconMode="custom"
+                app:helperText="@string/group_link_help"
+                app:helperTextEnabled="true">
 
-</ScrollView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:gravity="start"
+                    android:maxLength="@integer/description_max_length" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.65" />
+
+            </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
