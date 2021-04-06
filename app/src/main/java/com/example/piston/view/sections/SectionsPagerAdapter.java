@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
 
-    public SectionsPagerAdapter(@NonNull FragmentActivity fragmentActivity, FloatingActionButton actionButton) {
+    public SectionsPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 

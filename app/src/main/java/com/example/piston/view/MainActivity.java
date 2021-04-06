@@ -15,7 +15,6 @@ import com.example.piston.view.sections.SectionFragment;
 import com.example.piston.view.sections.SectionsPagerAdapter;
 import com.example.piston.view.user.ViewProfileActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -28,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton addButton = findViewById(R.id.add_button);
-
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, addButton);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this);
         viewPager = findViewById(R.id.view_pager2);
         viewPager.setAdapter(sectionsPagerAdapter);
 
