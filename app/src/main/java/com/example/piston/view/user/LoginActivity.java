@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    //testing pop up window reply post method -> not fully working!!
+    //testing pop up window reply post method -> not fully working -> EDIT: it kinda workds!?
     public void test(View anchorView) {
 
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
@@ -151,12 +152,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        ed.getEditText().requestFocus();
 
-        //force soft-keyboard to show up, but it doesn't hide soft-keyboard once popup window
-        //is closed... fuck this.
+        ed.getEditText().requestFocus();
+        popupWindow.setOutsideTouchable(false);
+
+        // force show keyboar once pop up window is open
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+
+        // close keyboard when popup window is closed
+        popupWindow.setOnDismissListener(() -> imm.hideSoftInputFromWindow(anchorView.getWindowToken(), 0));
     }
 
 }
