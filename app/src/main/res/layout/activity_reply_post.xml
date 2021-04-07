@@ -1,58 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    tools:context=".view.posts.ReplyPostActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/reply_post_topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/reply_post_activity_title"
+            app:navigationIcon="@drawable/outline_close_white_24"
+            app:menu="@menu/reply_post_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:orientation="vertical" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/moderate_group_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:text="@string/reply_post_activity_title"
-            android:textSize="@dimen/title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reply_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/big_text_field_post"
-            android:hint="@string/reply_content"
-            app:placeholderText="@string/hint_reply_button"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/post_max_length">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/small_separator"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reply_content"
+                app:boxBackgroundColor="@color/transparent"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/big_edit_text_post"
-                android:maxLength="@integer/post_max_length"
-                android:gravity="start" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/activity_vertical_margin"/>
-
-            <Button
-                android:id="@+id/reply_btn"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:onClick="replyPost"
-                android:text="@string/reply_btn" />
+                android:hint="@string/reply_content"
+                app:placeholderText="@string/hint_reply_button"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/post_max_length" >
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_edit_text_post"
+                    android:maxLength="@integer/post_max_length"
+                    android:gravity="start|top" />
 
-</ScrollView>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@drawable/outline_reply_black_36"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.user.LoginActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:placeholderText="Enter your message here"
+        app:boxBackgroundColor="@color/grey">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="6"
+            android:maxLength="@integer/post_max_length"
+            android:gravity="start" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

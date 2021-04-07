@@ -3,11 +3,16 @@ package com.example.piston.view.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -105,6 +110,53 @@ public class LoginActivity extends AppCompatActivity {
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+
+    //testing pop up window reply post method -> not fully working!!
+    public void test(View anchorView) {
+
+        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        // If the PopupWindow should be focusable
+        popupWindow.setFocusable(true);
+        // If you need the PopupWindow to dismiss when touched outside
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        // Using location, the PopupWindow will be displayed right under anchorView
+        popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+
+        // Initialize objects from layout
+        TextInputLayout ed = popupView.findViewById(R.id.popup);
+        ed.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(ed.getEditText().getText().toString().length() > 0) {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                    ed.setEndIconDrawable(R.drawable.outline_send_black_36);
+                }
+                else {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_NONE);
+                }
+            }
+        });
+        ed.getEditText().requestFocus();
+
+        //force soft-keyboard to show up, but it doesn't hide soft-keyboard once popup window
+        //is closed... fuck this.
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
 }

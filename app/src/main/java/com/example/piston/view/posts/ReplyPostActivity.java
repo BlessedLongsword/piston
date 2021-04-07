@@ -13,14 +13,12 @@ import com.google.android.material.textfield.TextInputLayout;
 public class ReplyPostActivity extends AppCompatActivity {
 
     private TextInputLayout content;
-    private Button replyBtn;
 
     protected void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_create_group);
 
         content = findViewById(R.id.post_content);
-        replyBtn = findViewById(R.id.reply_btn);
         content.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
     }
 

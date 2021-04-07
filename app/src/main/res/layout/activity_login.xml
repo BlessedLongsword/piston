@@ -75,6 +75,13 @@
         android:onClick="login"
         android:text="@string/sign_in" />
 
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="click here for a pop up window post"
+        android:onClick="test"/>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,5 +113,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/test"
+            app:boxBackgroundColor="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/reply_content"
+            app:placeholderText="@string/hint_reply_button"
+            android:enabled="false"
+            android:visibility="invisible"
+            app:counterEnabled="true"
+            app:counterMaxLength="@integer/post_max_length" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="@integer/post_max_length"
+                android:gravity="start|top" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
 
 </LinearLayout>

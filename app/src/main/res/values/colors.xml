@@ -13,6 +13,7 @@
 
     <color name="dark_blue">#0000EE</color>
     <color name="azure">#007FFF</color>
+    <color name="transparent">#00000000</color>
 
     <color name="red">#FFFF0000</color>
 

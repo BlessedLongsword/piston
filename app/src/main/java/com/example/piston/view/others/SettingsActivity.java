@@ -17,7 +17,6 @@ public class SettingsActivity extends AppCompatActivity {
     SwitchMaterial dark_mode;
     SwitchMaterial show_nsfw;
     SwitchMaterial blur_nsfw;
-    Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
         dark_mode = findViewById(R.id.settings_darkMode);
         show_nsfw = findViewById(R.id.settings_show_nsfw);
         blur_nsfw = findViewById(R.id.settings_blur);
-        save = findViewById(R.id.settings_save);
 
         subscribe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

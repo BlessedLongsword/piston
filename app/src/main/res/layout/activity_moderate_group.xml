@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    tools:context=".view.sections.group.ModerateGroupActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/moderate_group_topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/group_settings_activity_title"
+            app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+            app:menu="@menu/edit_folder_top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:orientation="vertical" >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/moderate_group_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:text="@string/group_settings_activity_title"
-            android:textSize="@dimen/title" />
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/small_separator"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/moderate_group_name"
@@ -36,7 +52,6 @@
                 android:layout_height="match_parent"
                 android:inputType="textShortMessage" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/moderate_group_desc"
@@ -70,7 +85,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/group_link"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -92,34 +106,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/activity_vertical_margin"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:layout_weight="1.5" />
 
-            <Button
-                android:id="@+id/moderate_group_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:onClick="saveChanges"
-                android:text="@string/save_changes" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/moderate_group_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:onClick="deleteGroup"
-                android:text="@string/delete_group_btn"
-                android:textColor="@color/red"
-                style="?attr/materialButtonOutlinedStyle"/>
+    </androidx.core.widget.NestedScrollView>
 
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

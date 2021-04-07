@@ -1,66 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-    android:layout_marginVertical="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context=".view.sections.personal.CreateFolderActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/edit_folder_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/tiny_separator"
-        android:text="@string/edit_folder_activity_title"
-        android:textSize="@dimen/title" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_folder_name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="@integer/title_max_length"
-        android:hint="@string/folder_name"
-        app:errorEnabled="true">
+        android:layout_height="wrap_content" >
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/edit_folder_topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:maxLength="@integer/title_max_length"
-            android:inputType="textShortMessage" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/edit_folder_activity_title"
+            app:navigationIcon="@drawable/outline_close_white_24"
+            app:menu="@menu/edit_folder_top_app_bar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_folder_description"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/big_text_field_description"
-        android:hint="@string/description"
-        app:counterEnabled="true"
-        app:counterMaxLength="@integer/description_max_length">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/big_edit_text_description"
-            android:gravity="start" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="@dimen/small_separator"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
 
-    <Button
-        android:id="@+id/edit_folder_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/tiny_separator"
-        android:layout_marginBottom="@dimen/tiny_separator"
-        android:onClick="createFolder"
-        android:text="@string/edit" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_folder_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/title_max_length"
+                android:hint="@string/folder_name"
+                app:errorEnabled="true">
 
-</LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLength="@integer/title_max_length"
+                    android:inputType="textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_folder_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/big_text_field_description"
+                android:hint="@string/description"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/description_max_length">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_edit_text_description"
+                    android:gravity="start" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
