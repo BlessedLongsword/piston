@@ -119,13 +119,11 @@ public class LoginActivity extends AppCompatActivity {
 
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
 
-        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        // If the PopupWindow should be focusable
-        popupWindow.setFocusable(true);
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
         // If you need the PopupWindow to dismiss when touched outside
         popupWindow.setBackgroundDrawable(new ColorDrawable());
-
+        popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
         // Adjust popup window location when keyboard pops up :)))
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -163,11 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // force show keyboar once pop up window is open
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
-
-        // close keyboard when popup window is closed
-        popupWindow.setOnDismissListener(() -> imm.hideSoftInputFromWindow(anchorView.getWindowToken(), 0));
     }
 
 }
