@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         });
     }
 
-    public void createGroup(View view) {
+    public void createGroup(MenuItem item) {
         finish();
     }
 }

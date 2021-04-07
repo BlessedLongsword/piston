@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -38,11 +39,9 @@ public class ModerateGroupActivity extends AppCompatActivity {
         });
     }
 
-    public void saveChanges (View v) {
-        finish();
+    public void saveChanges(MenuItem item) {
     }
 
-    public void deleteGroup (View v) {
-        finish();
+    public void deleteGroup(MenuItem item) {
     }
 }

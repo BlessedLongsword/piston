@@ -2,6 +2,7 @@ package com.example.piston.view.posts;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +23,8 @@ public class CreatePostActivity extends AppCompatActivity {
         postContent.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
     }
 
-   public void createPost(View view) {
+    public void createPost(MenuItem item) {
         //pistonViewModel.createPost(title.getText().toString(), content.getText().toString(), picturePath);
         finish();
     }
-
 }

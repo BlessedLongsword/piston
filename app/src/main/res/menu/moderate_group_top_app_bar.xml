@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.sections.group.ModerateGroupActivity">
 
     <item
-        android:id="@+id/moderate_group_save"
+        android:id="@+id/moderate_group_delete"
         android:title="@string/delete"
         android:icon="@drawable/outline_delete_white_36"
         android:onClick="saveChanges"
@@ -11,11 +13,11 @@
     </item>
 
     <item
-        android:id="@+id/moderate_group_delete"
+        android:id="@+id/moderate_group_save"
         android:title="@string/save_changes"
         android:icon="@drawable/outline_save_white_36"
         android:onClick="deleteGroup"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
     </item>
 
 </menu>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.sections.global.CreateCategoryActivity">
+    tools:context=".view.posts.CreatePostActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                     android:text="@string/choose_picture" />
 
                 <Space
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
@@ -80,7 +80,8 @@
                     android:id="@+id/post_picture"
                     android:layout_width="@dimen/big_square"
                     android:layout_height="@dimen/big_square"
-                    android:background="@drawable/jojo" />
+                    android:background="@drawable/jojo"
+                    android:contentDescription="@string/post_image" />
             </LinearLayout>
 
             <LinearLayout

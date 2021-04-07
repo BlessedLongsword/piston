@@ -36,7 +36,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="0.5" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +70,7 @@
                     android:text="@string/change_picture" />
 
                 <Space
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
@@ -78,7 +78,8 @@
                     android:id="@+id/edit_post_picture"
                     android:layout_width="@dimen/big_square"
                     android:layout_height="@dimen/big_square"
-                    android:background="@drawable/jojo" />
+                    android:background="@drawable/jojo"
+                    android:contentDescription="@string/profile_image" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,47 +137,6 @@
                     android:layout_height="@dimen/big_edit_text_post"/>
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10" />
-
-                <Button
-                    android:id="@+id/edit_post_button1"
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="30"
-                    android:onClick="createPost"
-                    android:text="@string/upload" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="20" />
-
-                <Button
-                    android:id="@+id/delete_post"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="@dimen/zero"
-                    android:layout_height="match_parent"
-                    android:layout_weight="30"
-                    android:textColor="@color/red"
-                    android:text="@string/delete" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

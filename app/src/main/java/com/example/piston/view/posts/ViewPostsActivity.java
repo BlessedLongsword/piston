@@ -2,6 +2,7 @@ package com.example.piston.view.posts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,5 +22,10 @@ public class ViewPostsActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.view_posts_topAppBar);
         toolbar.setTitle(title);
+    }
+
+    public void createPost(View view) {
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivity(intent);
     }
 }

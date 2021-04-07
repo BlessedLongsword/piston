@@ -39,7 +39,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
                 android:orientation="vertical">
@@ -137,7 +137,8 @@
                 android:id="@+id/viewProfile_icon"
                 android:layout_width="@dimen/bigger_square"
                 android:layout_height="@dimen/bigger_square"
-                android:background="@drawable/jojo" />
+                android:background="@drawable/jojo"
+                android:contentDescription="@string/profile_image" />
 
         </LinearLayout>
 
@@ -173,7 +174,8 @@
                 android:enabled="false"
                 android:text="@string/cancel"
                 android:textColor="@color/red"
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_alignParentStart="true" />
 
             <Button
                 android:id="@+id/viewProfile_edit"
@@ -183,7 +185,8 @@
                 android:onClick="edit"
                 android:text="@string/view_profile_edit"
                 app:icon="@drawable/baseline_edit_black_24"
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_alignParentEnd="true" />
 
             <Button
                 android:id="@+id/viewProfile_save"
@@ -195,7 +198,8 @@
                 android:visibility="invisible"
                 android:text="@string/save"
                 app:icon="@drawable/baseline_save_black_24"
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 

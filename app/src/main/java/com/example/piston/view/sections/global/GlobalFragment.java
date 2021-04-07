@@ -24,7 +24,8 @@ public class GlobalFragment extends SectionFragment {
     @Override
     public void onResume() {
         super.onResume();
-        actionButton.setVisibility(View.INVISIBLE);
+        actionButton.setVisibility(View.VISIBLE);
+        actionButton.setImageResource(R.drawable.baseline_create_new_folder_black_24);
     }
 
     public void add() {

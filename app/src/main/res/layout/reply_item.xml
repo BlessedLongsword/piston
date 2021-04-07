@@ -71,7 +71,6 @@
                 android:contentDescription="@string/content_description_media"
                 android:src="@drawable/baseline_favorite_border_black_36" />
 
-
         </LinearLayout>
 
     </LinearLayout>
