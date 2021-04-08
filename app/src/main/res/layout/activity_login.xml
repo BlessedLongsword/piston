@@ -61,6 +61,11 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

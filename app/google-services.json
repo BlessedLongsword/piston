@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1013687056437-ba080dl4l2b42uhje3j9mm6sp6sfoirt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.piston",
+            "certificate_hash": "9bb3b5754c9c3cde176d2cb4310632ee6d0e3ffd"
+          }
+        },
+        {
           "client_id": "1013687056437-oe5hsfgnlmnugkrualvealgur1gjpid3.apps.googleusercontent.com",
           "client_type": 3
         }

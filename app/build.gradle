@@ -36,12 +36,13 @@ android {
     }
 }
 
-//apply plugin: 'com.android.application'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     //implementation 'com.google.firebase:firebase-admin:7.1.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
@@ -57,6 +58,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:22.1.2'
     implementation "androidx.multidex:multidex:2.0.1"
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
