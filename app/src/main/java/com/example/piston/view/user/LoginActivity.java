@@ -267,7 +267,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    //testing pop up window reply post method -> not fully working -> EDIT: it kinda workds!?
+    //testing pop up window reply post method -> not fully working -> EDIT: it kinda works!?
     public void test(View anchorView) {
 
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
