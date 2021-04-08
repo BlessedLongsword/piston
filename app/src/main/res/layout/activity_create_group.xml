@@ -16,15 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/create_group_activity_title"
-            app:navigationIcon="@drawable/outline_close_black_24"
+            app:navigationIcon="@drawable/outline_close_white_24"
             app:menu="@menu/create_group_top_app_bar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true"
         tools:context=".view.sections.group.CreateGroupActivity">
 
@@ -39,7 +40,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.35" />
+                android:layout_weight="0.5" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_group_name"
@@ -96,10 +97,10 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.65" />
+                android:layout_weight="1.5" />
 
             </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

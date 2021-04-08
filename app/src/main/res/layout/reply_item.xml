@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -53,6 +53,7 @@
                 android:layout_marginEnd="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_weight="30"
+                app:icon="@drawable/outline_reply_white_24"
                 android:text="@string/reply" />
 
             <Space
