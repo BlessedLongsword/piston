@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.adapter.CategoryAdapter;
-import com.example.piston.adapter.FolderAdapter;
 import com.example.piston.view.sections.SectionFragment;
 import com.example.piston.viewmodel.GlobalFragmentViewModel;
-import com.example.piston.viewmodel.PersonalFragmentViewModel;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -32,7 +30,7 @@ public class GlobalFragment extends SectionFragment {
         viewModel = new ViewModelProvider(requireActivity()).get(GlobalFragmentViewModel.class);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_global);
         recyclerView.setAdapter(new CategoryAdapter(requireActivity()));
-        return inflater.inflate(R.layout.fragment_global, container, false);
+        return view;
     }
 
     @Override
