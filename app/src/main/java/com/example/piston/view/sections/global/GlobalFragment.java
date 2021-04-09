@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.adapter.CategoryAdapter;
-import com.example.piston.adapter.FolderAdapter;
 import com.example.piston.view.sections.SectionFragment;
 import com.example.piston.viewmodel.GlobalFragmentViewModel;
-import com.example.piston.viewmodel.PersonalFragmentViewModel;
 
 import static android.app.Activity.RESULT_OK;
 

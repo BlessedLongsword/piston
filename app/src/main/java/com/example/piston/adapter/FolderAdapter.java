@@ -1,7 +1,6 @@
 package com.example.piston.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +44,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
     public FolderAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PersonalFragmentViewModel.class);
-        viewModel.getFolders().observe(activity, cosa -> {
-            Log.d("nowaybro", "Updated");
-            notifyDataSetChanged();
-        });
+        viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());
     }
 
     @NonNull

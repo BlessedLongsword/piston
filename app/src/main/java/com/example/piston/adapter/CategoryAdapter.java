@@ -1,7 +1,6 @@
 package com.example.piston.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.view.posts.ViewPostsActivity;
 import com.example.piston.viewmodel.GlobalFragmentViewModel;
-import com.example.piston.viewmodel.PersonalFragmentViewModel;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
 
@@ -51,18 +49,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GlobalFragmentViewModel.class);
-        viewModel.getCategories().observe(activity, cosa -> {
-            Log.d("nowaybro", "Updatedadapter");
-            notifyDataSetChanged();
-        });
+        viewModel.getCategories().observe(activity, cosa -> notifyDataSetChanged());
     }
 
     @NonNull
     @Override
-    public CategoryAdapter.CategoryHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public CategoryHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.category_item, viewGroup, false);
-        return new CategoryAdapter.CategoryHolder(view);
+        return new CategoryHolder(view);
     }
 
     @Override
@@ -79,8 +74,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-    Log.d("nowaybro","hh");
-    return viewModel.getCategories().getValue().size();
+        return viewModel.getCategories().getValue().size();
     }
 
 }
