@@ -1,5 +1,6 @@
 package com.example.piston.view.user;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -9,12 +10,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
     TextInputLayout username, fullName, phoneNumber, email, bday;
     TextView featuredPost;
+    MaterialToolbar mat;
     Button cancel, edit, save;
 
     @Override
@@ -26,12 +29,12 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void cancel (View v) {
-        save.setEnabled(false);
+        /*save.setEnabled(false);
         save.setVisibility(View.INVISIBLE);
         edit.setEnabled(true);
         edit.setVisibility(View.VISIBLE);
         cancel.setVisibility(View.INVISIBLE);
-        cancel.setEnabled(false);
+        cancel.setEnabled(false);*/
 
         fullName.getEditText().setInputType(InputType.TYPE_NULL);
         phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
@@ -47,12 +50,12 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void edit (View v) {
-        save.setEnabled(true);
+        /*save.setEnabled(true);
         save.setVisibility(View.VISIBLE);
         edit.setEnabled(false);
         edit.setVisibility(View.INVISIBLE);
         cancel.setVisibility(View.VISIBLE);
-        cancel.setEnabled(true);
+        cancel.setEnabled(true);*/
 
 
         fullName.getEditText().setFocusableInTouchMode(true);
@@ -73,9 +76,11 @@ public class ViewProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.viewProfile_email);
         bday = findViewById(R.id.viewProfile_date);
         featuredPost = findViewById(R.id.viewProfile_featPost);
-        cancel = findViewById(R.id.viewProfile_cancel);
+        mat = findViewById(R.id.profile_toolbar);
+        mat.setTitleTextColor(Color.WHITE);
+        /*cancel = findViewById(R.id.viewProfile_cancel);
         edit = findViewById(R.id.viewProfile_edit);
-        save = findViewById(R.id.viewProfile_save);
+        save = findViewById(R.id.viewProfile_save);*/
 
         username.getEditText().setInputType(InputType.TYPE_NULL);
         fullName.getEditText().setInputType(InputType.TYPE_NULL);

@@ -52,7 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GlobalFragmentViewModel.class);
         viewModel.getCategories().observe(activity, cosa -> {
-            Log.d("nowaybro", "Updated");
+            Log.d("nowaybro", "Updatedadapter");
             notifyDataSetChanged();
         });
     }
@@ -79,7 +79,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        return viewModel.getCategories().getValue().size();
+    Log.d("nowaybro","hh");
+    return viewModel.getCategories().getValue().size();
     }
 
 }
