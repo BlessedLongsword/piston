@@ -1,4 +1,4 @@
-package com.example.piston.view.sections.personal;
+package com.example.piston.adapter;
 
 import android.content.Intent;
 import android.util.Log;
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.view.posts.ViewPostsActivity;
-import com.example.piston.view.user.ViewProfileActivity;
 import com.example.piston.viewmodel.PersonalFragmentViewModel;
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {

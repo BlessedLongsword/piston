@@ -46,7 +46,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     private LoginActivityViewModel loginActivityViewModel;
 
@@ -75,9 +75,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //updateUI(account);
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton2 = findViewById(R.id.sign_in_button_google);
-        signInButton2.setSize(SignInButton.SIZE_STANDARD);
-        findViewById(R.id.sign_in_button_google).setOnClickListener(this);
+        SignInButton signInGoogle = findViewById(R.id.sign_in_button_google);
+        signInGoogle.setSize(SignInButton.SIZE_STANDARD);
+        signInGoogle.setOnClickListener(this::signIn);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -146,18 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pwd.getEditText().addTextChangedListener(afterTextChangedListener);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button_google:
-                Log.d("nowaybro", "Es crida!!");
-                signIn();
-                break;
-            // ...
-        }
-    }
-
-    private void signIn() {
+    public void signIn(View view) {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -234,8 +223,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     public void login(View view) {
-        startSignIn();
-        //loginActivityViewModel.login(username.getEditText().getText().toString(), pwd.getEditText().getText().toString());
+        loginActivityViewModel.login(username.getEditText().getText().toString(), pwd.getEditText().getText().toString());
     }
 
     private static final int RC_SIGN_IN = 9001;
@@ -267,7 +255,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    //testing pop up window reply post method -> not fully working -> EDIT: it kinda works!?
+    /* testing pop up window reply post method -> not fully working -> EDIT: it kinda works!?
     public void test(View anchorView) {
 
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
@@ -315,6 +303,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // force show keyboar once pop up window is open
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
-    }
+    }*/
 
 }

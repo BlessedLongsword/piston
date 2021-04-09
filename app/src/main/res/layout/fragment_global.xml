@@ -7,7 +7,7 @@
     tools:context=".view.sections.global.GlobalFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_personal"
+        android:id="@+id/recyclerview_global"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"/>

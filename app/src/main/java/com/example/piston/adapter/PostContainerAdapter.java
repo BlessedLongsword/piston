@@ -1,4 +1,4 @@
-package com.example.piston.view.posts;
+package com.example.piston.adapter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;

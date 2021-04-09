@@ -1,4 +1,4 @@
-package com.example.piston.view.sections;
+package com.example.piston.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

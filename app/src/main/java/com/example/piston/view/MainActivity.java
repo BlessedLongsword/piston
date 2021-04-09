@@ -12,7 +12,7 @@ import com.example.piston.R;
 import com.example.piston.view.others.NotificationsActivity;
 import com.example.piston.view.others.SettingsActivity;
 import com.example.piston.view.sections.SectionFragment;
-import com.example.piston.view.sections.SectionsPagerAdapter;
+import com.example.piston.adapter.SectionsPagerAdapter;
 import com.example.piston.view.user.ViewProfileActivity;
 
 import com.google.android.material.tabs.TabLayout;

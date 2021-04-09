@@ -61,15 +61,11 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10" />
+        android:layout_weight="5" />
 
     <Button
         android:id="@+id/sign_in_button"
@@ -80,12 +76,23 @@
         android:onClick="login"
         android:text="@string/sign_in" />
 
-    <Button
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button_google"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content" />
+
+    <!--Button
         android:id="@+id/test_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="click here for a pop up window post"
-        android:onClick="test"/>
+        android:onClick="test"/-->
 
     <Space
         android:layout_width="match_parent"
