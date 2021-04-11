@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
         desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         link.setEndIconOnClickListener(v -> {
-            clip = ClipData.newPlainText("CategoryCode", link.getEditText().getText());
+            clip = ClipData.newPlainText("GroupCode", link.getEditText().getText());
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
         });

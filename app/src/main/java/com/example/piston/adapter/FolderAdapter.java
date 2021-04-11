@@ -67,7 +67,6 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
     @Override
     public int getItemCount() {
-        Log.d("nowaybro","asd");
         return viewModel.getFolders().getValue().size();
     }
 
