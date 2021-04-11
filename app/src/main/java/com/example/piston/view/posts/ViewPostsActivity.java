@@ -3,6 +3,7 @@ package com.example.piston.view.posts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,4 +29,5 @@ public class ViewPostsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreatePostActivity.class);
         startActivity(intent);
     }
+
 }

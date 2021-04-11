@@ -66,7 +66,6 @@
                     android:layout_marginEnd="@dimen/card_margin"
                     android:layout_marginRight="@dimen/card_margin"
                     android:layout_weight="0.1"
-                    android:onClick="moderateGroup"
                     android:background="@null"
                     android:contentDescription="@string/content_description_media"
                     android:src="@drawable/baseline_edit_black_36" />
