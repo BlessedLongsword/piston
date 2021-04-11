@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.util.textwatchers.BaseTextWatcher;
+import com.example.piston.util.textwatchers.CounterWatcher;
 import com.example.piston.viewmodel.RegisterActivityViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -37,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerActivityViewModel = new ViewModelProvider(this).get(RegisterActivityViewModel.class);
 
         this.username = (TextInputLayout) findViewById(R.id.userText);
+        username.setSuffixText(Integer.toString(getResources().getInteger(R.integer.username_max_length)));
         this.email = findViewById(R.id.emailText);
         this.pwd = findViewById(R.id.pwdText);
         this.pwd2 = findViewById(R.id.pwd2Text);
@@ -98,17 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        username.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        username.getEditText().addTextChangedListener(new CounterWatcher(getResources().getInteger(R.integer.username_max_length), username));
+        username.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 username.setError(null);
@@ -116,17 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        pwd.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        pwd.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 pwd.setError(null);
@@ -134,17 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        pwd2.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        pwd2.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 pwd2.setError(null);
@@ -153,17 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 signUpBtn.setEnabled(showRegBtn() && tos.isChecked());
             }
         });
-        email.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        email.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 email.setError(null);
@@ -172,17 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        birthday.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        birthday.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 birthday.setError(null);
