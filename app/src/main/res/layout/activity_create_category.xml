@@ -52,7 +52,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="textShortMessage" />
+                    android:inputType="textShortMessage"
+                    android:maxLength="@integer/title_max_length"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 

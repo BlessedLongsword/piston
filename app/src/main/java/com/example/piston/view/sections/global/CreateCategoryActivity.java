@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.util.textwatchers.CounterWatcher;
 import com.example.piston.viewmodel.GlobalFragmentViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +35,8 @@ public class CreateCategoryActivity extends AppCompatActivity {
         link = findViewById(R.id.category_link);
 
         title = findViewById(R.id.input_category_name);
+        title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
+        title.getEditText().addTextChangedListener(new CounterWatcher(R.integer.title_max_length, title));
 
         desc = findViewById(R.id.input_category_desc);
         desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.util.textwatchers.CounterWatcher;
 import com.example.piston.viewmodel.GroupFragmentViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +35,9 @@ public class CreateGroupActivity extends AppCompatActivity {
         link = findViewById(R.id.group_link);
 
         title = findViewById(R.id.input_group_name);
+        title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
+        title.getEditText().addTextChangedListener(new CounterWatcher(R.integer.title_max_length, title));
+
 
         desc = findViewById(R.id.input_group_desc);
         desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
