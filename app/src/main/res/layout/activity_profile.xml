@@ -194,18 +194,22 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/dividerVertical" />
 
-        <TextView
-            android:id="@+id/viewProfile_featPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/view_profile_post"
-            android:textSize="@dimen/small_title" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="10" />
+            <TextView
+                android:id="@+id/viewProfile_featPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_profile_post"
+                android:textSize="@dimen/small_title" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10" />
 
         </LinearLayout>
 
