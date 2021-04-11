@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.util.textwatchers.CounterWatcher;
 import com.example.piston.viewmodel.PersonalFragmentViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -23,6 +24,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_folder);
         personalFragmentViewModel = new ViewModelProvider(this).get(PersonalFragmentViewModel.class);
         title = findViewById(R.id.create_folder_name);
+        title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
+        title.getEditText().addTextChangedListener(new CounterWatcher(R.integer.title_max_length, title));
         desc = findViewById(R.id.create_folder_description);
         //desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
     }

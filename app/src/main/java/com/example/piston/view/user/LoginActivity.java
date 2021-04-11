@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.model.User;
+import com.example.piston.util.textwatchers.BaseTextWatcher;
 import com.example.piston.view.MainActivity;
 import com.example.piston.viewmodel.LoginActivityViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -125,17 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
+        TextWatcher afterTextChangedListener = new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 boolean enabled = username.getEditText().length()>0 && pwd.getEditText().length()>0;

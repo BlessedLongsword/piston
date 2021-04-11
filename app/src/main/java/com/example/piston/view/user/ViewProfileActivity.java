@@ -1,16 +1,31 @@
 package com.example.piston.view.user;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.piston.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ViewProfileActivity extends AppCompatActivity {
@@ -18,13 +33,18 @@ public class ViewProfileActivity extends AppCompatActivity {
     TextInputLayout username, fullName, phoneNumber, email, bday;
     TextView featuredPost;
     MaterialToolbar mat;
-    Button cancel, edit, save;
+    CoordinatorLayout cl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.dimAmount = 0.75f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(layoutParams);
+        cl = findViewById(R.id.viewProfile);
         init();
     }
 
@@ -88,6 +108,13 @@ public class ViewProfileActivity extends AppCompatActivity {
         email.getEditText().setInputType(InputType.TYPE_NULL);
         bday.getEditText().setInputType(InputType.TYPE_NULL);
 
+        username.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test(v, username.getEditText());
+            }
+        });
+
         /*try {
             String userFile = "userFile";
             FileInputStream fin = openFileInput(userFile);
@@ -102,4 +129,67 @@ public class ViewProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }*/
     }
+
+    public void clickImage(View view){
+        Toast.makeText(getApplicationContext(),"CLICKED", Toast.LENGTH_SHORT).show();
+    }
+
+    public void test(View anchorView, EditText edit) {
+
+        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        // If you need the PopupWindow to dismiss when touched outside
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
+        // Adjust popup window location when keyboard pops up :)))
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        // Using location, the PopupWindow will be displayed right under anchorView
+        popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+
+        // Initialize objects from layout
+        TextInputLayout ed = popupView.findViewById(R.id.popup);
+        ed.setBoxStrokeWidth(0);
+        ed.getEditText().setText(edit.getText().toString());
+        ed.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(ed.getEditText().getText().toString().length() > 0) {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                    ed.setEndIconDrawable(R.drawable.outline_send_black_36);
+                }
+                else {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_NONE);
+                }
+            }
+        });
+
+        ed.getEditText().requestFocus();
+        popupWindow.setOutsideTouchable(false);
+
+        // force show keyboar once pop up window is open
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+
+        /*
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.dimAmount = 0.70f; //Generally in between 0.70f to 0.80f
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(layoutParams);*/
+
+    }
+
 }
