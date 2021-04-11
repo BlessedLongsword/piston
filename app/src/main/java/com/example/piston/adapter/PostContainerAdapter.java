@@ -71,8 +71,10 @@ public class PostContainerAdapter extends RecyclerView.Adapter<PostContainerAdap
     public void onBindViewHolder(@NonNull PostHolder holder, int position) {
         holder.getPostTitle().setText(localDataSet.get(position).getTitle());
         holder.getPostContent().setText(localDataSet.get(position).getContent());
+        /*
         holder.getPostPicture().setImageBitmap(BitmapFactory
-                .decodeFile(localDataSet.get(position).getPicturePath()));
+                .decodeFile(localDataSet.get(position).getPicturePath()));*/
+        holder.getPostOwner().setText(localDataSet.get(position).getOwner());
     }
 
     @Override

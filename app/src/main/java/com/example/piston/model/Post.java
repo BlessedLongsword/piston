@@ -4,13 +4,13 @@ public class Post {
 
     private String title;
     private String content;
-    private String picturePath;
+    private String owner;
     private int id;
 
-    public Post(String title, String content, String picture, int id) {
+    public Post(String title, String content, String owner, int id) {
         setTitle(title);
         setContent(content);
-        setPicturePath(picture);
+        setOwner(owner);
         setId(id);
     }
 
@@ -30,13 +30,6 @@ public class Post {
         this.content = content;
     }
 
-    public String getPicturePath() {
-        return picturePath;
-    }
-
-    public void setPicturePath(String picture) {
-        this.picturePath = picture;
-    }
 
     public int getId() {
         return id;
@@ -44,5 +37,13 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }
