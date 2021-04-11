@@ -10,4 +10,18 @@
 
     </style>
 
+    <!-- Text Fields with no outline and no fill -->
+
+    <style name="BlankBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="paddingStart">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="boxBackgroundColor">@color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <style name="BlankBox.EditIcon">
+        <item name="endIconMode">custom</item>
+        <item name="endIconDrawable">@drawable/baseline_edit_black_24</item>
+    </style>
+
 </resources>

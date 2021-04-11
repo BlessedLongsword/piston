@@ -2,6 +2,8 @@ package com.example.piston.view.user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -23,10 +26,13 @@ import com.example.piston.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.ByteArrayOutputStream;
+
 public class ViewProfileActivity extends AppCompatActivity {
 
     TextInputLayout username, fullName, phoneNumber, email, bday;
     TextView featuredPost;
+    ImageView pfp;
     MaterialToolbar mat;
 
     @Override
@@ -38,7 +44,12 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void clickImage(View view){
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Bitmap bitmap = BitmapFactory.decodeResource
+                (getResources(), R.drawable.jojo); // your bitmap
+        ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+        Intent intent = new Intent(this, ProfileImageActivity.class);
+        intent.putExtra("byteArray", bs.toByteArray());
         startActivity(intent);
     }
 
@@ -146,6 +157,9 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     private void init () {
+        pfp = findViewById(R.id.profile_picture);
+        pfp.setImageBitmap(BitmapFactory.decodeResource
+                (getResources(), R.drawable.jojo));
         username = findViewById(R.id.viewProfile_username);
         fullName = findViewById(R.id.viewProfile_fullName);
         phoneNumber = findViewById(R.id.viewProfile_phone);

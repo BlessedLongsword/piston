@@ -30,7 +30,7 @@
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginVertical="@dimen/small_separator"
             android:orientation="vertical"
-            android:weightSum="100">
+            android:weightSum="40">
 
             <Space
                 android:layout_width="match_parent"
@@ -44,12 +44,12 @@
                 app:cardCornerRadius="100dp" >
 
                 <ImageView
+                    android:id="@+id/profile_picture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/jojo"
-                    android:scaleType="centerCrop"
                     android:contentDescription="@string/profile"
-                    android:onClick="clickImage"/>
+                    android:onClick="clickImage"
+                    android:scaleType="centerCrop" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -58,20 +58,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="10" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/username_card"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/viewProfile_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/viewProfile_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="@string/username"
-                    app:boxBackgroundColor="@color/transparent"
-                    app:boxStrokeWidth="0dp" >
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/username"
+                style="@style/BlankBox" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewProfile_username_editText"
@@ -81,14 +74,12 @@
                     android:paddingLeft="0dp"
                     android:focusable="false"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/viewProfile_fullName"
@@ -96,10 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/view_profile_fullName"
-                app:boxBackgroundColor="@color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/baseline_edit_black_24" >
+                style="@style/BlankBox.EditIcon" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewProfile_fullName_editText"
@@ -110,12 +98,13 @@
                     android:paddingLeft="0dp"
                     android:inputType="textPersonName" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/viewProfile_phone"
@@ -123,10 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/view_profile_phone"
-                app:boxBackgroundColor="@color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/baseline_edit_black_24" >
+                style="@style/BlankBox.EditIcon" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewProfile_phone_editText"
@@ -136,12 +122,13 @@
                     android:paddingStart="0dp"
                     android:paddingLeft="0dp"
                     android:inputType="phone"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/viewProfile_email"
@@ -149,8 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/email"
-                app:boxBackgroundColor="@color/transparent"
-                app:boxStrokeWidth="0dp" >
+                style="@style/BlankBox" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewProfile_email_editText"
@@ -160,12 +146,12 @@
                     android:paddingStart="0dp"
                     android:paddingLeft="0dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/viewProfile_date"
@@ -173,10 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/birth_date"
-                app:boxBackgroundColor="@color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/baseline_edit_black_24" >
+                style="@style/BlankBox.EditIcon" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewProfile_date_editText"
@@ -186,12 +169,13 @@
                     android:paddingStart="0dp"
                     android:paddingLeft="0dp"
                     android:inputType="date"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Space
                 android:layout_width="match_parent"

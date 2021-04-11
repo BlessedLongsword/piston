@@ -37,5 +37,6 @@
     <dimen name="small">10sp</dimen>
     <dimen name="huge">45sp</dimen>
     <dimen name="card_image">194dp</dimen>
+    <dimen name="profile_activity_image_height">400dp</dimen>
 
 </resources>
