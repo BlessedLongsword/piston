@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         };
         username.getEditText().addTextChangedListener(afterTextChangedListener);
         pwd.getEditText().addTextChangedListener(afterTextChangedListener);
+
     }
 
     public void signIn(View view) {

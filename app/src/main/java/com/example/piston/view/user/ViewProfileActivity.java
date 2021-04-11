@@ -33,7 +33,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     TextInputLayout username, fullName, phoneNumber, email, bday;
     TextView featuredPost;
     MaterialToolbar mat;
-    CoordinatorLayout cl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         layoutParams.dimAmount = 0.75f;
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setAttributes(layoutParams);
-        cl = findViewById(R.id.viewProfile);
         init();
     }
 
@@ -108,12 +106,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         email.getEditText().setInputType(InputType.TYPE_NULL);
         bday.getEditText().setInputType(InputType.TYPE_NULL);
 
-        username.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                test(v, username.getEditText());
-            }
-        });
+        fullName.setEndIconOnClickListener(v -> popUpWindow(v, fullName.getEditText()));
+        phoneNumber.setEndIconOnClickListener(v -> popUpWindow(v, phoneNumber.getEditText()));
+        bday.setEndIconOnClickListener(v -> popUpWindow(v, bday.getEditText()));
 
         /*try {
             String userFile = "userFile";
@@ -134,7 +129,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"CLICKED", Toast.LENGTH_SHORT).show();
     }
 
-    public void test(View anchorView, EditText edit) {
+    public void popUpWindow(View anchorView, EditText edit) {
 
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
 
@@ -152,7 +147,6 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         // Initialize objects from layout
         TextInputLayout ed = popupView.findViewById(R.id.popup);
-        ed.setBoxStrokeWidth(0);
         ed.getEditText().setText(edit.getText().toString());
         ed.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -184,12 +178,17 @@ public class ViewProfileActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
 
-        /*
-        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-        layoutParams.dimAmount = 0.70f; //Generally in between 0.70f to 0.80f
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        getWindow().setAttributes(layoutParams);*/
 
+        // dims background when popup window shows up
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha=0.5f;
+        getWindow().setAttributes(lp);
+
+        // restore dim
+        popupWindow.setOnDismissListener(() -> {
+            lp.alpha=1f;
+            getWindow().setAttributes(lp);
+        });
     }
 
 }
