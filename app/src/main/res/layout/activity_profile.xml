@@ -49,7 +49,6 @@
                     android:src="@drawable/jojo"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/profile"
-                    android:clickable="true"
                     android:onClick="clickImage"/>
 
             </com.google.android.material.card.MaterialCardView>
