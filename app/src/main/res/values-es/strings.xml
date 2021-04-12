@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Piston</string>
+
+    <!-- Tab names -->
+    <string-array name="tab_titles">
+        <item><string name="tab_personal">Personal</string></item>
+        <item><string name="tab_groups">Grupal</string></item>
+        <item><string name="tab_global">Global</string></item>
+    </string-array>
+
+    <!-- General purpose -->
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="save_changes">Guardar Cambios</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+    <string name="link">Enlace</string>
+    <string name="description">Descripción</string>
+    <string name="create">Crear</string>
+    <string name="upload">Subir</string>
+    <string name="title">Título</string>
+    <string name="add">Añadir</string>
+    <string name="profile">Perfil</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="settings">Configuración</string>
+    <string name="link_copied">Enlace Copiado</string>
+    <string name="file_path">Dirección del archivo</string>
+
+    <!-- User Data -->
+    <string name="password">Contraseña</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="birth_date">Fecha de Nacimiento</string>
+
+    <!-- Sign in strings -->
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="user_hint">Nombre de usuario o Correo Electrónico</string>
+    <string name="forgot_pass">¿Ha olvidado su contraseña?</string>
+    <string name="sign_up_msg">¿No tiene una cuenta?</string>
+    <string name="sign_up_button"> ¡Regístrese ahora!</string>
+    <string name="welcome">Bienvenido</string>
+
+    <!-- Register strings -->
+    <string name="reg_title">REGISTRARSE</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="reg_date_format">dd/mm/aaaa</string>
+    <string name="terms_text">He leído y aceptado los términos de privacidad</string>
+    <string name="reg_btn">Registrarse</string>
+    <string name="reg_succesful">Registro exitoso</string>
+
+    <!-- View Profile Strings -->
+    <string name="view_profile_fullName">Nombre y Apellidos</string>
+    <string name="view_profile_phone">Teléfono</string>
+    <string name="view_profile_activity_title">PERFIL</string>
+    <string name="view_profile_post">Publicacion destacada</string>
+    <string name="view_profile_edit">Editar perfil</string>
+
+    <!-- Create Post Strings -->
+    <string name="create_post_activity_title">CREAR PUBLICACION</string>
+    <string name="post_content">Contenido</string>
+    <string name="hint_post_content">Explique la sucedura</string>
+    <string name="hint_input_title">Insertar Título</string>
+    <string name="choose_picture">Insertar Imagen</string>
+    <string name="attach_file">Adjuntar Archivo</string>
+
+    <!-- Edit Post Strings -->
+    <string name="edit_post_activity_title">EDITAR PUBLICACION</string>
+    <string name="edit_post_btn">Editar</string>
+    <string name="change_picture">Editar Imagen</string>
+    <string name="change_file">Editar Archivo</string>
+
+    <!-- Reply Post Strings -->
+    <string name="reply_post_activity_title">RESPONDER PUBLICACION</string>
+    <string name="reply_btn">Responder</string>
+
+    <!-- Create and edit Folder Strings -->
+    <string name="create_folder_activity_title">CREAR CARPETA</string>
+    <string name="folder_name">Nombre de la Carpeta</string>
+    <string name="edit_folder_activity_title">EDITAR CARPETA</string>
+
+    <!-- Create and edit Group Strings -->
+    <string name="create_group_activity_title">CREAR GRUPO</string>
+    <string name="create_group_name">Nombre del Grupo</string>
+    <string name="create_group_members">Miembros</string>
+    <string name="group_link_help">Use esto para invitar nuevos miembros</string>
+
+    <!-- Moderate Group Strings -->
+    <string name="group_settings_activity_title">AJUSTES DEL GRUPO</string>
+    <string name="delete_group_btn">Eliminar Grupo</string>
+    <string name="delete_selected">Eliminar seleccionados</string>
+
+    <!-- Create Category Strings -->
+    <string name="create_category_activity_title">CREAR CATEGORIA</string>
+    <string name="create_category_name">Nombre de la Categoría</string>
+    <string name="create_category_nsfw">Categoría +18</string>
+    <string name="category_link_help">Use esto para compartir la categoría</string>
+
+    <!-- Notifications Strings -->
+    <string name="notifications_activity_title">NOTIFICACIONES</string>
+    <string name="notifications_mark_as_read">Marcar como leído</string>
+
+    <!-- Error Strings -->
+    <string name="wrong_user">Usuario inexistente</string>
+    <string name="wrong_password">Contraseña incorrecta</string>
+    <string name="invalid_username">Ya existe un usuario con este nombre</string>
+    <string name="invalid_password">La contraseña debe tener por lo menos 6 caracteres</string>
+    <string name="invalid_password2">Las contraseñas no coinciden</string>
+    <string name="invalid_date">Introduzca una fecha válida: dd/mm/aaaa</string>
+    <string name="email_taken">Ya existe un usuario con esa dirección de correo electrónico</string>
+    <string name="username_req">Es necesario introducir un nombre de usuario</string>
+    <string name="email_req">La dirección de correo electrónico no es válida</string>
+    <string name="pwd_req">Es necesaria una contraseña</string>
+    <string name="verify_reg_field">Confirme los campos e inténtelo de nuevo</string>
+
+    <!-- Settings Strings -->
+    <string name="settings_activity_title">AJUSTES</string>
+    <string name="settings_sub">Suscripción a publicaciones por defecto</string>
+    <string name="settings_dark">Modo oscuro</string>
+    <string name="settings_sfw">Mostrarme publicaciones +18 (Soy mayor de edad)</string>
+    <string name="settings_blur_nsfw">Difuminar imagenes +18</string>
+    <string name="reply_content">Contenido de la respuesta</string>
+    <string name="hint_reply_button">Redacte su respuesta</string>
+    <string name="content_description_media">Texto de ejemplo</string>
+    <string name="reply">responder</string>
+    <string name="post_image">Imagen de la Publicación</string>
+    <string name="profile_image">Imagen de Perfil</string>
+
+</resources>
