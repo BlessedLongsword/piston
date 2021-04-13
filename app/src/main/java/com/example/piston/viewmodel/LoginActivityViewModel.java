@@ -1,6 +1,5 @@
 package com.example.piston.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,11 +12,11 @@ import java.util.Objects;
 
 public class LoginActivityViewModel extends ViewModel {
 
-    public MutableLiveData<String> username = new MutableLiveData<>("");
+    public MutableLiveData<String> username = new MutableLiveData<>(""); //Encapsular en una classe?
     public MutableLiveData<String> password = new MutableLiveData<>("");
 
-    private MutableLiveData<User.UsernameError> usernameError = new MutableLiveData<>();
-    private MutableLiveData<User.PasswordError> passwordError = new MutableLiveData<>();
+    public MutableLiveData<User.UsernameError> usernameError = new MutableLiveData<>(User.UsernameError.NONE);
+    public MutableLiveData<User.PasswordError> passwordError = new MutableLiveData<>(User.PasswordError.NONE);
 
     public MutableLiveData<Boolean> signInEnabled = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> signedIn = new MutableLiveData<>(false);

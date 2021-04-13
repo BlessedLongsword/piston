@@ -6,9 +6,6 @@
         <variable
             name="viewModel"
             type="com.example.piston.viewmodel.LoginActivityViewModel" />
-        <variable
-            name="activity"
-            type="com.example.piston.view.user.LoginActivity" />
     </data>
 
     <LinearLayout
@@ -44,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_hint"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            android:usernameError='@{viewModel.usernameError}'>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_editText"
                 android:layout_width="match_parent"
@@ -115,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/micro_separator"
                 android:layout_marginLeft="@dimen/micro_separator"
-                android:onClick="@{() -> activity.register()"
+                android:onClick="register"
                 android:text="@string/sign_up_button"
                 android:textColor="@color/dark_blue" />
         </LinearLayout>

@@ -108,8 +108,6 @@ public class AuthRepository {
     }
 
     private void loginEmail(String email, String password) {
-        Log.d("nowaybro", "Email: " + email);
-        Log.d("nowaybro", "password: " + password);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -142,6 +140,18 @@ public class AuthRepository {
             }
         });
         return null;
+
+        /*db.collection("emails")
+            .get()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("nowaybro", document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.w("nowaybro", "Error getting documents.", task.getException());
+                }
+            });*/
     }
 
     public void logout() {

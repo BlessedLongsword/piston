@@ -4,12 +4,9 @@ import android.media.Image;
 
 import androidx.annotation.Nullable;
 
-import com.google.firebase.auth.FirebaseUser;
-
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class User {
 
     @Nullable
     private String name;

@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setViewModel(loginActivityViewModel);
-        binding.setActivity(this);
         binding.setLifecycleOwner(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -85,10 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-    public void register() {
+    public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
 }
