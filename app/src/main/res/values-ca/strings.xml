@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Piston</string>
+
+    <!-- Tab names -->
+    <string-array name="tab_titles">
+        <item><string name="tab_personal">Personal</string></item>
+        <item><string name="tab_groups">Grupal</string></item>
+        <item><string name="tab_global">Global</string></item>
+    </string-array>
+
+    <!-- General purpose -->
+    <string name="cancel">Cancel·lar</string>
+    <string name="save">Desar</string>
+    <string name="save_changes">Desa els canvis</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+    <string name="link">Enllaç</string>
+    <string name="description">Descripció</string>
+    <string name="create">Crear</string>
+    <string name="upload">Pujar</string>
+    <string name="title">Títol</string>
+    <string name="add">Afegir</string>
+    <string name="profile">Perfil</string>
+    <string name="notifications">Notificacions</string>
+    <string name="settings">Configuració</string>
+    <string name="link_copied">Enllaç Copiat</string>
+    <string name="file_path">Camí del Arxiu</string>
+
+    <!-- User Data -->
+    <string name="password">Contrasenya</string>
+    <string name="username">Nom d\'Usuari</string>
+    <string name="email">Correu Electrònic</string>
+    <string name="birth_date">Data de Naixement</string>
+
+    <!-- Sign in strings -->
+    <string name="sign_in">Inicia sessió</string>
+    <string name="sign_up">Registrar-se</string>
+    <string name="user_hint">Nom d\'Usuari o Correu Electrònic</string>
+    <string name="forgot_pass">Ha oblidat la seva contrasenya?</string>
+    <string name="sign_up_msg">No disposa d\'un compte?</string>
+    <string name="sign_up_button"> Registrar-se ara</string>
+    <string name="welcome">Benvingut</string>
+
+    <!-- Register strings -->
+    <string name="reg_title">REGISTRAR-SE</string>
+    <string name="confirm_password">Confirmar contrasenya</string>
+    <string name="reg_date_format">dd/mm/aaaa</string>
+    <string name="terms_text">He llegit i acceptat els termes de privacitat</string>
+    <string name="reg_btn">Registrar-se</string>
+    <string name="reg_succesful">Registre amb exit</string>
+
+    <!-- View Profile Strings -->
+    <string name="view_profile_fullName">Nom i Cognoms</string>
+    <string name="view_profile_phone">Teléfon</string>
+    <string name="view_profile_activity_title">PERFIL</string>
+    <string name="view_profile_post">Publicació destacada</string>
+    <string name="view_profile_edit">Editar perfil</string>
+
+    <!-- Create Post Strings -->
+    <string name="create_post_activity_title">NOVA PUBLICACIÓ</string>
+    <string name="post_content">Contingut</string>
+    <string name="hint_post_content">Expliqui la seva experiència</string>
+    <string name="hint_input_title">Insertar Títol</string>
+    <string name="choose_picture">Insertar Imatge</string>
+    <string name="attach_file">Adjuntar Arxiu</string>
+
+    <!-- Edit Post Strings -->
+    <string name="edit_post_activity_title">EDITAR PUBLICACIO</string>
+    <string name="edit_post_btn">Editar</string>
+    <string name="change_picture">Editar Imatge</string>
+    <string name="change_file">Editar Arxiu</string>
+
+    <!-- Reply Post Strings -->
+    <string name="reply_post_activity_title">RESPONDRE PUBLICACIO</string>
+    <string name="reply_btn">Respondre</string>
+
+    <!-- Create and edit Folder Strings -->
+    <string name="create_folder_activity_title">CREAR CARPETA</string>
+    <string name="folder_name">Nom de la Carpeta</string>
+    <string name="edit_folder_activity_title">EDITAR CARPETA</string>
+
+    <!-- Create and edit Group Strings -->
+    <string name="create_group_activity_title">CREAR GRUP</string>
+    <string name="create_group_name">Nom del Grup</string>
+    <string name="create_group_members">Membres</string>
+    <string name="group_link_help">Obtenir invitacions per nou membres</string>
+
+    <!-- Moderate Group Strings -->
+    <string name="group_settings_activity_title">CONFIGURACIO DEL GRUP</string>
+    <string name="delete_group_btn">Eliminar Grup</string>
+    <string name="delete_selected">Eliminar seleccionats</string>
+
+    <!-- Create Category Strings -->
+    <string name="create_category_activity_title">CREAR CATEGORIA</string>
+    <string name="create_category_name">Nom de la Categoría</string>
+    <string name="create_category_nsfw">Categoria +18</string>
+    <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
+
+    <!-- Notifications Strings -->
+    <string name="notifications_activity_title">NOTIFICACIONS</string>
+    <string name="notifications_mark_as_read">Marcar com llegit</string>
+
+    <!-- Error Strings -->
+    <string name="wrong_user">Usuari inexistent</string>
+    <string name="wrong_password">Contrasenya incorrecta</string>
+    <string name="invalid_username">Ja existeix un usuari amb aquest nom</string>
+    <string name="invalid_password">La contrasenya ha de contenir com a mínim 6 caràters</string>
+    <string name="invalid_password2">Les contrasenyes no coincideixen</string>
+    <string name="invalid_date">Introdueixi una data vàlida: dd/mm/aaaa</string>
+    <string name="email_taken">Ja existeix un usuari amb aquesta adreça de correu electrònic</string>
+    <string name="username_req">Cal introduir un nom d\'usuari</string>
+    <string name="email_req">L\'adreça de correu electrònic no es vàlida</string>
+    <string name="pwd_req">Cal introduir una contrasenya</string>
+    <string name="verify_reg_field">Confirmi tots els camps i provi una altra vegada</string>
+
+    <!-- Settings Strings -->
+    <string name="settings_activity_title">CONFIGURACIÓ</string>
+    <string name="settings_sub">Suscripció a publicacions per defecte</string>
+    <string name="settings_dark">Mode fosc</string>
+    <string name="settings_sfw">Vull veure publicacions +18 (Sóc major d\'edat)</string>
+    <string name="settings_blur_nsfw">Difuminar imatges +18</string>
+    <string name="reply_content">Contingut de la resposta</string>
+    <string name="hint_reply_button">Escrigui la seva resposta</string>
+    <string name="content_description_media">Text d\'exemple</string>
+    <string name="reply">respondre</string>
+    <string name="post_image">Imatge de la Publicació</string>
+    <string name="profile_image">Imatge del Perfil</string>
+
+</resources>
