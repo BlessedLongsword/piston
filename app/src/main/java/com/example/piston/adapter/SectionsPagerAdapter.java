@@ -8,7 +8,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.piston.view.sections.global.GlobalFragment;
 import com.example.piston.view.sections.group.GroupFragment;
 import com.example.piston.view.sections.personal.PersonalFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
 
