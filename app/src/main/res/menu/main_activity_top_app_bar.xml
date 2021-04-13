@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.MainActivity">
+    tools:context=".view.sections.MainActivity">
 
     <item
         android:id="@+id/navigation_profile"
@@ -22,6 +22,12 @@
         android:id="@+id/navigation_settings"
         android:title="@string/settings"
         android:onClick="openSettings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/navigation_logout"
+        android:title="@string/logout"
+        android:onClick="logout"
         app:showAsAction="never" />
 
 </menu>

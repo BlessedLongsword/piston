@@ -42,25 +42,25 @@ public class RegisterActivityViewModel extends ViewModel {
         }
         if(result instanceof Result.Error) {
             Log.d("what"," register" + result.toString());
-            if (result.toString().equals("Error[exception=Username required]")) {
+            if (result.toString().equals("UsernameError[exception=Username required]")) {
                 registerResult.setValue(new RegisterResult(R.string.username_req));
             }
-            else if (result.toString().equals("Error[exception=Email required]")) {
+            else if (result.toString().equals("UsernameError[exception=Email required]")) {
                 registerResult.setValue((new RegisterResult(R.string.email_req)));
             }
-            else if (result.toString().equals("Error[exception=Password required]")) {
+            else if (result.toString().equals("UsernameError[exception=Password required]")) {
                 registerResult.setValue(new RegisterResult(R.string.pwd_req));
             }
-            else if (result.toString().equals("Error[exception=Username already taken]")) {
+            else if (result.toString().equals("UsernameError[exception=Username already taken]")) {
                 registerResult.setValue((new RegisterResult(R.string.invalid_username)));
             }
-            else if (result.toString().equals("Error[exception=This email is already taken]")) {
+            else if (result.toString().equals("UsernameError[exception=This email is already taken]")) {
                 registerResult.setValue((new RegisterResult(R.string.email_taken)));
             }
-            else if (result.toString().equals("Error[exception=Password must be at least 6 characters]")) {
+            else if (result.toString().equals("UsernameError[exception=Password must be at least 6 characters]")) {
                 registerResult.setValue((new RegisterResult(R.string.invalid_password)));
             }
-            else if (result.toString().equals("Error[exception=Passwords do not match]")) {
+            else if (result.toString().equals("UsernameError[exception=Passwords do not match]")) {
                 registerResult.setValue((new RegisterResult(R.string.invalid_password2)));
             }
         }

@@ -35,6 +35,14 @@ public class User implements Serializable {
         this.pwd = pwd;
     }
 
+    public enum UsernameError {
+        NONE, EMPTY, INVALID
+    }
+
+    public enum PasswordError {
+        NONE, INCORRECT
+    }
+
 
     public String getUsername() {
         return username;

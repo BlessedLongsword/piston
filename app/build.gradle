@@ -9,10 +9,13 @@ android {
     defaultConfig {
         //applicationId "com.example.piston"
         minSdkVersion 16
-        //targetSdkVersion 30
+        targetSdkVersion 30
         //versionCode 1
         //versionName "1.0"
         multiDexEnabled true
+    }
+    buildFeatures {
+        dataBinding true
     }
     /*buildTypes {
         release {

@@ -100,7 +100,7 @@
     <string name="notifications_activity_title">NOTIFICATIONS</string>
     <string name="notifications_mark_as_read">Mark as read</string>
 
-    <!-- Error Strings -->
+    <!-- UsernameError Strings -->
     <string name="wrong_user">This user does not exist</string>
     <string name="wrong_password">Wrong password</string>
     <string name="invalid_username">This username is already taken</string>
@@ -125,5 +125,6 @@
     <string name="reply">reply</string>
     <string name="post_image">Post Image</string>
     <string name="profile_image">Profile Image</string>
+    <string name="logout">Log Out</string>
 
 </resources>

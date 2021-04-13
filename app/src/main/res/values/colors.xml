@@ -17,4 +17,6 @@
 
     <color name="red">#FFFF0000</color>
 
+    <color name="almost_black">#282828</color>
+
 </resources>

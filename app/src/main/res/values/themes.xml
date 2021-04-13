@@ -7,11 +7,13 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
+    </style>
 
+    <style name="Theme.Piston.SplashScreen" parent="Theme.Piston">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <!-- Text Fields with no outline and no fill -->
-
     <style name="BlankBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="paddingStart">0dp</item>
         <item name="android:paddingLeft">0dp</item>

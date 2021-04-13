@@ -21,29 +21,25 @@
         <activity android:name=".view.posts.ViewPostsActivity"/>
 
         <activity android:name=".view.sections.global.CreateCategoryActivity"/>
-
         <activity android:name=".view.sections.group.CreateGroupActivity"/>
         <activity android:name=".view.sections.group.ModerateGroupActivity"/>
-
         <activity android:name=".view.sections.personal.CreateFolderActivity"/>
 
-        <activity android:name=".view.user.LoginActivity">
+        <activity android:name=".view.sections.MainActivity"/>
+
+        <activity android:name=".view.user.LoginActivity"/>
+        <activity android:name=".view.user.RegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".view.user.ViewProfileActivity"/>
+        <activity android:name=".view.user.ProfileImageActivity"/>
+
+        <activity android:name=".view.LaunchActivity"
+            android:theme="@style/Theme.Piston.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.user.RegisterActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"/>
-        <activity android:name=".view.user.ViewProfileActivity"/>
-        <activity android:name=".view.user.ProfileImageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".view.MainActivity"/>
 
     </application>
 
