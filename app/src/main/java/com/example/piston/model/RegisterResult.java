@@ -1,7 +1,5 @@
 package com.example.piston.model;
 
-import android.provider.ContactsContract;
-
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 

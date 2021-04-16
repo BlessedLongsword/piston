@@ -23,6 +23,7 @@ public class LoginResult extends BaseObservable {
         this.usernameError = usernameError;
     }
 
+    @Bindable
     public PasswordError getPasswordError() {
         return passwordError;
     }

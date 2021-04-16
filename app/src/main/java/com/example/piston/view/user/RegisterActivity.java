@@ -9,12 +9,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.databinding.ActivityRegisterBinding;
 import com.example.piston.util.textwatchers.BaseTextWatcher;
 import com.example.piston.util.textwatchers.CounterWatcher;
 import com.example.piston.viewmodel.RegisterActivityViewModel;
@@ -26,8 +29,9 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterActivityViewModel registerActivityViewModel;
+    private ActivityRegisterBinding binding;
 
-    TextInputLayout username, email, pwd, pwd2, birthday;
+    TextInputLayout userEditText, passEditText, passEditText2, emailEditText, birthEditText;
     CheckBox tos;
     Button signUpBtn;
 
@@ -38,20 +42,30 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         registerActivityViewModel = new ViewModelProvider(this).get(RegisterActivityViewModel.class);
 
-        this.username = (TextInputLayout) findViewById(R.id.userText);
-        username.setSuffixText(Integer.toString(getResources().getInteger(R.integer.username_max_length)));
-        this.email = findViewById(R.id.emailText);
-        this.pwd = findViewById(R.id.pwdText);
-        this.pwd2 = findViewById(R.id.pwd2Text);
-        this.birthday = findViewById(R.id.bdayText);
-        this.tos = findViewById(R.id.tosCheck);
-        this.signUpBtn = findViewById(R.id.registerBtn);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
+        binding.setViewModel(registerActivityViewModel);
+        binding.setLifecycleOwner(this);
+
+        TextWatcher afterTextChangedListener = new BaseTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                binding.getViewModel().onTextChanged();
+            }
+        };
+        binding.regUsernameEditText.addTextChangedListener(afterTextChangedListener);
+        binding.regPwdEditText.addTextChangedListener(afterTextChangedListener);
+        binding.regPwd2EditText.addTextChangedListener(afterTextChangedListener);
+        binding.regEmailEditText.addTextChangedListener(afterTextChangedListener);
+        binding.regBdayEditText.addTextChangedListener(afterTextChangedListener);
+        binding.tosCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+        });
 
         if(savedInstanceState != null){
             mSavedInstanceState = savedInstanceState;
         }
 
-        registerActivityViewModel.getRegisterFormState().observe(this, registerFormState -> {
+        /*registerActivityViewModel.getRegisterFormState().observe(this, registerFormState -> {
             if (registerFormState == null){
                 return;
             }
@@ -151,10 +165,10 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 signUpBtn.setEnabled(false);
             }
-        });
+        });*/
     }
 
-    public void registerUser(View view) {
+    /*public void registerUser(View view) {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         registerActivityViewModel.register(username.getEditText().getText().toString(),
@@ -173,5 +187,5 @@ public class RegisterActivity extends AppCompatActivity {
         String a = username.getError() == null ? "null": "noNull";
         Log.d("what", "showbtn " + a);
         return !isEmpty && !error;
-    }
+    }*/
 }

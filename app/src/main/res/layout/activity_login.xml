@@ -42,15 +42,15 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_hint"
             app:errorEnabled="true"
-            android:usernameError='@{viewModel.loginResult.usernameError}'>
-
+            android:usernameError="@{viewModel.loginResult.usernameError}">
+            <!--suppress AndroidUnknownAttribute -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:afterTextChanged="@{() -> viewModel.onTextChanged()}"
                 android:text="@={viewModel.username}" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -61,14 +61,14 @@
             android:hint="@string/password"
             app:errorEnabled="true"
             android:passwordError="@{viewModel.loginResult.passwordError}" >
-
+            <!--suppress AndroidUnknownAttribute -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass_editText"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.password}" />
-
+                android:text="@={viewModel.password}"
+                android:afterTextChanged="@{() -> viewModel.onTextChanged()}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space

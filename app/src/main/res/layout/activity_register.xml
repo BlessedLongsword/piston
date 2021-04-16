@@ -50,8 +50,7 @@
                 android:hint="@string/username"
                 app:endIconMode="custom"
                 app:errorEnabled="true"
-                android:usernameError='@{viewModel.registerResult.usernameError}'
-                android:onTextChanged='@{viewModel.onTextChanged()}'>
+                android:regUsernameError='@{viewModel.registerResult.usernameError}'>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_username_editText"
@@ -75,7 +74,7 @@
                 android:hint="@string/email"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                android:emailError='@{viewModel.registerResult.emailError}'>
+                android:regEmailError='@{viewModel.registerResult.emailError}'>
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_email_editText"
                     android:layout_width="match_parent"
@@ -94,7 +93,7 @@
                 app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
-                android:passwordError='@{viewModel.registerResult.passwordError}'>
+                android:regPasswordError='@{viewModel.registerResult.passwordError}'>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd_editText"
@@ -115,7 +114,7 @@
                 app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
-                android:passwordError2='@{viewModel.registerResult.passwordError2}'>
+                android:regPasswordError2='@{viewModel.registerResult.passwordError2}'>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd2_editText"
@@ -134,7 +133,7 @@
                 android:hint="@string/birth_date"
                 app:placeholderText="@string/reg_date_format"
                 app:errorEnabled="true"
-                android:birthdayError='@{viewModel.registerResult.birthdayError}'>
+                android:regBirthdayError='@{viewModel.registerResult.birthdayError}'>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_bday_editText"

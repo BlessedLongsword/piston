@@ -1,6 +1,7 @@
 package com.example.piston.util.textwatchers;
 
 import android.text.Editable;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
