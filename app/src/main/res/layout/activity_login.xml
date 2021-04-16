@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:text="@={viewModel.username}" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,13 +60,15 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/password"
             app:errorEnabled="true"
-            android:passwordError="@{viewModel.passwordError}">
+            android:passwordError="@{viewModel.loginResult.passwordError}" >
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass_editText"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.password}" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space

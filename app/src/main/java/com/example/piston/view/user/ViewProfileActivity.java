@@ -88,7 +88,7 @@ public class ViewProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(ed.getEditText().getText().toString().length() > 0) {
                     ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                    ed.setEndIconDrawable(R.drawable.outline_send_black_36);
+                    ed.setEndIconDrawable(R.drawable.outline_send_black_24);
                 }
                 else {
                     ed.setEndIconMode(TextInputLayout.END_ICON_NONE);

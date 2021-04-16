@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -36,7 +35,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         title = findViewById(R.id.input_group_name);
         title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
-        title.getEditText().addTextChangedListener(new CounterWatcher(R.integer.title_max_length, title));
+        title.getEditText().addTextChangedListener(new CounterWatcher(getResources().getInteger(R.integer.title_max_length), title));
 
 
         desc = findViewById(R.id.input_group_desc);

@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.google.android.material.appbar.MaterialToolbar;
 
 public class NotificationsActivity extends AppCompatActivity {
     private androidx.appcompat.view.ActionMode mActionMode;
@@ -23,7 +21,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     }
 
-    public void test(View view){
+    public void test(MenuItem menuItem){
         if (mActionMode == null){
             mActionMode = startSupportActionMode((androidx.appcompat.view.ActionMode.Callback) mActionModeCallback);
         }

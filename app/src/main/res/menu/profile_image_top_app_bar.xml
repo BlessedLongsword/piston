@@ -5,7 +5,7 @@
     <item
         android:id="@+id/edit_image"
         android:title="@string/edit"
-        android:icon="@drawable/baseline_mode_edit_white_36"
+        android:icon="@drawable/baseline_mode_edit_white_24"
         app:showAsAction="always">
     </item>
 
