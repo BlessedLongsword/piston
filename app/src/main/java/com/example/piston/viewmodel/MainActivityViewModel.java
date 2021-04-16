@@ -3,19 +3,19 @@ package com.example.piston.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.model.AuthRepository;
+import com.example.piston.model.LoginRepository;
 
 public class MainActivityViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>(true);
-    private final AuthRepository authRepository;
+   // private final LoginRepository loginRepository;
 
     public MainActivityViewModel() {
-        authRepository = new AuthRepository(isSignedIn);
+        //loginRepository = new LoginRepository(this);
     }
 
     public void logout() {
-        authRepository.logout();
+        //loginRepository.logout();
     }
 
 }

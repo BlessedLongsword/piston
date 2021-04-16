@@ -3,18 +3,19 @@ package com.example.piston.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.model.AuthRepository;
+import com.example.piston.model.LaunchRepository;
 
-public class LaunchActivityViewModel extends ViewModel {
+public class LaunchActivityViewModel extends ViewModel implements LaunchRepository.ILaunch {
 
     public MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>();
-    private final AuthRepository authRepository;
-
-    public LaunchActivityViewModel() {
-        authRepository = new AuthRepository(isSignedIn);
-    }
+    private final LaunchRepository launchRepository = new LaunchRepository(this);
 
     public void checkIfUserIsAuthenticated() {
-        authRepository.checkIfUserIsAuthenticatedInFirebase();
+        launchRepository.checkIfUserIsAuthenticated();
+    }
+
+    @Override
+    public void setIsSignedId(boolean isSignedIn) {
+        this.isSignedIn.setValue(isSignedIn);
     }
 }

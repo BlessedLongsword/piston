@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodel.LoginActivityViewModel" />
+            type="com.example.piston.viewmodel.LoginViewModelActivity" />
     </data>
 
     <LinearLayout
@@ -42,13 +42,14 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_hint"
             app:errorEnabled="true"
-            android:usernameError='@{viewModel.usernameError}'>
+            android:usernameError='@{viewModel.loginResult.usernameError}'>
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.username}"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.username}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:hint="@string/password"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            android:passwordError="@{viewModel.passwordError}">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass_editText"
                 android:inputType="textPassword"

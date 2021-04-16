@@ -14,7 +14,7 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.util.textwatchers.BaseTextWatcher;
 import com.example.piston.view.sections.MainActivity;
-import com.example.piston.viewmodel.LoginActivityViewModel;
+import com.example.piston.viewmodel.LoginViewModelActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginActivityViewModel loginActivityViewModel;
+    private LoginViewModelActivity loginActivityViewModel;
     private ActivityLoginBinding binding;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
+        loginActivityViewModel = new ViewModelProvider(this).get(LoginViewModelActivity.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setViewModel(loginActivityViewModel);
         binding.setLifecycleOwner(this);
@@ -55,16 +55,19 @@ public class LoginActivity extends AppCompatActivity {
         binding.userEditText.addTextChangedListener(afterTextChangedListener);
         binding.passEditText.addTextChangedListener(afterTextChangedListener);
 
+        /*binding.getViewModel()
+
         binding.getViewModel().signedIn.observe(this, isSignedIn -> {
             if (isSignedIn)
                 goToMainActivity();
-        });
+        });*/
 
     }
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private static final int RC_SIGN_IN = 9001;
