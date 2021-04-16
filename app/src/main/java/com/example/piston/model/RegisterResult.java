@@ -7,10 +7,10 @@ import androidx.databinding.Bindable;
 
 public class RegisterResult extends BaseObservable {
 
-    public enum UsernameError { NONE, EMPTY, INVALID }
+    public enum UsernameError { NONE, EMPTY, EXISTS }
     public enum PasswordError { NONE, EMPTY, INVALID }
     public enum PasswordError2 { NONE, INVALID }
-    public enum EmailError { NONE, EMPTY, INVALID }
+    public enum EmailError { NONE, EMPTY, INVALID, EXISTS }
     public enum BirthdayError { NONE, INVALID }
     public enum CheckError { NONE, EMPTY }
 
