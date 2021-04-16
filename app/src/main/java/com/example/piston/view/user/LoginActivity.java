@@ -2,8 +2,6 @@ package com.example.piston.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,20 +9,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.view.sections.MainActivity;
 import com.example.piston.viewmodel.LoginViewModelActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModelActivity loginActivityViewModel;
-    private ActivityLoginBinding binding;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -32,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         loginActivityViewModel = new ViewModelProvider(this).get(LoginViewModelActivity.class);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        com.example.piston.databinding.ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setViewModel(loginActivityViewModel);
         binding.setLifecycleOwner(this);
 
@@ -48,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
             if (loginResult.isSignedIn())
                 goToMainActivity();
         });
-
     }
 
     private void goToMainActivity() {
@@ -69,8 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            loginActivityViewModel.signInWithGoogle(task);
+            loginActivityViewModel.signInWithGoogle(GoogleSignIn.getSignedInAccountFromIntent(data));
         }
     }
 

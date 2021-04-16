@@ -1,14 +1,6 @@
 package com.example.piston.util;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.widget.TextView;
-
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.InverseBindingListener;
-import androidx.databinding.adapters.ListenerUtil;
-import androidx.databinding.adapters.TextViewBindingAdapter;
 
 import com.example.piston.R;
 import com.example.piston.model.LoginResult;
@@ -53,7 +45,7 @@ public class BindingAdapters {
             case EMPTY:
                 view.setError(view.getContext().getString(R.string.username_req));
                 break;
-            case INVALID:
+            case EXISTS:
                 view.setError(view.getContext().getString(R.string.invalid_username));
                 break;
         }

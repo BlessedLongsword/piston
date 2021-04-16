@@ -2,14 +2,11 @@ package com.example.piston.model;
 
 import android.util.Log;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,7 +28,7 @@ public class LoginRepository {
     public void signInWithGoogle(Task<GoogleSignInAccount> task) {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
-            Log.d("nowaybro", "firebaseAuthWithGoogle:" + account.getId());
+            assert account != null;
             firebaseAuthWithGoogle(account.getIdToken());
         } catch (ApiException e) {
             Log.w("nowaybro", "Google sign in failed", e);
@@ -43,48 +40,12 @@ public class LoginRepository {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d("nowaybro", "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Log.d("nowaybro", user.getEmail());
+                        //boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                        listener.setLoginResult(new LoginResult(true));
                     } else {
                         Log.w("nowaybro", "signInWithCredential:failure", task.getException());
                     }
                 });
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-            //updateUI(account);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("nowaybro", "signInResult:failed code=" + e.getStatusCode());
-            //updateUI(null);
-        }
-    }
-
-    MutableLiveData<FirebaseUser> firebaseSignInWithGoogle(AuthCredential googleAuthCredential) {
-        MutableLiveData<FirebaseUser> authenticatedUserMutableLiveData = new MutableLiveData<>();
-        mAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener(authTask -> {
-            if (authTask.isSuccessful()) {
-                boolean isNewUser = authTask.getResult().getAdditionalUserInfo().isNewUser();
-                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    String uid = firebaseUser.getUid();
-                    String name = firebaseUser.getDisplayName();
-                    String email = firebaseUser.getEmail();
-                    //User user = new User(uid, name, email);
-                    //user.isNew = isNewUser;
-                    //authenticatedUserMutableLiveData.setValue(user);
-                }
-            } else {
-                Log.d("nowaybro", authTask.getException().getMessage());
-            }
-        });
-        return authenticatedUserMutableLiveData;
     }
 
     public void login(String username, String password) {
@@ -98,10 +59,7 @@ public class LoginRepository {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d("nowaybro", "signInWithEmailAndPassword:success");
-                        LoginResult loginResult = new LoginResult();
-                        loginResult.setSignedIn(true);
-                        listener.setLoginResult(loginResult);
+                        listener.setLoginResult(new LoginResult(true));
                     } else {
                         Log.w("nowaybro", "signInWithEmailAndPassword:failure",
                                 task.getException());
