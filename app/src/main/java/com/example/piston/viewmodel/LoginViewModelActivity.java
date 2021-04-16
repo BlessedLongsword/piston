@@ -25,7 +25,6 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
     private final LoginRepository loginRepository = new LoginRepository(this);
 
     public void onTextChanged() {
-        LiveData<String> a;
         getSignInEnabled().setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
                 Objects.requireNonNull(getPassword().getValue()).length()>0);
     }
@@ -42,10 +41,7 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
     @Override
     public void setLoginResult(LoginResult loginResult) {
         this.loginResult.setValue(loginResult);
-        Log.d("nowaybro", loginResult.getUsernameError().toString());
-        Log.d("nowaybro", loginResult.getPasswordError().toString());
     }
-
 
     public MutableLiveData<String> getUsername() {
         return username;
@@ -59,15 +55,4 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
         return signInEnabled;
     }
 
-    public LoginResult.PasswordError getPasswordError() {
-        return Objects.requireNonNull(loginResult.getValue()).getPasswordError();
-    }
-
-    public boolean isSignedIn() {
-        return Objects.requireNonNull(loginResult.getValue()).isSignedIn();
-    }
-
-    public boolean isNewuser() {
-        return Objects.requireNonNull(loginResult.getValue()).isNewUser();
-    }
 }

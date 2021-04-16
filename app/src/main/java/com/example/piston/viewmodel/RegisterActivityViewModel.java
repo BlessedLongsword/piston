@@ -2,30 +2,75 @@ package com.example.piston.viewmodel;
 
 import android.util.Log;
 
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.R;
+import com.example.piston.model.LoginResult;
+import com.example.piston.model.RegisterResult;
 import com.example.piston.model.Result;
 import com.example.piston.model.UserList;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivityViewModel extends ViewModel {
 
-    private MutableLiveData<RegisterResult> registerResult;
     private MutableLiveData<RegisterFormState> registerFormState;
     private UserList users;
 
-    public RegisterActivityViewModel() {
-        registerResult = new MutableLiveData<>();
-        registerFormState = new MutableLiveData<>();
-        users = new UserList();
+    private final MutableLiveData<String> username = new MutableLiveData<>("");
+    private final MutableLiveData<String> password = new MutableLiveData<>("");
+    private final MutableLiveData<String> password2 = new MutableLiveData<>("");
+    private final MutableLiveData<String> birthday = new MutableLiveData<>("");
+    private final MutableLiveData<String> email = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> registerEnabled = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> checkEnabled = new MutableLiveData<>(false);
+
+    private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>(new RegisterResult());
+
+    @BindingAdapter("android:onTextChanged")
+    public void onTextChanged() {
+        getRegisterEnabled().setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
+                Objects.requireNonNull(getPassword().getValue()).length()>0);
     }
 
+    public MutableLiveData<Boolean> getRegisterEnabled() {
+        return registerEnabled;
+    }
+
+    public MutableLiveData<String> getUsername() {
+        return username;
+    }
+
+    public MutableLiveData<String> getPassword() {
+        return password;
+    }
+    public MutableLiveData<String> getPassword2() {
+        return password2;
+    }
+
+    public MutableLiveData<String> getBirthday() {
+        return birthday;
+    }
+
+    public MutableLiveData<String> getEmail() {
+        return email;
+    }
+
+    public MutableLiveData<Boolean> getCheckEnabled() {
+        return checkEnabled;
+    }
+
+    public LiveData<RegisterResult> getRegisterResult() {
+        return registerResult;
+    }
+
+/*
     public LiveData<RegisterResult> getRegisterResult() {
         return registerResult;
     }
@@ -139,5 +184,5 @@ public class RegisterActivityViewModel extends ViewModel {
                     null,null,null,null,R.string.invalid_date));
         }
     }
-
+*/
 }
