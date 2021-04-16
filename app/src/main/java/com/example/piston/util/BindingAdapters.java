@@ -1,8 +1,13 @@
 package com.example.piston.util;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingListener;
+import androidx.databinding.adapters.ListenerUtil;
 import androidx.databinding.adapters.TextViewBindingAdapter;
 
 import com.example.piston.R;
@@ -106,10 +111,5 @@ public class BindingAdapters {
                 view.setError(view.getContext().getString(R.string.invalid_date));
                 break;
         }
-    }
-
-    @BindingAdapter("android:afterTextChanged")
-    public static void setListener(TextView view, TextViewBindingAdapter.AfterTextChanged after) {
-        setListener(view, null, null, after);
     }
 }

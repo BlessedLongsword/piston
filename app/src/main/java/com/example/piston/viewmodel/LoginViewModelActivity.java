@@ -1,7 +1,5 @@
 package com.example.piston.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,7 +18,7 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
     private final MutableLiveData<String> password = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> signInEnabled = new MutableLiveData<>(false);
 
-    public final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>(new LoginResult());
+    private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>(new LoginResult());
 
     private final LoginRepository loginRepository = new LoginRepository(this);
 
@@ -43,6 +41,7 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
         this.loginResult.setValue(loginResult);
     }
 
+
     public MutableLiveData<String> getUsername() {
         return username;
     }
@@ -55,4 +54,11 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
         return signInEnabled;
     }
 
+    public LoginResult.PasswordError getPasswordError() {
+        return Objects.requireNonNull(getLoginResult().getValue()).getPasswordError();
+    }
+
+    public LiveData<LoginResult> getLoginResult() {
+        return loginResult;
+    }
 }

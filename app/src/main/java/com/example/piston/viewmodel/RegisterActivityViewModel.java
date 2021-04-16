@@ -1,27 +1,15 @@
 package com.example.piston.viewmodel;
 
-import android.util.Log;
-
 import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.R;
-import com.example.piston.model.LoginResult;
 import com.example.piston.model.RegisterResult;
-import com.example.piston.model.Result;
-import com.example.piston.model.UserList;
 
-import java.util.Date;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivityViewModel extends ViewModel {
-
-    private MutableLiveData<RegisterFormState> registerFormState;
-    private UserList users;
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
     private final MutableLiveData<String> password = new MutableLiveData<>("");
@@ -31,9 +19,8 @@ public class RegisterActivityViewModel extends ViewModel {
     private final MutableLiveData<Boolean> registerEnabled = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> checkEnabled = new MutableLiveData<>(false);
 
-    private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>(new RegisterResult());
+    private final MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>(new RegisterResult());
 
-    @BindingAdapter("android:onTextChanged")
     public void onTextChanged() {
         getRegisterEnabled().setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
                 Objects.requireNonNull(getPassword().getValue()).length()>0);
@@ -68,6 +55,10 @@ public class RegisterActivityViewModel extends ViewModel {
 
     public LiveData<RegisterResult> getRegisterResult() {
         return registerResult;
+    }
+
+    public void register() {
+
     }
 
 /*

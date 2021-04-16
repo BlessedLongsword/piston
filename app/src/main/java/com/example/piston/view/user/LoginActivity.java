@@ -12,14 +12,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityLoginBinding;
-import com.example.piston.util.textwatchers.BaseTextWatcher;
 import com.example.piston.view.sections.MainActivity;
 import com.example.piston.viewmodel.LoginViewModelActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,24 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        SignInButton signInGoogle = findViewById(R.id.sign_in_button_google);
-        signInGoogle.setOnClickListener(this::signIn);
+        binding.signInButtonGoogle.setOnClickListener(this::signIn);
 
-        TextWatcher afterTextChangedListener = new BaseTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                binding.getViewModel().onTextChanged();
-            }
-        };
-        binding.userEditText.addTextChangedListener(afterTextChangedListener);
-        binding.passEditText.addTextChangedListener(afterTextChangedListener);
-
-        /*binding.getViewModel()
-
-        binding.getViewModel().signedIn.observe(this, isSignedIn -> {
-            if (isSignedIn)
+        binding.getViewModel().getLoginResult().observe(this, loginResult -> {
+            if (loginResult.isSignedIn())
                 goToMainActivity();
-        });*/
+        });
 
     }
 

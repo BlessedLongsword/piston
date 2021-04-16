@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
             mSavedInstanceState = savedInstanceState;
         }
 
-        registerActivityViewModel.getRegisterFormState().observe(this, registerFormState -> {
+        /*registerActivityViewModel.getRegisterFormState().observe(this, registerFormState -> {
             if (registerFormState == null){
                 return;
             }
@@ -165,10 +165,10 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 signUpBtn.setEnabled(false);
             }
-        });
+        });*/
     }
 
-    public void registerUser(View view) {
+    /*public void registerUser(View view) {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         registerActivityViewModel.register(username.getEditText().getText().toString(),
@@ -187,5 +187,5 @@ public class RegisterActivity extends AppCompatActivity {
         String a = username.getError() == null ? "null": "noNull";
         Log.d("what", "showbtn " + a);
         return !isEmpty && !error;
-    }
+    }*/
 }

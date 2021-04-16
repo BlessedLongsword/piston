@@ -99,7 +99,9 @@ public class LoginRepository {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("nowaybro", "signInWithEmailAndPassword:success");
-                        listener.setLoginResult(new LoginResult());
+                        LoginResult loginResult = new LoginResult();
+                        loginResult.setSignedIn(true);
+                        listener.setLoginResult(loginResult);
                     } else {
                         Log.w("nowaybro", "signInWithEmailAndPassword:failure",
                                 task.getException());
@@ -142,10 +144,6 @@ public class LoginRepository {
                     Log.w("nowaybro", "Error getting documents.", task.getException());
                 }
             });*/
-    }
-
-    public void logout() {
-        mAuth.signOut();
     }
 
 
