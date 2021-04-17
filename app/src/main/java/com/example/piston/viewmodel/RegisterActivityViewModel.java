@@ -4,38 +4,37 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.piston.model.RegisterRepository;
 import com.example.piston.model.RegisterResult;
 
 import java.util.Objects;
 
-public class RegisterActivityViewModel extends ViewModel {
+public class RegisterActivityViewModel extends ViewModel implements RegisterRepository.IRegister {
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
+    private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<String> password = new MutableLiveData<>("");
     private final MutableLiveData<String> password2 = new MutableLiveData<>("");
     private final MutableLiveData<String> birthday = new MutableLiveData<>("");
-    private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> registerEnabled = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> checkEnabled = new MutableLiveData<>(false);
 
     private final MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>(new RegisterResult());
 
-    public void onTextChanged() {
-        getRegisterEnabled().setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
-                Objects.requireNonNull(getPassword().getValue()).length()>0);
-    }
-
-    public MutableLiveData<Boolean> getRegisterEnabled() {
-        return registerEnabled;
-    }
+    private final RegisterRepository registerRepository = new RegisterRepository(this);
 
     public MutableLiveData<String> getUsername() {
         return username;
     }
 
+    public MutableLiveData<String> getEmail() {
+        return email;
+    }
+
     public MutableLiveData<String> getPassword() {
         return password;
     }
+
     public MutableLiveData<String> getPassword2() {
         return password2;
     }
@@ -44,12 +43,12 @@ public class RegisterActivityViewModel extends ViewModel {
         return birthday;
     }
 
-    public MutableLiveData<String> getEmail() {
-        return email;
+    public LiveData<Boolean> getCheckEnabled() {
+        return checkEnabled;
     }
 
-    public MutableLiveData<Boolean> getCheckEnabled() {
-        return checkEnabled;
+    public LiveData<Boolean> getRegisterEnabled() {
+        return registerEnabled;
     }
 
     public LiveData<RegisterResult> getRegisterResult() {
@@ -60,14 +59,45 @@ public class RegisterActivityViewModel extends ViewModel {
 
     }
 
-/*
-    public LiveData<RegisterResult> getRegisterResult() {
-        return registerResult;
+    public void usernameUpdate() {
+        onTextChanged();
+    }
+    public void passwordUpdate() {
+        onTextChanged();
+    }
+    public void password2Update() {
+        onTextChanged();
+    }
+    public void birthdayUpdate() {
+        onTextChanged();
+    }
+    public void emailUpdate() {
+        onTextChanged();
     }
 
-    public LiveData<RegisterFormState> getRegisterFormState() {
-        return registerFormState;
+    public void onTextChanged() {
+        registerEnabled.setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
+                Objects.requireNonNull(getPassword().getValue()).length()>0);
     }
+
+    @Override
+    public void setUsernameErrorStatus(RegisterResult.UsernameError usernameError) {
+        registerResult.getValue().setUsernameError(usernameError);
+        registerResult.notify();
+    }
+
+    @Override
+    public void setEmailErrorStatus(RegisterResult.EmailError emailError) {
+        registerResult.getValue().setEmailError(emailError);
+        registerResult.notify();
+    }
+
+    @Override
+    public void setRegisterResult(RegisterResult registerResult) {
+        this.registerResult.setValue(registerResult);
+    }
+
+/*
 
     public void register(String username, String pwd1, String pwd2, String email, Date birthDate) {
         Result<String> result = users.register(username, pwd1, pwd2, email, birthDate);

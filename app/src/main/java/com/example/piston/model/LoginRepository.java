@@ -41,20 +41,20 @@ public class LoginRepository {
     private void loginUsername(String username, String password) {
         DocumentReference docRef = db.collection("emails").document(username);
         docRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (Objects.requireNonNull(document).exists()) {
-                    String email = Objects.requireNonNull(document.get("email")).toString();
-                    loginEmail(email, password);
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (Objects.requireNonNull(document).exists()) {
+                        String email = Objects.requireNonNull(document.get("email")).toString();
+                        loginEmail(email, password);
+                    }
+                    else {
+                        LoginResult loginResult = new LoginResult();
+                        loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
+                        listener.setLoginResult(loginResult);
+                    }
+                } else {
+                    Log.d("nowaybro", "get failed with ", task.getException());
                 }
-                else {
-                    LoginResult loginResult = new LoginResult();
-                    loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
-                    listener.setLoginResult(loginResult);
-                }
-            } else {
-                Log.d("nowaybro", "get failed with ", task.getException());
-            }
         });
     }
 

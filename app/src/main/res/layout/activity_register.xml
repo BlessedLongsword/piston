@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.user.RegisterActivity">
 
     <data>
         <variable
@@ -10,11 +11,9 @@
     </data>
 
     <ScrollView
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        tools:context=".view.user.RegisterActivity">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,18 +50,15 @@
                 app:endIconMode="custom"
                 app:errorEnabled="true"
                 android:regUsernameError='@{viewModel.registerResult.usernameError}'>
-
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_username_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="@integer/username_max_length"
                     android:inputType="text"
-                    android:text="@={viewModel.username}">
-
-
-                </com.google.android.material.textfield.TextInputEditText>
-
+                    android:maxLength="@integer/username_max_length"
+                    android:text="@={viewModel.username}"
+                    android:afterTextChanged="@{() -> viewModel.usernameUpdate()"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,12 +71,14 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 android:regEmailError='@{viewModel.registerResult.emailError}'>
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_email_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:text="@={viewModel.email}"/>
+                    android:text="@={viewModel.email}"
+                    android:afterTextChanged="@{() -> viewModel.emailUpdate()"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -94,14 +92,14 @@
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
                 android:regPasswordError='@{viewModel.registerResult.passwordError}'>
-
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password}"/>
-
+                    android:text="@={viewModel.password}"
+                    android:afterTextChanged="@{() -> viewModel.passwordUpdate()"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -115,13 +113,14 @@
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
                 android:regPasswordError2='@{viewModel.registerResult.passwordError2}'>
-
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd2_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password2}"/>
+                    android:text="@={viewModel.password2}"
+                    android:afterTextChanged="@{() -> viewModel.password2Update()"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -134,13 +133,14 @@
                 app:placeholderText="@string/reg_date_format"
                 app:errorEnabled="true"
                 android:regBirthdayError='@{viewModel.registerResult.birthdayError}'>
-
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_bday_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="@integer/date_max_length"
-                    android:text="@={viewModel.birthday}"/>
+                    android:text="@={viewModel.birthday}"
+                    android:afterTextChanged="@{() -> viewModel.birthdayUpdate()"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
