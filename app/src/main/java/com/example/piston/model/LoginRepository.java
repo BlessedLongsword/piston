@@ -5,16 +5,22 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class LoginRepository {
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final ILogin listener;
 
     public interface ILogin {
@@ -25,11 +31,61 @@ public class LoginRepository {
         this.listener = listener;
     }
 
+    public void login(String username, String password) {
+        if (!username.contains("@"))
+            loginUsername(username, password);
+        else
+            loginEmail(username, password);
+    }
+
+    private void loginUsername(String username, String password) {
+        DocumentReference docRef = db.collection("emails").document(username);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (Objects.requireNonNull(document).exists()) {
+                    String email = Objects.requireNonNull(document.get("email")).toString();
+                    loginEmail(email, password);
+                }
+                else {
+                    LoginResult loginResult = new LoginResult();
+                    loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
+                    listener.setLoginResult(loginResult);
+                }
+            } else {
+                Log.d("nowaybro", "get failed with ", task.getException());
+            }
+        });
+    }
+
+    private void loginEmail(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        LoginResult loginResult = new LoginResult();
+                        loginResult.setSignedIn(true);
+                        listener.setLoginResult(loginResult);
+                    } else {
+                        LoginResult loginResult = new LoginResult();
+                        try {
+                            throw Objects.requireNonNull(task.getException());
+                        } catch (FirebaseAuthInvalidUserException exception) {
+                            loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
+                        } catch (FirebaseAuthInvalidCredentialsException exception) {
+                        loginResult.setPasswordError(LoginResult.PasswordError.INCORRECT);
+                        } catch (Exception exception) {
+                            Log.d("nowaybro", "Unexpected exception: " + exception.getMessage());
+                        }
+                        listener.setLoginResult(loginResult);
+                    }
+                });
+    }
+
     public void signInWithGoogle(Task<GoogleSignInAccount> task) {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
-            assert account != null;
-            firebaseAuthWithGoogle(account.getIdToken());
+            if (account != null)
+                firebaseAuthWithGoogle(account.getIdToken());
         } catch (ApiException e) {
             Log.w("nowaybro", "Google sign in failed", e);
         }
@@ -40,56 +96,19 @@ public class LoginRepository {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        //boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
-                        listener.setLoginResult(new LoginResult(true));
+                        LoginResult loginResult = new LoginResult();
+                        boolean isNewUser = Objects.requireNonNull(Objects.requireNonNull(
+                                task.getResult()).getAdditionalUserInfo()).isNewUser();
+                        if (isNewUser)
+                            loginResult.setNewUser(true);
+                        else
+                            loginResult.setSignedIn(true);
+                        listener.setLoginResult(loginResult);
                     } else {
                         Log.w("nowaybro", "signInWithCredential:failure", task.getException());
                     }
                 });
     }
-
-    public void login(String username, String password) {
-        if (!username.contains("@"))
-            getEmail(username, password);
-        else
-            loginEmail(username, password);
-    }
-
-    private void loginEmail(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        listener.setLoginResult(new LoginResult(true));
-                    } else {
-                        Log.w("nowaybro", "signInWithEmailAndPassword:failure",
-                                task.getException());
-                    }
-                });
-    }
-
-    private String getEmail(String username, String password) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("emails").document(username);
-        docRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    Log.d("nowaybro", "DocumentSnapshot data: " + document.getData());
-                    String email = document.get("email").toString();
-                    loginEmail(email, password);
-                    Log.d("nowaybro", "yay: " + email);
-                    //return email;
-                } else {
-                    LoginResult loginResult = new LoginResult();
-                    loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
-                    listener.setLoginResult(loginResult);
-                    Log.d("nowaybro", "No such document");
-                }
-            } else {
-                Log.d("nowaybro", "get failed with ", task.getException());
-            }
-        });
-        return null;
 
         /*db.collection("emails")
             .get()
@@ -102,9 +121,6 @@ public class LoginRepository {
                     Log.w("nowaybro", "Error getting documents.", task.getException());
                 }
             });*/
-    }
-
-
 
     /*Acces firestore collection users
     FirebaseFirestore db = FirebaseFirestore.getInstance();

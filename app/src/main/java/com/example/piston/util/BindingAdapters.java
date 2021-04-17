@@ -15,9 +15,6 @@ public class BindingAdapters {
             case NONE:
                 view.setError(null);
                 break;
-            case EMPTY:
-                view.setError(view.getContext().getString(R.string.username_req));
-                break;
             case INVALID:
                 view.setError(view.getContext().getString(R.string.wrong_user));
                 break;

@@ -1,6 +1,5 @@
 package com.example.piston.viewmodel;
 
-import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

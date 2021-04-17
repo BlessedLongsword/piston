@@ -12,7 +12,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Objects;
 
-public class LoginViewModelActivity extends ViewModel implements LoginRepository.ILogin {
+public class LoginActivityViewModel extends ViewModel implements LoginRepository.ILogin {
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
     private final MutableLiveData<String> password = new MutableLiveData<>("");
@@ -22,12 +22,13 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
 
     private final LoginRepository loginRepository = new LoginRepository(this);
 
-    public void onTextChanged() {
-        getSignInEnabled().setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
+    public void afterTextChanged() {
+        signInEnabled.setValue(Objects.requireNonNull(getUsername().getValue()).length()>0 &&
                 Objects.requireNonNull(getPassword().getValue()).length()>0);
     }
 
     public void login() {
+        loginResult.setValue(new LoginResult());
         loginRepository.login(Objects.requireNonNull(getUsername().getValue()),
                 Objects.requireNonNull(getPassword().getValue()));
     }
@@ -41,7 +42,6 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
         this.loginResult.setValue(loginResult);
     }
 
-
     public MutableLiveData<String> getUsername() {
         return username;
     }
@@ -50,12 +50,8 @@ public class LoginViewModelActivity extends ViewModel implements LoginRepository
         return password;
     }
 
-    public MutableLiveData<Boolean> getSignInEnabled() {
+    public LiveData<Boolean> getSignInEnabled() {
         return signInEnabled;
-    }
-
-    public LoginResult.PasswordError getPasswordError() {
-        return Objects.requireNonNull(getLoginResult().getValue()).getPasswordError();
     }
 
     public LiveData<LoginResult> getLoginResult() {

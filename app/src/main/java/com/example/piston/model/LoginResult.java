@@ -5,13 +5,7 @@ import androidx.databinding.Bindable;
 
 public class LoginResult extends BaseObservable {
 
-    public LoginResult(boolean signedIn) {
-        this.setSignedIn(signedIn);
-    }
-
-    public LoginResult() { }
-
-    public enum UsernameError { NONE, EMPTY, INVALID }
+    public enum UsernameError { NONE, INVALID }
     public enum PasswordError { NONE, INCORRECT }
 
     private UsernameError usernameError = UsernameError.NONE;
@@ -38,6 +32,7 @@ public class LoginResult extends BaseObservable {
         this.passwordError = passwordError;
     }
 
+    @Bindable
     public boolean isSignedIn() {
         return signedIn;
     }
@@ -46,6 +41,7 @@ public class LoginResult extends BaseObservable {
         this.signedIn = signedIn;
     }
 
+    @Bindable
     public boolean isNewUser() {
         return newUser;
     }

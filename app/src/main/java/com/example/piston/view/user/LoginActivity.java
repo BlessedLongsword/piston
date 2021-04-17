@@ -2,6 +2,7 @@ package com.example.piston.view.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +10,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.view.sections.MainActivity;
-import com.example.piston.viewmodel.LoginViewModelActivity;
+import com.example.piston.viewmodel.LoginActivityViewModel;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,15 +20,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModelActivity loginActivityViewModel;
+    private LoginActivityViewModel loginActivityViewModel;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loginActivityViewModel = new ViewModelProvider(this).get(LoginViewModelActivity.class);
-        com.example.piston.databinding.ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setViewModel(loginActivityViewModel);
         binding.setLifecycleOwner(this);
 
@@ -36,11 +38,13 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        binding.signInButtonGoogle.setOnClickListener(this::signIn);
+        binding.signInButtonGoogle.setOnClickListener(view -> signIn());
 
-        binding.getViewModel().getLoginResult().observe(this, loginResult -> {
+        loginActivityViewModel.getLoginResult().observe(this, loginResult -> {
             if (loginResult.isSignedIn())
                 goToMainActivity();
+            if (loginResult.isNewUser())
+                registerGoogleUser();
         });
     }
 
@@ -50,9 +54,13 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void registerGoogleUser() {
+        Log.d("nowaybro", "Ask for username"); //Falta demanar username (popup o activity)
+    }
+
     private static final int RC_SIGN_IN = 9001;
 
-    public void signIn(View view) {
+    public void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -60,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             loginActivityViewModel.signInWithGoogle(GoogleSignIn.getSignedInAccountFromIntent(data));
         }
