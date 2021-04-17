@@ -112,7 +112,7 @@
                 app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
-                android:regPasswordError2='@{viewModel.registerResult.passwordError2}'>
+                android:regPasswordError2="@{viewModel.registerResult.confirmPasswordError}">
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd2_editText"

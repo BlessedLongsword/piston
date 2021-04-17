@@ -1,7 +1,5 @@
 package com.example.piston.model;
 
-import android.media.Image;
-
 import androidx.annotation.Nullable;
 
 import java.util.Date;
@@ -13,7 +11,7 @@ public class User {
     @Nullable
     private String surname;
     @Nullable
-    private Image icon;
+    private String profilePictureLink;
     @Nullable
     private Post featuredPost;
     @Nullable
@@ -24,22 +22,14 @@ public class User {
     private String pwd;
     private Date birthDate;
 
+    public User() {} //Empty constructor for db
 
-    public User (String username, String email, Date birthDate, String pwd){
+    public User (String username, String email, String pwd, Date birthDate){
         this.username = username;
         this.email = email;
         this.birthDate = birthDate;
         this.pwd = pwd;
     }
-
-    public enum UsernameError {
-        NONE, EMPTY, INVALID
-    }
-
-    public enum PasswordError {
-        NONE, INCORRECT
-    }
-
 
     public String getUsername() {
         return username;
@@ -93,12 +83,12 @@ public class User {
     }
 
     @Nullable
-    public Image getIcon() {
-        return icon;
+    public String getProfilePictureLink() {
+        return profilePictureLink;
     }
 
-    public void setIcon(Image icon) {
-        this.icon = icon;
+    public void setProfilePictureLink(String profilePictureLink) {
+        this.profilePictureLink = profilePictureLink;
     }
 
     public Date getBirthDate() {

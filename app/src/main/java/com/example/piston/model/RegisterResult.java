@@ -7,14 +7,14 @@ public class RegisterResult extends BaseObservable {
 
     public enum UsernameError { NONE, EMPTY, EXISTS }
     public enum PasswordError { NONE, EMPTY, INVALID }
-    public enum PasswordError2 { NONE, INVALID }
+    public enum ConfirmPasswordError { NONE, INVALID }
     public enum EmailError { NONE, EMPTY, INVALID, EXISTS }
     public enum BirthdayError { NONE, INVALID }
     public enum CheckError { NONE, EMPTY }
 
     private UsernameError usernameError = UsernameError.NONE;
     private PasswordError passwordError = PasswordError.NONE;
-    private PasswordError2 passwordError2 = PasswordError2.NONE;
+    private ConfirmPasswordError confirmPasswordError = ConfirmPasswordError.NONE;
     private EmailError emailError = EmailError.NONE;
     private BirthdayError birthdayError = BirthdayError.NONE;
     private CheckError checkError = CheckError.NONE;
@@ -40,11 +40,11 @@ public class RegisterResult extends BaseObservable {
     }
 
     @Bindable
-    public PasswordError2 getPasswordError2() {
-        return passwordError2; }
+    public ConfirmPasswordError getConfirmPasswordError() {
+        return confirmPasswordError; }
 
-    public void setPasswordError2(PasswordError2 passwordError2) {
-        this.passwordError2 = passwordError2;
+    public void setConfirmPasswordError(ConfirmPasswordError confirmPasswordError) {
+        this.confirmPasswordError = confirmPasswordError;
     }
 
     @Bindable

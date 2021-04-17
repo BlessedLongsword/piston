@@ -1,5 +1,7 @@
 package com.example.piston.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -7,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.piston.model.RegisterRepository;
 import com.example.piston.model.RegisterResult;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Objects;
 
 public class RegisterActivityViewModel extends ViewModel implements RegisterRepository.IRegister {
@@ -56,7 +60,12 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
     }
 
     public void register() {
-
+        try {
+            registerRepository.register(username.getValue(), email.getValue(),
+                    password.getValue(), birthday.getValue());
+        } catch (Exception e) {
+            Log.w("DBWriteTAG", "Something went wrong went converting Date", e);
+        }
     }
 
     public void usernameUpdate() {
@@ -93,9 +102,24 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
     }
 
     @Override
-    public void setRegisterResult(RegisterResult registerResult) {
-        this.registerResult.setValue(registerResult);
+    public void setPasswordStatus(RegisterResult.PasswordError passwordError) {
+        registerResult.getValue().setPasswordError(passwordError);
+        registerResult.notify();
     }
+
+    @Override
+    public void setConfirmPasswordStatus(RegisterResult.ConfirmPasswordError confirmPasswordError) {
+        registerResult.getValue().setConfirmPasswordError(confirmPasswordError);
+        registerResult.notify();
+    }
+
+    @Override
+    public void setBirthDateStatus(RegisterResult.BirthdayError birthdayError) {
+        registerResult.getValue().setBirthdayError(birthdayError);
+        registerResult.notify();
+    }
+
+
 
 /*
 

@@ -64,7 +64,7 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("android:regPasswordError2")
-    public static void setRegPasswordErrorMessage2 (TextInputLayout view, RegisterResult.PasswordError2 error) {
+    public static void setRegPasswordErrorMessage2 (TextInputLayout view, RegisterResult.ConfirmPasswordError error) {
         switch (error) {
             case NONE:
                 view.setError(null);
