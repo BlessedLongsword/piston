@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardPreventCornerOverlap="false"
-    tools:context=".adapter.FolderAdapter">
+    tools:context=".adapters.FolderAdapter">
 
     <TextView
         android:id="@+id/folder_item_title"
