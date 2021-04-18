@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.user.RegisterActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -13,11 +12,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:context=".view.user.RegisterActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:weightSum="100">
@@ -25,29 +26,26 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_vertical_margin"
-                android:layout_weight="30" />
+                android:layout_weight="40" />
 
             <TextView
                 android:id="@+id/registerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:text="@string/reg_title"
-                android:textSize="@dimen/title" />
+                android:textSize="@dimen/huge" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_vertical_margin"
-                android:layout_weight="30" />
+                android:layout_weight="20" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/userText"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:hint="@string/username"
-                app:endIconMode="custom"
                 app:errorEnabled="true"
                 android:regUsernameError='@{viewModel.registerResult.usernameError}'>
                 <!--suppress AndroidUnknownAttribute -->
@@ -58,7 +56,7 @@
                     android:inputType="text"
                     android:maxLength="@integer/username_max_length"
                     android:text="@={viewModel.username}"
-                    android:afterTextChanged="@{() -> viewModel.usernameUpdate()"/>
+                    android:afterTextChanged="@{() -> viewModel.usernameUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -66,9 +64,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:hint="@string/email"
-                app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 android:regEmailError='@{viewModel.registerResult.emailError}'>
                 <!--suppress AndroidUnknownAttribute -->
@@ -78,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
-                    android:afterTextChanged="@{() -> viewModel.emailUpdate()"/>
+                    android:afterTextChanged="@{() -> viewModel.emailUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -86,9 +82,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:hint="@string/password"
-                app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
                 android:regPasswordError='@{viewModel.registerResult.passwordError}'>
@@ -99,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
-                    android:afterTextChanged="@{() -> viewModel.passwordUpdate()"/>
+                    android:afterTextChanged="@{() -> viewModel.passwordUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,9 +101,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:hint="@string/confirm_password"
-                app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
                 android:regPasswordError2="@{viewModel.registerResult.confirmPasswordError}">
@@ -120,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password2}"
-                    android:afterTextChanged="@{() -> viewModel.password2Update()"/>
+                    android:afterTextChanged="@{() -> viewModel.password2Update()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -128,7 +120,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:hint="@string/birth_date"
                 app:placeholderText="@string/reg_date_format"
                 app:errorEnabled="true"
@@ -140,14 +131,13 @@
                     android:layout_height="wrap_content"
                     android:maxLength="@integer/date_max_length"
                     android:text="@={viewModel.birthday}"
-                    android:afterTextChanged="@{() -> viewModel.birthdayUpdate()"/>
+                    android:afterTextChanged="@{() -> viewModel.birthdayUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/tosCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:text="@string/terms_text"
                 android:checked="@{viewModel.checkEnabled}"/>
 
@@ -160,7 +150,6 @@
                 android:id="@+id/registerBtn"
                 android:layout_width="@dimen/medium_wide_btn"
                 android:layout_height="@dimen/medium_high_btn"
-                android:layout_gravity="center_horizontal"
                 android:enabled="@{viewModel.registerEnabled}"
                 android:onClick="@{() -> viewModel.register()}"
                 android:text="@string/reg_btn" />

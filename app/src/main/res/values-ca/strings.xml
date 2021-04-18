@@ -42,7 +42,7 @@
     <string name="welcome">Benvingut</string>
 
     <!-- Register strings -->
-    <string name="reg_title">REGISTRAR-SE</string>
+    <string name="reg_title">Registrar-se</string>
     <string name="confirm_password">Confirmar contrasenya</string>
     <string name="reg_date_format">dd/mm/aaaa</string>
     <string name="terms_text">He llegit i acceptat els termes de privacitat</string>
@@ -125,5 +125,6 @@
     <string name="reply">respondre</string>
     <string name="post_image">Imatge de la Publicació</string>
     <string name="profile_image">Imatge del Perfil</string>
+    <string name="logout">Tanca sessió</string>
 
 </resources>

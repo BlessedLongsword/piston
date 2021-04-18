@@ -42,7 +42,7 @@
     <string name="welcome">Bienvenido</string>
 
     <!-- Register strings -->
-    <string name="reg_title">REGISTRARSE</string>
+    <string name="reg_title">Registrarse</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="reg_date_format">dd/mm/aaaa</string>
     <string name="terms_text">He leído y aceptado los términos de privacidad</string>
@@ -125,5 +125,6 @@
     <string name="reply">responder</string>
     <string name="post_image">Imagen de la Publicación</string>
     <string name="profile_image">Imagen de Perfil</string>
+    <string name="logout">Cerrar sesión</string>
 
 </resources>

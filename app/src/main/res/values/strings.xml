@@ -42,7 +42,7 @@
     <string name="welcome">Welcome</string>
 
     <!-- Register strings -->
-    <string name="reg_title">REGISTER</string>
+    <string name="reg_title">Register</string>
     <string name="confirm_password">Confirm password</string>
     <string name="reg_date_format">dd/mm/yyyy</string>
     <string name="terms_text">I have read and accept the privacy policy</string>

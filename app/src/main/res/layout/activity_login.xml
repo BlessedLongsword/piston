@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.user.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,126 +9,133 @@
             type="com.example.piston.viewmodel.LoginActivityViewModel" />
     </data>
 
-    <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/activity_horizontal_margin"
-        android:weightSum="100">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="35" />
-
-        <TextView
-            android:id="@+id/label_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/sign_in"
-            android:textSize="@dimen/huge" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="15" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/user_textField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint="@string/user_hint"
-            app:errorEnabled="true"
-            android:usernameError="@{viewModel.loginResult.usernameError}">
-            <!--suppress AndroidUnknownAttribute -->
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:afterTextChanged="@{() -> viewModel.afterTextChanged()}"
-                android:text="@={viewModel.username}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pass_textField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint="@string/password"
-            app:errorEnabled="true"
-            android:passwordError="@{viewModel.loginResult.passwordError}" >
-            <!--suppress AndroidUnknownAttribute -->
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pass_editText"
-                android:inputType="textPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@={viewModel.password}"
-                android:afterTextChanged="@{() -> viewModel.afterTextChanged()}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="5" />
-
-        <Button
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:enabled="@{viewModel.signInEnabled}"
-            android:onClick="@{() -> viewModel.login()}"
-            android:text="@string/sign_in" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="20" />
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button_google"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="20" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".view.user.LoginActivity">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="35" />
 
             <TextView
-                android:id="@+id/sign_up_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_up_msg" />
+                android:text="@string/sign_in"
+                android:textSize="@dimen/huge" />
 
-            <TextView
-                android:id="@+id/sign_up_button"
-                android:layout_width="wrap_content"
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="15" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/micro_separator"
-                android:layout_marginLeft="@dimen/micro_separator"
-                android:onClick="register"
-                android:text="@string/sign_up_button"
-                android:textColor="@color/dark_blue" />
+                android:hint="@string/user_hint"
+                app:errorEnabled="true"
+                android:usernameError="@{viewModel.loginResult.usernameError}">
+                <!--suppress AndroidUnknownAttribute -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.username}"
+                    android:afterTextChanged="@{() -> viewModel.afterTextChanged()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                app:errorEnabled="true"
+                android:passwordError="@{viewModel.loginResult.passwordError}" >
+                <!--suppress AndroidUnknownAttribute -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
+                    android:afterTextChanged="@{() -> viewModel.afterTextChanged()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/sign_in_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in"
+                    android:enabled="@{viewModel.isSignInEnabled}"
+                    android:onClick="@{() -> viewModel.login()}"/>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="20" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="20" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_msg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/micro_separator"
+                    android:layout_marginLeft="@dimen/micro_separator"
+                    android:onClick="register"
+                    android:text="@string/sign_up_button"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/dark_blue" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="5" />
+
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="5" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </layout>

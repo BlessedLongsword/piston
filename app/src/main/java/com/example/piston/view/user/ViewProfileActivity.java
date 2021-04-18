@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -56,7 +56,9 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     public void popUpWindow(View anchorView, EditText edit) {
 
-        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
+        /*
+
+        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, findViewById(android.R.id.content));
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -113,10 +115,10 @@ public class ViewProfileActivity extends AppCompatActivity {
         popupWindow.setOnDismissListener(() -> {
             lp.alpha=1f;
             getWindow().setAttributes(lp);
-        });
+        });*/
     }
 
-    public void cancel (View v) {
+    public void cancel(MenuItem item) {
         /*save.setEnabled(false);
         save.setVisibility(View.INVISIBLE);
         edit.setEnabled(true);
@@ -137,7 +139,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         bday.getEditText().clearFocus();
     }
 
-    public void edit (View v) {
+    public void edit(MenuItem item) {
         /*save.setEnabled(true);
         save.setVisibility(View.VISIBLE);
         edit.setEnabled(false);
@@ -182,20 +184,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         fullName.setEndIconOnClickListener(v -> popUpWindow(v, fullName.getEditText()));
         phoneNumber.setEndIconOnClickListener(v -> popUpWindow(v, phoneNumber.getEditText()));
         bday.setEndIconOnClickListener(v -> popUpWindow(v, bday.getEditText()));
-
-        /*try {
-            String userFile = "userFile";
-            FileInputStream fin = openFileInput(userFile);
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            User user = (User) ois.readObject();
-            ois.close();
-            fin.close();
-            username.getEditText().setText(user.getUsername());
-            email.getEditText().setText(user.getEmail());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
 }

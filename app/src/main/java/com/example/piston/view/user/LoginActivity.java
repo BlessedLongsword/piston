@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
@@ -45,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
                 goToMainActivity();
             if (loginResult.isNewUser())
                 registerGoogleUser();
+        });
+
+        loginActivityViewModel.isLoading().observe(this, isLoading -> {
+            binding.progressBar.setVisibility((isLoading)? View.VISIBLE : View.GONE);
+            binding.signInButton.setVisibility((!isLoading)? View.VISIBLE : View.GONE);
         });
     }
 
