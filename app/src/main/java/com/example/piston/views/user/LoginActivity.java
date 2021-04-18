@@ -46,11 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             if (loginResult.isNewUser())
                 registerGoogleUser();
         });
-
-        loginActivityViewModel.isLoading().observe(this, isLoading -> {
-            binding.progressBar.setVisibility((isLoading)? View.VISIBLE : View.GONE);
-            binding.signInButton.setVisibility((!isLoading)? View.VISIBLE : View.GONE);
-        });
     }
 
     private void goToMainActivity() {

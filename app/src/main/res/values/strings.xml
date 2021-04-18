@@ -107,11 +107,14 @@
     <string name="invalid_password">Password must be at least 6 characters</string>
     <string name="invalid_password2">Passwords do not match</string>
     <string name="invalid_date">Enter a valid date: dd/mm/yyyy</string>
-    <string name="email_taken">This email already is taken</string>
+    <string name="email_taken">This email is already taken</string>
     <string name="username_req">Username required</string>
-    <string name="email_req">Not a valid Email</string>
+    <string name="email_req">Email required</string>
+    <string name="email_invalid">Not a valid Email</string>
     <string name="pwd_req">Password required</string>
     <string name="verify_reg_field">Please confirm the fields and try again</string>
+    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="unexpected_error">Unexpected Error</string>
 
     <!-- Settings Strings -->
     <string name="settings_activity_title">SETTINGS</string>

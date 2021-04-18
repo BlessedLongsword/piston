@@ -109,9 +109,12 @@
     <string name="invalid_date">Introdueixi una data vàlida: dd/mm/aaaa</string>
     <string name="email_taken">Ja existeix un usuari amb aquesta adreça de correu electrònic</string>
     <string name="username_req">Cal introduir un nom d\'usuari</string>
-    <string name="email_req">L\'adreça de correu electrònic no es vàlida</string>
+    <string name="email_req">És necessària una adreça de correu electrònic</string>
+    <string name="email_invalid">L\'adreça de correu electrònic no es vàlida</string>
     <string name="pwd_req">Cal introduir una contrasenya</string>
+    <string name="passwords_dont_match">Les contrasenyes no coincideixen</string>
     <string name="verify_reg_field">Confirmi tots els camps i provi una altra vegada</string>
+    <string name="unexpected_error">Error Inesperat</string>
 
     <!-- Settings Strings -->
     <string name="settings_activity_title">CONFIGURACIÓ</string>

@@ -109,9 +109,12 @@
     <string name="invalid_date">Introduzca una fecha válida: dd/mm/aaaa</string>
     <string name="email_taken">Ya existe un usuario con esa dirección de correo electrónico</string>
     <string name="username_req">Es necesario introducir un nombre de usuario</string>
-    <string name="email_req">La dirección de correo electrónico no es válida</string>
+    <string name="email_req">Es necesaria una dirección de correo electrónico</string>
+    <string name="email_invalid">La dirección de correo electrónico no es válida</string>
     <string name="pwd_req">Es necesaria una contraseña</string>
+    <string name="passwords_dont_match">Las contraseñas no coinciden</string>
     <string name="verify_reg_field">Confirme los campos e inténtelo de nuevo</string>
+    <string name="unexpected_error">Error Inesperado</string>
 
     <!-- Settings Strings -->
     <string name="settings_activity_title">AJUSTES</string>

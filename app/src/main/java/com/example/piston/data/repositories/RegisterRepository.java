@@ -6,12 +6,17 @@ import android.util.Patterns;
 import com.example.piston.data.RegisterResult;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +31,8 @@ public class RegisterRepository {
         void setPasswordStatus(RegisterResult.PasswordError passwordError);
         void setConfirmPasswordStatus(RegisterResult.ConfirmPasswordError confirmPasswordError);
         void setBirthDateStatus(RegisterResult.BirthdayError birthdayError);
+        void setLoadingFinished();
+        void setRegisterFinished();
     }
 
     public RegisterRepository(IRegister listener) {
@@ -39,20 +46,38 @@ public class RegisterRepository {
         User user = new User(username, email, password, userBirthDate);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
-            } else {
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(regTask -> {
-                            if (regTask.isSuccessful()) {
-                                db.collection("users")
-                                        .add(user)
-                                        .addOnSuccessListener(documentReference -> Log.d("DBWriteTAG", "DocumentSnapshot " +
-                                                "written with ID: " + documentReference.getId()))
-                                        .addOnFailureListener(e -> Log.w("DBWriteTAG", "Error adding document", e));
-                            } else {
-                                listener.setEmailErrorStatus(RegisterResult.EmailError.EXISTS);
-                            }
-                        });
+                DocumentSnapshot ds = task.getResult();
+                if (ds.exists())
+                    listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
+                else {
+                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(regTask -> {
+                                if (regTask.isSuccessful()) {
+                                    db.collection("users")
+                                            .add(user)
+                                            .addOnSuccessListener(documentReference -> Log.d("DBWriteTAG", "DocumentSnapshot " +
+                                                    "written with ID: " + documentReference.getId()))
+                                            .addOnFailureListener(e -> Log.w("DBWriteTAG", "Error adding document", e));
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put("email", email);
+                                    db.collection("emails").document(username).set(data);
+                                    listener.setLoadingFinished();
+                                    listener.setRegisterFinished();
+                                } else {
+                                    try {
+                                        throw regTask.getException();
+                                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                                        listener.setEmailErrorStatus(RegisterResult.EmailError.INVALID);
+                                    } catch (FirebaseAuthUserCollisionException e) {
+                                        listener.setEmailErrorStatus(RegisterResult.EmailError.EXISTS);
+                                    } catch (Exception e) {
+                                        listener.setEmailErrorStatus(RegisterResult.EmailError.UNEXPECTED);
+                                    } finally {
+                                        listener.setLoadingFinished();
+                                    }
+                                }
+                            });
+                }
             }
         });
     }
@@ -63,10 +88,12 @@ public class RegisterRepository {
         } else {
             DocumentReference docRef = db.collection("emails").document(username);
             docRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
-                } else {
-                    listener.setUsernameErrorStatus(RegisterResult.UsernameError.NONE);
+                if (task.isComplete()) {
+                    DocumentSnapshot ds = task.getResult();
+                    if (ds.exists())
+                        listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
+                    else
+                        listener.setUsernameErrorStatus(RegisterResult.UsernameError.NONE);
                 }
             });
         }
@@ -75,16 +102,18 @@ public class RegisterRepository {
     public void checkEmail(String email) {
         if (email.trim().equals(""))
             listener.setEmailErrorStatus(RegisterResult.EmailError.EMPTY);
-        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             listener.setEmailErrorStatus(RegisterResult.EmailError.INVALID);
+        }
         else {
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     if (task.getResult().getSignInMethods().isEmpty())
-                        listener.setEmailErrorStatus(RegisterResult.EmailError.EXISTS);
-                    else
                         listener.setEmailErrorStatus(RegisterResult.EmailError.NONE);
+                    else {
+                        listener.setEmailErrorStatus(RegisterResult.EmailError.EXISTS);
+                    }
                 }
             });
         }

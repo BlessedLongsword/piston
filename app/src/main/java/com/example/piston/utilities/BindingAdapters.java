@@ -1,5 +1,8 @@
 package com.example.piston.utilities;
 
+import android.view.View;
+import android.widget.EditText;
+
 import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
@@ -64,13 +67,13 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("android:regPasswordError2")
-    public static void setRegPasswordErrorMessage2 (TextInputLayout view, RegisterResult.ConfirmPasswordError error) {
+    public static void setRegConfirmPasswordErrorMessage(TextInputLayout view, RegisterResult.ConfirmPasswordError error) {
         switch (error) {
             case NONE:
                 view.setError(null);
                 break;
             case INVALID:
-                view.setError(view.getContext().getString(R.string.invalid_password));
+                view.setError(view.getContext().getString(R.string.passwords_dont_match));
                 break;
         }
     }
@@ -85,7 +88,13 @@ public class BindingAdapters {
                 view.setError(view.getContext().getString(R.string.email_req));
                 break;
             case INVALID:
+                view.setError(view.getContext().getString(R.string.email_invalid));
+                break;
+            case EXISTS:
                 view.setError(view.getContext().getString(R.string.email_taken));
+                break;
+            case UNEXPECTED:
+                view.setError(view.getContext().getString(R.string.unexpected_error));
                 break;
         }
     }
@@ -101,4 +110,18 @@ public class BindingAdapters {
                 break;
         }
     }
+
+    @BindingAdapter("android:onFocusLost")
+    public static void onFocusChange(EditText text, Runnable runnable) {
+        text.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus)
+                runnable.run();
+        });
+    }
+
+    @BindingAdapter("android:setVisible")
+    public static void setVisible(View view, boolean visible) {
+        view.setVisibility((visible)? View.VISIBLE : View.GONE);
+    }
+
 }

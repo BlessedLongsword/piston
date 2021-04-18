@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 app:errorEnabled="true"
-                android:regUsernameError='@{viewModel.registerResult.usernameError}'>
+                android:regUsernameError='@{viewModel.usernameError}'>
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_username_editText"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 app:errorEnabled="true"
-                android:regEmailError='@{viewModel.registerResult.emailError}'>
+                android:regEmailError='@{viewModel.emailError}'>
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_email_editText"
@@ -85,7 +85,7 @@
                 android:hint="@string/password"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
-                android:regPasswordError='@{viewModel.registerResult.passwordError}'>
+                android:regPasswordError='@{viewModel.passwordError}'>
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd_editText"
@@ -104,15 +104,15 @@
                 android:hint="@string/confirm_password"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
-                android:regPasswordError2="@{viewModel.registerResult.confirmPasswordError}">
+                android:regPasswordError2="@{viewModel.confirmPasswordError}">
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_pwd2_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password2}"
-                    android:afterTextChanged="@{() -> viewModel.password2Update()}"/>
+                    android:text="@={viewModel.confirmPassword}"
+                    android:afterTextChanged="@{() -> viewModel.confirmPasswordUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -123,15 +123,15 @@
                 android:hint="@string/birth_date"
                 app:placeholderText="@string/reg_date_format"
                 app:errorEnabled="true"
-                android:regBirthdayError='@{viewModel.registerResult.birthdayError}'>
+                android:regBirthdayError='@{viewModel.birthDateError}'>
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_bday_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="@integer/date_max_length"
-                    android:text="@={viewModel.birthday}"
-                    android:afterTextChanged="@{() -> viewModel.birthdayUpdate()}"/>
+                    android:text="@={viewModel.birthDate}"
+                    android:onFocusLost="@{() -> viewModel.birthdayUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -139,20 +139,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/terms_text"
-                android:checked="@{viewModel.checkEnabled}"/>
+                android:checked="@={viewModel.checkEnabled}"
+                android:onClick= "@{() -> viewModel.onFieldChanged()}" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_vertical_margin"
                 android:layout_weight="20" />
 
-            <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="@dimen/medium_wide_btn"
-                android:layout_height="@dimen/medium_high_btn"
-                android:enabled="@{viewModel.registerEnabled}"
-                android:onClick="@{() -> viewModel.register()}"
-                android:text="@string/reg_btn" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/registerBtn"
+                    android:layout_width="@dimen/medium_wide_btn"
+                    android:layout_height="@dimen/medium_high_btn"
+                    android:enabled="@{viewModel.registerEnabled}"
+                    android:onClick="@{() -> viewModel.register()}"
+                    android:setVisible="@{!viewModel.loading}"
+                    android:text="@string/reg_btn" />
+
+                    <ProgressBar
+                        android:id="@+id/reg_progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:setVisible="@{viewModel.loading}"
+                        android:layout_centerInParent="true"/>
+            </RelativeLayout>
 
             <Space
                 android:layout_width="match_parent"
