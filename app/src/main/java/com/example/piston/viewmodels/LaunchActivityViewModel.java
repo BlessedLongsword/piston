@@ -3,7 +3,7 @@ package com.example.piston.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.LaunchRepository;
+import com.example.piston.data.repositories.LaunchRepository;
 
 public class LaunchActivityViewModel extends ViewModel implements LaunchRepository.ILaunch {
 

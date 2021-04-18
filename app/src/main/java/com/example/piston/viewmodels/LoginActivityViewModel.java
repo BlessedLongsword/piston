@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.LoginRepository;
+import com.example.piston.data.repositories.LoginRepository;
 import com.example.piston.data.LoginResult;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

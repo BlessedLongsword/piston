@@ -3,7 +3,7 @@ package com.example.piston.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.MainRepository;
+import com.example.piston.data.repositories.MainRepository;
 
 public class MainActivityViewModel extends ViewModel implements MainRepository.IMain {
 

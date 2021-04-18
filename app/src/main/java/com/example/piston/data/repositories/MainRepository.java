@@ -1,4 +1,4 @@
-package com.example.piston.data;
+package com.example.piston.data.repositories;
 
 import com.google.firebase.auth.FirebaseAuth;
 

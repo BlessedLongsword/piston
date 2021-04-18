@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.RegisterRepository;
+import com.example.piston.data.repositories.RegisterRepository;
 import com.example.piston.data.RegisterResult;
 
 import java.util.Objects;

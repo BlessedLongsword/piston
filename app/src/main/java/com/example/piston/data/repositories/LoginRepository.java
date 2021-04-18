@@ -1,7 +1,8 @@
-package com.example.piston.data;
+package com.example.piston.data.repositories;
 
 import android.util.Log;
 
+import com.example.piston.data.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
