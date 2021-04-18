@@ -51,7 +51,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
     @Override
     public FolderHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.folder_item, viewGroup, false);
+                .inflate(R.layout.item_folder, viewGroup, false);
         return new FolderHolder(view);
     }
 

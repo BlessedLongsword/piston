@@ -1,7 +1,6 @@
 package com.example.piston.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     @Override
     public GroupHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.group_item, viewGroup, false);
+                .inflate(R.layout.item_group, viewGroup, false);
         return new GroupHolder(view);
     }
 
