@@ -16,7 +16,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this).get(RegisterActivityViewModel.class);
+        RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this)
+                .get(RegisterActivityViewModel.class);
 
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         binding.setViewModel(registerActivityViewModel);

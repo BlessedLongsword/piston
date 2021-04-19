@@ -4,17 +4,29 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.databinding.ActivityProfileBinding;
+import com.example.piston.viewmodels.ViewProfileActivityViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,7 +44,13 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        init();
+        ViewProfileActivityViewModel viewProfileActivityViewModel = new ViewModelProvider(this)
+                .get(ViewProfileActivityViewModel.class);
+
+        ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+        binding.setViewModel(viewProfileActivityViewModel);
+        binding.setLifecycleOwner(this);
+        //init();
     }
 
     public void clickImage(View view){
@@ -46,9 +64,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void popUpWindow(View anchorView, EditText edit) {
-
-        /*
-
+/*
         View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, findViewById(android.R.id.content));
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
@@ -106,7 +122,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         popupWindow.setOnDismissListener(() -> {
             lp.alpha=1f;
             getWindow().setAttributes(lp);
-        });*/
+        });
+        */
+
     }
 
     public void cancel(MenuItem item) {
@@ -150,6 +168,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         fullName.getEditText().requestFocus();
     }
 
+    /*
     private void init () {
         pfp = findViewById(R.id.profile_picture);
         pfp.setImageBitmap(BitmapFactory.decodeResource
@@ -162,9 +181,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         featuredPost = findViewById(R.id.viewProfile_featPost);
         mat = findViewById(R.id.profile_toolbar);
         mat.setTitleTextColor(Color.WHITE);
-        /*cancel = findViewById(R.id.viewProfile_cancel);
-        edit = findViewById(R.id.viewProfile_edit);
-        save = findViewById(R.id.viewProfile_save);*/
+        //cancel = findViewById(R.id.viewProfile_cancel);
+        //edit = findViewById(R.id.viewProfile_edit);
+        //save = findViewById(R.id.viewProfile_save);
 
         username.getEditText().setInputType(InputType.TYPE_NULL);
         fullName.getEditText().setInputType(InputType.TYPE_NULL);
@@ -176,5 +195,5 @@ public class ViewProfileActivity extends AppCompatActivity {
         phoneNumber.setEndIconOnClickListener(v -> popUpWindow(v, phoneNumber.getEditText()));
         bday.setEndIconOnClickListener(v -> popUpWindow(v, bday.getEditText()));
     }
-
+*/
 }

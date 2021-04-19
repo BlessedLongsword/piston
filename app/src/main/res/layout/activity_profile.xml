@@ -1,201 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:id="@+id/viewProfile"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/profile_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/baseline_arrow_back_white_24"
-            app:title="@string/profile" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.viewmodels.ViewProfileActivityViewModel" />
+    </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/viewProfile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:layout_height="match_parent" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:layout_marginVertical="@dimen/small_separator"
-            android:orientation="vertical"
-            android:weightSum="40">
+            android:layout_width="match_parent">
 
-            <Space
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/profile_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10" />
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+                app:title="@string/profile" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                app:cardCornerRadius="100dp" >
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true">
 
-                <ImageView
-                    android:id="@+id/profile_picture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/profile"
-                    android:onClick="clickImage"
-                    android:scaleType="centerCrop" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/viewProfile_username"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/username"
-                style="@style/BlankBox" >
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginVertical="@dimen/small_separator"
+                android:orientation="vertical"
+                android:weightSum="40">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/viewProfile_username_editText"
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="100dp" >
+
+                    <ImageView
+                        android:id="@+id/profile_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/profile"
+                        android:onClick="clickImage"
+                        android:scaleType="centerCrop" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/viewProfile_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="0dp"
-                    android:paddingLeft="0dp"
-                    android:focusable="false"/>
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/username"
+                    style="@style/BlankBox" >
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/viewProfile_username_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:focusable="false"
+                        android:text="@={viewModel.username}"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/dividerVertical" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/viewProfile_fullName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/view_profile_fullName"
-                style="@style/BlankBox.EditIcon" >
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/viewProfile_fullName_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:paddingStart="0dp"
-                    android:paddingLeft="0dp"
-                    android:inputType="textPersonName" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/viewProfile_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/view_profile_phone"
-                style="@style/BlankBox.EditIcon" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/viewProfile_phone_editText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/viewProfile_fullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:paddingStart="0dp"
-                    android:paddingLeft="0dp"
-                    android:inputType="phone"/>
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/view_profile_fullName"
+                    style="@style/BlankBox.EditIcon" >
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/viewProfile_fullName_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.fullName}"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/dividerVertical" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/viewProfile_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/email"
-                style="@style/BlankBox" >
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/viewProfile_email_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:paddingStart="0dp"
-                    android:paddingLeft="0dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/viewProfile_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/birth_date"
-                style="@style/BlankBox.EditIcon" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/viewProfile_date_editText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/viewProfile_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:paddingStart="0dp"
-                    android:paddingLeft="0dp"
-                    android:inputType="date"/>
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/view_profile_phone"
+                    style="@style/BlankBox.EditIcon" >
 
-                <View
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/viewProfile_phone_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:inputType="phone"
+                        android:text="@={viewModel.phone}"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/dividerVertical" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/viewProfile_email"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/email"
+                    style="@style/BlankBox" >
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/viewProfile_email_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:text="@={viewModel.email}"/>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="10" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/dividerVertical" />
 
-            <TextView
-                android:id="@+id/viewProfile_featPost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/view_profile_post"
-                android:textSize="@dimen/small_title" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="10" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/viewProfile_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/birth_date"
+                    style="@style/BlankBox.EditIcon"
+                    app:errorEnabled="true"
+                    android:birthDateError='@{viewModel.birthDateError}'>
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/viewProfile_date_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:paddingStart="0dp"
+                        android:paddingLeft="0dp"
+                        android:inputType="date"
+                        android:text="@={viewModel.birthDate}" />
 
-    </androidx.core.widget.NestedScrollView>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/dividerVertical" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+
+                <TextView
+                    android:id="@+id/viewProfile_featPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_profile_post"
+                    android:textSize="@dimen/small_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

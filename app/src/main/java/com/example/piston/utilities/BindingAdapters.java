@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
 import com.example.piston.data.LoginResult;
+import com.example.piston.data.ProfileResult;
 import com.example.piston.data.RegisterResult;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -124,4 +125,15 @@ public class BindingAdapters {
         view.setVisibility((visible)? View.VISIBLE : View.GONE);
     }
 
+    @BindingAdapter("android:birthDateError")
+    public static void setBirthDateErrorMessage(TextInputLayout view, ProfileResult.BirthDateError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case INVALID:
+                view.setError(view.getContext().getString(R.string.invalid_date));
+                break;
+        }
+    }
 }

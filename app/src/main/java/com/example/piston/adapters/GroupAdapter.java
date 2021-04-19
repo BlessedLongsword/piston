@@ -1,6 +1,7 @@
 package com.example.piston.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             Intent intent = new Intent(localActivity, ViewPostsActivity.class);
             intent.putExtra("title", viewModel.getGroups().getValue().get(position).getTitle());
             intent.putExtra("description", viewModel.getGroups().getValue().get(position).getDescription());
+            Log.d("what","hihi");
             localActivity.startActivity(intent);
         });
     }

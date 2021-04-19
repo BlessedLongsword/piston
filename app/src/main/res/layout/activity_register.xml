@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 app:errorEnabled="true"
-                android:regUsernameError='@{viewModel.usernameError}'>
+                android:regUsernameError='@{viewModel.usernameError}' >
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_username_editText"
