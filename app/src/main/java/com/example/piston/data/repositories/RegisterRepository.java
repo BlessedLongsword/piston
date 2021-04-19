@@ -53,14 +53,10 @@ public class RegisterRepository {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(regTask -> {
                                 if (regTask.isSuccessful()) {
-                                    db.collection("users")
-                                            .add(user)
-                                            .addOnSuccessListener(documentReference -> Log.d("DBWriteTAG", "DocumentSnapshot " +
-                                                    "written with ID: " + documentReference.getId()))
-                                            .addOnFailureListener(e -> Log.w("DBWriteTAG", "Error adding document", e));
+                                    db.collection("users").document(email).set(user);
                                     Map<String, Object> data = new HashMap<>();
                                     data.put("email", email);
-                                    db.collection("emails").document(username).set(data);
+                                    db.collection("emails").document(email).set(data);
                                     listener.setLoadingFinished();
                                     listener.setRegisterFinished();
                                 } else {

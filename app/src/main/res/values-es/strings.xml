@@ -107,7 +107,7 @@
     <string name="invalid_password">La contraseña debe tener por lo menos 6 caracteres</string>
     <string name="invalid_password2">Las contraseñas no coinciden</string>
     <string name="invalid_date">Introduzca una fecha válida: dd/mm/aaaa</string>
-    <string name="email_taken">Ya existe un usuario con esa dirección de correo electrónico</string>
+    <string name="email_taken">Dirección de correo ya registrada</string>
     <string name="username_req">Es necesario introducir un nombre de usuario</string>
     <string name="email_req">Es necesaria una dirección de correo electrónico</string>
     <string name="email_invalid">La dirección de correo electrónico no es válida</string>

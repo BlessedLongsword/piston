@@ -107,7 +107,7 @@
     <string name="invalid_password">La contrasenya ha de contenir com a mínim 6 caràters</string>
     <string name="invalid_password2">Les contrasenyes no coincideixen</string>
     <string name="invalid_date">Introdueixi una data vàlida: dd/mm/aaaa</string>
-    <string name="email_taken">Ja existeix un usuari amb aquesta adreça de correu electrònic</string>
+    <string name="email_taken">Correu electrònic ja enregistrat</string>
     <string name="username_req">Cal introduir un nom d\'usuari</string>
     <string name="email_req">És necessària una adreça de correu electrònic</string>
     <string name="email_invalid">L\'adreça de correu electrònic no es vàlida</string>
