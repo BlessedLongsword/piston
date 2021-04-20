@@ -18,10 +18,13 @@
         <item name="paddingStart">0dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="boxBackgroundColor">@color/transparent</item>
+    </style>
+
+    <style name="BlankBox.NoStroke" >
         <item name="boxStrokeWidth">0dp</item>
     </style>
 
-    <style name="BlankBox.EditIcon">
+    <style name="BlankBox.NoStroke.EditIcon">
         <item name="endIconMode">custom</item>
         <item name="endIconDrawable">@drawable/baseline_edit_black_24</item>
     </style>

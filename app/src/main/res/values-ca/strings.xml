@@ -55,6 +55,9 @@
     <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicació destacada</string>
     <string name="view_profile_edit">Editar perfil</string>
+    <string name="insert_name">Introdueix el teu nom</string>
+    <string name="insert_phone_number">Introdueix el teu número de telèfon</string>
+    <string name="insert_birth_date">Introdueix la teva data de naixement</string>
 
     <!-- Create Post Strings -->
     <string name="create_post_activity_title">NOVA PUBLICACIÓ</string>

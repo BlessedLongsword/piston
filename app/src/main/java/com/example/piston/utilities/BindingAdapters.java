@@ -9,6 +9,8 @@ import com.example.piston.R;
 import com.example.piston.data.LoginResult;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.RegisterResult;
+import com.example.piston.utilities.textwatchers.CounterWatcher;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class BindingAdapters {
@@ -112,6 +114,18 @@ public class BindingAdapters {
         }
     }
 
+    @BindingAdapter("android:profileBirthdayError")
+    public static void setProfileBirthdayErrorMessage(TextInputLayout view, ProfileResult.BirthDateError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case INVALID:
+                view.setError(view.getContext().getString(R.string.invalid_date));
+                break;
+        }
+    }
+
     @BindingAdapter("android:onFocusLost")
     public static void onFocusChange(EditText text, Runnable runnable) {
         text.setOnFocusChangeListener((v, hasFocus) -> {
@@ -136,4 +150,13 @@ public class BindingAdapters {
                 break;
         }
     }
+
+    @BindingAdapter("android:counter")
+    public static void updateCounter(TextInputLayout view, int max_length) {
+        view.getEditText().addTextChangedListener(new CounterWatcher(max_length, view));
+        view.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
+            view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length()));
+        });
+    }
+
 }

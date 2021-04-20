@@ -18,7 +18,11 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
     private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
 
-    private final MutableLiveData<ProfileResult.BirthDateError> birthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
+    /*PupUps*/
+    private final MutableLiveData<String> editNameText = new MutableLiveData<>("");
+    private final MutableLiveData<String> editPhoneNumberText = new MutableLiveData<>("");
+    private final MutableLiveData<String> editBirthDateText = new MutableLiveData<>("");
+    private final MutableLiveData<ProfileResult.BirthDateError> editBirthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
@@ -30,29 +34,8 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
         profileRepository.checkBirthDate(birthDate.getValue());
     }
 
-    public LiveData<String> getUsername() {
-        return username;
-    }
 
-    public MutableLiveData<String> getFullName() {
-        return fullName;
-    }
-
-    public MutableLiveData<String> getPhone() {
-        return phone;
-    }
-
-    public LiveData<String> getEmail() {
-        return email;
-    }
-
-    public MutableLiveData<String> getBirthDate() {
-        return birthDate;
-    }
-
-    public MutableLiveData<ProfileResult.BirthDateError> getBirthDateError() {
-        return birthDateError;
-    }
+    /*-----------------------------------   Interface Methods   ----------------------------------*/
 
     @Override
     public void setUserNameField(String username) {
@@ -82,7 +65,46 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     @Override
     public void setBirthDateStatus(ProfileResult.BirthDateError birthDateError) {
-        this.birthDateError.setValue(birthDateError);
+        this.editBirthDateError.setValue(birthDateError);
+    }
+
+
+    /*-------------------------------------   Data Getters   -------------------------------------*/
+
+    public LiveData<String> getUsername() {
+        return username;
+    }
+
+    public MutableLiveData<String> getFullName() {
+        return fullName;
+    }
+
+    public MutableLiveData<String> getPhone() {
+        return phone;
+    }
+
+    public LiveData<String> getEmail() {
+        return email;
+    }
+
+    public MutableLiveData<String> getBirthDate() {
+        return birthDate;
+    }
+
+    public MutableLiveData<String> getEditNameText() {
+        return editNameText;
+    }
+
+    public MutableLiveData<String> getEditPhoneNumberText() {
+        return editPhoneNumberText;
+    }
+
+    public MutableLiveData<String> getEditBirthDateText() {
+        return editBirthDateText;
+    }
+
+    public MutableLiveData<ProfileResult.BirthDateError> getEditBirthDateError() {
+        return editBirthDateError;
     }
 
     /*public MutableLiveData<Boolean> getLoading() {

@@ -6,6 +6,7 @@
     <integer name="title_max_length">30</integer>
     <integer name="long_title_max_length">50</integer>
     <integer name="username_max_length">20</integer>
+    <integer name="name_max_length">25</integer>
     <integer name="date_max_length">10</integer>
 
 </resources>

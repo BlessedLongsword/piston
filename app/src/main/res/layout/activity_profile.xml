@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/username"
-                    style="@style/BlankBox" >
+                    style="@style/BlankBox.NoStroke" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/viewProfile_username_editText"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/view_profile_fullName"
-                    style="@style/BlankBox.EditIcon" >
+                    style="@style/BlankBox.NoStroke.EditIcon" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/viewProfile_fullName_editText"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/view_profile_phone"
-                    style="@style/BlankBox.EditIcon" >
+                    style="@style/BlankBox.NoStroke.EditIcon" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/viewProfile_phone_editText"
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/email"
-                    style="@style/BlankBox" >
+                    style="@style/BlankBox.NoStroke" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/viewProfile_email_editText"
@@ -177,9 +177,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/birth_date"
-                    style="@style/BlankBox.EditIcon"
-                    app:errorEnabled="true"
-                    android:birthDateError='@{viewModel.birthDateError}'>
+                    style="@style/BlankBox.NoStroke.EditIcon"
+                    android:birthDateError="@{viewModel.editBirthDateError}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/viewProfile_date_editText"

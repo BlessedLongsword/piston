@@ -55,6 +55,9 @@
     <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicacion destacada</string>
     <string name="view_profile_edit">Editar perfil</string>
+    <string name="insert_name">Introduce tu nombre</string>
+    <string name="insert_phone_number">Introduce tu número de teléfono</string>
+    <string name="insert_birth_date">Introduce tu fecha de nacimiento</string>
 
     <!-- Create Post Strings -->
     <string name="create_post_activity_title">CREAR PUBLICACION</string>

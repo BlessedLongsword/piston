@@ -55,6 +55,9 @@
     <string name="view_profile_activity_title">PROFILE</string>
     <string name="view_profile_post">Featured post</string>
     <string name="view_profile_edit">Edit profile</string>
+    <string name="insert_name">Insert your name</string>
+    <string name="insert_phone_number">Insert your phone number</string>
+    <string name="insert_birth_date">Insert your birth date</string>
 
     <!-- Create Post Strings -->
     <string name="create_post_activity_title">CREATE POST</string>
