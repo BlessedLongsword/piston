@@ -50,7 +50,7 @@
     <string name="reg_succesful">Registre amb exit</string>
 
     <!-- View Profile Strings -->
-    <string name="view_profile_fullName">Nom i Cognoms</string>
+    <string name="view_profile_name">Nom i Cognoms</string>
     <string name="view_profile_phone">Teléfon</string>
     <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicació destacada</string>

@@ -50,7 +50,7 @@
     <string name="reg_succesful">Registro exitoso</string>
 
     <!-- View Profile Strings -->
-    <string name="view_profile_fullName">Nombre y Apellidos</string>
+    <string name="view_profile_name">Nombre y Apellidos</string>
     <string name="view_profile_phone">Teléfono</string>
     <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicacion destacada</string>

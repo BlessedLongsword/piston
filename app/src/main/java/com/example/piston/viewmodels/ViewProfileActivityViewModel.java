@@ -1,16 +1,9 @@
 package com.example.piston.viewmodels;
 
-import android.graphics.drawable.ColorDrawable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.PopupWindow;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.R;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.repositories.ProfileRepository;
 
@@ -20,8 +13,8 @@ import java.util.Date;
 public class ViewProfileActivityViewModel extends ViewModel implements ProfileRepository.IProfile{
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
-    private final MutableLiveData<String> fullName = new MutableLiveData<>("");
-    private final MutableLiveData<String> phone = new MutableLiveData<>("");
+    private final MutableLiveData<String> name = new MutableLiveData<>("");
+    private final MutableLiveData<String> phoneNumber = new MutableLiveData<>("");
     private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
 
@@ -30,6 +23,7 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
     private final MutableLiveData<String> editPhoneNumberText = new MutableLiveData<>("");
     private final MutableLiveData<String> editBirthDateText = new MutableLiveData<>("");
     private final MutableLiveData<ProfileResult.BirthDateError> editBirthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
+    private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
@@ -39,6 +33,12 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     public void birthdayUpdate() {
         profileRepository.checkBirthDate(birthDate.getValue());
+        onEditBirthDateFieldChange();
+    }
+
+    public void onEditBirthDateFieldChange() {
+        editBirthDateSaveEnabled.setValue(editBirthDateError.getValue()
+                == ProfileResult.BirthDateError.NONE);
     }
 
 
@@ -56,7 +56,7 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     @Override
     public void setFullNameField(String fullName) {
-        this.fullName.setValue(fullName);
+        this.name.setValue(fullName);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     @Override
     public void setPhoneNumberField(String phoneNumber) {
-        this.phone.setValue(phoneNumber);
+        this.phoneNumber.setValue(phoneNumber);
     }
 
     @Override
@@ -82,12 +82,12 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
         return username;
     }
 
-    public MutableLiveData<String> getFullName() {
-        return fullName;
+    public MutableLiveData<String> getName() {
+        return name;
     }
 
-    public MutableLiveData<String> getPhone() {
-        return phone;
+    public MutableLiveData<String> getPhoneNumber() {
+        return phoneNumber;
     }
 
     public LiveData<String> getEmail() {
@@ -112,6 +112,10 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     public MutableLiveData<ProfileResult.BirthDateError> getEditBirthDateError() {
         return editBirthDateError;
+    }
+
+    public LiveData<Boolean> getEditBirthDateSaveEnabled() {
+        return editBirthDateSaveEnabled;
     }
 
 
