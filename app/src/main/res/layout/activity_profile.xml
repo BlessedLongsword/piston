@@ -126,7 +126,8 @@
                         android:background="@color/transparent"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:onClick="@{() -> viewModel.setEditOptionName()}"/>
 
                 </LinearLayout>
 
@@ -169,7 +170,8 @@
                         android:background="@color/transparent"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:onClick="@{() -> viewModel.setEditOptionPhoneNumber()}"/>
 
                 </LinearLayout>
 
@@ -238,7 +240,8 @@
                         android:background="@color/transparent"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:onClick="@{() -> viewModel.setEditOptionBirthDate()}"/>
                 </LinearLayout>
 
                 <View

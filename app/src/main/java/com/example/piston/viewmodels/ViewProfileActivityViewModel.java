@@ -24,12 +24,18 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
     private final MutableLiveData<String> editBirthDateText = new MutableLiveData<>("");
     private final MutableLiveData<ProfileResult.BirthDateError> editBirthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
     private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
+    private final MutableLiveData<ProfileResult.BirthDateError> birthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
+    private final MutableLiveData<ProfileResult.EditOptions> editOption = new MutableLiveData<>(ProfileResult.EditOptions.NONE);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
     public void viewProfile() {
         profileRepository.viewProfile();
     }
+
+
+
+    /*-----------------------------------   popup Methods   ----------------------------------*/
 
     public void birthdayUpdate() {
         profileRepository.checkBirthDate(birthDate.getValue());
@@ -41,6 +47,21 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
                 == ProfileResult.BirthDateError.NONE);
     }
 
+    public void setEditOption(ProfileResult.EditOptions editOption){
+        this.editOption.setValue(editOption);
+    }
+
+    public void setEditOptionName(){
+        setEditOption(ProfileResult.EditOptions.NAME);
+    }
+
+    public void setEditOptionPhoneNumber(){
+        setEditOption(ProfileResult.EditOptions.PHONE);
+    }
+
+    public void setEditOptionBirthDate(){
+        setEditOption(ProfileResult.EditOptions.BIRTH_DATE);
+    }
 
     /*-----------------------------------   Interface Methods   ----------------------------------*/
 
@@ -117,6 +138,15 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
     public LiveData<Boolean> getEditBirthDateSaveEnabled() {
         return editBirthDateSaveEnabled;
     }
+
+    public MutableLiveData<ProfileResult.BirthDateError> getBirthDateError() {
+        return birthDateError;
+    }
+    public MutableLiveData<ProfileResult.EditOptions> getEditOption(){
+        return editOption;
+    }
+
+
 
 
 

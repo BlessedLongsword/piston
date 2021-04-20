@@ -8,6 +8,11 @@
         <variable
             name="viewModel"
             type="com.example.piston.viewmodels.ViewProfileActivityViewModel" />
+
+        <variable
+            name="constants"
+            type="com.example.piston.data.Constants" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -46,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_separator"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:counter="@integer/name_max_length"
+                    android:counter="@{constants.MAX_NAME_LENGTH}"
                     style="@style/BlankBox"
                     android:textColor="?android:attr/textColorSecondary" >
 

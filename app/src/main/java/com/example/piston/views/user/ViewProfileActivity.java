@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -31,23 +32,41 @@ import com.example.piston.viewmodels.ViewProfileActivityViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class ViewProfileActivity extends AppCompatActivity {
+    private ViewProfileActivityViewModel viewProfileActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ViewProfileActivityViewModel viewProfileActivityViewModel = new ViewModelProvider(this)
+         viewProfileActivityViewModel = new ViewModelProvider(this)
                 .get(ViewProfileActivityViewModel.class);
 
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         binding.setViewModel(viewProfileActivityViewModel);
         binding.setLifecycleOwner(this);
         viewProfileActivityViewModel.viewProfile();
+        viewProfileActivityViewModel.getEditOption().observe(this, editOptions -> {
+        int layoutResource;
+        switch (editOptions){
+            case NAME:
+                layoutResource = R.layout.popup_profile_edit_name;
+                break;
+            case PHONE:
+                layoutResource = R.layout.popup_profile_edit_phone_number;
+                break;
+            default:
+                layoutResource = R.layout.popup_profile_edit_birth_date;
+                break;
+        }
+        popUpWindow(layoutResource);
+        });
         //init();
     }
 
@@ -61,9 +80,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void popUpWindow(View anchorView, EditText edit) {
+    public void popUpWindow(int layoutResource) {
 
-        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
+        View popupView = getLayoutInflater().inflate(layoutResource, null);
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -75,7 +94,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Using location, the PopupWindow will be displayed right under anchorView
-        popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
 
         // Initialize objects from layout
         TextInputLayout ed = popupView.findViewById(R.id.popup);
@@ -84,7 +103,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         Objects.requireNonNull(ed.getEditText()).requestFocus();
         popupWindow.setOutsideTouchable(false);
 
-        // force show keyboar once pop up window is open
+        // force show keyboard once pop up window is open
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
 
@@ -102,6 +121,8 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     /*
+
+
     public void cancel(MenuItem item) {
 
         fullName.getEditText().setInputType(InputType.TYPE_NULL);
