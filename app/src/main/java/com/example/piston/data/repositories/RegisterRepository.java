@@ -1,6 +1,5 @@
 package com.example.piston.data.repositories;
 
-import android.util.Log;
 import android.util.Patterns;
 
 import com.example.piston.data.RegisterResult;
@@ -30,7 +29,7 @@ public class RegisterRepository {
         void setEmailErrorStatus(RegisterResult.EmailError emailError);
         void setPasswordStatus(RegisterResult.PasswordError passwordError);
         void setConfirmPasswordStatus(RegisterResult.ConfirmPasswordError confirmPasswordError);
-        void setBirthDateStatus(RegisterResult.BirthdayError birthdayError);
+        void setBirthDateStatus(RegisterResult.BirthDateError birthDateError);
         void setLoadingFinished();
         void setRegisterFinished();
     }
@@ -56,7 +55,7 @@ public class RegisterRepository {
                                     db.collection("users").document(email).set(user);
                                     Map<String, Object> data = new HashMap<>();
                                     data.put("email", email);
-                                    db.collection("emails").document(email).set(data);
+                                    db.collection("emails").document(username).set(data);
                                     listener.setLoadingFinished();
                                     listener.setRegisterFinished();
                                 } else {
@@ -135,9 +134,9 @@ public class RegisterRepository {
         Pattern pattern = Pattern.compile("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)");
         Matcher matcher = pattern.matcher(birthDate);
         if (matcher.matches())
-            listener.setBirthDateStatus(RegisterResult.BirthdayError.NONE);
+            listener.setBirthDateStatus(RegisterResult.BirthDateError.NONE);
         else
-            listener.setBirthDateStatus(RegisterResult.BirthdayError.INVALID);
+            listener.setBirthDateStatus(RegisterResult.BirthDateError.INVALID);
     }
 
 }

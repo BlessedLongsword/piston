@@ -50,6 +50,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         binding.setViewModel(viewProfileActivityViewModel);
         binding.setLifecycleOwner(this);
+        viewProfileActivityViewModel.viewProfile();
         //init();
     }
 

@@ -12,7 +12,7 @@ public class RegisterResult extends BaseObservable {
 
     public enum EmailError {NONE, EMPTY, INVALID, EXISTS, UNEXPECTED }
 
-    public enum BirthdayError {NONE, INVALID }
+    public enum BirthDateError {NONE, INVALID }
 
     public enum CheckError {NONE, EMPTY }
 

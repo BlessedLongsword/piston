@@ -9,8 +9,6 @@ public class User {
     @Nullable
     private String name;
     @Nullable
-    private String surname;
-    @Nullable
     private String profilePictureLink;
     @Nullable
     private Post featuredPost;
@@ -46,15 +44,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Nullable
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getEmail() {
@@ -106,11 +95,6 @@ public class User {
 
     public void setFeaturedPost(Post featuredPost) {
         this.featuredPost = featuredPost;
-    }
-
-    @Nullable
-    public String getFullName(){
-        return name + " " + surname;
     }
 
 }

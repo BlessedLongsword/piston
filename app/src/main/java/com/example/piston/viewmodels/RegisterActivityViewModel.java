@@ -27,7 +27,7 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
     private final MutableLiveData<RegisterResult.PasswordError> passwordError = new MutableLiveData<>(RegisterResult.PasswordError.NONE);
     private final MutableLiveData<RegisterResult.ConfirmPasswordError> confirmPasswordError = new MutableLiveData<>(RegisterResult.ConfirmPasswordError.NONE);
     private final MutableLiveData<RegisterResult.EmailError> emailError = new MutableLiveData<>(RegisterResult.EmailError.NONE);
-    private final MutableLiveData<RegisterResult.BirthdayError> birthDateError = new MutableLiveData<>(RegisterResult.BirthdayError.NONE);
+    private final MutableLiveData<RegisterResult.BirthDateError> birthDateError = new MutableLiveData<>(RegisterResult.BirthDateError.NONE);
     private final MutableLiveData<RegisterResult.CheckError> checkError = new MutableLiveData<>(RegisterResult.CheckError.NONE);
 
 
@@ -75,7 +75,7 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
                 (getEmailError().getValue() == RegisterResult.EmailError.NONE) &&
                 (getPasswordError().getValue() == RegisterResult.PasswordError.NONE) &&
                 (getConfirmPasswordError().getValue() == RegisterResult.ConfirmPasswordError.NONE) &&
-                (getBirthDateError().getValue() == RegisterResult.BirthdayError.NONE));
+                (getBirthDateError().getValue() == RegisterResult.BirthDateError.NONE));
     }
 
     @Override
@@ -100,8 +100,8 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
     }
 
     @Override
-    public void setBirthDateStatus(RegisterResult.BirthdayError birthdayError) {
-        this.birthDateError.setValue(birthdayError);
+    public void setBirthDateStatus(RegisterResult.BirthDateError birthDateError) {
+        this.birthDateError.setValue(birthDateError);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
         return emailError;
     }
 
-    public LiveData<RegisterResult.BirthdayError> getBirthDateError() {
+    public LiveData<RegisterResult.BirthDateError> getBirthDateError() {
         return birthDateError;
     }
 

@@ -1,10 +1,14 @@
 package com.example.piston.viewmodels;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.repositories.ProfileRepository;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ViewProfileActivityViewModel extends ViewModel implements ProfileRepository.IProfile{
 
@@ -18,7 +22,15 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
-    public MutableLiveData<String> getUsername() {
+    public void viewProfile() {
+        profileRepository.viewProfile();
+    }
+
+    public void birthdayUpdate() {
+        profileRepository.checkBirthDate(birthDate.getValue());
+    }
+
+    public LiveData<String> getUsername() {
         return username;
     }
 
@@ -30,7 +42,7 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
         return phone;
     }
 
-    public MutableLiveData<String> getEmail() {
+    public LiveData<String> getEmail() {
         return email;
     }
 
@@ -42,12 +54,39 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
         return birthDateError;
     }
 
-    public MutableLiveData<Boolean> getLoading() {
-        return loading;
+    @Override
+    public void setUserNameField(String username) {
+        this.username.setValue(username);
     }
 
-    public MutableLiveData<Boolean> getFinishedRegister() {
-        return finishedRegister;
+    @Override
+    public void setEmailField(String email) {
+        this.email.setValue(email);
     }
+
+    @Override
+    public void setFullNameField(String fullName) {
+        this.fullName.setValue(fullName);
+    }
+
+    @Override
+    public void setBirthDateField(Date birthDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        this.birthDate.setValue(formatter.format(birthDate));
+    }
+
+    @Override
+    public void setPhoneNumberField(String phoneNumber) {
+        this.phone.setValue(phoneNumber);
+    }
+
+    @Override
+    public void setBirthDateStatus(ProfileResult.BirthDateError birthDateError) {
+        this.birthDateError.setValue(birthDateError);
+    }
+
+    /*public MutableLiveData<Boolean> getLoading() {
+        return loading;
+    }*/
 
 }

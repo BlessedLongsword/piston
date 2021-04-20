@@ -25,8 +25,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textShortMessage"
-                    android:maxLength="@integer/title_max_length"/>
+                    android:maxLength="@integer/title_max_length" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -79,25 +79,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/create_category_nsfw" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/category_link"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/link"
-                app:endIconDrawable="@drawable/baseline_content_copy_black_24"
-                app:endIconMode="custom"
-                app:helperText="@string/category_link_help"
-                app:helperTextEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:gravity="start" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Space
                 android:layout_width="match_parent"

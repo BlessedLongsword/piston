@@ -101,7 +101,7 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("android:regBirthdayError")
-    public static void setRegBirthdayErrorMessage(TextInputLayout view, RegisterResult.BirthdayError error) {
+    public static void setRegBirthdayErrorMessage(TextInputLayout view, RegisterResult.BirthDateError error) {
         switch (error) {
             case NONE:
                 view.setError(null);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -81,7 +82,8 @@
                         android:paddingStart="0dp"
                         android:paddingLeft="0dp"
                         android:focusable="false"
-                        android:text="@={viewModel.username}"/>
+                        android:text="@{viewModel.username}"
+                        tools:ignore="RtlSymmetry" />
 
                     <View
                         android:layout_width="match_parent"
@@ -106,7 +108,8 @@
                         android:paddingStart="0dp"
                         android:paddingLeft="0dp"
                         android:inputType="textPersonName"
-                        android:text="@={viewModel.fullName}"/>
+                        android:text="@={viewModel.fullName}"
+                        tools:ignore="RtlSymmetry" />
 
                     <View
                         android:layout_width="match_parent"
@@ -132,7 +135,8 @@
                         android:paddingStart="0dp"
                         android:paddingLeft="0dp"
                         android:inputType="phone"
-                        android:text="@={viewModel.phone}"/>
+                        android:text="@={viewModel.phone}"
+                        tools:ignore="RtlSymmetry" />
 
                     <View
                         android:layout_width="match_parent"
@@ -156,7 +160,8 @@
                         android:focusable="false"
                         android:paddingStart="0dp"
                         android:paddingLeft="0dp"
-                        android:text="@={viewModel.email}"/>
+                        android:text="@{viewModel.email}"
+                        tools:ignore="RtlSymmetry" />
 
                     <View
                         android:layout_width="match_parent"
@@ -165,6 +170,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/viewProfile_date"
                     android:layout_width="match_parent"
@@ -183,7 +189,9 @@
                         android:paddingStart="0dp"
                         android:paddingLeft="0dp"
                         android:inputType="date"
-                        android:text="@={viewModel.birthDate}" />
+                        android:afterTextChanged='@{() -> viewModel.birthdayUpdate()}'
+                        android:text="@={viewModel.birthDate}"
+                        tools:ignore="RtlSymmetry" />
 
                     <View
                         android:layout_width="match_parent"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,21 +25,19 @@
                 android:layout_marginTop="@dimen/card_margin"
                 android:text="@string/username"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                />
+                android:textColor="?android:attr/textColorSecondary" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_separator"
+                android:maxLength="@integer/description_max_length"
                 android:text="@string/post_content"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:maxLength="@integer/description_max_length"
-                />
+                android:textColor="?android:attr/textColorSecondary" />
 
         </LinearLayout>
 
-        <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,8 +52,8 @@
                 android:layout_marginEnd="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_weight="30"
-                app:icon="@drawable/outline_reply_white_24"
-                android:text="@string/reply" />
+                android:text="@string/reply"
+                app:icon="@drawable/outline_reply_white_24" />
 
             <Space
                 android:layout_width="@dimen/zero"
