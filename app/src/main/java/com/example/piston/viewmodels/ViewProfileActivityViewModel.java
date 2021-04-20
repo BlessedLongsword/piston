@@ -1,9 +1,16 @@
 package com.example.piston.viewmodels;
 
+import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.piston.R;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.repositories.ProfileRepository;
 
@@ -84,6 +91,8 @@ public class ViewProfileActivityViewModel extends ViewModel implements ProfileRe
     public void setBirthDateStatus(ProfileResult.BirthDateError birthDateError) {
         this.birthDateError.setValue(birthDateError);
     }
+
+
 
     /*public MutableLiveData<Boolean> getLoading() {
         return loading;
