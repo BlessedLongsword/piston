@@ -12,7 +12,7 @@
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/notif_delete"
-        android:icon="@drawable/outline_delete_black_36"
+        android:icon="@drawable/outline_delete_white_36"
         android:title="@string/delete"
         app:showAsAction="ifRoom"/>
 

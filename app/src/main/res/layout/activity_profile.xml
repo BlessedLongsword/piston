@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"
-                app:title="@string/profile" />
+                app:title="@string/profile"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -172,30 +173,55 @@
 
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/viewProfile_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="@string/birth_date"
                     style="@style/BlankBox.NoStroke.EditIcon"
                     android:birthDateError="@{viewModel.editBirthDateError}">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/viewProfile_date_editText"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                    <!--suppress AndroidUnknownAttribute -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/viewProfile_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:paddingStart="0dp"
-                        android:paddingLeft="0dp"
-                        android:inputType="date"
-                        android:afterTextChanged='@{() -> viewModel.birthdayUpdate()}'
-                        android:text="@={viewModel.birthDate}"
-                        tools:ignore="RtlSymmetry" />
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="9"
+                        android:hint="@string/birth_date"
+                        style="@style/BlankBox">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/dividerVertical" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/viewProfile_date_editText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:paddingStart="0dp"
+                            android:paddingLeft="0dp"
+                            android:inputType="date"
+                            android:afterTextChanged='@{() -> viewModel.birthdayUpdate()}'
+                            android:text="@={viewModel.birthDate}"
+                            tools:ignore="RtlSymmetry" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_edit_black_24"
+                        android:background="@color/transparent"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

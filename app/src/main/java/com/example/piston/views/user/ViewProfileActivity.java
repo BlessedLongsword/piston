@@ -1,5 +1,6 @@
 package com.example.piston.views.user;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,13 +32,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
 public class ViewProfileActivity extends AppCompatActivity {
-
-    TextInputLayout username, fullName, phoneNumber, email, bday;
-    TextView featuredPost;
-    ImageView pfp;
-    MaterialToolbar mat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +62,15 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void popUpWindow(View anchorView, EditText edit) {
-/*
-        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, findViewById(android.R.id.content));
+
+        View popupView = getLayoutInflater().inflate(R.layout.reply_post_youtube, null);
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
         // If you need the PopupWindow to dismiss when touched outside
         popupWindow.setBackgroundDrawable(new ColorDrawable());
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
-        // Adjust popup window location when keyboard pops up :)))
+        // Adjust popup window location when keyboard pops up
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
@@ -82,37 +79,14 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         // Initialize objects from layout
         TextInputLayout ed = popupView.findViewById(R.id.popup);
-        ed.getEditText().setText(edit.getText().toString());
-        ed.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(ed.getEditText().getText().toString().length() > 0) {
-                    ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                    ed.setEndIconDrawable(R.drawable.outline_send_black_24);
-                }
-                else {
-                    ed.setEndIconMode(TextInputLayout.END_ICON_NONE);
-                }
-            }
-        });
-
-        ed.getEditText().requestFocus();
+        Objects.requireNonNull(ed.getEditText()).requestFocus();
         popupWindow.setOutsideTouchable(false);
 
         // force show keyboar once pop up window is open
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
-
 
         // dims background when popup window shows up
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -124,17 +98,11 @@ public class ViewProfileActivity extends AppCompatActivity {
             lp.alpha=1f;
             getWindow().setAttributes(lp);
         });
-        */
 
     }
 
+    /*
     public void cancel(MenuItem item) {
-        /*save.setEnabled(false);
-        save.setVisibility(View.INVISIBLE);
-        edit.setEnabled(true);
-        edit.setVisibility(View.VISIBLE);
-        cancel.setVisibility(View.INVISIBLE);
-        cancel.setEnabled(false);*/
 
         fullName.getEditText().setInputType(InputType.TYPE_NULL);
         phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
@@ -150,13 +118,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     public void edit(MenuItem item) {
-        /*save.setEnabled(true);
-        save.setVisibility(View.VISIBLE);
-        edit.setEnabled(false);
-        edit.setVisibility(View.INVISIBLE);
-        cancel.setVisibility(View.VISIBLE);
-        cancel.setEnabled(true);*/
-
 
         fullName.getEditText().setFocusableInTouchMode(true);
         phoneNumber.getEditText().setFocusableInTouchMode(true);
@@ -169,7 +130,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         fullName.getEditText().requestFocus();
     }
 
-    /*
     private void init () {
         pfp = findViewById(R.id.profile_picture);
         pfp.setImageBitmap(BitmapFactory.decodeResource
@@ -196,5 +156,29 @@ public class ViewProfileActivity extends AppCompatActivity {
         phoneNumber.setEndIconOnClickListener(v -> popUpWindow(v, phoneNumber.getEditText()));
         bday.setEndIconOnClickListener(v -> popUpWindow(v, bday.getEditText()));
     }
+
+            ed.getEditText().setText(edit.getText().toString());
+        ed.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(ed.getEditText().getText().toString().length() > 0) {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+                    ed.setEndIconDrawable(R.drawable.outline_send_black_24);
+                }
+                else {
+                    ed.setEndIconMode(TextInputLayout.END_ICON_NONE);
+                }
+            }
+        });
 */
 }
