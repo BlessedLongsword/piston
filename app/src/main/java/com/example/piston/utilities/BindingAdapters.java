@@ -6,10 +6,12 @@ import android.widget.EditText;
 import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
+import com.example.piston.data.CreateCategoryResult;
 import com.example.piston.data.LoginResult;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class BindingAdapters {
@@ -146,6 +148,21 @@ public class BindingAdapters {
                 break;
             case INVALID:
                 view.setError(view.getContext().getString(R.string.invalid_date));
+                break;
+        }
+    }
+
+    @BindingAdapter("android:categoryTitleError")
+    public static void setCategoryTitleErrorMessage(TextInputLayout view, CreateCategoryResult.TitleError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case EMPTY:
+                view.setError(view.getContext().getString(R.string.create_category_title_empty));
+                break;
+            case EXISTS:
+                view.setError(view.getContext().getString(R.string.create_category_title_taken));
                 break;
         }
     }

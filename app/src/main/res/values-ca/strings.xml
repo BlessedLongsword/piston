@@ -100,6 +100,8 @@
     <string name="create_category_nsfw">Categoria +18</string>
     <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
     <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoría</string>
+    <string name="create_category_title_empty">Aquest camp és obligatori</string>
+    <string name="create_category_title_taken">Aquesta categoría ja existeix</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICACIONS</string>

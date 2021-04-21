@@ -53,6 +53,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         binding.setViewModel(viewProfileActivityViewModel);
         binding.setLifecycleOwner(this);
+        binding.profileToolbar.setNavigationOnClickListener(v -> finish());
         viewProfileActivityViewModel.viewProfile();
         viewProfileActivityViewModel.getEditOption().observe(this, editOptions -> {
         switch (editOptions){

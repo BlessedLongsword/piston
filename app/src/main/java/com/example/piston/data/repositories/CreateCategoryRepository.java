@@ -42,7 +42,7 @@ public class CreateCategoryRepository {
         }
     }
 
-    public void createCategory(String title, String description) {
+    public void createCategory(String title, String description, boolean nsfw) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
             listener.setCreateError();
@@ -57,7 +57,7 @@ public class CreateCategoryRepository {
                         listener.setCreateError();
                         listener.setLoadingFinished();
                     } else {
-                        Section category = new Section(title, description);
+                        Category category = new Category(title, description, nsfw);
                         db.collection("categories").document(title).set(category);
                         listener.setCreateFinished();
                         listener.setLoadingFinished();

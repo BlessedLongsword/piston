@@ -27,7 +27,7 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     }
 
     public void createCategory() {
-        repository.createCategory(titleField.getValue(), descriptionField.getValue());
+        repository.createCategory(titleField.getValue(), descriptionField.getValue(), nsfwBox.getValue());
         loading.setValue(true);
     }
 

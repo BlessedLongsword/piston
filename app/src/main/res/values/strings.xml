@@ -102,6 +102,8 @@
     <string name="create_category_nsfw">NSFW Category</string>
     <string name="category_link_help">Use this to share category</string>
     <string name="create_category_error_message">Please insert a valid Category Name</string>
+    <string name="create_category_title_empty">This field is necessary</string>
+    <string name="create_category_title_taken">This Category already exists</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICATIONS</string>

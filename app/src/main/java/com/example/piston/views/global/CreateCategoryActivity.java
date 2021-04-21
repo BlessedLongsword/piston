@@ -35,6 +35,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
         ActivityCreateCategoryBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_create_category);
         binding.setViewModel(createCategoryViewModel);
         binding.setLifecycleOwner(this);
+        binding.createCategoryTopAppBar.setNavigationOnClickListener(v -> finish());
         createCategoryViewModel.getCreateError().observe(this, aBoolean -> {
             if (aBoolean) {
                 new MaterialAlertDialogBuilder(this)
@@ -55,4 +56,6 @@ public class CreateCategoryActivity extends AppCompatActivity {
     public void createCategory(MenuItem item) {
         createCategoryViewModel.createCategory();
     }
+
+
 }
