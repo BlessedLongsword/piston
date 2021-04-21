@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.viewmodels.CreateCategoryViewModel" />
+    </data>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.global.CreateCategoryActivity">
@@ -47,11 +55,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/create_category_name"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                android:afterTextChanged="@{() -> viewModel.titleUpdate()}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:text="@={viewModel.titleField}"
                     android:inputType="textShortMessage"
                     android:maxLength="@integer/title_max_length" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +79,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/big_edit_text_description"
+                    android:text="@={viewModel.descriptionField}"
                     android:gravity="start"
                     android:maxLength="@integer/description_max_length" />
 
@@ -78,6 +89,7 @@
                 android:id="@+id/nsfwCheckBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="@={viewModel.nsfwBox}"
                 android:text="@string/create_category_nsfw" />
 
             <Space
@@ -90,3 +102,5 @@
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -124,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_edit_black_24"
                         android:background="@color/transparent"
+                        android:theme="@style/Theme.AppCompat.DayNight"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"

@@ -41,7 +41,7 @@
                     />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/post_content"
+                    android:id="@+id/edit_phone_number_text_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_separator"

@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Layout;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityProfileBinding;
 import com.example.piston.viewmodels.ViewProfileActivityViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -53,19 +55,20 @@ public class ViewProfileActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
         viewProfileActivityViewModel.viewProfile();
         viewProfileActivityViewModel.getEditOption().observe(this, editOptions -> {
-        int layoutResource;
         switch (editOptions){
+            case NONE:
+                break;
             case NAME:
-                layoutResource = R.layout.popup_profile_edit_name;
+                popUpWindow(R.layout.popup_profile_edit_name, binding.viewProfileFullNameEditText);
                 break;
             case PHONE:
-                layoutResource = R.layout.popup_profile_edit_phone_number;
+                popUpWindow(R.layout.popup_profile_edit_phone_number, findViewById(R.id.edit_phone_number_text_field));
                 break;
-            default:
-                layoutResource = R.layout.popup_profile_edit_birth_date;
+            case BIRTH_DATE:
+                popUpWindow(R.layout.popup_profile_edit_birth_date, findViewById(R.id.edit_birth_date_text_field));
                 break;
         }
-        popUpWindow(layoutResource);
+
         });
         //init();
     }
@@ -80,7 +83,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void popUpWindow(int layoutResource) {
+    public void popUpWindow(int layoutResource, TextInputEditText textField) {
 
         View popupView = getLayoutInflater().inflate(layoutResource, null);
 
@@ -96,11 +99,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
 
-        // Initialize objects from layout
-        TextInputLayout ed = popupView.findViewById(R.id.popup);
-
-
-        Objects.requireNonNull(ed.getEditText()).requestFocus();
+        Objects.requireNonNull(textField).requestFocus();
         popupWindow.setOutsideTouchable(false);
 
         // force show keyboard once pop up window is open
