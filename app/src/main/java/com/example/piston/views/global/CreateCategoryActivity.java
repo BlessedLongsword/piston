@@ -38,11 +38,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
     }
 
     public void createCategory(MenuItem item) {
-        globalFragmentViewModel.createCategory(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
-        Intent output = new Intent();
-        output.putExtra("title", title.getEditText().getText().toString());
-        output.putExtra("desc", desc.getEditText().getText().toString());
-        setResult(RESULT_OK, output);
+        //globalFragmentViewModel.createCategory(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
         finish();
     }
 }

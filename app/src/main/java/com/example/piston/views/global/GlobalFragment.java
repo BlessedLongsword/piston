@@ -8,29 +8,29 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.adapters.CategoryAdapter;
+import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.views.main.SectionFragment;
 import com.example.piston.viewmodels.GlobalFragmentViewModel;
 
-import static android.app.Activity.RESULT_OK;
-
 public class GlobalFragment extends SectionFragment {
-
-    private GlobalFragmentViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_global, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(GlobalFragmentViewModel.class);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_global);
-        recyclerView.setAdapter(new CategoryAdapter(requireActivity()));
-        return view;
+        FragmentGlobalBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_global, container, false);
+        GlobalFragmentViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+                GlobalFragmentViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+        binding.recyclerviewGlobal.setAdapter(new CategoryAdapter(requireActivity()));
+        return binding.getRoot();
     }
 
     @Override
@@ -42,17 +42,7 @@ public class GlobalFragment extends SectionFragment {
 
     public void add() {
         Intent intent = new Intent(requireActivity(), CreateCategoryActivity.class);
-        startActivityForResult(intent, 0);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
-            String title = data.getStringExtra("title");
-            String desc = data.getStringExtra("desc");
-            viewModel.createCategory(title, desc);
-        }
+        startActivity(intent);
     }
 
 }

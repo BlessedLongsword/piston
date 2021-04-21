@@ -4,6 +4,8 @@ public class Section {
 
     private String title, description;
 
+    public Section() {}
+
     public Section(String title, String description)  {
         setTitle(title);
         setDescription(description);
