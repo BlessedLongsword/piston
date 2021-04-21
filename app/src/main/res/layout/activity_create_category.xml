@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.example.piston.viewmodels.CreateCategoryViewModel" />
+        <variable
+            name="constants"
+            type="com.example.piston.data.Constants" />
     </data>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -55,14 +58,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/create_category_name"
-                app:errorEnabled="true"
-                android:afterTextChanged="@{() -> viewModel.titleUpdate()}">
+                android:counter="@{constants.MAX_TITLE_LENGTH}"
+                app:errorEnabled="true" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@={viewModel.titleField}"
                     android:inputType="textShortMessage"
+                    android:afterTextChanged="@{() -> viewModel.titleUpdate()}"
                     android:maxLength="@integer/title_max_length" />
             </com.google.android.material.textfield.TextInputLayout>
 

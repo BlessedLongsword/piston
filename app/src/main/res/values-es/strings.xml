@@ -25,6 +25,7 @@
     <string name="settings">Configuración</string>
     <string name="link_copied">Enlace Copiado</string>
     <string name="file_path">Dirección del archivo</string>
+    <string name="confirmation_long">Entendido</string>
 
     <!-- User Data -->
     <string name="password">Contraseña</string>
@@ -98,6 +99,7 @@
     <string name="create_category_name">Nombre de la Categoría</string>
     <string name="create_category_nsfw">Categoría +18</string>
     <string name="category_link_help">Use esto para compartir la categoría</string>
+    <string name="create_category_error_message">Porfavor inserte un Nombre válido para la Categoría</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICACIONES</string>

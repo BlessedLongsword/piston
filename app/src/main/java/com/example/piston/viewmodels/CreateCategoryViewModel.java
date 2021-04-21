@@ -16,6 +16,7 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     private MutableLiveData<Boolean> nsfwBox = new MutableLiveData<>(false);
     private MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
+    private MutableLiveData<Boolean> finishCreateCategory = new MutableLiveData<>(false);
 
 
     private final CreateCategoryRepository repository = new CreateCategoryRepository(this);
@@ -26,17 +27,23 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     }
 
     public void createCategory() {
-        if (titleFieldError.getValue() == CreateCategoryResult.TitleError.NONE) {
-            repository.createCategory(titleField.getValue(), descriptionField.getValue());
-            loading.setValue(true);
-        } else {
-            createError.setValue(true);
-        }
+        repository.createCategory(titleField.getValue(), descriptionField.getValue());
+        loading.setValue(true);
     }
 
     @Override
     public void setTitleStatus(CreateCategoryResult.TitleError titleError) {
         titleFieldError.setValue(titleError);
+    }
+
+    @Override
+    public void setCreateError() {
+        createError.setValue(true);
+    }
+
+    @Override
+    public void setCreateFinished() {
+        finishCreateCategory.setValue(true);
     }
 
     @Override
@@ -60,12 +67,16 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
         return nsfwBox;
     }
 
-    public LiveData<Boolean> getLoading() {
-        return loading;
-    }
-
     public LiveData<Boolean> getCreateError() {
         return createError;
+    }
+
+    public LiveData<Boolean> getFinishCreateCategory() {
+        return finishCreateCategory;
+    }
+
+    public LiveData<Boolean> getLoading() {
+        return loading;
     }
 
 }

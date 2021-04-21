@@ -1,7 +1,9 @@
 package com.example.piston.data.repositories;
 
+import android.util.Log;
+
+import com.example.piston.data.Category;
 import com.example.piston.data.CreateCategoryResult;
-import com.example.piston.data.RegisterResult;
 import com.example.piston.data.Section;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -14,6 +16,8 @@ public class CreateCategoryRepository {
 
     public interface ICreateCategory {
         void setTitleStatus(CreateCategoryResult.TitleError titleError);
+        void setCreateError();
+        void setCreateFinished();
         void setLoadingFinished();
     }
 
@@ -39,19 +43,28 @@ public class CreateCategoryRepository {
     }
 
     public void createCategory(String title, String description) {
-        DocumentReference docRef = db.collection("categories").document(title);
-        docRef.get().addOnCompleteListener(task -> {
-            if (task.isComplete()) {
-                DocumentSnapshot ds = task.getResult();
-                if (ds.exists())
-                    listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
-                else {
-                    Section category = new Section(title, description);
-                    db.collection("categories").document().set(category);
-                    listener.setLoadingFinished();
+        if (title.trim().equals("")) {
+            listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
+            listener.setCreateError();
+            listener.setLoadingFinished();
+        } else {
+            DocumentReference docRef = db.collection("categories").document(title);
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isComplete()) {
+                    DocumentSnapshot ds = task.getResult();
+                    if (ds.exists()) {
+                        listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
+                        listener.setCreateError();
+                        listener.setLoadingFinished();
+                    } else {
+                        Section category = new Section(title, description);
+                        db.collection("categories").document(title).set(category);
+                        listener.setCreateFinished();
+                        listener.setLoadingFinished();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
 }

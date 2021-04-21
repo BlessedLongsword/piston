@@ -10,7 +10,6 @@ import com.example.piston.data.LoginResult;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class BindingAdapters {

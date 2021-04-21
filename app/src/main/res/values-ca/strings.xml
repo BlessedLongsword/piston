@@ -25,6 +25,7 @@
     <string name="settings">Configuració</string>
     <string name="link_copied">Enllaç Copiat</string>
     <string name="file_path">Camí del Arxiu</string>
+    <string name="confirmation_long">Entès</string>
 
     <!-- User Data -->
     <string name="password">Contrasenya</string>
@@ -98,6 +99,7 @@
     <string name="create_category_name">Nom de la Categoría</string>
     <string name="create_category_nsfw">Categoria +18</string>
     <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
+    <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoría</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICACIONS</string>
