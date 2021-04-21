@@ -13,20 +13,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
+import com.example.piston.viewmodels.CreateCategoryViewModel;
 import com.example.piston.viewmodels.GlobalFragmentViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateCategoryActivity extends AppCompatActivity {
 
     TextInputLayout desc, title;
-    private GlobalFragmentViewModel globalFragmentViewModel;
+    private CreateCategoryViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_create_category);
 
-        globalFragmentViewModel = new ViewModelProvider(this).get(GlobalFragmentViewModel.class);
+        viewModel = new ViewModelProvider(this).get(CreateCategoryViewModel.class);
 
         title = findViewById(R.id.input_category_name);
         title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
@@ -38,11 +39,10 @@ public class CreateCategoryActivity extends AppCompatActivity {
     }
 
     public void createCategory(MenuItem item) {
-        globalFragmentViewModel.createCategory(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
-        Intent output = new Intent();
-        output.putExtra("title", title.getEditText().getText().toString());
-        output.putExtra("desc", desc.getEditText().getText().toString());
-        setResult(RESULT_OK, output);
-        finish();
+        viewModel.createCategory();
+        if (viewModel.getCreateError().getValue())
+            ;
+        else
+            finish();
     }
 }
