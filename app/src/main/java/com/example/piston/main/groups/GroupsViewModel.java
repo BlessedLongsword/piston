@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal;
+package com.example.piston.main.groups;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,12 +8,12 @@ import com.example.piston.data.Section;
 
 import java.util.ArrayList;
 
-public class GroupFragmentViewModel extends ViewModel {
+public class GroupsViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Section>> groups;
     private final ArrayList<Section> groups_array;
 
-    public GroupFragmentViewModel() {
+    public GroupsViewModel() {
         groups_array = new ArrayList<>();
         groups = new MutableLiveData<>(groups_array);
     }

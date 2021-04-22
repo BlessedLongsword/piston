@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateCategoryBinding;
-import com.example.piston.main.global.createCategory.CreateCategoryViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreateCategoryActivity extends AppCompatActivity {

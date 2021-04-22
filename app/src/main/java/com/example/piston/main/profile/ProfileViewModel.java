@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ViewProfileActivityViewModel extends ViewModel implements ProfileRepository.IProfile{
+public class ProfileViewModel extends ViewModel implements ProfileRepository.IProfile{
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
     private final MutableLiveData<String> name = new MutableLiveData<>("");

@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal.group;
+package com.example.piston.main.groups.group;
 
 import android.content.Intent;
 import android.util.Log;
@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.main.global.category.CategoryActivity;
-import com.example.piston.main.groupal.GroupFragmentViewModel;
+import com.example.piston.main.groups.GroupsViewModel;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
 
     private final FragmentActivity localActivity;
-    private final GroupFragmentViewModel viewModel;
+    private final GroupsViewModel viewModel;
 
     public static class GroupHolder extends RecyclerView.ViewHolder {
 
@@ -49,7 +49,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     public GroupAdapter(FragmentActivity activity) {
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(GroupFragmentViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(GroupsViewModel.class);
         viewModel.getGroups().observe(activity, cosa -> notifyDataSetChanged());
     }
 

@@ -1,4 +1,4 @@
-package com.example.piston.other.launch;
+package com.example.piston.launch;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +12,12 @@ import com.example.piston.authentication.login.LoginActivity;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private LaunchActivityViewModel viewModel;
+    private LaunchViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(LaunchActivityViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LaunchViewModel.class);
         checkIfUserIsAuthenticated();
     }
 

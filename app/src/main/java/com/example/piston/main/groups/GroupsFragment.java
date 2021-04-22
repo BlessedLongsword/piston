@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal;
+package com.example.piston.main.groups;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,22 +12,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.example.piston.main.groupal.createGroup.CreateGroupActivity;
-import com.example.piston.main.groupal.group.GroupAdapter;
+import com.example.piston.main.groups.createGroup.CreateGroupActivity;
+import com.example.piston.main.groups.group.GroupAdapter;
 import com.example.piston.main.SectionFragment;
 
 import static android.app.Activity.RESULT_OK;
 
-public class GroupFragment extends SectionFragment {
+public class GroupsFragment extends SectionFragment {
 
-    private GroupFragmentViewModel viewModel;
+    private GroupsViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_group, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(GroupFragmentViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(GroupsViewModel.class);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_group);
         recyclerView.setAdapter(new GroupAdapter(requireActivity()));
         return view;

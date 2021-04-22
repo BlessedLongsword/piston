@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal.group;
+package com.example.piston.main.groups.group;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

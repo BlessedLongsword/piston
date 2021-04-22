@@ -10,21 +10,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.example.piston.main.posts.ViewPostsActivityViewModel;
+import com.example.piston.main.posts.ViewPostsViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreatePostActivity extends AppCompatActivity {
 
     TextInputLayout title, content;
 
-    private ViewPostsActivityViewModel viewPostsActivityViewModel;
+    private ViewPostsViewModel viewPostsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
-        viewPostsActivityViewModel = new ViewModelProvider(this).get(ViewPostsActivityViewModel.class);
+        viewPostsViewModel = new ViewModelProvider(this).get(ViewPostsViewModel.class);
 
         title = findViewById(R.id.choose_title);
         title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
@@ -36,7 +36,7 @@ public class CreatePostActivity extends AppCompatActivity {
 
     public void createPost(MenuItem item) {
         String owner = "jojo";
-        viewPostsActivityViewModel.createPost(title.getEditText().getText().toString()
+        viewPostsViewModel.createPost(title.getEditText().getText().toString()
                 , owner, content.getEditText().getText().toString());
 
         Intent output = new Intent();

@@ -15,13 +15,13 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        RegisterActivityViewModel registerActivityViewModel = new ViewModelProvider(this)
-                .get(RegisterActivityViewModel.class);
+        RegisterViewModel registerViewModel = new ViewModelProvider(this)
+                .get(RegisterViewModel.class);
 
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        binding.setViewModel(registerActivityViewModel);
+        binding.setViewModel(registerViewModel);
         binding.setLifecycleOwner(this);
-        registerActivityViewModel.getFinishedRegister().observe(this, aBoolean -> {
+        registerViewModel.getFinishedRegister().observe(this, aBoolean -> {
             if (aBoolean)
                 finish();
         });

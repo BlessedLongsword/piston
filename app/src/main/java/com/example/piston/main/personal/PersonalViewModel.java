@@ -9,11 +9,11 @@ import com.example.piston.main.personal.PersonalRepository;
 
 import java.util.ArrayList;
 
-public class PersonalFragmentViewModel extends ViewModel implements PersonalRepository.IPersonal{
+public class PersonalViewModel extends ViewModel implements PersonalRepository.IPersonal{
 
     private final MutableLiveData<ArrayList<Folder>> folders = new MutableLiveData<>(new ArrayList<>());
 
-    public PersonalFragmentViewModel() {
+    public PersonalViewModel() {
         PersonalRepository personalRepository = new PersonalRepository(this);
         personalRepository.loadFolders();
     }

@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal.createGroup;
+package com.example.piston.main.groups.createGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.example.piston.main.groupal.GroupFragmentViewModel;
+import com.example.piston.main.groups.GroupsViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateGroupActivity extends AppCompatActivity {
@@ -21,14 +21,14 @@ public class CreateGroupActivity extends AppCompatActivity {
     ClipboardManager clipboard;
     ClipData clip;
     TextInputLayout link, desc, title;
-    private GroupFragmentViewModel groupFragmentViewModel;
+    private GroupsViewModel groupsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_create_group);
 
-        groupFragmentViewModel = new ViewModelProvider(this).get(GroupFragmentViewModel.class);
+        groupsViewModel = new ViewModelProvider(this).get(GroupsViewModel.class);
 
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         link = findViewById(R.id.group_link);
@@ -49,7 +49,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     public void createGroup(MenuItem item) {
-        groupFragmentViewModel.createGroup(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
+        groupsViewModel.createGroup(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
         Intent output = new Intent();
         output.putExtra("title", title.getEditText().getText().toString());
         output.putExtra("desc", desc.getEditText().getText().toString());

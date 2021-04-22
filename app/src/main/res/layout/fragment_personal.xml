@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.main.personal.PersonalFragmentViewModel" />
+            type="com.example.piston.main.personal.PersonalViewModel" />
     </data>
 
     <FrameLayout

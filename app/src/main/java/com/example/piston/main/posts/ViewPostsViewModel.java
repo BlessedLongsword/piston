@@ -8,12 +8,12 @@ import com.example.piston.data.Post;
 
 import java.util.ArrayList;
 
-public class ViewPostsActivityViewModel extends ViewModel {
+public class ViewPostsViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Post>> posts;
     private final ArrayList<Post> posts_array;
 
-    public ViewPostsActivityViewModel() {
+    public ViewPostsViewModel() {
         posts_array = new ArrayList<>();
         posts = new MutableLiveData<>(posts_array);
     }

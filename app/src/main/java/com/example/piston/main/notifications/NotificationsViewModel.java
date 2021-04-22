@@ -8,12 +8,12 @@ import com.example.piston.data.Section;
 
 import java.util.ArrayList;
 
-public class NotificationViewModel extends ViewModel {
+public class NotificationsViewModel extends ViewModel {
     private final MutableLiveData<ArrayList<Section>> notifications;
     private final ArrayList<Section> notification_array;
 
 
-    public NotificationViewModel() {
+    public NotificationsViewModel() {
         notification_array = new ArrayList<>();
         notifications = new MutableLiveData<>(notification_array);
 

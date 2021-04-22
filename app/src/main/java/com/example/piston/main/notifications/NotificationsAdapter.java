@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.main.global.category.CategoryActivity;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationHolder> {
+public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationHolder> {
 
     private final FragmentActivity localActivity;
-    private final NotificationViewModel viewModel;
+    private final NotificationsViewModel viewModel;
 
     public static class NotificationHolder extends RecyclerView.ViewHolder {
 
@@ -45,22 +45,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 
-    public NotificationAdapter(FragmentActivity activity){
+    public NotificationsAdapter(FragmentActivity activity){
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(NotificationViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
         viewModel.getNotifications().observe(activity, cosa -> notifyDataSetChanged());
     }
 
     @NonNull
     @Override
-    public NotificationAdapter.NotificationHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public NotificationsAdapter.NotificationHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_notification, viewGroup, false);
-        return new NotificationAdapter.NotificationHolder(view);
+        return new NotificationsAdapter.NotificationHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationAdapter.NotificationHolder notificationHolder, int position) {
+    public void onBindViewHolder(@NonNull NotificationsAdapter.NotificationHolder notificationHolder, int position) {
         notificationHolder.getNotificationTitle().setText(viewModel.getNotifications().getValue().get(position).getTitle());
         notificationHolder.getNotificationText().setText(viewModel.getNotifications().getValue().get(position).getDescription());
         notificationHolder.getLayout().setOnClickListener(view -> {

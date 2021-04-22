@@ -22,8 +22,8 @@
         <activity android:name=".main.global.category.CategoryActivity"/>
 
         <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
-        <activity android:name=".main.groupal.createGroup.CreateGroupActivity"/>
-        <activity android:name=".main.groupal.editGroup.ModerateGroupActivity"/>
+        <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>
+        <activity android:name=".main.groups.editGroup.ModerateGroupActivity"/>
         <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
 
         <activity android:name=".main.MainActivity"/>
@@ -31,10 +31,10 @@
         <activity android:name=".authentication.login.LoginActivity"/>
         <activity android:name=".authentication.register.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
-        <activity android:name=".main.profile.ViewProfileActivity"/>
+        <activity android:name=".main.profile.ProfileActivity"/>
         <activity android:name=".main.profile.image.ProfileImageActivity"/>
 
-        <activity android:name=".other.launch.LaunchActivity"
+        <activity android:name=".launch.LaunchActivity"
             android:theme="@style/Theme.Piston.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

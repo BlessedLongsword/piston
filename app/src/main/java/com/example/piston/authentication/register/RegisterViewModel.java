@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.Objects;
 
-public class RegisterActivityViewModel extends ViewModel implements RegisterRepository.IRegister {
+public class RegisterViewModel extends ViewModel implements RegisterRepository.IRegister {
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
     private final MutableLiveData<String> email = new MutableLiveData<>("");
@@ -25,7 +25,6 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
     private final MutableLiveData<RegisterResult.ConfirmPasswordError> confirmPasswordError = new MutableLiveData<>(RegisterResult.ConfirmPasswordError.NONE);
     private final MutableLiveData<RegisterResult.EmailError> emailError = new MutableLiveData<>(RegisterResult.EmailError.NONE);
     private final MutableLiveData<RegisterResult.BirthDateError> birthDateError = new MutableLiveData<>(RegisterResult.BirthDateError.NONE);
-    private final MutableLiveData<RegisterResult.CheckError> checkError = new MutableLiveData<>(RegisterResult.CheckError.NONE);
 
 
     private final RegisterRepository registerRepository = new RegisterRepository(this);
@@ -158,15 +157,11 @@ public class RegisterActivityViewModel extends ViewModel implements RegisterRepo
         return birthDateError;
     }
 
-    public LiveData<RegisterResult.CheckError> getCheckError() {
-        return checkError;
-    }
-
     public LiveData<Boolean> getLoading() {
         return loading;
     }
 
-    public MutableLiveData<Boolean> getFinishedRegister() {
+    public LiveData<Boolean> getFinishedRegister() {
         return finishedRegister;
     }
 

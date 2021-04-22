@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.data.Folder;
 import com.example.piston.databinding.ItemFolderBinding;
-import com.example.piston.main.personal.PersonalFragmentViewModel;
+import com.example.piston.main.personal.PersonalViewModel;
 
 import java.util.Objects;
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
 
     private final FragmentActivity localActivity;
-    private final PersonalFragmentViewModel viewModel;
+    private final PersonalViewModel viewModel;
 
     public static class FolderHolder extends RecyclerView.ViewHolder {
 
@@ -38,7 +38,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
     public FolderAdapter(FragmentActivity activity) {
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(PersonalFragmentViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(PersonalViewModel.class);
         viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());
     }
 

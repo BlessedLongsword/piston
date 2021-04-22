@@ -1,4 +1,4 @@
-package com.example.piston.main.groupal.editGroup;
+package com.example.piston.main.groups.editGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

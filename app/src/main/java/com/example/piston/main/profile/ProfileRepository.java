@@ -1,6 +1,5 @@
 package com.example.piston.main.profile;
 
-import com.example.piston.main.profile.ProfileResult;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;

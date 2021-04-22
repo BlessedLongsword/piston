@@ -16,7 +16,7 @@ import com.example.piston.R;
 public class ViewPostsAdapter extends RecyclerView.Adapter<ViewPostsAdapter.PostsHolder> {
 
     private final FragmentActivity localActivity;
-    private final ViewPostsActivityViewModel viewModel;
+    private final ViewPostsViewModel viewModel;
 
     public static class PostsHolder extends RecyclerView.ViewHolder {
 
@@ -50,7 +50,7 @@ public class ViewPostsAdapter extends RecyclerView.Adapter<ViewPostsAdapter.Post
 
     public ViewPostsAdapter(FragmentActivity activity) {
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(ViewPostsActivityViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(ViewPostsViewModel.class);
         viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
     }
 

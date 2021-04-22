@@ -24,8 +24,8 @@ public class GlobalFragment extends SectionFragment {
                              @Nullable Bundle savedInstanceState) {
         FragmentGlobalBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_global, container, false);
-        GlobalFragmentViewModel viewModel = new ViewModelProvider(requireActivity()).get(
-                GlobalFragmentViewModel.class);
+        GlobalViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+                GlobalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.recyclerviewGlobal.setAdapter(new CategoryAdapter(requireActivity()));

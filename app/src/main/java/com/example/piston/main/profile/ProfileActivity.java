@@ -25,23 +25,23 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class ViewProfileActivity extends AppCompatActivity {
-    private ViewProfileActivityViewModel viewProfileActivityViewModel;
+public class ProfileActivity extends AppCompatActivity {
+    private ProfileViewModel profileViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-         viewProfileActivityViewModel = new ViewModelProvider(this)
-                .get(ViewProfileActivityViewModel.class);
+         profileViewModel = new ViewModelProvider(this)
+                .get(ProfileViewModel.class);
 
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
-        binding.setViewModel(viewProfileActivityViewModel);
+        binding.setViewModel(profileViewModel);
         binding.setLifecycleOwner(this);
         binding.profileToolbar.setNavigationOnClickListener(v -> finish());
-        viewProfileActivityViewModel.viewProfile();
-        viewProfileActivityViewModel.getEditOption().observe(this, editOptions -> {
+        profileViewModel.viewProfile();
+        profileViewModel.getEditOption().observe(this, editOptions -> {
         switch (editOptions){
             case NONE:
                 break;

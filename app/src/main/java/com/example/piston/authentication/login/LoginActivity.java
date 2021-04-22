@@ -20,16 +20,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginActivityViewModel loginActivityViewModel;
+    private LoginViewModel loginViewModel;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        binding.setViewModel(loginActivityViewModel);
+        binding.setViewModel(loginViewModel);
         binding.setLifecycleOwner(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.signInButtonGoogle.setOnClickListener(view -> signIn());
 
-        loginActivityViewModel.getLoginResult().observe(this, loginResult -> {
+        loginViewModel.getLoginResult().observe(this, loginResult -> {
             if (loginResult.isSignedIn())
                 goToMainActivity();
             if (loginResult.isNewUser())
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            loginActivityViewModel.signInWithGoogle(GoogleSignIn.getSignedInAccountFromIntent(data));
+            loginViewModel.signInWithGoogle(GoogleSignIn.getSignedInAccountFromIntent(data));
         }
     }
 

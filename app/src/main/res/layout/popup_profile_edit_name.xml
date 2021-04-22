@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.main.profile.ViewProfileActivityViewModel" />
+            type="com.example.piston.main.profile.ProfileViewModel" />
 
         <variable
             name="constants"

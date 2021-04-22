@@ -5,15 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Category;
-import com.example.piston.main.global.GlobalRepository;
 
 import java.util.ArrayList;
 
-public class GlobalFragmentViewModel extends ViewModel implements GlobalRepository.IGlobal {
+public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlobal {
 
     private final MutableLiveData<ArrayList<Category>> categories = new MutableLiveData<>(new ArrayList<>());
 
-    public GlobalFragmentViewModel() {
+    public GlobalViewModel() {
         GlobalRepository globalRepository = new GlobalRepository(this);
         globalRepository.loadCategories();
     }

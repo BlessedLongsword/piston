@@ -26,8 +26,8 @@ public class PersonalFragment extends SectionFragment {
 
         FragmentPersonalBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_personal, container, false);
-        PersonalFragmentViewModel viewModel = new ViewModelProvider(requireActivity()).get(
-                PersonalFragmentViewModel.class);
+        PersonalViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+                PersonalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.recyclerviewPersonal.setAdapter(new FolderAdapter(requireActivity()));

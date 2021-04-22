@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class CategoryRepository {
 
-    public interface CategoryListener {
+    public interface ICategory {
         void setCategoryPosts(ArrayList<Post> posts);
     }
 
-    private final CategoryListener listener;
+    private final ICategory listener;
 
-    public CategoryRepository(CategoryListener listener) {
+    public CategoryRepository(ICategory listener) {
         this.listener = listener;
     }
 

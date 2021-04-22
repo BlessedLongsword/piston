@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.piston.main.MainRepository;
 
-public class MainActivityViewModel extends ViewModel implements MainRepository.IMain {
+public class MainViewModel extends ViewModel implements MainRepository.IMain {
 
     public MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>(true);
     private final MainRepository mainRepository = new MainRepository(this);

@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Objects;
 
-public class LoginActivityViewModel extends ViewModel implements LoginRepository.ILogin {
+public class LoginViewModel extends ViewModel implements LoginRepository.ILogin {
 
     private final MutableLiveData<String> username = new MutableLiveData<>("");
     private final MutableLiveData<String> password = new MutableLiveData<>("");

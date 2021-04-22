@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.main.global.createCategory.CreateCategoryResult;
-import com.example.piston.main.global.createCategory.CreateCategoryRepository;
-
 import java.util.Objects;
 
 public class CreateCategoryViewModel extends ViewModel implements CreateCategoryRepository.ICreateCategory {

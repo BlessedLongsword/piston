@@ -13,19 +13,19 @@ import com.example.piston.R;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.authentication.login.LoginActivity;
-import com.example.piston.main.profile.ViewProfileActivity;
+import com.example.piston.main.profile.ProfileActivity;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainActivityViewModel viewModel;
+    private MainViewModel viewModel;
     private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         viewModel.isSignedIn.observe(this, isSignedIn -> {
             if (!isSignedIn)
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openViewProfile(MenuItem item) {
-        Intent intent = new Intent(this, ViewProfileActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 

@@ -21,7 +21,7 @@ import java.util.Objects;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
 
     private final FragmentActivity localActivity;
-    private final GlobalFragmentViewModel viewModel;
+    private final GlobalViewModel viewModel;
 
     public static class CategoryHolder extends RecyclerView.ViewHolder {
 
@@ -43,7 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public CategoryAdapter(FragmentActivity activity) {
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(GlobalFragmentViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(GlobalViewModel.class);
         viewModel.getCategories().observe(activity, cosa -> notifyDataSetChanged());
     }
 

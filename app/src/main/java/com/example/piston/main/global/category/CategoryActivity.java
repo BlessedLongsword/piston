@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.main.global.category.CategoryViewModel;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 

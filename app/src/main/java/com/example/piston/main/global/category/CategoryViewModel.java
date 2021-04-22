@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Post;
-import com.example.piston.main.global.category.CategoryRepository;
 
 import java.util.ArrayList;
 
-public class CategoryViewModel extends ViewModel implements CategoryRepository.CategoryListener {
+public class CategoryViewModel extends ViewModel implements CategoryRepository.ICategory {
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
 

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.piston.main.global.GlobalFragment;
-import com.example.piston.main.groupal.GroupFragment;
+import com.example.piston.main.groups.GroupsFragment;
 import com.example.piston.main.personal.PersonalFragment;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
@@ -21,7 +21,7 @@ public class SectionsPagerAdapter extends FragmentStateAdapter {
         if (position == 0)
             return new PersonalFragment();
         if (position == 1)
-            return new GroupFragment();
+            return new GroupsFragment();
         else
             return new GlobalFragment();
     }

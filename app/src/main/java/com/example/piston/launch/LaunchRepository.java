@@ -1,4 +1,4 @@
-package com.example.piston.other.launch;
+package com.example.piston.launch;
 
 import com.google.firebase.auth.FirebaseAuth;
 
