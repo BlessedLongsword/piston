@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
 import com.example.piston.main.global.createCategory.CreateCategoryResult;
+import com.example.piston.main.groups.createGroup.CreateGroupResult;
 import com.example.piston.main.personal.createFolder.CreateFolderResult;
 import com.example.piston.authentication.login.LoginResult;
 import com.example.piston.main.profile.ProfileResult;
@@ -159,10 +160,22 @@ public class BindingAdapters {
                 view.setError(null);
                 break;
             case EMPTY:
-                view.setError(view.getContext().getString(R.string.create_category_title_empty));
+                view.setError(view.getContext().getString(R.string.title_empty));
                 break;
             case EXISTS:
                 view.setError(view.getContext().getString(R.string.create_category_title_taken));
+                break;
+        }
+    }
+
+    @BindingAdapter("android:groupTitleError")
+    public static void setGroupTitleErrorMessage(TextInputLayout view, CreateGroupResult.TitleError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case EMPTY:
+                view.setError(view.getContext().getString(R.string.create_group_error_message));
                 break;
         }
     }
@@ -182,7 +195,7 @@ public class BindingAdapters {
                 view.setError(null);
                 break;
             case EMPTY:
-                view.setError(view.getContext().getString(R.string.create_category_title_empty));
+                view.setError(view.getContext().getString(R.string.title_empty));
                 break;
             case EXISTS:
                 view.setError(view.getContext().getString(R.string.create_category_title_taken));

@@ -26,6 +26,7 @@
     <string name="link_copied">Enllaç Copiat</string>
     <string name="file_path">Camí del Arxiu</string>
     <string name="confirmation_long">Entès</string>
+    <string name="title_empty">Aquest camp és obligatori</string>
 
     <!-- User Data -->
     <string name="password">Contrasenya</string>
@@ -89,6 +90,7 @@
     <string name="create_group_name">Nom del Grup</string>
     <string name="create_group_members">Membres</string>
     <string name="group_link_help">Obtenir invitacions per nou membres</string>
+    <string name="create_group_error_message">Has d\'insertar un nom pel grup</string>
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">CONFIGURACIO DEL GRUP</string>
@@ -101,7 +103,6 @@
     <string name="create_category_nsfw">Categoria +18</string>
     <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
     <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoría</string>
-    <string name="create_category_title_empty">Aquest camp és obligatori</string>
     <string name="create_category_title_taken">Aquesta categoría ja existeix</string>
 
     <!-- Notifications Strings -->

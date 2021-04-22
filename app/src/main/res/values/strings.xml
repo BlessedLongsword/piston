@@ -28,6 +28,7 @@
     <string name="error" translatable="false">Error</string>
     <string name="confirmation" translatable="false">OK</string>
     <string name="confirmation_long">Got it</string>
+    <string name="title_empty">This field is necessary</string>
 
     <!-- User Data -->
     <string name="password">Password</string>
@@ -91,6 +92,7 @@
     <string name="create_group_name">Group name</string>
     <string name="create_group_members">Members</string>
     <string name="group_link_help">Use this to invite members</string>
+    <string name="create_group_error_message">You must specify a group title</string>
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">GROUP SETTINGS</string>
@@ -103,7 +105,6 @@
     <string name="create_category_nsfw">NSFW Category</string>
     <string name="category_link_help">Use this to share category</string>
     <string name="create_category_error_message">Please insert a valid Category Name</string>
-    <string name="create_category_title_empty">This field is necessary</string>
     <string name="create_category_title_taken">This Category already exists</string>
 
     <!-- Notifications Strings -->

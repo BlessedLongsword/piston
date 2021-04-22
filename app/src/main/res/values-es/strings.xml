@@ -26,6 +26,7 @@
     <string name="link_copied">Enlace Copiado</string>
     <string name="file_path">Dirección del archivo</string>
     <string name="confirmation_long">Entendido</string>
+    <string name="title_empty">Este campo es obligatorio</string>
 
     <!-- User Data -->
     <string name="password">Contraseña</string>
@@ -89,6 +90,7 @@
     <string name="create_group_name">Nombre del Grupo</string>
     <string name="create_group_members">Miembros</string>
     <string name="group_link_help">Use esto para invitar nuevos miembros</string>
+    <string name="create_group_error_message">Debes insertar un nombre para el grupo</string>
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">AJUSTES DEL GRUPO</string>
@@ -101,7 +103,6 @@
     <string name="create_category_nsfw">Categoría +18</string>
     <string name="category_link_help">Use esto para compartir la categoría</string>
     <string name="create_category_error_message">Porfavor inserte un Nombre válido para la Categoría</string>
-    <string name="create_category_title_empty">Este campo es obligatorio</string>
     <string name="create_category_title_taken">Esta categoría ya existe</string>
 
     <!-- Notifications Strings -->

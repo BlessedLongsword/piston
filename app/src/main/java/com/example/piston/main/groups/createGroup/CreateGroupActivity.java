@@ -2,60 +2,64 @@ package com.example.piston.main.groups.createGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.example.piston.main.groups.GroupsViewModel;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.piston.databinding.ActivityCreateGroupBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
+    CreateGroupViewModel createGroupViewModel;
     ClipboardManager clipboard;
     ClipData clip;
-    TextInputLayout link, desc, title;
-    private GroupsViewModel groupsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_create_group);
 
-        groupsViewModel = new ViewModelProvider(this).get(GroupsViewModel.class);
+        createGroupViewModel = new ViewModelProvider(this).get(CreateGroupViewModel.class);
+        ActivityCreateGroupBinding  binding = DataBindingUtil.setContentView(this, R.layout.activity_create_group);
+        binding.setViewModel(createGroupViewModel);
+        binding.setLifecycleOwner(this);
+
+        createGroupViewModel.generateGroupID();
 
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        link = findViewById(R.id.group_link);
 
-        title = findViewById(R.id.input_group_name);
-        title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
-        title.getEditText().addTextChangedListener(new CounterWatcher(getResources().getInteger(R.integer.title_max_length), title));
-
-
-        desc = findViewById(R.id.input_group_desc);
-        desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-
-        link.setEndIconOnClickListener(v -> {
-            clip = ClipData.newPlainText("GroupCode", link.getEditText().getText());
+        binding.groupLink.setEndIconOnClickListener(v -> {
+            clip = ClipData.newPlainText("GroupCode", binding.groupLink.getEditText().getText());
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
         });
+
+        binding.createGroupTopAppBar.setNavigationOnClickListener(v -> finish());
+
+        createGroupViewModel.getCreateError().observe(this, aBoolean -> {
+            if (aBoolean) {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle(getResources().getString(R.string.error))
+                        .setMessage(getResources().getString(R.string.create_group_error_message))
+                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> {
+                        })
+                        .show();
+            }
+        });
+        createGroupViewModel.getFinishCreateGroup().observe(this, aBoolean -> {
+            if (aBoolean)
+                finish();
+        });
+
     }
 
     public void createGroup(MenuItem item) {
-        groupsViewModel.createGroup(title.getEditText().getText().toString(), desc.getEditText().getText().toString());
-        Intent output = new Intent();
-        output.putExtra("title", title.getEditText().getText().toString());
-        output.putExtra("desc", desc.getEditText().getText().toString());
-        output.putExtra("link", link.getEditText().getText().toString());
-        setResult(RESULT_OK, output);
-        finish();
-
+        createGroupViewModel.createGroup();
     }
 }
