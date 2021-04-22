@@ -14,28 +14,27 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
-        <activity android:name=".views.others.NotificationsActivity"/>
-        <activity android:name=".views.others.SettingsActivity"/>
+        <activity android:name=".main.notifications.NotificationsActivity"/>
+        <activity android:name=".main.settings.SettingsActivity"/>
 
-        <activity android:name=".views.posts.CreatePostActivity"/>
-        <activity android:name=".views.posts.EditPostActivity"/>
-        <activity android:name=".views.posts.ReplyPostActivity"/>
-        <activity android:name=".views.global.ViewPostsCategoryActivity"/>
+        <activity android:name=".main.posts.createPost.CreatePostActivity"/>
+        <activity android:name=".main.posts.editPost.EditPostActivity"/>
+        <activity android:name=".main.global.category.CategoryActivity"/>
 
-        <activity android:name=".views.global.CreateCategoryActivity"/>
-        <activity android:name=".views.group.CreateGroupActivity"/>
-        <activity android:name=".views.group.ModerateGroupActivity"/>
-        <activity android:name=".views.personal.CreateFolderActivity"/>
+        <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
+        <activity android:name=".main.groupal.createGroup.CreateGroupActivity"/>
+        <activity android:name=".main.groupal.editGroup.ModerateGroupActivity"/>
+        <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
 
-        <activity android:name=".views.main.MainActivity"/>
+        <activity android:name=".main.MainActivity"/>
 
-        <activity android:name=".views.user.LoginActivity"/>
-        <activity android:name=".views.user.RegisterActivity"
+        <activity android:name=".authentication.login.LoginActivity"/>
+        <activity android:name=".authentication.register.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
-        <activity android:name=".views.user.ViewProfileActivity"/>
-        <activity android:name=".views.user.ProfileImageActivity"/>
+        <activity android:name=".main.profile.ViewProfileActivity"/>
+        <activity android:name=".main.profile.image.ProfileImageActivity"/>
 
-        <activity android:name=".views.LaunchActivity"
+        <activity android:name=".other.launch.LaunchActivity"
             android:theme="@style/Theme.Piston.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

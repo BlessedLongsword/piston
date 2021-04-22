@@ -7,16 +7,16 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodels.CreateCategoryViewModel" />
+            type="com.example.piston.main.global.createCategory.CreateCategoryViewModel" />
         <variable
-            name="constants"
-            type="com.example.piston.data.Constants" />
+            name="integers"
+            type="com.example.piston.data.constants.Integers" />
     </data>
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.global.CreateCategoryActivity">
+    tools:context=".main.global.createCategory.CreateCategoryActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/create_category_name"
-                android:counter="@{constants.MAX_TITLE_LENGTH}"
+                android:counter="@{integers.MAX_TITLE_LENGTH}"
                 android:categoryTitleError="@{viewModel.titleFieldError}"
                 app:errorEnabled="true" >
 

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.posts.EditPostActivity">
+    tools:context=".main.posts.editPost.EditPostActivity">
 
     <item
         android:id="@+id/edit_post_btn"

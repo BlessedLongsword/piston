@@ -6,13 +6,12 @@ import android.widget.EditText;
 import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
-import com.example.piston.data.CreateCategoryResult;
-import com.example.piston.data.CreateFolderResult;
-import com.example.piston.data.LoginResult;
-import com.example.piston.data.ProfileResult;
-import com.example.piston.data.RegisterResult;
+import com.example.piston.main.global.createCategory.CreateCategoryResult;
+import com.example.piston.main.personal.createFolder.CreateFolderResult;
+import com.example.piston.authentication.login.LoginResult;
+import com.example.piston.main.profile.ProfileResult;
+import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class BindingAdapters {

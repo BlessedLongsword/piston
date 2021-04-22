@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodels.ViewProfileActivityViewModel" />
+            type="com.example.piston.main.profile.ViewProfileActivityViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -125,10 +125,12 @@
                         android:src="@drawable/baseline_edit_black_24"
                         android:background="@color/transparent"
                         android:theme="@style/Theme.AppCompat.DayNight"
+                        android:contentDescription="@string/edit"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionName()}"/>
+                        android:onClick="@{() -> viewModel.setEditOptionName()}"
+                        android:layout_marginEnd="10dp" />
 
                 </LinearLayout>
 
@@ -169,10 +171,12 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_edit_black_24"
                         android:background="@color/transparent"
+                        android:contentDescription="@string/edit"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionPhoneNumber()}"/>
+                        android:onClick="@{() -> viewModel.setEditOptionPhoneNumber()}"
+                        android:layout_marginEnd="10dp" />
 
                 </LinearLayout>
 
@@ -239,10 +243,12 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_edit_black_24"
                         android:background="@color/transparent"
+                        android:contentDescription="@string/edit"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionBirthDate()}"/>
+                        android:onClick="@{() -> viewModel.setEditOptionBirthDate()}"
+                        android:layout_marginEnd="10dp" />
                 </LinearLayout>
 
                 <View

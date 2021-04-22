@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodels.ViewProfileActivityViewModel" />
+            type="com.example.piston.main.profile.ViewProfileActivityViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -84,7 +84,7 @@
                     android:layout_marginEnd="@dimen/card_margin"
                     android:layout_marginRight="@dimen/card_margin"
                     android:layout_weight="22"
-                    android:text="Cancel" />
+                    android:text="@string/cancel" />
 
                 <com.google.android.material.button.MaterialButton
                     style="?attr/borderlessButtonStyle"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="22"
                     android:enabled="@{viewModel.editBirthDateSaveEnabled}"
-                    android:text="Save" />
+                    android:text="@string/save" />
 
             </LinearLayout>
 

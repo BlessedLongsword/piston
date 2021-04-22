@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.group.CreateGroupActivity">
+    tools:context=".main.groupal.createGroup.CreateGroupActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true"
-        tools:context=".views.group.CreateGroupActivity">
+        tools:context=".main.groupal.createGroup.CreateGroupActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -7,16 +7,16 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodels.CreateFolderViewModel" />
+            type="com.example.piston.main.personal.createFolder.CreateFolderViewModel" />
         <variable
             name="constants"
-            type="com.example.piston.data.Constants" />
+            type="com.example.piston.data.constants.Integers" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.personal.CreateFolderActivity">
+        tools:context=".main.personal.createFolder.CreateFolderActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:orientation="vertical"
                 android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                tools:context=".views.personal.CreateFolderActivity"
+                tools:context=".main.personal.createFolder.CreateFolderActivity"
                 android:weightSum="2">
 
                 <Space

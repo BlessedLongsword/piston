@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.piston.viewmodels.PersonalFragmentViewModel" />
+            type="com.example.piston.main.personal.PersonalFragmentViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.personal.PersonalFragment">
+        tools:context=".main.personal.PersonalFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_personal"
