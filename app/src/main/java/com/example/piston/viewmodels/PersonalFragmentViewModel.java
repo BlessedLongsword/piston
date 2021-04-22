@@ -4,29 +4,29 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.piston.data.Category;
+import com.example.piston.data.Folder;
+import com.example.piston.data.repositories.GlobalRepository;
+import com.example.piston.data.repositories.PersonalRepository;
+
 import java.util.ArrayList;
 
-public class PersonalFragmentViewModel extends ViewModel {
+public class PersonalFragmentViewModel extends ViewModel implements PersonalRepository.IPersonal{
 
-    private final MutableLiveData<ArrayList<String>> folders;
-    private final ArrayList<String> folders_array;
-    //private final CategoryManager categoryManager;
+    private final MutableLiveData<ArrayList<Folder>> folders = new MutableLiveData<>(new ArrayList<>());
 
     public PersonalFragmentViewModel() {
-        folders_array = new ArrayList<>();
-        folders = new MutableLiveData<>(folders_array);
-        //categoryManager = new CategoryManager();
+        PersonalRepository personalRepository = new PersonalRepository(this);
+        personalRepository.loadFolders();
     }
 
-    public LiveData<ArrayList<String>> getFolders() {
+    public LiveData<ArrayList<Folder>> getFolders() {
         return folders;
     }
 
-    public void createFolder(String title, String description){
-        //categoryManager.createFolder(title, description);
-        //folders.postValue(categoryManager.getFolderNames());
-        folders_array.add(title);
-        folders.setValue(folders_array);
+    @Override
+    public void setFolders(ArrayList<Folder> folders) {
+        this.folders.setValue(folders);
     }
 
 }

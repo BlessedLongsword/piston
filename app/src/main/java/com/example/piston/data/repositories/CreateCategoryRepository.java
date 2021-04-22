@@ -1,10 +1,7 @@
 package com.example.piston.data.repositories;
 
-import android.util.Log;
-
 import com.example.piston.data.Category;
 import com.example.piston.data.CreateCategoryResult;
-import com.example.piston.data.Section;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;

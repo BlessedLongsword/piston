@@ -1,7 +1,6 @@
 package com.example.piston.data.repositories;
 
 import com.example.piston.data.ProfileResult;
-import com.example.piston.data.RegisterResult;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +50,5 @@ public class ProfileRepository {
         else
             listener.setBirthDateStatus(ProfileResult.BirthDateError.INVALID);
     }
-
 
 }

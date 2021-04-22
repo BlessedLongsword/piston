@@ -1,41 +1,48 @@
 package com.example.piston.views.personal;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.example.piston.viewmodels.PersonalFragmentViewModel;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.piston.databinding.ActivityCreateFolderBinding;
+import com.example.piston.viewmodels.CreateFolderViewModel;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreateFolderActivity extends AppCompatActivity {
 
-    private PersonalFragmentViewModel personalFragmentViewModel;
-    private TextInputLayout title, desc;
+    CreateFolderViewModel createFolderViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_folder);
-        personalFragmentViewModel = new ViewModelProvider(this).get(PersonalFragmentViewModel.class);
-        title = findViewById(R.id.create_folder_name);
-        title.setSuffixText(Integer.toString(getResources().getInteger(R.integer.title_max_length)));
-        title.getEditText().addTextChangedListener(new CounterWatcher(R.integer.title_max_length, title));
-        desc = findViewById(R.id.create_folder_description);
-        //desc.getEditText().setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        createFolderViewModel = new ViewModelProvider(this).get(CreateFolderViewModel.class);
+        ActivityCreateFolderBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_create_folder);
+        binding.setViewModel(createFolderViewModel);
+        binding.setLifecycleOwner(this);
+        binding.createFolderTopAppBar.setNavigationOnClickListener(v -> finish());
+        createFolderViewModel.getCreateError().observe(this, aBoolean -> {
+            if (aBoolean) {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle(getResources().getString(R.string.error))
+                        .setMessage(getResources().getString(R.string.create_category_error_message))
+                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> {
+
+                        })
+                        .show();
+            }
+        });
+        createFolderViewModel.getFinishCreateFolder().observe(this, aBoolean -> {
+            if (aBoolean)
+                finish();
+        });
     }
 
     public void createFolder(MenuItem item) {
-        personalFragmentViewModel.createFolder(title.getEditText().getText().toString(),
-                desc.getEditText().getText().toString());
-        Intent output = new Intent();
-        output.putExtra("title", title.getEditText().getText().toString());
-        output.putExtra("desc", desc.getEditText().getText().toString());
-        setResult(RESULT_OK, output);
-        finish();
+        createFolderViewModel.createFolder();
     }
 }

@@ -5,13 +5,11 @@ public class Post {
     private String title;
     private String content;
     private String owner;
-    private int id;
 
-    public Post(String title, String content, String owner, int id) {
+    public Post(String title, String content, String owner) {
         setTitle(title);
         setContent(content);
         setOwner(owner);
-        setId(id);
     }
 
     public String getTitle() {
@@ -28,15 +26,6 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getOwner() {

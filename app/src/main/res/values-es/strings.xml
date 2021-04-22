@@ -82,6 +82,7 @@
     <string name="create_folder_activity_title">CREAR CARPETA</string>
     <string name="folder_name">Nombre de la Carpeta</string>
     <string name="edit_folder_activity_title">EDITAR CARPETA</string>
+    <string name="create_folder_title_taken">Esta carpeta ya existe</string>
 
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREAR GRUPO</string>

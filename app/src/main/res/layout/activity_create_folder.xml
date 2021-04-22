@@ -1,82 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.personal.CreateFolderActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.viewmodels.CreateFolderViewModel" />
+        <variable
+            name="constants"
+            type="com.example.piston.data.Constants" />
+    </data>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/create_folder_topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/create_folder_activity_title"
-            app:navigationIcon="@drawable/outline_close_white_24"
-            app:menu="@menu/create_folder_top_app_bar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        tools:context=".views.personal.CreateFolderActivity">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/create_folder_topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/create_folder_activity_title"
+                app:navigationIcon="@drawable/outline_close_white_24"
+                app:menu="@menu/create_folder_top_app_bar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            tools:context=".views.personal.CreateFolderActivity"
-            android:weightSum="2">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true">
 
-            <Space
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                tools:context=".views.personal.CreateFolderActivity"
+                android:weightSum="2">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_folder_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/folder_name"
-                app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
+                <Space
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:maxLength="@integer/title_max_length"
-                    android:inputType="textShortMessage" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_folder_description"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/big_text_field_description"
-                android:hint="@string/description"
-                app:counterEnabled="true"
-                app:counterMaxLength="@integer/description_max_length">
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/create_folder_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/big_edit_text_description"
-                    android:gravity="start" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:hint="@string/folder_name"
+                    android:counter="@{constants.MAX_TITLE_LENGTH}"
+                    android:folderTitleError="@{viewModel.titleFieldError}"
+                    app:errorEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@={viewModel.titleField}"
+                        android:maxLength="@integer/title_max_length"
+                        android:afterTextChanged="@{() -> viewModel.titleUpdate()}"
+                        android:inputType="textShortMessage" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/create_folder_description"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_text_field_description"
+                    android:hint="@string/description"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="@integer/description_max_length">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/big_edit_text_description"
+                        android:text="@={viewModel.descriptionField}"
+                        android:gravity="start"
+                        android:maxLength="@integer/description_max_length" />
 
-    </androidx.core.widget.NestedScrollView>
+                </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <ProgressBar
+                    android:id="@+id/category_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:setVisible="@{viewModel.loading}"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

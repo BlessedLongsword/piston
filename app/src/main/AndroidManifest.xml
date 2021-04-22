@@ -20,7 +20,7 @@
         <activity android:name=".views.posts.CreatePostActivity"/>
         <activity android:name=".views.posts.EditPostActivity"/>
         <activity android:name=".views.posts.ReplyPostActivity"/>
-        <activity android:name=".views.posts.ViewPostsActivity"/>
+        <activity android:name=".views.global.ViewPostsCategoryActivity"/>
 
         <activity android:name=".views.global.CreateCategoryActivity"/>
         <activity android:name=".views.group.CreateGroupActivity"/>

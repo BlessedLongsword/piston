@@ -1,6 +1,8 @@
 package com.example.piston.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import com.example.piston.R;
 import com.example.piston.data.Category;
 import com.example.piston.databinding.ItemCategoryBinding;
 import com.example.piston.viewmodels.GlobalFragmentViewModel;
+import com.example.piston.views.global.ViewPostsCategoryActivity;
 
 import java.util.Objects;
 
@@ -32,7 +35,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         public void bind(Category item) {
             binding.setCategory(item);
-            binding.executePendingBindings();
+        }
+
+        public ItemCategoryBinding getBinding() {
+            return binding;
         }
     }
 
@@ -55,11 +61,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryHolder holder, int position) {
         Category category = Objects.requireNonNull(viewModel.getCategories().getValue()).get(position);
         holder.bind(category);
+        holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
     }
 
     @Override
     public int getItemCount() {
-        return viewModel.getCategories().getValue().size();
+        return Objects.requireNonNull(viewModel.getCategories().getValue()).size();
+    }
+
+    private View.OnClickListener openNewActivity(String id) {
+        return v -> {
+            Intent intent = new Intent(localActivity, ViewPostsCategoryActivity.class);
+            intent.putExtra("id", id);
+            localActivity.startActivity(intent);
+        };
     }
 
 }

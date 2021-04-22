@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.example.piston.views.posts.ViewPostsActivity;
+import com.example.piston.views.global.ViewPostsCategoryActivity;
 import com.example.piston.viewmodels.NotificationViewModel;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationHolder> {
@@ -65,7 +65,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         notificationHolder.getNotificationTitle().setText(viewModel.getNotifications().getValue().get(position).getTitle());
         notificationHolder.getNotificationText().setText(viewModel.getNotifications().getValue().get(position).getDescription());
         notificationHolder.getLayout().setOnClickListener(view -> {
-            Intent intent = new Intent(localActivity, ViewPostsActivity.class);
+            Intent intent = new Intent(localActivity, ViewPostsCategoryActivity.class);
             intent.putExtra("title", viewModel.getNotifications().getValue().get(position).getTitle());
             intent.putExtra("description", viewModel.getNotifications().getValue().get(position).getDescription());
             localActivity.startActivity(intent);
