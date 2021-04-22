@@ -14,7 +14,7 @@
     <string name="save_changes">Guardar Cambios</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
-    <string name="link">Enlace</string>
+    <string name="group_code">Enlace</string>
     <string name="description">Descripción</string>
     <string name="create">Crear</string>
     <string name="upload">Subir</string>
@@ -27,6 +27,7 @@
     <string name="file_path">Dirección del archivo</string>
     <string name="confirmation_long">Entendido</string>
     <string name="title_empty">Este campo es obligatorio</string>
+    <string name="alternative">También puedes</string>
 
     <!-- User Data -->
     <string name="password">Contraseña</string>
@@ -84,6 +85,13 @@
     <string name="folder_name">Nombre de la Carpeta</string>
     <string name="edit_folder_activity_title">EDITAR CARPETA</string>
     <string name="create_folder_title_taken">Esta carpeta ya existe</string>
+
+    <!-- Join Group Strings -->
+    <string name="join_group_activity_title">Unirse a un Grupo</string>
+    <string name="join_group_error">Éste grupo no existe</string>
+    <string name="join_group_help">Usa un código proporcionado por un dueño de grupo</string>
+    <string name="join_successful">Te has unido al grupo con éxito!</string>
+    <string name="join_grup_already">Ya estás en este grupo</string>
 
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREAR GRUPO</string>

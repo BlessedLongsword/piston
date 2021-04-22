@@ -14,7 +14,7 @@
     <string name="save_changes">Desa els canvis</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
-    <string name="link">Enllaç</string>
+    <string name="group_code">Enllaç</string>
     <string name="description">Descripció</string>
     <string name="create">Crear</string>
     <string name="upload">Pujar</string>
@@ -27,6 +27,7 @@
     <string name="file_path">Camí del Arxiu</string>
     <string name="confirmation_long">Entès</string>
     <string name="title_empty">Aquest camp és obligatori</string>
+    <string name="alternative">També pots</string>
 
     <!-- User Data -->
     <string name="password">Contrasenya</string>
@@ -85,6 +86,13 @@
     <string name="edit_folder_activity_title">EDITAR CARPETA</string>
     <string name="create_folder_title_taken">Aquesta carpeta ja existeix</string>
 
+    <!-- Join Group Strings -->
+    <string name="join_group_activity_title">Unir-se a un Grup</string>
+    <string name="join_group_error">Aquest grup no existeix</string>
+    <string name="join_group_help">Usa un codi proporcionat per un propietari de grup</string>
+    <string name="join_successful">T\'has unit al grup amb èxit!</string>
+    <string name="join_grup_already">Ja pertanys a aquest grup</string>
+
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREAR GRUP</string>
     <string name="create_group_name">Nom del Grup</string>
@@ -96,6 +104,7 @@
     <string name="group_settings_activity_title">CONFIGURACIO DEL GRUP</string>
     <string name="delete_group_btn">Eliminar Grup</string>
     <string name="delete_selected">Eliminar seleccionats</string>
+
 
     <!-- Create Category Strings -->
     <string name="create_category_activity_title">CREAR CATEGORIA</string>

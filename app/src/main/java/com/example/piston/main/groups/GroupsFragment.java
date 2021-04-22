@@ -15,6 +15,7 @@ import com.example.piston.R;
 import com.example.piston.main.groups.createGroup.CreateGroupActivity;
 import com.example.piston.main.groups.group.GroupAdapter;
 import com.example.piston.main.SectionFragment;
+import com.example.piston.main.groups.joinGroup.JoinGroupActivity;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,7 +42,7 @@ public class GroupsFragment extends SectionFragment {
     }
 
     public void add() {
-        Intent intent = new Intent(requireActivity(), CreateGroupActivity.class);
+        Intent intent = new Intent(requireActivity(), JoinGroupActivity.class);
         startActivityForResult(intent, 0);
     }
 

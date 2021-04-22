@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter;
 import com.example.piston.R;
 import com.example.piston.main.global.createCategory.CreateCategoryResult;
 import com.example.piston.main.groups.createGroup.CreateGroupResult;
+import com.example.piston.main.groups.joinGroup.JoinGroupResult;
 import com.example.piston.main.personal.createFolder.CreateFolderResult;
 import com.example.piston.authentication.login.LoginResult;
 import com.example.piston.main.profile.ProfileResult;
@@ -199,6 +200,24 @@ public class BindingAdapters {
                 break;
             case EXISTS:
                 view.setError(view.getContext().getString(R.string.create_category_title_taken));
+                break;
+        }
+    }
+
+    @BindingAdapter("android:groupCodeError")
+    public static void setGroupCodeError(TextInputLayout view, JoinGroupResult.JoinError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case EMPTY:
+                view.setError(view.getContext().getString(R.string.title_empty));
+                break;
+            case NOT_EXISTS:
+                view.setError(view.getContext().getString(R.string.join_group_error));
+                break;
+            case ALREADY_JOINED:
+                view.setError(view.getContext().getString(R.string.join_grup_already));
                 break;
         }
     }

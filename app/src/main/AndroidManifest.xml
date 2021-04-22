@@ -23,6 +23,7 @@
 
         <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
         <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>
+        <activity android:name=".main.groups.joinGroup.JoinGroupActivity"/>
         <activity android:name=".main.groups.editGroup.ModerateGroupActivity"/>
         <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
 
