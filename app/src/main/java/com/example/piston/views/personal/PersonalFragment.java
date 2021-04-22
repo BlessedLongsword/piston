@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
+import com.example.piston.adapters.CategoryAdapter;
 import com.example.piston.adapters.FolderAdapter;
+import com.example.piston.databinding.FragmentGlobalBinding;
+import com.example.piston.databinding.FragmentPersonalBinding;
+import com.example.piston.viewmodels.GlobalFragmentViewModel;
 import com.example.piston.views.main.SectionFragment;
 import com.example.piston.viewmodels.PersonalFragmentViewModel;
 
@@ -20,17 +25,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class PersonalFragment extends SectionFragment {
 
-    private PersonalFragmentViewModel viewModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personal, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(PersonalFragmentViewModel.class);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_personal);
-        recyclerView.setAdapter(new FolderAdapter(requireActivity()));
-        return view;
+
+        FragmentPersonalBinding binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_personal, container, false);
+        PersonalFragmentViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+                PersonalFragmentViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+        binding.recyclerviewPersonal.setAdapter(new FolderAdapter(requireActivity()));
+        return binding.getRoot();
     }
 
     @Override
@@ -45,13 +52,4 @@ public class PersonalFragment extends SectionFragment {
         startActivityForResult(intent, 0);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
-            String title = data.getStringExtra("title");
-            String desc = data.getStringExtra("desc");
-            viewModel.createFolder(title, desc);
-        }
-    }
 }

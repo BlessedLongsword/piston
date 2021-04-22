@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.example.piston.R;
 import com.example.piston.data.CreateCategoryResult;
+import com.example.piston.data.CreateFolderResult;
 import com.example.piston.data.LoginResult;
 import com.example.piston.data.ProfileResult;
 import com.example.piston.data.RegisterResult;
@@ -173,6 +174,21 @@ public class BindingAdapters {
         view.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
             view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length()));
         });
+    }
+
+    @BindingAdapter("android:folderTitleError")
+    public static void setFolderTitleErrorMessage(TextInputLayout view, CreateFolderResult.TitleError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case EMPTY:
+                view.setError(view.getContext().getString(R.string.create_category_title_empty));
+                break;
+            case EXISTS:
+                view.setError(view.getContext().getString(R.string.create_category_title_taken));
+                break;
+        }
     }
 
 }

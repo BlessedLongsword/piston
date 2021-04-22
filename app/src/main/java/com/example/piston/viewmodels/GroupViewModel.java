@@ -22,8 +22,8 @@ public class GroupViewModel {
         return posts;
     }
 
-    public void createPost(String title, String text, String owner, int id){
-        post_array.add(new Post(title, text, owner, id));
+    public void createPost(String title, String text, String owner){
+        post_array.add(new Post(title, text, owner));
         posts.setValue(post_array);
     }
 }

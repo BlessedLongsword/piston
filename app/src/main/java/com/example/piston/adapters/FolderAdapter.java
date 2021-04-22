@@ -8,13 +8,20 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
+import com.example.piston.data.Category;
+import com.example.piston.data.Folder;
+import com.example.piston.databinding.ItemCategoryBinding;
+import com.example.piston.databinding.ItemFolderBinding;
 import com.example.piston.views.posts.ViewPostsActivity;
 import com.example.piston.viewmodels.PersonalFragmentViewModel;
+
+import java.util.Objects;
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
 
@@ -23,21 +30,16 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
     public static class FolderHolder extends RecyclerView.ViewHolder {
 
-        private final FrameLayout layout;
-        private final TextView folderTitle;
+        private final ItemFolderBinding binding;
 
-        public FolderHolder(View view) {
-            super(view);
-            layout = view.findViewById(R.id.folder_item_layout);
-            folderTitle = view.findViewById(R.id.folder_item_title);
+        public FolderHolder(ItemFolderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        public TextView getFolderTitle() {
-            return folderTitle;
-        }
-
-        public FrameLayout getLayout() {
-            return layout;
+        public void bind(Folder item) {
+            binding.setFolder(item);
+            //binding.executePendingBindings();
         }
     }
 
@@ -49,20 +51,17 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
     @NonNull
     @Override
-    public FolderHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_folder, viewGroup, false);
-        return new FolderHolder(view);
+    public FolderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemFolderBinding binding = DataBindingUtil.inflate(layoutInflater,
+                R.layout.item_folder, parent, false);
+        return new FolderHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FolderHolder folderHolder, int position) {
-        folderHolder.getFolderTitle().setText(viewModel.getFolders().getValue().get(position));
-        folderHolder.getLayout().setOnClickListener(view -> {
-            Intent intent = new Intent(localActivity, ViewPostsActivity.class);
-            intent.putExtra("title", viewModel.getFolders().getValue().get(position));
-            localActivity.startActivity(intent);
-        });
+    public void onBindViewHolder(@NonNull FolderHolder holder, int position) {
+        Folder folder = Objects.requireNonNull(viewModel.getFolders().getValue()).get(position);
+        holder.bind(folder);
     }
 
     @Override

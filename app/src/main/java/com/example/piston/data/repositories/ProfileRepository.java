@@ -52,5 +52,4 @@ public class ProfileRepository {
             listener.setBirthDateStatus(ProfileResult.BirthDateError.INVALID);
     }
 
-
 }

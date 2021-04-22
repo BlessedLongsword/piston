@@ -84,6 +84,7 @@
     <string name="create_folder_activity_title">CREATE FOLDER</string>
     <string name="folder_name">Folder Name</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
+    <string name="create_folder_title_taken">This Folder already exists</string>
 
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREATE GROUP</string>
