@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.main.groups.joinGroup.JoinGroupViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.groups.createGroup.CreateGroupActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/join_group_top_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/join_group_activity_title"
+                app:navigationIcon="@drawable/outline_close_white_24"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true"
+            tools:context=".main.groups.createGroup.CreateGroupActivity">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginVertical="@dimen/medium_separator"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_group_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintEnabled="false"
+                    app:placeholderText="@string/group_code"
+                    app:helperText="@string/join_group_help"
+                    app:endIconMode="custom"
+                    android:groupCodeError="@{viewModel.groupCodeFieldError}"
+                    app:endIconDrawable="@drawable/outline_group_add_black_36"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="@dimen/zero"
+                        android:afterTextChanged="@{() -> viewModel.groupCodeUpdate()}"
+                        android:text="@={viewModel.groupCodeField}"
+                        android:inputType="textShortMessage" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/medium_separator"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/alternative"
+                    android:textSize="@dimen/title"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="@dimen/long_button"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    app:icon="@drawable/outline_groups_black_24"
+                    android:onClick="@{() -> viewModel.setCreateGroup()}"
+                    android:text="@string/create_group_activity_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <ProgressBar
+                    android:id="@+id/reg_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_marginVertical="@dimen/medium_separator"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:setVisible="@{viewModel.loading}"/>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

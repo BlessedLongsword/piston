@@ -38,5 +38,6 @@
     <dimen name="huge">45sp</dimen>
     <dimen name="card_image">194dp</dimen>
     <dimen name="profile_activity_image_height">400dp</dimen>
+    <dimen name="long_button">200dp</dimen>
 
 </resources>

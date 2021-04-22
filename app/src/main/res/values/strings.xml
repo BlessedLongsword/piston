@@ -14,7 +14,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="link">Link</string>
+    <string name="group_code">Group Code</string>
     <string name="description">Description</string>
     <string name="create">Create</string>
     <string name="upload">Upload</string>
@@ -29,6 +29,7 @@
     <string name="confirmation" translatable="false">OK</string>
     <string name="confirmation_long">Got it</string>
     <string name="title_empty">This field is necessary</string>
+    <string name="alternative">You can also</string>
 
     <!-- User Data -->
     <string name="password">Password</string>
@@ -86,6 +87,13 @@
     <string name="folder_name">Folder Name</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
     <string name="create_folder_title_taken">This Folder already exists</string>
+
+    <!-- Join Group Strings -->
+    <string name="join_group_activity_title">Join Group</string>
+    <string name="join_group_error">This group does not exist</string>
+    <string name="join_group_help">Use a group code provided by a group owner</string>
+    <string name="join_successful">Joined group successfully!</string>
+    <string name="join_grup_already">You already joined this group</string>
 
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREATE GROUP</string>

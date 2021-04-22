@@ -2,6 +2,7 @@ package com.example.piston.data;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
@@ -19,6 +20,7 @@ public class User {
     private String email;
     private String pwd;
     private Date birthDate;
+    private ArrayList<String> joinedGroups;
 
     public User() {} //Empty constructor for db
 
@@ -27,6 +29,7 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.pwd = pwd;
+        joinedGroups = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -97,5 +100,13 @@ public class User {
         this.featuredPost = featuredPost;
     }
 
+    @Nullable
+    public ArrayList<String> getJoinedGroups() {
+        return joinedGroups;
+    }
+
+    public void setJoinedGroups(ArrayList<String> joinedGroups) {
+        this.joinedGroups = joinedGroups;
+    }
 }
 

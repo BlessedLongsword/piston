@@ -92,7 +92,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/link"
+            android:hint="@string/group_code"
             app:endIconDrawable="@drawable/baseline_content_copy_black_24"
             app:endIconMode="custom"
             app:helperText="@string/group_link_help"

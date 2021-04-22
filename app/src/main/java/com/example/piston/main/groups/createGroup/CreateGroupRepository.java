@@ -3,15 +3,18 @@ package com.example.piston.main.groups.createGroup;
 import android.util.Log;
 
 import com.example.piston.data.Group;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CreateGroupRepository {
 
     private final CreateGroupRepository.ICreateGroup listener;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public interface ICreateGroup {
         void setGroupID(String groupID);
@@ -52,13 +55,17 @@ public class CreateGroupRepository {
             listener.setLoadingFinished();
             listener.setCreateError();
         } else {
-            Group group = new Group(title, description);
+            Group group = new Group(title, description, groupID);
             db.collection("groups").document(groupID).set(group).addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     listener.setLoadingFinished();
                     listener.setCreateFinished();
                 }
             });
+            Map<String, String> data = new HashMap<>();
+            data.put("id", groupID);
+            db.collection("users").document(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
+                    .collection("groups").document(groupID).set(data);
         }
     }
 
