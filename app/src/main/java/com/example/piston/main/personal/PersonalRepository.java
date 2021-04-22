@@ -28,7 +28,6 @@ public class PersonalRepository {
     }
 
     public void loadFolders() {
-
         db.collection("users")
                 .document(user)
                 .collection("folders")

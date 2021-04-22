@@ -8,4 +8,9 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
     </style>
+
+    <style name="EditTextButton">
+        <item name="android:src">@drawable/baseline_mode_edit_white_24</item>
+    </style>
+
 </resources>

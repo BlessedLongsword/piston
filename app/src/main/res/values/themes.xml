@@ -24,9 +24,8 @@
         <item name="boxStrokeWidth">0dp</item>
     </style>
 
-    <style name="BlankBox.NoStroke.EditIcon">
-        <item name="endIconMode">custom</item>
-        <item name="endIconDrawable">@drawable/baseline_edit_black_24</item>
+    <style name="EditTextButton">
+        <item name="android:src">@drawable/baseline_edit_black_24</item>
     </style>
 
 </resources>

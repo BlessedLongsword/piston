@@ -6,6 +6,8 @@ public class Post {
     private String content;
     private String owner;
 
+    public Post() {}
+
     public Post(String title, String content, String owner) {
         setTitle(title);
         setContent(content);

@@ -33,6 +33,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".main.profile.ProfileActivity"/>
         <activity android:name=".main.profile.image.ProfileImageActivity"/>
+        <activity android:name=".main.posts.PostActivity"/>
 
         <activity android:name=".launch.LaunchActivity"
             android:theme="@style/Theme.Piston.SplashScreen">

@@ -1,5 +1,8 @@
 package com.example.piston.main.global.category;
 
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,12 +16,24 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
 
     private final CategoryRepository repository = new CategoryRepository(this);
 
+    public CategoryViewModel(String category) {
+        Log.d("nowaybro", "Created");
+        repository.loadCategoryPosts(category);
+    }
+
     public void setTitle(String category) {
         repository.loadCategoryPosts(category);
     }
 
     @Override
     public void setCategoryPosts(ArrayList<Post> posts) {
+        Log.d("nowaybro", String.valueOf(posts.size()));
+        for (Post post : posts)
+            Log.d("nowaybro", post.getTitle());
         this.posts.setValue(posts);
+    }
+
+    public LiveData<ArrayList<Post>> getPosts() {
+        return posts;
     }
 }

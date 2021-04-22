@@ -1,114 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:checkable="true"
-    android:layout_margin="@dimen/card_margin">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="post"
+            type="com.example.piston.data.Post" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Media -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/card_image"
-            app:srcCompat="@drawable/jojo"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/content_description_media"
-            />
+        android:checkable="true"
+        android:layout_margin="@dimen/card_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/small_separator">
+            android:orientation="vertical">
 
-            <!-- Title, secondary and supporting text -->
-            <TextView
-                android:id="@+id/post_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title"
-                android:textAppearance="?attr/textAppearanceHeadline6"
+            <!-- Media -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_image"
+                app:srcCompat="@drawable/jojo"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/content_description_media"
                 />
-            <TextView
-                android:id="@+id/post_owner"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_margin"
-                android:text="@string/username"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                />
-            <TextView
-                android:id="@+id/post_content"
-                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/small_separator">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/title"
+                    android:text="@{post.title}"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    />
+                <TextView
+                    android:id="@+id/post_owner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/card_margin"
+                    tools:text="@string/username"
+                    android:text="@{post.owner}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    />
+                <TextView
+                    android:id="@+id/post_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_separator"
+                    tools:text="@string/post_content"
+                    android:text="@{post.content}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:maxLength="@integer/description_max_length"
+                    />
+
+            </LinearLayout>
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_separator"
-                android:text="@string/post_content"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:maxLength="@integer/description_max_length"
-                />
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <com.google.android.material.button.MaterialButton
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_marginRight="@dimen/card_margin"
+                    android:layout_weight="30"
+                    android:text="Optional 1" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:text="Optional 2" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20" />
+
+                <ImageButton
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_marginRight="@dimen/card_margin"
+                    android:layout_weight="10"
+                    android:background="@null"
+                    android:contentDescription="@string/content_description_media"
+                    android:src="@drawable/baseline_favorite_border_black_36" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:background="@null"
+                    android:contentDescription="@string/content_description_media"
+                    android:src="@drawable/baseline_share_black_36" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/card_margin"
-            android:orientation="horizontal"
-            android:weightSum="100">
+    </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_weight="30"
-                android:text="Optional 1" />
-
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="30"
-                android:text="Optional 2" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="20" />
-
-            <ImageButton
-                android:layout_width="2dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_weight="10"
-                android:background="@null"
-                android:contentDescription="@string/content_description_media"
-                android:src="@drawable/baseline_favorite_border_black_36" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="10"
-                android:background="@null"
-                android:contentDescription="@string/content_description_media"
-                android:src="@drawable/baseline_share_black_36" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</layout>

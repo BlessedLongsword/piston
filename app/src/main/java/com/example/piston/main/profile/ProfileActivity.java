@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
+
     private ProfileViewModel profileViewModel;
 
     @Override
