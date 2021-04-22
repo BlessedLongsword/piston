@@ -14,11 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.example.piston.data.Category;
 import com.example.piston.data.Folder;
-import com.example.piston.databinding.ItemCategoryBinding;
 import com.example.piston.databinding.ItemFolderBinding;
-import com.example.piston.views.posts.ViewPostsActivity;
 import com.example.piston.viewmodels.PersonalFragmentViewModel;
 
 import java.util.Objects;

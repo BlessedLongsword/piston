@@ -1,6 +1,5 @@
 package com.example.piston.adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.viewmodels.ViewPostsActivityViewModel;
-import com.example.piston.views.posts.ViewPostsActivity;
 
 public class ViewPostsAdapter extends RecyclerView.Adapter<ViewPostsAdapter.PostsHolder> {
 
@@ -71,11 +69,11 @@ public class ViewPostsAdapter extends RecyclerView.Adapter<ViewPostsAdapter.Post
         postsHolder.getPostOwner().setText(viewModel.getPosts().getValue().get(position).getOwner());
         postsHolder.getPostContent().setText(viewModel.getPosts().getValue().get(position).getContent());
         postsHolder.getLayout().setOnClickListener(view -> {
-            Intent intent = new Intent(localActivity, ViewPostsActivity.class);
+            /*Intent intent = new Intent(localActivity, ViewPostsActivity.class);
             intent.putExtra("title", viewModel.getPosts().getValue().get(position).getTitle());
             intent.putExtra("owner", viewModel.getPosts().getValue().get(position).getOwner());
             intent.putExtra("content", viewModel.getPosts().getValue().get(position).getContent());
-            localActivity.startActivity(intent);
+            localActivity.startActivity(intent);*/
         });
     }
 

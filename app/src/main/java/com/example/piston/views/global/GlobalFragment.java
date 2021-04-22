@@ -44,5 +44,4 @@ public class GlobalFragment extends SectionFragment {
         Intent intent = new Intent(requireActivity(), CreateCategoryActivity.class);
         startActivity(intent);
     }
-
 }

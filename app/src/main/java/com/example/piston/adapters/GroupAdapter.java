@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.example.piston.views.posts.ViewPostsActivity;
+import com.example.piston.views.global.ViewPostsCategoryActivity;
 import com.example.piston.viewmodels.GroupFragmentViewModel;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
@@ -66,7 +66,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         groupHolder.getgroupTitle().setText(viewModel.getGroups().getValue().get(position).getTitle());
         groupHolder.getgroupDesc().setText(viewModel.getGroups().getValue().get(position).getDescription());
         groupHolder.getLayout().setOnClickListener(view -> {
-            Intent intent = new Intent(localActivity, ViewPostsActivity.class);
+            Intent intent = new Intent(localActivity, ViewPostsCategoryActivity.class);
             intent.putExtra("title", viewModel.getGroups().getValue().get(position).getTitle());
             intent.putExtra("description", viewModel.getGroups().getValue().get(position).getDescription());
             Log.d("what","hihi");

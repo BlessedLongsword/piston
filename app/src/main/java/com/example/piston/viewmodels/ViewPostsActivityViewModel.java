@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Post;
-import com.example.piston.data.Section;
-import com.example.piston.views.posts.ViewPostsActivity;
 
 import java.util.ArrayList;
 

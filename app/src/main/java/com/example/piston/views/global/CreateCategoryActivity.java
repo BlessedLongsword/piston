@@ -1,13 +1,7 @@
 package com.example.piston.views.global;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,13 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateCategoryBinding;
-import com.example.piston.databinding.ActivityRegisterBinding;
-import com.example.piston.databinding.ActivityRegisterBindingImpl;
-import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.example.piston.viewmodels.CreateCategoryViewModel;
-import com.example.piston.viewmodels.GlobalFragmentViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateCategoryActivity extends AppCompatActivity {
 
