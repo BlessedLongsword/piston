@@ -29,7 +29,7 @@
                 app:title="@string/create_folder_activity_title"
                 app:navigationIcon="@drawable/outline_close_white_24"
                 app:menu="@menu/create_folder_top_app_bar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+                style="@style/Theme.Piston.ToolbarStyle"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

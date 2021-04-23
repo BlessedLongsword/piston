@@ -14,7 +14,6 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     public GlobalViewModel() {
         GlobalRepository globalRepository = new GlobalRepository(this);
-        globalRepository.loadCategories();
     }
 
     public LiveData<ArrayList<Category>> getCategories() {

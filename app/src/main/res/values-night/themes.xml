@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.Piston" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Piston" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
@@ -7,7 +7,13 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
+
     </style>
+
+    <style name="Theme.Piston.ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.MaterialComponents.Toolbar.Surface</item>
+    </style>
+
 
     <style name="EditTextButton">
         <item name="android:src">@drawable/baseline_mode_edit_white_24</item>

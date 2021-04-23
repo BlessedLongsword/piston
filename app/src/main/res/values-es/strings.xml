@@ -2,10 +2,13 @@
     <string name="app_name">Piston</string>
 
     <!-- Tab names -->
+    <string name="tab_personal">Personal</string>
+    <string name="tab_groups">Grupal</string>
+    <string name="tab_global">Global</string>
     <string-array name="tab_titles">
-        <item><string name="tab_personal">Personal</string></item>
-        <item><string name="tab_groups">Grupal</string></item>
-        <item><string name="tab_global">Global</string></item>
+        <item>@string/tab_personal</item>
+        <item>@string/tab_groups</item>
+        <item>@string/tab_global</item>
     </string-array>
 
     <!-- General purpose -->
@@ -50,7 +53,7 @@
     <string name="reg_date_format">dd/mm/aaaa</string>
     <string name="terms_text">He leído y aceptado los términos de privacidad</string>
     <string name="reg_btn">Registrarse</string>
-    <string name="reg_succesful">Registro exitoso</string>
+    <string name="reg_successful">Registro exitoso</string>
 
     <!-- View Profile Strings -->
     <string name="view_profile_name">Nombre y Apellidos</string>
@@ -92,7 +95,7 @@
     <string name="join_group_error">Éste grupo no existe</string>
     <string name="join_group_help">Usa un código proporcionado por un dueño de grupo</string>
     <string name="join_successful">Te has unido al grupo con éxito!</string>
-    <string name="join_grup_already">Ya estás en este grupo</string>
+    <string name="join_group_already">Ya estás en este grupo</string>
 
     <!-- Create and edit Group Strings -->
     <string name="create_group_activity_title">CREAR GRUPO</string>

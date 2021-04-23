@@ -14,8 +14,7 @@ public class PersonalViewModel extends ViewModel implements PersonalRepository.I
     private final MutableLiveData<ArrayList<Folder>> folders = new MutableLiveData<>(new ArrayList<>());
 
     public PersonalViewModel() {
-        PersonalRepository personalRepository = new PersonalRepository(this);
-        personalRepository.loadFolders();
+        new PersonalRepository(this);
     }
 
     public LiveData<ArrayList<Folder>> getFolders() {

@@ -22,7 +22,7 @@
                 android:id="@+id/view_posts_topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+                style="@style/Theme.Piston.ToolbarStyle"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

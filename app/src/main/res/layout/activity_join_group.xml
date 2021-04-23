@@ -24,7 +24,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/join_group_activity_title"
                 app:navigationIcon="@drawable/outline_close_white_24"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+                style="@style/Theme.Piston.ToolbarStyle"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

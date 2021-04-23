@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.posts.ReplyPostActivity">
+    tools:context=".main.posts.createPost.CreatePostActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/reply_post_topAppBar"
@@ -18,7 +18,7 @@
             app:title="@string/reply_post_activity_title"
             app:navigationIcon="@drawable/outline_close_white_24"
             app:menu="@menu/reply_post_top_app_bar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+            style="@style/Theme.Piston.ToolbarStyle"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

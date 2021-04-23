@@ -1,11 +1,14 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Piston</string>
 
     <!-- Tab names -->
+    <string name="tab_personal">Personal</string>
+    <string name="tab_groups">Groups</string>
+    <string name="tab_global">Global</string>
     <string-array name="tab_titles">
-        <item><string name="tab_personal">Personal</string></item>
-        <item><string name="tab_groups">Grupal</string></item>
-        <item><string name="tab_global">Global</string></item>
+        <item>@string/tab_personal</item>
+        <item>@string/tab_groups</item>
+        <item>@string/tab_global</item>
     </string-array>
 
     <!-- General purpose -->
@@ -52,12 +55,12 @@
     <string name="reg_date_format">dd/mm/yyyy</string>
     <string name="terms_text">I have read and accept the privacy policy</string>
     <string name="reg_btn">Register</string>
-    <string name="reg_succesful">Registration Successful</string>
+    <string name="reg_successful">Registration Successful</string>
 
     <!-- View Profile Strings -->
     <string name="view_profile_name">Full Name</string>
     <string name="view_profile_phone">Phone</string>
-    <string name="view_profile_activity_title">PROFILE</string>
+    <string name="view_profile_activity_title">Profile</string>
     <string name="view_profile_post">Featured post</string>
     <string name="view_profile_edit">Edit profile</string>
     <string name="insert_name">Insert your name</string>
@@ -65,7 +68,7 @@
     <string name="insert_birth_date">Insert your birth date</string>
 
     <!-- Create Post Strings -->
-    <string name="create_post_activity_title">CREATE POST</string>
+    <string name="create_post_activity_title">Create Post</string>
     <string name="post_content">Content</string>
     <string name="hint_post_content">Tell what happened</string>
     <string name="hint_input_title">Insert your Title</string>
@@ -74,19 +77,19 @@
 
 
     <!-- Edit Post Strings -->
-    <string name="edit_post_activity_title">EDIT POST</string>
+    <string name="edit_post_activity_title">Edit Post</string>
     <string name="edit_post_btn">Edit</string>
     <string name="change_picture">Change Picture</string>
     <string name="change_file">Change File</string>
 
     <!-- Reply Post Strings -->
-    <string name="reply_post_activity_title">REPLY POST</string>
+    <string name="reply_post_activity_title">Reply Post</string>
     <string name="reply_btn">Reply</string>
 
     <!-- Create and edit Folder Strings -->
-    <string name="create_folder_activity_title">CREATE FOLDER</string>
+    <string name="create_folder_activity_title">Create Folder</string>
     <string name="folder_name">Folder Name</string>
-    <string name="edit_folder_activity_title">EDIT FOLDER</string>
+    <string name="edit_folder_activity_title">Edit Folder</string>
     <string name="create_folder_title_taken">This Folder already exists</string>
     <string name="create_folder_error_message">Please insert a valid Folder Name</string>
 
@@ -95,22 +98,22 @@
     <string name="join_group_error">This group does not exist</string>
     <string name="join_group_help">Use a group code provided by a group owner</string>
     <string name="join_successful">Joined group successfully!</string>
-    <string name="join_grup_already">You already joined this group</string>
+    <string name="join_group_already">You already joined this group</string>
 
     <!-- Create and edit Group Strings -->
-    <string name="create_group_activity_title">CREATE GROUP</string>
+    <string name="create_group_activity_title">Create Group</string>
     <string name="create_group_name">Group name</string>
     <string name="create_group_members">Members</string>
     <string name="group_link_help">Use this to invite members</string>
     <string name="create_group_error_message">You must specify a group title</string>
 
     <!-- Moderate Group Strings -->
-    <string name="group_settings_activity_title">GROUP SETTINGS</string>
+    <string name="group_settings_activity_title">Group Settings</string>
     <string name="delete_group_btn">Delete Group</string>
     <string name="delete_selected">Delete selected</string>
 
     <!-- Create Category Strings -->
-    <string name="create_category_activity_title">CREATE CATEGORY</string>
+    <string name="create_category_activity_title">Create Category</string>
     <string name="create_category_name">Category Name</string>
     <string name="create_category_nsfw">NSFW Category</string>
     <string name="category_link_help">Use this to share category</string>
@@ -118,7 +121,7 @@
     <string name="create_category_title_taken">This Category already exists</string>
 
     <!-- Notifications Strings -->
-    <string name="notifications_activity_title">NOTIFICATIONS</string>
+    <string name="notifications_activity_title">Notifications</string>
     <string name="notifications_mark_as_read">Mark as read</string>
 
     <!-- UsernameError Strings -->
@@ -138,8 +141,8 @@
     <string name="unexpected_error">Unexpected Error</string>
 
     <!-- Settings Strings -->
-    <string name="settings_activity_title">SETTINGS</string>
-    <string name="settings_sub">Default suscription to posts</string>
+    <string name="settings_activity_title">Settings</string>
+    <string name="settings_sub">Default subscription to posts</string>
     <string name="settings_dark">Dark mode</string>
     <string name="settings_sfw">Show NSFW content (I am over 18)</string>
     <string name="settings_blur_nsfw">Blur NSFW Images</string>

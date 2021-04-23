@@ -40,7 +40,9 @@
                     tools:text="@string/title"
                     android:text="@{folder.title}"
                     android:layout_gravity="center_vertical"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:layout_marginLeft="@dimen/small_separator"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:layout_marginStart="@dimen/small_separator" />
             </LinearLayout>
 
             <View

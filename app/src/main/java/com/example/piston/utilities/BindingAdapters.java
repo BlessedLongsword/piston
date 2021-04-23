@@ -217,7 +217,7 @@ public class BindingAdapters {
                 view.setError(view.getContext().getString(R.string.join_group_error));
                 break;
             case ALREADY_JOINED:
-                view.setError(view.getContext().getString(R.string.join_grup_already));
+                view.setError(view.getContext().getString(R.string.join_group_already));
                 break;
         }
     }
