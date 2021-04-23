@@ -85,6 +85,7 @@
     <string name="folder_name">Nom de la Carpeta</string>
     <string name="edit_folder_activity_title">EDITAR CARPETA</string>
     <string name="create_folder_title_taken">Aquesta carpeta ja existeix</string>
+    <string name="create_folder_error_message">Siusplau inserti un nom vàlid per la Carpeta</string>
 
     <!-- Join Group Strings -->
     <string name="join_group_activity_title">Unir-se a un Grup</string>

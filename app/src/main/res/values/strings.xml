@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Piston</string>
 
     <!-- Tab names -->
@@ -72,6 +72,7 @@
     <string name="choose_picture">Choose Picture</string>
     <string name="attach_file">Attach File</string>
 
+
     <!-- Edit Post Strings -->
     <string name="edit_post_activity_title">EDIT POST</string>
     <string name="edit_post_btn">Edit</string>
@@ -87,6 +88,7 @@
     <string name="folder_name">Folder Name</string>
     <string name="edit_folder_activity_title">EDIT FOLDER</string>
     <string name="create_folder_title_taken">This Folder already exists</string>
+    <string name="create_folder_error_message">Please insert a valid Folder Name</string>
 
     <!-- Join Group Strings -->
     <string name="join_group_activity_title">Join Group</string>

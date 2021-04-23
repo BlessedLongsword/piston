@@ -29,9 +29,7 @@ public class CreateCategoryActivity extends AppCompatActivity {
                 new MaterialAlertDialogBuilder(this)
                         .setTitle(getResources().getString(R.string.error))
                         .setMessage(getResources().getString(R.string.create_category_error_message))
-                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> {
-
-                        })
+                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> { })
                         .show();
             }
         });

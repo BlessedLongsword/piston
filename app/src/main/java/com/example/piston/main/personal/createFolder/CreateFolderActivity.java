@@ -29,10 +29,8 @@ public class CreateFolderActivity extends AppCompatActivity {
             if (aBoolean) {
                 new MaterialAlertDialogBuilder(this)
                         .setTitle(getResources().getString(R.string.error))
-                        .setMessage(getResources().getString(R.string.create_category_error_message))
-                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> {
-
-                        })
+                        .setMessage(getResources().getString(R.string.create_folder_error_message))
+                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> { })
                         .show();
             }
         });
