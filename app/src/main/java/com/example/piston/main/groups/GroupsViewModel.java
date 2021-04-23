@@ -4,28 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Section;
+import com.example.piston.data.Group;
 
 import java.util.ArrayList;
 
-public class GroupsViewModel extends ViewModel {
+public class GroupsViewModel extends ViewModel implements GroupsRepository.IGroup {
 
-    private final MutableLiveData<ArrayList<Section>> groups;
-    private final ArrayList<Section> groups_array;
+    private final MutableLiveData<ArrayList<Group>> groups = new MutableLiveData<>(new ArrayList<>());
 
     public GroupsViewModel() {
-        groups_array = new ArrayList<>();
-        groups = new MutableLiveData<>(groups_array);
+        GroupsRepository groupsRepository = new GroupsRepository(this);
+        groupsRepository.loadGroups();
     }
 
-    public LiveData<ArrayList<Section>> getGroups() {
+    public LiveData<ArrayList<Group>> getGroups() {
         return groups;
     }
 
-    public void createGroup(String title, String description){
-        //categoryManager.createFolder(title, description);
-        //folders.postValue(categoryManager.getFolderNames());
-        groups_array.add(new Section(title, description));
-        groups.setValue(groups_array);
+    @Override
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups.setValue(groups);
     }
 }

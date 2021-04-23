@@ -44,7 +44,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GlobalViewModel.class);
-        viewModel.getCategories().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getCategories().observe(activity, item -> notifyDataSetChanged());
     }
 
     @NonNull

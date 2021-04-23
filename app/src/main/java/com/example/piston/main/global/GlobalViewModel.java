@@ -21,7 +21,6 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         return categories;
     }
 
-
     @Override
     public void setCategories(ArrayList<Category> categories) {
         this.categories.setValue(categories);
