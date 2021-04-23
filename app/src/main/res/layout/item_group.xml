@@ -1,93 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/group_item_card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:checkable="true"
-    android:layout_margin="@dimen/card_margin">
 
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="group"
+            type="com.example.piston.data.Group" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/group_item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Media -->
-        <ImageView
-            android:layout_width="@dimen/bigger_square"
-            android:layout_height="@dimen/bigger_square"
-            app:srcCompat="@drawable/jojo"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/content_description_media"
-            />
+        android:checkable="true"
+        android:layout_margin="@dimen/card_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/small_separator">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <!-- Title, secondary and supporting text -->
-            <TextView
-                android:id="@+id/group_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                />
-
-            <TextView
-                android:id="@+id/group_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_separator"
-                android:text="@string/post_content"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:maxLength="@integer/long_title_max_length"
+            <!-- Media -->
+            <ImageView
+                android:layout_width="@dimen/bigger_square"
+                android:layout_height="@dimen/bigger_square"
+                app:srcCompat="@drawable/jojo"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/content_description_media"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_separator"
-                android:weightSum="10"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/small_separator">
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="9.8"/>
-
-                <ImageButton
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/group_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_marginRight="@dimen/card_margin"
-                    android:layout_weight="0.1"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description_media"
-                    android:src="@drawable/baseline_edit_black_36" />
+                    android:text="@{group.title}"
+                    tools:text="@string/title"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    />
 
-                <ImageButton
+                <TextView
+                    android:id="@+id/group_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_marginRight="@dimen/card_margin"
-                    android:layout_weight="0.1"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description_media"
-                    android:src="@drawable/outline_star_border_black_36" />
+                    android:layout_marginTop="@dimen/small_separator"
+                    android:text="@{group.description}"
+                    tools:text="@string/description"
+                    android:maxLines="@integer/max_desc_lines"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_separator"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9.8"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/card_margin"
+                        android:layout_marginRight="@dimen/card_margin"
+                        android:layout_weight="0.1"
+                        android:background="@null"
+                        android:contentDescription="@string/content_description_media"
+                        android:src="@drawable/baseline_edit_black_36" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/card_margin"
+                        android:layout_marginRight="@dimen/card_margin"
+                        android:layout_weight="0.1"
+                        android:background="@null"
+                        android:contentDescription="@string/content_description_media"
+                        android:src="@drawable/outline_star_border_black_36" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Buttons -->
+    </com.google.android.material.card.MaterialCardView>
 
-
-
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</layout>
