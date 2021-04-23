@@ -10,14 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
 import com.example.piston.databinding.FragmentGroupBinding;
 import com.example.piston.main.SectionFragment;
 import com.example.piston.main.groups.joinGroup.JoinGroupActivity;
-
-import static android.app.Activity.RESULT_OK;
 
 public class GroupsFragment extends SectionFragment {
 

@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Group;
-import com.example.piston.data.Section;
-import com.example.piston.main.global.GlobalRepository;
 
 import java.util.ArrayList;
 

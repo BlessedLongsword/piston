@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.data.Group;
 import com.example.piston.databinding.ItemGroupBinding;
-import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
 
 import java.util.Objects;
@@ -55,7 +54,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     @Override
     public void onBindViewHolder(@NonNull GroupAdapter.GroupHolder holder, int position) {
-        Group group = Objects.requireNonNull(viewModel.getGroups().getValue().get(position));
+        Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
         holder.bind(group);
         holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId()));
     }
