@@ -14,27 +14,30 @@
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait">
 
+        <activity android:name=".main.MainActivity"/>
+
         <activity android:name=".main.notifications.NotificationsActivity"/>
         <activity android:name=".main.settings.SettingsActivity"/>
 
+        <activity android:name=".main.posts.PostActivity"/>
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
         <activity android:name=".main.posts.editPost.EditPostActivity"/>
-        <activity android:name=".main.global.category.CategoryActivity"/>
 
-        <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
+        <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
+        <activity android:name=".main.personal.folder.FolderActivity"/>
+
         <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>
         <activity android:name=".main.groups.joinGroup.JoinGroupActivity"/>
         <activity android:name=".main.groups.editGroup.ModerateGroupActivity"/>
-        <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
 
-        <activity android:name=".main.MainActivity"/>
+        <activity android:name=".main.global.category.CategoryActivity"/>
+        <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
 
         <activity android:name=".authentication.login.LoginActivity"/>
         <activity android:name=".authentication.register.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".main.profile.ProfileActivity"/>
         <activity android:name=".main.profile.image.ProfileImageActivity"/>
-        <activity android:name=".main.posts.PostActivity"/>
 
         <activity android:name=".launch.LaunchActivity"
             android:theme="@style/Theme.Piston.SplashScreen">

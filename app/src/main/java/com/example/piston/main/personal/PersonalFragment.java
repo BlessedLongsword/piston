@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.main.personal.createFolder.CreateFolderActivity;
-import com.example.piston.main.personal.folder.FolderAdapter;
 import com.example.piston.databinding.FragmentPersonalBinding;
 import com.example.piston.main.SectionFragment;
 

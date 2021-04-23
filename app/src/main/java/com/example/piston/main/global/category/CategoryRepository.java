@@ -30,11 +30,9 @@ public class CategoryRepository {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d("nowaybro", String.valueOf(task.getResult()));
                         ArrayList<Post> posts = new ArrayList<>();
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
-                            Log.d("nowaybro", "Hello====");
                             Post post = documentSnapshot.toObject(Post.class);
                             posts.add(post);
                         }

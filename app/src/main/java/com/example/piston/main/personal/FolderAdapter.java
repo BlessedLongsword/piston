@@ -1,6 +1,8 @@
-package com.example.piston.main.personal.folder;
+package com.example.piston.main.personal;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.data.Folder;
 import com.example.piston.databinding.ItemFolderBinding;
-import com.example.piston.main.personal.PersonalViewModel;
+import com.example.piston.main.personal.folder.FolderActivity;
 
 import java.util.Objects;
 
@@ -33,6 +35,10 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
         public void bind(Folder item) {
             binding.setFolder(item);
             //binding.executePendingBindings();
+        }
+
+        public ItemFolderBinding getBinding() {
+            return binding;
         }
     }
 
@@ -55,11 +61,20 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
     public void onBindViewHolder(@NonNull FolderHolder holder, int position) {
         Folder folder = Objects.requireNonNull(viewModel.getFolders().getValue()).get(position);
         holder.bind(folder);
+        holder.getBinding().folderItemCard.setOnClickListener(openNewActivity(folder.getTitle()));
     }
 
     @Override
     public int getItemCount() {
         return viewModel.getFolders().getValue().size();
+    }
+
+    private View.OnClickListener openNewActivity(String id) {
+        return v -> {
+            Intent intent = new Intent(localActivity, FolderActivity.class);
+            intent.putExtra("id", id);
+            localActivity.startActivity(intent);
+        };
     }
 
 }
