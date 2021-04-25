@@ -19,6 +19,7 @@ public class GroupsRepository {
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final String user;
     private ListenerRegistration listenerRegistration;
 
     private Group[] groups;
@@ -30,12 +31,13 @@ public class GroupsRepository {
 
     public GroupsRepository(IGroup listener) {
         this.listener = listener;
+        this.user = mAuth.getCurrentUser().getEmail();
         listenChanges();
     }
 
     public void loadGroups() {
         db.collection("users")
-                .document(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
+                .document(user)
                 .collection("groups")
                 .get()
                 .addOnCompleteListener(task -> {

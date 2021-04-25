@@ -42,6 +42,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("what", "categoryDestroyed");
         viewModel.removeListener();
     }
 
