@@ -21,9 +21,10 @@ public class GroupViewModel {
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
-
+/*
     public void createPost(String title, String text, String owner){
-        post_array.add(new Post(title, text, owner));
+        post_array.add(new Post(title, text));
         posts.setValue(post_array);
     }
+    */
 }

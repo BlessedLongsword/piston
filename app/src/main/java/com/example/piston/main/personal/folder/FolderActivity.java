@@ -17,13 +17,15 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class FolderActivity extends AppCompatActivity {
 
+    String title;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("id");
+        title = intent.getStringExtra("id");
 
         FolderViewModel viewModel = new ViewModelProvider(this,
                 new MyViewModelFactory(title)).get(FolderViewModel.class);
@@ -39,6 +41,8 @@ public class FolderActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
+        intent.putExtra("collection", "users");
+        intent.putExtra("document", title);
         startActivity(intent);
     }
 }

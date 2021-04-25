@@ -31,7 +31,7 @@ public class RegisterViewModel extends ViewModel implements RegisterRepository.I
 
     public void register() {
         try {
-            registerRepository.register(username.getValue(), email.getValue(),
+            registerRepository.register(username.getValue(), email.getValue().toLowerCase(),
                     password.getValue(), birthDate.getValue());
             loading.setValue(true);
         } catch (Exception e) {
@@ -41,11 +41,11 @@ public class RegisterViewModel extends ViewModel implements RegisterRepository.I
 
     public void usernameUpdate() {
         onFieldChanged();
-        registerRepository.checkUsername(username.getValue());
+        registerRepository.checkUsername(Objects.requireNonNull(username.getValue()));
     }
     public void passwordUpdate() {
         onFieldChanged();
-        registerRepository.checkPassword(password.getValue());
+        registerRepository.checkPassword(Objects.requireNonNull(password.getValue()));
     }
     public void confirmPasswordUpdate() {
         onFieldChanged();

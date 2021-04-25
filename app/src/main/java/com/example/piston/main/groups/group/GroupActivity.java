@@ -12,12 +12,14 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class GroupActivity extends AppCompatActivity {
 
+    String title;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
+        title = intent.getStringExtra("id");
     }
 }

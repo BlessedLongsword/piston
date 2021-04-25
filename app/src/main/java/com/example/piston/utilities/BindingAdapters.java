@@ -11,6 +11,7 @@ import com.example.piston.main.groups.createGroup.CreateGroupResult;
 import com.example.piston.main.groups.joinGroup.JoinGroupResult;
 import com.example.piston.main.personal.createFolder.CreateFolderResult;
 import com.example.piston.authentication.login.LoginResult;
+import com.example.piston.main.posts.createPost.CreatePostResult;
 import com.example.piston.main.profile.ProfileResult;
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
@@ -200,6 +201,18 @@ public class BindingAdapters {
                 break;
             case EXISTS:
                 view.setError(view.getContext().getString(R.string.create_category_title_taken));
+                break;
+        }
+    }
+
+    @BindingAdapter("android:postTitleError")
+    public static void setPostTitleErrorMessage(TextInputLayout view, CreatePostResult.TitleError error) {
+        switch (error) {
+            case NONE:
+                view.setError(null);
+                break;
+            case EMPTY:
+                view.setError(view.getContext().getString(R.string.title_empty));
                 break;
         }
     }

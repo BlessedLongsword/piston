@@ -22,9 +22,11 @@ public class ViewPostsViewModel extends ViewModel {
         return posts;
     }
 
+    /*
     public void createPost(String title, String owner, String description){
         posts_array.add(new Post(title, owner, description));
         posts.setValue(posts_array);
     }
+     */
 
 }

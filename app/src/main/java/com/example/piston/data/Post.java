@@ -6,12 +6,15 @@ public class Post {
     private String content;
     private String owner;
 
+    private String id;
+
     public Post() {}
 
-    public Post(String title, String content, String owner) {
+    public Post(String title, String content, String owner, String id) {
         setTitle(title);
         setContent(content);
         setOwner(owner);
+        setId(id);
     }
 
     public String getTitle() {
@@ -37,4 +40,14 @@ public class Post {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 }

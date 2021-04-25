@@ -72,6 +72,7 @@
     <string name="hint_input_title">Insertar Título</string>
     <string name="choose_picture">Insertar Imagen</string>
     <string name="attach_file">Adjuntar Archivo</string>
+    <string name="create_post_error_message">Porfavor inserte un nombre vçalido para el post</string>
 
     <!-- Edit Post Strings -->
     <string name="edit_post_activity_title">EDITAR PUBLICACION</string>

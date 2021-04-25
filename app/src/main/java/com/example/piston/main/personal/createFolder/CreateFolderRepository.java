@@ -56,7 +56,8 @@ public class CreateFolderRepository {
         } else {
             DocumentReference docRef = db.collection("users")
                     .document(user)
-                    .collection("folders").document(title);
+                    .collection("folders")
+                    .document(title);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
@@ -66,10 +67,7 @@ public class CreateFolderRepository {
                         listener.setLoadingFinished();
                     } else {
                         Folder folder = new Folder(title, description);
-                        db.collection("users")
-                                .document(user)
-                                .collection("folders")
-                                .document(title).set(folder);
+                        docRef.set(folder);
                         listener.setCreateFinished();
                         listener.setLoadingFinished();
                     }

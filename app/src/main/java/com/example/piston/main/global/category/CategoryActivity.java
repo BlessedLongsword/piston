@@ -2,6 +2,7 @@ package com.example.piston.main.global.category;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -16,13 +17,15 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class CategoryActivity extends AppCompatActivity {
 
+    String title;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("id");
+        title = intent.getStringExtra("id");
 
         CategoryViewModel viewModel = new ViewModelProvider(this,
                 new MyViewModelFactory(title)).get(CategoryViewModel.class);
@@ -38,6 +41,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
+        intent.putExtra("collection", "categories");
+        intent.putExtra("document", title);
         startActivity(intent);
     }
 }

@@ -72,6 +72,7 @@
     <string name="hint_input_title">Insertar Títol</string>
     <string name="choose_picture">Insertar Imatge</string>
     <string name="attach_file">Adjuntar Arxiu</string>
+    <string name="create_post_error_message">Sisuplau inserti un nom vàlid pel post</string>
 
     <!-- Edit Post Strings -->
     <string name="edit_post_activity_title">EDITAR PUBLICACIO</string>

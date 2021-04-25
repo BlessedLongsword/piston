@@ -74,6 +74,7 @@
     <string name="hint_input_title">Insert your Title</string>
     <string name="choose_picture">Choose Picture</string>
     <string name="attach_file">Attach File</string>
+    <string name="create_post_error_message">Please insert a valid Post Name</string>
 
 
     <!-- Edit Post Strings -->

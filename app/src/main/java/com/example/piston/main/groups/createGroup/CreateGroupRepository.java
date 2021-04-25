@@ -64,8 +64,11 @@ public class CreateGroupRepository {
             });
             Map<String, String> data = new HashMap<>();
             data.put("id", groupID);
-            db.collection("users").document(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
-                    .collection("groups").document(groupID).set(data);
+            db.collection("users")
+                    .document(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
+                    .collection("groups")
+                    .document(groupID)
+                    .set(data);
         }
     }
 
