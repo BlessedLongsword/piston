@@ -43,6 +43,7 @@ public class FolderActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("what", "folderDestroyed");
         viewModel.removeListener();
     }
 
