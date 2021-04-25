@@ -18,6 +18,8 @@ import com.example.piston.main.groups.joinGroup.JoinGroupActivity;
 
 public class GroupsFragment extends SectionFragment {
 
+    private GroupsViewModel viewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -25,7 +27,7 @@ public class GroupsFragment extends SectionFragment {
         FragmentGroupBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_group, container, false);
         binding.recyclerviewGroup.setAdapter(new GroupAdapter(requireActivity()));
-        GroupsViewModel viewModel = new ViewModelProvider(requireActivity())
+        viewModel = new ViewModelProvider(requireActivity())
                 .get(GroupsViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -42,6 +44,11 @@ public class GroupsFragment extends SectionFragment {
     public void add() {
         Intent intent = new Intent(requireActivity(), JoinGroupActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void removeListener() {
+        viewModel.removeListener();
     }
 
 }

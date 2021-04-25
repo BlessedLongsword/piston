@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.piston.data.Folder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class PersonalRepository {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
     String user;
+    private ListenerRegistration listenerRegistration;
 
     public interface IPersonal {
         void setFolders(ArrayList<Folder> categories);
@@ -48,7 +50,7 @@ public class PersonalRepository {
     }
 
     private void listenChanges() {
-        db.collection("users")
+        listenerRegistration = db.collection("users")
                 .document(user)
                 .collection("folders")
                 .addSnapshotListener((snapshots, e) -> {
@@ -71,5 +73,9 @@ public class PersonalRepository {
                         }
                     }*/
                 });
+    }
+
+    public void removeListener() {
+        listenerRegistration.remove();
     }
 }

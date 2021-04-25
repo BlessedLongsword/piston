@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class GroupsRepository {
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private ListenerRegistration listenerRegistration;
 
     private Group[] groups;
     private int counter;
@@ -68,8 +70,15 @@ public class GroupsRepository {
     }
 
     private void listenChanges() {
-        db.collection("groups")
-                .addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
+        listenerRegistration = db.collection("groups")
+                .addSnapshotListener((snapshots, e) -> {
+                    Log.d("nowaybro", "Group change...");
+                    GroupsRepository.this.loadGroups();
+                });
+    }
+
+    public void removeListener() {
+        listenerRegistration.remove();
     }
 
 }

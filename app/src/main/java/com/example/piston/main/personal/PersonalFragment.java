@@ -18,6 +18,8 @@ import com.example.piston.main.SectionFragment;
 
 public class PersonalFragment extends SectionFragment {
 
+    private PersonalViewModel viewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -25,7 +27,7 @@ public class PersonalFragment extends SectionFragment {
 
         FragmentPersonalBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_personal, container, false);
-        PersonalViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+        viewModel = new ViewModelProvider(requireActivity()).get(
                 PersonalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -43,6 +45,11 @@ public class PersonalFragment extends SectionFragment {
     public void add() {
         Intent intent = new Intent(requireActivity(), CreateFolderActivity.class);
         startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void removeListener() {
+        viewModel.removeListener();
     }
 
 }

@@ -12,10 +12,7 @@ import java.util.ArrayList;
 public class PersonalViewModel extends ViewModel implements PersonalRepository.IPersonal {
 
     private final MutableLiveData<ArrayList<Folder>> folders = new MutableLiveData<>(new ArrayList<>());
-
-    public PersonalViewModel() {
-        new PersonalRepository(this);
-    }
+    private final PersonalRepository repository = new PersonalRepository(this);
 
     public LiveData<ArrayList<Folder>> getFolders() {
         return folders;
@@ -26,4 +23,7 @@ public class PersonalViewModel extends ViewModel implements PersonalRepository.I
         this.folders.setValue(folders);
     }
 
+    public void removeListener() {
+        repository.removeListener();
+    }
 }

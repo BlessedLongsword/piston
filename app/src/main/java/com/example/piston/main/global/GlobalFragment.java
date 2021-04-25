@@ -18,13 +18,15 @@ import com.example.piston.main.SectionFragment;
 
 public class GlobalFragment extends SectionFragment {
 
+    private GlobalViewModel viewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         FragmentGlobalBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_global, container, false);
-        GlobalViewModel viewModel = new ViewModelProvider(requireActivity()).get(
+        viewModel = new ViewModelProvider(requireActivity()).get(
                 GlobalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -42,5 +44,10 @@ public class GlobalFragment extends SectionFragment {
     public void add() {
         Intent intent = new Intent(requireActivity(), CreateCategoryActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void removeListener() {
+        viewModel.removeListener();
     }
 }

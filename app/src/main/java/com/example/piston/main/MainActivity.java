@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(MenuItem item) {
+        ((SectionFragment)getSupportFragmentManager().findFragmentByTag(
+                "f" + viewPager.getCurrentItem())).removeListener();
         viewModel.logout();
     }
 }

@@ -11,10 +11,7 @@ import java.util.ArrayList;
 public class GroupsViewModel extends ViewModel implements GroupsRepository.IGroup {
 
     private final MutableLiveData<ArrayList<Group>> groups = new MutableLiveData<>(new ArrayList<>());
-
-    public GroupsViewModel() {
-        new GroupsRepository(this);
-    }
+    private final GroupsRepository repository = new GroupsRepository(this);
 
     public LiveData<ArrayList<Group>> getGroups() {
         return groups;
@@ -22,5 +19,9 @@ public class GroupsViewModel extends ViewModel implements GroupsRepository.IGrou
     @Override
     public void setGroups(ArrayList<Group> groups) {
         this.groups.setValue(groups);
+    }
+
+    public void removeListener() {
+        repository.removeListener();
     }
 }

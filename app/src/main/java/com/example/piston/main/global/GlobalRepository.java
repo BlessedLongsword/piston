@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.piston.data.Category;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class GlobalRepository {
 
     private final IGlobal listener;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ListenerRegistration listenerRegistration;
 
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
@@ -42,7 +44,7 @@ public class GlobalRepository {
     }
 
     private void listenChanges() {
-        db.collection("categories")
+        listenerRegistration = db.collection("categories")
                 .addSnapshotListener((snapshots, e) -> {
                     GlobalRepository.this.loadCategories();
                     /*if (e != null) {
@@ -63,6 +65,10 @@ public class GlobalRepository {
                         }
                     }*/
                 });
+    }
+
+    public void removeListener() {
+        listenerRegistration.remove();
     }
 
 }

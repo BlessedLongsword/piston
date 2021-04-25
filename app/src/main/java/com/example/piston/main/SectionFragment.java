@@ -18,4 +18,6 @@ public abstract class SectionFragment extends Fragment {
     }
 
     public abstract void add();
+
+    public abstract void removeListener();
 }
