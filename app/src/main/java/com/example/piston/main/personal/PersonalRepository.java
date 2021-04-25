@@ -25,11 +25,11 @@ public class PersonalRepository {
     public PersonalRepository(PersonalRepository.IPersonal listener) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        user = Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
+        user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         listenChanges();
     }
 
-    public void loadFolders() {
+    private void loadFolders() {
         db.collection("users")
                 .document(user)
                 .collection("folders")
