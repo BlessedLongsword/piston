@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -71,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(MenuItem item) {
-        ((SectionFragment)getSupportFragmentManager().findFragmentByTag(
-                "f" + viewPager.getCurrentItem())).removeListener();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        for (int i = 0; i < 3; i++) {
+            Fragment fragment = fragmentManager.findFragmentByTag("f" + i);
+            if (fragment != null) {
+                ((SectionFragment) fragment).removeListener();
+            }
+        }
         viewModel.logout();
     }
 }

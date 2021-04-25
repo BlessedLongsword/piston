@@ -71,10 +71,7 @@ public class GroupsRepository {
 
     private void listenChanges() {
         listenerRegistration = db.collection("groups")
-                .addSnapshotListener((snapshots, e) -> {
-                    Log.d("nowaybro", "Group change...");
-                    GroupsRepository.this.loadGroups();
-                });
+                .addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
     }
 
     public void removeListener() {

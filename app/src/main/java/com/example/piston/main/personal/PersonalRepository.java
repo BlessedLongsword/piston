@@ -14,9 +14,8 @@ import java.util.Objects;
 public class PersonalRepository {
 
     private final PersonalRepository.IPersonal listener;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String user;
     private ListenerRegistration listenerRegistration;
 
     public interface IPersonal {
@@ -25,6 +24,7 @@ public class PersonalRepository {
 
     public PersonalRepository(PersonalRepository.IPersonal listener) {
         this.listener = listener;
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         user = Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
         listenChanges();
     }
