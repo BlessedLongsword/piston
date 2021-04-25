@@ -26,4 +26,8 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+
+    public void removeListener() {
+        repository.removeListener();
+    }
 }

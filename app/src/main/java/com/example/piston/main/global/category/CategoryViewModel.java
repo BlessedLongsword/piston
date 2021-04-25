@@ -26,4 +26,8 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+
+    public void removeListener() {
+        repository.removeListener();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.piston.main.personal.folder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.piston.utilities.MyViewModelFactory;
 public class FolderActivity extends AppCompatActivity {
 
     String title;
+    FolderViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +29,8 @@ public class FolderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("id");
 
-        FolderViewModel viewModel = new ViewModelProvider(this,
-                new MyViewModelFactory(title)).get(FolderViewModel.class);
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+                .get(FolderViewModel.class);
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);
         binding.setViewModel(viewModel);
@@ -37,6 +39,11 @@ public class FolderActivity extends AppCompatActivity {
         binding.viewNotesTopAppBar.setTitle(title);
 
         binding.recyclerviewFolder.setAdapter(new NoteAdapter(this));
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        viewModel.removeListener();
     }
 
     public void createPost(View view) {

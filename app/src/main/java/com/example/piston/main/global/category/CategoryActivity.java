@@ -17,7 +17,8 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    String title;
+    private String title;
+    private CategoryViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("id");
 
-        CategoryViewModel viewModel = new ViewModelProvider(this,
-                new MyViewModelFactory(title)).get(CategoryViewModel.class);
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+                .get(CategoryViewModel.class);
         ActivityCategoryBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category);
         binding.setViewModel(viewModel);
@@ -37,6 +38,11 @@ public class CategoryActivity extends AppCompatActivity {
         binding.viewPostsTopAppBar.setTitle(title);
 
         binding.recyclerviewCategory.setAdapter(new PostAdapter(this));
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        viewModel.removeListener();
     }
 
     public void createPost(View view) {
