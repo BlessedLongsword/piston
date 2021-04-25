@@ -14,9 +14,9 @@ import java.util.Objects;
 public class PersonalRepository {
 
     private final PersonalRepository.IPersonal listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    String user;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private String user;
     private ListenerRegistration listenerRegistration;
 
     public interface IPersonal {
@@ -55,23 +55,6 @@ public class PersonalRepository {
                 .collection("folders")
                 .addSnapshotListener((snapshots, e) -> {
                     PersonalRepository.this.loadFolders();
-                    /*if (e != null) {
-                        Log.w("nowaybro", "listen:error", e);
-                        return;
-                    }
-                    for (DocumentChange dc : Objects.requireNonNull(snapshots).getDocumentChanges()) {
-                        switch (dc.getType()) {
-                            case ADDED:
-                                Log.d(TAG, "New city: " + dc.getDocument().getData());
-                                break;
-                            case MODIFIED:
-                                Log.d(TAG, "Modified city: " + dc.getDocument().getData());
-                                break;
-                            case REMOVED:
-                                Log.d(TAG, "Removed city: " + dc.getDocument().getData());
-                                break;
-                        }
-                    }*/
                 });
     }
 

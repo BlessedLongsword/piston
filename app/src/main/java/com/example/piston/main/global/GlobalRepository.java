@@ -13,7 +13,7 @@ import java.util.Objects;
 public class GlobalRepository {
 
     private final IGlobal listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
 
     public interface IGlobal {
@@ -47,23 +47,6 @@ public class GlobalRepository {
         listenerRegistration = db.collection("categories")
                 .addSnapshotListener((snapshots, e) -> {
                     GlobalRepository.this.loadCategories();
-                    /*if (e != null) {
-                        Log.w("nowaybro", "listen:error", e);
-                        return;
-                    }
-                    for (DocumentChange dc : Objects.requireNonNull(snapshots).getDocumentChanges()) {
-                        switch (dc.getType()) {
-                            case ADDED:
-                                Log.d(TAG, "New city: " + dc.getDocument().getData());
-                                break;
-                            case MODIFIED:
-                                Log.d(TAG, "Modified city: " + dc.getDocument().getData());
-                                break;
-                            case REMOVED:
-                                Log.d(TAG, "Removed city: " + dc.getDocument().getData());
-                                break;
-                        }
-                    }*/
                 });
     }
 

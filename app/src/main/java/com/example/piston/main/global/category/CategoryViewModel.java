@@ -12,14 +12,10 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
 
-    private final CategoryRepository repository = new CategoryRepository(this);
+    private final CategoryRepository repository;
 
     public CategoryViewModel(String category) {
-        repository.loadCategoryPosts(category);
-    }
-
-    public void setTitle(String category) {
-        repository.loadCategoryPosts(category);
+        repository = new CategoryRepository(this, category);
     }
 
     @Override

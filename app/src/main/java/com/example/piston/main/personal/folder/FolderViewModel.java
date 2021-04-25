@@ -12,14 +12,10 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
 
-    private final FolderRepository repository = new FolderRepository(this);
+    private final FolderRepository repository;
 
     public FolderViewModel(String folder) {
-        repository.loadFolderPosts(folder);
-    }
-
-    public void setTitle(String folder) {
-        repository.loadFolderPosts(folder);
+        repository = new FolderRepository(this, folder);
     }
 
     @Override

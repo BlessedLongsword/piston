@@ -32,7 +32,7 @@ public class FolderActivity extends AppCompatActivity {
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);
         binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
+         binding.setLifecycleOwner(this);
 
         binding.viewNotesTopAppBar.setTitle(title);
 

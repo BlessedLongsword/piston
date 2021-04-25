@@ -2,9 +2,7 @@ package com.example.piston.main.posts.createPost;
 
 import android.util.Log;
 
-import com.example.piston.data.Category;
 import com.example.piston.data.Post;
-import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.example.piston.data.Category;
 import com.example.piston.data.Post;
+import com.example.piston.main.global.GlobalRepository;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -17,13 +19,17 @@ public class CategoryRepository {
     }
 
     private final ICategory listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String category;
+    private ListenerRegistration listenerRegistration;
 
-    public CategoryRepository(ICategory listener) {
+    public CategoryRepository(ICategory listener, String category) {
         this.listener = listener;
+        this.category = category;
+        listenChanges();
     }
 
-    public void loadCategoryPosts(String category) {
+    public void loadCategoryPosts() {
         db.collection("categories")
                 .document(category)
                 .collection("posts")
@@ -41,6 +47,19 @@ public class CategoryRepository {
                         Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
                 });
+    }
+
+    private void listenChanges() {
+        listenerRegistration = db.collection("categories")
+                .document(category)
+                .collection("posts")
+                .addSnapshotListener((snapshots, e) -> {
+                   CategoryRepository.this.loadCategoryPosts();
+                });
+    }
+
+    public void removeListener() {
+        listenerRegistration.remove();
     }
 
 }
