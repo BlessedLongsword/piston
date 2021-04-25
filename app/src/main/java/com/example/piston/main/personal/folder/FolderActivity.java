@@ -41,12 +41,6 @@ public class FolderActivity extends AppCompatActivity {
         binding.recyclerviewFolder.setAdapter(new NoteAdapter(this));
     }
 
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("what", "folderDestroyed");
-        viewModel.removeListener();
-    }
-
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra("collection", "users");

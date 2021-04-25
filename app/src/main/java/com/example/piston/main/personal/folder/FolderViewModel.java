@@ -23,11 +23,12 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
         this.posts.setValue(posts);
     }
 
-    public LiveData<ArrayList<Post>> getPosts() {
-        return posts;
+    @Override
+    protected void onCleared () {
+        repository.removeListener();
     }
 
-    public void removeListener() {
-        repository.removeListener();
+    public LiveData<ArrayList<Post>> getPosts() {
+        return posts;
     }
 }
