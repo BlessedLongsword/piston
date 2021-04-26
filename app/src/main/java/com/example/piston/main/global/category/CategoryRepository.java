@@ -29,7 +29,7 @@ public class CategoryRepository {
         listenChanges();
     }
 
-    public void loadCategoryPosts() {
+    private void loadCategoryPosts() {
         db.collection("categories")
                 .document(category)
                 .collection("posts")

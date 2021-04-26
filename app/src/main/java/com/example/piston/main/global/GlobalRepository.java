@@ -25,7 +25,7 @@ public class GlobalRepository {
         listenChanges();
     }
 
-    public void loadCategories() {
+    private void loadCategories() {
         db.collection("categories")
                 .get()
                 .addOnCompleteListener(task -> {

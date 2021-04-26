@@ -20,18 +20,18 @@ public class FolderRepository {
 
     private final FolderRepository.IFolder listener;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String user, folder;
     private ListenerRegistration listenerRegistration;
 
     public FolderRepository(FolderRepository.IFolder listener, String folder) {
         this.listener = listener;
-        this.user = auth.getCurrentUser().getEmail();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        this.user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         this.folder = folder;
         listenChanges();
     }
 
-    public void loadFolderPosts() {
+    private void loadFolderPosts() {
         db.collection("users")
                 .document(user)
                 .collection("folders")

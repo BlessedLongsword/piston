@@ -31,11 +31,11 @@ public class GroupsRepository {
     public GroupsRepository(IGroup listener) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        this.user = mAuth.getCurrentUser().getEmail();
+        this.user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         listenChanges();
     }
 
-    public void loadGroups() {
+    private void loadGroups() {
         db.collection("users")
                 .document(user)
                 .collection("groups")

@@ -36,14 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         binding.viewPostsTopAppBar.setTitle(title);
-
         binding.recyclerviewCategory.setAdapter(new PostAdapter(this));
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("what", "categoryDestroyed");
-        viewModel.removeListener();
     }
 
     public void createPost(View view) {
