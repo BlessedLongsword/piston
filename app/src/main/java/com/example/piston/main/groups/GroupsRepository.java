@@ -18,7 +18,6 @@ public class GroupsRepository {
 
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final String user;
     private ListenerRegistration listenerRegistration;
 
@@ -31,6 +30,7 @@ public class GroupsRepository {
 
     public GroupsRepository(IGroup listener) {
         this.listener = listener;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.user = mAuth.getCurrentUser().getEmail();
         listenChanges();
     }

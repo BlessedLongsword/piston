@@ -13,7 +13,7 @@ import java.util.Objects;
 public class GlobalRepository {
 
     private final IGlobal listener;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
 
     public interface IGlobal {

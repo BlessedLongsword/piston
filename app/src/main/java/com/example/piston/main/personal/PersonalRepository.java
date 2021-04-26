@@ -53,9 +53,7 @@ public class PersonalRepository {
         listenerRegistration = db.collection("users")
                 .document(user)
                 .collection("folders")
-                .addSnapshotListener((snapshots, e) -> {
-                    PersonalRepository.this.loadFolders();
-                });
+                .addSnapshotListener((snapshots, e) -> PersonalRepository.this.loadFolders());
     }
 
     public void removeListener() {

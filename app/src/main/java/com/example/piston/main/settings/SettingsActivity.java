@@ -30,7 +30,6 @@ public class SettingsActivity extends AppCompatActivity {
         show_nsfw = findViewById(R.id.settings_show_nsfw);
         blur_nsfw = findViewById(R.id.settings_blur);
 
-
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.piston", Context.MODE_PRIVATE);
 
