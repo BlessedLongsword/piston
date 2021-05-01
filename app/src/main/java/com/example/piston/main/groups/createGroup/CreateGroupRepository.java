@@ -5,16 +5,22 @@ import android.util.Log;
 import com.example.piston.data.Group;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CreateGroupRepository {
 
     private final CreateGroupRepository.ICreateGroup listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private String imageId, imageLink;
 
     public interface ICreateGroup {
         void setGroupID(String groupID);
@@ -44,7 +50,7 @@ public class CreateGroupRepository {
             listener.setLoadingFinished();
             listener.setCreateError();
         } else {
-            Group group = new Group(title, description, groupID);
+            Group group = new Group(title, description, groupID, imageId, imageLink);
             db.collection("groups").document(groupID).set(group).addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     listener.setLoadingFinished();
@@ -59,6 +65,17 @@ public class CreateGroupRepository {
                     .document(groupID)
                     .set(data);
         }
+    }
+
+    public void uploadImage(byte[] image) {
+        StorageReference storageRef = storage.getReference();
+        imageId = UUID.randomUUID().toString();
+        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
+        UploadTask uploadTask = imageRef.putBytes(image);
+        uploadTask.addOnFailureListener(exception -> {
+            // Handle unsuccessful uploads
+        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> imageLink = uri.toString()));
     }
 
 }

@@ -13,10 +13,9 @@ import java.util.UUID;
 public class CreateCategoryRepository {
 
     private final ICreateCategory listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    String imageId;
-    String imageLink;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private String imageId, imageLink;
 
     public interface ICreateCategory {
         void setTitleStatus(CreateCategoryResult.TitleError titleError);

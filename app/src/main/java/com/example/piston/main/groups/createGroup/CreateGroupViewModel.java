@@ -30,6 +30,8 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
         createError.setValue(false);
     }
 
+    public void uploadImage(byte[] image) { repository.uploadImage(image); }
+
     public void createGroup() {
         loading.setValue(true);
         repository.createGroup(Objects.requireNonNull(titleField.getValue())

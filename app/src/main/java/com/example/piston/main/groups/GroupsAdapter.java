@@ -1,6 +1,7 @@
 package com.example.piston.main.groups;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Group;
 import com.example.piston.databinding.ItemGroupBinding;
@@ -54,9 +56,17 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
 
     @Override
     public void onBindViewHolder(@NonNull GroupsAdapter.GroupsHolder holder, int position) {
-        Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
-        holder.bind(group);
-        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
+        try {
+            Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
+            holder.bind(group);
+            Glide.with(localActivity)
+                    .load(group.getImageLink())
+                    .into(holder.binding.groupImage);
+            holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
+        }catch (Exception e){
+            Log.d("what","ww");
+        }
+
     }
 
     @Override

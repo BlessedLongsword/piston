@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,13 +23,14 @@ import com.example.piston.databinding.ActivityCreateGroupBinding;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
-    CreateGroupViewModel createGroupViewModel;
-    ClipboardManager clipboard;
-    ClipData clip;
+    private CreateGroupViewModel createGroupViewModel;
+    private ClipboardManager clipboard;
+    private ClipData clip;
 
     @Override
     protected void onCreate(Bundle savedInstances) {
@@ -88,9 +90,13 @@ public class CreateGroupActivity extends AppCompatActivity {
             try {
                 ImageView im = findViewById(R.id.group_picture);
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                //createGroupViewModel.uploadImage(bitmap);
                 im.setImageBitmap(bitmap);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] image = baos.toByteArray();
+                createGroupViewModel.uploadImage(image);
             } catch (IOException e) {
+                Log.w("DBReadTAG", "c murio");
                 e.printStackTrace();
             }
         }

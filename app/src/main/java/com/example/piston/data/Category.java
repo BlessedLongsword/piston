@@ -2,9 +2,8 @@ package com.example.piston.data;
 
 public class Category extends Section {
 
-    boolean nsfw;
-    private String imageID;
-    private String imageLink;
+    private boolean nsfw;
+    private String imageID, imageLink;
 
     public Category() {}
 

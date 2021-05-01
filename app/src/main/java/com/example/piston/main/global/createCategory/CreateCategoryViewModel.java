@@ -31,6 +31,8 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
                 , descriptionField.getValue(), nsfwBox.getValue());
     }
 
+    public void uploadImage(byte[] image) { repository.uploadImage(image); }
+
     @Override
     public void setTitleStatus(CreateCategoryResult.TitleError titleError) {
         titleFieldError.setValue(titleError);
@@ -78,7 +80,5 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     public LiveData<Boolean> getLoading() {
         return loading;
     }
-
-    public void uploadImage(byte[] image) { repository.uploadImage(image); }
 
 }
