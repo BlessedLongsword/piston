@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:checkable="true"
         app:cardElevation="0dp"
-        android:layout_margin="@dimen/card_margin">
+        android:layout_marginHorizontal="@dimen/card_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/outline_folder_black_48"/>
+                    android:src="@drawable/folder_icon"/>
 
                 <TextView
                     android:id="@+id/folder_title"
@@ -46,6 +46,7 @@
             </LinearLayout>
 
             <View
+                android:layout_marginVertical="@dimen/tiny_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/dividerVertical" />

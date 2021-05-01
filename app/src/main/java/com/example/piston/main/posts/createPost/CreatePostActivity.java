@@ -18,6 +18,7 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -83,9 +84,12 @@ public class CreatePostActivity extends AppCompatActivity {
             try {
                 InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(data.getData());
                 ImageView im = findViewById(R.id.post_picture);
-                Bitmap b = BitmapFactory.decodeStream(inputStream);
-                createPostViewModel.uploadImage(b);
-                im.setImageBitmap(b);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                im.setImageBitmap(bitmap);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] image = baos.toByteArray();
+                createPostViewModel.uploadImage(image);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

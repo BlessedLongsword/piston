@@ -82,7 +82,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
         return finishCreatePost;
     }
 
-    public void uploadImage(Bitmap b) {
-        repository.uploadImage(b);
+    public void uploadImage(byte[] image) {
+        repository.uploadImage(image);
     }
 }

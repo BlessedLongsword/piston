@@ -16,6 +16,7 @@ public class GroupsViewModel extends ViewModel implements GroupsRepository.IGrou
     public LiveData<ArrayList<Group>> getGroups() {
         return groups;
     }
+
     @Override
     public void setGroups(ArrayList<Group> groups) {
         this.groups.setValue(groups);

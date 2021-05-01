@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class NotificationsActivity extends AppCompatActivity {
     private androidx.appcompat.view.ActionMode mActionMode;
@@ -17,6 +18,9 @@ public class NotificationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+
+        MaterialToolbar bar = findViewById(R.id.notifications_topAppBar);
+        bar.setNavigationOnClickListener((view) -> finish());
 
     }
 
@@ -28,7 +32,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     }
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.getMenuInflater().inflate(R.menu.notifications_top_app_bar, menu);

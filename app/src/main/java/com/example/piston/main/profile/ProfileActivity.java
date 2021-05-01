@@ -58,7 +58,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         });
-        //init();
     }
 
     public void clickImage(View view){

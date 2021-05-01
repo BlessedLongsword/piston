@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.piston.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -60,5 +61,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         blur_nsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
         });
+
+        MaterialToolbar bar = findViewById(R.id.settings_topAppBar);
+        bar.setNavigationOnClickListener((view) -> finish());
     }
 }

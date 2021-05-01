@@ -1,9 +1,11 @@
 package com.example.piston.main.posts.createPost;
 
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
 import com.example.piston.data.Post;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -11,9 +13,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class CreatePostRepository {
     private final CreatePostRepository.ICreatePost listener;
@@ -21,7 +23,10 @@ public class CreatePostRepository {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     String user;
+    String username;
     String id;
+    String imageId;
+    String imageLink;
 
     public interface ICreatePost {
         void setTitleStatus(CreatePostResult.TitleError titleError);
@@ -33,7 +38,11 @@ public class CreatePostRepository {
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
         this.listener = listener;
         user = auth.getCurrentUser().getEmail();
-        Log.d("nowaybro", "Display name: " + auth.getCurrentUser().getDisplayName());
+        db.collection("users")
+                .document(user)
+                .get()
+                .addOnCompleteListener(task ->
+                        username = (String) task.getResult().get("username"));
     }
 
     public void checkTitle(String title) {
@@ -60,8 +69,7 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id, "nice",
-                            "https://firebasestorage.googleapis.com/v0/b/piston-48298.appspot.com/o/nice?alt=media&token=710e0200-a661-401a-9db3-2b1da7ee2f62");
+                    Post post = new Post(title, content, username, id, imageId, imageLink);
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
@@ -76,8 +84,7 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id, "nice",
-                            "https://firebasestorage.googleapis.com/v0/b/piston-48298.appspot.com/o/nice?alt=media&token=710e0200-a661-401a-9db3-2b1da7ee2f62");
+                    Post post = new Post(title, content, username, id, imageId, imageLink);
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
@@ -102,19 +109,14 @@ public class CreatePostRepository {
                 });
     }
 
-    public void uploadImage(Bitmap bitmap) {
+    public void uploadImage(byte[] image) {
         StorageReference storageRef = storage.getReference();
-        StorageReference imageRef = storageRef.child("nice");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-
-        UploadTask uploadTask = imageRef.putBytes(data);
+        imageId = UUID.randomUUID().toString();
+        StorageReference imageRef = storageRef.child(id); //Falta comprovar que sigui nou
+        UploadTask uploadTask = imageRef.putBytes(image);
         uploadTask.addOnFailureListener(exception -> {
             // Handle unsuccessful uploads
-        }).addOnSuccessListener(taskSnapshot -> {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-            // ...
-        });
+        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> imageLink = uri.toString()));
     }
 }
