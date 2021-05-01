@@ -74,7 +74,9 @@ public class GroupsRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = db.collection("users").document(user).collection("groups")
+        listenerRegistration = db.collection("users")
+                .document(user)
+                .collection("groups")
                 .addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
     }
 

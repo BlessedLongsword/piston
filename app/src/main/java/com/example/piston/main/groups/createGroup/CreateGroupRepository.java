@@ -3,6 +3,8 @@ package com.example.piston.main.groups.createGroup;
 import android.util.Log;
 
 import com.example.piston.data.Group;
+import com.example.piston.data.Post;
+import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -20,7 +22,7 @@ public class CreateGroupRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private String imageId, imageLink;
+    private String imageId, imageLink, user;
 
     public interface ICreateGroup {
         void setGroupID(String groupID);
@@ -32,6 +34,7 @@ public class CreateGroupRepository {
 
     public CreateGroupRepository(CreateGroupRepository.ICreateGroup listener) {
         this.listener = listener;
+        user = mAuth.getCurrentUser().getEmail();
     }
 
     public void generateGroupID() {
@@ -51,7 +54,11 @@ public class CreateGroupRepository {
             listener.setCreateError();
         } else {
             Group group = new Group(title, description, groupID, imageId, imageLink);
-            db.collection("groups").document(groupID).set(group).addOnCompleteListener(task -> {
+
+            db.collection("groups")
+                    .document(groupID)
+                    .set(group)
+                    .addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     listener.setLoadingFinished();
                     listener.setCreateFinished();
@@ -60,9 +67,17 @@ public class CreateGroupRepository {
             Map<String, String> data = new HashMap<>();
             data.put("id", groupID);
             db.collection("users")
-                    .document(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
+                    .document(user)
                     .collection("groups")
                     .document(groupID)
+                    .set(data);
+
+            data.clear();
+            data.put("id", user);
+            db.collection("groups")
+                    .document(groupID)
+                    .collection("mods")
+                    .document(user)
                     .set(data);
         }
     }

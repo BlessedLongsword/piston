@@ -13,8 +13,9 @@ public class JoinGroupRepository {
 
     private final JoinGroupRepository.IJoinGroup listener;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String user;
 
     public interface IJoinGroup {
         void setGroupCodeError(JoinGroupResult.JoinError error);
@@ -24,6 +25,7 @@ public class JoinGroupRepository {
 
     public JoinGroupRepository(JoinGroupRepository.IJoinGroup listener) {
         this.listener = listener;
+        user = mAuth.getCurrentUser().getEmail();
     }
 
     public void checkGroupCode(String groupCode) {
@@ -44,9 +46,7 @@ public class JoinGroupRepository {
                 DocumentSnapshot ds = task.getResult();
                 if (Objects.requireNonNull(ds).exists()) {
                     DocumentReference docRef2 = db.collection("users")
-                                                    .document(Objects.requireNonNull
-                                                            (Objects.requireNonNull(mAuth
-                                                                    .getCurrentUser()).getEmail()))
+                                                    .document(user)
                                                     .collection("groups")
                                                     .document(groupCode);
                     docRef2.get().addOnCompleteListener(task2 -> {
@@ -64,6 +64,13 @@ public class JoinGroupRepository {
                                    listener.setJoinGroupFinished();
                                }
                            });
+                           data.clear();
+                           data.put("id", user);
+                           db.collection("groups")
+                                   .document(groupCode)
+                                   .collection("members")
+                                   .document(user)
+                                   .set(data);
                        }
                     });
                 }

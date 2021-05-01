@@ -1,8 +1,9 @@
-package com.example.piston.main.personal;
+package com.example.piston.main.posts;
 
 import android.util.Log;
 
 import com.example.piston.data.Folder;
+import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -11,38 +12,43 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PersonalRepository {
+public class PostsRepository {
 
-    private final PersonalRepository.IPersonal listener;
+    private final PostsRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final String user;
+    private final String user, collection, document, postID;
     private ListenerRegistration listenerRegistration;
 
-    public interface IPersonal {
-        void setFolders(ArrayList<Folder> categories);
+    public interface IPosts {
+        void setPosts(ArrayList<Post> categories);
     }
 
-    public PersonalRepository(PersonalRepository.IPersonal listener) {
+    public PostsRepository(PostsRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
+        this.collection = collection;
+        this.document = document;
+        this.postID = postID;
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         listenChanges();
     }
 
-    private void loadFolders() {
-        db.collection("users")
-                .document(user)
-                .collection("folders")
+    private void loadPosts() {
+        db.collection(collection)
+                .document(document)
+                .collection("posts")
+                .document(postID)
+                .collection("replies")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        ArrayList<Folder> folders = new ArrayList<>();
+                        ArrayList<Post> posts = new ArrayList<>();
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
-                            Folder Folder = documentSnapshot.toObject(Folder.class);
-                            folders.add(Folder);
+                            Post post = documentSnapshot.toObject(Post.class);
+                            posts.add(post);
                         }
-                        listener.setFolders(folders);
+                        listener.setPosts(posts);
                     } else {
                         Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
@@ -52,8 +58,8 @@ public class PersonalRepository {
     private void listenChanges() {
         listenerRegistration = db.collection("users")
                 .document(user)
-                .collection("folders")
-                .addSnapshotListener((snapshots, e) -> PersonalRepository.this.loadFolders());
+                .collection("posts")
+                .addSnapshotListener((snapshots, e) -> PostsRepository.this.loadPosts());
     }
 
     public void removeListener() {
