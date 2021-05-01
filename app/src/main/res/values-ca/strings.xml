@@ -153,5 +153,6 @@
     <string name="profile_image">Imatge del Perfil</string>
     <string name="logout">Tanca sessió</string>
     <string name="category_name">Nom Categoria</string>
+    <string name="category_info">Informació de Categoria</string>
 
 </resources>

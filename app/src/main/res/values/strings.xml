@@ -157,5 +157,6 @@
     <string name="profile_image">Profile Image</string>
     <string name="logout">Log Out</string>
     <string name="category_name">Category Name</string>
+    <string name="category_info">Category Info</string>
 
 </resources>

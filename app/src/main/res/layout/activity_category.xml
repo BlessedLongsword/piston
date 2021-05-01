@@ -22,6 +22,7 @@
                 android:id="@+id/view_posts_topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:onClick="goToInfo"
                 app:title="@string/category_name"
                 style="@style/Theme.Piston.ToolbarStyle"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"/>

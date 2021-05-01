@@ -152,5 +152,6 @@
     <string name="profile_image">Imagen de Perfil</string>
     <string name="logout">Cerrar sesión</string>
     <string name="category_name">Nombre Categoría</string>
+    <string name="category_info">Información de Categoría</string>
 
 </resources>

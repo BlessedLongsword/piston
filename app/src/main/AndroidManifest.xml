@@ -30,6 +30,7 @@
         <activity android:name=".main.MainActivity"/>
 
         <activity android:name=".main.global.category.CategoryActivity"/>
+        <activity android:name=".main.global.category.info.CategoryInfoActivity"/>
         <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
 
         <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>

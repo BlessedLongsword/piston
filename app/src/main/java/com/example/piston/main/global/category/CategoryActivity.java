@@ -8,10 +8,12 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryBinding;
+import com.example.piston.main.global.category.info.CategoryInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
@@ -43,6 +45,12 @@ public class CategoryActivity extends AppCompatActivity {
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra("collection", "categories");
+        intent.putExtra("document", title);
+        startActivity(intent);
+    }
+
+    public void goToInfo(View view) {
+        Intent intent = new Intent(this, CategoryInfoActivity.class);
         intent.putExtra("document", title);
         startActivity(intent);
     }
