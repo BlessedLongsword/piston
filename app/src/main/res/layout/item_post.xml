@@ -23,9 +23,9 @@
 
             <!-- Media -->
             <ImageView
+                android:id="@+id/post_picture"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/card_image"
-                android:getImage="@{post.image}"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/content_description_media"
                 />

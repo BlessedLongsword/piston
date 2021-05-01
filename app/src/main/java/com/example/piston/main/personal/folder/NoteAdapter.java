@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
 import com.example.piston.databinding.ItemPostBinding;
@@ -57,9 +58,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NoteAdapter.NoteHolder holder, int position) {
-        Post Post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
-        holder.bind(Post);
-        holder.getBinding().card.setOnClickListener(openNewActivity(Post.getTitle()));
+        Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
+        holder.bind(post);
+        Glide.with(localActivity)
+                .load(post.getImageLink())
+                .into(holder.binding.postPicture);
+        holder.getBinding().card.setOnClickListener(openNewActivity(post.getTitle()));
     }
 
     @Override

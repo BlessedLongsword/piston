@@ -237,9 +237,4 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:getImage")
-    public static void getImage(ImageView imageView, byte[] byteArray) {
-        imageView.setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
-    }
-
 }

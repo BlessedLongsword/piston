@@ -1,7 +1,5 @@
 package com.example.piston.data;
 
-import com.google.firebase.firestore.Exclude;
-
 public class Post {
 
     private String title;
@@ -9,18 +7,18 @@ public class Post {
     private String owner;
 
     private String id;
-    private String image_id;
-
-    private byte[] image;
+    private String imageId;
+    private String imageLink;
 
     public Post() {}
 
-    public Post(String title, String content, String owner, String id, String image_id) {
+    public Post(String title, String content, String owner, String id, String imageId, String imageLink) {
         setTitle(title);
         setContent(content);
         setOwner(owner);
         setId(id);
-        setImage_id(image_id);
+        setImageId(imageId);
+        setImageLink(imageLink);
     }
 
     public String getTitle() {
@@ -56,21 +54,19 @@ public class Post {
     }
 
 
-    public String getImage_id() {
-        return image_id;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImage_id(String image_id) {
-        this.image_id = image_id;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
-    @Exclude
-    public byte[] getImage() {
-        return image;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    @Exclude
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 }

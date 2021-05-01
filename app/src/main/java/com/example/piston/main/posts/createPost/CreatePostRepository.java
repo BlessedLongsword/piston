@@ -33,6 +33,7 @@ public class CreatePostRepository {
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
         this.listener = listener;
         user = auth.getCurrentUser().getEmail();
+        Log.d("nowaybro", "Display name: " + auth.getCurrentUser().getDisplayName());
     }
 
     public void checkTitle(String title) {
@@ -50,7 +51,7 @@ public class CreatePostRepository {
             listener.setLoadingFinished();
         }
         //Personal
-        else if (collection.equals("users")){
+        else if (collection.equals("users")) {
             DocumentReference docRef = db.collection(collection)
                     .document(user)
                     .collection("folders")
@@ -59,7 +60,8 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id, "nice");
+                    Post post = new Post(title, content, user, id, "nice",
+                            "https://firebasestorage.googleapis.com/v0/b/piston-48298.appspot.com/o/nice?alt=media&token=710e0200-a661-401a-9db3-2b1da7ee2f62");
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
@@ -74,7 +76,8 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id, "nice");
+                    Post post = new Post(title, content, user, id, "nice",
+                            "https://firebasestorage.googleapis.com/v0/b/piston-48298.appspot.com/o/nice?alt=media&token=710e0200-a661-401a-9db3-2b1da7ee2f62");
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
