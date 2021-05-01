@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
 import com.example.piston.databinding.ItemPostBinding;
@@ -60,6 +61,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
     public void onBindViewHolder(@NonNull PostAdapter.PostHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
+        Glide.with(localActivity)
+                .load(post.getImageLink())
+                .into(holder.binding.postPicture);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
     }
 

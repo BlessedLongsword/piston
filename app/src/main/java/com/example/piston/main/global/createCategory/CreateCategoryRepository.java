@@ -4,11 +4,19 @@ import com.example.piston.data.Category;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 public class CreateCategoryRepository {
 
     private final ICreateCategory listener;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    String imageId;
+    String imageLink;
 
     public interface ICreateCategory {
         void setTitleStatus(CreateCategoryResult.TitleError titleError);
@@ -53,7 +61,7 @@ public class CreateCategoryRepository {
                         listener.setCreateError();
                         listener.setLoadingFinished();
                     } else {
-                        Category category = new Category(title, description, nsfw);
+                        Category category = new Category(title, description, nsfw, imageId, imageLink);
                         db.collection("categories").document(title).set(category);
                         listener.setCreateFinished();
                         listener.setLoadingFinished();
@@ -61,6 +69,17 @@ public class CreateCategoryRepository {
                 }
             });
         }
+    }
+
+    public void uploadImage(byte[] image) {
+        StorageReference storageRef = storage.getReference();
+        imageId = UUID.randomUUID().toString();
+        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
+        UploadTask uploadTask = imageRef.putBytes(image);
+        uploadTask.addOnFailureListener(exception -> {
+            // Handle unsuccessful uploads
+        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> imageLink = uri.toString()));
     }
 
 }

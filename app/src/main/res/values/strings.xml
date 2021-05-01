@@ -107,6 +107,7 @@
     <string name="create_group_members">Members</string>
     <string name="group_link_help">Use this to invite members</string>
     <string name="create_group_error_message">You must specify a group title</string>
+    <string name="group_image" translatable="false">Group Image</string>
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">Group Settings</string>
@@ -120,6 +121,7 @@
     <string name="category_link_help">Use this to share category</string>
     <string name="create_category_error_message">Please insert a valid Category Name</string>
     <string name="create_category_title_taken">This Category already exists</string>
+    <string name="category_image" translatable="false">Category Image</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">Notifications</string>

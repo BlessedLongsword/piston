@@ -91,25 +91,13 @@ public class CreatePostRepository {
     }
 
     public void generatePostID() {
-        Map data = new HashMap();
-        data.put("Null", null);
-        db.collection("users")
-                .add(data)
-                .addOnSuccessListener(documentReference -> {
-                    id = documentReference.getId();
-                    Log.d("what", "The id is: " + documentReference.getId());
-                    db.collection("users")
-                            .document(id)
-                            .delete().addOnCompleteListener(task -> {
-                                listener.setLoadingFinished();
-                    });
-                });
+        id = db.collection("users").document().getId();
     }
 
     public void uploadImage(byte[] image) {
         StorageReference storageRef = storage.getReference();
         imageId = UUID.randomUUID().toString();
-        StorageReference imageRef = storageRef.child(id); //Falta comprovar que sigui nou
+        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
         UploadTask uploadTask = imageRef.putBytes(image);
         uploadTask.addOnFailureListener(exception -> {
             // Handle unsuccessful uploads

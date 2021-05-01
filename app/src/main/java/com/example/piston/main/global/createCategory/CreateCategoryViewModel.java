@@ -79,4 +79,6 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
         return loading;
     }
 
+    public void uploadImage(byte[] image) { repository.uploadImage(image); }
+
 }

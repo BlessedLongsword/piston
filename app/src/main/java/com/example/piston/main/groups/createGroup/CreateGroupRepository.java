@@ -29,18 +29,7 @@ public class CreateGroupRepository {
     }
 
     public void generateGroupID() {
-        Map data = new HashMap();
-        data.put("Null", null);
-        db.collection("groups")
-                .add(data)
-                .addOnSuccessListener(documentReference -> {
-                   listener.setGroupID(documentReference.getId());
-                   Log.d("DBReadTAG", "The id is: " + documentReference.getId());
-                   db.collection("groups").document(documentReference.getId())
-                           .delete().addOnCompleteListener(task -> {
-                               listener.setLoadingFinished();
-                   });
-                });
+        listener.setGroupID(db.collection("groups").document().getId());
     }
 
     public void checkTitle(String title) {

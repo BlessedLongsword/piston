@@ -1,9 +1,16 @@
 package com.example.piston.main.groups.createGroup;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +19,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateGroupBinding;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.io.IOException;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
@@ -62,4 +72,28 @@ public class CreateGroupActivity extends AppCompatActivity {
     public void createGroup(MenuItem item) {
         createGroupViewModel.createGroup();
     }
+
+    public void imagePick(View v) {
+        ImagePicker.Companion.with(this)
+                .crop()
+                .compress(1024)
+                .start();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Uri imageUri = data.getData();
+            try {
+                ImageView im = findViewById(R.id.group_picture);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                //createGroupViewModel.uploadImage(bitmap);
+                im.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

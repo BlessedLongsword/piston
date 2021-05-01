@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Category;
 import com.example.piston.databinding.ItemCategoryBinding;
@@ -60,6 +61,9 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
     public void onBindViewHolder(@NonNull GlobalAdapter.CategoryHolder holder, int position) {
         Category category = Objects.requireNonNull(viewModel.getCategories().getValue()).get(position);
         holder.bind(category);
+        Glide.with(localActivity)
+                .load(category.getImageLink())
+                .into(holder.binding.categoryImage);
         holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
     }
 
