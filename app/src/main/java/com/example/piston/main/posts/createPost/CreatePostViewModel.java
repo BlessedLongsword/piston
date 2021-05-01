@@ -1,12 +1,8 @@
 package com.example.piston.main.posts.createPost;
 
-import android.graphics.Bitmap;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-
 
 import java.util.Objects;
 
@@ -22,19 +18,14 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
 
     private final CreatePostRepository repository = new CreatePostRepository(this);
 
-    public void generatePostID() {
-        repository.generatePostID();
-        loading.setValue(true);
-    }
-
     public void titleUpdate() {
         repository.checkTitle(Objects.requireNonNull(titleField.getValue()));
         createError.setValue(false);
     }
 
-    public void createPost(String collection, String document) {
-        repository.createPost(collection, document, Objects.requireNonNull(titleField.getValue())
-                , contentField.getValue());
+    public void createPost(String collection, String document, byte[] image) {
+        repository.createPost(collection, document, Objects.requireNonNull(titleField.getValue()),
+                contentField.getValue(), image);
         loading.setValue(true);
     }
 
@@ -80,9 +71,5 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
 
     public LiveData<Boolean> getFinishCreatePost() {
         return finishCreatePost;
-    }
-
-    public void uploadImage(byte[] image) {
-        repository.uploadImage(image);
     }
 }

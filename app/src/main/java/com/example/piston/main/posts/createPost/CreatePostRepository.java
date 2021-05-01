@@ -17,9 +17,6 @@ public class CreatePostRepository {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     String user;
     String username;
-    String id;
-    String imageId;
-    String imageLink;
 
     public interface ICreatePost {
         void setTitleStatus(CreatePostResult.TitleError titleError);
@@ -46,50 +43,54 @@ public class CreatePostRepository {
         }
     }
 
-    public void createPost(String collection, String document, String title, String content) {
+    public void createPost(String collection, String document, String title, String content, byte[] image) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreatePostResult.TitleError.EMPTY);
             listener.setCreateError();
             listener.setLoadingFinished();
         }
         else {
-            DocumentReference docRef;
-            if (collection.equals("users")) {
-                docRef = db.collection(collection)
-                        .document(user)
-                        .collection("folders")
-                        .document(document)
-                        .collection("posts")
-                        .document(id);
-            } else {
-                docRef = db.collection(collection)
-                        .document(document)
-                        .collection("posts")
-                        .document(id);
-            }
-            docRef.get().addOnCompleteListener(task -> {
-                if (task.isComplete()) {
-                    Post post = new Post(title, content, username, id, imageId, imageLink);
-                    docRef.set(post);
-                    listener.setCreateFinished();
-                    listener.setLoadingFinished();
-                }
-            });
+            StorageReference storageRef = storage.getReference();
+            String randomId = UUID.randomUUID().toString();
+            String path;
+            if (collection.equals("users"))
+                path = "users/" + username;
+            else
+                path = collection + "/" + document;
+            String imageId = path + "/" + randomId;
+            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+            UploadTask uploadTask = imageRef.putBytes(image);
+            uploadTask.addOnFailureListener(exception -> {
+                // Handle unsuccessful uploads
+            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                    .addOnSuccessListener(uri -> {
+                        String imageLink = uri.toString();
+
+                        String id = db.collection("users").document().getId();
+
+                        DocumentReference docRef;
+                        if (collection.equals("users")) {
+                            docRef = db.collection(collection)
+                                    .document(user)
+                                    .collection("folders")
+                                    .document(document)
+                                    .collection("posts")
+                                    .document(id);
+                        } else {
+                            docRef = db.collection(collection)
+                                    .document(document)
+                                    .collection("posts")
+                                    .document(id);
+                        }
+                        docRef.get().addOnCompleteListener(task -> {
+                            if (task.isComplete()) {
+                                Post post = new Post(title, content, username, id, imageId, imageLink);
+                                docRef.set(post);
+                                listener.setCreateFinished();
+                                listener.setLoadingFinished();
+                            }
+                        });
+                    }));
         }
-    }
-
-    public void generatePostID() {
-        id = db.collection("users").document().getId();
-    }
-
-    public void uploadImage(byte[] image) {
-        StorageReference storageRef = storage.getReference();
-        imageId = UUID.randomUUID().toString();
-        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
-        UploadTask uploadTask = imageRef.putBytes(image);
-        uploadTask.addOnFailureListener(exception -> {
-            // Handle unsuccessful uploads
-        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> imageLink = uri.toString()));
     }
 }

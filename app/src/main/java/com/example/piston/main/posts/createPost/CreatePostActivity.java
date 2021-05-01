@@ -24,8 +24,10 @@ import java.io.IOException;
 
 public class CreatePostActivity extends AppCompatActivity {
 
-    CreatePostViewModel createPostViewModel;
-    String collection, document;
+    private CreatePostViewModel createPostViewModel;
+    private String collection, document;
+    private byte[] image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,6 @@ public class CreatePostActivity extends AppCompatActivity {
         binding.setViewModel(createPostViewModel);
         binding.setLifecycleOwner(this);
         binding.createPostTopAppBar.setNavigationOnClickListener(v -> finish());
-
-        createPostViewModel.generatePostID();
 
         createPostViewModel.getCreateError().observe(this, aBoolean -> {
             if (aBoolean) {
@@ -60,7 +60,7 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
     public void createPost(MenuItem item) {
-        createPostViewModel.createPost(collection, document);
+        createPostViewModel.createPost(collection, document, image);
     }
 
     public void imagePick(View v) {
@@ -81,8 +81,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 im.setImageBitmap(bitmap);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] image = baos.toByteArray();
-                createPostViewModel.uploadImage(image);
+                image = baos.toByteArray();
             } catch (IOException e) {
                 e.printStackTrace();
             }
