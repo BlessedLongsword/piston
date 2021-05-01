@@ -8,14 +8,14 @@ import com.example.piston.data.Post;
 
 import java.util.ArrayList;
 
-public class PostsViewModel extends ViewModel implements PostsRepository.IPosts{
+public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
 
-    private final PostsRepository repository;
+    private final PostRepository repository;
 
-    public PostsViewModel(String collection, String document, String postID) {
-        repository = new PostsRepository(this, collection, document, postID);
+    public PostViewModel(String collection, String document, String postID) {
+        repository = new PostRepository(this, collection, document, postID);
     }
 
     @Override

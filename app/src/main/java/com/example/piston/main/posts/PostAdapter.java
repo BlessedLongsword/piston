@@ -19,10 +19,10 @@ import com.example.piston.databinding.ItemThreadBinding;
 
 import java.util.Objects;
 
-public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final FragmentActivity localActivity;
-    private final PostsViewModel viewModel;
+    private final PostViewModel viewModel;
 
     public static class ThreadHolder extends RecyclerView.ViewHolder {
 
@@ -60,9 +60,9 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public PostsAdapter(FragmentActivity activity) {
+    public PostAdapter(FragmentActivity activity) {
         localActivity = activity;
-        viewModel = new ViewModelProvider(activity).get(PostsViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(PostViewModel.class);
         viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
     }
 
@@ -78,12 +78,12 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == 0){
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
-            return new PostsAdapter.ThreadHolder(binding);
+            return new PostAdapter.ThreadHolder(binding);
         }
         else {
             ItemReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_reply, parent, false);
-            return new PostsAdapter.ReplyHolder(binding);
+            return new PostAdapter.ReplyHolder(binding);
         }
 
     }
@@ -92,7 +92,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         if (holder.getItemViewType() == 0) {
-            PostsAdapter.ThreadHolder hold  = (PostsAdapter.ThreadHolder) holder;
+            PostAdapter.ThreadHolder hold  = (PostAdapter.ThreadHolder) holder;
             hold.bind(post);
             Glide.with(localActivity)
                     .load(post.getImageLink())
@@ -100,7 +100,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             hold.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
         }
         else {
-            PostsAdapter.ReplyHolder hold = ((PostsAdapter.ReplyHolder) holder);
+            PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
             hold.bind(post);
             hold.getBinding().card.setOnClickListener(openNewActivity(post.getTitle()));
         }
@@ -113,7 +113,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private View.OnClickListener openNewActivity(String id) {
         return v -> {
-            Intent intent = new Intent(localActivity, PostsActivity.class);
+            Intent intent = new Intent(localActivity, PostActivity.class);
             intent.putExtra("id", id);
             localActivity.startActivity(intent);
         };

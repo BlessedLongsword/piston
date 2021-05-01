@@ -7,16 +7,18 @@ public class Post {
     private String owner;
 
     private String id;
+    private String documentID;
     private String imageId;
     private String imageLink;
 
     public Post() {}
 
-    public Post(String title, String content, String owner, String id, String imageId, String imageLink) {
+    public Post(String title, String content, String owner, String id, String documentID, String imageId, String imageLink) {
         setTitle(title);
         setContent(content);
         setOwner(owner);
         setId(id);
+        setDocumentID(documentID);
         setImageId(imageId);
         setImageLink(imageLink);
     }
@@ -68,5 +70,13 @@ public class Post {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
     }
 }

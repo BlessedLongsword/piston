@@ -84,7 +84,7 @@ public class CreatePostRepository {
                         }
                         docRef.get().addOnCompleteListener(task -> {
                             if (task.isComplete()) {
-                                Post post = new Post(title, content, username, id, imageId, imageLink);
+                                Post post = new Post(title, content, username, id, document, imageId, imageLink);
                                 docRef.set(post);
                                 listener.setCreateFinished();
                                 listener.setLoadingFinished();

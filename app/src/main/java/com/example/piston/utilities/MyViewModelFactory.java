@@ -9,14 +9,18 @@ import com.example.piston.main.global.category.CategoryViewModel;
 import com.example.piston.main.global.category.info.CategoryInfoViewModel;
 import com.example.piston.main.groups.group.GroupViewModel;
 import com.example.piston.main.personal.folder.FolderViewModel;
-import com.example.piston.main.posts.PostsViewModel;
+import com.example.piston.main.posts.PostViewModel;
 
 public class MyViewModelFactory implements ViewModelProvider.Factory {
 
-    private String mParam, mParam1, mParam2;
+    private final String mParam;
+    private final String mParam1;
+    private final String mParam2;
 
     public MyViewModelFactory(String param) {
         mParam = param;
+        mParam1 = null;
+        mParam2 = null;
     }
 
     public MyViewModelFactory(String param, String param1, String param2) {
@@ -39,8 +43,8 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new CategoryInfoViewModel(mParam);
         if (modelClass.isAssignableFrom(GoogleRegisterViewModel.class))
             return (T) new GoogleRegisterViewModel(mParam);
-        if (modelClass.isAssignableFrom(PostsViewModel.class))
-            return (T) new PostsViewModel(mParam, mParam1, mParam2);
+        if (modelClass.isAssignableFrom(PostViewModel.class))
+            return (T) new PostViewModel(mParam, mParam1, mParam2);
         throw new IllegalArgumentException("Unable to construct viewmodel");
     }
 

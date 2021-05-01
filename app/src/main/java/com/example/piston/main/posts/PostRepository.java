@@ -2,7 +2,6 @@ package com.example.piston.main.posts;
 
 import android.util.Log;
 
-import com.example.piston.data.Folder;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -12,9 +11,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PostsRepository {
+public class PostRepository {
 
-    private final PostsRepository.IPosts listener;
+    private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String user, collection, document, postID;
     private ListenerRegistration listenerRegistration;
@@ -23,7 +22,7 @@ public class PostsRepository {
         void setPosts(ArrayList<Post> categories);
     }
 
-    public PostsRepository(PostsRepository.IPosts listener, String collection, String document, String postID) {
+    public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
         this.collection = collection;
         this.document = document;
@@ -59,7 +58,7 @@ public class PostsRepository {
         listenerRegistration = db.collection("users")
                 .document(user)
                 .collection("posts")
-                .addSnapshotListener((snapshots, e) -> PostsRepository.this.loadPosts());
+                .addSnapshotListener((snapshots, e) -> PostRepository.this.loadPosts());
     }
 
     public void removeListener() {

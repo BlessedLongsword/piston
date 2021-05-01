@@ -63,7 +63,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         Glide.with(localActivity)
                 .load(post.getImageLink())
                 .into(holder.binding.postPicture);
-        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getTitle()));
     }
 
     @Override
@@ -71,9 +71,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id) {
+    private View.OnClickListener openNewActivity(String documentID, String id) {
         return v -> {
             Intent intent = new Intent(localActivity, GroupActivity.class);
+            intent.putExtra("collection", "groups");
+            intent.putExtra("document", documentID);
             intent.putExtra("id", id);
             localActivity.startActivity(intent);
         };
