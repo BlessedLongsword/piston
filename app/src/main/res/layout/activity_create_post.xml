@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/choose_picture"
-                        android:onClick="tata"/>
+                        android:onClick="imagePick"/>
 
                     <Space
                         android:layout_width="0dp"

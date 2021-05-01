@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.FileNotFoundException;
@@ -65,11 +66,15 @@ public class CreatePostActivity extends AppCompatActivity {
 
     //OPEN GALLERY TO SELECT AVATAR
     int PICK_PHOTO_FOR_AVATAR = 0;
-    public void tata(View v) {
-        Log.d("nowaybro", "MMMMMM");
+    public void imagePick(View v) {
+        ImagePicker.Companion.with(this)
+                .crop(1.95f, 1f)
+                .compress(1024)
+                .start();
+        /*Log.d("nowaybro", "MMMMMM");
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
+        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);*/
     }
 
     @Override

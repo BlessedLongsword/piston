@@ -12,7 +12,9 @@
         android:theme="@style/Theme.Piston"
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:screenOrientation="sensorPortrait">
+        android:screenOrientation="sensorPortrait"
+        android:requestLegacyExternalStorage="true" >
+
 
         <activity android:name=".authentication.login.LoginActivity"/>
         <activity android:name=".authentication.register.RegisterActivity"/>
