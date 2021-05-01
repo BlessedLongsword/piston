@@ -1,6 +1,5 @@
 package com.example.piston.main.personal.folder;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.example.piston.databinding.ItemPostBinding;
 import java.util.Objects;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
-
 
     private final FragmentActivity localActivity;
     private final FolderViewModel viewModel;

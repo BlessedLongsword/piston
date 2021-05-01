@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/card_image"
-                app:srcCompat="@drawable/jojo"
+                android:getImage="@{post.image}"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/content_description_media"
                 />

@@ -1,7 +1,14 @@
 package com.example.piston.main.posts.createPost;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -56,9 +63,10 @@ public class CreatePostActivity extends AppCompatActivity {
     }
 
 
-    /* OPEN GALLERY TO SELECT AVATAR
+    //OPEN GALLERY TO SELECT AVATAR
     int PICK_PHOTO_FOR_AVATAR = 0;
     public void tata(View v) {
+        Log.d("nowaybro", "MMMMMM");
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
@@ -76,12 +84,13 @@ public class CreatePostActivity extends AppCompatActivity {
                 InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(data.getData());
                 ImageView im = findViewById(R.id.post_picture);
                 Bitmap b = BitmapFactory.decodeStream(inputStream);
+                createPostViewModel.uploadImage(b);
                 im.setImageBitmap(b);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
         }
-    }*/
+    }
 
 }

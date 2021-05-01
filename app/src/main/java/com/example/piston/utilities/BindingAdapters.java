@@ -1,7 +1,9 @@
 package com.example.piston.utilities;
 
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -233,6 +235,11 @@ public class BindingAdapters {
                 view.setError(view.getContext().getString(R.string.join_group_already));
                 break;
         }
+    }
+
+    @BindingAdapter("android:getImage")
+    public static void getImage(ImageView imageView, byte[] byteArray) {
+        imageView.setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
     }
 
 }

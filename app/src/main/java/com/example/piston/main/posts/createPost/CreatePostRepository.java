@@ -1,12 +1,17 @@
 package com.example.piston.main.posts.createPost;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +19,7 @@ public class CreatePostRepository {
     private final CreatePostRepository.ICreatePost listener;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     String user;
     String id;
 
@@ -53,7 +59,7 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id);
+                    Post post = new Post(title, content, user, id, "nice");
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
@@ -68,7 +74,7 @@ public class CreatePostRepository {
                     .document(id);
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
-                    Post post = new Post(title, content, user, id);
+                    Post post = new Post(title, content, user, id, "nice");
                     docRef.set(post);
                     listener.setCreateFinished();
                     listener.setLoadingFinished();
@@ -91,5 +97,21 @@ public class CreatePostRepository {
                                 listener.setLoadingFinished();
                     });
                 });
+    }
+
+    public void uploadImage(Bitmap bitmap) {
+        StorageReference storageRef = storage.getReference();
+        StorageReference imageRef = storageRef.child("nice");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imageRef.putBytes(data);
+        uploadTask.addOnFailureListener(exception -> {
+            // Handle unsuccessful uploads
+        }).addOnSuccessListener(taskSnapshot -> {
+            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+            // ...
+        });
     }
 }

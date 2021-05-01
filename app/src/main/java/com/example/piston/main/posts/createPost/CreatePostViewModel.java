@@ -1,5 +1,7 @@
 package com.example.piston.main.posts.createPost;
 
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -80,4 +82,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
         return finishCreatePost;
     }
 
+    public void uploadImage(Bitmap b) {
+        repository.uploadImage(b);
+    }
 }

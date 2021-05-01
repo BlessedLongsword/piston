@@ -18,8 +18,8 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class FolderActivity extends AppCompatActivity {
 
-    String title;
-    FolderViewModel viewModel;
+    private String title;
+    private FolderViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
