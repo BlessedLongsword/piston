@@ -30,7 +30,7 @@ public class GlobalFragment extends SectionFragment {
                 GlobalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-        binding.recyclerviewGlobal.setAdapter(new CategoryAdapter(requireActivity()));
+        binding.recyclerviewGlobal.setAdapter(new GlobalAdapter(requireActivity()));
         return binding.getRoot();
     }
 

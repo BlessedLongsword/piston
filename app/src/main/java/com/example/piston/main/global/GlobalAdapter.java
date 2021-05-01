@@ -18,7 +18,7 @@ import com.example.piston.main.global.category.CategoryActivity;
 
 import java.util.Objects;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
+public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHolder> {
 
     private final FragmentActivity localActivity;
     private final GlobalViewModel viewModel;
@@ -41,7 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 
-    public CategoryAdapter(FragmentActivity activity) {
+    public GlobalAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GlobalViewModel.class);
         viewModel.getCategories().observe(activity, item -> notifyDataSetChanged());
@@ -57,7 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.CategoryHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GlobalAdapter.CategoryHolder holder, int position) {
         Category category = Objects.requireNonNull(viewModel.getCategories().getValue()).get(position);
         holder.bind(category);
         holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
