@@ -26,7 +26,7 @@ public class GroupsFragment extends SectionFragment {
                              @Nullable Bundle savedInstanceState) {
         FragmentGroupBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_group, container, false);
-        binding.recyclerviewGroup.setAdapter(new GroupAdapter(requireActivity()));
+        binding.recyclerviewGroup.setAdapter(new GroupsAdapter(requireActivity()));
         viewModel = new ViewModelProvider(requireActivity())
                 .get(GroupsViewModel.class);
         binding.setViewModel(viewModel);

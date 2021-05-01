@@ -30,6 +30,7 @@ public class PersonalRepository {
     }
 
     private void loadFolders() {
+        Log.d("what", "loadFolders");
         db.collection("users")
                 .document(user)
                 .collection("folders")

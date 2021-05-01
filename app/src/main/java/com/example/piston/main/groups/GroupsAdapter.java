@@ -18,16 +18,16 @@ import com.example.piston.main.groups.group.GroupActivity;
 
 import java.util.Objects;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
+public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHolder> {
 
     private final FragmentActivity localActivity;
     private final GroupsViewModel viewModel;
 
-    public static class GroupHolder extends RecyclerView.ViewHolder {
+    public static class GroupsHolder extends RecyclerView.ViewHolder {
 
         private final ItemGroupBinding binding;
 
-        public GroupHolder(ItemGroupBinding binding) {
+        public GroupsHolder(ItemGroupBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -37,7 +37,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         public ItemGroupBinding getBinding() { return binding; }
     }
 
-    public GroupAdapter(FragmentActivity activity) {
+    public GroupsAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GroupsViewModel.class);
         viewModel.getGroups().observe(activity, item -> notifyDataSetChanged());
@@ -45,18 +45,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     @NonNull
     @Override
-    public GroupHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GroupsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemGroupBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_group, parent, false);
-        return new GroupHolder(binding);
+        return new GroupsHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroupAdapter.GroupHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupsAdapter.GroupsHolder holder, int position) {
         Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
         holder.bind(group);
-        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId()));
+        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
     }
 
     @Override
@@ -64,10 +64,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         return Objects.requireNonNull(viewModel.getGroups().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id) {
+    private View.OnClickListener openNewActivity(String id, String title) {
         return v -> {
             Intent intent = new Intent(localActivity, GroupActivity.class);
             intent.putExtra("id", id);
+            intent.putExtra("title", title);
             localActivity.startActivity(intent);
         };
     }

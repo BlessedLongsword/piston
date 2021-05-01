@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.main.global.category.CategoryViewModel;
+import com.example.piston.main.groups.group.GroupViewModel;
 import com.example.piston.main.personal.folder.FolderViewModel;
 
 public class MyViewModelFactory implements ViewModelProvider.Factory {
@@ -23,6 +24,8 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new CategoryViewModel(mParam);
         if (modelClass.isAssignableFrom(FolderViewModel.class))
             return (T) new FolderViewModel(mParam);
+        if (modelClass.isAssignableFrom(GroupViewModel.class))
+            return (T) new GroupViewModel(mParam);
         throw new IllegalArgumentException("Unable to construct viewmodel");
     }
 

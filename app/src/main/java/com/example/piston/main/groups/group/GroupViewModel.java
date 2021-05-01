@@ -2,29 +2,33 @@ package com.example.piston.main.groups.group;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Post;
 
 import java.util.ArrayList;
 
-public class GroupViewModel {
-    private final MutableLiveData<ArrayList<Post>> posts;
-    private final ArrayList<Post> post_array;
+public class GroupViewModel extends ViewModel implements GroupRepository.IGroup {
 
+    private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
 
-    public GroupViewModel() {
-        post_array = new ArrayList<>();
-        posts = new MutableLiveData<>(post_array);
+    private final GroupRepository repository;
 
+    public GroupViewModel(String Group) {
+        repository = new GroupRepository(this, Group);
+    }
+
+    @Override
+    public void setGroupPosts(ArrayList<Post> posts) {
+        this.posts.setValue(posts);
+    }
+
+    @Override
+    protected void onCleared () {
+        repository.removeListener();
     }
 
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
-/*
-    public void createPost(String title, String text, String owner){
-        post_array.add(new Post(title, text));
-        posts.setValue(post_array);
-    }
-    */
 }
