@@ -3,9 +3,9 @@ package com.example.piston.main.posts.createPost;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,11 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.IOException;
 
 public class CreatePostActivity extends AppCompatActivity {
 
@@ -63,37 +63,29 @@ public class CreatePostActivity extends AppCompatActivity {
         createPostViewModel.createPost(collection, document);
     }
 
-
-    //OPEN GALLERY TO SELECT AVATAR
-    int PICK_PHOTO_FOR_AVATAR = 0;
-    public void tata(View v) {
-        Log.d("nowaybro", "MMMMMM");
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
+    public void imagePick(View v) {
+        ImagePicker.Companion.with(this)
+                .crop()
+                .compress(1024)
+                .start();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK) {
-            if (data == null) {
-                //Display an error
-                return;
-            }
+        if (resultCode == Activity.RESULT_OK) {
+            Uri imageUri = data.getData();
             try {
-                InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(data.getData());
                 ImageView im = findViewById(R.id.post_picture);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 im.setImageBitmap(bitmap);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] image = baos.toByteArray();
                 createPostViewModel.uploadImage(image);
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
