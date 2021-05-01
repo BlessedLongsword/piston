@@ -152,5 +152,6 @@
     <string name="post_image">Imatge de la Publicació</string>
     <string name="profile_image">Imatge del Perfil</string>
     <string name="logout">Tanca sessió</string>
+    <string name="category_name">Nom Categoria</string>
 
 </resources>

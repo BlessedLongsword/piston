@@ -31,7 +31,7 @@ public class PersonalFragment extends SectionFragment {
                 PersonalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-        binding.recyclerviewPersonal.setAdapter(new FolderAdapter(requireActivity()));
+        binding.recyclerviewPersonal.setAdapter(new PersonalAdapter(requireActivity()));
         return binding.getRoot();
     }
 

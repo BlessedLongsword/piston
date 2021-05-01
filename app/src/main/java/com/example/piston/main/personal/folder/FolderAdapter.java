@@ -18,7 +18,7 @@ import com.example.piston.databinding.ItemPostBinding;
 
 import java.util.Objects;
 
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
+public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder> {
 
     private final FragmentActivity localActivity;
     private final FolderViewModel viewModel;
@@ -41,7 +41,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         }
     }
 
-    public NoteAdapter(FragmentActivity activity) {
+    public FolderAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(FolderViewModel.class);
         viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
@@ -49,21 +49,21 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     @NonNull
     @Override
-    public NoteAdapter.NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FolderAdapter.NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
-        return new NoteAdapter.NoteHolder(binding);
+        return new FolderAdapter.NoteHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteAdapter.NoteHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FolderAdapter.NoteHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
         Glide.with(localActivity)
                 .load(post.getImageLink())
                 .into(holder.binding.postPicture);
-        holder.getBinding().card.setOnClickListener(openNewActivity(post.getTitle()));
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.example.piston.main.posts.createPost;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.example.piston.data.Post;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -2,7 +2,6 @@ package com.example.piston.main.personal.folder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityFolderBinding;
-import com.example.piston.main.global.category.PostAdapter;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
@@ -34,11 +32,12 @@ public class FolderActivity extends AppCompatActivity {
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);
         binding.setViewModel(viewModel);
-         binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(this);
 
-        binding.viewNotesTopAppBar.setTitle(title);
+        binding.folderTopAppBar.setTitle(title);
+        binding.folderTopAppBar.setNavigationOnClickListener((view) -> finish());
 
-        binding.recyclerviewFolder.setAdapter(new NoteAdapter(this));
+        binding.recyclerviewFolder.setAdapter(new FolderAdapter(this));
     }
 
     public void createPost(View view) {

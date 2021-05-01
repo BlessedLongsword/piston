@@ -18,7 +18,7 @@ import com.example.piston.main.personal.folder.FolderActivity;
 
 import java.util.Objects;
 
-public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHolder> {
+public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.FolderHolder> {
 
     private final FragmentActivity localActivity;
     private final PersonalViewModel viewModel;
@@ -34,7 +34,6 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
 
         public void bind(Folder item) {
             binding.setFolder(item);
-            //binding.executePendingBindings();
         }
 
         public ItemFolderBinding getBinding() {
@@ -42,7 +41,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderHold
         }
     }
 
-    public FolderAdapter(FragmentActivity activity) {
+    public PersonalAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PersonalViewModel.class);
         viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());

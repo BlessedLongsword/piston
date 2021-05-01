@@ -58,9 +58,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.PostHolder holder, int position) {
-        Post Post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
-        holder.bind(Post);
-        holder.getBinding().card.setOnClickListener(openNewActivity(Post.getTitle()));
+        Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
+        holder.bind(post);
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
     }
 
     @Override

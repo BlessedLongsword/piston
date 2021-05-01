@@ -151,5 +151,6 @@
     <string name="post_image">Imagen de la Publicación</string>
     <string name="profile_image">Imagen de Perfil</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="category_name">Nombre Categoría</string>
 
 </resources>
