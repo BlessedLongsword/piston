@@ -2,13 +2,11 @@ package com.example.piston.main.global.category;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
@@ -39,7 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         binding.viewPostsTopAppBar.setTitle(title);
         binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
-        binding.recyclerviewCategory.setAdapter(new PostAdapter(this));
+        binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
     }
 
     public void createPost(View view) {

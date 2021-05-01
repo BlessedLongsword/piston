@@ -37,6 +37,7 @@ public class GroupActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         binding.viewNotesTopAppBar.setTitle(title);
+        binding.viewNotesTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         binding.recyclerviewGroups.setAdapter(new GroupAdapter(this));
     }

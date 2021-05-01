@@ -15,9 +15,9 @@
         android:screenOrientation="sensorPortrait"
         android:requestLegacyExternalStorage="true" >
 
-
         <activity android:name=".authentication.login.LoginActivity"/>
         <activity android:name=".authentication.register.RegisterActivity"/>
+        <activity android:name=".authentication.googleRegister.GoogleRegisterActivity"/>
 
         <activity android:name=".launch.LaunchActivity"
             android:theme="@style/Theme.Piston.SplashScreen">

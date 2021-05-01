@@ -1,5 +1,6 @@
 package com.example.piston.authentication.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
+import com.example.piston.authentication.googleRegister.GoogleRegisterActivity;
 import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.authentication.register.RegisterActivity;
 import com.example.piston.main.MainActivity;
@@ -22,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private GoogleSignInClient mGoogleSignInClient;
+    private String idToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private static final int RC_REGISTER = 4097;
+
     private void registerGoogleUser() {
-        Log.d("nowaybro", "Ask for username"); //Falta demanar username (popup o activity)
+        Intent intent = new Intent(this, GoogleRegisterActivity.class);
+        intent.putExtra("idToken", idToken);
+        startActivityForResult(intent, RC_REGISTER);
     }
 
     private static final int RC_SIGN_IN = 9001;
@@ -69,8 +76,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            loginViewModel.signInWithGoogle(GoogleSignIn.getSignedInAccountFromIntent(data));
+            idToken = GoogleSignIn.getSignedInAccountFromIntent(data).getResult().getIdToken();
+            loginViewModel.signInWithToken(idToken);
         }
+        else if (requestCode == RC_REGISTER && resultCode==Activity.RESULT_OK)
+            goToMainActivity();
     }
 
     public void register(View view) {

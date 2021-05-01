@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.Task;
-
 import java.util.Objects;
 
 public class LoginViewModel extends ViewModel implements LoginRepository.ILogin {
@@ -30,10 +27,6 @@ public class LoginViewModel extends ViewModel implements LoginRepository.ILogin 
         loading.setValue(true);
         loginRepository.login(Objects.requireNonNull(getUsername().getValue()),
                 Objects.requireNonNull(getPassword().getValue()));
-    }
-
-    public void signInWithGoogle(Task<GoogleSignInAccount> task) {
-        loginRepository.signInWithGoogle(task);
     }
 
     @Override
@@ -60,5 +53,9 @@ public class LoginViewModel extends ViewModel implements LoginRepository.ILogin 
 
     public LiveData<LoginResult> getLoginResult() {
         return loginResult;
+    }
+
+    public void signInWithToken(String idToken) {
+        loginRepository.signInWithToken(idToken);
     }
 }

@@ -56,16 +56,12 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
 
     @Override
     public void onBindViewHolder(@NonNull GroupsAdapter.GroupsHolder holder, int position) {
-        try {
-            Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
-            holder.bind(group);
-            Glide.with(localActivity)
-                    .load(group.getImageLink())
-                    .into(holder.binding.groupImage);
-            holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
-        }catch (Exception e){
-            Log.d("what","ww");
-        }
+        Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
+        holder.bind(group);
+        Glide.with(localActivity)
+                .load(group.getImageLink())
+                .into(holder.binding.groupImage);
+        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
 
     }
 

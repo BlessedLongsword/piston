@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.authentication.googleRegister.GoogleRegisterViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".authentication.register.RegisterActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="40" />
+
+            <TextView
+                android:id="@+id/registerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reg_title"
+                android:textSize="@dimen/huge" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="20" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                app:errorEnabled="true"
+                android:regUsernameError='@{viewModel.usernameError}' >
+                <!--suppress AndroidUnknownAttribute -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_username_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="@integer/username_max_length"
+                    android:text="@={viewModel.username}"
+                    android:afterTextChanged="@{() -> viewModel.usernameUpdate()}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bdayText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/birth_date"
+                app:placeholderText="@string/reg_date_format"
+                app:errorEnabled="true"
+                android:regBirthDateError='@{viewModel.birthDateError}'>
+                <!--suppress AndroidUnknownAttribute -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_bday_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="@integer/date_max_length"
+                    android:text="@={viewModel.birthDate}"
+                    android:onFocusLost="@{() -> viewModel.birthdayUpdate()}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/tosCheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_text"
+                android:checked="@={viewModel.checkEnabled}"
+                android:onClick= "@{() -> viewModel.onFieldChanged()}" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="20" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/registerBtn"
+                    android:layout_width="@dimen/medium_wide_btn"
+                    android:layout_height="@dimen/medium_high_btn"
+                    android:enabled="@{viewModel.registerEnabled}"
+                    android:onClick="@{() -> viewModel.register()}"
+                    android:setVisible="@{!viewModel.loading}"
+                    android:text="@string/reg_btn" />
+
+                <ProgressBar
+                    android:id="@+id/reg_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:setVisible="@{viewModel.loading}"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_weight="20" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

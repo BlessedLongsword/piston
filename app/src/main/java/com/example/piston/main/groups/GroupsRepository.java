@@ -69,12 +69,8 @@ public class GroupsRepository {
 
     private void addGroup(int position, Group group) {
         groups[position] = group;
-        if (++counter == groups.length) {
+        if (++counter == groups.length)
             listener.setGroups(new ArrayList<>(Arrays.asList(groups)));
-            for (Group value : groups) {
-                Log.d("nowaybro", value.getTitle());
-            }
-        }
     }
 
     private void listenChanges() {

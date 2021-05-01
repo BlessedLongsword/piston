@@ -16,7 +16,7 @@ public class LaunchRepository {
     }
 
     public void checkIfUserIsAuthenticated() {
-        listener.setIsSignedId(mAuth.getCurrentUser()!=null);
+        listener.setIsSignedId(mAuth.getCurrentUser() != null);
     }
 
 }

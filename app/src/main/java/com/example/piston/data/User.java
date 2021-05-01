@@ -1,35 +1,26 @@
 package com.example.piston.data;
 
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
 
-    @Nullable
     private String name;
-    @Nullable
     private String profilePictureLink;
-    @Nullable
     private Post featuredPost;
-    @Nullable
     private String phoneNumber;
 
     private String username;
     private String email;
     private String pwd;
     private Date birthDate;
-    private ArrayList<String> joinedGroups;
 
-    public User() {} //Empty constructor for db
+    public User() {}
 
     public User (String username, String email, String pwd, Date birthDate){
         this.username = username;
         this.email = email;
         this.birthDate = birthDate;
         this.pwd = pwd;
-        joinedGroups = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -40,7 +31,6 @@ public class User {
         this.username = username;
     }
 
-    @Nullable
     public String getName() {
         return name;
     }
@@ -57,7 +47,6 @@ public class User {
         this.email = email;
     }
 
-    @Nullable
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -74,7 +63,6 @@ public class User {
         this.pwd = pwd;
     }
 
-    @Nullable
     public String getProfilePictureLink() {
         return profilePictureLink;
     }
@@ -91,22 +79,12 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    @Nullable
     public Post getFeaturedPost() {
         return featuredPost;
     }
 
     public void setFeaturedPost(Post featuredPost) {
         this.featuredPost = featuredPost;
-    }
-
-    @Nullable
-    public ArrayList<String> getJoinedGroups() {
-        return joinedGroups;
-    }
-
-    public void setJoinedGroups(ArrayList<String> joinedGroups) {
-        this.joinedGroups = joinedGroups;
     }
 }
 

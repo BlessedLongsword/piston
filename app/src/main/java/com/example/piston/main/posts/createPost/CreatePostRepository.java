@@ -1,7 +1,5 @@
 package com.example.piston.main.posts.createPost;
 
-import android.util.Log;
-
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -10,8 +8,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class CreatePostRepository {
@@ -56,29 +52,21 @@ public class CreatePostRepository {
             listener.setCreateError();
             listener.setLoadingFinished();
         }
-        //Personal
-        else if (collection.equals("users")) {
-            DocumentReference docRef = db.collection(collection)
-                    .document(user)
-                    .collection("folders")
-                    .document(document)
-                    .collection("posts")
-                    .document(id);
-            docRef.get().addOnCompleteListener(task -> {
-                if (task.isComplete()) {
-                    Post post = new Post(title, content, username, id, imageId, imageLink);
-                    docRef.set(post);
-                    listener.setCreateFinished();
-                    listener.setLoadingFinished();
-                    }
-            });
-        }
-        //Group || Category
         else {
-            DocumentReference docRef = db.collection(collection)
-                    .document(document)
-                    .collection("posts")
-                    .document(id);
+            DocumentReference docRef;
+            if (collection.equals("users")) {
+                docRef = db.collection(collection)
+                        .document(user)
+                        .collection("folders")
+                        .document(document)
+                        .collection("posts")
+                        .document(id);
+            } else {
+                docRef = db.collection(collection)
+                        .document(document)
+                        .collection("posts")
+                        .document(id);
+            }
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     Post post = new Post(title, content, username, id, imageId, imageLink);

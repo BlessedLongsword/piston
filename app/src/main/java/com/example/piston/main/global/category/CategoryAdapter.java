@@ -19,7 +19,7 @@ import com.example.piston.main.posts.PostActivity;
 
 import java.util.Objects;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHolder> {
 
     private final FragmentActivity localActivity;
     private final CategoryViewModel viewModel;
@@ -42,7 +42,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         }
     }
 
-    public PostAdapter(FragmentActivity activity) {
+    public CategoryAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(CategoryViewModel.class);
         viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
@@ -50,15 +50,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     @NonNull
     @Override
-    public PostAdapter.PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoryAdapter.PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
-        return new PostAdapter.PostHolder(binding);
+        return new CategoryAdapter.PostHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostAdapter.PostHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryAdapter.PostHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));

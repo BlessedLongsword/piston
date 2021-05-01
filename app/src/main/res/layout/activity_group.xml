@@ -22,7 +22,8 @@
                 android:id="@+id/view_notes_topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                style="@style/Theme.Piston.ToolbarStyle"/>
+                style="@style/Theme.Piston.ToolbarStyle"
+                app:navigationIcon="@drawable/baseline_arrow_back_white_24"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

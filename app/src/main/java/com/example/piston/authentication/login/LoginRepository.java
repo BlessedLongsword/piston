@@ -2,10 +2,6 @@ package com.example.piston.authentication.login;
 
 import android.util.Log;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -81,60 +77,28 @@ public class LoginRepository {
                 });
     }
 
-    public void signInWithGoogle(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            if (account != null)
-                firebaseAuthWithGoogle(account.getIdToken());
-        } catch (ApiException e) {
-            Log.w("nowaybro", "Google sign in failed", e);
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
+    public void signInWithToken(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        LoginResult loginResult = new LoginResult();
-                        boolean isNewUser = Objects.requireNonNull(Objects.requireNonNull(
-                                task.getResult()).getAdditionalUserInfo()).isNewUser();
-                        if (isNewUser)
-                            loginResult.setNewUser(true);
-                        else
-                            loginResult.setSignedIn(true);
-                        listener.setLoginResult(loginResult);
+                        String email = task.getResult().getUser().getEmail();
+                        db.collection("users").document(email)
+                                .get().addOnCompleteListener(task1 -> {
+                                    LoginResult loginResult = new LoginResult();
+                                    if (task1.getResult().exists())
+                                        loginResult.setSignedIn(true);
+                                    else {
+                                        loginResult.setNewUser(true);
+                                        mAuth.signOut();
+                                    }
+                                    listener.setLoginResult(loginResult);
+                        });
                     } else {
                         Log.w("nowaybro", "signInWithCredential:failure", task.getException());
                     }
                 });
     }
-
-        /*db.collection("emails")
-            .get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("nowaybro", document.getId() + " => " + document.getData());
-                    }
-                } else {
-                    Log.w("nowaybro", "Error getting documents.", task.getException());
-                }
-            });*/
-
-    /*Acces firestore collection users
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    db.collection("users")
-            .get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("nowaybro", document.getId() + " => " + document.getData());
-                    }
-                } else {
-                    Log.w("nowaybro", "Error getting documents.", task.getException());
-                }
-            });*/
 
     /*Email verification
     final FirebaseUser user = mAuth.getCurrentUser();
