@@ -119,6 +119,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position-1);
             PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
             hold.bind(reply);
+            if (reply.getQuote() != null)
+                hold.binding.replyQuote.setVisibility(View.VISIBLE);
         }
 
     }

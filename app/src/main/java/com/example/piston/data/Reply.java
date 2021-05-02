@@ -11,8 +11,6 @@ public class Reply {
         setContent(content);
         setOwner(owner);
         setId(id);
-        setQuote("");
-        setQuoteOwner("");
     }
 
     public Reply(String owner, String content, String id, String quote, String quoteOwner) {
@@ -23,6 +21,7 @@ public class Reply {
         setQuoteOwner(quoteOwner);
     }
 
+    //hi
     public String getContent() {
         return content;
     }
