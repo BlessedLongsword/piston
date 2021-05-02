@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
 import com.example.piston.databinding.ItemPostBinding;
+import com.example.piston.main.posts.PostActivity;
 
 import java.util.Objects;
 
@@ -73,7 +74,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
 
     private View.OnClickListener openNewActivity(String documentID, String id) {
         return v -> {
-            Intent intent = new Intent(localActivity, FolderActivity.class);
+            Intent intent = new Intent(localActivity, PostActivity.class);
             intent.putExtra("collection", "folders");
             intent.putExtra("document", documentID);
             intent.putExtra("id", id);

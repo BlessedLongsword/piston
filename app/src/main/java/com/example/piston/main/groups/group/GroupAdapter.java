@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
 import com.example.piston.databinding.ItemPostBinding;
+import com.example.piston.main.posts.PostActivity;
 
 import java.util.Objects;
 
@@ -73,7 +74,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     private View.OnClickListener openNewActivity(String documentID, String id) {
         return v -> {
-            Intent intent = new Intent(localActivity, GroupActivity.class);
+            Intent intent = new Intent(localActivity, PostActivity.class);
             intent.putExtra("collection", "groups");
             intent.putExtra("document", documentID);
             intent.putExtra("id", id);
