@@ -15,6 +15,7 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     private final MutableLiveData<Boolean> nsfwBox = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> imageError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finishCreateCategory = new MutableLiveData<>(false);
 
     private final CreateCategoryRepository repository = new CreateCategoryRepository(this);
@@ -24,10 +25,11 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
         createError.setValue(false);
     }
 
-    public void createCategory(byte[] image) {
+    public void createCategory(byte[] image, boolean connected) {
         loading.setValue(true);
+        imageError.setValue(false);
         repository.createCategory(Objects.requireNonNull(titleField.getValue()),
-                descriptionField.getValue(), nsfwBox.getValue(), image);
+                descriptionField.getValue(), Objects.requireNonNull(nsfwBox.getValue()), image, connected);
     }
 
     @Override
@@ -49,6 +51,12 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     public void setLoadingFinished() {
         loading.setValue(false);
     }
+
+    @Override
+    public void setImageError() {
+        imageError.setValue(true);
+    }
+
 
     public MutableLiveData<String> getTitleField() {
         return titleField;
@@ -77,5 +85,7 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     public LiveData<Boolean> getLoading() {
         return loading;
     }
+
+    public LiveData<Boolean> getImageError() { return imageError; }
 
 }

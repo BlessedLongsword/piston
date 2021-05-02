@@ -8,6 +8,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class CreateCategoryRepository {
@@ -21,6 +22,7 @@ public class CreateCategoryRepository {
         void setCreateError();
         void setCreateFinished();
         void setLoadingFinished();
+        void setImageError();
     }
 
     public CreateCategoryRepository(ICreateCategory listener) {
@@ -35,7 +37,7 @@ public class CreateCategoryRepository {
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
-                    if (ds.exists())
+                    if (Objects.requireNonNull(ds).exists())
                         listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
                     else
                         listener.setTitleStatus(CreateCategoryResult.TitleError.NONE);
@@ -44,12 +46,17 @@ public class CreateCategoryRepository {
         }
     }
 
-    public void createCategory(String title, String description, boolean nsfw, byte[] image) {
+    public void createCategory(String title, String description, boolean nsfw, byte[] image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
             listener.setCreateError();
             listener.setLoadingFinished();
-        } else {
+        }
+        else if (!connected || image == null) {
+            listener.setImageError();
+            listener.setLoadingFinished();
+        }
+        else {
             StorageReference storageRef = storage.getReference();
             String randomId = UUID.randomUUID().toString();
             String path = "categories/" + title;
@@ -66,7 +73,7 @@ public class CreateCategoryRepository {
                         docRef.get().addOnCompleteListener(task -> {
                             if (task.isComplete()) {
                                 DocumentSnapshot ds = task.getResult();
-                                if (ds.exists()) {
+                                if (Objects.requireNonNull(ds).exists()) {
                                     listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
                                     listener.setCreateError();
                                     listener.setLoadingFinished();

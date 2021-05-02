@@ -1,6 +1,9 @@
 package com.example.piston.main.global.createCategory;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -35,6 +38,15 @@ public class CreateCategoryActivity extends PickImageActivity {
                         .show();
             }
         });
+        createCategoryViewModel.getImageError().observe(this, aBoolean -> {
+            if (aBoolean) {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle(getResources().getString(R.string.error))
+                        .setMessage(getResources().getString(R.string.create_category_image_error_message))
+                        .setPositiveButton(getResources().getString(R.string.confirmation_long), (dialog, which) -> { })
+                        .show();
+            }
+        });
         createCategoryViewModel.getFinishCreateCategory().observe(this, aBoolean -> {
             if (aBoolean)
                 finish();
@@ -42,7 +54,11 @@ public class CreateCategoryActivity extends PickImageActivity {
     }
 
     public void createCategory(MenuItem item) {
-        createCategoryViewModel.createCategory(image);
+        boolean connected;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
+        createCategoryViewModel.createCategory(image, connected);
     }
 
     @Override

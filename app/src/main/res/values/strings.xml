@@ -163,5 +163,6 @@
     <string name="owner_header">By:</string>
     <string name="quote_header">said:</string>
     <string name="group_info">Group Info</string>
+    <string name="create_category_image_error_message">You must add an image to the category. Make sure you have internet connection.</string>
 
 </resources>
