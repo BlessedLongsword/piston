@@ -20,7 +20,7 @@ public class PostRepository {
 
     private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private  String user, email, collection, document, postID;
+    private  String user;
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
@@ -32,11 +32,8 @@ public class PostRepository {
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
-        this.collection = collection;
-        this.document = document;
-        this.postID = postID;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
                 .document(email)
                 .get()

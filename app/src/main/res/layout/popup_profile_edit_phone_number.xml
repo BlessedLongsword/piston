@@ -68,6 +68,7 @@
                     android:layout_weight="56" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancel_button"
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -76,6 +77,7 @@
                     android:text="@string/cancel" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save_button"
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

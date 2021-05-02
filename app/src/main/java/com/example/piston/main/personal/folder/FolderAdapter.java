@@ -31,7 +31,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         public NoteHolder(ItemPostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.postOwner.setVisibility(View.GONE);
+            binding.postOwnerLayout.setVisibility(View.GONE);
         }
 
         public void bind(Post item) {

@@ -19,9 +19,6 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        if (savedInstanceState != null) {
-        }
-
         Intent intent = getIntent();
         String collection = intent.getStringExtra("collection");
         String document = intent.getStringExtra("document");

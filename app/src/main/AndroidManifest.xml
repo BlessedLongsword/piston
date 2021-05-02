@@ -35,7 +35,6 @@
 
         <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>
         <activity android:name=".main.groups.joinGroup.JoinGroupActivity"/>
-        <activity android:name=".main.groups.editGroup.ModerateGroupActivity"/>
         <activity android:name=".main.groups.group.GroupActivity"/>
         <activity android:name=".main.groups.group.info.GroupInfoActivity" />
 
@@ -48,7 +47,6 @@
             android:name=".main.posts.PostActivity"
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
-        <activity android:name=".main.posts.editPost.EditPostActivity"/>
 
         <activity android:name=".main.profile.ProfileActivity"/>
         <activity android:name=".main.profile.image.ProfileImageActivity"/>

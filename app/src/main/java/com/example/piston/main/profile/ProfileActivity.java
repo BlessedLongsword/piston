@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -54,7 +55,6 @@ public class ProfileActivity extends AppCompatActivity {
                 popUpWindow(R.layout.popup_profile_edit_birth_date, binding.viewProfileDateEditText);
                 break;
         }
-
         });
     }
 
@@ -102,88 +102,10 @@ public class ProfileActivity extends AppCompatActivity {
             getWindow().setAttributes(lp);
         });
 
-    }
-
-    /*
-
-
-    public void cancel(MenuItem item) {
-
-        fullName.getEditText().setInputType(InputType.TYPE_NULL);
-        phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
-        bday.getEditText().setInputType(InputType.TYPE_NULL);
-
-        fullName.getEditText().setFocusableInTouchMode(false);
-        phoneNumber.getEditText().setFocusableInTouchMode(false);
-        bday.getEditText().setFocusableInTouchMode(false);
-
-        fullName.getEditText().clearFocus();
-        phoneNumber.getEditText().clearFocus();
-        bday.getEditText().clearFocus();
-    }
-
-    public void edit(MenuItem item) {
-
-        fullName.getEditText().setFocusableInTouchMode(true);
-        phoneNumber.getEditText().setFocusableInTouchMode(true);
-        bday.getEditText().setFocusableInTouchMode(true);
-
-        fullName.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
-        phoneNumber.getEditText().setInputType(InputType.TYPE_CLASS_PHONE);
-        bday.getEditText().setInputType(InputType.TYPE_CLASS_DATETIME);
-
-        fullName.getEditText().requestFocus();
-    }
-
-    private void init () {
-        pfp = findViewById(R.id.profile_picture);
-        pfp.setImageBitmap(BitmapFactory.decodeResource
-                (getResources(), R.drawable.jojo));
-        username = findViewById(R.id.viewProfile_username);
-        fullName = findViewById(R.id.viewProfile_fullName);
-        phoneNumber = findViewById(R.id.viewProfile_phone);
-        email = findViewById(R.id.viewProfile_email);
-        bday = findViewById(R.id.viewProfile_date);
-        featuredPost = findViewById(R.id.viewProfile_featPost);
-        mat = findViewById(R.id.profile_toolbar);
-        mat.setTitleTextColor(Color.WHITE);
-        //cancel = findViewById(R.id.viewProfile_cancel);
-        //edit = findViewById(R.id.viewProfile_edit);
-        //save = findViewById(R.id.viewProfile_save);
-
-        username.getEditText().setInputType(InputType.TYPE_NULL);
-        fullName.getEditText().setInputType(InputType.TYPE_NULL);
-        phoneNumber.getEditText().setInputType(InputType.TYPE_NULL);
-        email.getEditText().setInputType(InputType.TYPE_NULL);
-        bday.getEditText().setInputType(InputType.TYPE_NULL);
-
-        fullName.setEndIconOnClickListener(v -> popUpWindow(v, fullName.getEditText()));
-        phoneNumber.setEndIconOnClickListener(v -> popUpWindow(v, phoneNumber.getEditText()));
-        bday.setEndIconOnClickListener(v -> popUpWindow(v, bday.getEditText()));
-    }
-
-            ed.getEditText().setText(edit.getText().toString());
-        ed.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(ed.getEditText().getText().toString().length() > 0) {
-                    ed.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                    ed.setEndIconDrawable(R.drawable.outline_send_black_24);
-                }
-                else {
-                    ed.setEndIconMode(TextInputLayout.END_ICON_NONE);
-                }
-            }
+        popupView.findViewById(R.id.cancel_button).setOnClickListener((view) -> popupWindow.dismiss());
+        popupView.findViewById(R.id.save_button).setOnClickListener((view) -> {
+            Toast.makeText(getApplicationContext(), "Not yet implemented", Toast.LENGTH_LONG).show();
+            popupWindow.dismiss();
         });
-*/
+    }
 }

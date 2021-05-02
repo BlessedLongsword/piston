@@ -3,7 +3,6 @@ package com.example.piston.main.posts;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,6 @@ import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.databinding.ItemThreadBinding;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
