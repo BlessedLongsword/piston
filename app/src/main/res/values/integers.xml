@@ -9,5 +9,6 @@
     <integer name="name_max_length">25</integer>
     <integer name="date_max_length">10</integer>
     <integer name="max_desc_lines">3</integer>
+    <integer name="max_reply_length">500</integer>
 
 </resources>
