@@ -40,8 +40,8 @@
                     android:layout_marginTop="@dimen/card_margin"
                     tools:text="@string/username"
                     android:text="@{thread.owner}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="?attr/colorPrimary"
                     />
                 <TextView
                     android:id="@+id/post_content"
