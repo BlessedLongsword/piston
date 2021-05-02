@@ -1,5 +1,7 @@
 package com.example.piston.main.posts.createPost;
 
+import android.util.Log;
+
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,6 +25,7 @@ public class CreatePostRepository {
         void setCreateError();
         void setCreateFinished();
         void setLoadingFinished();
+        void setErrorMessage(String message);
     }
 
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
@@ -43,54 +46,67 @@ public class CreatePostRepository {
         }
     }
 
-    public void createPost(String collection, String document, String title, String content, byte[] image) {
+    public void createPost(String collection, String document, String title, String content, byte[] image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreatePostResult.TitleError.EMPTY);
             listener.setCreateError();
             listener.setLoadingFinished();
         }
         else {
-            StorageReference storageRef = storage.getReference();
-            String randomId = UUID.randomUUID().toString();
-            String path;
-            if (collection.equals("users"))
-                path = "users/" + username;
-            else
-                path = collection + "/" + document;
-            String imageId = path + "/" + randomId;
-            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
-            UploadTask uploadTask = imageRef.putBytes(image);
-            uploadTask.addOnFailureListener(exception -> {
-                // Handle unsuccessful uploads
-            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                    .addOnSuccessListener(uri -> {
-                        String imageLink = uri.toString();
-
-                        String id = db.collection("users").document().getId();
-
-                        DocumentReference docRef;
-                        if (collection.equals("users")) {
-                            docRef = db.collection(collection)
-                                    .document(user)
-                                    .collection("folders")
-                                    .document(document)
-                                    .collection("posts")
-                                    .document(id);
-                        } else {
-                            docRef = db.collection(collection)
-                                    .document(document)
-                                    .collection("posts")
-                                    .document(id);
-                        }
-                        docRef.get().addOnCompleteListener(task -> {
-                            if (task.isComplete()) {
-                                Post post = new Post(title, content, username, id, document, imageId, imageLink);
-                                docRef.set(post);
-                                listener.setCreateFinished();
-                                listener.setLoadingFinished();
-                            }
-                        });
-                    }));
+            if (!connected) {
+                listener.setErrorMessage("No internet, uploaded without image");
+                uploadPost(collection, document, title, content, null, null);
+            }
+            else if (image == null)
+                uploadPost(collection, document, title, content, null, null);
+            if (image != null && connected) {
+                Log.d("nowaybro", "Imatge");
+                StorageReference storageRef = storage.getReference();
+                String randomId = UUID.randomUUID().toString();
+                String path;
+                if (collection.equals("users"))
+                    path = "users/" + username;
+                else
+                    path = collection + "/" + document;
+                String imageId = path + "/" + randomId;
+                StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+                UploadTask uploadTask = imageRef.putBytes(image);
+                uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                        .addOnSuccessListener(uri -> {
+                            String imageLink = uri.toString();
+                            uploadPost(collection, document, title, content, imageId, imageLink);
+                        })
+                );
+            }
         }
+    }
+
+    private void uploadPost(String collection, String document, String title, String content,
+                            String imageId, String imageLink) {
+
+        String id = db.collection("users").document().getId();
+
+        DocumentReference docRef;
+        if (collection.equals("users")) {
+            docRef = db.collection(collection)
+                    .document(user)
+                    .collection("folders")
+                    .document(document)
+                    .collection("posts")
+                    .document(id);
+        } else {
+            docRef = db.collection(collection)
+                    .document(document)
+                    .collection("posts")
+                    .document(id);
+        }
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isComplete()) {
+                Post post = new Post(title, content, username, id, document, imageId, imageLink);
+                docRef.set(post);
+                listener.setCreateFinished();
+                listener.setLoadingFinished();
+            }
+        });
     }
 }

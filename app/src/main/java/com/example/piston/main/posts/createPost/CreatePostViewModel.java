@@ -15,6 +15,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finishCreatePost = new MutableLiveData<>(false);
+    private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     private final CreatePostRepository repository = new CreatePostRepository(this);
 
@@ -23,9 +24,9 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
         createError.setValue(false);
     }
 
-    public void createPost(String collection, String document, byte[] image) {
+    public void createPost(String collection, String document, byte[] image, boolean connected) {
         repository.createPost(collection, document, Objects.requireNonNull(titleField.getValue()),
-                contentField.getValue(), image);
+                contentField.getValue(), image, connected);
         loading.setValue(true);
     }
 
@@ -47,6 +48,11 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
     @Override
     public void setLoadingFinished() {
         loading.setValue(false);
+    }
+
+    @Override
+    public void setErrorMessage(String message) {
+        errorMessage.setValue(message);
     }
 
     public MutableLiveData<String> getTitleField() {
@@ -71,5 +77,9 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
 
     public LiveData<Boolean> getFinishCreatePost() {
         return finishCreatePost;
+    }
+
+    public LiveData<String> getErrorMessage() {
+        return errorMessage;
     }
 }

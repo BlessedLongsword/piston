@@ -61,9 +61,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     public void onBindViewHolder(@NonNull GroupAdapter.GroupHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
-        Glide.with(localActivity)
-                .load(post.getImageLink())
-                .into(holder.binding.postPicture);
+        if (post.getImageLink() != null) {
+            Glide.with(localActivity)
+                    .load(post.getImageLink())
+                    .into(holder.binding.postPicture);
+        } else
+            holder.getBinding().postPicture.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getId()));
     }
 
