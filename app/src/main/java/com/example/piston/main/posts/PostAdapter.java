@@ -1,6 +1,7 @@
 package com.example.piston.main.posts;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         if (viewType == 0){
+            Log.d("DBReadTAG", "if else entrado");
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
             return new PostAdapter.ThreadHolder(binding);
@@ -91,32 +93,24 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
+        Log.d("DBReadTAG", "pre-if");
         if (holder.getItemViewType() == 0) {
+            Log.d("DBReadTAG", "lo estoy intentando ;_;");
             PostAdapter.ThreadHolder hold  = (PostAdapter.ThreadHolder) holder;
             hold.bind(post);
             Glide.with(localActivity)
                     .load(post.getImageLink())
                     .into(hold.binding.postPicture);
-            hold.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getTitle()));
         }
         else {
             PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
             hold.bind(post);
-            hold.getBinding().card.setOnClickListener(openNewActivity(post.getTitle()));
         }
     }
 
     @Override
     public int getItemCount() {
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
-    }
-
-    private View.OnClickListener openNewActivity(String id) {
-        return v -> {
-            Intent intent = new Intent(localActivity, PostActivity.class);
-            intent.putExtra("id", id);
-            localActivity.startActivity(intent);
-        };
     }
 }
 

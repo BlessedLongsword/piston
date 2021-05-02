@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> postTitle = new MutableLiveData<>("");
 
     private final PostRepository repository;
 
@@ -24,6 +25,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     @Override
+    public void setPostTitle(String title) {
+        this.postTitle.setValue(title);
+    }
+
+    @Override
     protected void onCleared () {
         repository.removeListener();
     }
@@ -31,5 +37,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+    public LiveData<String> getPostTitle() { return postTitle; }
 
 }

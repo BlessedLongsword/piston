@@ -29,14 +29,14 @@ public class PostActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(collection, document, postID))
                 .get(PostViewModel.class);
-        ActivityPostBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
+        ActivityPostBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_post);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.postsTopAppBar.setTitle(document);
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
-
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this));
+
+        viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
     }
 
 }
