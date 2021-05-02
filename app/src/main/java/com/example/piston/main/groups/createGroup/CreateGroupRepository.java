@@ -16,8 +16,6 @@ public class CreateGroupRepository {
     private final CreateGroupRepository.ICreateGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private String imageId;
-    private String imageLink;
     private final String user;
 
     public interface ICreateGroup {
@@ -26,6 +24,7 @@ public class CreateGroupRepository {
         void setCreateError();
         void setCreateFinished();
         void setLoadingFinished();
+        void setErrorMessage(String message);
     }
 
     public CreateGroupRepository(CreateGroupRepository.ICreateGroup listener) {
@@ -45,11 +44,17 @@ public class CreateGroupRepository {
             listener.setTitleStatus(CreateGroupResult.TitleError.NONE);
     }
 
-    public void createGroup(String title, String description, String groupID, byte[] image) {
+    public void createGroup(String title, String description, String groupID, byte[] image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setLoadingFinished();
             listener.setCreateError();
-        } else {
+        }
+        else if (!connected) {
+            listener.setErrorMessage("Need internet to create group");
+        }
+        else if (image == null)
+            listener.setErrorMessage("Group must have an image");
+        else {
             StorageReference storageRef = storage.getReference();
             String randomId = UUID.randomUUID().toString();
             String path = "groups/" + groupID;

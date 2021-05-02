@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.piston.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class ProfileImageActivity extends AppCompatActivity  {
     private ScaleGestureDetector scaleGestureDetector;
@@ -26,6 +27,8 @@ public class ProfileImageActivity extends AppCompatActivity  {
                 getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
         picture.setImageBitmap(bitmap);
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+        MaterialToolbar toolbar = findViewById(R.id.profile_toolbar);
+        toolbar.setNavigationOnClickListener((view) -> finish());
     }
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {

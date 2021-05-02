@@ -16,6 +16,7 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finishCreateGroup = new MutableLiveData<>(false);
+    private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     private final CreateGroupRepository repository = new CreateGroupRepository(this);
 
@@ -29,10 +30,10 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
         createError.setValue(false);
     }
 
-    public void createGroup(byte[] image) {
+    public void createGroup(byte[] image, boolean connected) {
         loading.setValue(true);
         repository.createGroup(Objects.requireNonNull(titleField.getValue()),
-                descriptionField.getValue(), groupIDField.getValue(), image);
+                descriptionField.getValue(), groupIDField.getValue(), image, connected);
     }
 
     @Override
@@ -58,6 +59,11 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
     @Override
     public void setLoadingFinished() {
         loading.setValue(false);
+    }
+
+    @Override
+    public void setErrorMessage(String message) {
+        errorMessage.setValue(message);
     }
 
     public MutableLiveData<String> getTitleField() {
@@ -86,5 +92,9 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
 
     public LiveData<Boolean> getFinishCreateGroup() {
         return finishCreateGroup;
+    }
+
+    public LiveData<String> getErrorMessage() {
+        return errorMessage;
     }
 }
