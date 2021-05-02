@@ -1,8 +1,12 @@
 package com.example.piston.main.posts.createPost;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -46,10 +50,19 @@ public class CreatePostActivity extends PickImageActivity {
             if (aBoolean)
                 finish();
         });
+        createPostViewModel.getErrorMessage().observe(this, message -> {
+            if (message != null)
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        });
     }
 
     public void createPost(MenuItem item) {
-        createPostViewModel.createPost(collection, document, image);
+        boolean connected;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
+
+        createPostViewModel.createPost(collection, document, image, connected);
     }
 
     @Override

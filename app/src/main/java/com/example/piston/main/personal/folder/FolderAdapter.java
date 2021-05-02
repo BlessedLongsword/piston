@@ -31,6 +31,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         public NoteHolder(ItemPostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.postOwner.setVisibility(View.GONE);
         }
 
         public void bind(Post item) {
@@ -61,9 +62,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
     public void onBindViewHolder(@NonNull FolderAdapter.NoteHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
-        Glide.with(localActivity)
-                .load(post.getImageLink())
-                .into(holder.binding.postPicture);
+        if (post.getImageLink() != null) {
+            Glide.with(localActivity)
+                    .load(post.getImageLink())
+                    .into(holder.binding.postPicture);
+        } else
+            holder.getBinding().postPicture.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getId()));
     }
 
