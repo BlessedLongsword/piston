@@ -25,9 +25,8 @@ public class NotificationsActivity extends AppCompatActivity {
     }
 
     public void test(MenuItem menuItem){
-        if (mActionMode == null){
-            mActionMode = startSupportActionMode((androidx.appcompat.view.ActionMode.Callback) mActionModeCallback);
-        }
+        //if (mActionMode == null)
+            //mActionMode = startSupportActionMode((androidx.appcompat.view.ActionMode.Callback) mActionModeCallback);
 
 
     }

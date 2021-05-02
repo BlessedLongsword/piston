@@ -50,10 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
                 popUpWindow(R.layout.popup_profile_edit_name, binding.viewProfileFullNameEditText);
                 break;
             case PHONE:
-                popUpWindow(R.layout.popup_profile_edit_phone_number, findViewById(R.id.edit_phone_number_text_field));
+                popUpWindow(R.layout.popup_profile_edit_phone_number, binding.viewProfilePhoneEditText);
                 break;
             case BIRTH_DATE:
-                popUpWindow(R.layout.popup_profile_edit_birth_date, findViewById(R.id.edit_birth_date_text_field));
+                popUpWindow(R.layout.popup_profile_edit_birth_date, binding.viewProfileDateEditText);
                 break;
         }
 

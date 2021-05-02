@@ -36,7 +36,6 @@ public class GroupsRepository {
     }
 
     private void loadGroups() {
-        Log.d("nowaybro", "Grup creat");
         db.collection("users")
                 .document(user)
                 .collection("groups")

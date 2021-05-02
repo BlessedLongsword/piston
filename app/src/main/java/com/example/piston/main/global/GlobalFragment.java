@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.main.global.createCategory.CreateCategoryActivity;
-import com.example.piston.main.SectionFragment;
+import com.example.piston.main.sections.SectionFragment;
 
 public class GlobalFragment extends SectionFragment {
 

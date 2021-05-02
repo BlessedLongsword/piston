@@ -62,7 +62,6 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
                 .load(group.getImageLink())
                 .into(holder.binding.groupImage);
         holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
-
     }
 
     @Override

@@ -48,49 +48,50 @@ public class CreateGroupRepository {
             listener.setTitleStatus(CreateGroupResult.TitleError.NONE);
     }
 
-    public void createGroup(String title, String description, String groupID) {
+    public void createGroup(String title, String description, String groupID, byte[] image) {
         if (title.trim().equals("")) {
             listener.setLoadingFinished();
             listener.setCreateError();
         } else {
-            Group group = new Group(title, description, groupID, imageId, imageLink);
+            StorageReference storageRef = storage.getReference();
+            String randomId = UUID.randomUUID().toString();
+            String path = "groups/" + groupID;
+            String imageId = path + "/" + randomId;
+            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+            UploadTask uploadTask = imageRef.putBytes(image);
+            uploadTask.addOnFailureListener(exception -> {
+                // Handle unsuccessful uploads
+            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                    .addOnSuccessListener(uri -> {
+                        String imageLink = uri.toString();
 
-            db.collection("groups")
-                    .document(groupID)
-                    .set(group)
-                    .addOnCompleteListener(task -> {
-                if (task.isComplete()) {
-                    listener.setLoadingFinished();
-                    listener.setCreateFinished();
-                }
-            });
-            Map<String, String> data = new HashMap<>();
-            data.put("id", groupID);
-            db.collection("users")
-                    .document(user)
-                    .collection("groups")
-                    .document(groupID)
-                    .set(data);
+                        Group group = new Group(title, description, groupID, imageId, imageLink);
 
-            data.clear();
-            data.put("id", user);
-            db.collection("groups")
-                    .document(groupID)
-                    .collection("mods")
-                    .document(user)
-                    .set(data);
+                        db.collection("groups")
+                                .document(groupID)
+                                .set(group)
+                                .addOnCompleteListener(task -> {
+                            if (task.isComplete()) {
+                                listener.setLoadingFinished();
+                                listener.setCreateFinished();
+                            }
+                        });
+                        Map<String, String> data = new HashMap<>();
+                        data.put("id", groupID);
+                        db.collection("users")
+                                .document(user)
+                                .collection("groups")
+                                .document(groupID)
+                                .set(data);
+
+                        data.clear();
+                        data.put("id", user);
+                        db.collection("groups")
+                                .document(groupID)
+                                .collection("mods")
+                                .document(user)
+                                .set(data);
+                    }));
         }
     }
-
-    public void uploadImage(byte[] image) {
-        StorageReference storageRef = storage.getReference();
-        imageId = UUID.randomUUID().toString();
-        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
-        UploadTask uploadTask = imageRef.putBytes(image);
-        uploadTask.addOnFailureListener(exception -> {
-            // Handle unsuccessful uploads
-        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> imageLink = uri.toString()));
-    }
-
 }

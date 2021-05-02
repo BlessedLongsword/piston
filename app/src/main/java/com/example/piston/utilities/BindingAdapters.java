@@ -1,9 +1,7 @@
 package com.example.piston.utilities;
 
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 

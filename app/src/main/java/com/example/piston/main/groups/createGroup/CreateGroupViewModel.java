@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.Objects;
 
-
 public class CreateGroupViewModel extends ViewModel implements CreateGroupRepository.ICreateGroup {
 
     private final MutableLiveData<String> titleField = new MutableLiveData<>("");
@@ -30,12 +29,10 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
         createError.setValue(false);
     }
 
-    public void uploadImage(byte[] image) { repository.uploadImage(image); }
-
-    public void createGroup() {
+    public void createGroup(byte[] image) {
         loading.setValue(true);
-        repository.createGroup(Objects.requireNonNull(titleField.getValue())
-                , descriptionField.getValue(), groupIDField.getValue());
+        repository.createGroup(Objects.requireNonNull(titleField.getValue()),
+                descriptionField.getValue(), groupIDField.getValue(), image);
     }
 
     @Override

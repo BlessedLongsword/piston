@@ -1,33 +1,24 @@
 package com.example.piston.main.groups.createGroup;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateGroupBinding;
-import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.example.piston.main.sections.PickImageActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
-public class CreateGroupActivity extends AppCompatActivity {
+public class CreateGroupActivity extends PickImageActivity {
 
+    private ActivityCreateGroupBinding binding;
     private CreateGroupViewModel createGroupViewModel;
     private ClipboardManager clipboard;
     private ClipData clip;
@@ -38,7 +29,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_group);
 
         createGroupViewModel = new ViewModelProvider(this).get(CreateGroupViewModel.class);
-        ActivityCreateGroupBinding  binding = DataBindingUtil.setContentView(this, R.layout.activity_create_group);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_group);
         binding.setViewModel(createGroupViewModel);
         binding.setLifecycleOwner(this);
 
@@ -72,34 +63,12 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     public void createGroup(MenuItem item) {
-        createGroupViewModel.createGroup();
-    }
-
-    public void imagePick(View v) {
-        ImagePicker.Companion.with(this)
-                .crop()
-                .compress(1024)
-                .start();
+        createGroupViewModel.createGroup(image);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            Uri imageUri = data.getData();
-            try {
-                ImageView im = findViewById(R.id.group_picture);
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                im.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] image = baos.toByteArray();
-                createGroupViewModel.uploadImage(image);
-            } catch (IOException e) {
-                Log.w("DBReadTAG", "c murio");
-                e.printStackTrace();
-            }
-        }
+    protected void setImage(Bitmap bitmap) {
+        binding.groupPicture.setImageBitmap(bitmap);
     }
 
 }
