@@ -51,14 +51,6 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/card_margin"
-                        android:text="@string/owner_header"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary" />
-
-                    <TextView
                         android:id="@+id/post_owner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,7 +58,7 @@
                         tools:text="@string/username"
                         android:text="@{post.owner}"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"/>
+                        android:textColor="?attr/colorPrimary"/>
 
                 </LinearLayout>
 
