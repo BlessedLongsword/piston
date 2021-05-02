@@ -37,6 +37,7 @@
         <activity android:name=".main.groups.joinGroup.JoinGroupActivity"/>
         <activity android:name=".main.groups.editGroup.ModerateGroupActivity"/>
         <activity android:name=".main.groups.group.GroupActivity"/>
+        <activity android:name=".main.groups.group.info.GroupInfoActivity" />
 
         <activity android:name=".main.notifications.NotificationsActivity"/>
 

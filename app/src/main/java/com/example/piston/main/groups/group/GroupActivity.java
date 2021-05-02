@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupBinding;
+import com.example.piston.main.global.category.info.CategoryInfoActivity;
+import com.example.piston.main.groups.group.info.GroupInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
@@ -43,6 +45,12 @@ public class GroupActivity extends AppCompatActivity {
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra("collection", "groups");
+        intent.putExtra("document", id);
+        startActivity(intent);
+    }
+
+    public void goToInfo(View view) {
+        Intent intent = new Intent(this, GroupInfoActivity.class);
         intent.putExtra("document", id);
         startActivity(intent);
     }

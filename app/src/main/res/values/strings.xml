@@ -162,5 +162,6 @@
     <string name="folder_icon">Folder Icon</string>
     <string name="owner_header">By:</string>
     <string name="quote_header">said:</string>
+    <string name="group_info">Group Info</string>
 
 </resources>
