@@ -10,15 +10,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.databinding.ActivityFolderBinding;
 import com.example.piston.databinding.ActivityGroupBinding;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
 public class GroupActivity extends AppCompatActivity {
 
-    private String title, id;
-    private GroupViewModel viewModel;
+    private String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,9 +25,9 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        title = intent.getStringExtra("title");
+        String title = intent.getStringExtra("title");
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupViewModel.class);
         ActivityGroupBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group);

@@ -3,7 +3,6 @@ package com.example.piston.main.personal.folder;
 import android.util.Log;
 
 import com.example.piston.data.Post;
-import com.example.piston.main.personal.PersonalRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -19,8 +18,9 @@ public class FolderRepository {
     }
 
     private final FolderRepository.IFolder listener;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String user, folder;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String user;
+    private final String folder;
     private ListenerRegistration listenerRegistration;
 
     public FolderRepository(FolderRepository.IFolder listener, String folder) {
@@ -59,9 +59,7 @@ public class FolderRepository {
                 .collection("folders")
                 .document(folder)
                 .collection("posts")
-                .addSnapshotListener((snapshots, e) -> {
-                    FolderRepository.this.loadFolderPosts();
-                });
+                .addSnapshotListener((snapshots, e) -> FolderRepository.this.loadFolderPosts());
     }
 
     public void removeListener() {

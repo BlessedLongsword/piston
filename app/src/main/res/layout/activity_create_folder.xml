@@ -21,7 +21,6 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/create_folder_topAppBar"
                 android:layout_width="match_parent"
@@ -30,7 +29,6 @@
                 app:navigationIcon="@drawable/outline_close_white_24"
                 app:menu="@menu/create_folder_top_app_bar"
                 style="@style/Theme.Piston.ToolbarStyle"/>
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -50,7 +48,7 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="0.5" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -62,6 +60,7 @@
                     android:counter="@{constants.MAX_TITLE_LENGTH}"
                     android:folderTitleError="@{viewModel.titleFieldError}"
                     app:errorEnabled="true">
+                    <!--suppress AndroidUnknownAttribute -->
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -79,14 +78,12 @@
                     android:hint="@string/description"
                     app:counterEnabled="true"
                     app:counterMaxLength="@integer/description_max_length">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/big_edit_text_description"
                         android:text="@={viewModel.descriptionField}"
                         android:gravity="start"
                         android:maxLength="@integer/description_max_length" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ProgressBar
@@ -96,14 +93,10 @@
                     android:layout_gravity="center"
                     android:setVisible="@{viewModel.loading}"/>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

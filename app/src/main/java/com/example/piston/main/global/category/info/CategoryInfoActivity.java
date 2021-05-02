@@ -2,7 +2,6 @@ package com.example.piston.main.global.category.info;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 public class CategoryInfoActivity extends AppCompatActivity {
 
-    private String title;
     CategoryInfoViewModel viewModel;
 
     @Override
@@ -25,7 +23,7 @@ public class CategoryInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_info);
 
         Intent intent = getIntent();
-        title = intent.getStringExtra("document");
+        String title = intent.getStringExtra("document");
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
                 .get(CategoryInfoViewModel.class);
@@ -37,11 +35,9 @@ public class CategoryInfoActivity extends AppCompatActivity {
         binding.categoryInfoTopAppBar.setTitle(title);
         binding.categoryInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
 
-        viewModel.getImageLink().observe(this, aString -> {
-            Glide.with(this)
-                    .load(aString)
-                    .into(binding.categoryInfoImage);
-        });
+        viewModel.getImageLink().observe(this, aString -> Glide.with(this)
+                .load(aString)
+                .into(binding.categoryInfoImage));
     }
 
 }

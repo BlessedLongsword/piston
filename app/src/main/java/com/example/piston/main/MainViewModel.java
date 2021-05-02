@@ -7,7 +7,7 @@ import com.example.piston.main.MainRepository;
 
 public class MainViewModel extends ViewModel implements MainRepository.IMain {
 
-    public MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>(true);
+    public final MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>(true);
     private final MainRepository mainRepository = new MainRepository(this);
 
     public void logout() {

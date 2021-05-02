@@ -154,5 +154,7 @@
     <string name="logout">Tanca sessió</string>
     <string name="category_name">Nom Categoria</string>
     <string name="category_info">Informació de Categoria</string>
+    <string name="group_name">Nom Grup</string>
+    <string name="folder_icon">Folder Icon</string>
 
 </resources>

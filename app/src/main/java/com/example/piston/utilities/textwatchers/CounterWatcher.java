@@ -6,8 +6,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class CounterWatcher extends BaseTextWatcher {
 
-    int max_num;
-    TextInputLayout textField;
+    final int max_num;
+    final TextInputLayout textField;
 
     public CounterWatcher(int max_num, TextInputLayout textField) {
         this.max_num = max_num;

@@ -17,7 +17,6 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/join_group_top_app_bar"
                 android:layout_width="match_parent"
@@ -25,7 +24,6 @@
                 app:title="@string/join_group_activity_title"
                 app:navigationIcon="@drawable/outline_close_white_24"
                 style="@style/Theme.Piston.ToolbarStyle"/>
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -54,7 +52,7 @@
                     android:groupCodeError="@{viewModel.groupCodeFieldError}"
                     app:endIconDrawable="@drawable/outline_group_add_black_36"
                     app:errorEnabled="true">
-
+                    <!--suppress AndroidUnknownAttribute -->
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -62,7 +60,6 @@
                         android:afterTextChanged="@{() -> viewModel.groupCodeUpdate()}"
                         android:text="@={viewModel.groupCodeField}"
                         android:inputType="textShortMessage" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
@@ -98,7 +95,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:setVisible="@{viewModel.loading}"/>
-
 
             </LinearLayout>
 

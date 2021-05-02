@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Media -->
             <ImageView
                 android:id="@+id/group_image"
                 android:layout_width="@dimen/bigger_square"
@@ -38,15 +36,13 @@
                 android:orientation="vertical"
                 android:padding="@dimen/small_separator">
 
-                <!-- Title, secondary and supporting text -->
                 <TextView
                     android:id="@+id/group_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{group.title}"
                     tools:text="@string/title"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                 <TextView
                     android:id="@+id/group_desc"
@@ -57,7 +53,7 @@
                     tools:text="@string/description"
                     android:maxLines="@integer/max_desc_lines"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+
                     />
 
                 <LinearLayout
@@ -76,7 +72,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
                         android:layout_weight="0.1"
                         android:background="@null"
                         android:contentDescription="@string/content_description_media"
@@ -87,7 +82,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
                         android:layout_weight="0.1"
                         android:background="@null"
                         android:visibility="invisible"

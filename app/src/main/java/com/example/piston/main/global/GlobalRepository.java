@@ -45,9 +45,7 @@ public class GlobalRepository {
 
     private void listenChanges() {
         listenerRegistration = db.collection("categories")
-                .addSnapshotListener((snapshots, e) -> {
-                    GlobalRepository.this.loadCategories();
-                });
+                .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());
     }
 
     public void removeListener() {

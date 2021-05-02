@@ -9,7 +9,7 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
     private final MutableLiveData<String> description = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
 
-    CategoryInfoRepository repository;
+    final CategoryInfoRepository repository;
 
     public CategoryInfoViewModel(String category) {
         repository = new CategoryInfoRepository(this, category);

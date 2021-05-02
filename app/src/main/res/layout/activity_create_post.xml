@@ -20,7 +20,6 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/create_post_topAppBar"
                 android:layout_width="match_parent"
@@ -29,7 +28,6 @@
                 app:navigationIcon="@drawable/outline_close_white_24"
                 app:menu="@menu/create_post_top_app_bar"
                 style="@style/Theme.Piston.ToolbarStyle"/>
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -43,13 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:orientation="vertical"
-                android:weightSum="0.5">
+                android:orientation="vertical">
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2" />
+                    android:layout_height="@dimen/activity_vertical_margin"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/choose_title"
@@ -59,7 +55,7 @@
                     android:counter="@{constants.MAX_TITLE_LENGTH}"
                     android:postTitleError="@{viewModel.titleFieldError}"
                     app:errorEnabled="true" >
-
+                    <!--suppress AndroidUnknownAttribute -->
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -93,15 +89,15 @@
                         android:id="@+id/post_picture"
                         android:layout_width="@dimen/big_square"
                         android:layout_height="@dimen/big_square"
-
                         android:contentDescription="@string/post_image" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:visibility="gone"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btn_attach_file"
@@ -137,32 +133,27 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/post_content"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/big_text_field_post"
+                    android:layout_height="wrap_content"
                     android:hint="@string/post_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     app:placeholderText="@string/hint_post_content"
                     app:counterEnabled="true"
-                    app:counterMaxLength="@integer/post_max_length" >
-
+                    app:counterMaxLength="@integer/post_max_length"
+                    android:inputType="textMultiLine" >
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
+                        android:minLines="1"
                         android:maxLength="@integer/post_max_length"
-                        android:maxLines="10"
-                        android:inputType="textMultiLine"
                         android:text="@={viewModel.contentField}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

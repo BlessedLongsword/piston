@@ -17,7 +17,6 @@ import com.example.piston.utilities.MyViewModelFactory;
 public class FolderActivity extends AppCompatActivity {
 
     private String title;
-    private FolderViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class FolderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("id");
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        FolderViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
                 .get(FolderViewModel.class);
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);

@@ -31,7 +31,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/folder_icon"/>
+                    android:src="@drawable/folder_icon"
+                    android:contentDescription="@string/folder_icon" />
 
                 <TextView
                     android:id="@+id/folder_title"
@@ -40,7 +41,6 @@
                     tools:text="@string/title"
                     android:text="@{folder.title}"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/small_separator"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:layout_marginStart="@dimen/small_separator" />
             </LinearLayout>
