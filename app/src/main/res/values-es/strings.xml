@@ -31,6 +31,7 @@
     <string name="confirmation_long">Entendido</string>
     <string name="title_empty">Este campo es obligatorio</string>
     <string name="alternative">También puedes</string>
+    <string name="write_your_message">Escribe tu mensaje aquí</string>
 
     <!-- User Data -->
     <string name="password">Contraseña</string>
@@ -72,16 +73,16 @@
     <string name="hint_input_title">Insertar Título</string>
     <string name="choose_picture">Insertar Imagen</string>
     <string name="attach_file">Adjuntar Archivo</string>
-    <string name="create_post_error_message">Porfavor inserte un nombre vçalido para el post</string>
+    <string name="create_post_error_message">Porfavor inserte un nombre válido para el post</string>
 
     <!-- Edit Post Strings -->
-    <string name="edit_post_activity_title">EDITAR PUBLICACION</string>
+    <string name="edit_post_activity_title">EDITAR PUBLICACIÓN</string>
     <string name="edit_post_btn">Editar</string>
     <string name="change_picture">Editar Imagen</string>
     <string name="change_file">Editar Archivo</string>
 
     <!-- Reply Post Strings -->
-    <string name="reply_post_activity_title">RESPONDER PUBLICACION</string>
+    <string name="reply_post_activity_title">RESPONDER PUBLICACIÓN</string>
     <string name="reply_btn">Responder</string>
 
     <!-- Create and edit Folder Strings -->

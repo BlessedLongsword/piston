@@ -31,6 +31,7 @@
     <string name="confirmation_long">Entès</string>
     <string name="title_empty">Aquest camp és obligatori</string>
     <string name="alternative">També pots</string>
+    <string name="write_your_message">Escriu el teu missatge aquí</string>
 
     <!-- User Data -->
     <string name="password">Contrasenya</string>

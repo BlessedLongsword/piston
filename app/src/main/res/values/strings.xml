@@ -33,6 +33,7 @@
     <string name="confirmation_long">Got it</string>
     <string name="title_empty">This field is necessary</string>
     <string name="alternative">You can also</string>
+    <string name="write_your_message">Enter your message here</string>
 
     <!-- User Data -->
     <string name="password">Password</string>

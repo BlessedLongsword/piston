@@ -13,7 +13,7 @@
         app:endIconMode="custom"
         app:endIconDrawable="@drawable/outline_send_black_24"
         app:boxStrokeColor="@color/transparent"
-        app:placeholderText="Enter your message here" >
+        app:placeholderText="@string/write_your_message" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
