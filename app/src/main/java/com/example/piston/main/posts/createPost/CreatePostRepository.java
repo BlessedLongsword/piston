@@ -59,7 +59,7 @@ public class CreatePostRepository {
             }
             else if (image == null)
                 uploadPost(collection, document, title, content, null, null);
-            if (image != null && connected) {
+            else {
                 Log.d("nowaybro", "Imatge");
                 StorageReference storageRef = storage.getReference();
                 String randomId = UUID.randomUUID().toString();

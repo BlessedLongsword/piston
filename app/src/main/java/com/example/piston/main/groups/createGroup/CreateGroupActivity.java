@@ -2,7 +2,10 @@ package com.example.piston.main.groups.createGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -60,10 +63,20 @@ public class CreateGroupActivity extends PickImageActivity {
                 finish();
         });
 
+        createGroupViewModel.getErrorMessage().observe(this, message -> {
+            if (message != null)
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        });
+
     }
 
     public void createGroup(MenuItem item) {
-        createGroupViewModel.createGroup(image);
+        boolean connected;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
+
+        createGroupViewModel.createGroup(image, connected);
     }
 
     @Override

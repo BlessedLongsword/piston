@@ -8,11 +8,13 @@
         android:id="@+id/notif_read"
         android:icon="@drawable/outline_mark_email_read_white_36"
         android:title="@string/notifications_mark_as_read"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/notif_delete"
         android:icon="@drawable/outline_delete_white_36"
         android:title="@string/delete"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
 
 </menu>
