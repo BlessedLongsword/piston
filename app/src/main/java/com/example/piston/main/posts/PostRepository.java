@@ -1,16 +1,20 @@
 package com.example.piston.main.posts;
 
 import android.util.Log;
-import android.widget.PopupWindow;
 
 import com.example.piston.data.Post;
+import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firestore.v1.DocumentTransform;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class PostRepository {
@@ -21,8 +25,9 @@ public class PostRepository {
     private ListenerRegistration listenerRegistration;
 
     public interface IPosts {
-        void setPosts(ArrayList<Post> categories);
+        void setReplies(ArrayList<Reply> replies);
         void setPostTitle(String title);
+        void setPost(Post post);
     }
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
@@ -43,27 +48,30 @@ public class PostRepository {
         listenChanges();
     }
 
+    //Añadir como atributo al hacer reply
+    //timestamp: FieldValue.serverTimestamp()
     private void loadPosts() {
-        Log.d("DBReadTAG", "pude entrar xd");
-        ArrayList<Post> posts = new ArrayList<>();
+        ArrayList<Reply> posts = new ArrayList<>();
         DocumentReference docRef = db.collection(collection)
             .document(document)
             .collection("posts")
             .document(postID);
+
         docRef.get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
-               posts.add(Objects.requireNonNull(task.getResult()).toObject(Post.class));
-               docRef.collection("replies").get().addOnCompleteListener(task1 -> {
+               listener.setPost((Objects.requireNonNull(task.getResult()).toObject(Post.class)));
+               docRef.collection("replies")
+                       .get().addOnCompleteListener(task1 -> {
                    if (task.isSuccessful()) {
                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                task1.getResult())) {
-                           Post post = documentSnapshot.toObject(Post.class);
+                           Reply post = documentSnapshot.toObject(Reply.class);
                            posts.add(post);
                        }
                    } else {
                        Log.d("nowaybro", "Error getting documents: ", task.getException());
                    }
-                   listener.setPosts(posts);
+                   listener.setReplies(posts);
                });
            }
         });
@@ -74,6 +82,7 @@ public class PostRepository {
                 .document(document)
                 .collection("posts")
                 .document(postID)
+                .collection("replies")
                 .addSnapshotListener((snapshots, e) -> PostRepository.this.loadPosts());
     }
 

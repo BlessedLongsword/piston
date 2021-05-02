@@ -5,7 +5,7 @@
     <data>
         <variable
             name="reply"
-            type="com.example.piston.data.Post" />
+            type="com.example.piston.data.Reply" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/card_margin"
-                    android:text="@string/username"
+                    android:text="@{reply.owner}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_separator"
                     android:maxLength="@integer/description_max_length"
-                    android:text="@string/post_content"
+                    android:text="@{reply.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 

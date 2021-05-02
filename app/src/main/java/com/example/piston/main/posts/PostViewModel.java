@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.Post;
+import com.example.piston.data.Reply;
 
 import java.util.ArrayList;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
-    private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<Post> post = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Reply>> replies = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> postTitle = new MutableLiveData<>("");
 
     private final PostRepository repository;
@@ -20,8 +22,13 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     @Override
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts.setValue(posts);
+    public void setReplies(ArrayList<Reply> replies) {
+        this.replies.setValue(replies);
+    }
+
+    @Override
+    public void setPost(Post post) {
+        this.post.setValue(post);
     }
 
     @Override
@@ -34,9 +41,12 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         repository.removeListener();
     }
 
-    public LiveData<ArrayList<Post>> getPosts() {
-        return posts;
+    public LiveData<ArrayList<Reply>> getReplies() {
+        return replies;
     }
+    
     public LiveData<String> getPostTitle() { return postTitle; }
+    
+    public LiveData<Post> getPost() { return post; }
 
 }

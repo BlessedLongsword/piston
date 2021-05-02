@@ -1,9 +1,7 @@
 package com.example.piston.main.posts;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
+import com.example.piston.data.Reply;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.databinding.ItemThreadBinding;
 
@@ -52,7 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.binding = binding;
         }
 
-        public void bind(Post item) {
+        public void bind(Reply item) {
             binding.setReply(item);
         }
 
@@ -64,7 +63,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public PostAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PostViewModel.class);
-        viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getPost().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getReplies().observe(activity, cosa -> notifyDataSetChanged());
     }
 
     @Override
@@ -77,7 +77,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         if (viewType == 0){
-            Log.d("DBReadTAG", "if else entrado");
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
             return new PostAdapter.ThreadHolder(binding);
@@ -92,10 +91,10 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
-        Log.d("DBReadTAG", "pre-if");
+
+
         if (holder.getItemViewType() == 0) {
-            Log.d("DBReadTAG", "lo estoy intentando ;_;");
+            Post post = Objects.requireNonNull(viewModel.getPost().getValue());
             PostAdapter.ThreadHolder hold  = (PostAdapter.ThreadHolder) holder;
             hold.bind(post);
             Glide.with(localActivity)
@@ -103,14 +102,17 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(hold.binding.postPicture);
         }
         else {
+            Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position-1);
             PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
-            hold.bind(post);
+            hold.bind(reply);
         }
     }
 
     @Override
     public int getItemCount() {
-        return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
+        if (viewModel.getPost().getValue() == null)
+            return 0;
+        return Objects.requireNonNull(viewModel.getReplies().getValue()).size() + 1;
     }
 }
 
