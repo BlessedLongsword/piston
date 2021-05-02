@@ -35,7 +35,7 @@ public class RegisterRepository extends CommonRegisterRepository {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         DocumentReference docRef = db.collection("emails").document(username);
         Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
-        User user = new User(username, email, password, userBirthDate);
+        User user = new User(username, email, userBirthDate);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot ds = task.getResult();

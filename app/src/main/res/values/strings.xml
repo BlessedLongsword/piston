@@ -158,5 +158,7 @@
     <string name="logout">Log Out</string>
     <string name="category_name">Category Name</string>
     <string name="category_info">Category Info</string>
+    <string name="group_name">Group Name</string>
+    <string name="folder_icon">Folder Icon</string>
 
 </resources>

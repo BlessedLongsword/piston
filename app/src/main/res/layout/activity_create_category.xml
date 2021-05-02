@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -13,134 +12,134 @@
             type="com.example.piston.data.constants.Integers" />
     </data>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.global.createCategory.CreateCategoryActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/create_category_topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/create_category_activity_title"
-            app:navigationIcon="@drawable/outline_close_white_24"
-            app:menu="@menu/create_category_top_app_bar"
-            style="@style/Theme.Piston.ToolbarStyle"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:context=".main.global.createCategory.CreateCategoryActivity">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            android:layout_marginVertical="@dimen/small_separator"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_height="wrap_content" >
 
-            <Space
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/create_category_topAppBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/create_category_activity_title"
+                app:navigationIcon="@drawable/outline_close_white_24"
+                app:menu="@menu/create_category_top_app_bar"
+                style="@style/Theme.Piston.ToolbarStyle"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_category_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/create_category_name"
-                android:counter="@{integers.MAX_TITLE_LENGTH}"
-                android:categoryTitleError="@{viewModel.titleFieldError}"
-                app:errorEnabled="true" >
+        </com.google.android.material.appbar.AppBarLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@={viewModel.titleField}"
-                    android:inputType="textShortMessage"
-                    android:afterTextChanged="@{() -> viewModel.titleUpdate()}"
-                    android:maxLength="@integer/title_max_length" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_category_desc"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginTop="@dimen/small_separator"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/big_text_field_description"
-                android:hint="@string/description"
-                app:counterEnabled="true"
-                app:counterMaxLength="@integer/description_max_length">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/big_edit_text_description"
-                    android:text="@={viewModel.descriptionField}"
-                    android:gravity="start"
-                    android:maxLength="@integer/description_max_length" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/choose_picture"
-                    android:onClick="imagePick"/>
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginVertical="@dimen/small_separator"
+                android:orientation="vertical"
+                android:weightSum="2">
 
                 <Space
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.5" />
 
-                <ImageView
-                    android:id="@+id/category_picture"
-                    android:layout_width="@dimen/big_square"
-                    android:layout_height="@dimen/big_square"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_category_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/create_category_name"
+                    android:counter="@{integers.MAX_TITLE_LENGTH}"
+                    android:categoryTitleError="@{viewModel.titleFieldError}"
+                    app:errorEnabled="true" >
+                    <!--suppress AndroidUnknownAttribute -->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@={viewModel.titleField}"
+                        android:inputType="textShortMessage"
+                        android:afterTextChanged="@{() -> viewModel.titleUpdate()}"
+                        android:maxLength="@integer/title_max_length" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    android:contentDescription="@string/category_image" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_category_desc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="@dimen/small_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_text_field_description"
+                    android:hint="@string/description"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="@integer/description_max_length">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/big_edit_text_description"
+                        android:text="@={viewModel.descriptionField}"
+                        android:gravity="start"
+                        android:maxLength="@integer/description_max_length" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/choose_picture"
+                        android:onClick="imagePick"/>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/category_picture"
+                        android:layout_width="@dimen/big_square"
+                        android:layout_height="@dimen/big_square"
+
+                        android:contentDescription="@string/category_image" />
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/nsfwCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.nsfwBox}"
+                    android:text="@string/create_category_nsfw" />
+
+                <ProgressBar
+                    android:id="@+id/category_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:setVisible="@{viewModel.loading}"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5" />
 
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/nsfwCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="@={viewModel.nsfwBox}"
-                android:text="@string/create_category_nsfw" />
+        </androidx.core.widget.NestedScrollView>
 
-            <ProgressBar
-                android:id="@+id/category_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:setVisible="@{viewModel.loading}"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

@@ -143,7 +143,7 @@
     <string name="settings_sub">Suscripción a publicaciones por defecto</string>
     <string name="settings_dark">Modo oscuro</string>
     <string name="settings_sfw">Mostrarme publicaciones +18 (Soy mayor de edad)</string>
-    <string name="settings_blur_nsfw">Difuminar imagenes +18</string>
+    <string name="settings_blur_nsfw">Difuminar imágenes +18</string>
     <string name="reply_content">Contenido de la respuesta</string>
     <string name="hint_reply_button">Redacte su respuesta</string>
     <string name="content_description_media">Texto de ejemplo</string>
@@ -153,5 +153,7 @@
     <string name="logout">Cerrar sesión</string>
     <string name="category_name">Nombre Categoría</string>
     <string name="category_info">Información de Categoría</string>
+    <string name="group_name">Nombre Grupo</string>
+    <string name="folder_icon">Folder Icon</string>
 
 </resources>

@@ -11,16 +11,14 @@ public class User {
 
     private String username;
     private String email;
-    private String pwd;
     private Date birthDate;
 
     public User() {}
 
-    public User (String username, String email, String pwd, Date birthDate){
+    public User(String username, String email, Date birthDate) {
         this.username = username;
         this.email = email;
         this.birthDate = birthDate;
-        this.pwd = pwd;
     }
 
     public String getUsername() {
@@ -55,14 +53,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
     public String getProfilePictureLink() {
         return profilePictureLink;
     }
@@ -87,4 +77,3 @@ public class User {
         this.featuredPost = featuredPost;
     }
 }
-

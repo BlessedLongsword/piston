@@ -34,7 +34,7 @@ public class GoogleRegisterRepository extends CommonRegisterRepository {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             String email = task.getResult().getUser().getEmail();
-            User user = new User(username, email, null, userBirthDate);
+            User user = new User(username, email, userBirthDate);
 
             docRef.get().addOnCompleteListener(task2 -> {
                 if (task2.isSuccessful()) {
@@ -55,5 +55,4 @@ public class GoogleRegisterRepository extends CommonRegisterRepository {
             });
         });
     }
-
 }

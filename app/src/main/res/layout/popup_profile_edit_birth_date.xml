@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <data>
         <variable
@@ -22,8 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Media -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,7 +48,7 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     style="@style/BlankBox"
                     android:textColor="?android:attr/textColorSecondary" >
-
+                    <!--suppress AndroidUnknownAttribute -->
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -64,7 +60,6 @@
 
             </LinearLayout>
 
-            <!-- Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +77,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_marginRight="@dimen/card_margin"
                     android:layout_weight="22"
                     android:text="@string/cancel" />
 

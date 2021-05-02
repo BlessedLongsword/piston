@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -23,15 +22,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Media -->
             <ImageView
                 android:id="@+id/post_picture"
                 android:layout_width="@dimen/bigger_square"
                 android:layout_height="@dimen/bigger_square"
                 app:srcCompat="@drawable/jojo"
                 android:scaleType="centerCrop"
-                android:contentDescription="@string/content_description_media"
-                />
+                android:contentDescription="@string/content_description_media"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,15 +36,13 @@
                 android:orientation="vertical"
                 android:padding="@dimen/small_separator">
 
-                <!-- Title, secondary and supporting text -->
                 <TextView
                     android:id="@+id/post_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{post.title}"
                     tools:text="@string/title"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                 <TextView
                     android:id="@+id/post_owner"
@@ -57,8 +52,7 @@
                     tools:text="@string/username"
                     android:text="@{post.owner}"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary"/>
 
                 <TextView
                     android:id="@+id/post_content"
@@ -69,8 +63,7 @@
                     tools:text="@string/description"
                     android:maxLines="@integer/max_desc_lines"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,7 +81,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
                         android:layout_weight="0.1"
                         android:background="@null"
                         android:contentDescription="@string/content_description_media"
@@ -99,7 +91,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_marginRight="@dimen/card_margin"
                         android:layout_weight="0.1"
                         android:background="@null"
                         android:visibility="invisible"
