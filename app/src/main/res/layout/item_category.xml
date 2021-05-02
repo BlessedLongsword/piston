@@ -49,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_separator"
                     android:maxLines="@integer/max_desc_lines"
+                    android:ellipsize="end"
                     android:text="@{category.description}"
                     tools:text="@string/description"
                     android:textAppearance="?attr/textAppearanceBody2"
