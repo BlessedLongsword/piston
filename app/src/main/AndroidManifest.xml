@@ -43,7 +43,9 @@
         <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
         <activity android:name=".main.personal.folder.FolderActivity"/>
 
-        <activity android:name=".main.posts.PostActivity"/>
+        <activity
+            android:name=".main.posts.PostActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
         <activity android:name=".main.posts.editPost.EditPostActivity"/>
 

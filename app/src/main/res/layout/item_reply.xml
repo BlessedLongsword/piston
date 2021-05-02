@@ -28,6 +28,7 @@
                 android:padding="@dimen/medium_separator">
 
                 <TextView
+                    android:id="@+id/reply_owner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/card_margin"
@@ -36,6 +37,7 @@
                     android:textColor="?android:attr/textColorSecondary" />
 
                 <TextView
+                    android:id="@+id/reply_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_separator"
@@ -51,28 +53,27 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin"
                 android:orientation="horizontal"
-                android:weightSum="100">
+                android:weightSum="1">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reply_button"
                     style="?attr/borderlessButtonStyle"
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_weight="30"
                     android:text="@string/reply"
                     app:icon="@drawable/outline_reply_white_24" />
 
                 <Space
                     android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
-                    android:layout_weight="60" />
+                    android:layout_weight="1" />
 
                 <ImageButton
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_weight="10"
                     android:background="@null"
                     android:contentDescription="@string/content_description_media"
                     android:src="@drawable/baseline_favorite_border_black_36" />

@@ -8,13 +8,23 @@
         android:id="@+id/popup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hintEnabled="false"
+        app:errorEnabled="false"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/outline_send_black_24"
+        app:boxStrokeColor="@color/transparent"
         app:placeholderText="Enter your message here" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:inputType="textMultiLine"
             android:maxLines="6"
-            android:maxLength="@integer/post_max_length"
+            android:paddingStart="@dimen/tiny_separator"
+            android:paddingEnd="@dimen/tiny_separator"
+            android:paddingVertical="@dimen/tiny_separator"
+            android:maxLength="@integer/max_reply_length"
             android:gravity="start" />
     </com.google.android.material.textfield.TextInputLayout>
 
