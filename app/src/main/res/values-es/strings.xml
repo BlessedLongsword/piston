@@ -155,5 +155,7 @@
     <string name="category_info">Información de Categoría</string>
     <string name="group_name">Nombre Grupo</string>
     <string name="folder_icon">Folder Icon</string>
+    <string name="owner_header">Por:</string>
+    <string name="quote_header">dijo:</string>
 
 </resources>

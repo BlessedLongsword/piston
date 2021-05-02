@@ -156,5 +156,7 @@
     <string name="category_info">Informació de Categoria</string>
     <string name="group_name">Nom Grup</string>
     <string name="folder_icon">Folder Icon</string>
+    <string name="owner_header">Per:</string>
+    <string name="quote_header">ha dit:</string>
 
 </resources>

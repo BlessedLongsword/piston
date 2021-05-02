@@ -160,5 +160,7 @@
     <string name="category_info">Category Info</string>
     <string name="group_name">Group Name</string>
     <string name="folder_icon">Folder Icon</string>
+    <string name="owner_header">By:</string>
+    <string name="quote_header">said:</string>
 
 </resources>

@@ -40,5 +40,6 @@
     <dimen name="profile_activity_image_height">400dp</dimen>
     <dimen name="long_button">200dp</dimen>
     <dimen name="half_screen">400dp</dimen>
+    <dimen name="quote_elevation">5dp</dimen>
 
 </resources>

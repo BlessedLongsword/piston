@@ -24,7 +24,10 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public void createReply(String content) {
         repository.createReply(content);
-        //loading.setValue(true);
+    }
+
+    public void createReply(String content, String quote, String quoteOwner) {
+        repository.createReply(content, quote, quoteOwner);
     }
 
     @Override

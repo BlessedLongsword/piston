@@ -110,6 +110,20 @@ public class PostRepository {
         docRef1.update(value);
     }
 
+    public void createReply(String content, String quote, String quoteOwner) {
+        Log.d("DBReadTAG", content + " " + quote + " " + quoteOwner);
+        String id = db.collection("users").document().getId();
+        Reply rep = new Reply(user, content, id, quote, quoteOwner);
+        DocumentReference docRef1 = docRef.collection("replies")
+                .document(id);
+        Map<String, Object> value = new HashMap<>();
+
+        value.put("timestamp", FieldValue.serverTimestamp());
+
+        docRef1.set(rep);
+        docRef1.update(value);
+    }
+
     public void removeListener() {
         listenerRegistration.remove();
     }

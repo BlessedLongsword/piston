@@ -42,15 +42,32 @@
                     android:text="@{post.title}"
                     android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-                <TextView
-                    android:id="@+id/post_owner"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/card_margin"
-                    tools:text="@string/username"
-                    android:text="@{post.owner}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_margin"
+                        android:text="@string/owner_header"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="?android:attr/textColorSecondary" />
+
+                    <TextView
+                        android:id="@+id/post_owner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_margin"
+                        tools:text="@string/username"
+                        android:text="@{post.owner}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="?android:attr/textColorSecondary"/>
+
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/post_content"
@@ -61,8 +78,8 @@
                     android:text="@{post.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:ellipsize="end"
-                    android:maxLines="3"/>
+                    android:maxLines="@integer/max_desc_lines"
+                    android:ellipsize="end"/>
 
             </LinearLayout>
 

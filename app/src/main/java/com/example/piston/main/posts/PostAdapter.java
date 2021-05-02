@@ -2,6 +2,8 @@ package com.example.piston.main.posts;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.databinding.ItemThreadBinding;
+import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -89,7 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == 0){
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
-            binding.threadReplyButton.setOnClickListener(v -> replyThreadPopUp());
+            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null));
             return new PostAdapter.ThreadHolder(binding);
         }
         else {
@@ -127,7 +130,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return Objects.requireNonNull(viewModel.getReplies().getValue()).size() + 1;
     }
 
-    public void replyThreadPopUp() {
+    public void replyPopUp(String owner, String content) {
         View popupView = localActivity.getLayoutInflater().inflate(R.layout.pupup_reply, null);
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -158,7 +161,11 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
 
         textField.setEndIconOnClickListener(v -> {
-            viewModel.createReply(textField.getEditText().getText().toString());
+            if (owner == null && content == null) {
+                viewModel.createReply(textField.getEditText().getText().toString());
+            } else {
+                viewModel.createReply(textField.getEditText().getText().toString(), content, owner);
+            }
             popupWindow.dismiss();
         });
         // force show keyboard once pop up window is open
@@ -174,10 +181,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             lp.alpha=1f;
             localActivity.getWindow().setAttributes(lp);
         });
-    }
-
-    public void replyPopUp(String owner, String content) {
-
     }
 
 }
