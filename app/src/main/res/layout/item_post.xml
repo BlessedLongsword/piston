@@ -61,7 +61,8 @@
                     android:text="@{post.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:maxLength="@integer/description_max_length"/>
+                    android:ellipsize="end"
+                    android:maxLines="3"/>
 
             </LinearLayout>
 
