@@ -16,8 +16,6 @@ import java.util.Objects;
 public class PostRepository {
 
     private final PostRepository.IPosts listener;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final String user, collection, document, postID;
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
@@ -29,12 +27,10 @@ public class PostRepository {
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
-        this.collection = collection;
-        this.document = document;
-        this.postID = postID;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (collection.equals("folders")) {
             docRef = db.collection("users")
                     .document(user)

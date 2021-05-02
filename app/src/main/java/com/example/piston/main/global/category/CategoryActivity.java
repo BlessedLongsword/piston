@@ -18,7 +18,6 @@ import com.example.piston.utilities.MyViewModelFactory;
 public class CategoryActivity extends AppCompatActivity {
 
     private String title;
-    private CategoryViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("id");
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
                 .get(CategoryViewModel.class);
         ActivityCategoryBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category);

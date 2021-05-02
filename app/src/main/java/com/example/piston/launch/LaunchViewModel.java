@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 public class LaunchViewModel extends ViewModel implements LaunchRepository.ILaunch {
 
-    public MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> isSignedIn = new MutableLiveData<>();
     private final LaunchRepository launchRepository = new LaunchRepository(this);
 
     public void checkIfUserIsAuthenticated() {

@@ -2,9 +2,7 @@ package com.example.piston.main.global.category;
 
 import android.util.Log;
 
-import com.example.piston.data.Category;
 import com.example.piston.data.Post;
-import com.example.piston.main.global.GlobalRepository;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -19,8 +17,8 @@ public class CategoryRepository {
     }
 
     private final ICategory listener;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String category;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String category;
     private ListenerRegistration listenerRegistration;
 
     public CategoryRepository(ICategory listener, String category) {
@@ -53,9 +51,7 @@ public class CategoryRepository {
         listenerRegistration = db.collection("categories")
                 .document(category)
                 .collection("posts")
-                .addSnapshotListener((snapshots, e) -> {
-                   CategoryRepository.this.loadCategoryPosts();
-                });
+                .addSnapshotListener((snapshots, e) -> CategoryRepository.this.loadCategoryPosts());
     }
 
     public void removeListener() {

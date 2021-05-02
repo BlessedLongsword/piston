@@ -64,7 +64,7 @@
                     app:icon="@drawable/outline_reply_white_24" />
 
                 <Space
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 

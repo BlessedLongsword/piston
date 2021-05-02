@@ -18,14 +18,14 @@ public class GroupRepository {
     }
 
     private final GroupRepository.IGroup listener;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String user, group;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String group;
     private ListenerRegistration listenerRegistration;
 
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        this.user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         this.group = group;
         listenChanges();
     }
@@ -54,9 +54,7 @@ public class GroupRepository {
         listenerRegistration = db.collection("groups")
                 .document(group)
                 .collection("posts")
-                .addSnapshotListener((snapshots, e) -> {
-                    GroupRepository.this.loadGroupPosts();
-                });
+                .addSnapshotListener((snapshots, e) -> GroupRepository.this.loadGroupPosts());
     }
 
     public void removeListener() {

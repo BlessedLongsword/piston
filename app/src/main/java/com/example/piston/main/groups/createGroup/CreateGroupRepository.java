@@ -1,10 +1,6 @@
 package com.example.piston.main.groups.createGroup;
 
-import android.util.Log;
-
 import com.example.piston.data.Group;
-import com.example.piston.data.Post;
-import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -13,16 +9,16 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 public class CreateGroupRepository {
 
     private final CreateGroupRepository.ICreateGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private String imageId, imageLink, user;
+    private String imageId;
+    private String imageLink;
+    private final String user;
 
     public interface ICreateGroup {
         void setGroupID(String groupID);
@@ -34,6 +30,7 @@ public class CreateGroupRepository {
 
     public CreateGroupRepository(CreateGroupRepository.ICreateGroup listener) {
         this.listener = listener;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser().getEmail();
     }
 

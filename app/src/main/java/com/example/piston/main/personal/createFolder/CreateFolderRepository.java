@@ -11,9 +11,9 @@ import java.util.Objects;
 public class CreateFolderRepository {
 
     private final CreateFolderRepository.ICreateFolder listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    String user;
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
+    final String user;
 
 
     public interface ICreateFolder {

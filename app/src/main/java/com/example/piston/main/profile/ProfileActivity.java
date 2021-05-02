@@ -27,14 +27,12 @@ import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ProfileViewModel profileViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-         profileViewModel = new ViewModelProvider(this)
+        ProfileViewModel profileViewModel = new ViewModelProvider(this)
                 .get(ProfileViewModel.class);
 
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);

@@ -2,15 +2,12 @@ package com.example.piston.main.posts;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.text.Editable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
@@ -25,7 +22,6 @@ import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.databinding.ItemThreadBinding;
-import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -93,17 +89,13 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == 0){
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
-            binding.threadReplyButton.setOnClickListener(v -> {
-                replyThreadPopUp();
-            });
+            binding.threadReplyButton.setOnClickListener(v -> replyThreadPopUp());
             return new PostAdapter.ThreadHolder(binding);
         }
         else {
             ItemReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_reply, parent, false);
-            binding.replyButton.setOnClickListener(v -> {
-                replyPopUp(binding.replyOwner.getText().toString(), binding.replyContent.getText().toString());
-            });
+            binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(), binding.replyContent.getText().toString()));
             return new PostAdapter.ReplyHolder(binding);
         }
 

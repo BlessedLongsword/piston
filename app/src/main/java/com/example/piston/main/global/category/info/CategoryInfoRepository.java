@@ -4,9 +4,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CategoryInfoRepository {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    ICategoryInfo listener;
+    final ICategoryInfo listener;
 
     public interface ICategoryInfo {
         void setDescription(String description);

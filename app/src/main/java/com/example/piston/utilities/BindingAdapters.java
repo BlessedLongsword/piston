@@ -185,9 +185,8 @@ public class BindingAdapters {
     @BindingAdapter("android:counter")
     public static void updateCounter(TextInputLayout view, int max_length) {
         view.getEditText().addTextChangedListener(new CounterWatcher(max_length, view));
-        view.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-            view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length()));
-        });
+        view.getEditText().setOnFocusChangeListener((v, hasFocus) ->
+                view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length())));
     }
 
     @BindingAdapter("android:folderTitleError")

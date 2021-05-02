@@ -12,10 +12,10 @@ import java.util.UUID;
 
 public class CreatePostRepository {
     private final CreatePostRepository.ICreatePost listener;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    String user;
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseStorage storage = FirebaseStorage.getInstance();
+    final String user;
     String username;
 
     public interface ICreatePost {

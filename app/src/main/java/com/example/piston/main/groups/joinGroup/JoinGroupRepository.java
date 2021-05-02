@@ -13,9 +13,8 @@ public class JoinGroupRepository {
 
     private final JoinGroupRepository.IJoinGroup listener;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String user;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String user;
 
     public interface IJoinGroup {
         void setGroupCodeError(JoinGroupResult.JoinError error);
@@ -25,6 +24,7 @@ public class JoinGroupRepository {
 
     public JoinGroupRepository(JoinGroupRepository.IJoinGroup listener) {
         this.listener = listener;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser().getEmail();
     }
 
