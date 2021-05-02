@@ -63,7 +63,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         Glide.with(localActivity)
                 .load(post.getImageLink())
                 .into(holder.binding.postPicture);
-        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getTitle()));
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getId()));
     }
 
     @Override

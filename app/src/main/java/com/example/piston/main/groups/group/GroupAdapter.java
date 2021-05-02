@@ -63,7 +63,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         Glide.with(localActivity)
                 .load(post.getImageLink())
                 .into(holder.binding.postPicture);
-        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getTitle()));
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getId()));
     }
 
     @Override
