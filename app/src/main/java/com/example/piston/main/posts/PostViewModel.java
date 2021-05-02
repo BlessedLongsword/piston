@@ -8,6 +8,7 @@ import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
@@ -19,6 +20,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public PostViewModel(String collection, String document, String postID) {
         repository = new PostRepository(this, collection, document, postID);
+    }
+
+    public void createReply(String content) {
+        repository.createReply(content);
+        //loading.setValue(true);
     }
 
     @Override

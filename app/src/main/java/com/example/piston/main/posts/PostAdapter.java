@@ -112,7 +112,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-
         if (holder.getItemViewType() == 0) {
             Post post = Objects.requireNonNull(viewModel.getPost().getValue());
             PostAdapter.ThreadHolder hold  = (PostAdapter.ThreadHolder) holder;
@@ -140,6 +139,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View popupView = localActivity.getLayoutInflater().inflate(R.layout.pupup_reply, null);
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
         // If you need the PopupWindow to dismiss when touched outside
         popupWindow.setBackgroundDrawable(new ColorDrawable());
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
@@ -150,9 +150,25 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
+
         TextInputLayout textField = popupWindow.getContentView().findViewById(R.id.popup);
+
+        textField.setEndIconVisible(false);
         textField.requestFocus();
-        popupWindow.setOutsideTouchable(false);
+
+        Objects.requireNonNull(textField.getEditText())
+                .addTextChangedListener(new CounterWatcher(500, textField));
+        textField.getEditText().addTextChangedListener(new BaseTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                textField.setEndIconVisible(s.length() != 0);
+            }
+        });
+
+        textField.setEndIconOnClickListener(v -> {
+            viewModel.createReply(textField.getEditText().getText().toString());
+            popupWindow.dismiss();
+        });
         // force show keyboard once pop up window is open
         InputMethodManager imm = (InputMethodManager) localActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
@@ -166,18 +182,9 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             lp.alpha=1f;
             localActivity.getWindow().setAttributes(lp);
         });
-        Objects.requireNonNull(textField.getEditText())
-                .addTextChangedListener(new CounterWatcher(500, textField));
     }
 
     public void replyPopUp(String owner, String content) {
-
-    }
-
-    public void popUpWindow(int layoutResource, TextInputEditText textField) {
-
-
-
 
     }
 

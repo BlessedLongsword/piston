@@ -142,8 +142,7 @@
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     app:placeholderText="@string/hint_post_content"
                     app:counterEnabled="true"
-                    app:counterMaxLength="@integer/post_max_length"
-                    android:inputType="textMultiLine" >
+                    app:counterMaxLength="@integer/post_max_length" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -151,6 +150,7 @@
                         android:gravity="start"
                         android:maxLength="@integer/post_max_length"
                         android:maxLines="10"
+                        android:inputType="textMultiLine"
                         android:text="@={viewModel.contentField}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
