@@ -53,6 +53,7 @@
                     tools:text="@string/description"
                     android:maxLines="@integer/max_desc_lines"
                     android:textAppearance="?attr/textAppearanceBody2"
+                    android:ellipsize="end"
 
                     />
 
