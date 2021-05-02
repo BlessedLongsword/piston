@@ -1,4 +1,4 @@
-package com.example.piston.main;
+package com.example.piston.main.sections;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

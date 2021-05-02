@@ -17,7 +17,6 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finishCreateCategory = new MutableLiveData<>(false);
 
-
     private final CreateCategoryRepository repository = new CreateCategoryRepository(this);
 
     public void titleUpdate() {
@@ -25,13 +24,11 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
         createError.setValue(false);
     }
 
-    public void createCategory() {
+    public void createCategory(byte[] image) {
         loading.setValue(true);
-        repository.createCategory(Objects.requireNonNull(titleField.getValue())
-                , descriptionField.getValue(), nsfwBox.getValue());
+        repository.createCategory(Objects.requireNonNull(titleField.getValue()),
+                descriptionField.getValue(), nsfwBox.getValue(), image);
     }
-
-    public void uploadImage(byte[] image) { repository.uploadImage(image); }
 
     @Override
     public void setTitleStatus(CreateCategoryResult.TitleError titleError) {

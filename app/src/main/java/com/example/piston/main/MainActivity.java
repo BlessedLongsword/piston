@@ -13,6 +13,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
 import com.example.piston.main.notifications.NotificationsActivity;
+import com.example.piston.main.sections.SectionFragment;
+import com.example.piston.main.sections.SectionsPagerAdapter;
 import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.authentication.login.LoginActivity;
 import com.example.piston.main.profile.ProfileActivity;

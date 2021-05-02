@@ -15,7 +15,6 @@ public class CreateCategoryRepository {
     private final ICreateCategory listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private String imageId, imageLink;
 
     public interface ICreateCategory {
         void setTitleStatus(CreateCategoryResult.TitleError titleError);
@@ -45,40 +44,41 @@ public class CreateCategoryRepository {
         }
     }
 
-    public void createCategory(String title, String description, boolean nsfw) {
+    public void createCategory(String title, String description, boolean nsfw, byte[] image) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
             listener.setCreateError();
             listener.setLoadingFinished();
         } else {
-            DocumentReference docRef = db.collection("categories").document(title);
-            docRef.get().addOnCompleteListener(task -> {
-                if (task.isComplete()) {
-                    DocumentSnapshot ds = task.getResult();
-                    if (ds.exists()) {
-                        listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
-                        listener.setCreateError();
-                        listener.setLoadingFinished();
-                    } else {
-                        Category category = new Category(title, description, nsfw, imageId, imageLink);
-                        db.collection("categories").document(title).set(category);
-                        listener.setCreateFinished();
-                        listener.setLoadingFinished();
-                    }
-                }
-            });
+            StorageReference storageRef = storage.getReference();
+            String randomId = UUID.randomUUID().toString();
+            String path = "categories/" + title;
+            String imageId = path + "/" + randomId;
+            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+            UploadTask uploadTask = imageRef.putBytes(image);
+            uploadTask.addOnFailureListener(exception -> {
+                // Handle unsuccessful uploads
+            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                    .addOnSuccessListener(uri -> {
+                        String imageLink = uri.toString();
+
+                        DocumentReference docRef = db.collection("categories").document(title);
+                        docRef.get().addOnCompleteListener(task -> {
+                            if (task.isComplete()) {
+                                DocumentSnapshot ds = task.getResult();
+                                if (ds.exists()) {
+                                    listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
+                                    listener.setCreateError();
+                                    listener.setLoadingFinished();
+                                } else {
+                                    Category category = new Category(title, description, nsfw, imageId, imageLink);
+                                    db.collection("categories").document(title).set(category);
+                                    listener.setCreateFinished();
+                                    listener.setLoadingFinished();
+                                }
+                            }
+                        });
+                    }));
         }
     }
-
-    public void uploadImage(byte[] image) {
-        StorageReference storageRef = storage.getReference();
-        imageId = UUID.randomUUID().toString();
-        StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou
-        UploadTask uploadTask = imageRef.putBytes(image);
-        uploadTask.addOnFailureListener(exception -> {
-            // Handle unsuccessful uploads
-        }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> imageLink = uri.toString()));
-    }
-
 }
