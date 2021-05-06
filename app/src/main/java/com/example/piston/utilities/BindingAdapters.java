@@ -17,6 +17,8 @@ import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class BindingAdapters {
 
     @BindingAdapter("android:usernameError")
@@ -143,18 +145,6 @@ public class BindingAdapters {
         view.setVisibility((visible)? View.VISIBLE : View.GONE);
     }
 
-    @BindingAdapter("android:birthDateError")
-    public static void setBirthDateErrorMessage(TextInputLayout view, ProfileResult.BirthDateError error) {
-        switch (error) {
-            case NONE:
-                view.setError(null);
-                break;
-            case INVALID:
-                view.setError(view.getContext().getString(R.string.invalid_date));
-                break;
-        }
-    }
-
     @BindingAdapter("android:categoryTitleError")
     public static void setCategoryTitleErrorMessage(TextInputLayout view, CreateCategoryResult.TitleError error) {
         switch (error) {
@@ -184,7 +174,7 @@ public class BindingAdapters {
 
     @BindingAdapter("android:counter")
     public static void updateCounter(TextInputLayout view, int max_length) {
-        view.getEditText().addTextChangedListener(new CounterWatcher(max_length, view));
+        Objects.requireNonNull(view.getEditText()).addTextChangedListener(new CounterWatcher(max_length, view));
         view.getEditText().setOnFocusChangeListener((v, hasFocus) ->
                 view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length())));
     }

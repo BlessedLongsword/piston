@@ -25,7 +25,6 @@ public class GroupRepository {
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         this.group = group;
         listenChanges();
     }

@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,10 +31,10 @@ public class ProfileRepository {
 
 
     public void viewProfile(){
-        String currentUser = mAuth.getCurrentUser().getEmail();
-        db.collection("users").document(currentUser).get().addOnSuccessListener(documentSnapshot -> {
+        String currentUser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        db.collection("users").document(Objects.requireNonNull(currentUser)).get().addOnSuccessListener(documentSnapshot -> {
             User user = documentSnapshot.toObject(User.class);
-            listener.setUserNameField(user.getUsername());
+            listener.setUserNameField(Objects.requireNonNull(user).getUsername());
             listener.setEmailField(user.getEmail());
             listener.setFullNameField(user.getName());
             listener.setBirthDateField(user.getBirthDate());

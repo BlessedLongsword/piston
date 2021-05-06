@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class GoogleRegisterRepository extends CommonRegisterRepository {
 
@@ -33,18 +34,18 @@ public class GoogleRegisterRepository extends CommonRegisterRepository {
         Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
-            String email = task.getResult().getUser().getEmail();
+            String email = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getEmail();
             User user = new User(username, email, userBirthDate);
 
             docRef.get().addOnCompleteListener(task2 -> {
                 if (task2.isSuccessful()) {
                     DocumentSnapshot ds = task2.getResult();
-                    if (ds.exists()) {
+                    if (Objects.requireNonNull(ds).exists()) {
                         mAuth.signOut();
                         listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
                     }
                     else {
-                        db.collection("users").document(email).set(user);
+                        db.collection("users").document(Objects.requireNonNull(email)).set(user);
                         Map<String, Object> data = new HashMap<>();
                         data.put("email", email);
                         db.collection("emails").document(username).set(data);

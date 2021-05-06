@@ -39,7 +39,7 @@ public class CreateFolderRepository {
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
-                    if (ds.exists())
+                    if (Objects.requireNonNull(ds).exists())
                         listener.setTitleStatus(CreateFolderResult.TitleError.EXISTS);
                     else
                         listener.setTitleStatus(CreateFolderResult.TitleError.NONE);
@@ -61,16 +61,15 @@ public class CreateFolderRepository {
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
-                    if (ds.exists()) {
+                    if (Objects.requireNonNull(ds).exists()) {
                         listener.setTitleStatus(CreateFolderResult.TitleError.EXISTS);
                         listener.setCreateError();
-                        listener.setLoadingFinished();
                     } else {
                         Folder folder = new Folder(title, description);
                         docRef.set(folder);
                         listener.setCreateFinished();
-                        listener.setLoadingFinished();
                     }
+                    listener.setLoadingFinished();
                 }
             });
         }

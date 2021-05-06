@@ -35,9 +35,9 @@ public class GoogleRegisterViewModel extends CommonRegisterViewModel implements 
     }
 
     public void onFieldChanged() {
-        registerEnabled.setValue((Objects.requireNonNull(getUsername().getValue().trim()).length() > 0) &&
-                (getBirthDate().getValue().trim().length() > 0) &&
-                (getCheckEnabled().getValue()) &&
+        registerEnabled.setValue((Objects.requireNonNull(Objects.requireNonNull(getUsername().getValue()).trim()).length() > 0) &&
+                (Objects.requireNonNull(getBirthDate().getValue()).trim().length() > 0) &&
+                (Objects.requireNonNull(getCheckEnabled().getValue())) &&
                 (getUsernameError().getValue() == RegisterResult.UsernameError.NONE) &&
                 (getBirthDateError().getValue() == RegisterResult.BirthDateError.NONE));
     }

@@ -19,6 +19,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -75,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            idToken = GoogleSignIn.getSignedInAccountFromIntent(data).getResult().getIdToken();
+            idToken = Objects.requireNonNull(GoogleSignIn.getSignedInAccountFromIntent(data).getResult()).getIdToken();
             loginViewModel.signInWithToken(idToken);
         }
         else if (requestCode == RC_REGISTER && resultCode==Activity.RESULT_OK)

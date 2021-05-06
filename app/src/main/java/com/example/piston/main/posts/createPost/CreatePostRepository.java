@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class CreatePostRepository {
@@ -30,12 +31,12 @@ public class CreatePostRepository {
 
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
         this.listener = listener;
-        user = auth.getCurrentUser().getEmail();
+        user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
-                .document(user)
+                .document(Objects.requireNonNull(user))
                 .get()
                 .addOnCompleteListener(task ->
-                        username = (String) task.getResult().get("username"));
+                        username = (String) Objects.requireNonNull(task.getResult()).get("username"));
     }
 
     public void checkTitle(String title) {

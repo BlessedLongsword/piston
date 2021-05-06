@@ -42,7 +42,7 @@ public class GroupsRepository {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        int size = task.getResult().size();
+                        int size = Objects.requireNonNull(task.getResult()).size();
                         counter = 0;
                         groups = new Group[size];
                         int position = 0;

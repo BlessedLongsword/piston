@@ -76,13 +76,12 @@ public class CreateCategoryRepository {
                                 if (Objects.requireNonNull(ds).exists()) {
                                     listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
                                     listener.setCreateError();
-                                    listener.setLoadingFinished();
                                 } else {
                                     Category category = new Category(title, description, nsfw, imageId, imageLink);
                                     db.collection("categories").document(title).set(category);
                                     listener.setCreateFinished();
-                                    listener.setLoadingFinished();
                                 }
+                                listener.setLoadingFinished();
                             }
                         });
                     }));

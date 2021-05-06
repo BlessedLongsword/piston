@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateFolderBinding;
-import com.example.piston.main.personal.createFolder.CreateFolderViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreateFolderActivity extends AppCompatActivity {

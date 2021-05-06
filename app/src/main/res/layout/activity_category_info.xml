@@ -64,7 +64,7 @@
                             android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                         <TextView
-                            android:id="@+id/caregory_info_description"
+                            android:id="@+id/category_info_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_separator"

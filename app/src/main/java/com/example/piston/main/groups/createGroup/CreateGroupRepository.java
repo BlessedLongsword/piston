@@ -9,6 +9,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class CreateGroupRepository {
@@ -30,7 +31,7 @@ public class CreateGroupRepository {
     public CreateGroupRepository(CreateGroupRepository.ICreateGroup listener) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser().getEmail();
+        user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
     }
 
     public void generateGroupID() {

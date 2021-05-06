@@ -35,10 +35,10 @@ public class PostRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
-                .document(email)
+                .document(Objects.requireNonNull(email))
                 .get()
                 .addOnCompleteListener(task ->
-                        user = (String) task.getResult().get("username"));
+                        user = (String) Objects.requireNonNull(task.getResult()).get("username"));
 
         if (collection.equals("folders")) {
             docRef = db.collection("users")
@@ -57,7 +57,7 @@ public class PostRepository {
 
         docRef.get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        listener.setPostTitle((String) task.getResult().get("title"));
+                        listener.setPostTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
                     }
         });
         listenChanges();

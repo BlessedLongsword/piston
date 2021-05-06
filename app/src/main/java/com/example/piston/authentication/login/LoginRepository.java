@@ -82,11 +82,11 @@ public class LoginRepository {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String email = task.getResult().getUser().getEmail();
-                        db.collection("users").document(email)
+                        String email = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getEmail();
+                        db.collection("users").document(Objects.requireNonNull(email))
                                 .get().addOnCompleteListener(task1 -> {
                                     LoginResult loginResult = new LoginResult();
-                                    if (task1.getResult().exists())
+                                    if (Objects.requireNonNull(task1.getResult()).exists())
                                         loginResult.setSignedIn(true);
                                     else {
                                         loginResult.setNewUser(true);

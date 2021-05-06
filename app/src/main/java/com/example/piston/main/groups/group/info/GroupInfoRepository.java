@@ -2,6 +2,8 @@ package com.example.piston.main.groups.group.info;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class GroupInfoRepository {
 
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -20,7 +22,7 @@ public class GroupInfoRepository {
                 .document(groupID)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                listener.setTitle((String) task.getResult().get("title"));
+                listener.setTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
                 listener.setDescription((String) task.getResult().get("description"));
                 listener.setImageLink((String) task.getResult().get("imageLink"));
             }

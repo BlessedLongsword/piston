@@ -5,6 +5,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +33,7 @@ public class CommonRegisterRepository {
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
-                    if (ds.exists())
+                    if (Objects.requireNonNull(ds).exists())
                         listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
                     else
                         listener.setUsernameErrorStatus(RegisterResult.UsernameError.NONE);

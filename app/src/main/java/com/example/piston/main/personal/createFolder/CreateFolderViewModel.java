@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.main.personal.createFolder.CreateFolderResult;
-import com.example.piston.main.personal.createFolder.CreateFolderRepository;
-
 import java.util.Objects;
 
 public class CreateFolderViewModel extends ViewModel implements CreateFolderRepository.ICreateFolder {

@@ -65,7 +65,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.Folder
 
     @Override
     public int getItemCount() {
-        return viewModel.getFolders().getValue().size();
+        return Objects.requireNonNull(viewModel.getFolders().getValue()).size();
     }
 
     private View.OnClickListener openNewActivity(String id) {

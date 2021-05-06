@@ -2,6 +2,8 @@ package com.example.piston.main.global.category.info;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class CategoryInfoRepository {
 
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -19,7 +21,7 @@ public class CategoryInfoRepository {
                 .document(category)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        listener.setDescription((String) task.getResult().get("description"));
+                        listener.setDescription((String) Objects.requireNonNull(task.getResult()).get("description"));
                         listener.setImageLink((String) task.getResult().get("imageLink"));
                     }
         });

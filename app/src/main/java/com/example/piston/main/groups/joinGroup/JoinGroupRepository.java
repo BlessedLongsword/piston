@@ -25,7 +25,7 @@ public class JoinGroupRepository {
     public JoinGroupRepository(JoinGroupRepository.IJoinGroup listener) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser().getEmail();
+        user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
     }
 
     public void checkGroupCode(String groupCode) {

@@ -23,7 +23,7 @@ public class RegisterViewModel extends CommonRegisterViewModel implements Regist
 
     public void register() {
         try {
-            registerRepository.register(username.getValue(), email.getValue().toLowerCase(),
+            registerRepository.register(username.getValue(), Objects.requireNonNull(email.getValue()).toLowerCase(),
                     password.getValue(), birthDate.getValue());
             loading.setValue(true);
         } catch (Exception e) {
@@ -38,11 +38,11 @@ public class RegisterViewModel extends CommonRegisterViewModel implements Regist
     public void passwordUpdate() {
         onFieldChanged();
         registerRepository.checkPassword(Objects.requireNonNull(password.getValue()));
-        registerRepository.checkConfirmPassword(password.getValue(), confirmPassword.getValue());
+        registerRepository.checkConfirmPassword(password.getValue(), Objects.requireNonNull(confirmPassword.getValue()));
     }
     public void confirmPasswordUpdate() {
         onFieldChanged();
-        registerRepository.checkConfirmPassword(password.getValue(), confirmPassword.getValue());
+        registerRepository.checkConfirmPassword(password.getValue(), Objects.requireNonNull(confirmPassword.getValue()));
     }
     public void birthdayUpdate() {
         onFieldChanged();
@@ -50,16 +50,16 @@ public class RegisterViewModel extends CommonRegisterViewModel implements Regist
     }
     public void emailUpdate() {
         onFieldChanged();
-        registerRepository.checkEmail(email.getValue());
+        registerRepository.checkEmail(Objects.requireNonNull(email.getValue()));
     }
 
     public void onFieldChanged() {
-        registerEnabled.setValue((Objects.requireNonNull(getUsername().getValue().trim()).length() > 0) &&
-                (Objects.requireNonNull(getPassword().getValue().trim()).length() > 0) &&
-                (getConfirmPassword().getValue().trim().length() > 0) &&
-                (getEmail().getValue().trim().length() > 0) &&
-                (getBirthDate().getValue().trim().length() > 0) &&
-                (getCheckEnabled().getValue()) &&
+        registerEnabled.setValue((Objects.requireNonNull(Objects.requireNonNull(getUsername().getValue()).trim()).length() > 0) &&
+                (Objects.requireNonNull(Objects.requireNonNull(getPassword().getValue()).trim()).length() > 0) &&
+                (Objects.requireNonNull(getConfirmPassword().getValue()).trim().length() > 0) &&
+                (Objects.requireNonNull(getEmail().getValue()).trim().length() > 0) &&
+                (Objects.requireNonNull(getBirthDate().getValue()).trim().length() > 0) &&
+                (Objects.requireNonNull(getCheckEnabled().getValue())) &&
                 (getUsernameError().getValue() == RegisterResult.UsernameError.NONE) &&
                 (getEmailError().getValue() == RegisterResult.EmailError.NONE) &&
                 (getPasswordError().getValue() == RegisterResult.PasswordError.NONE) &&

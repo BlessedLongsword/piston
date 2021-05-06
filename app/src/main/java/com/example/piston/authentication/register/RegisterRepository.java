@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RegisterRepository extends CommonRegisterRepository {
 
@@ -39,7 +40,7 @@ public class RegisterRepository extends CommonRegisterRepository {
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot ds = task.getResult();
-                if (ds.exists())
+                if (Objects.requireNonNull(ds).exists())
                     listener.setUsernameErrorStatus(RegisterResult.UsernameError.EXISTS);
                 else {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -53,7 +54,7 @@ public class RegisterRepository extends CommonRegisterRepository {
                                     listener.setRegisterFinished();
                                 } else {
                                     try {
-                                        throw regTask.getException();
+                                        throw Objects.requireNonNull(regTask.getException());
                                     } catch (FirebaseAuthInvalidCredentialsException e) {
                                         listener.setEmailErrorStatus(RegisterResult.EmailError.INVALID);
                                     } catch (FirebaseAuthUserCollisionException e) {
@@ -80,7 +81,7 @@ public class RegisterRepository extends CommonRegisterRepository {
             FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    if (task.getResult().getSignInMethods().isEmpty())
+                    if (Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).isEmpty())
                         listener.setEmailErrorStatus(RegisterResult.EmailError.NONE);
                     else {
                         listener.setEmailErrorStatus(RegisterResult.EmailError.EXISTS);

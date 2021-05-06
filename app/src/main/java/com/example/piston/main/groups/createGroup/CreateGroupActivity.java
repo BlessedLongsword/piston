@@ -18,6 +18,8 @@ import com.example.piston.databinding.ActivityCreateGroupBinding;
 import com.example.piston.main.sections.PickImageActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Objects;
+
 
 public class CreateGroupActivity extends PickImageActivity {
 
@@ -41,7 +43,7 @@ public class CreateGroupActivity extends PickImageActivity {
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
         binding.groupLink.setEndIconOnClickListener(v -> {
-            clip = ClipData.newPlainText("GroupCode", binding.groupLink.getEditText().getText());
+            clip = ClipData.newPlainText("GroupCode", Objects.requireNonNull(binding.groupLink.getEditText()).getText());
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
         });

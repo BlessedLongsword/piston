@@ -22,6 +22,8 @@ import com.example.piston.main.profile.ProfileActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel viewModel;
@@ -55,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        ((SectionFragment)getSupportFragmentManager().findFragmentByTag(
-                "f" + viewPager.getCurrentItem())).add();
+        ((SectionFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(
+                "f" + viewPager.getCurrentItem()))).add();
     }
 
     public void openViewProfile(MenuItem item) {

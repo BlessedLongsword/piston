@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.piston.R;
 import com.example.piston.main.global.category.CategoryActivity;
 
+import java.util.Objects;
+
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.NotificationHolder> {
 
     private final FragmentActivity localActivity;
@@ -61,7 +63,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
     @Override
     public void onBindViewHolder(@NonNull NotificationsAdapter.NotificationHolder notificationHolder, int position) {
-        notificationHolder.getNotificationTitle().setText(viewModel.getNotifications().getValue().get(position).getTitle());
+        notificationHolder.getNotificationTitle().setText(Objects.requireNonNull(viewModel.getNotifications().getValue()).get(position).getTitle());
         notificationHolder.getNotificationText().setText(viewModel.getNotifications().getValue().get(position).getDescription());
         notificationHolder.getLayout().setOnClickListener(view -> {
             Intent intent = new Intent(localActivity, CategoryActivity.class);
@@ -73,7 +75,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
     @Override
     public int getItemCount() {
-        return viewModel.getNotifications().getValue().size();
+        return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 
 }
