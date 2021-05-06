@@ -47,6 +47,7 @@
                 android:usernameError="@{viewModel.loginResult.usernameError}">
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_in_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -62,6 +63,7 @@
                 android:passwordError="@{viewModel.loginResult.passwordError}" >
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_in_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"

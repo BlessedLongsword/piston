@@ -50,7 +50,7 @@
                 android:regUsernameError='@{viewModel.usernameError}' >
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_username_editText"
+                    android:id="@+id/g_reg_username_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
