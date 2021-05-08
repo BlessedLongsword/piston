@@ -109,6 +109,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
+        if (viewModel.getNotifications().getValue() == null) {
+            return 0;
+        }
         return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 
