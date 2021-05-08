@@ -116,7 +116,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public int getNotificationType(Notification notification) {
-        if (notification.getClass() == NotificationPost.class) {
+        if (notification instanceof NotificationPost) {
             return 0;
         } else {
             return 1;

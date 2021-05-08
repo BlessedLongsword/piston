@@ -114,17 +114,19 @@ public class CreatePostRepository {
                     .collection("members")
                     .get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
-                            String groupName = db.collection("groups")
-                                    .document().get().getResult().get("title").toString();
                             for (QueryDocumentSnapshot documentSnapshot :
                                     Objects.requireNonNull(task1.getResult())) {
                                 if (!documentSnapshot.getId().equals(user)) {
-                                    NotificationPost notificationPost = new NotificationPost(
-                                            title, groupName, imageLink, false, collection, document, id);
-                                    db.collection("users")
-                                            .document(documentSnapshot.getId())
-                                            .collection("notifications")
-                                            .document(id).set(notificationPost);
+                                    db.collection("groups").document(document).get()
+                                            .addOnCompleteListener(task2 -> {
+                                        NotificationPost notificationPost = new NotificationPost(
+                                                title, task2.getResult().get("title").toString(),
+                                                imageLink, false, collection, document, id);
+                                        db.collection("users")
+                                                .document(documentSnapshot.getId())
+                                                .collection("notifications")
+                                                .document(id).set(notificationPost);
+                                    });
                                 }
                             }
                         }
