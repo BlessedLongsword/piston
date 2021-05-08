@@ -160,5 +160,7 @@
     <string name="quote_header">dijo:</string>
     <string name="group_info">Group Info</string>
     <string name="create_category_image_error_message">Debes añadir una imagen a la categoría. Asegúrate de que tienes conexión a internet.</string>
+    <string name="notification_post_indication">Nuevo post de </string>
+    <string name="notification_reply_indication">Respuesta de</string>
 
 </resources>

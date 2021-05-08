@@ -2,6 +2,7 @@ package com.example.piston.main.groups.createGroup;
 
 import com.example.piston.data.Group;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -89,11 +90,9 @@ public class CreateGroupRepository {
 
                         data.clear();
                         data.put("id", user);
-                        db.collection("groups")
-                                .document(groupID)
-                                .collection("mods")
-                                .document(user)
-                                .set(data);
+                        DocumentReference groupDocref = db.collection("groups").document(groupID);
+                        groupDocref.collection("mods").document(user).set(data);
+                        groupDocref.collection("members").document(user).set(data);
                     }));
         }
     }

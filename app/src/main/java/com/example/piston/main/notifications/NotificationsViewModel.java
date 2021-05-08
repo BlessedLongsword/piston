@@ -4,28 +4,27 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Section;
+import com.example.piston.data.Notification;
 
 import java.util.ArrayList;
 
-public class NotificationsViewModel extends ViewModel {
-    private final MutableLiveData<ArrayList<Section>> notifications;
-    private final ArrayList<Section> notification_array;
+public class NotificationsViewModel extends ViewModel implements NotificationsRepository.INotifications {
 
+    private final MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>();
+
+    private final NotificationsRepository repository;
 
     public NotificationsViewModel() {
-        notification_array = new ArrayList<>();
-        notifications = new MutableLiveData<>(notification_array);
-
+        repository = new NotificationsRepository(this);
+        repository.loadNotifications();
     }
 
-    public LiveData<ArrayList<Section>> getNotifications() {
+    @Override
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications.setValue(notifications);
+    }
+
+    public LiveData<ArrayList<Notification>> getNotifications() {
         return notifications;
-    }
-
-    public void addNotification(String title, String text){
-
-        notification_array.add(new Section(title, text));
-        notifications.setValue(notification_array);
     }
 }

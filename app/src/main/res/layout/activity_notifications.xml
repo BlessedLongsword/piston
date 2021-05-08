@@ -1,46 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".main.notifications.NotificationsActivity">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <data>
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/notifications_topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/notifications_activity_title"
-            app:navigationIcon="@drawable/baseline_arrow_back_white_24"
-            app:menu="@menu/notifications_top_app_bar"
-            style="@style/Theme.Piston.ToolbarStyle"/>
+        <variable
+            name="viewModel"
+            type="com.example.piston.main.notifications.NotificationsViewModel" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:layout_width="match_parent"
+        tools:context=".main.notifications.NotificationsActivity">
 
-        <FrameLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/notifications_topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/notifications_activity_title"
+                app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+                app:menu="@menu/notifications_top_app_bar"
+                style="@style/Theme.Piston.ToolbarStyle"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".main.global.GlobalFragment">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_notifications"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="LinearLayoutManager"/>
+                tools:context=".main.global.GlobalFragment">
 
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="LinearLayoutManager"/>
 
-    </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

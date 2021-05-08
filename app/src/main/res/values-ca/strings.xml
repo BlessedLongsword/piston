@@ -161,5 +161,7 @@
     <string name="quote_header">ha dit:</string>
     <string name="group_info">Group Info</string>
     <string name="create_category_image_error_message">Has d\'afegir una imatge a la categoría. Assegura\'t de que tens connexió a internet.</string>
+    <string name="notification_post_indication">Nou post de</string>
+    <string name="notification_reply_indication">Resposta de</string>
 
 </resources>

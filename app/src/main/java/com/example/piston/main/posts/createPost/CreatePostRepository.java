@@ -2,10 +2,13 @@ package com.example.piston.main.posts.createPost;
 
 import android.util.Log;
 
+import com.example.piston.data.Notification;
+import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -105,6 +108,28 @@ public class CreatePostRepository {
             if (task.isComplete()) {
                 Post post = new Post(title, content, username, id, document, imageId, imageLink);
                 docRef.set(post);
+                if (collection.equals("groups")) {
+                    db.collection(collection)
+                    .document(document)
+                    .collection("members")
+                    .get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            String groupName = db.collection("groups")
+                                    .document().get().getResult().get("title").toString();
+                            for (QueryDocumentSnapshot documentSnapshot :
+                                    Objects.requireNonNull(task1.getResult())) {
+                                if (!documentSnapshot.getId().equals(user)) {
+                                    NotificationPost notificationPost = new NotificationPost(
+                                            title, groupName, imageLink, false, collection, document, id);
+                                    db.collection("users")
+                                            .document(documentSnapshot.getId())
+                                            .collection("notifications")
+                                            .document(id).set(notificationPost);
+                                }
+                            }
+                        }
+                    });
+                }
                 listener.setCreateFinished();
                 listener.setLoadingFinished();
             }
