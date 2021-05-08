@@ -2,6 +2,7 @@ package com.example.piston.main.posts;
 
 import android.util.Log;
 
+import com.example.piston.data.NotificationReply;
 import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +21,10 @@ public class PostRepository {
 
     private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private  String user;
+    private String user;
+    private final String collection;
+    private final String document;
+    private final String postID;
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
@@ -32,6 +36,9 @@ public class PostRepository {
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
+        this.collection = collection;
+        this.document = collection;
+        this.postID = postID;
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
@@ -105,6 +112,21 @@ public class PostRepository {
 
         docRef1.set(rep);
         docRef1.update(value);
+
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                NotificationReply notificationReply = new NotificationReply(user, content,
+                        false, collection, document, postID);
+                DocumentReference docRef2 = db.collection("users")
+                        .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
+                                .get("owner")).toString())
+                        .collection("notifications")
+                        .document();
+                docRef2.set(notificationReply);
+                docRef2.update("type", "reply");
+                docRef2.update("timestamp", FieldValue.serverTimestamp());
+            }
+        });
     }
 
     public void createReply(String content, String quote, String quoteOwner) {
@@ -119,6 +141,21 @@ public class PostRepository {
 
         docRef1.set(rep);
         docRef1.update(value);
+
+        db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
+           if (task.isSuccessful()) {
+               NotificationReply notificationReply = new NotificationReply(user, content, false,
+                       collection, document, postID);
+               DocumentReference docRef2 = db.collection("users")
+                       .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
+                               .get("email")).toString())
+                       .collection("notifications")
+                       .document();
+               docRef2.set(notificationReply);
+               docRef2.update("type", "reply");
+               docRef2.update("timestamp", FieldValue.serverTimestamp());
+           }
+        });
     }
 
     public void removeListener() {

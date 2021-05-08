@@ -12,10 +12,8 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
 
     private final MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>();
 
-    private final NotificationsRepository repository;
-
     public NotificationsViewModel() {
-        repository = new NotificationsRepository(this);
+        NotificationsRepository repository = new NotificationsRepository(this);
     }
 
     @Override

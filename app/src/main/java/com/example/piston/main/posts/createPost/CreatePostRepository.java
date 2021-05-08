@@ -7,12 +7,15 @@ import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -125,9 +128,10 @@ public class CreatePostRepository {
                                         DocumentReference docRef2 = db.collection("users")
                                                 .document(documentSnapshot.getId())
                                                 .collection("notifications")
-                                                .document(id);
+                                                .document();
                                         docRef2.set(notificationPost);
                                         docRef2.update("type", "post");
+                                        docRef2.update("timestamp", FieldValue.serverTimestamp());
                                     });
                                 }
                             }
