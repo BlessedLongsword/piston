@@ -16,7 +16,6 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
 
     public NotificationsViewModel() {
         repository = new NotificationsRepository(this);
-        repository.loadNotifications();
     }
 
     @Override

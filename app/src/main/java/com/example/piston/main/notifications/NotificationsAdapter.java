@@ -1,6 +1,7 @@
 package com.example.piston.main.notifications;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             this.binding = binding;
         }
 
-        public void bind(NotificationPost item) { binding.setNotification(item); }
+        public void bind(NotificationPost item) {
+            binding.setNotification(item);
+        }
 
         public ItemNotificationPostBinding getBinding() { return binding; }
 
@@ -110,8 +113,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public int getItemCount() {
         if (viewModel.getNotifications().getValue() == null) {
+            Log.d("nowaybro", "Null....");
             return 0;
         }
+        Log.d("nowaybro", "Size: " + Objects.requireNonNull(viewModel.getNotifications().getValue()).size());
         return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 

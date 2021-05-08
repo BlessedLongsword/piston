@@ -122,10 +122,12 @@ public class CreatePostRepository {
                                         NotificationPost notificationPost = new NotificationPost(
                                                 title, task2.getResult().get("title").toString(),
                                                 imageLink, false, collection, document, id);
-                                        db.collection("users")
+                                        DocumentReference docRef2 = db.collection("users")
                                                 .document(documentSnapshot.getId())
                                                 .collection("notifications")
-                                                .document(id).set(notificationPost);
+                                                .document(id);
+                                        docRef2.set(notificationPost);
+                                        docRef2.update("type", "post");
                                     });
                                 }
                             }

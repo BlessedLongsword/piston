@@ -30,6 +30,7 @@ public class NotificationsRepository {
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         docRef = db.collection("users")
                 .document(email);
+        listenChanges();
     }
 
     public void loadNotifications() {
@@ -61,8 +62,6 @@ public class NotificationsRepository {
         listenerRegistration = docRef.collection("notifications")
                 .addSnapshotListener((snapshots, e) -> NotificationsRepository.this.loadNotifications());
     }
-
-
 
     public void removeListener() {
         listenerRegistration.remove();
