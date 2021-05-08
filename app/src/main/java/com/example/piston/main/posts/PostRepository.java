@@ -113,18 +113,25 @@ public class PostRepository {
         docRef1.set(rep);
         docRef1.update(value);
 
+        value.put("type", "reply");
+
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                NotificationReply notificationReply = new NotificationReply(user, content,
-                        false, collection, document, postID);
-                DocumentReference docRef2 = db.collection("users")
-                        .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
-                                .get("owner")).toString())
-                        .collection("notifications")
-                        .document();
-                docRef2.set(notificationReply);
-                docRef2.update("type", "reply");
-                docRef2.update("timestamp", FieldValue.serverTimestamp());
+                db.collection("emails").document(Objects.requireNonNull(Objects
+                        .requireNonNull(task.getResult()).get("owner")).toString())
+                        .get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                NotificationReply notificationReply = new NotificationReply(user, content,
+                                        false, collection, document, postID);
+                                DocumentReference docRef2 = db.collection("users")
+                                        .document(Objects.requireNonNull(Objects.requireNonNull
+                                                (task1.getResult()).get("email")).toString())
+                                        .collection("notifications")
+                                        .document();
+                                docRef2.set(notificationReply);
+                                docRef2.update(value);
+                            }
+                });
             }
         });
     }
@@ -142,6 +149,8 @@ public class PostRepository {
         docRef1.set(rep);
         docRef1.update(value);
 
+        value.put("type", "reply");
+
         db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                NotificationReply notificationReply = new NotificationReply(user, content, false,
@@ -152,8 +161,7 @@ public class PostRepository {
                        .collection("notifications")
                        .document();
                docRef2.set(notificationReply);
-               docRef2.update("type", "reply");
-               docRef2.update("timestamp", FieldValue.serverTimestamp());
+               docRef2.update(value);
            }
         });
     }
