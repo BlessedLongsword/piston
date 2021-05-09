@@ -34,6 +34,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         String collection = intent.getStringExtra("collection");
         String document = intent.getStringExtra("document");
         String postID = intent.getStringExtra("id");
+        String replyID = intent.getStringExtra("reply");
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(collection, document, postID))
                 .get(PostViewModel.class);
@@ -54,13 +55,22 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
 
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
+        viewModel.getLoaded().observe(this, aBoolean -> {
+            if (aBoolean && replyID != null) {
+                goToReply(replyID);
+            }
+        });
     }
 
     @Override
     public void quoteOnClick(View v, String quoteID) {
-        for (int i = 1; i < Objects.requireNonNull(viewModel.getReplies().getValue()).size() + 1; i++) {
-            if (viewModel.getReplies().getValue().get(i).getQuoteID().equals(quoteID)) {
-                smoothScroller.setTargetPosition(i);
+        goToReply(quoteID);
+    }
+
+    public void goToReply(String replyID) {
+        for (int i = 0; i < Objects.requireNonNull(viewModel.getReplies().getValue()).size(); i++) {
+            if (viewModel.getReplies().getValue().get(i).getId().equals(replyID)) {
+                smoothScroller.setTargetPosition(i+1);
                 Objects.requireNonNull(binding.recyclerviewPosts.getLayoutManager())
                         .startSmoothScroll(smoothScroller);
                 break;

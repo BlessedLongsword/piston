@@ -15,6 +15,8 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<ArrayList<Reply>> replies = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> postTitle = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
+    private boolean firstLoad = false;
 
     private final PostRepository repository;
 
@@ -34,6 +36,10 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     @Override
     public void setReplies(ArrayList<Reply> replies) {
         this.replies.setValue(replies);
+        if (!firstLoad) {
+            loaded.setValue(true);
+            firstLoad = true;
+        }
     }
 
     @Override
@@ -70,5 +76,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<Post> getPost() { return post; }
 
     public LiveData<Boolean> getLiked() {return liked;}
+
+    public LiveData<Boolean> getLoaded() { return loaded; }
 
 }

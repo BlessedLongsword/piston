@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.piston.data.NotificationReply;
 import com.example.piston.data.Post;
+import com.example.piston.data.QuoteReply;
 import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -40,7 +41,7 @@ public class PostRepository {
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
         this.listener = listener;
         this.collection = collection;
-        this.document = collection;
+        this.document = document;
         this.postID = postID;
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
@@ -87,8 +88,14 @@ public class PostRepository {
                    if (task.isSuccessful()) {
                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                task1.getResult())) {
-                           Reply post = documentSnapshot.toObject(Reply.class);
-                           posts.add(post);
+                           String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
+                           if (replyType.equals("reply")) {
+                               Reply post = documentSnapshot.toObject(Reply.class);
+                               posts.add(post);
+                           } else {
+                               QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
+                               posts.add(post);
+                           }
                        }
                    } else {
                        Log.d("nowaybro", "Error getting documents: ", task.getException());
@@ -109,14 +116,13 @@ public class PostRepository {
         Reply rep = new Reply(user, content, id);
         DocumentReference docRef1 = docRef.collection("replies")
                                         .document(id);
-        Map<String, Object> value = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
 
-        value.put("timestamp", FieldValue.serverTimestamp());
+        data.put("timestamp", FieldValue.serverTimestamp());
+        data.put("type", "reply");
 
         docRef1.set(rep);
-        docRef1.update(value);
-
-        value.put("type", "reply");
+        docRef1.update(data);
 
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -125,14 +131,14 @@ public class PostRepository {
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
                                 NotificationReply notificationReply = new NotificationReply(user, content,
-                                        false, collection, document, postID);
+                                        id, false, collection, document, postID);
                                 DocumentReference docRef2 = db.collection("users")
                                         .document(Objects.requireNonNull(Objects.requireNonNull
                                                 (task1.getResult()).get("email")).toString())
                                         .collection("notifications")
                                         .document();
                                 docRef2.set(notificationReply);
-                                docRef2.update(value);
+                                docRef2.update(data);
                             }
                 });
             }
@@ -142,30 +148,29 @@ public class PostRepository {
     public void createReply(String content, String quote, String quoteOwner, String quoteID) {
         Log.d("DBReadTAG", content + " " + quote + " " + quoteOwner);
         String id = db.collection("users").document().getId();
-        Reply rep = new Reply(user, content, id, quote, quoteOwner, quoteID);
+        QuoteReply rep = new QuoteReply(user, content, id, quote, quoteOwner, quoteID);
         DocumentReference docRef1 = docRef.collection("replies")
                 .document(id);
-        Map<String, Object> value = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
 
-        value.put("timestamp", FieldValue.serverTimestamp());
+        data.put("timestamp", FieldValue.serverTimestamp());
+        data.put("type", "quoteReply");
 
         docRef1.set(rep);
-        docRef1.update(value);
-
-        value.put("type", "reply");
+        docRef1.update(data);
 
         if (!quoteOwner.equals(user)) {
             db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    NotificationReply notificationReply = new NotificationReply(user, content, false,
-                            collection, document, postID);
+                    NotificationReply notificationReply = new NotificationReply(user, content, id,
+                            false, collection, document, postID);
                     DocumentReference docRef2 = db.collection("users")
                             .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
                                     .get("email")).toString())
                             .collection("notifications")
                             .document();
                     docRef2.set(notificationReply);
-                    docRef2.update(value);
+                    docRef2.update(data);
                 }
             });
         }

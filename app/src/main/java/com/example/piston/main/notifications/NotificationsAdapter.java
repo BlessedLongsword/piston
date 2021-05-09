@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -21,7 +19,7 @@ import com.example.piston.data.NotificationPost;
 import com.example.piston.data.NotificationReply;
 import com.example.piston.databinding.ItemNotificationPostBinding;
 import com.example.piston.databinding.ItemNotificationReplyBinding;
-import com.example.piston.main.global.category.CategoryActivity;
+import com.example.piston.main.posts.PostActivity;
 
 import java.util.Objects;
 
@@ -100,6 +98,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             Glide.with(localActivity)
                     .load(notificationPost.getImageLink())
                     .into(hold.binding.notificationPostPicture);
+            hold.getBinding().notificationPostCard.setOnClickListener(openNewActivity(
+                    notificationPost.getCollection(), notificationPost.getSectionID(),
+                            notificationPost.getPostID(), null));
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) viewModel
@@ -107,6 +108,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             NotificationsAdapter.NotificationReplyHolder hold = (NotificationsAdapter
                     .NotificationReplyHolder) holder;
             hold.bind(notificationReply);
+            hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
+                    notificationReply.getCollection(), notificationReply.getSectionID(),
+                            notificationReply.getPostID(), notificationReply.getReplyID()));
         }
     }
 
@@ -126,6 +130,17 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else {
             return 1;
         }
+    }
+
+    private View.OnClickListener openNewActivity(String collection, String documentID, String id, String replyID) {
+        return v -> {
+            Intent intent = new Intent(localActivity, PostActivity.class);
+            intent.putExtra("collection", collection);
+            intent.putExtra("document", documentID);
+            intent.putExtra("id", id);
+            intent.putExtra("reply", replyID);
+            localActivity.startActivity(intent);
+        };
     }
 
 }

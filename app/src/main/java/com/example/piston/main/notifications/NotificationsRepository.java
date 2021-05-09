@@ -16,6 +16,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class NotificationsRepository {
@@ -36,7 +38,7 @@ public class NotificationsRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         docRef = db.collection("users")
-                .document(email);
+                .document(Objects.requireNonNull(email));
         listenChanges();
     }
 
@@ -60,6 +62,7 @@ public class NotificationsRepository {
                                 notifications.add(notification);
                             }
                         }
+                        Collections.reverse(notifications);
                         listener.setNotifications(notifications);
                     }
         });
@@ -70,17 +73,19 @@ public class NotificationsRepository {
                 .addSnapshotListener((snapshots, error) -> {
                     NotificationsRepository.this.loadNotifications();
                     ArrayList<Notification> newNotifications = new ArrayList<>();
-                    for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                        if (dc.getType().equals(DocumentChange.Type.ADDED)) {
-                            String notificationType = dc.getDocument().get("type").toString();
-                            if (notificationType.equals("post")) {
-                                NotificationPost notification = dc.getDocument().
-                                        toObject(NotificationPost.class);
-                                newNotifications.add(notification);
-                            } else {
-                                NotificationReply notification = dc.getDocument()
-                                        .toObject(NotificationReply.class);
-                                newNotifications.add(notification);
+                    if (error == null) {
+                        for (DocumentChange dc : snapshots.getDocumentChanges()) {
+                            if (dc.getType().equals(DocumentChange.Type.ADDED)) {
+                                String notificationType = dc.getDocument().get("type").toString();
+                                if (notificationType.equals("post")) {
+                                    NotificationPost notification = dc.getDocument().
+                                            toObject(NotificationPost.class);
+                                    newNotifications.add(notification);
+                                } else {
+                                    NotificationReply notification = dc.getDocument()
+                                            .toObject(NotificationReply.class);
+                                    newNotifications.add(notification);
+                                }
                             }
                         }
                     }

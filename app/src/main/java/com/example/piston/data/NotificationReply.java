@@ -2,16 +2,17 @@ package com.example.piston.data;
 
 public class NotificationReply extends Notification {
 
-    private String user, content;
+    private String user, content, replyID;
 
     public NotificationReply() {
     }
 
-    public NotificationReply(String user, String content, boolean read,
+    public NotificationReply(String user, String content, String replyID, boolean read,
                              String collection, String sectionID, String postID) {
         super(collection, sectionID, postID, read);
         this.user = user;
         this.content = content;
+        this.replyID = replyID;
     }
 
     public String getUser() {
@@ -28,5 +29,13 @@ public class NotificationReply extends Notification {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getReplyID() {
+        return replyID;
+    }
+
+    public void setReplyID(String replyID) {
+        this.replyID = replyID;
     }
 }

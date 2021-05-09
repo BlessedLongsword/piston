@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.Post;
+import com.example.piston.data.QuoteReply;
 import com.example.piston.data.Reply;
+import com.example.piston.databinding.ItemQuoteReplyBinding;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.databinding.ItemThreadBinding;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
@@ -74,6 +76,23 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    public static class QuoteReplyHolder extends RecyclerView.ViewHolder {
+        private final ItemQuoteReplyBinding binding;
+
+        public QuoteReplyHolder(ItemQuoteReplyBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(QuoteReply item) {
+            binding.setReply(item);
+        }
+
+        public ItemQuoteReplyBinding getBinding() {
+            return binding;
+        }
+    }
+
     public PostAdapter(FragmentActivity activity, PostAdapterListener listener) {
         localActivity = activity;
         this.listener = listener;
@@ -84,67 +103,94 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? 0 : 1;
+        return (position == 0) ? 0 : getReplyType(viewModel.getReplies().getValue().get(position-1));
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        if (viewType == 0){
-            ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
-                    R.layout.item_thread, parent, false);
-            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
-            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
-            binding.heartButton.setOnLikeListener(new OnLikeListener() {
-                @Override
-                public void liked(LikeButton likeButton) {
-                    likeButton.setLiked(true);
-                    viewModel.setLiked(true);
-                }
+        switch (viewType) {
+            case 0: {
+                ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
+                        R.layout.item_thread, parent, false);
+                binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
+                binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
+                binding.heartButton.setOnLikeListener(new OnLikeListener() {
+                    @Override
+                    public void liked(LikeButton likeButton) {
+                        likeButton.setLiked(true);
+                        viewModel.setLiked(true);
+                    }
 
-                @Override
-                public void unLiked(LikeButton likeButton) {
-                    likeButton.setLiked(false);
-                    viewModel.setLiked(false);
-                }
-            });
-            return new PostAdapter.ThreadHolder(binding);
-        }
-        else {
-            ItemReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
-                    R.layout.item_reply, parent, false);
-            PostAdapter.ReplyHolder holder = new PostAdapter.ReplyHolder(binding);
-            binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(),
-                    binding.replyContent.getText().toString(), binding.getReply().getId()));
-            binding.replyQuote.setOnClickListener(v -> {
-                listener.quoteOnClick(v, holder.binding.getReply().getQuoteID());
-            });
-            return holder;
-        }
+                    @Override
+                    public void unLiked(LikeButton likeButton) {
+                        likeButton.setLiked(false);
+                        viewModel.setLiked(false);
+                    }
+                });
+                return new PostAdapter.ThreadHolder(binding);
+            }
 
+            case 1: {
+                ItemReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
+                        R.layout.item_reply, parent, false);
+                PostAdapter.ReplyHolder holder = new PostAdapter.ReplyHolder(binding);
+                binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(),
+                        binding.replyContent.getText().toString(), binding.getReply().getId()));
+                return holder;
+            }
+
+            case 2: {
+                ItemQuoteReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
+                        R.layout.item_quote_reply, parent, false);
+                PostAdapter.QuoteReplyHolder holder = new PostAdapter.QuoteReplyHolder(binding);
+                binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(),
+                        binding.replyContent.getText().toString(), binding.getReply().getId()));
+                binding.replyQuote.setOnClickListener(v ->
+                        listener.quoteOnClick(v, holder.binding.getReply().getQuoteID()));
+                return holder;
+            }
+        }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if (holder.getItemViewType() == 0) {
-            Post post = Objects.requireNonNull(viewModel.getPost().getValue());
-            PostAdapter.ThreadHolder hold  = (PostAdapter.ThreadHolder) holder;
-            hold.bind(post);
-            Glide.with(localActivity)
-                    .load(post.getImageLink())
-                    .into(hold.binding.postPicture);
-            if (Objects.requireNonNull(viewModel.getLiked().getValue())){
-                hold.binding.heartButton.setLiked(true);
+        switch (holder.getItemViewType()) {
+            case 0: {
+                Post post = Objects.requireNonNull(viewModel.getPost().getValue());
+                PostAdapter.ThreadHolder hold = (PostAdapter.ThreadHolder) holder;
+                hold.bind(post);
+                Glide.with(localActivity)
+                        .load(post.getImageLink())
+                        .into(hold.binding.postPicture);
+                if (Objects.requireNonNull(viewModel.getLiked().getValue())) {
+                    hold.binding.heartButton.setLiked(true);
+                }
+                break;
+            }
+
+            case 1: {
+                Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position - 1);
+                PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
+                hold.bind(reply);
+                break;
+            }
+
+            case 2: {
+                QuoteReply reply = (QuoteReply) Objects.requireNonNull(viewModel.getReplies().getValue()).get(position - 1);
+                PostAdapter.QuoteReplyHolder hold = ((PostAdapter.QuoteReplyHolder) holder);
+                hold.bind(reply);
+                break;
             }
         }
-        else {
-            Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position-1);
-            PostAdapter.ReplyHolder hold = ((PostAdapter.ReplyHolder) holder);
-            hold.bind(reply);
-            if (reply.getQuote() != null)
-                hold.binding.replyQuote.setVisibility(View.VISIBLE);
+
+        if (holder.getItemViewType() == 0) {
+
+        } else {
+
         }
 
     }
@@ -158,6 +204,14 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewModel.getPost().getValue() == null)
             return 0;
         return Objects.requireNonNull(viewModel.getReplies().getValue()).size() + 1;
+    }
+
+    public int getReplyType(Reply reply) {
+        if (reply instanceof QuoteReply) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
     public void replyPopUp(String owner, String content, String quoteID) {
@@ -200,18 +254,17 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
         // force show keyboard once pop up window is open
         InputMethodManager imm = (InputMethodManager) localActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         // dims background when popup window shows up
         WindowManager.LayoutParams lp = localActivity.getWindow().getAttributes();
-        lp.alpha=0.5f;
+        lp.alpha = 0.5f;
         localActivity.getWindow().setAttributes(lp);
 
         // restore dim
         popupWindow.setOnDismissListener(() -> {
-            lp.alpha=1f;
+            lp.alpha = 1f;
             localActivity.getWindow().setAttributes(lp);
         });
     }
-
 }
 
