@@ -41,24 +41,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{post.title}"
-                    tools:text="@string/title"
-                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="@string/title" />
 
                 <LinearLayout
+                    android:id="@+id/post_owner_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/post_owner_layout"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/post_owner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/card_margin"
-                        tools:text="@string/username"
                         android:text="@{post.owner}"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?attr/colorPrimary"/>
+                        android:textColor="?attr/colorPrimary"
+                        tools:text="@string/username" />
 
                 </LinearLayout>
 
@@ -67,23 +67,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_separator"
-                    android:text="@{post.content}"
-                    tools:text="@string/description"
                     android:maxLines="@integer/max_desc_lines"
+                    android:text="@{post.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
+                    android:textColor="?android:attr/textColorSecondary"
+                    tools:text="@string/description" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_separator"
-                    android:weightSum="10"
-                    android:orientation="horizontal">
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="9.8"/>
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -92,8 +87,8 @@
                         android:layout_weight="0.1"
                         android:background="@null"
                         android:contentDescription="@string/content_description_media"
-                        android:visibility="invisible"
-                        android:src="@drawable/baseline_edit_black_36" />
+                        android:src="@drawable/baseline_edit_black_36"
+                        android:visibility="invisible" />
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -101,11 +96,17 @@
                         android:layout_marginEnd="@dimen/card_margin"
                         android:layout_weight="0.1"
                         android:background="@null"
-                        android:visibility="invisible"
                         android:contentDescription="@string/content_description_media"
-                        android:src="@drawable/outline_star_border_black_36" />
+                        android:src="@drawable/outline_star_border_black_36"
+                        android:visibility="invisible" />
+
 
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9.8" />
 
             </LinearLayout>
 

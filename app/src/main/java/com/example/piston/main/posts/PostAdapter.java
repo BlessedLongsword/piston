@@ -26,6 +26,8 @@ import com.example.piston.databinding.ItemThreadBinding;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputLayout;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import java.util.Objects;
 
@@ -91,6 +93,19 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
             binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null));
+            binding.heartButton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    likeButton.setLiked(true);
+                    viewModel.setLiked(true);
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    likeButton.setLiked(false);
+                    viewModel.setLiked(false);
+                }
+            });
             return new PostAdapter.ThreadHolder(binding);
         }
         else {
@@ -112,6 +127,9 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Glide.with(localActivity)
                     .load(post.getImageLink())
                     .into(hold.binding.postPicture);
+            if (viewModel.getLiked().getValue()){
+                hold.binding.heartButton.setLiked(true);
+            }
         }
         else {
             Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position-1);

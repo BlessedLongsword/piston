@@ -7,6 +7,7 @@ import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PostRepository {
 
@@ -32,6 +34,7 @@ public class PostRepository {
         void setReplies(ArrayList<Reply> replies);
         void setPostTitle(String title);
         void setPost(Post post);
+        void setIsLiked(boolean liked);
     }
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
@@ -166,7 +169,36 @@ public class PostRepository {
         });
     }
 
+    public void addLiked (boolean liked, String postID){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        if (liked){
+            Map <String, String> data = new HashMap<>();
+            data.put("id", postID);
+            db.collection("users").document(email).collection("liked").document(postID).set(data);
+        }
+        else{
+            db.collection("users").document(email).collection("liked").document(postID).delete();
+        }
+
+    }
+
+    public void checkLiked (String postID){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        DocumentReference dR = db.collection("users").document(email).collection("liked").document(postID);
+        dR.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                DocumentSnapshot ds = task.getResult();
+                listener.setIsLiked(ds.exists());
+            }
+        });
+
+
+    }
+
     public void removeListener() {
         listenerRegistration.remove();
     }
-}
+
+    }
