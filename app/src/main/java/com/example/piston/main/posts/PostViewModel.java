@@ -14,11 +14,13 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<Post> post = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Reply>> replies = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> postTitle = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
 
     private final PostRepository repository;
 
     public PostViewModel(String collection, String document, String postID) {
         repository = new PostRepository(this, collection, document, postID);
+        repository.checkLiked(postID);
     }
 
     public void createReply(String content) {
@@ -45,6 +47,17 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     @Override
+    public void setIsLiked(boolean liked){
+        this.liked.setValue(liked);
+    }
+
+    public void setLiked(Boolean bool){
+        this.liked.setValue(bool);
+        repository.addLiked(bool,post.getValue().getId());
+        post.getValue().setNumLikes(bool);
+    }
+
+    @Override
     protected void onCleared () {
         repository.removeListener();
     }
@@ -56,5 +69,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<String> getPostTitle() { return postTitle; }
     
     public LiveData<Post> getPost() { return post; }
+
+    public LiveData<Boolean> getLiked() {return liked;}
 
 }

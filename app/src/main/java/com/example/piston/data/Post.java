@@ -11,6 +11,8 @@ public class Post {
     private String imageId;
     private String imageLink;
 
+    private int numLikes;
+
     public Post() {}
 
     public Post(String title, String content, String owner, String id, String documentID, String imageId, String imageLink) {
@@ -78,5 +80,18 @@ public class Post {
 
     public void setDocumentID(String documentID) {
         this.documentID = documentID;
+    }
+
+    public int getNumLikes() {
+        return numLikes;
+    }
+
+    public void setNumLikes(boolean liked) {
+        if (liked){
+            numLikes++;
+        }
+        else{
+            numLikes--;
+        }
     }
 }

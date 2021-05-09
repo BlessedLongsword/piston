@@ -1,5 +1,9 @@
 package com.example.piston.data;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+
 import java.util.Date;
 
 public class User {
@@ -76,4 +80,5 @@ public class User {
     public void setFeaturedPost(Post featuredPost) {
         this.featuredPost = featuredPost;
     }
+
 }
