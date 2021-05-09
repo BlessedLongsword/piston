@@ -83,7 +83,7 @@
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
-                        app:icon_size="15dp"
+                        app:icon_size="12dp"
                         app:icon_type="heart"
                         app:liked="false" />
                 </LinearLayout>
