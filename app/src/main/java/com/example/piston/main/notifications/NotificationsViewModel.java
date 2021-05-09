@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class NotificationsViewModel extends ViewModel implements NotificationsRepository.INotifications {
 
     private final MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Notification>> newNotifications = new MutableLiveData<>();
 
     public NotificationsViewModel() {
         NotificationsRepository repository = new NotificationsRepository(this);
@@ -21,7 +22,15 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
         this.notifications.setValue(notifications);
     }
 
+    @Override
+    public void setNewNotifications(ArrayList<Notification> notifications) {
+
+    }
+
     public LiveData<ArrayList<Notification>> getNotifications() {
         return notifications;
+    }
+    public LiveData<ArrayList<Notification>> getNewNotifications() {
+        return newNotifications;
     }
 }

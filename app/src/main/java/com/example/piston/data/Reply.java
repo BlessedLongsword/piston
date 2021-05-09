@@ -2,7 +2,12 @@ package com.example.piston.data;
 
 public class Reply {
 
-    private String content, owner, id, quote, quoteOwner;
+    private String content;
+    private String owner;
+    private String id;
+    private String quote;
+    private String quoteOwner;
+    private String quoteID;
 
 
     public Reply() {}
@@ -13,12 +18,13 @@ public class Reply {
         setId(id);
     }
 
-    public Reply(String owner, String content, String id, String quote, String quoteOwner) {
+    public Reply(String owner, String content, String id, String quote, String quoteOwner, String quoteID) {
         setContent(content);
         setOwner(owner);
         setId(id);
         setQuote(quote);
         setQuoteOwner(quoteOwner);
+        setQuoteID(quoteID);
     }
 
     //hi
@@ -60,5 +66,13 @@ public class Reply {
 
     public void setQuoteOwner(String quoteOwner) {
         this.quoteOwner = quoteOwner;
+    }
+
+    public String getQuoteID() {
+        return quoteID;
+    }
+
+    public void setQuoteID(String quoteID) {
+        this.quoteID = quoteID;
     }
 }

@@ -120,7 +120,7 @@ public class PostRepository {
                 db.collection("emails").document(Objects.requireNonNull(Objects
                         .requireNonNull(task.getResult()).get("owner")).toString())
                         .get().addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
+                            if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
                                 NotificationReply notificationReply = new NotificationReply(user, content,
                                         false, collection, document, postID);
                                 DocumentReference docRef2 = db.collection("users")
@@ -136,10 +136,10 @@ public class PostRepository {
         });
     }
 
-    public void createReply(String content, String quote, String quoteOwner) {
+    public void createReply(String content, String quote, String quoteOwner, String quoteID) {
         Log.d("DBReadTAG", content + " " + quote + " " + quoteOwner);
         String id = db.collection("users").document().getId();
-        Reply rep = new Reply(user, content, id, quote, quoteOwner);
+        Reply rep = new Reply(user, content, id, quote, quoteOwner, quoteID);
         DocumentReference docRef1 = docRef.collection("replies")
                 .document(id);
         Map<String, Object> value = new HashMap<>();
@@ -151,19 +151,21 @@ public class PostRepository {
 
         value.put("type", "reply");
 
-        db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
-           if (task.isSuccessful()) {
-               NotificationReply notificationReply = new NotificationReply(user, content, false,
-                       collection, document, postID);
-               DocumentReference docRef2 = db.collection("users")
-                       .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
-                               .get("email")).toString())
-                       .collection("notifications")
-                       .document();
-               docRef2.set(notificationReply);
-               docRef2.update(value);
-           }
-        });
+        if (!quoteOwner.equals(user)) {
+            db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    NotificationReply notificationReply = new NotificationReply(user, content, false,
+                            collection, document, postID);
+                    DocumentReference docRef2 = db.collection("users")
+                            .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
+                                    .get("email")).toString())
+                            .collection("notifications")
+                            .document();
+                    docRef2.set(notificationReply);
+                    docRef2.update(value);
+                }
+            });
+        }
     }
 
     public void removeListener() {

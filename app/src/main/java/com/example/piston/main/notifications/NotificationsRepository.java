@@ -1,13 +1,19 @@
 package com.example.piston.main.notifications;
 
+import androidx.annotation.Nullable;
+
 import com.example.piston.data.Notification;
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.NotificationReply;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,6 +28,7 @@ public class NotificationsRepository {
 
     public interface INotifications {
         void setNotifications(ArrayList<Notification> notifications);
+        void setNewNotifications(ArrayList<Notification> notifications);
     }
 
     public NotificationsRepository(INotifications listener) {
@@ -60,7 +67,24 @@ public class NotificationsRepository {
 
     private void listenChanges() {
         listenerRegistration = docRef.collection("notifications")
-                .addSnapshotListener((snapshots, e) -> NotificationsRepository.this.loadNotifications());
+                .addSnapshotListener((snapshots, error) -> {
+                    NotificationsRepository.this.loadNotifications();
+                    ArrayList<Notification> newNotifications = new ArrayList<>();
+                    for (DocumentChange dc : snapshots.getDocumentChanges()) {
+                        if (dc.getType().equals(DocumentChange.Type.ADDED)) {
+                            String notificationType = dc.getDocument().get("type").toString();
+                            if (notificationType.equals("post")) {
+                                NotificationPost notification = dc.getDocument().
+                                        toObject(NotificationPost.class);
+                                newNotifications.add(notification);
+                            } else {
+                                NotificationReply notification = dc.getDocument()
+                                        .toObject(NotificationReply.class);
+                                newNotifications.add(notification);
+                            }
+                        }
+                    }
+                });
     }
 
     public void removeListener() {

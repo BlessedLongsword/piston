@@ -33,6 +33,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final FragmentActivity localActivity;
     private final PostViewModel viewModel;
+    private final PostAdapterListener listener;
 
     public static class ThreadHolder extends RecyclerView.ViewHolder {
 
@@ -71,8 +72,9 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public PostAdapter(FragmentActivity activity) {
+    public PostAdapter(FragmentActivity activity, PostAdapterListener listener) {
         localActivity = activity;
+        this.listener = listener;
         viewModel = new ViewModelProvider(activity).get(PostViewModel.class);
         viewModel.getPost().observe(activity, cosa -> notifyDataSetChanged());
         viewModel.getReplies().observe(activity, cosa -> notifyDataSetChanged());
@@ -90,14 +92,19 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == 0){
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
-            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null));
+            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
             return new PostAdapter.ThreadHolder(binding);
         }
         else {
             ItemReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_reply, parent, false);
-            binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(), binding.replyContent.getText().toString()));
-            return new PostAdapter.ReplyHolder(binding);
+            PostAdapter.ReplyHolder holder = new PostAdapter.ReplyHolder(binding);
+            binding.replyButton.setOnClickListener(v -> replyPopUp(binding.replyOwner.getText().toString(),
+                    binding.replyContent.getText().toString(), binding.getReply().getId()));
+            binding.replyQuote.setOnClickListener(v -> {
+                listener.quoteOnClick(v, holder.binding.getReply().getQuoteID());
+            });
+            return holder;
         }
 
     }
@@ -123,6 +130,10 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
+    public interface PostAdapterListener {
+        void quoteOnClick(View v, String quoteID);
+    }
+
     @Override
     public int getItemCount() {
         if (viewModel.getPost().getValue() == null)
@@ -130,7 +141,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return Objects.requireNonNull(viewModel.getReplies().getValue()).size() + 1;
     }
 
-    public void replyPopUp(String owner, String content) {
+    public void replyPopUp(String owner, String content, String quoteID) {
         View popupView = localActivity.getLayoutInflater().inflate(R.layout.pupup_reply, null);
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -161,10 +172,10 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
 
         textField.setEndIconOnClickListener(v -> {
-            if (owner == null && content == null) {
+            if (owner == null || content == null || quoteID == null) {
                 viewModel.createReply(textField.getEditText().getText().toString());
             } else {
-                viewModel.createReply(textField.getEditText().getText().toString(), content, owner);
+                viewModel.createReply(textField.getEditText().getText().toString(), content, owner, quoteID);
             }
             popupWindow.dismiss();
         });

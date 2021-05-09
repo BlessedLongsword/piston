@@ -47,6 +47,7 @@
                     android:id="@+id/recyclerview_notifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/card_margin"
                     app:layoutManager="LinearLayoutManager"/>
 
             </FrameLayout>
