@@ -80,13 +80,12 @@
 
                     <com.like.LikeButton
                         android:id="@+id/heart_button"
-                        android:layout_width="match_parent"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
-                        app:icon_size="10dp"
-                        app:anim_scale_factor="2.5"
-                        app:liked="false"
-                        app:icon_type="heart" />
+                        app:icon_size="15dp"
+                        app:icon_type="heart"
+                        app:liked="false" />
                 </LinearLayout>
 
             </LinearLayout>
