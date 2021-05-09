@@ -23,6 +23,7 @@ public class Post {
         setDocumentID(documentID);
         setImageId(imageId);
         setImageLink(imageLink);
+        setNumLikes(0);
     }
 
     public String getTitle() {
@@ -86,12 +87,7 @@ public class Post {
         return numLikes;
     }
 
-    public void setNumLikes(boolean liked) {
-        if (liked){
-            numLikes++;
-        }
-        else{
-            numLikes--;
-        }
+    public void setNumLikes(int numLikes) {
+        this.numLikes = numLikes;
     }
 }

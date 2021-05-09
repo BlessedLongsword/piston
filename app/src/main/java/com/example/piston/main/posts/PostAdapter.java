@@ -95,7 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ItemThreadBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_thread, parent, false);
             binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
-            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null));
+            binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
             binding.heartButton.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
@@ -135,7 +135,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Glide.with(localActivity)
                     .load(post.getImageLink())
                     .into(hold.binding.postPicture);
-            if (viewModel.getLiked().getValue()){
+            if (Objects.requireNonNull(viewModel.getLiked().getValue())){
                 hold.binding.heartButton.setLiked(true);
             }
         }

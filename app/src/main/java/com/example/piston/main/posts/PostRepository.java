@@ -199,6 +199,10 @@ public class PostRepository {
 
     }
 
+    public void updateNumLikes(String postID){
+
+    }
+
     public void removeListener() {
         listenerRegistration.remove();
     }
