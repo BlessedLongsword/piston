@@ -8,6 +8,7 @@ import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -199,8 +200,19 @@ public class PostRepository {
 
     }
 
-    public void updateNumLikes(String postID){
-
+    public void updateNumLikes(boolean liked){
+       docRef.get().addOnSuccessListener(documentSnapshot -> {
+           Post post = documentSnapshot.toObject(Post.class);
+           int likes;
+           if (liked){
+               likes = post.getNumLikes()+1;
+               docRef.update("numLikes", likes);
+           }
+           else{
+               likes = post.getNumLikes()-1;
+               docRef.update("numLikes", likes);
+           }
+       });
     }
 
     public void removeListener() {
