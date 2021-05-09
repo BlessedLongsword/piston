@@ -57,9 +57,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         this.liked.setValue(liked);
     }
 
+
     public void setLiked(Boolean bool){
         this.liked.setValue(bool);
         repository.addLiked(bool,post.getValue().getId());
+        repository.updateNumLikes(bool);
     }
 
     @Override
