@@ -31,11 +31,11 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
     }
 
     @Override
-    public void setSubscribed(HashMap<Integer, Boolean> subs){
+    public void setSubscribed(HashMap<Integer, Boolean> subscribed){
         for(int i = 0; i < 2; i++) {
-            Log.d("DBReadTAG", "Categoría: " + i + ": " + subs.get(i));
+            Log.d("DBReadTAG", "Categoría: " + i + ": " + subscribed.get(i));
         }
-        this.subscribed.setValue(subs);
+        this.subscribed.setValue(subscribed);
     }
     public void setSub(boolean sub, String title){
         globalRepository.addSub(sub,title);

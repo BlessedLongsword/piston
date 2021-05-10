@@ -52,7 +52,6 @@
                     android:text="@{thread.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:maxLength="@integer/description_max_length"
                     />
 
                 <Space

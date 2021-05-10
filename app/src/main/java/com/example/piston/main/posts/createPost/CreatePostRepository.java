@@ -6,6 +6,7 @@ import com.example.piston.data.Notification;
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -112,34 +113,42 @@ public class CreatePostRepository {
                 Post post = new Post(title, content, username, id, document, imageId, imageLink);
                 docRef.set(post);
                 if (collection.equals("groups")) {
-                    db.collection(collection)
-                    .document(document)
-                    .collection("members")
-                    .get().addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            for (QueryDocumentSnapshot documentSnapshot :
-                                    Objects.requireNonNull(task1.getResult())) {
-                                if (!documentSnapshot.getId().equals(user)) {
-                                    db.collection("groups").document(document).get()
-                                            .addOnCompleteListener(task2 -> {
-                                        NotificationPost notificationPost = new NotificationPost(
-                                                title, task2.getResult().get("title").toString(),
-                                                imageLink, false, collection, document, id);
-                                        DocumentReference docRef2 = db.collection("users")
-                                                .document(documentSnapshot.getId())
-                                                .collection("notifications")
-                                                .document();
-                                        docRef2.set(notificationPost);
-                                        docRef2.update("type", "post");
-                                        docRef2.update("timestamp", FieldValue.serverTimestamp());
-                                    });
-                                }
-                            }
-                        }
-                    });
+                    CollectionReference cr = db.collection(collection).document(document)
+                            .collection("members");
+                            sendNotification(cr, document, title, imageLink, collection, id);
+                } else if (collection.equals("categories")) {
+                    CollectionReference cr = db.collection(collection).document(document)
+                            .collection("subscribedUsers");
+                    sendNotification(cr, document, title, imageLink, collection, id);
                 }
                 listener.setCreateFinished();
                 listener.setLoadingFinished();
+            }
+        });
+    }
+
+    public void sendNotification(CollectionReference collectionReference, String document, String title,
+                                 String imageLink, String collection, String id) {
+        collectionReference.get().addOnCompleteListener(task1 -> {
+            if (task1.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot :
+                        Objects.requireNonNull(task1.getResult())) {
+                    if (!documentSnapshot.getId().equals(user)) {
+                        db.collection(collection).document(document).get()
+                                .addOnCompleteListener(task2 -> {
+                                    NotificationPost notificationPost = new NotificationPost(
+                                            title, Objects.requireNonNull(task2.getResult().get("title")).toString(),
+                                            imageLink, false, collection, document, id);
+                                    DocumentReference docRef2 = db.collection("users")
+                                            .document(documentSnapshot.getId())
+                                            .collection("notifications")
+                                            .document();
+                                    docRef2.set(notificationPost);
+                                    docRef2.update("type", "post");
+                                    docRef2.update("timestamp", FieldValue.serverTimestamp());
+                                });
+                    }
+                }
             }
         });
     }

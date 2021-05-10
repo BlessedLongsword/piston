@@ -25,7 +25,7 @@ public class GlobalRepository {
 
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
-        void setSubscribed(HashMap<Integer,Boolean> subs);
+        void setSubscribed(HashMap<Integer,Boolean> subscribed);
     }
 
     public GlobalRepository(IGlobal listener) {
@@ -49,7 +49,7 @@ public class GlobalRepository {
                             Integer finalCount = count;
                             db.collection("categories")
                                     .document(category.getTitle())
-                                    .collection("subs")
+                                    .collection("subscribedUsers")
                                     .document(Objects.requireNonNull(email))
                                     .get().addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
@@ -72,28 +72,17 @@ public class GlobalRepository {
         if (sub){
             Map<String, String> data = new HashMap<>();
             data.put("title", title);
-            db.collection("users").document(email).collection("subscribed").document(title).set(data);
+            db.collection("users").document(email).collection("subscribedCategories").document(title).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
-            db.collection("categories").document(title).collection("subs").document(email).set(data2);
+            db.collection("categories").document(title).collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            db.collection("users").document(email).collection("subscribed").document(title).delete();
-            db.collection("categories").document(title).collection("subs").document(email).delete();
+            db.collection("users").document(email).collection("subscribedCategories").document(title).delete();
+            db.collection("categories").document(title).collection("subscribedUsers").document(email).delete();
         }
     }
 
-    /*public void checkSub (HashMap<Integer, Boolean> map, int position, String title){
-        //En caso de que no utilizemos la lista de suscripciones pues se cambia esto
-
-        DocumentReference dR = db.collection("categories").document(title).collection("subs").document(Objects.requireNonNull(email));
-        dR.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                map.put(position,task.getResult().exists());
-        });
-
-
-    }*/
     private void listenChanges() {
         listenerRegistration = db.collection("categories")
                 .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());

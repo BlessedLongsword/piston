@@ -31,7 +31,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bigger_square"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="@dimen/small_separator">
 
@@ -56,28 +56,15 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_separator"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="9.9" />
-
-                    <com.like.LikeButton
-                        android:id="@+id/star_button"
-                        android:layout_width="47dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        app:icon_size="12dp"
-                        app:icon_type="star"
-                        app:liked="false" />
-
-                </LinearLayout>
+                <com.like.LikeButton
+                    android:id="@+id/star_button"
+                    android:layout_width="@dimen/low_square"
+                    android:layout_height="@dimen/low_square"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/tiny_separator"
+                    app:icon_size="12dp"
+                    app:icon_type="star"
+                    app:liked="false" />
 
             </LinearLayout>
 
