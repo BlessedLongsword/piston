@@ -141,7 +141,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return holder;
             }
 
-            case 2: {
+            default: {
                 ItemQuoteReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                         R.layout.item_quote_reply, parent, false);
                 PostAdapter.QuoteReplyHolder holder = new PostAdapter.QuoteReplyHolder(binding);
@@ -152,7 +152,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return holder;
             }
         }
-        return null;
     }
 
     @Override
@@ -186,13 +185,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             }
         }
-
-        if (holder.getItemViewType() == 0) {
-
-        } else {
-
-        }
-
     }
 
     public interface PostAdapterListener {
