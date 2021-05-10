@@ -16,9 +16,12 @@ import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.main.global.createCategory.CreateCategoryActivity;
 import com.example.piston.main.sections.SectionFragment;
 
+import java.util.Objects;
+
 public class GlobalFragment extends SectionFragment {
 
     private GlobalViewModel viewModel;
+    int buttonVisibility;
 
     @Nullable
     @Override
@@ -31,13 +34,15 @@ public class GlobalFragment extends SectionFragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.recyclerviewGlobal.setAdapter(new GlobalAdapter(requireActivity()));
+        viewModel.getIsAdmin().observe(Objects.requireNonNull(binding.getLifecycleOwner()),
+                aBoolean -> buttonVisibility = aBoolean ? View.VISIBLE : View.GONE);
         return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        actionButton.setVisibility(View.VISIBLE);
+        actionButton.setVisibility(buttonVisibility);
         actionButton.setImageResource(R.drawable.outline_collections_black_24);
     }
 

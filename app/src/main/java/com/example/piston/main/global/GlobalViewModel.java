@@ -18,6 +18,7 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     private final MutableLiveData<ArrayList<Category>> categories = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<HashMap<Integer, Boolean>> subscribed = new MutableLiveData<>(new HashMap<>());
+    private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
     private final GlobalRepository globalRepository = new GlobalRepository(this);
 
     public LiveData<ArrayList<Category>> getCategories() {
@@ -32,11 +33,14 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     @Override
     public void setSubscribed(HashMap<Integer, Boolean> subscribed){
-        for(int i = 0; i < 2; i++) {
-            Log.d("DBReadTAG", "Categoría: " + i + ": " + subscribed.get(i));
-        }
         this.subscribed.setValue(subscribed);
     }
+
+    @Override
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin.setValue(isAdmin);
+    }
+
     public void setSub(boolean sub, String title){
         globalRepository.addSub(sub,title);
     }
@@ -45,6 +49,9 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         return this.subscribed;
     }
 
+    public LiveData<Boolean> getIsAdmin() {
+        return isAdmin;
+    }
 
     public void removeListener() {
         globalRepository.removeListener();

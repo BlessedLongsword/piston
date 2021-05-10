@@ -26,12 +26,20 @@ public class GlobalRepository {
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
         void setSubscribed(HashMap<Integer,Boolean> subscribed);
+        void setIsAdmin(boolean isAdmin);
     }
 
     public GlobalRepository(IGlobal listener) {
         this.listener = listener;
         email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        listenChanges();
+        db.collection("admins")
+                .document(Objects.requireNonNull(Objects.requireNonNull
+                        (mAuth.getCurrentUser()).getEmail()))
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        listener.setIsAdmin(task.getResult().exists());
+                });
+            listenChanges();
     }
 
     private void loadCategories() {
