@@ -1,11 +1,14 @@
 package com.example.piston.main.global;
 
 import android.content.Intent;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,6 +19,8 @@ import com.example.piston.R;
 import com.example.piston.data.Category;
 import com.example.piston.databinding.ItemCategoryBinding;
 import com.example.piston.main.global.category.CategoryActivity;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import java.util.Objects;
 
@@ -54,6 +59,20 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemCategoryBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_category, parent, false);
+        binding.starButton.setOnLikeListener(new OnLikeListener() {
+
+            @Override
+            public void liked(LikeButton likeButton) {
+                likeButton.setLiked(true);
+                viewModel.setSub(true,binding.categoryTitle.getText().toString());
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                likeButton.setLiked(false);
+                viewModel.setSub(false,binding.categoryTitle.getText().toString());
+            }
+        });
         return new CategoryHolder(binding);
     }
 
@@ -65,6 +84,11 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
                 .load(category.getImageLink())
                 .into(holder.binding.categoryImage);
         holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
+        viewModel.getSubscribed().observe(localActivity,integerBooleanHashMap -> {
+            Log.d("Posicion", String.valueOf(position));
+            if(integerBooleanHashMap.get(position))
+                holder.binding.starButton.setLiked(true);
+        });
     }
 
     @Override

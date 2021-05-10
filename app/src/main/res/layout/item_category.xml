@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -67,15 +68,14 @@
                         android:layout_height="match_parent"
                         android:layout_weight="9.9" />
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/card_margin"
-                        android:layout_weight="0.1"
-                        android:background="@null"
-                        android:visibility="invisible"
-                        android:contentDescription="@string/content_description_media"
-                        android:src="@drawable/outline_star_border_black_36" />
+                    <com.like.LikeButton
+                        android:id="@+id/star_button"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        app:icon_size="12dp"
+                        app:icon_type="star"
+                        app:liked="false" />
 
                 </LinearLayout>
 

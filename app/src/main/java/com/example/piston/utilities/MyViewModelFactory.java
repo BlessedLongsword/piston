@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.authentication.googleRegister.GoogleRegisterViewModel;
+import com.example.piston.main.global.GlobalViewModel;
 import com.example.piston.main.global.category.CategoryViewModel;
 import com.example.piston.main.global.category.info.CategoryInfoViewModel;
 import com.example.piston.main.groups.group.GroupViewModel;

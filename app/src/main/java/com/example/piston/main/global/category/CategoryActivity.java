@@ -37,6 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
         binding.viewPostsTopAppBar.setTitle(title);
         binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
+
     }
 
     public void createPost(View view) {
