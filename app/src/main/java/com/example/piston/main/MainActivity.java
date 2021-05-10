@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
+
+        int tab = getIntent().getIntExtra("tab", 0);
+        tabLayout.selectTab(tabLayout.getTabAt(tab));
     }
 
     private void goToLogin() {

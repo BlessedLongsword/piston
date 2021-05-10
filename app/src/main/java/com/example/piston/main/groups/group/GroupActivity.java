@@ -26,7 +26,6 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        String title = intent.getStringExtra("title");
 
         GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupViewModel.class);
@@ -35,10 +34,10 @@ public class GroupActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.viewNotesTopAppBar.setTitle(title);
-        binding.viewNotesTopAppBar.setNavigationOnClickListener((view) -> finish());
+        binding.groupTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
 
         binding.recyclerviewGroups.setAdapter(new GroupAdapter(this));
+        viewModel.getTitle().observe(this, binding.groupTopAppBar::setTitle);
     }
 
     public void createPost(View view) {
@@ -51,6 +50,13 @@ public class GroupActivity extends AppCompatActivity {
     public void goToInfo(View view) {
         Intent intent = new Intent(this, GroupInfoActivity.class);
         intent.putExtra("document", id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getParentActivityIntent();
+        intent.putExtra("tab", 1);
         startActivity(intent);
     }
 }

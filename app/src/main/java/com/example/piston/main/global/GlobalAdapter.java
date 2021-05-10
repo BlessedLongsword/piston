@@ -64,13 +64,13 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
             @Override
             public void liked(LikeButton likeButton) {
                 likeButton.setLiked(true);
-                viewModel.setSub(true,binding.categoryTitle.getText().toString());
+                viewModel.setSub(true, binding.categoryTitle.getText().toString());
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
                 likeButton.setLiked(false);
-                viewModel.setSub(false,binding.categoryTitle.getText().toString());
+                viewModel.setSub(false, binding.categoryTitle.getText().toString());
             }
         });
         return new CategoryHolder(binding);
@@ -85,9 +85,10 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
                 .into(holder.binding.categoryImage);
         holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
         viewModel.getSubscribed().observe(localActivity,integerBooleanHashMap -> {
-            Log.d("Posicion", String.valueOf(position));
-            if(integerBooleanHashMap.get(position))
-                holder.binding.starButton.setLiked(true);
+            if (integerBooleanHashMap.get(position) != null) {
+                if (integerBooleanHashMap.get(position))
+                    holder.binding.starButton.setLiked(true);
+            }
         });
     }
 

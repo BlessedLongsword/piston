@@ -11,17 +11,21 @@ import java.util.ArrayList;
 public class GroupViewModel extends ViewModel implements GroupRepository.IGroup {
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> title = new MutableLiveData<>("");
 
     private final GroupRepository repository;
 
-    public GroupViewModel(String Group) {
-        repository = new GroupRepository(this, Group);
+    public GroupViewModel(String group) {
+        repository = new GroupRepository(this, group);
     }
 
     @Override
     public void setGroupPosts(ArrayList<Post> posts) {
         this.posts.setValue(posts);
     }
+
+    @Override
+    public void setTitle(String title) { this.title.setValue(title); }
 
     @Override
     protected void onCleared () {
@@ -31,4 +35,5 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+    public LiveData<String> getTitle() { return title; }
 }

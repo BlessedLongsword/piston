@@ -14,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.piston.R;
+import com.example.piston.data.Category;
 import com.example.piston.databinding.ActivityPostBinding;
+import com.example.piston.main.global.category.CategoryActivity;
+import com.example.piston.main.groups.group.GroupActivity;
+import com.example.piston.main.personal.folder.FolderActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
 import java.util.Objects;
@@ -24,6 +28,8 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     private PostViewModel viewModel;
     private ActivityPostBinding binding;
     private RecyclerView.SmoothScroller smoothScroller;
+    private String collection;
+    private String document;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +37,8 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         setContentView(R.layout.activity_post);
 
         Intent intent = getIntent();
-        String collection = intent.getStringExtra("collection");
-        String document = intent.getStringExtra("document");
+        collection = intent.getStringExtra("collection");
+        document = intent.getStringExtra("document");
         String postID = intent.getStringExtra("id");
         String replyID = intent.getStringExtra("reply");
 
@@ -49,7 +55,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                     }
                 };
 
-        binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
+        binding.postsTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
 
 
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
@@ -75,6 +81,28 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                         .startSmoothScroll(smoothScroller);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        switch (collection) {
+            case "folders":
+                intent = new Intent(this, FolderActivity.class);
+                intent.putExtra("id", document);
+                startActivity(intent);
+                break;
+            case "groups":
+                intent = new Intent(this, GroupActivity.class);
+                intent.putExtra("id", document);
+                startActivity(intent);
+                break;
+            case "categories":
+                intent = new Intent(this, CategoryActivity.class);
+                intent.putExtra("id", document);
+                startActivity(intent);
+                break;
         }
     }
 }

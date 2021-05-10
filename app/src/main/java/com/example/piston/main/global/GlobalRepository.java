@@ -19,6 +19,8 @@ public class GlobalRepository {
 
     private final IGlobal listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final String email;
     private ListenerRegistration listenerRegistration;
 
     public interface IGlobal {
@@ -28,6 +30,7 @@ public class GlobalRepository {
 
     public GlobalRepository(IGlobal listener) {
         this.listener = listener;
+        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         listenChanges();
     }
 
@@ -43,7 +46,17 @@ public class GlobalRepository {
                                 task.getResult())) {
                             Category category = documentSnapshot.toObject(Category.class);
                             categories.add(category);
-                            checkSub(subscribed, count, category.getTitle());
+                            Integer finalCount = count;
+                            db.collection("categories")
+                                    .document(category.getTitle())
+                                    .collection("subs")
+                                    .document(Objects.requireNonNull(email))
+                                    .get().addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            subscribed.put(finalCount, task1.getResult().exists());
+                                            listener.setSubscribed(subscribed);
+                                        }
+                                    });
                             count++;
                         }
                         listener.setCategories(categories);
@@ -70,10 +83,9 @@ public class GlobalRepository {
         }
     }
 
-    public void checkSub (HashMap<Integer, Boolean> map, int position, String title){
+    /*public void checkSub (HashMap<Integer, Boolean> map, int position, String title){
         //En caso de que no utilizemos la lista de suscripciones pues se cambia esto
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+
         DocumentReference dR = db.collection("categories").document(title).collection("subs").document(Objects.requireNonNull(email));
         dR.get().addOnCompleteListener(task -> {
             if (task.isSuccessful())
@@ -81,7 +93,7 @@ public class GlobalRepository {
         });
 
 
-    }
+    }*/
     private void listenChanges() {
         listenerRegistration = db.collection("categories")
                 .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());

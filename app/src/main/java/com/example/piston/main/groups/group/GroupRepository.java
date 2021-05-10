@@ -15,6 +15,7 @@ public class GroupRepository {
 
     public interface IGroup {
         void setGroupPosts(ArrayList<Post> posts);
+        void setTitle(String title);
     }
 
     private final GroupRepository.IGroup listener;
@@ -26,6 +27,14 @@ public class GroupRepository {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
         this.group = group;
+        db.collection("groups")
+                .document(group)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+                    }
+                });
         listenChanges();
     }
 

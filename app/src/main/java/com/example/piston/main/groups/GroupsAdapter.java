@@ -60,7 +60,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
         Glide.with(localActivity)
                 .load(group.getImageLink())
                 .into(holder.binding.groupImage);
-        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId(), group.getTitle()));
+        holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId()));
     }
 
     @Override
@@ -68,11 +68,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
         return Objects.requireNonNull(viewModel.getGroups().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id, String title) {
+    private View.OnClickListener openNewActivity(String id) {
         return v -> {
             Intent intent = new Intent(localActivity, GroupActivity.class);
             intent.putExtra("id", id);
-            intent.putExtra("title", title);
             localActivity.startActivity(intent);
         };
     }

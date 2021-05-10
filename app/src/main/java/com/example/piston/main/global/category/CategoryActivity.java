@@ -35,7 +35,7 @@ public class CategoryActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         binding.viewPostsTopAppBar.setTitle(title);
-        binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
+        binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
         binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
 
     }
@@ -50,6 +50,13 @@ public class CategoryActivity extends AppCompatActivity {
     public void goToInfo(View view) {
         Intent intent = new Intent(this, CategoryInfoActivity.class);
         intent.putExtra("document", title);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getParentActivityIntent();
+        intent.putExtra("tab", 2);
         startActivity(intent);
     }
 }

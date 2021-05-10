@@ -1,6 +1,7 @@
 package com.example.piston.main.global;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
@@ -31,6 +32,9 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     @Override
     public void setSubscribed(HashMap<Integer, Boolean> subs){
+        for(int i = 0; i < 2; i++) {
+            Log.d("DBReadTAG", "Categoría: " + i + ": " + subs.get(i));
+        }
         this.subscribed.setValue(subs);
     }
     public void setSub(boolean sub, String title){
