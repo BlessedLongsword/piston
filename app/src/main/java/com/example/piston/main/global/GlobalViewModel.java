@@ -1,9 +1,7 @@
 package com.example.piston.main.global;
 
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,7 +10,6 @@ import com.example.piston.data.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlobal {
 

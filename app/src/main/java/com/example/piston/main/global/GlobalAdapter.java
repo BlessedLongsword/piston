@@ -1,14 +1,11 @@
 package com.example.piston.main.global;
 
 import android.content.Intent;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -86,7 +83,7 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
         viewModel.getSubscribed().observe(localActivity,integerBooleanHashMap -> {
             if (integerBooleanHashMap.get(position) != null) {
-                if (integerBooleanHashMap.get(position))
+                if (Objects.requireNonNull(integerBooleanHashMap.get(position)))
                     holder.binding.starButton.setLiked(true);
             }
         });

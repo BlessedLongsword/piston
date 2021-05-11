@@ -103,7 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position == 0) ? 0 : getReplyType(viewModel.getReplies().getValue().get(position-1));
+        return (position == 0) ? 0 : getReplyType(Objects.requireNonNull(viewModel.getReplies().getValue()).get(position-1));
     }
 
     @NonNull

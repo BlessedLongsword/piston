@@ -8,6 +8,7 @@ import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
@@ -60,7 +61,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public void setLiked(Boolean bool){
         this.liked.setValue(bool);
-        repository.addLiked(bool,post.getValue().getId());
+        repository.addLiked(bool, Objects.requireNonNull(post.getValue()).getId());
         repository.updateNumLikes(bool);
     }
 

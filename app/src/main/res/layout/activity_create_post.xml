@@ -27,6 +27,7 @@
                 app:title="@string/create_post_activity_title"
                 app:navigationIcon="@drawable/outline_close_white_24"
                 app:menu="@menu/create_post_top_app_bar"
+                app:layout_collapseMode="pin"
                 style="@style/Theme.Piston.ToolbarStyle"/>
         </com.google.android.material.appbar.AppBarLayout>
 

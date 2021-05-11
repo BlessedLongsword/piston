@@ -9,7 +9,6 @@ import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PostRepository {
 
@@ -183,10 +181,10 @@ public class PostRepository {
         if (liked){
             Map <String, String> data = new HashMap<>();
             data.put("id", postID);
-            db.collection("users").document(email).collection("liked").document(postID).set(data);
+            db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID).set(data);
         }
         else{
-            db.collection("users").document(email).collection("liked").document(postID).delete();
+            db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID).delete();
         }
 
     }
@@ -194,7 +192,7 @@ public class PostRepository {
     public void checkLiked (String postID){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
-        DocumentReference dR = db.collection("users").document(email).collection("liked").document(postID);
+        DocumentReference dR = db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID);
         dR.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 DocumentSnapshot ds = task.getResult();
@@ -210,13 +208,12 @@ public class PostRepository {
            Post post = documentSnapshot.toObject(Post.class);
            int likes;
            if (liked){
-               likes = post.getNumLikes()+1;
-               docRef.update("numLikes", likes);
+               likes = Objects.requireNonNull(post).getNumLikes()+1;
            }
            else{
-               likes = post.getNumLikes()-1;
-               docRef.update("numLikes", likes);
+               likes = Objects.requireNonNull(post).getNumLikes()-1;
            }
+           docRef.update("numLikes", likes);
        });
     }
 

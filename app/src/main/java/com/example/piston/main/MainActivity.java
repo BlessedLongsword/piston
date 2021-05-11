@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
 
         int tab = getIntent().getIntExtra("tab", 0);
-        tabLayout.selectTab(tabLayout.getTabAt(tab));
+        if (tab != 0)
+            tabLayout.selectTab(tabLayout.getTabAt(tab));
     }
 
     private void goToLogin() {

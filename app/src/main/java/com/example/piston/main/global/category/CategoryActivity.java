@@ -2,6 +2,7 @@ package com.example.piston.main.global.category;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryBinding;
+import com.example.piston.main.MainActivity;
 import com.example.piston.main.global.category.info.CategoryInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
@@ -35,7 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         binding.viewPostsTopAppBar.setTitle(title);
-        binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
+        binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
 
     }
@@ -54,9 +56,13 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent = getParentActivityIntent();
-        intent.putExtra("tab", 2);
-        startActivity(intent);
+    public void finish() {
+        if (getParentActivityIntent() == null) {
+            Log.d("nowaybro", "WHYYYYY");
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("tab", 2);
+            startActivity(intent);
+        }
+        super.finish();
     }
 }

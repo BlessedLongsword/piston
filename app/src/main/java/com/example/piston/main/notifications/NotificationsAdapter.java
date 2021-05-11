@@ -68,7 +68,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemViewType(int position) {
-        return getNotificationType(viewModel.getNotifications().getValue().get(position));
+        return getNotificationType(Objects.requireNonNull(viewModel.getNotifications().getValue()).get(position));
     }
 
     @NonNull
@@ -90,8 +90,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
-            NotificationPost notificationPost = Objects.requireNonNull((NotificationPost) viewModel
-                    .getNotifications().getValue().get(position));
+            NotificationPost notificationPost = Objects.requireNonNull((NotificationPost) Objects.requireNonNull(viewModel
+                    .getNotifications().getValue()).get(position));
             NotificationsAdapter.NotificationPostHolder hold = (NotificationsAdapter
                     .NotificationPostHolder) holder;
             hold.bind(notificationPost);
@@ -103,8 +103,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                             notificationPost.getPostID(), null));
         }
         else {
-            NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) viewModel
-                    .getNotifications().getValue().get(position));
+            NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
+                    .getNotifications().getValue()).get(position));
             NotificationsAdapter.NotificationReplyHolder hold = (NotificationsAdapter
                     .NotificationReplyHolder) holder;
             hold.bind(notificationReply);
@@ -140,6 +140,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             intent.putExtra("id", id);
             intent.putExtra("reply", replyID);
             localActivity.startActivity(intent);
+            localActivity.finish();
         };
     }
 
