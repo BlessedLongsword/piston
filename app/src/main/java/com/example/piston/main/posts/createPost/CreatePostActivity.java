@@ -1,7 +1,6 @@
 package com.example.piston.main.posts.createPost;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

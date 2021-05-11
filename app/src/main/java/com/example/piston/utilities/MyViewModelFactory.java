@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.authentication.googleRegister.GoogleRegisterViewModel;
-import com.example.piston.main.global.GlobalViewModel;
 import com.example.piston.main.global.category.CategoryViewModel;
 import com.example.piston.main.global.category.info.CategoryInfoViewModel;
 import com.example.piston.main.groups.group.GroupViewModel;
@@ -52,7 +51,7 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new GoogleRegisterViewModel(mParam);
         if (modelClass.isAssignableFrom(PostViewModel.class))
             return (T) new PostViewModel(mParam, mParam1, mParam2);
-        throw new IllegalArgumentException("Unable to construct viewmodel");
+        throw new IllegalArgumentException("Unable to construct ViewModel");
     }
 
 }

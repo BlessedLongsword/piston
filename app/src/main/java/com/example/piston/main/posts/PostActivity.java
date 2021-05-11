@@ -2,7 +2,6 @@ package com.example.piston.main.posts;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -11,14 +10,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.piston.R;
-import com.example.piston.data.Category;
 import com.example.piston.databinding.ActivityPostBinding;
 import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
-import com.example.piston.main.personal.folder.FolderActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
 import java.util.Objects;
@@ -55,8 +51,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                     }
                 };
 
-        binding.postsTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
-
+        binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
 
@@ -85,24 +80,17 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent;
-        switch (collection) {
-            case "folders":
-                intent = new Intent(this, FolderActivity.class);
-                intent.putExtra("id", document);
-                startActivity(intent);
-                break;
-            case "groups":
+    public void finish() {
+        if (getParentActivityIntent() == null) {
+            Intent intent;
+            if (collection.equals("groups")) {
                 intent = new Intent(this, GroupActivity.class);
-                intent.putExtra("id", document);
-                startActivity(intent);
-                break;
-            case "categories":
+            } else {
                 intent = new Intent(this, CategoryActivity.class);
-                intent.putExtra("id", document);
-                startActivity(intent);
-                break;
+            }
+            intent.putExtra("id", document);
+            startActivity(intent);
         }
+        super.finish();
     }
 }

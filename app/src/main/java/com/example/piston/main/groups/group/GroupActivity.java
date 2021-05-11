@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupBinding;
+import com.example.piston.main.MainActivity;
 import com.example.piston.main.groups.group.info.GroupInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
@@ -34,7 +35,7 @@ public class GroupActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.groupTopAppBar.setNavigationOnClickListener((view) -> onBackPressed());
+        binding.groupTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         binding.recyclerviewGroups.setAdapter(new GroupAdapter(this));
         viewModel.getTitle().observe(this, binding.groupTopAppBar::setTitle);
@@ -54,9 +55,12 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent = getParentActivityIntent();
-        intent.putExtra("tab", 1);
-        startActivity(intent);
+    public void finish() {
+        if (getParentActivityIntent() == null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("tab", 1);
+            startActivity(intent);
+        }
+        super.finish();
     }
 }

@@ -48,7 +48,6 @@
                 android:checked="true"
                 app:thumbTint="@drawable/switch_thumb"
                 app:trackTint="@drawable/switch_track"
-                android:visibility="invisible"
                 android:text="@string/settings_sub"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -67,7 +66,6 @@
                 android:checked="true"
                 app:thumbTint="@drawable/switch_thumb"
                 app:trackTint="@drawable/switch_track"
-                android:visibility="invisible"
                 android:text="@string/settings_sfw" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -77,7 +75,6 @@
                 android:checked="true"
                 app:thumbTint="@drawable/switch_thumb"
                 app:trackTint="@drawable/switch_track"
-                android:visibility="invisible"
                 android:text="@string/settings_blur_nsfw" />
 
             <Space

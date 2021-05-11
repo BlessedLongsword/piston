@@ -19,6 +19,7 @@ import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.authentication.login.LoginActivity;
 import com.example.piston.main.profile.ProfileActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
 
         int tab = getIntent().getIntExtra("tab", 0);
-        tabLayout.selectTab(tabLayout.getTabAt(tab));
+        if (tab != 0)
+            tabLayout.selectTab(tabLayout.getTabAt(tab));
     }
 
     private void goToLogin() {

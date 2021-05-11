@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityNotificationsBinding;
-import com.google.android.material.appbar.MaterialToolbar;
 
 public class NotificationsActivity extends AppCompatActivity {
 

@@ -91,6 +91,7 @@ public class CreateGroupRepository {
                         data.clear();
                         data.put("id", user);
                         DocumentReference groupDocref = db.collection("groups").document(groupID);
+                        groupDocref.collection("owner").document(user).set(data);
                         groupDocref.collection("mods").document(user).set(data);
                         groupDocref.collection("members").document(user).set(data);
                     }));

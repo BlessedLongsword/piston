@@ -1,29 +1,21 @@
 package com.example.piston.main.notifications;
 
-import androidx.annotation.Nullable;
-
 import com.example.piston.data.Notification;
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.NotificationReply;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
 public class NotificationsRepository {
 
     private final INotifications listener;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
@@ -37,6 +29,7 @@ public class NotificationsRepository {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         docRef = db.collection("users")
                 .document(Objects.requireNonNull(email));
         listenChanges();
@@ -72,7 +65,7 @@ public class NotificationsRepository {
         listenerRegistration = docRef.collection("notifications")
                 .addSnapshotListener((snapshots, error) -> {
                     NotificationsRepository.this.loadNotifications();
-                    ArrayList<Notification> newNotifications = new ArrayList<>();
+                    /*ArrayList<Notification> newNotifications = new ArrayList<>();
                     if (error == null) {
                         for (DocumentChange dc : snapshots.getDocumentChanges()) {
                             if (dc.getType().equals(DocumentChange.Type.ADDED)) {
@@ -88,7 +81,7 @@ public class NotificationsRepository {
                                 }
                             }
                         }
-                    }
+                    }*/
                 });
     }
 

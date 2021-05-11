@@ -2,7 +2,6 @@ package com.example.piston.main.posts.createPost;
 
 import android.util.Log;
 
-import com.example.piston.data.Notification;
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,8 +14,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 

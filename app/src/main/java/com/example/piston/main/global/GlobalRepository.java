@@ -4,8 +4,6 @@ import android.util.Log;
 
 import com.example.piston.data.Category;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -19,19 +17,27 @@ public class GlobalRepository {
 
     private final IGlobal listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final String email;
     private ListenerRegistration listenerRegistration;
 
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
         void setSubscribed(HashMap<Integer,Boolean> subscribed);
+        void setIsAdmin(boolean isAdmin);
     }
 
     public GlobalRepository(IGlobal listener) {
         this.listener = listener;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        listenChanges();
+        db.collection("admins")
+                .document(Objects.requireNonNull(Objects.requireNonNull
+                        (mAuth.getCurrentUser()).getEmail()))
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        listener.setIsAdmin(task.getResult().exists());
+                });
+            listenChanges();
     }
 
     private void loadCategories() {
@@ -41,7 +47,7 @@ public class GlobalRepository {
                     if (task.isSuccessful()) {
                         ArrayList<Category> categories = new ArrayList<>();
                         HashMap<Integer, Boolean> subscribed = new HashMap<>();
-                        Integer count = 0;
+                        int count = 0;
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
                             Category category = documentSnapshot.toObject(Category.class);
@@ -72,13 +78,13 @@ public class GlobalRepository {
         if (sub){
             Map<String, String> data = new HashMap<>();
             data.put("title", title);
-            db.collection("users").document(email).collection("subscribedCategories").document(title).set(data);
+            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(title).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
             db.collection("categories").document(title).collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            db.collection("users").document(email).collection("subscribedCategories").document(title).delete();
+            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(title).delete();
             db.collection("categories").document(title).collection("subscribedUsers").document(email).delete();
         }
     }
