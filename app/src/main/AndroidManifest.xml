@@ -31,7 +31,7 @@
 
         <activity
             android:name=".main.global.category.CategoryActivity"
-            android:parentActivityName=".main.MainActivity"/>
+            android:parentActivityName=".main.MainActivity" />
         <activity android:name=".main.global.category.info.CategoryInfoActivity"/>
         <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
 

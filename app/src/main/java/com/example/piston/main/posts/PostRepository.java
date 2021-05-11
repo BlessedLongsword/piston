@@ -23,6 +23,7 @@ public class PostRepository {
 
     private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private String user;
     private final String collection;
     private final String document;
@@ -32,8 +33,7 @@ public class PostRepository {
 
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
-        void setPostTitle(String title);
-        void setPost(Post post);
+        void setPostParams(String title, String owner, String content, String imageLink);
         void setIsLiked(boolean liked);
     }
 
@@ -67,42 +67,37 @@ public class PostRepository {
 
         docRef.get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        listener.setPostTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
+                        DocumentSnapshot ds = task.getResult();
+                        listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
+                                Objects.requireNonNull(ds.get("owner")).toString(),
+                                Objects.requireNonNull(ds.get("content")).toString(),
+                                Objects.requireNonNull(ds.get("imageLink")).toString());
                     }
         });
         listenChanges();
     }
 
-    //Añadir como atributo al hacer reply
-    //timestamp: FieldValue.serverTimestamp()
     private void loadPosts() {
         ArrayList<Reply> posts = new ArrayList<>();
-
-        docRef.get().addOnCompleteListener(task -> {
-           if (task.isSuccessful()) {
-               listener.setPost((Objects.requireNonNull(task.getResult()).toObject(Post.class)));
-               docRef.collection("replies")
-                       .orderBy("timestamp")
-                       .get().addOnCompleteListener(task1 -> {
-                   if (task.isSuccessful()) {
-                       for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
-                               task1.getResult())) {
-                           String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
-                           if (replyType.equals("reply")) {
-                               Reply post = documentSnapshot.toObject(Reply.class);
-                               posts.add(post);
-                           } else {
-                               QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
-                               posts.add(post);
-                           }
-                       }
+        docRef.collection("replies").orderBy("timestamp")
+                .get().addOnCompleteListener(task1 -> {
+            if (task1.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
+                       task1.getResult())) {
+                   String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
+                   if (replyType.equals("reply")) {
+                       Reply post = documentSnapshot.toObject(Reply.class);
+                       posts.add(post);
                    } else {
-                       Log.d("nowaybro", "Error getting documents: ", task.getException());
+                       QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
+                       posts.add(post);
                    }
-                   listener.setReplies(posts);
-               });
+               }
+           } else {
+               Log.d("nowaybro", "Error getting documents: ", task1.getException());
            }
-        });
+           listener.setReplies(posts);
+       });
     }
 
     private void listenChanges() {
@@ -175,45 +170,38 @@ public class PostRepository {
         }
     }
 
-    public void addLiked (boolean liked, String postID){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    public void addLiked (boolean liked){
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
-        if (liked){
+        DocumentReference likedDocRef = db.collection("users")
+                .document(Objects.requireNonNull(email)).collection("liked").document(postID);
+        if (liked) {
             Map <String, String> data = new HashMap<>();
             data.put("id", postID);
-            db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID).set(data);
+            likedDocRef.set(data);
         }
-        else{
-            db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID).delete();
+        else {
+            likedDocRef.delete();
         }
-
     }
 
-    public void checkLiked (String postID){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+    public void checkLiked (String postID) {
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
-        DocumentReference dR = db.collection("users").document(Objects.requireNonNull(email)).collection("liked").document(postID);
+        DocumentReference dR = db.collection("users")
+                .document(Objects.requireNonNull(email)).collection("liked").document(postID);
         dR.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 DocumentSnapshot ds = task.getResult();
                 listener.setIsLiked(ds.exists());
             }
         });
-
-
     }
 
     public void updateNumLikes(boolean liked){
-       docRef.get().addOnSuccessListener(documentSnapshot -> {
-           Post post = documentSnapshot.toObject(Post.class);
-           int likes;
-           if (liked){
-               likes = Objects.requireNonNull(post).getNumLikes()+1;
+       docRef.get().addOnCompleteListener(task -> {
+           if (task.isSuccessful()) {
+               long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
+               docRef.update("numLikes", liked ? numLikes - 1 : numLikes + 1);
            }
-           else{
-               likes = Objects.requireNonNull(post).getNumLikes()-1;
-           }
-           docRef.update("numLikes", likes);
        });
     }
 

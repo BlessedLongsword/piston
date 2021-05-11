@@ -139,6 +139,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             intent.putExtra("document", documentID);
             intent.putExtra("id", id);
             intent.putExtra("reply", replyID);
+            intent.putExtra("orphan", true);
             localActivity.startActivity(intent);
             localActivity.finish();
         };

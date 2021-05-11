@@ -20,6 +20,7 @@ import com.example.piston.utilities.MyViewModelFactory;
 public class CategoryActivity extends AppCompatActivity {
 
     private String title;
+    private boolean orphan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         title = intent.getStringExtra("id");
+        orphan = intent.getBooleanExtra("orphan", false);
 
         CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
                 .get(CategoryViewModel.class);
@@ -57,8 +59,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        if (getParentActivityIntent() == null) {
-            Log.d("nowaybro", "WHYYYYY");
+        if (orphan) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 2);
             startActivity(intent);

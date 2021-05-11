@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checkable="true"
-        android:layout_margin="@dimen/card_margin">
+        app:cardElevation="@dimen/one"
+        app:cardCornerRadius="@dimen/zero"
+        android:layout_marginVertical="@dimen/card_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,18 +27,19 @@
                 android:id="@+id/reply_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/card_margin"
-                android:layout_marginTop="@dimen/small_separator"
+                android:layout_marginHorizontal="@dimen/small_separator"
+                android:layout_marginTop="@dimen/tiny_separator"
                 android:maxLength="@integer/description_max_length"
                 android:text="@{reply.content}"
                 tools:text="Reply Content"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?android:attr/textColorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
+                android:layout_marginHorizontal="@dimen/small_separator"
+                android:layout_marginVertical="@dimen/micro_separator"
                 android:orientation="horizontal"
                 android:weightSum="1">
 

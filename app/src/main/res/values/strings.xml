@@ -167,5 +167,6 @@
     <string name="create_category_image_error_message">You must add an image to the category. Make sure you have internet connection.</string>
     <string name="notification_post_indication">New Post from</string>
     <string name="notification_reply_indication">Reply from</string>
+    <string name="replies">Replies</string>
 
 </resources>

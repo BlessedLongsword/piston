@@ -19,6 +19,7 @@ import com.example.piston.utilities.MyViewModelFactory;
 public class GroupActivity extends AppCompatActivity {
 
     private String id;
+    private boolean orphan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        orphan = intent.getBooleanExtra("orphan", false);
 
         GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupViewModel.class);
@@ -56,7 +58,7 @@ public class GroupActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        if (getParentActivityIntent() == null) {
+        if (orphan) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 1);
             startActivity(intent);

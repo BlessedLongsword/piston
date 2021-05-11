@@ -42,5 +42,6 @@
     <dimen name="half_screen">400dp</dimen>
     <dimen name="quote_elevation">5dp</dimen>
     <dimen name="space">4dp</dimen>
+    <dimen name="one">1dp</dimen>
 
 </resources>

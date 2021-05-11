@@ -12,9 +12,12 @@ import java.util.Objects;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
-    private final MutableLiveData<Post> post = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Reply>> replies = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> postTitle = new MutableLiveData<>("");
+    private final MutableLiveData<String> postOwner = new MutableLiveData<>("");
+    private final MutableLiveData<String> postContent = new MutableLiveData<>("");
+    private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
+
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
     private boolean firstLoad = false;
@@ -44,13 +47,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     @Override
-    public void setPost(Post post) {
-        this.post.setValue(post);
-    }
-
-    @Override
-    public void setPostTitle(String title) {
+    public void setPostParams(String title, String owner, String content, String imageLink) {
         this.postTitle.setValue(title);
+        this.postOwner.setValue(owner);
+        this.postContent.setValue(content);
+        this.postImageLink.setValue(imageLink);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public void setLiked(Boolean bool){
         this.liked.setValue(bool);
-        repository.addLiked(bool, Objects.requireNonNull(post.getValue()).getId());
+        repository.addLiked(bool);
         repository.updateNumLikes(bool);
     }
 
@@ -75,11 +76,20 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
     
     public LiveData<String> getPostTitle() { return postTitle; }
-    
-    public LiveData<Post> getPost() { return post; }
 
     public LiveData<Boolean> getLiked() {return liked;}
 
     public LiveData<Boolean> getLoaded() { return loaded; }
 
+    public LiveData<String> getPostOwner() {
+        return postOwner;
+    }
+
+    public LiveData<String> getPostContent() {
+        return postContent;
+    }
+
+    public LiveData<String> getPostImageLink() {
+        return postImageLink;
+    }
 }
