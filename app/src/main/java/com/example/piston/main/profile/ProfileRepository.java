@@ -1,10 +1,13 @@
 package com.example.piston.main.profile;
 
 import com.example.piston.data.User;
+import com.example.piston.main.posts.createPost.CreatePostResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +26,7 @@ public class ProfileRepository {
         void setBirthDateField(Date birthDate);
         void setPhoneNumberField(String phoneNumber);
         void setBirthDateStatus(ProfileResult.BirthDateError birthDateError);
+        void setLoadingFinished();
     }
 
     public ProfileRepository(IProfile listener) {
@@ -32,13 +36,15 @@ public class ProfileRepository {
 
     public void viewProfile(){
         String currentUser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        db.collection("users").document(Objects.requireNonNull(currentUser)).get().addOnSuccessListener(documentSnapshot -> {
-            User user = documentSnapshot.toObject(User.class);
-            listener.setUserNameField(Objects.requireNonNull(user).getUsername());
-            listener.setEmailField(user.getEmail());
-            listener.setFullNameField(user.getName());
-            listener.setBirthDateField(user.getBirthDate());
-            listener.setPhoneNumberField(user.getPhoneNumber());
+        db.collection("users")
+                .document(Objects.requireNonNull(currentUser))
+                .get().addOnSuccessListener(documentSnapshot -> {
+                    User user = documentSnapshot.toObject(User.class);
+                    listener.setUserNameField(Objects.requireNonNull(user).getUsername());
+                    listener.setEmailField(user.getEmail());
+                    listener.setFullNameField(user.getName());
+                    listener.setBirthDateField(user.getBirthDate());
+                    listener.setPhoneNumberField(user.getPhoneNumber());
         });
     }
 
@@ -49,6 +55,18 @@ public class ProfileRepository {
             listener.setBirthDateStatus(ProfileResult.BirthDateError.NONE);
         else
             listener.setBirthDateStatus(ProfileResult.BirthDateError.INVALID);
+    }
+
+    public void editField(String field, String data) {
+        String currentUser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        DocumentReference docRef = db.collection("users")
+                .document(currentUser);
+
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            docRef.update(field, data);
+            viewProfile();
+            listener.setLoadingFinished();
+        });
     }
 
 }

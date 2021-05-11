@@ -23,6 +23,7 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
     private final MutableLiveData<ProfileResult.BirthDateError> birthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
     private final MutableLiveData<ProfileResult.EditOptions> editOption = new MutableLiveData<>(ProfileResult.EditOptions.NONE);
+    private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
@@ -93,6 +94,11 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
         this.editBirthDateError.setValue(birthDateError);
     }
 
+    @Override
+    public void setLoadingFinished() {
+        loading.setValue(false);
+    }
+
 
     /*-------------------------------------   Data Getters   -------------------------------------*/
 
@@ -139,16 +145,13 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     public MutableLiveData<ProfileResult.BirthDateError> getBirthDateError() {
         return birthDateError;
     }
+
     public MutableLiveData<ProfileResult.EditOptions> getEditOption(){
         return editOption;
     }
 
-
-
-
-
-    /*public MutableLiveData<Boolean> getLoading() {
+    public MutableLiveData<Boolean> getLoading() {
         return loading;
-    }*/
+    }
 
 }

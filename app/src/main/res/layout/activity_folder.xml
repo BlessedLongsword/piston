@@ -21,6 +21,7 @@
                 android:id="@+id/folder_topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:onClick="goToInfo"
                 app:title="@string/folder_name"
                 style="@style/Theme.Piston.ToolbarStyle"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"/>

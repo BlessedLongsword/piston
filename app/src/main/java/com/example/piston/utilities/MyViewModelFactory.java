@@ -11,6 +11,7 @@ import com.example.piston.main.global.category.info.CategoryInfoViewModel;
 import com.example.piston.main.groups.group.GroupViewModel;
 import com.example.piston.main.groups.group.info.GroupInfoViewModel;
 import com.example.piston.main.personal.folder.FolderViewModel;
+import com.example.piston.main.personal.folder.info.FolderInfoViewModel;
 import com.example.piston.main.posts.PostViewModel;
 
 public class MyViewModelFactory implements ViewModelProvider.Factory {
@@ -41,10 +42,12 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new FolderViewModel(mParam);
         if (modelClass.isAssignableFrom(GroupViewModel.class))
             return (T) new GroupViewModel(mParam);
-        if (modelClass.isAssignableFrom(CategoryInfoViewModel.class))
-            return (T) new CategoryInfoViewModel(mParam);
+        if (modelClass.isAssignableFrom(FolderInfoViewModel.class))
+            return (T) new FolderInfoViewModel(mParam);
         if (modelClass.isAssignableFrom(GroupInfoViewModel.class))
             return (T) new GroupInfoViewModel(mParam);
+        if (modelClass.isAssignableFrom(CategoryInfoViewModel.class))
+            return (T) new CategoryInfoViewModel(mParam);
         if (modelClass.isAssignableFrom(GoogleRegisterViewModel.class))
             return (T) new GoogleRegisterViewModel(mParam);
         if (modelClass.isAssignableFrom(PostViewModel.class))
