@@ -33,6 +33,7 @@ public class PostRepository {
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
         void setPostParams(String title, String owner, String content, String imageLink);
+        void setLoaded();
         void setIsLiked(boolean liked);
     }
 
@@ -96,6 +97,7 @@ public class PostRepository {
                Log.d("nowaybro", "Error getting documents: ", task1.getException());
            }
            listener.setReplies(posts);
+           listener.setLoaded();
        });
     }
 
