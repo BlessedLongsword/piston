@@ -66,7 +66,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public PostAdapter(FragmentActivity activity, PostAdapterListener listener) {
         this.listener = listener;
         viewModel = new ViewModelProvider(activity).get(PostViewModel.class);
-        viewModel.getReplies().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getReplies().observe(activity, replies -> notifyDataSetChanged());
     }
 
     @Override

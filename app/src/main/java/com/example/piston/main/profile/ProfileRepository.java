@@ -1,13 +1,11 @@
 package com.example.piston.main.profile;
 
 import com.example.piston.data.User;
-import com.example.piston.main.posts.createPost.CreatePostResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,7 +58,7 @@ public class ProfileRepository {
     public void editField(String field, String data) {
         String currentUser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         DocumentReference docRef = db.collection("users")
-                .document(currentUser);
+                .document(Objects.requireNonNull(currentUser));
 
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             docRef.update(field, data);

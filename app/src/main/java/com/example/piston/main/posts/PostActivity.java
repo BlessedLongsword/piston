@@ -92,14 +92,10 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                 goToReply(replyID);
             }
         });
-        viewModel.getLiked().observe(this, aBoolean -> {
-            binding.heartButton.setLiked(aBoolean);
-        });
-        viewModel.getPostImageLink().observe(this, imageLink -> {
-            Glide.with(this)
-                    .load(imageLink)
-                    .into(binding.postPicture);
-        });
+        viewModel.getLiked().observe(this, aBoolean -> binding.heartButton.setLiked(aBoolean));
+        viewModel.getPostImageLink().observe(this, imageLink -> Glide.with(this)
+                .load(imageLink)
+                .into(binding.postPicture));
     }
 
     public void goToReply(String replyID) {

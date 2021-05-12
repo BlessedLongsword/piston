@@ -45,7 +45,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     public GroupAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GroupViewModel.class);
-        viewModel.getPosts().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getPosts().observe(activity, posts -> notifyDataSetChanged());
     }
 
     @NonNull

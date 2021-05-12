@@ -2,10 +2,7 @@ package com.example.piston.main.groups.createGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateGroupBinding;
 import com.example.piston.main.sections.PickImageActivity;
+import com.example.piston.utilities.CheckNetwork;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
@@ -73,11 +71,7 @@ public class CreateGroupActivity extends PickImageActivity {
     }
 
     public void createGroup(MenuItem item) {
-        boolean connected;
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
-
+        boolean connected = CheckNetwork.isConnected(getApplicationContext());
         createGroupViewModel.createGroup(image, connected);
     }
 

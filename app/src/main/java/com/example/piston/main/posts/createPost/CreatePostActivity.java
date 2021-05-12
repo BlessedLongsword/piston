@@ -1,9 +1,6 @@
 package com.example.piston.main.posts.createPost;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
 import com.example.piston.main.sections.PickImageActivity;
+import com.example.piston.utilities.CheckNetwork;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreatePostActivity extends PickImageActivity {
@@ -57,11 +55,7 @@ public class CreatePostActivity extends PickImageActivity {
     }
 
     public void createPost(MenuItem item) {
-        boolean connected;
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
-
+        boolean connected = CheckNetwork.isConnected(getApplicationContext());
         createPostViewModel.createPost(collection, document, image, connected);
     }
 

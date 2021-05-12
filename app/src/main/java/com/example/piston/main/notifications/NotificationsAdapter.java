@@ -63,7 +63,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     public NotificationsAdapter(FragmentActivity activity){
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
-        viewModel.getNotifications().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
     }
 
     @Override
@@ -117,10 +117,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public int getItemCount() {
         if (viewModel.getNotifications().getValue() == null) {
-            Log.d("nowaybro", "Null....");
             return 0;
         }
-        Log.d("nowaybro", "Size: " + Objects.requireNonNull(viewModel.getNotifications().getValue()).size());
         return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 

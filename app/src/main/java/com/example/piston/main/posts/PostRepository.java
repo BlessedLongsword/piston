@@ -3,7 +3,6 @@ package com.example.piston.main.posts;
 import android.util.Log;
 
 import com.example.piston.data.NotificationReply;
-import com.example.piston.data.Post;
 import com.example.piston.data.QuoteReply;
 import com.example.piston.data.Reply;
 import com.google.firebase.auth.FirebaseAuth;

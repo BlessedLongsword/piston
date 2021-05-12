@@ -1,7 +1,5 @@
 package com.example.piston.main.posts.createPost;
 
-import android.util.Log;
-
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,7 +63,6 @@ public class CreatePostRepository {
             else if (image == null)
                 uploadPost(collection, document, title, content, null, null);
             else {
-                Log.d("nowaybro", "Imatge");
                 StorageReference storageRef = storage.getReference();
                 String randomId = UUID.randomUUID().toString();
                 String path;

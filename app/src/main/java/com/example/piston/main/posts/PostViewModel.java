@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Post;
 import com.example.piston.data.Reply;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 

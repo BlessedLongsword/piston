@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityFolderBinding;
-import com.example.piston.main.groups.group.info.GroupInfoActivity;
 import com.example.piston.main.personal.folder.info.FolderInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;

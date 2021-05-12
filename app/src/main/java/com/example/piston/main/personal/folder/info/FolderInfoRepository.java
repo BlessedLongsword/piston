@@ -7,20 +7,16 @@ import java.util.Objects;
 
 public class FolderInfoRepository {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    private final FolderInfoRepository.IFolderInfo listener;
-
     public interface IFolderInfo {
         void setTitle(String title);
         void setDescription(String description);
     }
 
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
-        this.listener = listener;
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
-                .document(user)
+                .document(Objects.requireNonNull(user))
                 .collection("folders")
                 .document(folderID)
                 .get().addOnCompleteListener(task -> {

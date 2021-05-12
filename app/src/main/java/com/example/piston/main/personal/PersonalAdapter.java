@@ -44,7 +44,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.Folder
     public PersonalAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PersonalViewModel.class);
-        viewModel.getFolders().observe(activity, cosa -> notifyDataSetChanged());
+        viewModel.getFolders().observe(activity, folders -> notifyDataSetChanged());
     }
 
     @NonNull
