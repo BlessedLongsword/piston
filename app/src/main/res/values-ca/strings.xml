@@ -165,5 +165,6 @@
     <string name="notification_post_indication">Nou post de</string>
     <string name="notification_reply_indication">Resposta de</string>
     <string name="replies">Respostes</string>
+    <string name="show_information">Info</string>
 
 </resources>

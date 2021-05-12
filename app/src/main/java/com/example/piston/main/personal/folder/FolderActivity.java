@@ -3,6 +3,7 @@ package com.example.piston.main.personal.folder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -54,6 +55,14 @@ public class FolderActivity extends AppCompatActivity {
 
     private static final int DELETE_CODE = 9999;
     public void goToInfo(View view) {
+        goToInfo();
+    }
+
+    public void goToInfo(MenuItem item) {
+        goToInfo();
+    }
+
+    private void goToInfo() {
         Intent intent = new Intent(this, FolderInfoActivity.class);
         intent.putExtra("document", id);
         startActivityForResult(intent, DELETE_CODE);

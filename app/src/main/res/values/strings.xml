@@ -169,5 +169,6 @@
     <string name="notification_post_indication">New Post from</string>
     <string name="notification_reply_indication">Reply from</string>
     <string name="replies">Replies</string>
+    <string name="show_information">Info</string>
 
 </resources>
