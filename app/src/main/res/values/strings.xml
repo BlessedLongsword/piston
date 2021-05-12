@@ -17,6 +17,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="delete_folder">Delete folder</string>
     <string name="group_code">Group Code</string>
     <string name="description">Description</string>
     <string name="create">Create</string>

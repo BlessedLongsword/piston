@@ -17,6 +17,7 @@
     <string name="save_changes">Desa els canvis</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
+    <string name="delete_folder">Eliminar carpeta</string>
     <string name="group_code">Enllaç</string>
     <string name="description">Descripció</string>
     <string name="create">Crear</string>

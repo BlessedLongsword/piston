@@ -35,5 +35,6 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+
     public LiveData<String> getTitle() { return title; }
 }

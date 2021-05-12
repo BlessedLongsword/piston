@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class FolderViewModel extends ViewModel implements FolderRepository.IFolder {
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> title = new MutableLiveData<>("");
 
     private final FolderRepository repository;
 
@@ -24,11 +25,20 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
     }
 
     @Override
+    public void setTitle(String title) {
+        this.title.setValue(title);
+    }
+
+    @Override
     protected void onCleared () {
         repository.removeListener();
     }
 
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
+    }
+
+    public LiveData<String> getTitle() {
+        return title;
     }
 }

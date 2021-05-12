@@ -15,6 +15,7 @@ public class FolderRepository {
 
     public interface IFolder {
         void setFolderPosts(ArrayList<Post> posts);
+        void setTitle(String title);
     }
 
     private final FolderRepository.IFolder listener;
@@ -28,6 +29,17 @@ public class FolderRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         this.user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         this.folder = folder;
+        db.collection("users")
+                .document(user)
+                .collection("folders")
+                .document(folder)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+                    }
+                });
+
         listenChanges();
     }
 
