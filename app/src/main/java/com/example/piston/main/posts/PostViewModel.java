@@ -38,10 +38,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     @Override
     public void setReplies(ArrayList<Reply> replies) {
         this.replies.setValue(replies);
-        if (!firstLoad) {
-            loaded.setValue(true);
-            firstLoad = true;
-        }
     }
 
     @Override
@@ -50,6 +46,14 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         this.postOwner.setValue(owner);
         this.postContent.setValue(content);
         this.postImageLink.setValue(imageLink);
+    }
+
+    @Override
+    public void setLoaded() {
+        if (!firstLoad) {
+            loaded.setValue(true);
+            firstLoad = true;
+        }
     }
 
     @Override

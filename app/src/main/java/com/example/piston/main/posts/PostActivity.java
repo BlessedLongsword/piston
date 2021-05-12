@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     private PostViewModel viewModel;
     private ActivityPostBinding binding;
-    private RecyclerView.SmoothScroller smoothScroller;
     private String collection;
     private String document;
     private boolean orphan;
@@ -60,13 +60,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        smoothScroller = new LinearSmoothScroller(this) {
-                    @Override
-                    protected int getVerticalSnapPreference() {
-                        return LinearSmoothScroller.SNAP_TO_START;
-                    }
-                };
-
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
@@ -87,26 +80,35 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         });
 
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
-        viewModel.getLoaded().observe(this, aBoolean -> {
-            if (aBoolean && replyID != null) {
-                goToReply(replyID);
-            }
-        });
         viewModel.getLiked().observe(this, aBoolean -> binding.heartButton.setLiked(aBoolean));
         viewModel.getPostImageLink().observe(this, imageLink -> Glide.with(this)
                 .load(imageLink)
                 .into(binding.postPicture));
+        viewModel.getLoaded().observe(this, aBoolean -> {
+            if (aBoolean && replyID != null)
+                scrollTo(getItemPositionByID(replyID));
+        });
     }
 
     public void goToReply(String replyID) {
-        for (int i = 0; i < Objects.requireNonNull(viewModel.getReplies().getValue()).size(); i++) {
-            if (viewModel.getReplies().getValue().get(i).getId().equals(replyID)) {
-                smoothScroller.setTargetPosition(i+1);
-                Objects.requireNonNull(binding.recyclerviewPosts.getLayoutManager())
-                        .startSmoothScroll(smoothScroller);
-                break;
-            }
+        View view = binding.recyclerviewPosts.findViewWithTag(replyID);
+        float y = binding.recyclerviewPosts.getY() + view.getY();
+        binding.postScrollView.smoothScrollTo(0, (int) y);
+    }
+
+    public void scrollTo(int itemPosition) {
+        for (int i = 0; i < itemPosition; i++) {
+            Log.d("DBReadTAG", String.valueOf(i));
+            goToReply(Objects.requireNonNull(viewModel.getReplies().getValue()).get(i).getId());
         }
+    }
+
+    public int getItemPositionByID(String replyID) {
+        for (int i = 0; i < Objects.requireNonNull(viewModel.getReplies().getValue()).size(); i++) {
+            if (viewModel.getReplies().getValue().get(i).getId().equals(replyID))
+                return i;
+        }
+        return -1;
     }
 
     @Override

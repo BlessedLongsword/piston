@@ -1,5 +1,6 @@
 package com.example.piston.main.posts;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,10 +102,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder.getItemViewType() == 1) {
             Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             ReplyHolder hold = ((ReplyHolder) holder);
+            hold.itemView.setTag(reply.getId());
             hold.bind(reply);
         } else {
             QuoteReply reply = (QuoteReply) Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             QuoteReplyHolder hold = ((QuoteReplyHolder) holder);
+            hold.itemView.setTag(reply.getId());
             hold.bind(reply);
         }
     }

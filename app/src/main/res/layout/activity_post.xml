@@ -28,6 +28,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/postScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -102,7 +103,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/card_margin"
                                     android:text="@string/reply"
-                                    android:onClick="replyPopUp"
                                     app:icon="@drawable/outline_reply_white_24" />
 
                                 <Space
@@ -137,9 +137,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_posts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layoutManager="LinearLayoutManager"
-                android:nestedScrollingEnabled="false"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             </LinearLayout>
