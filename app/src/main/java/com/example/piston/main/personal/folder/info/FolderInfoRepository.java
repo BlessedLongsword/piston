@@ -1,7 +1,10 @@
 package com.example.piston.main.personal.folder.info;
 
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.Objects;
 
@@ -12,9 +15,14 @@ public class FolderInfoRepository {
         void setDescription(String description);
     }
 
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private final String folderID, user;
+
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
-        String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        this.folderID = folderID;
+        user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
+
         db.collection("users")
                 .document(Objects.requireNonNull(user))
                 .collection("folders")
@@ -24,6 +32,26 @@ public class FolderInfoRepository {
                 listener.setTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
                 listener.setDescription((String) task.getResult().get("description"));
             }
+        });
+    }
+
+    public void deleteFolder() {
+        DocumentReference docRef = db.collection("users")
+                .document(user)
+                .collection("folders")
+                .document(folderID);
+
+        docRef.collection("posts").get().addOnCompleteListener(task -> {
+            if (task.isComplete()) {
+                // Delete subcollection
+                for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
+                        task.getResult())) {
+                    docRef.collection("posts")
+                            .document(documentSnapshot.getId())
+                            .delete();
+                }
+            }
+            docRef.delete();
         });
     }
 }

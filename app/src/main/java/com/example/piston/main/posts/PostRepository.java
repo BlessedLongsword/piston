@@ -71,7 +71,7 @@ public class PostRepository {
                         listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
                                 Objects.requireNonNull(ds.get("owner")).toString(),
                                 Objects.requireNonNull(ds.get("content")).toString(),
-                                Objects.requireNonNull(ds.get("imageLink")).toString());
+                                (String) ds.get("imageLink"));
                     }
         });
         listenChanges();

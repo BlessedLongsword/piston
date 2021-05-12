@@ -18,7 +18,7 @@
             app:title="@string/app_name"
             style="@style/Theme.Piston.ToolbarStyle"
             app:menu="@menu/main_activity_top_app_bar"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"

@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"
-                app:title="@string/title" />
+                app:title="@string/title"
+                app:layout_scrollFlags="scroll|enterAlways|snap"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

@@ -60,7 +60,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.Folder
     public void onBindViewHolder(@NonNull FolderHolder holder, int position) {
         Folder folder = Objects.requireNonNull(viewModel.getFolders().getValue()).get(position);
         holder.bind(folder);
-        holder.getBinding().folderItemCard.setOnClickListener(openNewActivity(folder.getTitle()));
+        holder.getBinding().folderItemCard.setOnClickListener(openNewActivity(folder.getId()));
     }
 
     @Override

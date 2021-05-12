@@ -6,7 +6,6 @@
         android:id="@+id/edit_image"
         android:title="@string/edit"
         android:icon="@drawable/baseline_mode_edit_white_24"
-        android:visible="false"
         app:showAsAction="always">
     </item>
 

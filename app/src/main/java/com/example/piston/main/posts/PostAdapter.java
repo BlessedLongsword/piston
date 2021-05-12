@@ -1,6 +1,5 @@
 package com.example.piston.main.posts;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

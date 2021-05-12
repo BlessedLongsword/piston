@@ -2,6 +2,7 @@ package com.example.piston.main.global.category;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -50,12 +51,6 @@ public class CategoryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToInfo(View view) {
-        Intent intent = new Intent(this, CategoryInfoActivity.class);
-        intent.putExtra("document", title);
-        startActivity(intent);
-    }
-
     @Override
     public void finish() {
         if (orphan) {
@@ -64,5 +59,19 @@ public class CategoryActivity extends AppCompatActivity {
             startActivity(intent);
         }
         super.finish();
+    }
+
+    public void goToInfo(View view) {
+        goToInfo();
+    }
+
+    public void goToInfo(MenuItem item) {
+        goToInfo();
+    }
+
+    private void goToInfo() {
+        Intent intent = new Intent(this, CategoryInfoActivity.class);
+        intent.putExtra("document", title);
+        startActivity(intent);
     }
 }

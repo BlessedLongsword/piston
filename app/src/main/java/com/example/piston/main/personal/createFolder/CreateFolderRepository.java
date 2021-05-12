@@ -54,10 +54,17 @@ public class CreateFolderRepository {
             listener.setCreateError();
             listener.setLoadingFinished();
         } else {
+            String id = db.collection("users")
+                    .document(user)
+                    .collection("folders")
+                    .document()
+                    .getId();
+
             DocumentReference docRef = db.collection("users")
                     .document(user)
                     .collection("folders")
-                    .document(title);
+                    .document(id);
+
             docRef.get().addOnCompleteListener(task -> {
                 if (task.isComplete()) {
                     DocumentSnapshot ds = task.getResult();
@@ -65,7 +72,7 @@ public class CreateFolderRepository {
                         listener.setTitleStatus(CreateFolderResult.TitleError.EXISTS);
                         listener.setCreateError();
                     } else {
-                        Folder folder = new Folder(title, description);
+                        Folder folder = new Folder(title, description, id);
                         docRef.set(folder);
                         listener.setCreateFinished();
                     }

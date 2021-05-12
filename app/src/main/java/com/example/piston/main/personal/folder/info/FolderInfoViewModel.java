@@ -10,7 +10,6 @@ public class FolderInfoViewModel extends ViewModel implements FolderInfoReposito
 
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<String> description = new MutableLiveData<>("");
-    private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
 
     final FolderInfoRepository repository;
 
@@ -32,6 +31,10 @@ public class FolderInfoViewModel extends ViewModel implements FolderInfoReposito
 
     public LiveData<String> getDescription() {
         return description;
+    }
+
+    public void deleteFolder() {
+        repository.deleteFolder();
     }
 
 }

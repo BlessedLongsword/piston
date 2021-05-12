@@ -45,7 +45,9 @@
 
         <activity android:name=".main.notifications.NotificationsActivity"/>
 
-        <activity android:name=".main.personal.folder.info.FolderInfoActivity"/>
+        <activity
+            android:name=".main.personal.folder.info.FolderInfoActivity"
+            android:parentActivityName=".main.personal.folder.FolderActivity"/>
         <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
         <activity android:name=".main.personal.folder.FolderActivity"/>
 

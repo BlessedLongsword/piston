@@ -25,7 +25,9 @@
                 android:onClick="goToInfo"
                 app:title="@string/group_name"
                 style="@style/Theme.Piston.ToolbarStyle"
-                app:navigationIcon="@drawable/baseline_arrow_back_white_24"/>
+                app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+                app:menu="@menu/group_top_app_bar"
+                app:layout_scrollFlags="scroll|enterAlways|snap"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

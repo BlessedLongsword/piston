@@ -1,7 +1,9 @@
 package com.example.piston.main.personal.folder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,10 +16,13 @@ import com.example.piston.databinding.ActivityFolderBinding;
 import com.example.piston.main.personal.folder.info.FolderInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+
+import java.util.Objects;
 
 public class FolderActivity extends AppCompatActivity {
 
-    private String title;
+    private String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,32 +30,49 @@ public class FolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_folder);
 
         Intent intent = getIntent();
-        title = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
 
-        FolderViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        FolderViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(FolderViewModel.class);
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.folderTopAppBar.setTitle(title);
         binding.folderTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         binding.recyclerviewFolder.setAdapter(new FolderAdapter(this));
+
+        viewModel.getTitle().observe(this, binding.folderTopAppBar::setTitle);
     }
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra("collection", "users");
-        intent.putExtra("document", title);
+        intent.putExtra("document", id);
         startActivity(intent);
     }
 
+    private static final int DELETE_CODE = 9999;
     public void goToInfo(View view) {
+        goToInfo();
+    }
+
+    public void goToInfo(MenuItem item) {
+        goToInfo();
+    }
+
+    private void goToInfo() {
         Intent intent = new Intent(this, FolderInfoActivity.class);
-        intent.putExtra("document", title);
-        startActivity(intent);
+        intent.putExtra("document", id);
+        startActivityForResult(intent, DELETE_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DELETE_CODE)
+            finish();
     }
 
 }

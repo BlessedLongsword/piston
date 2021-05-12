@@ -17,6 +17,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="delete_folder">Delete folder</string>
     <string name="group_code">Group Code</string>
     <string name="description">Description</string>
     <string name="create">Create</string>
@@ -168,6 +169,7 @@
     <string name="notification_post_indication">New Post from</string>
     <string name="notification_reply_indication">Reply from</string>
     <string name="replies">Replies</string>
+    <string name="show_information">Info</string>
     <string name="members">\u0020Members</string>
 
 </resources>
