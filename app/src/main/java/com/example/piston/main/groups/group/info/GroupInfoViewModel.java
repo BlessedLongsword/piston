@@ -1,35 +1,48 @@
 package com.example.piston.main.groups.group.info;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.piston.data.Group;
+import com.example.piston.data.GroupMember;
+
+import java.util.ArrayList;
+
 public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository.IGroupInfo {
 
+    private final MutableLiveData<String> id = new MutableLiveData<>("");
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<String> description = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
+    private final MutableLiveData<ArrayList<GroupMember>> members = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> numberOfMembers = new MutableLiveData<>("");
 
     final GroupInfoRepository repository;
 
     public GroupInfoViewModel(String group) {
-        repository = new GroupInfoRepository(this, group);
+        id.setValue(group);
+        repository = new GroupInfoRepository(this, id.getValue());
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setParams(String title, String description, String imageLink, String groupID) {
         this.title.setValue(title);
-    }
-
-    @Override
-    public void setDescription(String description) {
         this.description.setValue(description);
+        this.imageLink.setValue(imageLink);
+        id.setValue(groupID);
     }
 
     @Override
-    public void setImageLink(String imageLink) {
-        this.imageLink.setValue(imageLink);
+    public void setMembers(ArrayList<GroupMember> members) {
+        Log.d("DBReadTAG", "A: " + String.valueOf(members.size()));
+        this.members.setValue(members);
+        Log.d("DBReadTAG", "B: " + String.valueOf(members.size()));
     }
+
+    public LiveData<String> getID() { return id; }
 
     public LiveData<String> getTitle() { return title; }
 
@@ -40,5 +53,9 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     public LiveData<String> getImageLink() {
         return imageLink;
     }
+
+    public LiveData<ArrayList<GroupMember>> getMembers() { return members; }
+
+    public LiveData<String> getNumberOfMembers() { return numberOfMembers; }
 
 }

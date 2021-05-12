@@ -138,8 +138,7 @@
                 android:id="@+id/recyclerview_posts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                app:layoutManager="LinearLayoutManager"/>
 
             </LinearLayout>
 

@@ -1,7 +1,10 @@
 package com.example.piston.main.groups.group.info;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +16,13 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
 
+import java.util.Objects;
+
 public class GroupInfoActivity extends AppCompatActivity {
 
-    GroupInfoViewModel viewModel;
+    private GroupInfoViewModel viewModel;
+    private ClipboardManager clipboard;
+    private ClipData clip;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +38,16 @@ public class GroupInfoActivity extends AppCompatActivity {
                 this, R.layout.activity_group_info);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        binding.recyclerviewMembers.setAdapter(new MemberAdapter(this));
+
+        binding.groupLink.setEndIconOnClickListener(v -> {
+            clip = ClipData.newPlainText("GroupCode", Objects.requireNonNull(binding.groupLink.getEditText()).getText());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
+        });
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
 
