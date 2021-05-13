@@ -127,7 +127,7 @@
                         android:contentDescription="@string/edit"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionName()}"
+                        android:onClick="editName"
                         android:layout_marginEnd="10dp" />
 
                 </LinearLayout>

@@ -131,7 +131,9 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     @Override
     public void replyPopUp(String owner, String content, String quoteID) {
+
         View popupView = getLayoutInflater().inflate(R.layout.pupup_reply, null);
+
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
@@ -141,7 +143,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
         // Adjust popup window location when keyboard pops up
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);

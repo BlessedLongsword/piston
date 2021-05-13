@@ -1,6 +1,5 @@
 package com.example.piston.main.personal.folder.info;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityFolderInfoBinding;
-import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
 public class FolderInfoActivity extends AppCompatActivity {

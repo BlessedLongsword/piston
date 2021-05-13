@@ -166,5 +166,6 @@
     <string name="replies">Respuestas</string>
     <string name="show_information">Info</string>
     <string name="members">\u0020Miembros</string>
+    <string name="field">Field</string>
 
 </resources>

@@ -27,7 +27,7 @@ public class FolderRepository {
     public FolderRepository(FolderRepository.IFolder listener, String folder) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        this.user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        this.user = Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
         this.folder = folder;
         db.collection("users")
                 .document(user)

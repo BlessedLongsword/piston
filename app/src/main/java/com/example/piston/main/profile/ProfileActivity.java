@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityProfileBinding;
 import com.example.piston.main.profile.image.ProfileImageActivity;
+import com.example.piston.utilities.EditPopup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
@@ -41,18 +43,19 @@ public class ProfileActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
         binding.profileToolbar.setNavigationOnClickListener(v -> finish());
         profileViewModel.viewProfile();
+
         profileViewModel.getEditOption().observe(this, editOptions -> {
         switch (editOptions){
             case NONE:
                 break;
             case NAME:
-                popUpWindow(R.layout.popup_profile_edit_name, binding.viewProfileFullNameEditText);
+                //popUpWindow(R.layout.popup_profile_edit_name, binding.viewProfileFullNameEditText);
                 break;
             case PHONE:
-                popUpWindow(R.layout.popup_profile_edit_phone_number, binding.viewProfilePhoneEditText);
+                //popUpWindow(R.layout.popup_profile_edit_phone_number, binding.viewProfilePhoneEditText);
                 break;
             case BIRTH_DATE:
-                popUpWindow(R.layout.popup_profile_edit_birth_date, binding.viewProfileDateEditText);
+                //popUpWindow(R.layout.popup_profile_edit_birth_date, binding.viewProfileDateEditText);
                 break;
         }
         });
@@ -70,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void popUpWindow(int layoutResource, TextInputEditText textField) {
 
-        View popupView = getLayoutInflater().inflate(layoutResource, null);
+        View popupView = getLayoutInflater().inflate(layoutResource, new LinearLayout(this));
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -79,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
         // Adjust popup window location when keyboard pops up
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
@@ -107,5 +109,9 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Not yet implemented", Toast.LENGTH_LONG).show();
             popupWindow.dismiss();
         });
+    }
+
+    public void editName(View view) {
+        new EditPopup(this, getString(R.string.view_profile_name));
     }
 }

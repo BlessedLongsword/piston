@@ -167,5 +167,6 @@
     <string name="replies">Respostes</string>
     <string name="members">\u0020Membres</string>
     <string name="show_information">Info</string>
+    <string name="field">Field</string>
 
 </resources>

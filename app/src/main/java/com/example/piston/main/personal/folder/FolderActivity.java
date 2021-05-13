@@ -1,6 +1,5 @@
 package com.example.piston.main.personal.folder;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,9 +15,6 @@ import com.example.piston.databinding.ActivityFolderBinding;
 import com.example.piston.main.personal.folder.info.FolderInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-
-import java.util.Objects;
 
 public class FolderActivity extends AppCompatActivity {
 
