@@ -8,11 +8,13 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
 
     private final MutableLiveData<String> description = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> subscribed = new MutableLiveData<>(false);
 
     final CategoryInfoRepository repository;
 
     public CategoryInfoViewModel(String category) {
         repository = new CategoryInfoRepository(this, category);
+        repository.checkSub();
     }
 
     @Override
@@ -25,6 +27,16 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
         this.imageLink.setValue(imageLink);
     }
 
+    @Override
+    public void setSubscribed(boolean subscribed){
+        this.subscribed.setValue(subscribed);
+    }
+
+    public void setSub(boolean sub){
+        this.subscribed.setValue(sub);
+        repository.addSub(sub);
+    }
+
     public LiveData<String> getDescription() {
         return description;
     }
@@ -32,4 +44,6 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
     public LiveData<String> getImageLink() {
         return imageLink;
     }
+
+    public LiveData<Boolean> getSubscribed() {return subscribed;}
 }

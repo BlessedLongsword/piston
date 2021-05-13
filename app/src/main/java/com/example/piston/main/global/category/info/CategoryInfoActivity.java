@@ -12,6 +12,10 @@ import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
+
+import java.util.Objects;
 
 public class CategoryInfoActivity extends AppCompatActivity {
 
@@ -35,9 +39,30 @@ public class CategoryInfoActivity extends AppCompatActivity {
         binding.categoryInfoTopAppBar.setTitle(title);
         binding.categoryInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
 
+        binding.starButton.setOnLikeListener(new OnLikeListener() {
+
+            @Override
+            public void liked(LikeButton likeButton) {
+                likeButton.setLiked(true);
+                viewModel.setSub(true);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                likeButton.setLiked(false);
+                viewModel.setSub(false);
+            }
+        });
+
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
                 .load(aString)
                 .into(binding.categoryInfoImage));
+
+        viewModel.getSubscribed().observe(this, aBoolean -> {
+            if(aBoolean){
+                binding.starButton.setLiked(true);
+            }
+        });
     }
 
 }
