@@ -37,9 +37,11 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
 
     @Override
     public void setMembers(ArrayList<GroupMember> members) {
-        Log.d("DBReadTAG", "A: " + String.valueOf(members.size()));
         this.members.setValue(members);
-        Log.d("DBReadTAG", "B: " + String.valueOf(members.size()));
+    }
+
+    public void deleteGroup() {
+        repository.deleteGroup();
     }
 
     public LiveData<String> getID() { return id; }

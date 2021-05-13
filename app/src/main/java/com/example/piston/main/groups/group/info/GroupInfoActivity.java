@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -55,6 +56,11 @@ public class GroupInfoActivity extends AppCompatActivity {
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
             .into(binding.groupInfoImage));
+    }
+
+    public void deleteGroup(MenuItem item) {
+        viewModel.deleteGroup();
+        finish();
     }
 
 }
