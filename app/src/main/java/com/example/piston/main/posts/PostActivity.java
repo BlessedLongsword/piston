@@ -77,6 +77,10 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             }
         });
 
+        if (collection.equals("folders")){
+            binding.heartButton.setVisibility(View.GONE);
+        }
+
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
         viewModel.getLiked().observe(this, aBoolean -> binding.heartButton.setLiked(aBoolean));
         viewModel.getPostImageLink().observe(this, imageLink -> Glide.with(this)
