@@ -15,12 +15,12 @@ public class FolderInfoRepository {
         void setDescription(String description);
     }
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final DocumentReference docRef;
 
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         docRef = db.collection("users")
                 .document(Objects.requireNonNull(user))
                 .collection("folders")

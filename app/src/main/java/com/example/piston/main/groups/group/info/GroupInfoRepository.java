@@ -1,11 +1,6 @@
 package com.example.piston.main.groups.group.info;
 
-import android.util.Log;
-
-import com.example.piston.data.Group;
 import com.example.piston.data.GroupMember;
-import com.example.piston.main.posts.PostRepository;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;

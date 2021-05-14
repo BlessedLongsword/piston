@@ -54,7 +54,7 @@ public class CategoryInfoRepository {
 
     public void checkSub () {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String email = Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
         DocumentReference dR = db.collection("categories")
                 .document(category).collection("subscribedUsers").document(email);
         dR.get().addOnCompleteListener(task -> {

@@ -15,8 +15,6 @@ import com.example.piston.utilities.MyViewModelFactory;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
-import java.util.Objects;
-
 public class CategoryInfoActivity extends AppCompatActivity {
 
     CategoryInfoViewModel viewModel;
