@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/edit_name_card"
     android:layout_width="match_parent"
@@ -33,6 +33,7 @@
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintEnabled="false"
                 android:layout_marginTop="@dimen/small_separator"
                 android:textAppearance="?attr/textAppearanceBody2"
                 style="@style/BlankBox"
@@ -41,7 +42,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:paddingStart="@dimen/tiny_separator"
+                    android:paddingEnd="@dimen/tiny_separator"
+                    android:paddingVertical="@dimen/tiny_separator"
                     android:maxLength="@integer/name_max_length"
+                    android:gravity="start"
                     android:selectAllOnFocus="true" />
             </com.google.android.material.textfield.TextInputLayout>
 

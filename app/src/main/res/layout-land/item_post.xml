@@ -26,7 +26,6 @@
                 android:id="@+id/post_picture"
                 android:layout_width="@dimen/bigger_square"
                 android:layout_height="@dimen/bigger_square"
-                app:srcCompat="@drawable/jojo"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/content_description_media"/>
 

@@ -16,6 +16,7 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<String> phoneNumber = new MutableLiveData<>("");
     private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> isCurrentUser = new MutableLiveData<>(false);
 
     /*PupUps*/
     private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
@@ -24,6 +25,10 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
+
+    public ProfileViewModel(String id) {
+        isCurrentUser.setValue(id == null);
+    }
 
     public void loadProfile() {
         profileRepository.loadProfile();
@@ -132,5 +137,9 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
 
     public void editBirth(String text) {
         profileRepository.editBirth(text);
+    }
+
+    public LiveData<Boolean> getIsCurrentUser() {
+        return isCurrentUser;
     }
 }
