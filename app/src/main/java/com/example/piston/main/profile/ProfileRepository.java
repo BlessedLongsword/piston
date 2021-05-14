@@ -1,10 +1,14 @@
 package com.example.piston.main.profile;
 
+import android.net.wifi.WifiManager;
+import android.util.Log;
+
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,25 +24,34 @@ public class ProfileRepository {
 
     private final IProfile listener;
 
+    private final String email;
+
+    private ListenerRegistration listenerRegistration;
+
     public interface IProfile {
         void setUserNameField(String username);
         void setEmailField(String email);
         void setFullNameField(String fullName);
         void setBirthDateField(Date birthDate);
         void setPhoneNumberField(String phoneNumber);
+        void setImageLink(String imageLink);
         void setBirthDateStatus(RegisterResult.BirthDateError birthDateError);
         void setLoadingFinished();
+        void setIsCurrentUser(boolean isCurrentUser);
     }
 
-    public ProfileRepository(IProfile listener) {
+    public ProfileRepository(IProfile listener, String email) {
         this.listener = listener;
+        this.email = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
+        listener.setIsCurrentUser(Objects.equals(this.email,
+                Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()));
+        listenChanges();
     }
 
 
     public void loadProfile(){
-        String currentUser = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         db.collection("users")
-                .document(Objects.requireNonNull(currentUser))
+                .document(Objects.requireNonNull(email))
                 .get().addOnSuccessListener(documentSnapshot -> {
                     User user = documentSnapshot.toObject(User.class);
                     listener.setUserNameField(Objects.requireNonNull(user).getUsername());
@@ -46,6 +59,7 @@ public class ProfileRepository {
                     listener.setFullNameField(user.getName());
                     listener.setBirthDateField(user.getBirthDate());
                     listener.setPhoneNumberField(user.getPhoneNumber());
+                    listener.setImageLink(user.getProfilePictureLink());
         });
     }
 
@@ -83,6 +97,12 @@ public class ProfileRepository {
             docRef.update(field, data);
             listener.setLoadingFinished();
         });
+    }
+
+    private void listenChanges() {
+        listenerRegistration = db.collection("users")
+                .document(email)
+                .addSnapshotListener((value, error) -> ProfileRepository.this.loadProfile());
     }
 
 }

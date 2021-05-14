@@ -1,48 +1,75 @@
 package com.example.piston.main.profile.image;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.google.android.material.appbar.MaterialToolbar;
+import com.example.piston.databinding.ActivityProfileImageBinding;
+import com.example.piston.utilities.CheckNetwork;
+import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.PickImageActivity;
 
-public class ProfileImageActivity extends AppCompatActivity  {
-    private ScaleGestureDetector scaleGestureDetector;
-    private float mScaleFactor = 1.0f;
-    ImageView picture;
+public class ProfileImageActivity extends PickImageActivity {
+
+    ProfileImageViewModel viewModel;
+    ActivityProfileImageBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_image);
-        picture = findViewById(R.id.picture);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(
-                getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-        picture.setImageBitmap(bitmap);
-        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
-        MaterialToolbar toolbar = findViewById(R.id.profile_toolbar);
-        toolbar.setNavigationOnClickListener((view) -> finish());
+        setContentView(R.layout.activity_profile_image);
+
+        String email = getIntent().getStringExtra("email");
+
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(email))
+                .get(ProfileImageViewModel.class);
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_image);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+
+        binding.profileToolbar.setNavigationOnClickListener(v -> finish());
+
+        if (getIntent().getBooleanExtra("isCurrentUser", false))
+            binding.profileToolbar.inflateMenu(R.menu.profile_image_top_app_bar);
+
+        viewModel.getImageLink().observe(this, s -> {
+            if (s != null) {
+                if (!s.equals("")) {
+                    Glide.with(this)
+                            .load(s)
+                            .into(binding.picture);
+                }
+            }
+        });
     }
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        scaleGestureDetector.onTouchEvent(motionEvent);
-        return true;
-    }
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            mScaleFactor *= scaleGestureDetector.getScaleFactor();
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
-            picture.setScaleX(mScaleFactor);
-            picture.setScaleY(mScaleFactor);
-            return true;
+
+    public void changeImage(MenuItem item) {
+        if (CheckNetwork.isConnected(getApplicationContext())) {
+            imagePick(item);
+
         }
+        else
+            Toast.makeText(getApplicationContext(), "No connection!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        viewModel.setImage(image);
+    }
+
+    @Override
+    protected void setImage(Bitmap bitmap) {
+        binding.picture.setImageBitmap(bitmap);
     }
 }

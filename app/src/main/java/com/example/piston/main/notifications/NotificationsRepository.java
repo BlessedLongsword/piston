@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class NotificationsRepository {
     public void loadNotifications() {
         ArrayList<Notification> notifications = new ArrayList<>();
         docRef.collection("notifications")
-                .orderBy("timestamp")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot documentSnapshot : Objects.
@@ -55,7 +56,6 @@ public class NotificationsRepository {
                                 notifications.add(notification);
                             }
                         }
-                        Collections.reverse(notifications);
                         listener.setNotifications(notifications);
                     }
         });

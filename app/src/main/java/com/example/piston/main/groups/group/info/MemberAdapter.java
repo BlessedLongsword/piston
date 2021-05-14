@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.GroupMember;
 import com.example.piston.databinding.ItemMemberBinding;
@@ -67,16 +68,17 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
     public void onBindViewHolder(@NonNull MemberAdapter.MemberHolder holder, int position) {
         GroupMember member = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position);
         holder.bind(member);
-        /*Glide.with(localActivity)
-                .load(member.getProfilePictureLink())
-                .into(holder.binding.memberProfilePicture);*/
+        if (member.getProfilePictureLink() != null) {
+            Glide.with(localActivity)
+                    .load(member.getProfilePictureLink())
+                    .into(holder.binding.memberProfilePicture);
+        }
         holder.getBinding().memberCard.setOnClickListener(openNewActivity(member.getEmail()));
         //holder.getBinding().memberCard.setOnLongClickListener();
     }
 
     @Override
     public int getItemCount() {
-        Log.d("DBReadTAG", String.valueOf(Objects.requireNonNull(viewModel.getMembers().getValue()).size()));
         return Objects.requireNonNull(viewModel.getMembers().getValue()).size();
     }
 

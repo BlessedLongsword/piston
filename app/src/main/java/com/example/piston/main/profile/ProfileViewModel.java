@@ -1,5 +1,7 @@
 package com.example.piston.main.profile;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,6 +18,7 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<String> phoneNumber = new MutableLiveData<>("");
     private final MutableLiveData<String> email = new MutableLiveData<>("");
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
+    private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> isCurrentUser = new MutableLiveData<>(false);
 
     /*PupUps*/
@@ -24,10 +27,10 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
 
-    private final ProfileRepository profileRepository = new ProfileRepository(this);
+    private final ProfileRepository profileRepository;
 
-    public ProfileViewModel(String id) {
-        isCurrentUser.setValue(id == null);
+    public ProfileViewModel(String email) {
+        profileRepository = new ProfileRepository(this, email);
     }
 
     public void loadProfile() {
@@ -82,6 +85,11 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     }
 
     @Override
+    public void setImageLink(String imageLink) {
+        this.imageLink.setValue(imageLink);
+    }
+
+    @Override
     public void setBirthDateStatus(RegisterResult.BirthDateError birthDateError) {
         this.birthDateError.setValue(birthDateError);
     }
@@ -90,6 +98,11 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     public void setLoadingFinished() {
         loading.setValue(false);
         finished.setValue(true);
+    }
+
+    @Override
+    public void setIsCurrentUser(boolean isCurrentUser) {
+        this.isCurrentUser.setValue(isCurrentUser);
     }
 
 
@@ -127,6 +140,10 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
         return finished;
     }
 
+    public LiveData<String> getImageLink() {
+        return imageLink;
+    }
+
     public void editName(String text) {
         profileRepository.editName(text);
     }
@@ -142,4 +159,5 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     public LiveData<Boolean> getIsCurrentUser() {
         return isCurrentUser;
     }
+
 }

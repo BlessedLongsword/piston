@@ -13,6 +13,7 @@ import com.example.piston.main.personal.folder.FolderViewModel;
 import com.example.piston.main.personal.folder.info.FolderInfoViewModel;
 import com.example.piston.main.posts.PostViewModel;
 import com.example.piston.main.profile.ProfileViewModel;
+import com.example.piston.main.profile.image.ProfileImageViewModel;
 
 public class MyViewModelFactory implements ViewModelProvider.Factory {
 
@@ -52,6 +53,8 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new GoogleRegisterViewModel(mParam);
         if (modelClass.isAssignableFrom(ProfileViewModel.class))
             return (T) new ProfileViewModel(mParam);
+        if (modelClass.isAssignableFrom(ProfileImageViewModel.class))
+            return (T) new ProfileImageViewModel(mParam);
         if (modelClass.isAssignableFrom(PostViewModel.class))
             return (T) new PostViewModel(mParam, mParam1, mParam2);
         throw new IllegalArgumentException("Unable to construct ViewModel");

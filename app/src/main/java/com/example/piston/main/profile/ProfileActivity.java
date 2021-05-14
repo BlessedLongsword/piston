@@ -1,17 +1,17 @@
 package com.example.piston.main.profile;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityProfileBinding;
 import com.example.piston.main.profile.image.ProfileImageActivity;
@@ -19,35 +19,44 @@ import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ProfileViewModel profileViewModel;
     private ActivityProfileBinding binding;
-    private String id;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        id = getIntent().getStringExtra("id");
+        email = getIntent().getStringExtra("email");
 
-        profileViewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        profileViewModel = new ViewModelProvider(this, new MyViewModelFactory(email))
                 .get(ProfileViewModel.class);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         binding.setViewModel(profileViewModel);
         binding.setLifecycleOwner(this);
         binding.profileToolbar.setNavigationOnClickListener(v -> finish());
-        profileViewModel.loadProfile();
+
+        profileViewModel.getImageLink().observe(this, s -> {
+            if (s != null ) {
+                if (!s.equals("")) {
+                    Glide.with(this)
+                            .load(s)
+                            .into(binding.profilePicture);
+                }
+            }
+        });
     }
 
     public void clickImage(View view){
         Intent intent = new Intent(this, ProfileImageActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("email", email);
+        intent.putExtra("isCurrentUser", profileViewModel.getIsCurrentUser().getValue());
         startActivity(intent);
     }
 

@@ -7,6 +7,7 @@ import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,13 @@ public abstract class PickImageActivity extends AppCompatActivity {
     protected byte[] image;
 
     public void imagePick(View v) {
+        ImagePicker.Companion.with(this)
+                .crop()
+                .compress(1024)
+                .start();
+    }
+
+    public void imagePick(MenuItem item) {
         ImagePicker.Companion.with(this)
                 .crop()
                 .compress(1024)
