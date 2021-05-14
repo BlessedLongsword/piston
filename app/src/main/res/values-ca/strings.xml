@@ -137,7 +137,7 @@
     <string name="email_req">És necessària una adreça de correu electrònic</string>
     <string name="email_invalid">L\'adreça de correu electrònic no es vàlida</string>
     <string name="pwd_req">Cal introduir una contrasenya</string>
-    <string name="passwords_dont_match">Les contrasenyes no coincideixen</string>
+    <string name="passwords_not_match">Les contrasenyes no coincideixen</string>
     <string name="verify_reg_field">Confirmi tots els camps i provi una altra vegada</string>
     <string name="unexpected_error">Error Inesperat</string>
 

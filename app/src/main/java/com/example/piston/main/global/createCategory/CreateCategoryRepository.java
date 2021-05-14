@@ -61,7 +61,7 @@ public class CreateCategoryRepository {
             String randomId = UUID.randomUUID().toString();
             String path = "categories/" + title;
             String imageId = path + "/" + randomId;
-            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+            StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
             UploadTask uploadTask = imageRef.putBytes(image);
             uploadTask.addOnFailureListener(exception -> {
                 // Handle unsuccessful uploads

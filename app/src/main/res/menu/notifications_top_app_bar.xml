@@ -5,12 +5,12 @@
     tools:context=".main.notifications.NotificationsActivity">
 
     <item
-        android:id="@+id/notif_read"
+        android:id="@+id/notification_read"
         android:icon="@drawable/outline_mark_email_read_white_36"
         android:title="@string/notifications_mark_as_read"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/notif_delete"
+        android:id="@+id/notification_delete"
         android:icon="@drawable/outline_delete_white_36"
         android:title="@string/delete"
         app:showAsAction="ifRoom"/>

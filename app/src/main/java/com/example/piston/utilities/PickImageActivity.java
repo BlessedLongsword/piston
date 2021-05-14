@@ -44,9 +44,9 @@ public abstract class PickImageActivity extends AppCompatActivity {
                     bitmap = ImageDecoder.decodeBitmap(source);
                 }
                 setImage(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                image = baos.toByteArray();
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                image = byteArrayOutputStream.toByteArray();
             }
             catch (IOException e) {
                 e.printStackTrace();

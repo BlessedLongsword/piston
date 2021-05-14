@@ -1,8 +1,6 @@
 package com.example.piston.main.profile;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -19,7 +17,6 @@ import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {

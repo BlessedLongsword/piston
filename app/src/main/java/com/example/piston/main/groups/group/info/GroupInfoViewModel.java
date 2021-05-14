@@ -26,9 +26,9 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     }
 
     @Override
-    public void setParams(String title, String decription, String imageLink, String groupID) {
+    public void setParams(String title, String description, String imageLink, String groupID) {
         this.title.setValue(title);
-        this.description.setValue(decription);
+        this.description.setValue(description);
         this.imageLink.setValue(imageLink);
         id.setValue(groupID);
     }

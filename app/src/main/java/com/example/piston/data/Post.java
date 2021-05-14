@@ -58,7 +58,6 @@ public class Post {
         this.id = id;
     }
 
-    //Per quan borrem la imatge
     public String getImageId() {
         return imageId;
     }

@@ -1,7 +1,5 @@
 package com.example.piston.authentication.login;
 
-import android.util.Log;
-
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -48,8 +46,6 @@ public class LoginRepository {
                         loginResult.setUsernameError(LoginResult.UsernameError.INVALID);
                         listener.setLoginResult(loginResult);
                     }
-                } else {
-                    Log.d("nowaybro", "get failed with ", task.getException());
                 }
         });
     }
@@ -70,7 +66,7 @@ public class LoginRepository {
                         } catch (FirebaseAuthInvalidCredentialsException exception) {
                         loginResult.setPasswordError(LoginResult.PasswordError.INCORRECT);
                         } catch (Exception exception) {
-                            Log.d("nowaybro", "Unexpected exception: " + exception.getMessage());
+                            exception.printStackTrace();
                         }
                         listener.setLoginResult(loginResult);
                     }
@@ -94,30 +90,7 @@ public class LoginRepository {
                                     }
                                     listener.setLoginResult(loginResult);
                         });
-                    } else {
-                        Log.w("nowaybro", "signInWithCredential:failure", task.getException());
                     }
                 });
     }
-
-    /*Email verification
-    final FirebaseUser user = mAuth.getCurrentUser();
-    user.sendEmailVerification()
-            .addOnCompleteListener(this, new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    // Re-enable button
-
-                    if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this,
-                                "Verification email sent to " + user.getEmail(),
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.e("nowaybro", "sendEmailVerification", task.getException());
-                        Toast.makeText(MainActivity.this,
-                                "Failed to send verification email.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });*/
 }

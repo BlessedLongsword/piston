@@ -1,7 +1,5 @@
 package com.example.piston.main.global.category;
 
-import android.util.Log;
-
 import com.example.piston.data.Post;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -41,8 +39,6 @@ public class CategoryRepository {
                             posts.add(post);
                         }
                         listener.setCategoryPosts(posts);
-                    } else {
-                        Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
                 });
     }

@@ -81,7 +81,7 @@ public class BindingAdapters {
                 view.setError(null);
                 break;
             case INVALID:
-                view.setError(view.getContext().getString(R.string.passwords_dont_match));
+                view.setError(view.getContext().getString(R.string.passwords_not_match));
                 break;
         }
     }

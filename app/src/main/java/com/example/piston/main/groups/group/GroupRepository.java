@@ -1,7 +1,5 @@
 package com.example.piston.main.groups.group;
 
-import android.util.Log;
-
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -52,8 +50,6 @@ public class GroupRepository {
                             posts.add(post);
                         }
                         listener.setGroupPosts(posts);
-                    } else {
-                        Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
                 });
     }

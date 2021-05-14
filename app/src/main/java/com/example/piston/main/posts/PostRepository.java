@@ -93,8 +93,6 @@ public class PostRepository {
                        posts.add(post);
                    }
                }
-           } else {
-               Log.d("nowaybro", "Error getting documents: ", task1.getException());
            }
            listener.setReplies(posts);
            listener.setLoaded();

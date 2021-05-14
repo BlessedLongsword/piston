@@ -142,7 +142,7 @@
     <string name="email_invalid">Not a valid Email</string>
     <string name="pwd_req">Password required</string>
     <string name="verify_reg_field">Please confirm the fields and try again</string>
-    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="passwords_not_match">Passwords don\'t match</string>
     <string name="unexpected_error">Unexpected Error</string>
 
     <!-- Settings Strings -->
