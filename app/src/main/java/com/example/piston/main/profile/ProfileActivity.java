@@ -1,12 +1,20 @@
 package com.example.piston.main.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +25,8 @@ import com.example.piston.databinding.ActivityProfileBinding;
 import com.example.piston.main.profile.image.ProfileImageActivity;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
+import com.example.piston.utilities.textwatchers.CounterWatcher;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
@@ -43,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void clickImage(View view){
         Bitmap bitmap = BitmapFactory.decodeResource
-                (getResources(), R.drawable.jojo); // your bitmap
+                (getResources(), R.drawable.default_profile_picture); // your bitmap
         ByteArrayOutputStream bs = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs);
         Intent intent = new Intent(this, ProfileImageActivity.class);
