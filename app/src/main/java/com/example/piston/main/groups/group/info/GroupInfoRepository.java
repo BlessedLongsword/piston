@@ -80,7 +80,7 @@ public class GroupInfoRepository {
     public void deleteGroup() {
         docRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Delete post inside group
+                // Delete posts inside group
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String id = documentSnapshot.getId();
@@ -108,7 +108,7 @@ public class GroupInfoRepository {
         deleteMembers("mods");
         deleteMembers("members");
 
-        docRef.delete();
+        docRef.delete(); // Delete group
     }
 
     private void deleteLiked(String postID) {
