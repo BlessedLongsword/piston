@@ -11,6 +11,18 @@
 
     </data>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/micro_separator"
+            android:layout_marginStart="@dimen/medium_square"
+            android:background="?android:attr/dividerVertical" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/member_card"
         android:layout_width="match_parent"
@@ -19,17 +31,7 @@
         android:checkable="true"
         android:layout_marginHorizontal="@dimen/card_margin">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="@dimen/micro_separator"
-                android:layout_marginStart="@dimen/medium_square"
-                android:background="?android:attr/dividerVertical" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,18 +42,22 @@
                     android:id="@+id/member_profile_picture"
                     android:layout_width="@dimen/low_square"
                     android:layout_height="@dimen/low_square"
+                    android:src="@drawable/jojo"
                     android:contentDescription="@string/profile_image"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin"
+                    android:layout_marginHorizontal="@dimen/small_separator"
+                    android:layout_marginVertical="@dimen/tiny_separator"
                     android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <TextView
                             android:id="@+id/member_username"
@@ -62,15 +68,28 @@
                             android:textSize="18sp"
                             android:textAppearance="?attr/textAppearanceBody1"/>
 
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:id="@+id/member_type_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/content_description_media"/>
+
                     </LinearLayout>
+
+
 
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 </layout>

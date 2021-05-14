@@ -2,24 +2,24 @@ package com.example.piston.data;
 
 public class GroupMember extends User {
 
-    boolean mod, owner;
+    int priority;
+
+    public static final int OWNER = 0;
+    public static final int MOD = 1;
 
     public GroupMember() {
     }
 
-    public boolean getIsMod() {
-        return mod;
+    public GroupMember(int priority) {
+        this.priority = priority;
     }
 
-    public void getSetMod(boolean mod) {
-        this.mod = mod;
+    public int getPriority() {
+        return priority;
     }
 
-    public boolean isOwner() {
-        return owner;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
-    public void setOwner(boolean owner) {
-        this.owner = owner;
-    }
 }

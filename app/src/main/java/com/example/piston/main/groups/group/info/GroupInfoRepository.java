@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class GroupInfoRepository {
@@ -22,6 +23,8 @@ public class GroupInfoRepository {
     private ListenerRegistration listenerRegistration;
 
     private final String groupID;
+    private GroupMember[] members;
+    private int counter;
 
     public interface IGroupInfo {
         void setParams(String title, String decription, String imageLink, String groupID);
@@ -45,21 +48,33 @@ public class GroupInfoRepository {
     }
 
     public void loadMembers() {
-        docRef.collection("members").get().addOnCompleteListener(task -> {
+        docRef.collection("members").orderBy("priority").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                ArrayList<GroupMember> members = new ArrayList<>();
+                int size = Objects.requireNonNull(task.getResult()).size();
+                counter = 0;
+                members = new GroupMember[size];
+                int position = 0;
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    final int currentPosition = position;
                     db.collection("users").document(documentSnapshot.getId())
                             .get().addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     GroupMember member = task1.getResult().toObject(GroupMember.class);
-                                    members.add(member);
-                                    listener.setMembers(members);
+                                    long priority = (long) documentSnapshot.get("priority");
+                                    Objects.requireNonNull(member).setPriority((int) priority);
+                                    addMember(currentPosition, member);
                                 }
                     });
+                    position++;
                 }
             }
         });
+    }
+
+    private void addMember(int position, GroupMember member) {
+        members[position] = member;
+        if (++counter == members.length)
+            listener.setMembers(new ArrayList<>(Arrays.asList(members)));
     }
 
     private void listenChanges() {

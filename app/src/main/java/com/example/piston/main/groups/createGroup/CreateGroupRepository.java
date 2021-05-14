@@ -1,6 +1,7 @@
 package com.example.piston.main.groups.createGroup;
 
 import com.example.piston.data.Group;
+import com.example.piston.data.GroupMember;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -80,7 +81,7 @@ public class CreateGroupRepository {
                                 listener.setCreateFinished();
                             }
                         });
-                        Map<String, String> data = new HashMap<>();
+                        Map<String, Object> data = new HashMap<>();
                         data.put("id", groupID);
                         db.collection("users")
                                 .document(user)
@@ -90,9 +91,8 @@ public class CreateGroupRepository {
 
                         data.clear();
                         data.put("id", user);
+                        data.put("priority", GroupMember.OWNER);
                         DocumentReference groupDocref = db.collection("groups").document(groupID);
-                        groupDocref.collection("owner").document(user).set(data);
-                        groupDocref.collection("mods").document(user).set(data);
                         groupDocref.collection("members").document(user).set(data);
                     }));
         }
