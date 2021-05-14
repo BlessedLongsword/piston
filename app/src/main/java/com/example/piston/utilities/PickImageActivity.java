@@ -1,4 +1,4 @@
-package com.example.piston.main.sections;
+package com.example.piston.utilities;
 
 import android.app.Activity;
 import android.content.Intent;

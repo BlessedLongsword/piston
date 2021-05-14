@@ -39,6 +39,8 @@ public class EditPopup {
         popupWindow.setBackgroundDrawable(new ColorDrawable());
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
 
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
 

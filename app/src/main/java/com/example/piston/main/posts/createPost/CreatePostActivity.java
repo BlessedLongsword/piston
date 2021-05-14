@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
-import com.example.piston.main.sections.PickImageActivity;
+import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.CheckNetwork;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
