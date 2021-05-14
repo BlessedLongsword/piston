@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
@@ -132,7 +133,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     @Override
     public void replyPopUp(String owner, String content, String quoteID) {
 
-        View popupView = getLayoutInflater().inflate(R.layout.pupup_reply, null);
+        View popupView = getLayoutInflater().inflate(R.layout.popup_reply, new LinearLayout(this));
 
         PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
