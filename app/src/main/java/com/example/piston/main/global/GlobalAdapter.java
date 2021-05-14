@@ -56,20 +56,6 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemCategoryBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_category, parent, false);
-        binding.starButton.setOnLikeListener(new OnLikeListener() {
-
-            @Override
-            public void liked(LikeButton likeButton) {
-                likeButton.setLiked(true);
-                viewModel.setSub(true, binding.categoryTitle.getText().toString());
-            }
-
-            @Override
-            public void unLiked(LikeButton likeButton) {
-                likeButton.setLiked(false);
-                viewModel.setSub(false, binding.categoryTitle.getText().toString());
-            }
-        });
         return new CategoryHolder(binding);
     }
 
@@ -85,6 +71,20 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
             if (integerBooleanHashMap.get(position) != null) {
                 if (Objects.requireNonNull(integerBooleanHashMap.get(position)))
                     holder.binding.starButton.setLiked(true);
+            }
+        });
+        holder.getBinding().starButton.setOnLikeListener(new OnLikeListener() {
+
+            @Override
+            public void liked(LikeButton likeButton) {
+                likeButton.setLiked(true);
+                viewModel.setSub(true, category.getId());
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                likeButton.setLiked(false);
+                viewModel.setSub(false, category.getId());
             }
         });
     }

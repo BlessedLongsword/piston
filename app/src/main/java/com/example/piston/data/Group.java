@@ -2,23 +2,14 @@ package com.example.piston.data;
 
 public class Group extends Section {
 
-    private String id, imageID, imageLink;
+    private String imageID, imageLink;
 
     public Group() {}
 
     public Group(String name, String description, String id, String imageID, String imageLink) {
-        super(name, description);
-        this.id = id;
+        super(id, name, description);
         this.imageID = imageID;
         this.imageLink = imageLink;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getImageID() {

@@ -16,7 +16,7 @@ public class GlobalRepository {
     private final IGlobal listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String email;
-    private ListenerRegistration listenerRegistration;
+    private ListenerRegistration listenerRegistrationCategories, listenerRegistrationSubs;
 
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
@@ -52,7 +52,7 @@ public class GlobalRepository {
                             categories.add(category);
                             Integer finalCount = count;
                             db.collection("categories")
-                                    .document(category.getTitle())
+                                    .document(documentSnapshot.getId())
                                     .collection("subscribedUsers")
                                     .document(Objects.requireNonNull(email))
                                     .get().addOnCompleteListener(task1 -> {
@@ -68,30 +68,35 @@ public class GlobalRepository {
                 });
     }
 
-    public void addSub(boolean sub, String title){
+    public void addSub(boolean sub, String id){
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         if (sub){
             Map<String, String> data = new HashMap<>();
-            data.put("title", title);
-            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(title).set(data);
+            data.put("title", id);
+            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(id).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
-            db.collection("categories").document(title).collection("subscribedUsers").document(email).set(data2);
+            db.collection("categories").document(id).collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(title).delete();
-            db.collection("categories").document(title).collection("subscribedUsers").document(email).delete();
+            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(id).delete();
+            db.collection("categories").document(id).collection("subscribedUsers").document(email).delete();
         }
     }
 
     private void listenChanges() {
-        listenerRegistration = db.collection("categories")
+        listenerRegistrationCategories = db.collection("categories")
+                .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());
+        listenerRegistrationSubs = db.collection("users")
+                .document(email)
+                .collection("subscribedCategories")
                 .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());
     }
 
     public void removeListener() {
-        listenerRegistration.remove();
+        listenerRegistrationCategories.remove();
+        listenerRegistrationSubs.remove();
     }
 
 }

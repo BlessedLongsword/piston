@@ -3,24 +3,15 @@ package com.example.piston.data;
 public class Category extends Section {
 
     private boolean nsfw;
-    private String imageID, imageLink, id;
+    private String imageID, imageLink;
 
     public Category() {}
 
-    public Category(String title, String description, boolean nsfw, String imageID, String imageLink, String id) {
-        super(title, description);
+    public Category(String id, String title, String description, boolean nsfw, String imageID, String imageLink) {
+        super(id, title, description);
         this.nsfw = nsfw;
         this.imageID = imageID;
         this.imageLink = imageLink;
-        this.id = id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public boolean getIsNSFW() {

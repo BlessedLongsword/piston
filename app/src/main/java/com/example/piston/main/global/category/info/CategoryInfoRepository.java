@@ -1,5 +1,7 @@
 package com.example.piston.main.global.category.info;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,7 +31,6 @@ public class CategoryInfoRepository {
         this.category = category;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-
         docRef = db.collection("categories").document(category);
         docRef1 = db.collection("users").document(email);
 
@@ -47,7 +48,7 @@ public class CategoryInfoRepository {
     public void addSub(boolean sub){
         if (sub){
             Map<String, String> data = new HashMap<>();
-            data.put("title", category);
+            data.put("id", category);
             docRef1.collection("subscribedCategories").document(category).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
