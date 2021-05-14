@@ -17,7 +17,6 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="delete_folder">Delete folder</string>
     <string name="group_code">Group Code</string>
     <string name="description">Description</string>
     <string name="create">Create</string>
@@ -95,6 +94,7 @@
     <string name="edit_folder_activity_title">Edit Folder</string>
     <string name="create_folder_title_taken">This Folder already exists</string>
     <string name="create_folder_error_message">Please insert a valid Folder Name</string>
+    <string name="delete_folder">Delete folder</string>
 
     <!-- Join Group Strings -->
     <string name="join_group_activity_title">Join Group</string>
@@ -113,10 +113,10 @@
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">Group Settings</string>
-    <string name="delete_group_btn">Delete Group</string>
+    <string name="delete_group">Delete Group</string>
     <string name="delete_selected">Delete selected</string>
 
-    <!-- Create Category Strings -->
+    <!-- Create and edit Category Strings -->
     <string name="create_category_activity_title">Create Category</string>
     <string name="create_category_name">Category Name</string>
     <string name="create_category_nsfw">NSFW Category</string>
@@ -124,6 +124,7 @@
     <string name="create_category_error_message">Please insert a valid Category Name</string>
     <string name="create_category_title_taken">This Category already exists</string>
     <string name="category_image" translatable="false">Category Image</string>
+    <string name="delete_category">Delete category</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">Notifications</string>

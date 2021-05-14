@@ -12,6 +12,7 @@ public class CategoryRepository {
 
     public interface ICategory {
         void setCategoryPosts(ArrayList<Post> posts);
+        void setTitle(String title);
     }
 
     private final ICategory listener;

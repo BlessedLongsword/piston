@@ -13,6 +13,8 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityFolderInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
 
+import static com.example.piston.data.constants.Integers.DELETE_CODE;
+
 public class FolderInfoActivity extends AppCompatActivity {
 
     FolderInfoViewModel viewModel;
@@ -39,6 +41,7 @@ public class FolderInfoActivity extends AppCompatActivity {
 
     public void deleteFolder(MenuItem item) {
         viewModel.deleteFolder();
+        setResult(RESULT_OK);
         finish();
     }
 }

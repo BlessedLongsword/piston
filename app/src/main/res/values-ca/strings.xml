@@ -17,7 +17,6 @@
     <string name="save_changes">Desa els canvis</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
-    <string name="delete_folder">Eliminar carpeta</string>
     <string name="group_code">Enllaç</string>
     <string name="description">Descripció</string>
     <string name="create">Crear</string>
@@ -92,6 +91,7 @@
     <string name="edit_folder_activity_title">EDITAR CARPETA</string>
     <string name="create_folder_title_taken">Aquesta carpeta ja existeix</string>
     <string name="create_folder_error_message">Siusplau inserti un nom vàlid per la Carpeta</string>
+    <string name="delete_folder">Eliminar carpeta</string>
 
     <!-- Join Group Strings -->
     <string name="join_group_activity_title">Unir-se a un Grup</string>
@@ -109,17 +109,18 @@
 
     <!-- Moderate Group Strings -->
     <string name="group_settings_activity_title">CONFIGURACIO DEL GRUP</string>
-    <string name="delete_group_btn">Eliminar Grup</string>
+    <string name="delete_group">Eliminar Grup</string>
     <string name="delete_selected">Eliminar seleccionats</string>
 
 
-    <!-- Create Category Strings -->
+    <!-- Create and edit Category Strings -->
     <string name="create_category_activity_title">CREAR CATEGORIA</string>
-    <string name="create_category_name">Nom de la Categoría</string>
+    <string name="create_category_name">Nom de la Categoria</string>
     <string name="create_category_nsfw">Categoria +18</string>
     <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
-    <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoría</string>
-    <string name="create_category_title_taken">Aquesta categoría ja existeix</string>
+    <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoria</string>
+    <string name="create_category_title_taken">Aquesta categoria ja existeix</string>
+    <string name="delete_category">Eliminar categoria</string>
 
     <!-- Notifications Strings -->
     <string name="notifications_activity_title">NOTIFICACIONS</string>
@@ -161,7 +162,7 @@
     <string name="owner_header">De:</string>
     <string name="quote_header">ha dit:</string>
     <string name="group_info">Group Info</string>
-    <string name="create_category_image_error_message">Has d\'afegir una imatge a la categoría. Assegura\'t de que tens connexió a internet.</string>
+    <string name="create_category_image_error_message">Has d\'afegir una imatge a la categoria. Assegura\'t de que tens connexió a internet.</string>
     <string name="notification_post_indication">Nou post de</string>
     <string name="notification_reply_indication">Resposta de</string>
     <string name="replies">Respostes</string>

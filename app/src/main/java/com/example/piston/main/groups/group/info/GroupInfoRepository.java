@@ -108,9 +108,7 @@ public class GroupInfoRepository {
             }
         });
 
-        deleteMembers("owner");
-        deleteMembers("mods");
-        deleteMembers("members");
+        deleteMembers();
 
         docRef.delete(); // Delete group
     }
@@ -135,22 +133,22 @@ public class GroupInfoRepository {
         });
     }
 
-    private void deleteMembers(String collection) {
-        docRef.collection(collection).get().addOnCompleteListener(task -> {
+    private void deleteMembers() {
+        docRef.collection("members").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String id = documentSnapshot.getId();
-                    if (collection.equals("members")) {
-                        // Delete groupID from group's members
-                        db.collection("users")
-                                .document(id)
-                                .collection("groups")
-                                .document(groupID)
-                                .delete();
-                    }
-                    // Delete owner/member/mod from group
-                    docRef.collection(collection)
+
+                    // Delete groupID from group's members
+                    db.collection("users")
+                            .document(id)
+                            .collection("groups")
+                            .document(groupID)
+                            .delete();
+
+                    // Delete members from group
+                    docRef.collection("members")
                             .document(id)
                             .delete();
                 }
@@ -159,13 +157,13 @@ public class GroupInfoRepository {
     }
 
     public void isOwner() {
-
         docRef.collection("members")
-                .document(user).get().addOnCompleteListener(task -> {
-                                    if (task.isComplete()) {
-                                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
-                                        listener.setIsOwner((int) priority == 0);
-                                    }
+                .document(user)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isComplete()) {
+                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
+                        listener.setIsOwner((int) priority == 0);
+                    }
         });
     }
 

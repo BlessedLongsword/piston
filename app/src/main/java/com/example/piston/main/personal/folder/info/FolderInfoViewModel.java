@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.main.personal.folder.info.FolderInfoRepository;
-
 public class FolderInfoViewModel extends ViewModel implements FolderInfoRepository.IFolderInfo {
 
     private final MutableLiveData<String> title = new MutableLiveData<>("");

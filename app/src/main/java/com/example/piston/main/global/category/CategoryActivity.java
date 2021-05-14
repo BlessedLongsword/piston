@@ -17,9 +17,11 @@ import com.example.piston.main.global.category.info.CategoryInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
+import static com.example.piston.data.constants.Integers.DELETE_CODE;
+
 public class CategoryActivity extends AppCompatActivity {
 
-    private String title;
+    private String id;
     private boolean orphan;
 
     @Override
@@ -28,17 +30,18 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         Intent intent = getIntent();
-        title = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
+
         orphan = intent.getBooleanExtra("orphan", false);
 
-        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(CategoryViewModel.class);
         ActivityCategoryBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.viewPostsTopAppBar.setTitle(title);
+        viewModel.getTitle().observe(this, binding.viewPostsTopAppBar::setTitle);
         binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
 
@@ -47,7 +50,7 @@ public class CategoryActivity extends AppCompatActivity {
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra("collection", "categories");
-        intent.putExtra("document", title);
+        intent.putExtra("document", id);
         startActivity(intent);
     }
 
@@ -71,7 +74,15 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void goToInfo() {
         Intent intent = new Intent(this, CategoryInfoActivity.class);
-        intent.putExtra("document", title);
-        startActivity(intent);
+        intent.putExtra("document", id);
+        intent.putExtra("isAdmin", getIntent().getBooleanExtra("isAdmin",false));
+        startActivityForResult(intent, DELETE_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == DELETE_CODE)
+            finish();
     }
 }

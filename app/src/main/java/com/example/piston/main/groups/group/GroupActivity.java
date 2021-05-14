@@ -17,6 +17,8 @@ import com.example.piston.main.groups.group.info.GroupInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
+import static com.example.piston.data.constants.Integers.DELETE_CODE;
+
 public class GroupActivity extends AppCompatActivity {
 
     private String id;
@@ -69,8 +71,6 @@ public class GroupActivity extends AppCompatActivity {
         goToInfo();
     }
 
-    private static final int DELETE_CODE = 9999;
-
     public void goToInfo() {
         Intent intent = new Intent(this, GroupInfoActivity.class);
         intent.putExtra("document", id);
@@ -80,7 +80,7 @@ public class GroupActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DELETE_CODE)
+        if (resultCode == DELETE_CODE)
             finish();
     }
 }

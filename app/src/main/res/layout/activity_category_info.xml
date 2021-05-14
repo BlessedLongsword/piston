@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/category_info"
+                app:menu="@menu/global_info_top_app_bar"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"
                 style="@style/Theme.Piston.ToolbarStyle"/>
         </com.google.android.material.appbar.AppBarLayout>

@@ -63,26 +63,7 @@ public class NotificationsRepository {
 
     private void listenChanges() {
         listenerRegistration = docRef.collection("notifications")
-                .addSnapshotListener((snapshots, error) -> {
-                    NotificationsRepository.this.loadNotifications();
-                    /*ArrayList<Notification> newNotifications = new ArrayList<>();
-                    if (error == null) {
-                        for (DocumentChange dc : snapshots.getDocumentChanges()) {
-                            if (dc.getType().equals(DocumentChange.Type.ADDED)) {
-                                String notificationType = dc.getDocument().get("type").toString();
-                                if (notificationType.equals("post")) {
-                                    NotificationPost notification = dc.getDocument().
-                                            toObject(NotificationPost.class);
-                                    newNotifications.add(notification);
-                                } else {
-                                    NotificationReply notification = dc.getDocument()
-                                            .toObject(NotificationReply.class);
-                                    newNotifications.add(notification);
-                                }
-                            }
-                        }
-                    }*/
-                });
+                .addSnapshotListener((snapshots, error) -> NotificationsRepository.this.loadNotifications());
     }
 
     public void removeListener() {

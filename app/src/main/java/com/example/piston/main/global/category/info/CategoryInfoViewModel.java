@@ -8,7 +8,9 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
 
     private final MutableLiveData<String> description = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
+    private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> subscribed = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
 
     final CategoryInfoRepository repository;
 
@@ -18,18 +20,20 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
     }
 
     @Override
-    public void setDescription(String description) {
+    public void setParams(String title, String description, String imageLink) {
+        this.title.setValue(title);
         this.description.setValue(description);
-    }
-
-    @Override
-    public void setImageLink(String imageLink) {
         this.imageLink.setValue(imageLink);
     }
 
     @Override
     public void setSubscribed(boolean subscribed){
         this.subscribed.setValue(subscribed);
+    }
+
+    @Override
+    public void setIsAdmin(boolean admin) {
+        this.isAdmin.setValue(admin);
     }
 
     public void setSub(boolean sub){
@@ -46,4 +50,17 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
     }
 
     public LiveData<Boolean> getSubscribed() {return subscribed;}
+
+    public LiveData<Boolean> getIsAdmin() {
+        return isAdmin;
+    }
+
+    public LiveData<String> getTitle() {
+        return title;
+    }
+
+    public void deleteCategory() {
+        repository.deleteCategory();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.piston.main.global.category.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import com.example.piston.utilities.MyViewModelFactory;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
+import static com.example.piston.data.constants.Integers.DELETE_CODE;
+
 public class CategoryInfoActivity extends AppCompatActivity {
 
     CategoryInfoViewModel viewModel;
@@ -25,18 +28,19 @@ public class CategoryInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_info);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("document");
+        String id = intent.getStringExtra("document");
+        boolean isAdmin = intent.getBooleanExtra("isAdmin",false);
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(CategoryInfoViewModel.class);
         ActivityCategoryInfoBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category_info);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        binding.categoryInfoTopAppBar.setTitle(title);
+        viewModel.getTitle().observe(this, binding.categoryInfoTopAppBar::setTitle);
+        binding.categoryInfoTopAppBar.getMenu().getItem(0).setVisible(isAdmin);
         binding.categoryInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
-
         binding.starButton.setOnLikeListener(new OnLikeListener() {
 
             @Override
@@ -61,6 +65,12 @@ public class CategoryInfoActivity extends AppCompatActivity {
                 binding.starButton.setLiked(true);
             }
         });
+    }
+
+    public void deleteCategory(MenuItem item) {
+        viewModel.deleteCategory();
+        setResult(DELETE_CODE);
+        finish();
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class CategoryViewModel extends ViewModel implements CategoryRepository.ICategory {
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<String> title = new MutableLiveData<>("");
 
     private final CategoryRepository repository;
 
@@ -31,4 +32,13 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
     public LiveData<ArrayList<Post>> getPosts() {
         return posts;
     }
+
+    @Override
+    public void setTitle(String title){
+        this.title.setValue(title);
+    }
+
+    public LiveData<String> getTitle() { return title; }
+
+
 }

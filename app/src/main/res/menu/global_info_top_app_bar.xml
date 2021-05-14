@@ -5,7 +5,7 @@
     tools:context=".views.personal.group.GroupInfoActivity">
     <item
         android:id="@+id/navigation_delete"
-        android:title="@string/delete_group"
-        android:onClick="deleteGroup"
+        android:title="@string/delete_category"
+        android:onClick="deleteCategory"
         app:showAsAction="never" />
 </menu>

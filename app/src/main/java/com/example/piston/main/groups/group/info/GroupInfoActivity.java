@@ -19,6 +19,8 @@ import com.example.piston.utilities.MyViewModelFactory;
 
 import java.util.Objects;
 
+import static com.example.piston.data.constants.Integers.DELETE_CODE;
+
 public class GroupInfoActivity extends AppCompatActivity {
 
     private GroupInfoViewModel viewModel;
@@ -31,9 +33,9 @@ public class GroupInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_info);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("document");
+        String id = intent.getStringExtra("document");
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(title))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupInfoViewModel.class);
         ActivityGroupInfoBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group_info);
@@ -60,6 +62,7 @@ public class GroupInfoActivity extends AppCompatActivity {
 
     public void deleteGroup(MenuItem item) {
         viewModel.deleteGroup();
+        setResult(DELETE_CODE);
         finish();
     }
 }

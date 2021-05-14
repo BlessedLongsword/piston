@@ -14,8 +14,8 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<String> description = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
-    private final MutableLiveData<ArrayList<GroupMember>> members = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> numberOfMembers = new MutableLiveData<>("");
+    private final MutableLiveData<ArrayList<GroupMember>> members = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Boolean> isOwner = new MutableLiveData<>(false);
 
     final GroupInfoRepository repository;

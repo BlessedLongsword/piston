@@ -80,8 +80,8 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         Glide.with(localActivity)
                 .load(category.getImageLink())
                 .into(holder.binding.categoryImage);
-        holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getTitle()));
-        viewModel.getSubscribed().observe(localActivity,integerBooleanHashMap -> {
+        holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getId()));
+        viewModel.getSubscribed().observe(localActivity, integerBooleanHashMap -> {
             if (integerBooleanHashMap.get(position) != null) {
                 if (Objects.requireNonNull(integerBooleanHashMap.get(position)))
                     holder.binding.starButton.setLiked(true);
@@ -98,6 +98,7 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         return v -> {
             Intent intent = new Intent(localActivity, CategoryActivity.class);
             intent.putExtra("id", id);
+            intent.putExtra("isAdmin", viewModel.getIsAdmin().getValue());
             localActivity.startActivity(intent);
         };
     }

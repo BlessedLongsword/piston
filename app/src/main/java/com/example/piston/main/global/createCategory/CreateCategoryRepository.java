@@ -61,6 +61,7 @@ public class CreateCategoryRepository {
             String randomId = UUID.randomUUID().toString();
             String path = "categories/" + title;
             String imageId = path + "/" + randomId;
+
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
             UploadTask uploadTask = imageRef.putBytes(image);
             uploadTask.addOnFailureListener(exception -> {
@@ -69,7 +70,10 @@ public class CreateCategoryRepository {
                     .addOnSuccessListener(uri -> {
                         String imageLink = uri.toString();
 
-                        DocumentReference docRef = db.collection("categories").document(title);
+                        String id = db.collection("categories").document().getId();
+
+                        DocumentReference docRef = db.collection("categories").document(id);
+
                         docRef.get().addOnCompleteListener(task -> {
                             if (task.isComplete()) {
                                 DocumentSnapshot ds = task.getResult();
@@ -77,8 +81,8 @@ public class CreateCategoryRepository {
                                     listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
                                     listener.setCreateError();
                                 } else {
-                                    Category category = new Category(title, description, nsfw, imageId, imageLink);
-                                    db.collection("categories").document(title).set(category);
+                                    Category category = new Category(title, description, nsfw, imageId, imageLink, id);
+                                    db.collection("categories").document(id).set(category);
                                     listener.setCreateFinished();
                                 }
                                 listener.setLoadingFinished();
