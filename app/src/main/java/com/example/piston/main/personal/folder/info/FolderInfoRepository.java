@@ -37,7 +37,7 @@ public class FolderInfoRepository {
     public void deleteFolder() {
         docRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
-                // Delete subcollection
+                // Delete sub collection
                 for (QueryDocumentSnapshot snapshot : Objects.requireNonNull(
                         task.getResult())) {
                     DocumentReference docRef1 = docRef.collection("posts")

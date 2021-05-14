@@ -71,7 +71,7 @@ public class CreatePostRepository {
                 else
                     path = collection + "/" + document;
                 String imageId = path + "/" + randomId;
-                StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+                StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
                 UploadTask uploadTask = imageRef.putBytes(image);
                 uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                         .addOnSuccessListener(uri -> {

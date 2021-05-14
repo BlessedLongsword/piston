@@ -14,7 +14,6 @@ public class Reply {
         setId(id);
     }
 
-    //hi
     public String getContent() {
         return content;
     }

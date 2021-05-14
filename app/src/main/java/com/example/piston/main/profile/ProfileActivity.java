@@ -104,7 +104,6 @@ public class ProfileActivity extends AppCompatActivity {
                     break;
             }
         });
-        popup.getSaveButton().setEnabled(false);
         popup.getEditText().addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

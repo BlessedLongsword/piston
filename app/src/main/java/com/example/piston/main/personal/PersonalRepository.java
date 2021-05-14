@@ -1,7 +1,5 @@
 package com.example.piston.main.personal;
 
-import android.util.Log;
-
 import com.example.piston.data.Folder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,8 +41,6 @@ public class PersonalRepository {
                             folders.add(Folder);
                         }
                         listener.setFolders(folders);
-                    } else {
-                        Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
                 });
     }

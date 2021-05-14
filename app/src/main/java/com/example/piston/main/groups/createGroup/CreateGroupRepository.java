@@ -62,7 +62,7 @@ public class CreateGroupRepository {
             String randomId = UUID.randomUUID().toString();
             String path = "groups/" + groupID;
             String imageId = path + "/" + randomId;
-            StorageReference imageRef = storageRef.child(imageId); //Falta comprovar que sigui nou?
+            StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
             UploadTask uploadTask = imageRef.putBytes(image);
             uploadTask.addOnFailureListener(exception -> {
                 // Handle unsuccessful uploads
@@ -92,8 +92,8 @@ public class CreateGroupRepository {
                         data.clear();
                         data.put("id", user);
                         data.put("priority", GroupMember.OWNER);
-                        DocumentReference groupDocref = db.collection("groups").document(groupID);
-                        groupDocref.collection("members").document(user).set(data);
+                        DocumentReference groupDocRef = db.collection("groups").document(groupID);
+                        groupDocRef.collection("members").document(user).set(data);
                     }));
         }
     }

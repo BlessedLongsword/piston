@@ -5,8 +5,7 @@ public class Notification {
     private String collection, sectionID, postID;
     private boolean read;
 
-    public Notification() {
-    }
+    public Notification() {}
 
     public Notification(String collection, String sectionID, String postID, boolean read) {
         this.collection = collection;

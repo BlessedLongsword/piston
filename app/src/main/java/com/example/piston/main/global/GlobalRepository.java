@@ -1,7 +1,5 @@
 package com.example.piston.main.global;
 
-import android.util.Log;
-
 import com.example.piston.data.Category;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,8 +64,6 @@ public class GlobalRepository {
                             count++;
                         }
                         listener.setCategories(categories);
-                    } else {
-                        Log.d("nowaybro", "Error getting documents: ", task.getException());
                     }
                 });
     }
