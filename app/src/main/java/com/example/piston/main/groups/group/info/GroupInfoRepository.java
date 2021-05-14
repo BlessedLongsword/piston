@@ -1,6 +1,7 @@
 package com.example.piston.main.groups.group.info;
 
 import com.example.piston.data.GroupMember;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -17,19 +18,21 @@ public class GroupInfoRepository {
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
-    private final String groupID;
+    private final String groupID, user;
     private GroupMember[] members;
     private int counter;
 
     public interface IGroupInfo {
         void setParams(String title, String description, String imageLink, String groupID);
         void setMembers(ArrayList<GroupMember> members);
+        void setIsOwner(boolean priority);
     }
 
     public GroupInfoRepository(GroupInfoRepository.IGroupInfo listener, String groupID) {
         this.listener = listener;
         this.groupID = groupID;
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        this.user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         docRef = db.collection("groups").document(groupID);
 
         docRef.get().addOnCompleteListener(task -> {
@@ -39,6 +42,7 @@ public class GroupInfoRepository {
                         (String) task.getResult().get("imageLink"), groupID);
             }
         });
+        isOwner();
         listenChanges();
     }
 
@@ -151,6 +155,17 @@ public class GroupInfoRepository {
                             .delete();
                 }
             }
+        });
+    }
+
+    public void isOwner() {
+
+        docRef.collection("members")
+                .document(user).get().addOnCompleteListener(task -> {
+                                    if (task.isComplete()) {
+                                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
+                                        listener.setIsOwner((int) priority == 0);
+                                    }
         });
     }
 

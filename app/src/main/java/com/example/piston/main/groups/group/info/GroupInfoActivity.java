@@ -51,7 +51,7 @@ public class GroupInfoActivity extends AppCompatActivity {
         });
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
-
+        viewModel.getIsOwner().observe(this, binding.groupInfoTopAppBar.getMenu().getItem(0)::setVisible);
         viewModel.getTitle().observe(this, binding.groupInfoTopAppBar::setTitle);
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
@@ -62,5 +62,4 @@ public class GroupInfoActivity extends AppCompatActivity {
         viewModel.deleteGroup();
         finish();
     }
-
 }

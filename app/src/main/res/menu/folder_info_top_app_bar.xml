@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.personal.folder.FolderInfoActivity">
+
     <item
         android:id="@+id/navigation_delete"
         android:title="@string/delete_folder"
