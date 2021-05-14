@@ -25,6 +25,7 @@ public class EditPopup {
     private final TextInputLayout textInputLayout;
     private final Button saveButton;
 
+    @SuppressWarnings("deprecation")
     public EditPopup(Activity activity, String title, String value) {
 
         View popupView = activity.getLayoutInflater().inflate(R.layout.popup_edit,
@@ -39,7 +40,8 @@ public class EditPopup {
         popupWindow.setBackgroundDrawable(new ColorDrawable());
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
 
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        //popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        adjust();
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
@@ -94,5 +96,12 @@ public class EditPopup {
 
     public void dismiss() {
         popupWindow.dismiss();
+    }
+
+    /**
+     * @deprecated overriding deprecated method
+     */
+    public void adjust() {
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 }
