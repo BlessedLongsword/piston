@@ -35,6 +35,7 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     @Override
     public void setMembers(ArrayList<GroupMember> members) {
         this.members.setValue(members);
+        numberOfMembers.setValue(Integer.toString(members.size()));
     }
 
     public void deleteGroup() {

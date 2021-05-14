@@ -19,5 +19,9 @@
     <color name="red">#FFFF0000</color>
 
     <color name="almost_black">#282828</color>
+    
+    <color name="lime_green">#32CD32</color>
+
+    <color name="dark_yellow1">#CCCC00</color>
 
 </resources>

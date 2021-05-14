@@ -1,12 +1,14 @@
 package com.example.piston.main.groups.group.info;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -44,17 +46,25 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GroupInfoViewModel.class);
         viewModel.getMembers().observe(activity, item -> {
-            Log.d("DBReadTAG", "jajsi");
             notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return Objects.requireNonNull(viewModel.getMembers().getValue()).get(position).getPriority();
     }
 
     @NonNull
     @Override
     public MemberHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemMemberBinding binding = DataBindingUtil.inflate(layoutInflater,
-                R.layout.item_member, parent, false);
+        ItemMemberBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_member, parent, false);
+        if (viewType == GroupMember.OWNER) {
+            binding.memberTypeIcon.setImageResource(R.drawable.outline_local_police_black_24);
+        } else if (viewType == GroupMember.MOD) {
+            binding.memberTypeIcon.setImageResource(R.drawable.outline_construction_black_24);
+        }
         return new MemberHolder(binding);
     }
 
@@ -62,9 +72,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
     public void onBindViewHolder(@NonNull MemberAdapter.MemberHolder holder, int position) {
         GroupMember member = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position);
         holder.bind(member);
-        Glide.with(localActivity)
+        /*Glide.with(localActivity)
                 .load(member.getProfilePictureLink())
-                .into(holder.binding.memberProfilePicture);
+                .into(holder.binding.memberProfilePicture);*/
         holder.getBinding().memberCard.setOnClickListener(openNewActivity(member.getEmail()));
         //holder.getBinding().memberCard.setOnLongClickListener();
     }

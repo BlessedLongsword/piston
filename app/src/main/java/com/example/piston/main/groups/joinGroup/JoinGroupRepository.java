@@ -56,7 +56,7 @@ public class JoinGroupRepository {
                            listener.setGroupCodeError(JoinGroupResult.JoinError.ALREADY_JOINED);
                        }
                        else {
-                           Map<String, String> data = new HashMap<>();
+                           Map<String, Object> data = new HashMap<>();
                            data.put("id", groupCode);
                            docRef2.set(data).addOnCompleteListener(task3 -> {
                                if (task3.isSuccessful()) {
@@ -66,6 +66,7 @@ public class JoinGroupRepository {
                            });
                            data.clear();
                            data.put("id", user);
+                           data.put("priority", 2);
                            db.collection("groups")
                                    .document(groupCode)
                                    .collection("members")
