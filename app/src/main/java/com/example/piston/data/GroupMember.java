@@ -2,13 +2,12 @@ package com.example.piston.data;
 
 public class GroupMember extends User {
 
-    int priority;
-
     public static final int OWNER = 0;
     public static final int MOD = 1;
 
-    public GroupMember() {
-    }
+    private int priority;
+
+    public GroupMember() {}
 
     public GroupMember(int priority) {
         this.priority = priority;

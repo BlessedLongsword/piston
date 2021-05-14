@@ -4,8 +4,7 @@ public class NotificationPost extends Notification {
 
     private String title, sectionName, imageLink;
 
-    public NotificationPost() {
-    }
+    public NotificationPost() {}
 
     public NotificationPost(String title, String sectionName, String imageLink, boolean read,
                             String collection, String sectionID, String postID) {

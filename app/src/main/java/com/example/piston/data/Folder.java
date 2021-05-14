@@ -19,5 +19,4 @@ public class Folder extends Section {
         this.id = id;
     }
 
-
 }

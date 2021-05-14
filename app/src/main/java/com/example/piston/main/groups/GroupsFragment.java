@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
 import com.example.piston.databinding.FragmentGroupBinding;
-import com.example.piston.main.sections.SectionFragment;
+import com.example.piston.utilities.SectionFragment;
 import com.example.piston.main.groups.joinGroup.JoinGroupActivity;
 
 public class GroupsFragment extends SectionFragment {

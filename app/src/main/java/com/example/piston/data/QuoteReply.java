@@ -6,9 +6,8 @@ public class QuoteReply extends Reply {
     private String quoteOwner;
     private String quoteID;
 
-    public QuoteReply() {
+    public QuoteReply() {}
 
-    }
     public QuoteReply(String owner, String content, String id, String quote, String quoteOwner, String quoteID) {
         super(owner, content, id);
         setQuote(quote);

@@ -4,8 +4,7 @@ public class NotificationReply extends Notification {
 
     private String user, content, replyID;
 
-    public NotificationReply() {
-    }
+    public NotificationReply() {}
 
     public NotificationReply(String user, String content, String replyID, boolean read,
                              String collection, String sectionID, String postID) {
