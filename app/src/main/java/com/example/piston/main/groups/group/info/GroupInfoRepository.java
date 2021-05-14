@@ -55,7 +55,7 @@ public class GroupInfoRepository {
                             .get().addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     GroupMember member = task1.getResult().toObject(GroupMember.class);
-                                    long priority = (long) documentSnapshot.get("priority");
+                                    long priority = (long) Objects.requireNonNull(documentSnapshot.get("priority"));
                                     Objects.requireNonNull(member).setPriority((int) priority);
                                     addMember(currentPosition, member);
                                 }

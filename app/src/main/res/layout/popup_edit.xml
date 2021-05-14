@@ -21,7 +21,7 @@
             android:padding="@dimen/small_separator">
 
             <TextView
-                android:id="@+id/field_name"
+                android:id="@+id/edit_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_margin"
@@ -30,7 +30,7 @@
                 android:textColor="?android:attr/textColorPrimary"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_name_text_field"
+                android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_separator"

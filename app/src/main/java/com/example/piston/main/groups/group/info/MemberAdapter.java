@@ -1,20 +1,17 @@
 package com.example.piston.main.groups.group.info;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.GroupMember;
 import com.example.piston.databinding.ItemMemberBinding;
@@ -45,9 +42,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
     public MemberAdapter(FragmentActivity activity) {
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GroupInfoViewModel.class);
-        viewModel.getMembers().observe(activity, item -> {
-            notifyDataSetChanged();
-        });
+        viewModel.getMembers().observe(activity, item -> notifyDataSetChanged());
     }
 
     @Override

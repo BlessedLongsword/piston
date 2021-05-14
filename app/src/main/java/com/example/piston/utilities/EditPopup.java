@@ -30,7 +30,7 @@ public class EditPopup {
         View popupView = activity.getLayoutInflater().inflate(R.layout.popup_edit,
                 new LinearLayout(activity));
 
-        ((TextView) popupView.findViewById(R.id.field_name)).setText(title);
+        ((TextView) popupView.findViewById(R.id.edit_field)).setText(title);
 
         popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -40,6 +40,7 @@ public class EditPopup {
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
         // Adjust popup window location when keyboard pops up
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);  //This
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
@@ -61,7 +62,7 @@ public class EditPopup {
 
         popupView.findViewById(R.id.cancel_button).setOnClickListener((view) -> popupWindow.dismiss());
 
-        textInputLayout = popupView.findViewById(R.id.edit_name_text_field);
+        textInputLayout = popupView.findViewById(R.id.edit_text);
         Objects.requireNonNull(textInputLayout.getEditText()).requestFocus();
         saveButton = popupView.findViewById(R.id.save_button);
         getEditText().setText(value);
