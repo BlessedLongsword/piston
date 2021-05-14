@@ -22,7 +22,7 @@ public class GroupInfoRepository {
     private int counter;
 
     public interface IGroupInfo {
-        void setParams(String title, String decription, String imageLink, String groupID);
+        void setParams(String title, String description, String imageLink, String groupID);
         void setMembers(ArrayList<GroupMember> members);
     }
 

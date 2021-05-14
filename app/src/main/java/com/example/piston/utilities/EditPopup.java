@@ -38,16 +38,9 @@ public class EditPopup {
         // If you need the PopupWindow to dismiss when touched outside
         popupWindow.setBackgroundDrawable(new ColorDrawable());
         popupWindow.setAnimationStyle(R.style.popup_window_animation_slide);
-        // Adjust popup window location when keyboard pops up
-        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);  //This
 
         // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 0);
-
-        // force show keyboard once pop up window is open
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
 
         // dims background when popup window shows up
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
@@ -67,6 +60,18 @@ public class EditPopup {
         saveButton = popupView.findViewById(R.id.save_button);
         getEditText().setText(value);
         getEditText().selectAll();
+
+        // Show keyboard once pop up has finished the animation
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,0);
+                    }
+                },
+                500
+        );
     }
 
     public TextInputLayout getTextInputLayout() {

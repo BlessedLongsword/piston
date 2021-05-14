@@ -56,7 +56,9 @@
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
 
-        <activity android:name=".main.profile.ProfileActivity"/>
+        <activity android:name=".main.profile.ProfileActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
         <activity android:name=".main.profile.image.ProfileImageActivity"/>
 
         <activity android:name=".main.settings.SettingsActivity"/>
