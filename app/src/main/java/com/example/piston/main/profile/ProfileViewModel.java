@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.piston.authentication.register.RegisterResult;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,49 +18,34 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
 
     /*PupUps*/
-    private final MutableLiveData<String> editNameText = new MutableLiveData<>("");
-    private final MutableLiveData<String> editPhoneNumberText = new MutableLiveData<>("");
-    private final MutableLiveData<String> editBirthDateText = new MutableLiveData<>("");
-    private final MutableLiveData<ProfileResult.BirthDateError> editBirthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
     private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
-    private final MutableLiveData<ProfileResult.BirthDateError> birthDateError = new MutableLiveData<>(ProfileResult.BirthDateError.NONE);
-    private final MutableLiveData<ProfileResult.EditOptions> editOption = new MutableLiveData<>(ProfileResult.EditOptions.NONE);
+    private final MutableLiveData<RegisterResult.BirthDateError> birthDateError = new MutableLiveData<>(RegisterResult.BirthDateError.NONE);
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
 
     private final ProfileRepository profileRepository = new ProfileRepository(this);
 
-    public void viewProfile() {
-        profileRepository.viewProfile();
+    public void loadProfile() {
+        profileRepository.loadProfile();
     }
 
+    public void resetValues() {
+        editBirthDateSaveEnabled.setValue(false);
+        birthDateError.setValue(RegisterResult.BirthDateError.NONE);
+        loading.setValue(false);
+        finished.setValue(false);
+    }
 
 
     /*-----------------------------------   popup Methods   ----------------------------------*/
 
-    public void birthdayUpdate() {
-        profileRepository.checkBirthDate(birthDate.getValue());
+    public void birthdayUpdate(String birth) {
+        profileRepository.checkBirthDate(birth);
         onEditBirthDateFieldChange();
     }
 
     public void onEditBirthDateFieldChange() {
-        editBirthDateSaveEnabled.setValue(editBirthDateError.getValue()
-                == ProfileResult.BirthDateError.NONE);
-    }
-
-    public void setEditOption(ProfileResult.EditOptions editOption){
-        this.editOption.setValue(editOption);
-    }
-
-    public void setEditOptionName(){
-        setEditOption(ProfileResult.EditOptions.NAME);
-    }
-
-    public void setEditOptionPhoneNumber(){
-        setEditOption(ProfileResult.EditOptions.PHONE);
-    }
-
-    public void setEditOptionBirthDate(){
-        setEditOption(ProfileResult.EditOptions.BIRTH_DATE);
+        editBirthDateSaveEnabled.setValue(birthDateError.getValue() == RegisterResult.BirthDateError.NONE);
     }
 
     /*-----------------------------------   Interface Methods   ----------------------------------*/
@@ -90,13 +77,14 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     }
 
     @Override
-    public void setBirthDateStatus(ProfileResult.BirthDateError birthDateError) {
-        this.editBirthDateError.setValue(birthDateError);
+    public void setBirthDateStatus(RegisterResult.BirthDateError birthDateError) {
+        this.birthDateError.setValue(birthDateError);
     }
 
     @Override
     public void setLoadingFinished() {
         loading.setValue(false);
+        finished.setValue(true);
     }
 
 
@@ -106,11 +94,11 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
         return username;
     }
 
-    public MutableLiveData<String> getName() {
+    public LiveData<String> getName() {
         return name;
     }
 
-    public MutableLiveData<String> getPhoneNumber() {
+    public LiveData<String> getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -118,40 +106,31 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
         return email;
     }
 
-    public MutableLiveData<String> getBirthDate() {
+    public LiveData<String> getBirthDate() {
         return birthDate;
-    }
-
-    public MutableLiveData<String> getEditNameText() {
-        return editNameText;
-    }
-
-    public MutableLiveData<String> getEditPhoneNumberText() {
-        return editPhoneNumberText;
-    }
-
-    public MutableLiveData<String> getEditBirthDateText() {
-        return editBirthDateText;
-    }
-
-    public MutableLiveData<ProfileResult.BirthDateError> getEditBirthDateError() {
-        return editBirthDateError;
     }
 
     public LiveData<Boolean> getEditBirthDateSaveEnabled() {
         return editBirthDateSaveEnabled;
     }
 
-    public MutableLiveData<ProfileResult.BirthDateError> getBirthDateError() {
+    public LiveData<RegisterResult.BirthDateError> getBirthDateError() {
         return birthDateError;
     }
 
-    public MutableLiveData<ProfileResult.EditOptions> getEditOption(){
-        return editOption;
+    public MutableLiveData<Boolean> getFinished() {
+        return finished;
     }
 
-    public MutableLiveData<Boolean> getLoading() {
-        return loading;
+    public void editName(String text) {
+        profileRepository.editName(text);
     }
 
+    public void editPhone(String text) {
+        profileRepository.editPhone(text);
+    }
+
+    public void editBirth(String text) {
+        profileRepository.editBirth(text);
+    }
 }

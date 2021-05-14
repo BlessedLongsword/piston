@@ -17,13 +17,15 @@ import android.widget.TextView;
 import com.example.piston.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class EditPopup {
 
     private final PopupWindow popupWindow;
     private final TextInputLayout textInputLayout;
     private final Button saveButton;
 
-    public EditPopup(Activity activity, String title) {
+    public EditPopup(Activity activity, String title, String value) {
 
         View popupView = activity.getLayoutInflater().inflate(R.layout.popup_edit,
                 new LinearLayout(activity));
@@ -60,11 +62,22 @@ public class EditPopup {
         popupView.findViewById(R.id.cancel_button).setOnClickListener((view) -> popupWindow.dismiss());
 
         textInputLayout = popupView.findViewById(R.id.edit_name_text_field);
+        Objects.requireNonNull(textInputLayout.getEditText()).requestFocus();
         saveButton = popupView.findViewById(R.id.save_button);
+        getEditText().setText(value);
+        getEditText().selectAll();
     }
 
     public TextInputLayout getTextInputLayout() {
         return textInputLayout;
+    }
+
+    public EditText getEditText() {
+        return textInputLayout.getEditText();
+    }
+
+    public String getText() {
+        return getEditText().getText().toString();
     }
 
     public Button getSaveButton() {

@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:checkable="true"
-    android:layout_margin="@dimen/card_margin"
     tools:context=".utilities.EditPopup">
 
     <LinearLayout
@@ -58,7 +57,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="99" />
+                android:layout_weight="100" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"

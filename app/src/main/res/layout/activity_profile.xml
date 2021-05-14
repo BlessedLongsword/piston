@@ -112,10 +112,13 @@
                             android:id="@+id/viewProfile_fullName_editText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
                             android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:inputType="textPersonName"
                             android:paddingStart="0dp"
-                            android:text="@={viewModel.name}"
+                            android:text="@{viewModel.name}"
                             tools:ignore="RtlSymmetry" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,10 +158,13 @@
                             android:id="@+id/viewProfile_phone_editText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
                             android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:paddingStart="0dp"
                             android:inputType="phone"
-                            android:text="@={viewModel.phoneNumber}"
+                            android:text="@{viewModel.phoneNumber}"
                             tools:ignore="RtlSymmetry" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -171,7 +177,7 @@
                         android:contentDescription="@string/edit"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionPhoneNumber()}"
+                        android:onClick="editPhone"
                         android:layout_marginEnd="10dp" />
 
                 </LinearLayout>
@@ -227,10 +233,13 @@
                             android:id="@+id/viewProfile_date_editText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
                             android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:paddingStart="0dp"
                             android:inputType="date"
-                            android:text="@={viewModel.birthDate}"
+                            android:text="@{viewModel.birthDate}"
                             tools:ignore="RtlSymmetry" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -243,7 +252,7 @@
                         android:contentDescription="@string/edit"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:onClick="@{() -> viewModel.setEditOptionBirthDate()}"
+                        android:onClick="editBirth"
                         android:layout_marginEnd="10dp" />
                 </LinearLayout>
 

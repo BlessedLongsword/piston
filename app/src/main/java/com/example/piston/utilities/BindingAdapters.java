@@ -12,7 +12,6 @@ import com.example.piston.main.groups.joinGroup.JoinGroupResult;
 import com.example.piston.main.personal.createFolder.CreateFolderResult;
 import com.example.piston.authentication.login.LoginResult;
 import com.example.piston.main.posts.createPost.CreatePostResult;
-import com.example.piston.main.profile.ProfileResult;
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputLayout;
@@ -110,18 +109,6 @@ public class BindingAdapters {
 
     @BindingAdapter("android:regBirthDateError")
     public static void setRegBirthDateErrorMessage(TextInputLayout view, RegisterResult.BirthDateError error) {
-        switch (error) {
-            case NONE:
-                view.setError(null);
-                break;
-            case INVALID:
-                view.setError(view.getContext().getString(R.string.invalid_date));
-                break;
-        }
-    }
-
-    @BindingAdapter("android:profileBirthdayError")
-    public static void setProfileBirthdayErrorMessage(TextInputLayout view, ProfileResult.BirthDateError error) {
         switch (error) {
             case NONE:
                 view.setError(null);
