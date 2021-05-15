@@ -169,5 +169,8 @@
     <string name="members">\u0020Miembros</string>
     <string name="field">Field</string>
     <string name="edit_group_btn">Edit Title</string>
+    <string name="make_moderator">Hacer Moderador</string>
+    <string name="dismiss_as_moderator">Deshacer Moderator</string>
+    <string name="kick_from_group">Echar del Grupo</string>
 
 </resources>

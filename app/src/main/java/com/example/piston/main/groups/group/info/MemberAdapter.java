@@ -1,7 +1,10 @@
 package com.example.piston.main.groups.group.info;
 
 import android.content.Intent;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,20 +26,38 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
 
     private final FragmentActivity localActivity;
     private final GroupInfoViewModel viewModel;
+    private int position;
 
-    public static class MemberHolder extends RecyclerView.ViewHolder {
+    public static class MemberHolder extends RecyclerView.ViewHolder
+            implements View.OnCreateContextMenuListener{
 
         private final ItemMemberBinding binding;
+        private final int currentUserPriority;
 
-        public MemberHolder(ItemMemberBinding binding) {
+        public MemberHolder(ItemMemberBinding binding, int currentUserPriority) {
             super(binding.getRoot());
             this.binding = binding;
+            this.currentUserPriority = currentUserPriority;
+            binding.getRoot().setOnCreateContextMenuListener(this);
         }
 
         public void bind(GroupMember item) { binding.setMember(item); }
 
         public ItemMemberBinding getBinding() { return binding; }
 
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            if (binding.getMember().getPriority() == 2) {
+                if (currentUserPriority < 2) {
+                    menu.add(Menu.NONE, R.id.ctx_menu_members_kick, Menu.NONE, R.string.kick_from_group);
+                    if (currentUserPriority < 1)
+                        menu.add(Menu.NONE, R.id.ctx_menu_members_mod, Menu.NONE, R.string.make_moderator);
+                }
+            }
+            if (binding.getMember().getPriority() == 1 && currentUserPriority < 1) {
+                menu.add(Menu.NONE, R.id.ctx_menu_members_dismiss_mod, Menu.NONE, R.string.dismiss_as_moderator);
+            }
+        }
     }
 
     public MemberAdapter(FragmentActivity activity) {
@@ -45,9 +66,22 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
         viewModel.getMembers().observe(activity, item -> notifyDataSetChanged());
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @Override
     public int getItemViewType(int position) {
-        return Objects.requireNonNull(viewModel.getMembers().getValue()).get(position).getPriority();
+        try {
+            return viewModel.getMembers().getValue().get(position).getPriority();
+        } catch (NullPointerException e) {
+            Log.w("DBReadTAG", e.getMessage(), e);
+            return 2;
+        }
     }
 
     @NonNull
@@ -60,7 +94,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
         } else if (viewType == GroupMember.MOD) {
             binding.memberTypeIcon.setImageResource(R.drawable.outline_construction_black_24);
         }
-        return new MemberHolder(binding);
+        return new MemberHolder(binding, Objects.requireNonNull(viewModel.getPriority().getValue()));
     }
 
     @Override
@@ -73,12 +107,22 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
                     .into(holder.binding.memberProfilePicture);
         }
         holder.getBinding().memberCard.setOnClickListener(openNewActivity(member.getEmail()));
-        //holder.getBinding().memberCard.setOnLongClickListener();
+        holder.getBinding().memberCard.setOnLongClickListener(v -> {
+            setPosition(position);
+            return false;
+        });
     }
 
     @Override
     public int getItemCount() {
         return Objects.requireNonNull(viewModel.getMembers().getValue()).size();
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull MemberAdapter.MemberHolder holder) {
+        holder.getBinding().memberCard.setOnLongClickListener(null);
+        holder.getBinding().memberCard.setOnClickListener(null);
+        super.onViewRecycled(holder);
     }
 
     private View.OnClickListener openNewActivity(String email) {

@@ -47,6 +47,7 @@
                     android:contentDescription="@string/category_image" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/group_info_description_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/small_separator"

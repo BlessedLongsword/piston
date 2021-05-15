@@ -170,5 +170,8 @@
     <string name="show_information">Info</string>
     <string name="field">Field</string>
     <string name="edit_group_btn">Edit Title</string>
+    <string name="make_moderator">Fer Modearator</string>
+    <string name="dismiss_as_moderator">Desfer Moderator</string>
+    <string name="kick_from_group">Expulsar del Grup</string>
 
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ctx_menu_members_mod"
+        android:title="@string/make_moderator" />
+
+    <item
+        android:id="@+id/ctx_menu_members_dismiss_mod"
+        android:title="@string/dismiss_as_moderator" />
+
+    <item
+        android:id="@+id/ctx_menu_members_kick"
+        android:title="@string/kick_from_group" />
+
+
+</menu>

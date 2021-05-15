@@ -95,6 +95,17 @@ public class GroupInfoRepository {
             listener.setMembers(new ArrayList<>(Arrays.asList(members)));
     }
 
+    public void removeMember(String memberEmail) {
+        docRef.collection("members").document(memberEmail).delete();
+    }
+
+    public void updateMemberPriority(String memberEmail, int priority) {
+        DocumentReference memberDocRef = docRef.collection("members").document(memberEmail);
+        memberDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            memberDocRef.update("priority", priority);
+        });
+    }
+
     private void listenChanges() {
         listenerRegistration = docRef.collection("members")
                 .addSnapshotListener((snapshots, e) -> GroupInfoRepository.this.loadMembers());

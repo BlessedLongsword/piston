@@ -4,9 +4,11 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
+import com.example.piston.data.GroupMember;
 import com.example.piston.databinding.ActivityGroupInfoBinding;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
@@ -54,18 +57,46 @@ public class GroupInfoActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
         });
 
+        registerForContextMenu(binding.recyclerviewMembers);
+
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
         viewModel.getPriority().observe(this, priority -> {
             binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority==0);
             binding.groupInfoTopAppBar.getMenu().getItem(1).setVisible(priority<=1);
             if (priority<=1) {
-                binding.groupInfoDescription.setOnClickListener(v -> editDescription());
+                binding.groupInfoDescriptionCard.setOnClickListener(v -> editDescription());
             }
         });
         viewModel.getTitle().observe(this, binding.groupInfoTopAppBar::setTitle);
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
             .into(binding.groupInfoImage));
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        int position = -1;
+
+        try {
+            position = ((MemberAdapter) Objects.requireNonNull(binding.recyclerviewMembers
+                    .getAdapter())).getPosition();
+        } catch (Exception e) {
+            Log.w("DBReadTAG", e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+
+        String memberEmail = viewModel.getMembers().getValue().get(position).getEmail();
+
+        if (item.getItemId() == R.id.ctx_menu_members_mod) {
+            viewModel.updateMemberPriority(memberEmail, 1);
+        } else if (item.getItemId() == R.id.ctx_menu_members_dismiss_mod) {
+            viewModel.updateMemberPriority(memberEmail, 2);
+        } else {
+            viewModel.removeMember(memberEmail);
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     public void deleteGroup(MenuItem item) {
