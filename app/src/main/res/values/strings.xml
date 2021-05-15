@@ -156,7 +156,7 @@
     <string name="reply_content">Reply Content</string>
     <string name="hint_reply_button">Insert your reply</string>
     <string name="content_description_media">Sample content description</string>
-    <string name="reply">reply</string>
+    <string name="reply">Reply</string>
     <string name="post_image">Post Image</string>
     <string name="profile_image">Profile Image</string>
     <string name="logout">Log Out</string>

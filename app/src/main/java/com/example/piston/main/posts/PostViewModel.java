@@ -19,6 +19,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
     private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
     private final MutableLiveData<Boolean> postDoesNotExist = new MutableLiveData<>(false);
+    private final MutableLiveData<String> currentUser = new MutableLiveData<>("");
 
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
@@ -37,6 +38,14 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public void createReply(String content, String quote, String quoteOwner, String quoteID) {
         repository.createReply(content, quote, quoteOwner, quoteID);
+    }
+
+    public void deleteReply(String replyID) {
+        repository.deleteReply(replyID);
+    }
+
+    public void editReply(String replyID, String content) {
+        repository.editReply(replyID, content);
     }
 
     @Override
@@ -74,6 +83,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     @Override
     public void setPostDoesNotExist() {
         this.postDoesNotExist.setValue(true);
+    }
+
+    @Override
+    public void setCurrentUser(String currentUser) {
+        this.currentUser.setValue(currentUser);
     }
 
 
@@ -123,4 +137,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     public LiveData<Boolean> getPostDoesNotExist() { return postDoesNotExist; }
+
+    public LiveData<String> getCurrentUser() { return currentUser; }
 }

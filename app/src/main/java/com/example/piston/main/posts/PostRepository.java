@@ -35,6 +35,7 @@ public class PostRepository {
         void setPriority(Integer priority);
         void setIsLiked(boolean liked);
         void setPostDoesNotExist();
+        void setCurrentUser(String currentUser);
     }
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
@@ -51,6 +52,7 @@ public class PostRepository {
                 .get()
                 .addOnCompleteListener(task -> {
                     user = (String) task.getResult().get("username");
+                    listener.setCurrentUser(user);
                     profilePictureLink = (String) task.getResult().get("profilePictureLink");
                 });
 
@@ -190,6 +192,17 @@ public class PostRepository {
                 }
             });
         }
+    }
+
+    public void deleteReply(String replyID) {
+        docRef.collection("replies").document(replyID).delete();
+    }
+
+    public void editReply(String replyID, String content) {
+        DocumentReference replyDocRef = docRef.collection("replies").document(replyID);
+        replyDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            replyDocRef.update("content", content);
+        });
     }
 
     public void addLiked (boolean liked){

@@ -13,7 +13,6 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkable="true"
         app:cardElevation="@dimen/one"
         app:cardCornerRadius="@dimen/zero"
         android:layout_marginVertical="@dimen/card_margin">
@@ -76,16 +75,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description_media"
-                    android:src="@drawable/baseline_favorite_border_black_36"
-                    android:visibility="invisible" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/reply_button"

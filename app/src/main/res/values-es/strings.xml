@@ -151,7 +151,7 @@
     <string name="reply_content">Contenido de la respuesta</string>
     <string name="hint_reply_button">Redacte su respuesta</string>
     <string name="content_description_media">Texto de ejemplo</string>
-    <string name="reply">responder</string>
+    <string name="reply">Responder</string>
     <string name="post_image">Imagen de la Publicación</string>
     <string name="profile_image">Imagen de Perfil</string>
     <string name="logout">Cerrar sesión</string>

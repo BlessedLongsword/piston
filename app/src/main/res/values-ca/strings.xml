@@ -152,7 +152,7 @@
     <string name="reply_content">Contingut de la resposta</string>
     <string name="hint_reply_button">Escrigui la seva resposta</string>
     <string name="content_description_media">Text d\'exemple</string>
-    <string name="reply">respondre</string>
+    <string name="reply">Respondre</string>
     <string name="post_image">Imatge de la Publicació</string>
     <string name="profile_image">Imatge del Perfil</string>
     <string name="logout">Tanca sessió</string>

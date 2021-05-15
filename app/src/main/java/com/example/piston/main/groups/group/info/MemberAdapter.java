@@ -132,6 +132,4 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
             localActivity.startActivity(intent);
         };
     }
-
-    //private View.OnLongClickListener
 }

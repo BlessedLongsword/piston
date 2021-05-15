@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
+import com.example.piston.data.Reply;
 import com.example.piston.databinding.ActivityPostBinding;
 import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
@@ -70,7 +71,9 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             });
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
 
-        binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
+        registerForContextMenu(binding.recyclerviewPosts);
+
+        binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null, false));
         binding.heartButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
@@ -136,6 +139,17 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         return -1;
     }
 
+    public void deletePost(MenuItem menuItem) {
+        viewModel.deletePost();
+        finish();
+    }
+
+    public void editPost(MenuItem menuItem) {
+        Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
+    }
+
     @Override
     public void quoteOnClick(View v, String quoteID) {
         goToReply(quoteID);
@@ -154,7 +168,33 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     @Override
-    public void replyPopUp(String owner, String content, String quoteID) {
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        int position = -1;
+
+        try {
+            position = ((PostAdapter) Objects.requireNonNull(binding.recyclerviewPosts
+                    .getAdapter())).getPosition();
+        } catch (Exception e) {
+            Log.w("DBReadTAG", e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+
+        Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
+
+        if (item.getItemId() == R.id.ctx_menu_reply_edit) {
+            replyPopUp(reply.getOwner(), reply.getContent(), reply.getId(), true);
+        } else if (item.getItemId() == R.id.ctx_menu_reply_delete) {
+            viewModel.deleteReply(reply.getId());
+        } else {
+            replyPopUp(reply.getOwner(), reply.getContent(), reply.getId(), false);
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void replyPopUp(String owner, String content, String quoteID, boolean editing) {
 
         View popupView = getLayoutInflater().inflate(R.layout.popup_reply, new LinearLayout(this));
 
@@ -174,6 +214,8 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         TextInputLayout textField = popupWindow.getContentView().findViewById(R.id.popup);
 
         textField.setEndIconVisible(false);
+        if (editing)
+            Objects.requireNonNull(textField.getEditText()).setText(content);
         textField.requestFocus();
 
         Objects.requireNonNull(textField.getEditText())
@@ -189,7 +231,10 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             if (owner == null || content == null || quoteID == null) {
                 viewModel.createReply(textField.getEditText().getText().toString());
             } else {
-                viewModel.createReply(textField.getEditText().getText().toString(), content, owner, quoteID);
+                if (editing)
+                    viewModel.editReply(quoteID, textField.getEditText().getText().toString());
+                else
+                    viewModel.createReply(textField.getEditText().getText().toString(), content, owner, quoteID);
             }
             popupWindow.dismiss();
         });
@@ -206,16 +251,5 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             lp.alpha = 1f;
             getWindow().setAttributes(lp);
         });
-    }
-
-    public void deletePost(MenuItem menuItem) {
-        viewModel.deletePost();
-        finish();
-    }
-
-    public void editPost(MenuItem menuItem) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM,0,0);
-        toast.show();
     }
 }
