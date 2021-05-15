@@ -2,7 +2,7 @@ package com.example.piston.main.groups.createGroup;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -72,12 +72,12 @@ public class CreateGroupActivity extends PickImageActivity {
 
     public void createGroup(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createGroupViewModel.createGroup(image, connected);
+        createGroupViewModel.createGroup(imageUri, connected);
     }
 
     @Override
-    protected void setImage(Bitmap bitmap) {
-        binding.groupPicture.setImageBitmap(bitmap);
+    protected void setUri(Uri imageUri) {
+        binding.groupPicture.setImageURI(imageUri);
     }
 
 }

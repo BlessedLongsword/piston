@@ -1,10 +1,9 @@
 package com.example.piston.main.profile.image;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -69,7 +68,7 @@ public class ProfileImageActivity extends PickImageActivity {
     }
 
     @Override
-    protected void setImage(Bitmap bitmap) {
-        binding.picture.setImageBitmap(bitmap);
+    protected void setUri(Uri imageUri) {
+        binding.picture.setImageURI(imageUri);
     }
 }

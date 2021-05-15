@@ -1,5 +1,7 @@
 package com.example.piston.main.groups.createGroup;
 
+import android.net.Uri;
+
 import com.example.piston.data.Group;
 import com.example.piston.data.GroupMember;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +49,7 @@ public class CreateGroupRepository {
             listener.setTitleStatus(CreateGroupResult.TitleError.NONE);
     }
 
-    public void createGroup(String title, String description, String groupID, byte[] image, boolean connected) {
+    public void createGroup(String title, String description, String groupID, Uri image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setLoadingFinished();
             listener.setCreateError();
@@ -63,7 +65,7 @@ public class CreateGroupRepository {
             String path = "groups/" + groupID;
             String imageId = path + "/" + randomId;
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
-            UploadTask uploadTask = imageRef.putBytes(image);
+            UploadTask uploadTask = imageRef.putFile(image);
             uploadTask.addOnFailureListener(exception -> {
                 // Handle unsuccessful uploads
             }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()

@@ -1,5 +1,7 @@
 package com.example.piston.main.groups.createGroup;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -30,7 +32,7 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
         createError.setValue(false);
     }
 
-    public void createGroup(byte[] image, boolean connected) {
+    public void createGroup(Uri image, boolean connected) {
         loading.setValue(true);
         repository.createGroup(Objects.requireNonNull(titleField.getValue()),
                 descriptionField.getValue(), groupIDField.getValue(), image, connected);

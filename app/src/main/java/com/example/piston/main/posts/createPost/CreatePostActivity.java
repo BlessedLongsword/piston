@@ -1,6 +1,6 @@
 package com.example.piston.main.posts.createPost;
 
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -60,8 +60,8 @@ public class CreatePostActivity extends PickImageActivity {
     }
 
     @Override
-    protected void setImage(Bitmap bitmap) {
-        binding.postPicture.setImageBitmap(bitmap);
+    protected void setUri(Uri imageUri) {
+        binding.postPicture.setImageURI(imageUri);
     }
 
 }

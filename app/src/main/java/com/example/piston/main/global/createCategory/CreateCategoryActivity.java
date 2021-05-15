@@ -1,6 +1,6 @@
 package com.example.piston.main.global.createCategory;
 
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -57,7 +57,7 @@ public class CreateCategoryActivity extends PickImageActivity {
     }
 
     @Override
-    protected void setImage(Bitmap bitmap) {
-        binding.categoryPicture.setImageBitmap(bitmap);
+    protected void setUri(Uri imageUri) {
+        binding.categoryPicture.setImageURI(imageUri);
     }
 }
