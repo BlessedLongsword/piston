@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityProfileBinding;
+import com.example.piston.main.posts.PostActivity;
 import com.example.piston.main.profile.image.ProfileImageActivity;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
@@ -48,6 +49,34 @@ public class ProfileActivity extends AppCompatActivity {
                             .load(s)
                             .into(binding.profilePicture);
                 }
+            }
+        });
+
+        profileViewModel.getFeaturedPost().observe(this, post -> {
+            if (post == null) {
+                binding.postItemCard.setVisibility(View.GONE);
+                binding.viewProfileNoPost.setVisibility(View.VISIBLE);
+                if (Objects.requireNonNull(profileViewModel.getIsCurrentUser().getValue()))
+                    binding.viewProfileNoPost.setText(R.string.no_featured_current);
+                else
+                    binding.viewProfileNoPost.setText(R.string.no_featured);
+
+            } else {
+                binding.postItemCard.setVisibility(View.VISIBLE);
+                binding.viewProfileNoPost.setVisibility(View.GONE);
+                binding.postTitle.setText(post.getTitle());
+                binding.postContent.setText(post.getContent());
+                Glide.with(this)
+                        .load(post.getImageLink())
+                        .into(binding.postPicture);
+                binding.postItemCard.setOnClickListener(v -> {
+                    Intent intent = new Intent(this, PostActivity.class);
+                    intent.putExtra("collection", "categories");
+                    intent.putExtra("document", post.getDocumentID());
+                    intent.putExtra("id", post.getId());
+                    intent.putExtra("orphan", true);
+                    startActivity(intent);
+                });
             }
         });
     }

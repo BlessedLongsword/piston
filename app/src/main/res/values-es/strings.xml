@@ -172,5 +172,7 @@
     <string name="make_moderator">Hacer Moderador</string>
     <string name="dismiss_as_moderator">Deshacer Moderator</string>
     <string name="kick_from_group">Echar del Grupo</string>
+    <string name="no_featured">Este usuario no tiene publicaciones públicas</string>
+    <string name="no_featured_current">No tienes publicaciones públicas</string>
 
 </resources>

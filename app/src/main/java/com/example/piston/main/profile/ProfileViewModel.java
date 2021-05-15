@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.authentication.register.RegisterResult;
+import com.example.piston.data.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<String> birthDate = new MutableLiveData<>("");
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> isCurrentUser = new MutableLiveData<>(false);
+    private final MutableLiveData<Post> featuredPost = new MutableLiveData<>(null);
 
     /*PupUps*/
     private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
@@ -103,6 +105,11 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
         this.isCurrentUser.setValue(isCurrentUser);
     }
 
+    @Override
+    public void setFeaturedPost(Post featuredPost) {
+        this.featuredPost.setValue(featuredPost);
+    }
+
 
     /*-------------------------------------   Data Getters   -------------------------------------*/
 
@@ -141,6 +148,8 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     public LiveData<String> getImageLink() {
         return imageLink;
     }
+
+    public LiveData<Post> getFeaturedPost() { return featuredPost; }
 
     public void editName(String text) {
         profileRepository.editName(text);
