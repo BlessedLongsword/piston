@@ -36,6 +36,7 @@ public abstract class PickImageActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             imageUri = data.getData();
+            setUri(imageUri);
         }
     }
 
