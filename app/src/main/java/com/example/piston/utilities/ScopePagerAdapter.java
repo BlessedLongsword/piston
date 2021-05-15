@@ -9,9 +9,9 @@ import com.example.piston.main.global.GlobalFragment;
 import com.example.piston.main.groups.GroupsFragment;
 import com.example.piston.main.personal.PersonalFragment;
 
-public class SectionsPagerAdapter extends FragmentStateAdapter {
+public class ScopePagerAdapter extends FragmentStateAdapter {
 
-    public SectionsPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public ScopePagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 

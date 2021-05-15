@@ -2,8 +2,8 @@ package com.example.piston.main.posts.createPost;
 
 import android.net.Uri;
 
-import com.example.piston.data.NotificationPost;
-import com.example.piston.data.Post;
+import com.example.piston.data.notifications.NotificationPost;
+import com.example.piston.data.posts.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -15,9 +15,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class CreatePostRepository {
+
     private final CreatePostRepository.ICreatePost listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -54,7 +54,7 @@ public class CreatePostRepository {
         }
     }
 
-    public void createPost(String collection, String document, String title, String content, Uri image, boolean connected) {
+    public void createPost(String scope, String document, String title, String content, Uri image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreatePostResult.TitleError.EMPTY);
             listener.setCreateError();
@@ -63,63 +63,63 @@ public class CreatePostRepository {
         else {
             if (!connected) {
                 listener.setErrorMessage("No internet, uploaded without image");
-                uploadPost(collection, document, title, content, null, null);
+                uploadPost(scope, document, title, content, null);
             }
             else if (image == null)
-                uploadPost(collection, document, title, content, null, null);
+                uploadPost(scope, document, title, content, null);
             else {
                 StorageReference storageRef = storage.getReference();
-                String randomId = UUID.randomUUID().toString();
+                String id = db.collection("users").document().getId();
                 String path;
-                if (collection.equals("users"))
+                if (scope.equals("users"))
                     path = "users/" + username;
                 else
-                    path = collection + "/" + document;
+                    path = scope + "/" + document;
 
-                String imageId = path + "/" + randomId;
-                StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
+                String imageId = path + "/" + id;
+                StorageReference imageRef = storageRef.child(imageId);
                 UploadTask uploadTask = imageRef.putFile(image);
                 uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                         .addOnSuccessListener(uri -> {
                             String imageLink = uri.toString();
-                            uploadPost(collection, document, title, content, imageId, imageLink);
+                            uploadPost(scope, document, title, content, imageLink);
                         })
                 );
             }
         }
     }
 
-    private void uploadPost(String collection, String document, String title, String content,
-                            String imageId, String imageLink) {
+    private void uploadPost(String scope, String sectionID, String title, String content,
+                            String imageLink) {
 
         String id = db.collection("users").document().getId();
 
         DocumentReference docRef;
-        if (collection.equals("users")) {
-            docRef = db.collection(collection)
+        if (scope.equals("folders")) {
+            docRef = db.collection(scope)
                     .document(user)
                     .collection("folders")
-                    .document(document)
+                    .document(sectionID)
                     .collection("posts")
                     .document(id);
         } else {
-            docRef = db.collection(collection)
-                    .document(document)
+            docRef = db.collection(scope)
+                    .document(sectionID)
                     .collection("posts")
                     .document(id);
         }
         docRef.get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
-                Post post = new Post(title, content, username, id, document, imageId, imageLink, profilePictureLink);
+                Post post = new Post(id, username, content, title, sectionID, imageLink, profilePictureLink);
                 docRef.set(post);
-                if (collection.equals("groups")) {
-                    CollectionReference cr = db.collection(collection).document(document)
+                if (scope.equals("groups")) {
+                    CollectionReference cr = db.collection(scope).document(sectionID)
                             .collection("members");
-                            sendNotification(cr, document, title, imageLink, collection, id);
-                } else if (collection.equals("categories")) {
-                    CollectionReference cr = db.collection(collection).document(document)
+                            sendNotification(cr, sectionID, title, imageLink, scope, id);
+                } else if (scope.equals("categories")) {
+                    CollectionReference cr = db.collection(scope).document(sectionID)
                             .collection("subscribedUsers");
-                    sendNotification(cr, document, title, imageLink, collection, id);
+                    sendNotification(cr, sectionID, title, imageLink, scope, id);
                 }
                 listener.setCreateFinished();
                 listener.setLoadingFinished();

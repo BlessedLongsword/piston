@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 app:errorEnabled="true"
-                android:regUsernameError='@{viewModel.usernameError}' >
+                regUsernameError='@{viewModel.usernameError}' >
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/g_reg_username_editText"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 app:errorEnabled="true"
-                android:regEmailError='@{viewModel.emailError}'>
+                regEmailError='@{viewModel.emailError}'>
                 <!--suppress AndroidUnknownAttribute -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_email_editText"
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:regPasswordError='@{viewModel.passwordError}'
+                regPasswordError='@{viewModel.passwordError}'
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@null" >
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_password"
-                android:regPasswordError2="@{viewModel.confirmPasswordError}"
+                regPasswordError2="@{viewModel.confirmPasswordError}"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
 
@@ -126,15 +126,14 @@
                 android:hint="@string/birth_date"
                 app:placeholderText="@string/reg_date_format"
                 app:errorEnabled="true"
-                android:regBirthDateError='@{viewModel.birthDateError}'>
-                <!--suppress AndroidUnknownAttribute -->
+                regBirthDateError='@{viewModel.birthDateError}'>
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_birthday_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="@integer/date_max_length"
                     android:text="@={viewModel.birthDate}"
-                    android:onFocusLost="@{() -> viewModel.birthdayUpdate()}"/>
+                    onFocusLost="@{() -> viewModel.birthdayUpdate()}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -160,14 +159,14 @@
                     android:layout_height="@dimen/medium_high_btn"
                     android:enabled="@{viewModel.registerEnabled}"
                     android:onClick="@{() -> viewModel.register()}"
-                    android:setVisible="@{!viewModel.loading}"
+                    setVisible="@{!viewModel.loading}"
                     android:text="@string/reg_btn" />
 
                     <ProgressBar
                         android:id="@+id/reg_progress_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:setVisible="@{viewModel.loading}"
+                        setVisible="@{viewModel.loading}"
                         android:layout_centerInParent="true"/>
             </RelativeLayout>
 

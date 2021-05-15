@@ -1,4 +1,4 @@
-package com.example.piston.data;
+package com.example.piston.data.users;
 
 public class GroupMember extends User {
 
@@ -9,10 +9,6 @@ public class GroupMember extends User {
 
     public GroupMember() {}
 
-    public GroupMember(int priority) {
-        this.priority = priority;
-    }
-
     public int getPriority() {
         return priority;
     }
@@ -20,5 +16,4 @@ public class GroupMember extends User {
     public void setPriority(int priority) {
         this.priority = priority;
     }
-
 }

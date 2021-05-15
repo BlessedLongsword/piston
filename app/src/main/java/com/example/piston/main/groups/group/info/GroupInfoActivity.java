@@ -16,14 +16,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.GroupMember;
 import com.example.piston.databinding.ActivityGroupInfoBinding;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
-import static com.example.piston.data.constants.Integers.DELETE_CODE;
+import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class GroupInfoActivity extends AppCompatActivity {
 
@@ -38,9 +38,9 @@ public class GroupInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_info);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("document");
+        String groupID = intent.getStringExtra(Values.SECTION_ID);
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
                 .get(GroupInfoViewModel.class);
         binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group_info);
@@ -86,7 +86,7 @@ public class GroupInfoActivity extends AppCompatActivity {
             return super.onContextItemSelected(item);
         }
 
-        String memberEmail = viewModel.getMembers().getValue().get(position).getEmail();
+        String memberEmail = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position).getEmail();
 
         if (item.getItemId() == R.id.ctx_menu_members_mod) {
             viewModel.updateMemberPriority(memberEmail, 1);

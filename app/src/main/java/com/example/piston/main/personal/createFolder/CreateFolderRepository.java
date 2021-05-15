@@ -1,6 +1,6 @@
 package com.example.piston.main.personal.createFolder;
 
-import com.example.piston.data.Folder;
+import com.example.piston.data.sections.Folder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -72,7 +72,7 @@ public class CreateFolderRepository {
                         listener.setTitleStatus(CreateFolderResult.TitleError.EXISTS);
                         listener.setCreateError();
                     } else {
-                        Folder folder = new Folder(title, description, id);
+                        Folder folder = new Folder(id, title, description);
                         docRef.set(folder);
                         listener.setCreateFinished();
                     }

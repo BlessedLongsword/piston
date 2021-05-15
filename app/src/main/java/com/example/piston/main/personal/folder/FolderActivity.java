@@ -15,12 +15,13 @@ import com.example.piston.databinding.ActivityFolderBinding;
 import com.example.piston.main.personal.folder.info.FolderInfoActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
-import static com.example.piston.data.constants.Integers.DELETE_CODE;
+import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class FolderActivity extends AppCompatActivity {
 
-    private String id;
+    private String folderID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,9 +29,9 @@ public class FolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_folder);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        folderID = intent.getStringExtra(Values.SECTION_ID);
 
-        FolderViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        FolderViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(folderID))
                 .get(FolderViewModel.class);
         ActivityFolderBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_folder);
@@ -46,8 +47,8 @@ public class FolderActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
-        intent.putExtra("collection", "users");
-        intent.putExtra("document", id);
+        intent.putExtra(Values.SCOPE, Values.PERSONAL);
+        intent.putExtra(Values.SECTION_ID, folderID);
         startActivity(intent);
     }
 
@@ -62,7 +63,7 @@ public class FolderActivity extends AppCompatActivity {
 
     private void goToInfo() {
         Intent intent = new Intent(this, FolderInfoActivity.class);
-        intent.putExtra("document", id);
+        intent.putExtra(Values.SECTION_ID, folderID);
         startActivityForResult(intent, DELETE_CODE);
     }
 

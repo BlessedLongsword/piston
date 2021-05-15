@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.GroupMember;
+import com.example.piston.data.users.GroupMember;
 
 import java.util.ArrayList;
 

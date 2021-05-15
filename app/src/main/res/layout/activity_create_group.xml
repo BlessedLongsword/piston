@@ -9,7 +9,7 @@
             type="com.example.piston.main.groups.createGroup.CreateGroupViewModel" />
         <variable
             name="integers"
-            type="com.example.piston.data.constants.Integers" />
+            type="com.example.piston.data.Constants" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -55,8 +55,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:groupTitleError="@{viewModel.titleFieldError}"
-                    android:counter="@{integers.MAX_TITLE_LENGTH}"
+                    groupTitleError="@{viewModel.titleFieldError}"
+                    counter="@{integers.MAX_TITLE_LENGTH}"
                     android:hint="@string/create_group_name"
                     app:errorEnabled="true">
                     <!--suppress AndroidUnknownAttribute -->

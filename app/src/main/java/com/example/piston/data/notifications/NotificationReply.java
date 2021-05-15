@@ -1,14 +1,15 @@
-package com.example.piston.data;
+package com.example.piston.data.notifications;
 
 public class NotificationReply extends Notification {
 
     private String user, content, replyID;
 
+    @SuppressWarnings("unused")
     public NotificationReply() {}
 
     public NotificationReply(String user, String content, String replyID, boolean read,
-                             String collection, String sectionID, String postID) {
-        super(collection, sectionID, postID, read);
+                             String scope, String sectionID, String postID) {
+        super(scope, sectionID, postID, read);
         this.user = user;
         this.content = content;
         this.replyID = replyID;

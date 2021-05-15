@@ -175,7 +175,7 @@
     <string name="members">\u0020Members</string>
     <string name="field">Field</string>
     <string name="edit_group_btn">Edit Title</string>
-    <string name="make_moderator">Make Modearator</string>
+    <string name="make_moderator">Make Moderator</string>
     <string name="dismiss_as_moderator">Dismiss as Moderator</string>
     <string name="kick_from_group">Kick from Group</string>
     <string name="no_featured">This user has no public posts</string>

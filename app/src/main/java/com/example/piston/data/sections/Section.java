@@ -1,10 +1,8 @@
-package com.example.piston.data;
+package com.example.piston.data.sections;
 
-public class Section {
+public abstract class Section {
 
-    private String id;
-    private String title;
-    private String description;
+    private String id, title, description;
 
     public Section() {}
 
@@ -12,6 +10,14 @@ public class Section {
         setId(id);
         setTitle(title);
         setDescription(description);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -28,13 +34,5 @@ public class Section {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

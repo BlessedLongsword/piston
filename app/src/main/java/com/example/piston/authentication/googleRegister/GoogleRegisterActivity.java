@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityGoogleRegisterBinding;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
 public class GoogleRegisterActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class GoogleRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        String idToken = getIntent().getStringExtra("idToken");
+        String idToken = getIntent().getStringExtra(Values.ID_TOKEN);
 
         GoogleRegisterViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(idToken))
                 .get(GoogleRegisterViewModel.class);

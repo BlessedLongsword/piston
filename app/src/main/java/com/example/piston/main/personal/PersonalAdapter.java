@@ -12,9 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.piston.R;
-import com.example.piston.data.Folder;
+import com.example.piston.data.sections.Folder;
 import com.example.piston.databinding.ItemFolderBinding;
 import com.example.piston.main.personal.folder.FolderActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -68,10 +69,10 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.Folder
         return Objects.requireNonNull(viewModel.getFolders().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id) {
+    private View.OnClickListener openNewActivity(String folderID) {
         return v -> {
             Intent intent = new Intent(localActivity, FolderActivity.class);
-            intent.putExtra("id", id);
+            intent.putExtra(Values.SECTION_ID, folderID);
             localActivity.startActivity(intent);
         };
     }

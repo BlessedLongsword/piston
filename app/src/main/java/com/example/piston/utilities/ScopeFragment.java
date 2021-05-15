@@ -9,7 +9,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
-public abstract class SectionFragment extends Fragment {
+public abstract class ScopeFragment extends Fragment {
 
     protected FloatingActionButton actionButton;
 

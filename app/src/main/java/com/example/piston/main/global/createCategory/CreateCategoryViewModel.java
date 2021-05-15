@@ -12,9 +12,10 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
 
     private final MutableLiveData<String> titleField = new MutableLiveData<>("");
     private final MutableLiveData<String> descriptionField = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> nsfwBox = new MutableLiveData<>(false);
+
     private final MutableLiveData<CreateCategoryResult.TitleError> titleFieldError =
             new MutableLiveData<>(CreateCategoryResult.TitleError.NONE);
-    private final MutableLiveData<Boolean> nsfwBox = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> imageError = new MutableLiveData<>(false);

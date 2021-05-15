@@ -5,7 +5,6 @@
     android:forceDarkAllowed="false">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.piston.main.notifications.NotificationsViewModel" />

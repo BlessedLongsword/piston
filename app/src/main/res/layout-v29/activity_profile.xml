@@ -151,7 +151,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:layout_marginEnd="10dp"
-                            android:setVisible="@{viewModel.isCurrentUser}"/>
+                            setVisible="@{viewModel.isCurrentUser}"/>
 
                     </LinearLayout>
 
@@ -213,7 +213,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:layout_marginEnd="10dp"
-                            android:setVisible="@{viewModel.isCurrentUser}"/>
+                            setVisible="@{viewModel.isCurrentUser}"/>
 
                     </LinearLayout>
 
@@ -311,7 +311,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:layout_marginEnd="10dp"
-                            android:setVisible="@{viewModel.isCurrentUser}"/>
+                            setVisible="@{viewModel.isCurrentUser}"/>
 
                     </LinearLayout>
 

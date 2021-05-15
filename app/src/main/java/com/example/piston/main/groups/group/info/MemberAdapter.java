@@ -1,7 +1,6 @@
 package com.example.piston.main.groups.group.info;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.GroupMember;
+import com.example.piston.data.users.GroupMember;
 import com.example.piston.databinding.ItemMemberBinding;
 import com.example.piston.main.profile.ProfileActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -76,12 +76,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
 
     @Override
     public int getItemViewType(int position) {
-        try {
-            return viewModel.getMembers().getValue().get(position).getPriority();
-        } catch (NullPointerException e) {
-            Log.w("DBReadTAG", e.getMessage(), e);
-            return 2;
-        }
+        return Objects.requireNonNull(viewModel.getMembers().getValue()).get(position).getPriority();
     }
 
     @NonNull
@@ -99,7 +94,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
 
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.MemberHolder holder, int position) {
-        GroupMember member = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position);
+        GroupMember member = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position);  //member és null ------------------------------------------------
         holder.bind(member);
         if (member.getProfilePictureLink() != null) {
             Glide.with(localActivity)
@@ -128,7 +123,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
     private View.OnClickListener openNewActivity(String email) {
         return v -> {
             Intent intent = new Intent(localActivity, ProfileActivity.class);
-            intent.putExtra("email", email);
+            intent.putExtra(Values.EMAIL, email);
             localActivity.startActivity(intent);
         };
     }

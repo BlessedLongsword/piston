@@ -15,6 +15,7 @@ import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.authentication.register.RegisterActivity;
 import com.example.piston.main.MainActivity;
 
+import com.example.piston.utilities.Values;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void registerGoogleUser() {
         Intent intent = new Intent(this, GoogleRegisterActivity.class);
-        intent.putExtra("idToken", idToken);
+        intent.putExtra(Values.ID_TOKEN, idToken);
         startActivityForResult(intent, RC_REGISTER);
     }
 

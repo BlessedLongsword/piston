@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
-
         <variable
             name="notification"
-            type="com.example.piston.data.NotificationPost" />
+            type="com.example.piston.data.notifications.NotificationPost" />
 
     </data>
 

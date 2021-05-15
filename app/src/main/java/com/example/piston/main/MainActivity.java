@@ -13,8 +13,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
 import com.example.piston.main.notifications.NotificationsActivity;
-import com.example.piston.utilities.SectionFragment;
-import com.example.piston.utilities.SectionsPagerAdapter;
+import com.example.piston.utilities.ScopeFragment;
+import com.example.piston.utilities.ScopePagerAdapter;
 import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.authentication.login.LoginActivity;
 import com.example.piston.main.profile.ProfileActivity;
@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this);
+        ScopePagerAdapter scopePagerAdapter = new ScopePagerAdapter(this);
         viewPager = findViewById(R.id.view_pager2);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setAdapter(scopePagerAdapter);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        ((SectionFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(
+        ((ScopeFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(
                 "f" + viewPager.getCurrentItem()))).add();
     }
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 3; i++) {
             Fragment fragment = fragmentManager.findFragmentByTag("f" + i);
             if (fragment != null) {
-                ((SectionFragment) fragment).removeListener();
+                ((ScopeFragment) fragment).removeListener();
             }
         }
         viewModel.logout();

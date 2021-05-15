@@ -12,13 +12,14 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreatePostBinding;
 import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.CheckNetwork;
+import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class CreatePostActivity extends PickImageActivity {
 
     private ActivityCreatePostBinding binding;
     private CreatePostViewModel createPostViewModel;
-    private String collection, document;
+    private String scope, sectionID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +29,8 @@ public class CreatePostActivity extends PickImageActivity {
         createPostViewModel = new ViewModelProvider(this).get(CreatePostViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
 
-        collection = getIntent().getStringExtra("collection");
-        document = getIntent().getStringExtra("document");
+        scope = getIntent().getStringExtra(Values.SCOPE);
+        sectionID = getIntent().getStringExtra(Values.SECTION_ID);
 
         binding.setViewModel(createPostViewModel);
         binding.setLifecycleOwner(this);
@@ -56,7 +57,7 @@ public class CreatePostActivity extends PickImageActivity {
 
     public void createPost(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createPostViewModel.createPost(collection, document, imageUri, connected);
+        createPostViewModel.createPost(scope, sectionID, imageUri, connected);
     }
 
     @Override

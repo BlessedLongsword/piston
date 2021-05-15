@@ -24,11 +24,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.Reply;
+import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ActivityPostBinding;
 import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 import com.example.piston.utilities.textwatchers.CounterWatcher;
 import com.google.android.material.textfield.TextInputLayout;
@@ -41,8 +42,8 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     private PostViewModel viewModel;
     private ActivityPostBinding binding;
-    private String collection;
-    private String document;
+    private String scope;
+    private String sectionID;
     private boolean orphan;
     private boolean postDoesNotExist;
 
@@ -52,13 +53,13 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         setContentView(R.layout.activity_post);
 
         Intent intent = getIntent();
-        collection = intent.getStringExtra("collection");
-        document = intent.getStringExtra("document");
-        orphan = intent.getBooleanExtra("orphan", false);
-        String postID = intent.getStringExtra("id");
-        String replyID = intent.getStringExtra("reply");
+        scope = intent.getStringExtra(Values.SCOPE);
+        sectionID = intent.getStringExtra(Values.SECTION_ID);
+        orphan = intent.getBooleanExtra(Values.ORPHAN, false);
+        String postID = intent.getStringExtra(Values.POST_ID);
+        String replyID = intent.getStringExtra(Values.REPLY_ID);
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(collection, document, postID))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(scope, sectionID, postID))
                 .get(PostViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post);
         binding.setViewModel(viewModel);
@@ -88,7 +89,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             }
         });
 
-        if (collection.equals("folders")){
+        if (scope.equals("folders")){
             binding.heartButton.setVisibility(View.GONE);
         }
 
@@ -119,16 +120,23 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     public void goToReply(String replyID) {
+        Log.d("nowaybro", "Going to replyID: " + replyID);
         View view = binding.recyclerviewPosts.findViewWithTag(replyID);
         float y = binding.recyclerviewPosts.getY() + view.getY();
         binding.postScrollView.smoothScrollTo(0, (int) y);
     }
 
     public void scrollTo(int itemPosition) {
-        for (int i = 0; i < itemPosition; i++) {
-            Log.d("DBReadTAG", String.valueOf(i));
-            goToReply(Objects.requireNonNull(viewModel.getReplies().getValue()).get(i).getId());
-        }
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < itemPosition; i++) {
+                            Log.d("DBReadTAG", String.valueOf(i));
+                            goToReply(Objects.requireNonNull(viewModel.getReplies().getValue()).get(i).getId());
+                        }
+                    }
+                },  1000);
     }
 
     public int getItemPositionByID(String replyID) {
@@ -158,10 +166,10 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     @Override
     public void finish() {
         if (orphan) {
-            Intent intent = new Intent(this, (collection.equals("groups")) ?
+            Intent intent = new Intent(this, (scope.equals(Values.GROUPS)) ?
                     GroupActivity.class : CategoryActivity.class);
-            intent.putExtra("id", document);
-            intent.putExtra("postDidNotExist", postDoesNotExist);
+            intent.putExtra(Values.SECTION_ID, sectionID);
+            intent.putExtra(Values.POST_DOES_NOT_EXIST, postDoesNotExist);
             startActivity(intent);
         }
         super.finish();

@@ -1,6 +1,7 @@
 package com.example.piston.main.posts;
 
 import android.view.ContextMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -14,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.QuoteReply;
-import com.example.piston.data.Reply;
+import com.example.piston.data.posts.QuoteReply;
+import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ItemQuoteReplyBinding;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.main.groups.group.info.MemberAdapter;
@@ -142,11 +143,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder.getItemViewType() == 1) {
             Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             ReplyHolder hold = ((ReplyHolder) holder);
+            Log.d("nowaybro", "1,Setting tag: " + reply.getId());
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
-            if (reply.getImageLink() != null ) {
+            if (reply.getOwnerImageLink() != null ) {
                 Glide.with(localActivity)
-                        .load(reply.getImageLink())
+                        .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyProfilePicture);
             }
             ((ReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {
@@ -156,11 +158,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             QuoteReply reply = (QuoteReply) Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             QuoteReplyHolder hold = ((QuoteReplyHolder) holder);
+            Log.d("nowaybro", "2,Setting tag: " + reply.getId());
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
-            if (reply.getImageLink() != null) {
+            if (reply.getOwnerImageLink() != null) {
                 Glide.with(localActivity)
-                        .load(reply.getImageLink())
+                        .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyQuoteProfilePicture);
             }
             ((QuoteReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {

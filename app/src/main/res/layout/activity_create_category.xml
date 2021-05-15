@@ -9,7 +9,7 @@
             type="com.example.piston.main.global.createCategory.CreateCategoryViewModel" />
         <variable
             name="integers"
-            type="com.example.piston.data.constants.Integers" />
+            type="com.example.piston.data.Constants" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -57,8 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_category_name"
-                    android:counter="@{integers.MAX_TITLE_LENGTH}"
-                    android:categoryTitleError="@{viewModel.titleFieldError}"
+                    counter="@{integers.MAX_TITLE_LENGTH}"
+                    categoryTitleError="@{viewModel.titleFieldError}"
                     app:errorEnabled="true" >
                     <!--suppress AndroidUnknownAttribute -->
                     <com.google.android.material.textfield.TextInputEditText
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:setVisible="@{viewModel.loading}"/>
+                    setVisible="@{viewModel.loading}"/>
 
                 <Space
                     android:layout_width="match_parent"

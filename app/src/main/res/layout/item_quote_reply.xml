@@ -6,7 +6,7 @@
     <data>
         <variable
             name="reply"
-            type="com.example.piston.data.QuoteReply" />
+            type="com.example.piston.data.posts.QuoteReply" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -28,8 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin"
                 app:cardElevation="@dimen/quote_elevation"
-                app:cardCornerRadius="@dimen/zero"
-                android:visibility="visible">
+                app:cardCornerRadius="@dimen/zero">
 
                 <LinearLayout
                     android:layout_width="match_parent"

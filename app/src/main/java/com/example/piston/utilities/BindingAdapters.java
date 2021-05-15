@@ -18,9 +18,10 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class BindingAdapters {
 
-    @BindingAdapter("android:usernameError")
+    @BindingAdapter("usernameError")
     public static void setUsernameErrorMessage(TextInputLayout view, LoginResult.UsernameError error) {
         switch (error) {
             case NONE:
@@ -32,7 +33,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:passwordError")
+    @BindingAdapter("passwordError")
     public static void setPasswordErrorMessage(TextInputLayout view, LoginResult.PasswordError error) {
         switch (error) {
             case NONE:
@@ -44,7 +45,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:regUsernameError")
+    @BindingAdapter("regUsernameError")
     public static void setRegUsernameErrorMessage(TextInputLayout view, RegisterResult.UsernameError error) {
         switch (error) {
             case NONE:
@@ -59,7 +60,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:regPasswordError")
+    @BindingAdapter("regPasswordError")
     public static void setRegPasswordErrorMessage(TextInputLayout view, RegisterResult.PasswordError error) {
         switch (error) {
             case NONE:
@@ -74,7 +75,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:regPasswordError2")
+    @BindingAdapter("regPasswordError2")
     public static void setRegConfirmPasswordErrorMessage(TextInputLayout view, RegisterResult.ConfirmPasswordError error) {
         switch (error) {
             case NONE:
@@ -86,7 +87,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:regEmailError")
+    @BindingAdapter("regEmailError")
     public static void setRegEmailErrorMessage(TextInputLayout view, RegisterResult.EmailError error) {
         switch (error) {
             case NONE:
@@ -107,7 +108,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:regBirthDateError")
+    @BindingAdapter("regBirthDateError")
     public static void setRegBirthDateErrorMessage(TextInputLayout view, RegisterResult.BirthDateError error) {
         switch (error) {
             case NONE:
@@ -119,7 +120,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:onFocusLost")
+    @BindingAdapter("onFocusLost")
     public static void onFocusChange(EditText text, Runnable runnable) {
         text.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus)
@@ -127,12 +128,12 @@ public class BindingAdapters {
         });
     }
 
-    @BindingAdapter("android:setVisible")
+    @BindingAdapter("setVisible")
     public static void setVisible(View view, boolean visible) {
         view.setVisibility((visible)? View.VISIBLE : View.GONE);
     }
 
-    @BindingAdapter("android:categoryTitleError")
+    @BindingAdapter("categoryTitleError")
     public static void setCategoryTitleErrorMessage(TextInputLayout view, CreateCategoryResult.TitleError error) {
         switch (error) {
             case NONE:
@@ -147,7 +148,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:groupTitleError")
+    @BindingAdapter("groupTitleError")
     public static void setGroupTitleErrorMessage(TextInputLayout view, CreateGroupResult.TitleError error) {
         switch (error) {
             case NONE:
@@ -159,14 +160,14 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:counter")
+    @BindingAdapter("counter")
     public static void updateCounter(TextInputLayout view, int max_length) {
         Objects.requireNonNull(view.getEditText()).addTextChangedListener(new CounterWatcher(max_length, view));
         view.getEditText().setOnFocusChangeListener((v, hasFocus) ->
                 view.setSuffixText(Integer.toString(max_length - view.getEditText().getText().length())));
     }
 
-    @BindingAdapter("android:folderTitleError")
+    @BindingAdapter("folderTitleError")
     public static void setFolderTitleErrorMessage(TextInputLayout view, CreateFolderResult.TitleError error) {
         switch (error) {
             case NONE:
@@ -181,7 +182,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:postTitleError")
+    @BindingAdapter("postTitleError")
     public static void setPostTitleErrorMessage(TextInputLayout view, CreatePostResult.TitleError error) {
         switch (error) {
             case NONE:
@@ -193,7 +194,7 @@ public class BindingAdapters {
         }
     }
 
-    @BindingAdapter("android:groupCodeError")
+    @BindingAdapter("groupCodeError")
     public static void setGroupCodeError(TextInputLayout view, JoinGroupResult.JoinError error) {
         switch (error) {
             case NONE:

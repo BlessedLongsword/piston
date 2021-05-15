@@ -7,7 +7,7 @@
     <data>
         <variable
             name="folder"
-            type="com.example.piston.data.Folder" />
+            type="com.example.piston.data.sections.Folder" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -23,27 +23,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/folder_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/folder_icon"
-                    android:contentDescription="@string/folder_icon" />
-
-                <TextView
-                    android:id="@+id/folder_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="@string/title"
-                    android:text="@{folder.title}"
-                    android:layout_gravity="center_vertical"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:layout_marginStart="@dimen/small_separator" />
-            </LinearLayout>
+                tools:text="@string/title"
+                android:text="@{folder.title}"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:drawableStartCompat="@drawable/folder_icon"
+                android:drawablePadding="@dimen/small_separator"/>
 
             <View
                 android:layout_marginVertical="@dimen/tiny_separator"
@@ -53,4 +43,5 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 </layout>

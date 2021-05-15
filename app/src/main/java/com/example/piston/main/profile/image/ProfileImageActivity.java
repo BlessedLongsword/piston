@@ -15,6 +15,7 @@ import com.example.piston.databinding.ActivityProfileImageBinding;
 import com.example.piston.utilities.CheckNetwork;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.PickImageActivity;
+import com.example.piston.utilities.Values;
 
 public class ProfileImageActivity extends PickImageActivity {
 
@@ -26,7 +27,7 @@ public class ProfileImageActivity extends PickImageActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_image);
 
-        String email = getIntent().getStringExtra("email");
+        String email = getIntent().getStringExtra(Values.EMAIL);
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(email))
                 .get(ProfileImageViewModel.class);

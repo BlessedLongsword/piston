@@ -1,8 +1,6 @@
 package com.example.piston.main.groups;
 
-import android.util.Log;
-
-import com.example.piston.data.Group;
+import com.example.piston.data.sections.Group;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -53,15 +51,10 @@ public class GroupsRepository {
                                     .document(documentSnapshot.getId());
                             docRef.get().addOnCompleteListener(task1 -> {
                                 DocumentSnapshot ds = task1.getResult();
-                                if (Objects.requireNonNull(ds).exists()) {
+                                if (Objects.requireNonNull(ds).exists())
                                     addGroup(positionActual, ds.toObject(Group.class));
-                                } else {
-                                    Log.w("DBReadTAG", "Error getting data1: ", task1.getException());
-                                }
                             });
                         }
-                    } else {
-                        Log.w("DBReadTAG", "Error getting data2: ", task.getException());
                     }
                 });
     }

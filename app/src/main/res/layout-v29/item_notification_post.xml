@@ -5,10 +5,9 @@
     android:forceDarkAllowed="false">
 
     <data>
-
         <variable
             name="notification"
-            type="com.example.piston.data.NotificationPost" />
+            type="com.example.piston.data.notifications.NotificationPost" />
 
     </data>
 

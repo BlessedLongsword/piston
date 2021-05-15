@@ -6,7 +6,7 @@
     <data>
         <variable
             name="post"
-            type="com.example.piston.data.Post" />
+            type="com.example.piston.data.posts.Post" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -96,7 +96,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/card_margin"
                 android:orientation="horizontal"
-                android:visibility="gone"
                 android:weightSum="100">
 
                 <ImageButton

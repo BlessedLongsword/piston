@@ -13,10 +13,11 @@ import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
-import static com.example.piston.data.constants.Integers.DELETE_CODE;
+import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class CategoryInfoActivity extends AppCompatActivity {
 
@@ -28,10 +29,10 @@ public class CategoryInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_info);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("document");
-        boolean isAdmin = intent.getBooleanExtra("isAdmin",false);
+        String sectionID = intent.getStringExtra(Values.SECTION_ID);
+        boolean isAdmin = intent.getBooleanExtra(Values.IS_ADMIN,false);
 
-        viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(sectionID))
                 .get(CategoryInfoViewModel.class);
         ActivityCategoryInfoBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category_info);

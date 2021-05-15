@@ -17,12 +17,13 @@ import com.example.piston.main.groups.group.info.GroupInfoActivity;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
-import static com.example.piston.data.constants.Integers.DELETE_CODE;
+import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class GroupActivity extends AppCompatActivity {
 
-    private String id;
+    private String groupID;
     private boolean orphan;
     private boolean postDidNotExist;
 
@@ -32,7 +33,7 @@ public class GroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        groupID = intent.getStringExtra(Values.SECTION_ID);
         orphan = intent.getBooleanExtra("orphan", false);
 
         postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
@@ -42,7 +43,7 @@ public class GroupActivity extends AppCompatActivity {
             finish();
         }
 
-        GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
                 .get(GroupViewModel.class);
         ActivityGroupBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group);
@@ -57,8 +58,8 @@ public class GroupActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
-        intent.putExtra("collection", "groups");
-        intent.putExtra("document", id);
+        intent.putExtra(Values.SCOPE, Values.GROUPS);
+        intent.putExtra(Values.SECTION_ID, groupID);
         startActivity(intent);
     }
 
@@ -86,7 +87,7 @@ public class GroupActivity extends AppCompatActivity {
 
     public void goToInfo() {
         Intent intent = new Intent(this, GroupInfoActivity.class);
-        intent.putExtra("document", id);
+        intent.putExtra(Values.SECTION_ID, groupID);
         startActivityForResult(intent, DELETE_CODE);
     }
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Category;
+import com.example.piston.data.sections.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;

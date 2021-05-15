@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityFolderInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
 public class FolderInfoActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class FolderInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_folder_info);
 
         Intent intent = getIntent();
-        String folderID = intent.getStringExtra("document");
+        String folderID = intent.getStringExtra(Values.SECTION_ID);
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(folderID))
                 .get(FolderInfoViewModel.class);

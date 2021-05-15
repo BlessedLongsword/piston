@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.main.personal.createFolder.CreateFolderActivity;
 import com.example.piston.databinding.FragmentPersonalBinding;
-import com.example.piston.utilities.SectionFragment;
+import com.example.piston.utilities.ScopeFragment;
 
-public class PersonalFragment extends SectionFragment {
+public class PersonalFragment extends ScopeFragment {
 
     private PersonalViewModel viewModel;
 

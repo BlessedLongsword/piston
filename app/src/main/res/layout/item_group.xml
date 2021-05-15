@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="group"
-            type="com.example.piston.data.Group" />
+            type="com.example.piston.data.sections.Group" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,7 +25,6 @@
                 android:id="@+id/group_image"
                 android:layout_width="@dimen/bigger_square"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/content_description_media"/>
 

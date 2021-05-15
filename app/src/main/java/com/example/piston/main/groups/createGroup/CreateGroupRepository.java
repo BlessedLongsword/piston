@@ -2,8 +2,8 @@ package com.example.piston.main.groups.createGroup;
 
 import android.net.Uri;
 
-import com.example.piston.data.Group;
-import com.example.piston.data.GroupMember;
+import com.example.piston.data.sections.Group;
+import com.example.piston.data.users.GroupMember;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -61,9 +61,9 @@ public class CreateGroupRepository {
             listener.setErrorMessage("Group must have an image");
         else {
             StorageReference storageRef = storage.getReference();
-            String randomId = UUID.randomUUID().toString();
+            String id = UUID.randomUUID().toString();
             String path = "groups/" + groupID;
-            String imageId = path + "/" + randomId;
+            String imageId = path + "/" + "groupImage";
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
             UploadTask uploadTask = imageRef.putFile(image);
             uploadTask.addOnFailureListener(exception -> {
@@ -72,7 +72,7 @@ public class CreateGroupRepository {
                     .addOnSuccessListener(uri -> {
                         String imageLink = uri.toString();
 
-                        Group group = new Group(title, description, groupID, imageId, imageLink);
+                        Group group = new Group(id, title, description, imageLink);
 
                         db.collection("groups")
                                 .document(groupID)

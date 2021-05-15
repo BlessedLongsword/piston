@@ -5,11 +5,9 @@
     android:forceDarkAllowed="false">
 
     <data>
-
         <variable
             name="member"
-            type="com.example.piston.data.GroupMember" />
-
+            type="com.example.piston.data.users.GroupMember" />
     </data>
 
     <LinearLayout

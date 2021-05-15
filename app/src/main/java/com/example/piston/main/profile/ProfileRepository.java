@@ -3,14 +3,13 @@ package com.example.piston.main.profile;
 import android.util.Log;
 
 import com.example.piston.authentication.register.RegisterResult;
-import com.example.piston.data.Post;
-import com.example.piston.data.User;
+import com.example.piston.data.posts.Post;
+import com.example.piston.data.users.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

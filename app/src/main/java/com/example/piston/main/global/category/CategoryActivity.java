@@ -17,12 +17,13 @@ import com.example.piston.main.global.category.info.CategoryInfoActivity;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 
-import static com.example.piston.data.constants.Integers.DELETE_CODE;
+import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    private String id;
+    private String categoryID;
     private boolean orphan;
     private boolean postDidNotExist;
 
@@ -32,7 +33,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        categoryID = intent.getStringExtra(Values.SECTION_ID);
 
         orphan = intent.getBooleanExtra("orphan", false);
 
@@ -43,7 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
             finish();
         }
 
-        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
+        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(categoryID))
                 .get(CategoryViewModel.class);
         ActivityCategoryBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category);
@@ -58,8 +59,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
-        intent.putExtra("collection", "categories");
-        intent.putExtra("document", id);
+        intent.putExtra(Values.SCOPE, Values.GLOBAL);
+        intent.putExtra(Values.SECTION_ID, categoryID);
         startActivity(intent);
     }
 
@@ -87,8 +88,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void goToInfo() {
         Intent intent = new Intent(this, CategoryInfoActivity.class);
-        intent.putExtra("document", id);
-        intent.putExtra("isAdmin", getIntent().getBooleanExtra("isAdmin",false));
+        intent.putExtra(Values.SECTION_ID, categoryID);
+        intent.putExtra(Values.IS_ADMIN, getIntent().getBooleanExtra(Values.IS_ADMIN, false));
         startActivityForResult(intent, DELETE_CODE);
     }
 

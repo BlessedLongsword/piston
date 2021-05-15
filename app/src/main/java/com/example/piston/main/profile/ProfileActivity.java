@@ -18,6 +18,7 @@ import com.example.piston.main.posts.PostActivity;
 import com.example.piston.main.profile.image.ProfileImageActivity;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.Values;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
 
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        email = getIntent().getStringExtra("email");
+        email = getIntent().getStringExtra(Values.EMAIL);
 
         profileViewModel = new ViewModelProvider(this, new MyViewModelFactory(email))
                 .get(ProfileViewModel.class);
@@ -72,10 +73,10 @@ public class ProfileActivity extends AppCompatActivity {
                         .into(binding.postPicture);
                 binding.postItemCard.setOnClickListener(v -> {
                     Intent intent = new Intent(this, PostActivity.class);
-                    intent.putExtra("collection", "categories");
-                    intent.putExtra("document", post.getDocumentID());
-                    intent.putExtra("id", post.getId());
-                    intent.putExtra("orphan", true);
+                    intent.putExtra(Values.SCOPE, Values.GLOBAL);
+                    intent.putExtra(Values.SECTION_ID, post.getSectionID());
+                    intent.putExtra(Values.POST_ID, post.getId());
+                    intent.putExtra(Values.ORPHAN, true);
                     startActivity(intent);
                 });
             }
@@ -84,8 +85,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void clickImage(View view){
         Intent intent = new Intent(this, ProfileImageActivity.class);
-        intent.putExtra("email", email);
-        intent.putExtra("isCurrentUser", profileViewModel.getIsCurrentUser().getValue());
+        intent.putExtra(Values.EMAIL, email);
+        intent.putExtra(Values.IS_CURRENT_USER, profileViewModel.getIsCurrentUser().getValue());
         startActivity(intent);
     }
 

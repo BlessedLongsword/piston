@@ -3,7 +3,7 @@ package com.example.piston.authentication.register;
 import android.util.Patterns;
 
 import com.example.piston.authentication.CommonRegisterRepository;
-import com.example.piston.data.User;
+import com.example.piston.data.users.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;

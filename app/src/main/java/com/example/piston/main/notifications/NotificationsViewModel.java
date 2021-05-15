@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Notification;
+import com.example.piston.data.notifications.Notification;
 
 import java.util.ArrayList;
 

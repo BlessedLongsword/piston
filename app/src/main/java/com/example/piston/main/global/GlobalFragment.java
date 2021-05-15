@@ -14,11 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.main.global.createCategory.CreateCategoryActivity;
-import com.example.piston.utilities.SectionFragment;
+import com.example.piston.utilities.ScopeFragment;
 
 import java.util.Objects;
 
-public class GlobalFragment extends SectionFragment {
+public class GlobalFragment extends ScopeFragment {
 
     private GlobalViewModel viewModel;
     int buttonVisibility;

@@ -2,7 +2,7 @@ package com.example.piston.authentication.googleRegister;
 
 import com.example.piston.authentication.CommonRegisterRepository;
 import com.example.piston.authentication.register.RegisterResult;
-import com.example.piston.data.User;
+import com.example.piston.data.users.User;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;

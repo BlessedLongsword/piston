@@ -1,6 +1,6 @@
 package com.example.piston.main.personal.folder;
 
-import com.example.piston.data.Post;
+import com.example.piston.data.posts.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;

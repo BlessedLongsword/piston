@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.Post;
+import com.example.piston.data.posts.Post;
 import com.example.piston.databinding.ItemPostBinding;
 import com.example.piston.main.posts.PostActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -74,7 +75,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
                     .into(holder.binding.postPicture);
         } else
             holder.getBinding().postPicture.setVisibility(View.GONE);
-        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getDocumentID(), post.getId()));
+        holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
     }
 
     @Override
@@ -82,12 +83,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String documentID, String id) {
+    private View.OnClickListener openNewActivity(String sectionID, String postID) {
         return v -> {
             Intent intent = new Intent(localActivity, PostActivity.class);
-            intent.putExtra("collection", "groups");
-            intent.putExtra("document", documentID);
-            intent.putExtra("id", id);
+            intent.putExtra(Values.SCOPE, Values.GROUPS);
+            intent.putExtra(Values.SECTION_ID, sectionID);
+            intent.putExtra(Values.POST_ID, postID);
             localActivity.startActivity(intent);
         };
     }

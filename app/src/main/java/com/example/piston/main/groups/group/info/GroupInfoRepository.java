@@ -1,6 +1,6 @@
 package com.example.piston.main.groups.group.info;
 
-import com.example.piston.data.GroupMember;
+import com.example.piston.data.users.GroupMember;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +21,7 @@ public class GroupInfoRepository {
     private final String groupID, user;
     private GroupMember[] members;
     private int counter;
+    private int lastRequest = 0;
 
     public interface IGroupInfo {
         void setParams(String title, String description, String imageLink, String groupID);
@@ -71,6 +72,7 @@ public class GroupInfoRepository {
                 int size = Objects.requireNonNull(task.getResult()).size();
                 counter = 0;
                 members = new GroupMember[size];
+                final int requestNumber = ++lastRequest;
                 int position = 0;
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     final int currentPosition = position;
@@ -80,7 +82,7 @@ public class GroupInfoRepository {
                                     GroupMember member = task1.getResult().toObject(GroupMember.class);
                                     long priority = (long) Objects.requireNonNull(documentSnapshot.get("priority"));
                                     Objects.requireNonNull(member).setPriority((int) priority);
-                                    addMember(currentPosition, member);
+                                    addMember(currentPosition, member, requestNumber);
                                 }
                     });
                     position++;
@@ -89,10 +91,12 @@ public class GroupInfoRepository {
         });
     }
 
-    private void addMember(int position, GroupMember member) {
-        members[position] = member;
-        if (++counter == members.length)
-            listener.setMembers(new ArrayList<>(Arrays.asList(members)));
+    private void addMember(int position, GroupMember member, int requestNumber) {
+        if (requestNumber == lastRequest) {
+            members[position] = member;
+            if (++counter == members.length)
+                listener.setMembers(new ArrayList<>(Arrays.asList(members)));
+        }
     }
 
     public void removeMember(String memberEmail) {
@@ -188,7 +192,7 @@ public class GroupInfoRepository {
                 .document(user)
                 .get().addOnCompleteListener(task -> {
                     if (task.isComplete()) {
-                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
+                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority")); //Priority és null????
                         listener.setPriority((int) priority);
                     }
         });

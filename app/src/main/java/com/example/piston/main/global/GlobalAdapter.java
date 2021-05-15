@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.Category;
+import com.example.piston.data.sections.Category;
 import com.example.piston.databinding.ItemCategoryBinding;
 import com.example.piston.main.global.category.CategoryActivity;
+import com.example.piston.utilities.Values;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
@@ -94,13 +95,12 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         return Objects.requireNonNull(viewModel.getCategories().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id) {
+    private View.OnClickListener openNewActivity(String categoryID) {
         return v -> {
             Intent intent = new Intent(localActivity, CategoryActivity.class);
-            intent.putExtra("id", id);
-            intent.putExtra("isAdmin", viewModel.getIsAdmin().getValue());
+            intent.putExtra(Values.SECTION_ID, categoryID);
+            intent.putExtra(Values.IS_ADMIN, viewModel.getIsAdmin().getValue());
             localActivity.startActivity(intent);
         };
     }
-
 }

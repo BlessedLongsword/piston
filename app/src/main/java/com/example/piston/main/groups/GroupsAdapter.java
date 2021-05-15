@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.Group;
+import com.example.piston.data.sections.Group;
 import com.example.piston.databinding.ItemGroupBinding;
 import com.example.piston.main.groups.group.GroupActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -68,10 +69,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
         return Objects.requireNonNull(viewModel.getGroups().getValue()).size();
     }
 
-    private View.OnClickListener openNewActivity(String id) {
+    private View.OnClickListener openNewActivity(String groupID) {
         return v -> {
             Intent intent = new Intent(localActivity, GroupActivity.class);
-            intent.putExtra("id", id);
+            intent.putExtra(Values.SECTION_ID, groupID);
             localActivity.startActivity(intent);
         };
     }

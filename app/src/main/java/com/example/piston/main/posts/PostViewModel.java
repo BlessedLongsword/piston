@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Reply;
+import com.example.piston.data.posts.Reply;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,8 +27,8 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     private final PostRepository repository;
 
-    public PostViewModel(String collection, String document, String postID) {
-        repository = new PostRepository(this, collection, document, postID);
+    public PostViewModel(String scope, String sectionID, String postID) {
+        repository = new PostRepository(this, scope, sectionID, postID);
         repository.checkLiked(postID);
     }
 

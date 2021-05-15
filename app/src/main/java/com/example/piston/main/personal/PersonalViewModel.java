@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Folder;
+import com.example.piston.data.sections.Folder;
 
 import java.util.ArrayList;
 

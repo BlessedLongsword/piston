@@ -1,30 +1,25 @@
-package com.example.piston.data;
+package com.example.piston.data.users;
 
+import com.example.piston.data.posts.Post;
 
 import java.util.Date;
 
 public class User {
 
+    private String username, email;
+    private Date birthDate;
+
     private String name;
+    private String phoneNumber;
     private String profilePictureLink;
     private Post featuredPost;
-    private String phoneNumber;
-
-    private String username;
-    private String email;
-    private Date birthDate;
 
     public User() {}
 
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
-    }
-
     public User(String username, String email, Date birthDate) {
-        this.username = username;
-        this.email = email;
-        this.birthDate = birthDate;
+        setUsername(username);
+        setEmail(email);
+        setBirthDate(birthDate);
     }
 
     public String getUsername() {
@@ -35,20 +30,28 @@ public class User {
         this.username = username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoneNumber() {
@@ -67,14 +70,6 @@ public class User {
         this.profilePictureLink = profilePictureLink;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public Post getFeaturedPost() {
         return featuredPost;
     }
@@ -82,5 +77,4 @@ public class User {
     public void setFeaturedPost(Post featuredPost) {
         this.featuredPost = featuredPost;
     }
-
 }

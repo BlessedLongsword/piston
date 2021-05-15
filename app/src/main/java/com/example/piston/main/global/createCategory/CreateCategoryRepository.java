@@ -2,7 +2,7 @@ package com.example.piston.main.global.createCategory;
 
 import android.net.Uri;
 
-import com.example.piston.data.Category;
+import com.example.piston.data.sections.Category;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,17 +60,16 @@ public class CreateCategoryRepository {
         }
         else {
             StorageReference storageRef = storage.getReference();
-            String randomId = UUID.randomUUID().toString();
-            String path = "categories/" + title;
-            String imageId = path + "/" + randomId;
-            StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
+            String id = UUID.randomUUID().toString(); //Check if it's new?
+            String path = "categories/" + id;
+            String imageId = path + "/" + "categoryImage";
+            StorageReference imageRef = storageRef.child(imageId);
             UploadTask uploadTask = imageRef.putFile(image);
             uploadTask.addOnFailureListener(exception -> {
-                // Handle unsuccessful uploads
+                // Handle unsuccessful uploads?
             }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                     .addOnSuccessListener(uri -> {
                         String imageLink = uri.toString();
-                        String id = db.collection("users").document().getId();
                         DocumentReference docRef = db.collection("categories").document(id);
                         docRef.get().addOnCompleteListener(task -> {
                             if (task.isComplete()) {
@@ -79,7 +78,7 @@ public class CreateCategoryRepository {
                                     listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
                                     listener.setCreateError();
                                 } else {
-                                    Category category = new Category(id, title, description, nsfw, imageId, imageLink);
+                                    Category category = new Category(id, title, description, imageLink, nsfw);
                                     db.collection("categories").document(id).set(category);
                                     listener.setCreateFinished();
                                 }

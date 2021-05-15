@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
-import com.example.piston.data.Notification;
-import com.example.piston.data.NotificationPost;
-import com.example.piston.data.NotificationReply;
+import com.example.piston.data.notifications.Notification;
+import com.example.piston.data.notifications.NotificationPost;
+import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.databinding.ItemNotificationPostBinding;
 import com.example.piston.databinding.ItemNotificationReplyBinding;
 import com.example.piston.main.posts.PostActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -98,7 +99,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .load(notificationPost.getImageLink())
                     .into(hold.binding.notificationPostPicture);
             hold.getBinding().notificationPostCard.setOnClickListener(openNewActivity(
-                    notificationPost.getCollection(), notificationPost.getSectionID(),
+                    notificationPost.getScope(), notificationPost.getSectionID(),
                             notificationPost.getPostID(), null));
         }
         else {
@@ -108,7 +109,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .NotificationReplyHolder) holder;
             hold.bind(notificationReply);
             hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
-                    notificationReply.getCollection(), notificationReply.getSectionID(),
+                    notificationReply.getScope(), notificationReply.getSectionID(),
                             notificationReply.getPostID(), notificationReply.getReplyID()));
         }
     }
@@ -129,14 +130,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private View.OnClickListener openNewActivity(String collection, String documentID, String id, String replyID) {
+    private View.OnClickListener openNewActivity(String scope, String sectionID, String postID, String replyID) {
         return v -> {
             Intent intent = new Intent(localActivity, PostActivity.class);
-            intent.putExtra("collection", collection);
-            intent.putExtra("document", documentID);
-            intent.putExtra("id", id);
-            intent.putExtra("reply", replyID);
-            intent.putExtra("orphan", true);
+            intent.putExtra(Values.SCOPE, scope);
+            intent.putExtra(Values.SECTION_ID, sectionID);
+            intent.putExtra(Values.POST_ID, postID);
+            intent.putExtra(Values.REPLY_ID, replyID);
+            intent.putExtra(Values.ORPHAN, true);
             localActivity.startActivity(intent);
             localActivity.finish();
         };

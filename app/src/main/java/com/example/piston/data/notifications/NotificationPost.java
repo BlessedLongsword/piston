@@ -1,9 +1,10 @@
-package com.example.piston.data;
+package com.example.piston.data.notifications;
 
 public class NotificationPost extends Notification {
 
     private String title, sectionName, imageLink;
 
+    @SuppressWarnings("unused")
     public NotificationPost() {}
 
     public NotificationPost(String title, String sectionName, String imageLink, boolean read,
@@ -37,5 +38,4 @@ public class NotificationPost extends Notification {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
-
 }

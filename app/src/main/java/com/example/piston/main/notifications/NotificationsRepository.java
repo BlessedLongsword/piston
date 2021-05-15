@@ -1,8 +1,8 @@
 package com.example.piston.main.notifications;
 
-import com.example.piston.data.Notification;
-import com.example.piston.data.NotificationPost;
-import com.example.piston.data.NotificationReply;
+import com.example.piston.data.notifications.Notification;
+import com.example.piston.data.notifications.NotificationPost;
+import com.example.piston.data.notifications.NotificationReply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;

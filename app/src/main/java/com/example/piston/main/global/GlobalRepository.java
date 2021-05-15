@@ -1,6 +1,6 @@
 package com.example.piston.main.global;
 
-import com.example.piston.data.Category;
+import com.example.piston.data.sections.Category;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;

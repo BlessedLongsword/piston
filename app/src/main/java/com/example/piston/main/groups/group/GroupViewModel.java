@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.piston.data.Post;
+import com.example.piston.data.posts.Post;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
 package com.example.piston.main.posts;
 
-import com.example.piston.data.NotificationReply;
-import com.example.piston.data.QuoteReply;
-import com.example.piston.data.Reply;
+import com.example.piston.data.notifications.NotificationReply;
+import com.example.piston.data.posts.QuoteReply;
+import com.example.piston.data.posts.Reply;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,13 +18,11 @@ import java.util.Objects;
 
 public class PostRepository {
 
-    private final PostRepository.IPosts listener;
+    private final IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user, email, profilePictureLink;
-    private final String collection;
-    private final String document;
-    private final String postID;
+    private String user, profilePictureLink;
+    private final String scope, sectionID, postID;
     private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
@@ -38,14 +36,14 @@ public class PostRepository {
         void setCurrentUser(String currentUser);
     }
 
-    public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
+    public PostRepository(IPosts listener, String scope, String sectionID, String postID) {
         this.listener = listener;
-        this.collection = collection;
-        this.document = document;
+        this.scope = scope;
+        this.sectionID = sectionID;
         this.postID = postID;
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         db.collection("users")
                 .document(Objects.requireNonNull(email))
@@ -63,17 +61,17 @@ public class PostRepository {
                         listener.setPriority(1);
         });
 
-        if (collection.equals("folders")) {
+        if (scope.equals("folders")) {
             docRef = db.collection("users")
                     .document(email)
-                    .collection(collection)
-                    .document(document)
+                    .collection(scope)
+                    .document(sectionID)
                     .collection("posts")
                     .document(postID);
         }
         else {
-            docRef = db.collection(collection)
-                    .document(document)
+            docRef = db.collection(scope)
+                    .document(sectionID)
                     .collection("posts")
                     .document(postID);
         }
@@ -130,7 +128,7 @@ public class PostRepository {
 
     public void createReply(String content) {
         String id = db.collection("users").document().getId();
-        Reply rep = new Reply(user, content, id, profilePictureLink);
+        Reply rep = new Reply(id, user, content, profilePictureLink);
         DocumentReference docRef1 = docRef.collection("replies")
                                         .document(id);
         Map<String, Object> data = new HashMap<>();
@@ -148,7 +146,7 @@ public class PostRepository {
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
                                 NotificationReply notificationReply = new NotificationReply(user, content,
-                                        id, false, collection, document, postID);
+                                        id, false, scope, sectionID, postID);
                                 DocumentReference docRef2 = db.collection("users")
                                         .document(Objects.requireNonNull(Objects.requireNonNull
                                                 (task1.getResult()).get("email")).toString())
@@ -165,8 +163,7 @@ public class PostRepository {
     public void createReply(String content, String quote, String quoteOwner, String quoteID) {
         String id = db.collection("users").document().getId();
 
-
-        QuoteReply rep = new QuoteReply(user, content, id, quote, quoteOwner, quoteID, profilePictureLink);
+        QuoteReply rep = new QuoteReply(id, user, content, profilePictureLink, quoteID, quoteOwner, quote);
         DocumentReference docRef1 = docRef.collection("replies")
                 .document(id);
         Map<String, Object> data = new HashMap<>();
@@ -181,7 +178,7 @@ public class PostRepository {
             db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     NotificationReply notificationReply = new NotificationReply(user, content, id,
-                            false, collection, document, postID);
+                            false, scope, sectionID, postID);
                     DocumentReference docRef2 = db.collection("users")
                             .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
                                     .get("email")).toString())
@@ -209,7 +206,7 @@ public class PostRepository {
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         DocumentReference likedDocRefUsers = db.collection("users")
                 .document(Objects.requireNonNull(email)).collection("liked").document(postID);
-        DocumentReference likedDocRefPosts = db.collection(collection).document(document)
+        DocumentReference likedDocRefPosts = db.collection(scope).document(sectionID)
                 .collection("posts").document(postID)
                 .collection("userLikes").document(email);
         if (liked) {

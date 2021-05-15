@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.authentication.register.RegisterResult;
-import com.example.piston.data.Post;
+import com.example.piston.data.posts.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
