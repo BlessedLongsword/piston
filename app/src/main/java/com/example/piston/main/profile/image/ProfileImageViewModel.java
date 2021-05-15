@@ -1,5 +1,7 @@
 package com.example.piston.main.profile.image;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,7 +16,7 @@ public class ProfileImageViewModel extends ViewModel implements ProfileImageRepo
         repository = new ProfileImageRepository(this, email);
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Uri image) {
         repository.setImage(image);
     }
 

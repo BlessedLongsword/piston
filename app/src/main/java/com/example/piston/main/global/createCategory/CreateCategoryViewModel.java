@@ -1,5 +1,7 @@
 package com.example.piston.main.global.createCategory;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -25,7 +27,7 @@ public class CreateCategoryViewModel extends ViewModel implements CreateCategory
         createError.setValue(false);
     }
 
-    public void createCategory(byte[] image, boolean connected) {
+    public void createCategory(Uri image, boolean connected) {
         loading.setValue(true);
         imageError.setValue(false);
         repository.createCategory(Objects.requireNonNull(titleField.getValue()),

@@ -95,7 +95,7 @@ public class ProfileRepository {
     }
 
     private void listenChanges() {
-        ListenerRegistration listenerRegistration = db.collection("users")
+        db.collection("users")
                 .document(email)
                 .addSnapshotListener((value, error) -> ProfileRepository.this.loadProfile());
     }

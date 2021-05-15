@@ -1,6 +1,7 @@
 package com.example.piston.main.global.category;
 
 import com.example.piston.data.Post;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -18,18 +19,24 @@ public class CategoryRepository {
     private final ICategory listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final String category;
+    private final DocumentReference docRef;
     private ListenerRegistration listenerRegistration;
 
     public CategoryRepository(ICategory listener, String category) {
         this.listener = listener;
         this.category = category;
+
+        docRef = db.collection("categories").document(category);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isComplete())
+                listener.setTitle((String) task.getResult().get("title"));
+        });
+
         listenChanges();
     }
 
     private void loadCategoryPosts() {
-        db.collection("categories")
-                .document(category)
-                .collection("posts")
+        docRef.collection("posts")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -45,9 +52,7 @@ public class CategoryRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = db.collection("categories")
-                .document(category)
-                .collection("posts")
+        listenerRegistration = docRef.collection("posts")
                 .addSnapshotListener((snapshots, e) -> CategoryRepository.this.loadCategoryPosts());
     }
 

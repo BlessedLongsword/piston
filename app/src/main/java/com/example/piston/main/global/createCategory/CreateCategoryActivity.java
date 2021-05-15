@@ -53,7 +53,7 @@ public class CreateCategoryActivity extends PickImageActivity {
 
     public void createCategory(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createCategoryViewModel.createCategory(image, connected);
+        createCategoryViewModel.createCategory(imageUri, connected);
     }
 
     @Override

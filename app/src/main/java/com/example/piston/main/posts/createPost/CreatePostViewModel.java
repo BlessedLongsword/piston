@@ -1,5 +1,7 @@
 package com.example.piston.main.posts.createPost;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,7 +26,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
         createError.setValue(false);
     }
 
-    public void createPost(String collection, String document, byte[] image, boolean connected) {
+    public void createPost(String collection, String document, Uri image, boolean connected) {
         repository.createPost(collection, document, Objects.requireNonNull(titleField.getValue()),
                 contentField.getValue(), image, connected);
         loading.setValue(true);

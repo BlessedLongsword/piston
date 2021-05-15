@@ -1,5 +1,7 @@
 package com.example.piston.main.profile.image;
 
+import android.net.Uri;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,18 +46,19 @@ public class ProfileImageRepository {
         });
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Uri image) {
         StorageReference storageRef = storage.getReference();
         String randomId = UUID.randomUUID().toString();
         String path = "users/" + username + "/profile";
         String imageId = path + "/" + randomId;
         StorageReference imageRef = storageRef.child(imageId);
-        UploadTask uploadTask = imageRef.putBytes(image);
+        UploadTask uploadTask = imageRef.putFile(image);
         uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     DocumentReference docRef = db.collection("users").document(email);
                     docRef.get().addOnSuccessListener(documentSnapshot -> {
                        docRef.update("profilePictureLink", uri.toString());
+                       loadImage();
                     });
                 }));
     }

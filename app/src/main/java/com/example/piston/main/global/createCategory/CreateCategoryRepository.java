@@ -1,5 +1,7 @@
 package com.example.piston.main.global.createCategory;
 
+import android.net.Uri;
+
 import com.example.piston.data.Category;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -46,7 +48,7 @@ public class CreateCategoryRepository {
         }
     }
 
-    public void createCategory(String title, String description, boolean nsfw, byte[] image, boolean connected) {
+    public void createCategory(String title, String description, boolean nsfw, Uri image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
             listener.setCreateError();
@@ -62,7 +64,7 @@ public class CreateCategoryRepository {
             String path = "categories/" + title;
             String imageId = path + "/" + randomId;
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
-            UploadTask uploadTask = imageRef.putBytes(image);
+            UploadTask uploadTask = imageRef.putFile(image);
             uploadTask.addOnFailureListener(exception -> {
                 // Handle unsuccessful uploads
             }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()

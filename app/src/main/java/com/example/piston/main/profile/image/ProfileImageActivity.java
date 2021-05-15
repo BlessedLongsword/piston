@@ -53,22 +53,14 @@ public class ProfileImageActivity extends PickImageActivity {
     }
 
     public void changeImage(MenuItem item) {
-        if (CheckNetwork.isConnected(getApplicationContext())) {
+        if (CheckNetwork.isConnected(getApplicationContext()))
             imagePick(item);
-
-        }
         else
             Toast.makeText(getApplicationContext(), "No connection!", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        viewModel.setImage(image);
-    }
-
-    @Override
     protected void setUri(Uri imageUri) {
-        binding.picture.setImageURI(imageUri);
+        viewModel.setImage(imageUri);
     }
 }

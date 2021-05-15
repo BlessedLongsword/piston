@@ -1,5 +1,7 @@
 package com.example.piston.main.posts.createPost;
 
+import android.net.Uri;
+
 import com.example.piston.data.NotificationPost;
 import com.example.piston.data.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +51,7 @@ public class CreatePostRepository {
         }
     }
 
-    public void createPost(String collection, String document, String title, String content, byte[] image, boolean connected) {
+    public void createPost(String collection, String document, String title, String content, Uri image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreatePostResult.TitleError.EMPTY);
             listener.setCreateError();
@@ -72,7 +74,7 @@ public class CreatePostRepository {
                     path = collection + "/" + document;
                 String imageId = path + "/" + randomId;
                 StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
-                UploadTask uploadTask = imageRef.putBytes(image);
+                UploadTask uploadTask = imageRef.putFile(image);
                 uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                         .addOnSuccessListener(uri -> {
                             String imageLink = uri.toString();
