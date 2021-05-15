@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/small_separator"
-                android:layout_marginVertical="@dimen/micro_separator"
+                android:layout_marginVertical="@dimen/tiny_separator"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -110,6 +110,7 @@
                     android:id="@+id/reply_owner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="@{reply.owner}"
                     tools:text="Owner"
                     android:textAppearance="?attr/textAppearanceBody1"

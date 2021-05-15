@@ -15,6 +15,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> postOwner = new MutableLiveData<>("");
     private final MutableLiveData<String> postContent = new MutableLiveData<>("");
     private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
+    private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
 
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
@@ -41,11 +42,13 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     }
 
     @Override
-    public void setPostParams(String title, String owner, String content, String imageLink) {
+    public void setPostParams(String title, String owner, String content, String postImageLink, String profileImageLink) {
         this.postTitle.setValue(title);
         this.postOwner.setValue(owner);
         this.postContent.setValue(content);
-        this.postImageLink.setValue(imageLink);
+        this.postImageLink.setValue(postImageLink);
+        this.profileImageLink.setValue(profileImageLink);
+
     }
 
     @Override
@@ -93,5 +96,9 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     public LiveData<String> getPostImageLink() {
         return postImageLink;
+    }
+
+    public MutableLiveData<String> getProfileImageLink() {
+        return profileImageLink;
     }
 }

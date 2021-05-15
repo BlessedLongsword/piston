@@ -32,7 +32,7 @@ public class PostRepository {
 
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
-        void setPostParams(String title, String owner, String content, String profilePictureLink);
+        void setPostParams(String title, String owner, String content, String postImageLink, String profileImageLink);
         void setLoaded();
         void setIsLiked(boolean liked);
     }
@@ -81,7 +81,7 @@ public class PostRepository {
                 listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
                         Objects.requireNonNull(ds.get("owner")).toString(),
                         Objects.requireNonNull(ds.get("content")).toString(),
-                        (String) ds.get("imageLink"));
+                        (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
             }
         });
     }

@@ -87,6 +87,13 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         viewModel.getPostImageLink().observe(this, imageLink -> Glide.with(this)
                 .load(imageLink)
                 .into(binding.postPicture));
+
+        viewModel.getProfileImageLink().observe(this, profileImageLink ->{
+            if (profileImageLink != null)
+                Glide.with(this)
+                        .load(profileImageLink)
+                        .into(binding.postPicture);
+        });
         viewModel.getLoaded().observe(this, aBoolean -> {
             if (aBoolean && replyID != null)
                 scrollTo(getItemPositionByID(replyID));

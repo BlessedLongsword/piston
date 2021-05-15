@@ -19,11 +19,11 @@ import java.util.UUID;
 
 public class CreatePostRepository {
     private final CreatePostRepository.ICreatePost listener;
-    final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    final FirebaseAuth auth = FirebaseAuth.getInstance();
-    final FirebaseStorage storage = FirebaseStorage.getInstance();
-    final String user;
-    String username;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
+    private final String user;
+    private String username, profilePictureLink;
 
     public interface ICreatePost {
         void setTitleStatus(CreatePostResult.TitleError titleError);
@@ -39,8 +39,11 @@ public class CreatePostRepository {
         db.collection("users")
                 .document(Objects.requireNonNull(user))
                 .get()
-                .addOnCompleteListener(task ->
-                        username = (String) Objects.requireNonNull(task.getResult()).get("username"));
+                .addOnCompleteListener(task -> {
+                    username = (String) Objects.requireNonNull(task.getResult()).get("username");
+                    profilePictureLink = (String) task.getResult().get("profilePictureLink");
+        });
+
     }
 
     public void checkTitle(String title) {
@@ -107,7 +110,7 @@ public class CreatePostRepository {
         }
         docRef.get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
-                Post post = new Post(title, content, username, id, document, imageId, imageLink);
+                Post post = new Post(title, content, username, id, document, imageId, imageLink, profilePictureLink);
                 docRef.set(post);
                 if (collection.equals("groups")) {
                     CollectionReference cr = db.collection(collection).document(document)

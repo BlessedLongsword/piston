@@ -80,6 +80,7 @@
     <string name="edit_post_btn">Editar</string>
     <string name="change_picture">Editar Imagen</string>
     <string name="change_file">Editar Archivo</string>
+    <string name="delete_post_btn">Eliminar Post</string>
 
     <!-- Reply Post Strings -->
     <string name="reply_post_activity_title">RESPONDER PUBLICACIÓN</string>
