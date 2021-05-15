@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".main.personal.group.GroupInfoActivity">
+    tools:context=".main.posts.PostActivity">
     <item
-        android:id="@+id/delete_group"
-        android:title="@string/delete_group"
+        android:id="@+id/delete_post"
+        android:title="@string/delete_post_btn"
         android:onClick="deleteGroup"
         app:showAsAction="never" />
     <item
-        android:id="@+id/edit_title"
-        android:title="@string/edit_group_btn"
+        android:id="@+id/edit_post"
+        android:title="@string/edit_post_btn"
         android:icon="@drawable/outline_mode_edit_white_36"
-        android:onClick="editTitle"
+        android:onClick="editPost"
         app:showAsAction="ifRoom" />
 </menu>

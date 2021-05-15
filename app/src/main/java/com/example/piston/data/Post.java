@@ -2,20 +2,14 @@ package com.example.piston.data;
 
 public class Post {
 
-    private String title;
-    private String content;
-    private String owner;
-
-    private String id;
-    private String documentID;
-    private String imageId;
-    private String imageLink;
+    private String title, content, owner, id, documentID, imageId, imageLink, profileImageLink;
 
     private int numLikes;
 
     public Post() {}
 
-    public Post(String title, String content, String owner, String id, String documentID, String imageId, String imageLink) {
+    public Post(String title, String content, String owner, String id, String documentID,
+                String imageId, String imageLink, String profileImageLink) {
         setTitle(title);
         setContent(content);
         setOwner(owner);
@@ -24,6 +18,7 @@ public class Post {
         setImageId(imageId);
         setImageLink(imageLink);
         setNumLikes(0);
+        setProfileImageLink(profileImageLink);
     }
 
     public String getTitle() {
@@ -88,5 +83,13 @@ public class Post {
 
     public void setNumLikes(int numLikes) {
         this.numLikes = numLikes;
+    }
+
+    public void setProfileImageLink(String profileImageLink) {
+        this.profileImageLink = profileImageLink;
+    }
+
+    public String getProfileImageLink() {
+        return profileImageLink;
     }
 }

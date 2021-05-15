@@ -83,6 +83,7 @@
     <string name="edit_post_btn">Edit</string>
     <string name="change_picture">Change Picture</string>
     <string name="change_file">Change File</string>
+    <string name="delete_post_btn">Delete Post</string>
 
     <!-- Reply Post Strings -->
     <string name="reply_post_activity_title">Reply Post</string>
