@@ -6,14 +6,14 @@
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/baseline_person_white_24"
+        android:icon="@drawable/baseline_person_white_36"
         android:title="@string/profile"
         android:onClick="openViewProfile"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/baseline_notifications_white_24"
+        android:icon="@drawable/baseline_notifications_white_36"
         android:title="@string/notifications"
         android:onClick="openNotifications"
         app:showAsAction="ifRoom" />

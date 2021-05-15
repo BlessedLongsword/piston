@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.personal.group.GroupInfoActivity">
     <item
-        android:id="@+id/navigation_delete"
+        android:id="@+id/delete_group"
         android:title="@string/delete_group"
         android:onClick="deleteGroup"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/edit_title"
+        android:title="@string/edit_group_btn"
+        android:icon="@drawable/outline_mode_edit_white_36"
+        android:onClick="editTitle"
+        app:showAsAction="ifRoom" />
 </menu>

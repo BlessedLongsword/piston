@@ -56,12 +56,12 @@ public class GroupsRepository {
                                 if (Objects.requireNonNull(ds).exists()) {
                                     addGroup(positionActual, ds.toObject(Group.class));
                                 } else {
-                                    Log.w("DBReadTAG", "Error getting data: ", task1.getException());
+                                    Log.w("DBReadTAG", "Error getting data1: ", task1.getException());
                                 }
                             });
                         }
                     } else {
-                        Log.w("DBReadTAG", "Error getting data: ", task.getException());
+                        Log.w("DBReadTAG", "Error getting data2: ", task.getException());
                     }
                 });
     }

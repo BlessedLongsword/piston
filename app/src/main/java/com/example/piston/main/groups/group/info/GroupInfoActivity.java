@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupInfoBinding;
+import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     private GroupInfoViewModel viewModel;
     private ClipboardManager clipboard;
     private ClipData clip;
+    private ActivityGroupInfoBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class GroupInfoActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupInfoViewModel.class);
-        ActivityGroupInfoBinding binding = DataBindingUtil.setContentView(
+        binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group_info);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -53,7 +55,13 @@ public class GroupInfoActivity extends AppCompatActivity {
         });
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
-        viewModel.getIsOwner().observe(this, binding.groupInfoTopAppBar.getMenu().getItem(0)::setVisible);
+        viewModel.getPriority().observe(this, priority -> {
+            binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority==0);
+            binding.groupInfoTopAppBar.getMenu().getItem(1).setVisible(priority<=1);
+            if (priority<=1) {
+                binding.groupInfoDescription.setOnClickListener(v -> editDescription());
+            }
+        });
         viewModel.getTitle().observe(this, binding.groupInfoTopAppBar::setTitle);
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
@@ -64,5 +72,32 @@ public class GroupInfoActivity extends AppCompatActivity {
         viewModel.deleteGroup();
         setResult(DELETE_CODE);
         finish();
+    }
+
+    public void editDescription() {
+        viewModel.reset();
+        EditPopup popup = new EditPopup(this, getString(R.string.description),
+                binding.groupInfoDescription.getText().toString());
+        popup.getSaveButton().setOnClickListener(v -> viewModel.editDescription(popup.getText()));
+        viewModel.getFinished().observe(this, finished -> {
+            if (finished) {
+                popup.dismiss();
+                viewModel.update();
+            }
+        });
+
+    }
+
+    public void editTitle(MenuItem item) {
+        viewModel.reset();
+        EditPopup popup = new EditPopup(this, getString(R.string.title),
+                binding.groupInfoTopAppBar.getTitle().toString());
+        popup.getSaveButton().setOnClickListener(v -> viewModel.editTitle(popup.getText()));
+        viewModel.getFinished().observe(this, finished -> {
+            if (finished) {
+                popup.dismiss();
+                viewModel.update();
+            }
+        });
     }
 }

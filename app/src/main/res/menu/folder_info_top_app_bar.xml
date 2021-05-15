@@ -5,7 +5,7 @@
     tools:context=".views.personal.folder.FolderInfoActivity">
 
     <item
-        android:id="@+id/navigation_delete"
+        android:id="@+id/delete_group"
         android:title="@string/delete_folder"
         android:onClick="deleteFolder"
         app:showAsAction="never" />

@@ -1,8 +1,5 @@
 package com.example.piston.main.profile;
 
-import android.net.wifi.WifiManager;
-import android.util.Log;
-
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +22,6 @@ public class ProfileRepository {
     private final IProfile listener;
 
     private final String email;
-
-    private ListenerRegistration listenerRegistration;
 
     public interface IProfile {
         void setUserNameField(String username);
@@ -100,7 +95,7 @@ public class ProfileRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = db.collection("users")
+        ListenerRegistration listenerRegistration = db.collection("users")
                 .document(email)
                 .addSnapshotListener((value, error) -> ProfileRepository.this.loadProfile());
     }

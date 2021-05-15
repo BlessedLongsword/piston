@@ -25,7 +25,8 @@ public class GroupInfoRepository {
     public interface IGroupInfo {
         void setParams(String title, String description, String imageLink, String groupID);
         void setMembers(ArrayList<GroupMember> members);
-        void setIsOwner(boolean priority);
+        void setPriority(Integer priority);
+        void setFinished(boolean finished);
     }
 
     public GroupInfoRepository(GroupInfoRepository.IGroupInfo listener, String groupID) {
@@ -35,6 +36,12 @@ public class GroupInfoRepository {
         this.user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         docRef = db.collection("groups").document(groupID);
 
+        updateParams();
+        isOwner();
+        listenChanges();
+    }
+
+    public void updateParams() {
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
@@ -42,8 +49,20 @@ public class GroupInfoRepository {
                         (String) task.getResult().get("imageLink"), groupID);
             }
         });
-        isOwner();
-        listenChanges();
+    }
+
+    public void editDescription(String text) {
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            docRef.update("description", text);
+            listener.setFinished(true);
+        });
+    }
+
+    public void editTitle(String text) {
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            docRef.update("title", text);
+            listener.setFinished(true);
+        });
     }
 
     public void loadMembers() {
@@ -162,7 +181,7 @@ public class GroupInfoRepository {
                 .get().addOnCompleteListener(task -> {
                     if (task.isComplete()) {
                         long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
-                        listener.setIsOwner((int) priority == 0);
+                        listener.setPriority((int) priority);
                     }
         });
     }

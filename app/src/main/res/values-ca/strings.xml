@@ -169,5 +169,6 @@
     <string name="members">\u0020Membres</string>
     <string name="show_information">Info</string>
     <string name="field">Field</string>
+    <string name="edit_group_btn">Edit Title</string>
 
 </resources>

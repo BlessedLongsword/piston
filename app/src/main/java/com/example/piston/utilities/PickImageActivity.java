@@ -17,20 +17,15 @@ public abstract class PickImageActivity extends AppCompatActivity {
     public void imagePick(View v) {
         ImagePicker.Companion.with(this)
                 .crop()
-                .compress(1024)
                 .start();
     }
 
     public void imagePick(MenuItem item) {
         ImagePicker.Companion.with(this)
                 .crop()
-                .compress(1024)
                 .start();
     }
 
-    /**
-     * @deprecated using deprecated method for old Android versions....
-     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

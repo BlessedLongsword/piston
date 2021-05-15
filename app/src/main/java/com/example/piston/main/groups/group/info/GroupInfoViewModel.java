@@ -16,9 +16,11 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     private final MutableLiveData<String> imageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> numberOfMembers = new MutableLiveData<>("");
     private final MutableLiveData<ArrayList<GroupMember>> members = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<Boolean> isOwner = new MutableLiveData<>(false);
+    private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
 
-    final GroupInfoRepository repository;
+    private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
+
+    private final GroupInfoRepository repository;
 
     public GroupInfoViewModel(String group) {
         id.setValue(group);
@@ -40,8 +42,13 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     }
 
     @Override
-    public void setIsOwner(boolean priority) {
-        this.isOwner.setValue(priority);
+    public void setPriority(Integer priority) {
+        this.priority.setValue(priority);
+    }
+
+    @Override
+    public void setFinished(boolean finished) {
+        this.finished.setValue(finished);
     }
 
     public void deleteGroup() {
@@ -64,7 +71,27 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
 
     public LiveData<String> getNumberOfMembers() { return numberOfMembers; }
 
-    public LiveData<Boolean> getIsOwner() {
-        return isOwner;
+    public LiveData<Integer> getPriority() {
+        return priority;
+    }
+
+    public void editDescription(String text) {
+        repository.editDescription(text);
+    }
+
+    public void update() {
+        repository.updateParams();
+    }
+
+    public LiveData<Boolean> getFinished() {
+        return finished;
+    }
+
+    public void editTitle(String text) {
+        repository.editTitle(text);
+    }
+
+    public void reset() {
+        finished.setValue(false);
     }
 }

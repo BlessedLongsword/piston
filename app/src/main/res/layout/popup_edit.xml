@@ -45,7 +45,6 @@
                     android:paddingStart="@dimen/tiny_separator"
                     android:paddingEnd="@dimen/tiny_separator"
                     android:paddingVertical="@dimen/tiny_separator"
-                    android:maxLength="@integer/name_max_length"
                     android:gravity="start"
                     android:selectAllOnFocus="true" />
             </com.google.android.material.textfield.TextInputLayout>
