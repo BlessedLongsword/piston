@@ -173,5 +173,7 @@
     <string name="make_moderator">Fer Modearator</string>
     <string name="dismiss_as_moderator">Desfer Moderator</string>
     <string name="kick_from_group">Expulsar del Grup</string>
+    <string name="no_featured">Aquest usuari no te publicacions públiques</string>
+    <string name="no_featured_current">No tens publicacions públiques</string>
 
 </resources>

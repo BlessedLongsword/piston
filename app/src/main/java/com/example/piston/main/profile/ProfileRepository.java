@@ -1,11 +1,16 @@
 package com.example.piston.main.profile;
 
+import android.util.Log;
+
 import com.example.piston.authentication.register.RegisterResult;
+import com.example.piston.data.Post;
 import com.example.piston.data.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +27,7 @@ public class ProfileRepository {
     private final IProfile listener;
 
     private final String email;
+    private String username;
 
     public interface IProfile {
         void setUserNameField(String username);
@@ -33,6 +39,7 @@ public class ProfileRepository {
         void setBirthDateStatus(RegisterResult.BirthDateError birthDateError);
         void setLoadingFinished();
         void setIsCurrentUser(boolean isCurrentUser);
+        void setFeaturedPost(Post featuredPost);
     }
 
     public ProfileRepository(IProfile listener, String email) {
@@ -40,6 +47,12 @@ public class ProfileRepository {
         this.email = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
         listener.setIsCurrentUser(Objects.equals(this.email,
                 Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()));
+        db.collection("users").document(Objects.requireNonNull(this.email)).get()
+                .addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                username = (String) task.getResult().get("username");
+            }
+        });
         listenChanges();
     }
 
@@ -55,6 +68,31 @@ public class ProfileRepository {
                     listener.setBirthDateField(user.getBirthDate());
                     listener.setPhoneNumberField(user.getPhoneNumber());
                     listener.setImageLink(user.getProfilePictureLink());
+                    loadFeaturedPost();
+        });
+    }
+
+    public void loadFeaturedPost() {
+        db.collection("categories").get().addOnCompleteListener(task -> {
+            for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                db.collection("categories").document(ds.getId())
+                        .collection("posts")
+                        .whereEqualTo("owner", username)
+                        .orderBy("numLikes", Query.Direction.DESCENDING)
+                        .get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                Log.d("DBReadTAG", "i got here...");
+                                try {
+                                    DocumentSnapshot featuredPostDocumentSnapshot =
+                                            task1.getResult().getDocuments().get(0);
+                                    listener.setFeaturedPost(featuredPostDocumentSnapshot
+                                            .toObject(Post.class));
+                                } catch (NullPointerException e) {
+                                    listener.setFeaturedPost(null);
+                                }
+                            }
+                });
+            }
         });
     }
 

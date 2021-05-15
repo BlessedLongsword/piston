@@ -43,5 +43,6 @@
     <dimen name="quote_elevation">5dp</dimen>
     <dimen name="space">4dp</dimen>
     <dimen name="one">1dp</dimen>
+    <dimen name="bigger_text">16sp</dimen>
 
 </resources>

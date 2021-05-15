@@ -199,7 +199,7 @@ public class PostRepository {
        docRef.get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
-               docRef.update("numLikes", liked ? numLikes - 1 : numLikes + 1);
+               docRef.update("numLikes", liked ? numLikes + 1 : numLikes - 1);
            }
        });
     }
