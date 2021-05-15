@@ -1,7 +1,5 @@
 package com.example.piston.main.posts;
 
-import android.util.Log;
-
 import com.example.piston.data.NotificationReply;
 import com.example.piston.data.QuoteReply;
 import com.example.piston.data.Reply;
@@ -34,6 +32,7 @@ public class PostRepository {
         void setReplies(ArrayList<Reply> replies);
         void setPostParams(String title, String owner, String content, String postImageLink, String profileImageLink);
         void setLoaded();
+        void setPriority(Integer priority);
         void setIsLiked(boolean liked);
         void setPostDoesNotExist();
     }
@@ -55,6 +54,12 @@ public class PostRepository {
                     profilePictureLink = (String) task.getResult().get("profilePictureLink");
                 });
 
+        db.collection("admins")
+                .document(email)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful())
+                        listener.setPriority(1);
+        });
 
         if (collection.equals("folders")) {
             docRef = db.collection("users")
@@ -80,10 +85,13 @@ public class PostRepository {
             if (task.isSuccessful()) {
                 if (task.getResult().exists()) {
                     DocumentSnapshot ds = task.getResult();
+                    String owner = Objects.requireNonNull(ds.get("owner")).toString();
                     listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
-                            Objects.requireNonNull(ds.get("owner")).toString(),
-                            Objects.requireNonNull(ds.get("content")).toString(),
+                            owner, Objects.requireNonNull(ds.get("content")).toString(),
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
+
+                    if (owner.equals(user))
+                        listener.setPriority(0);
                 } else {
                     listener.setPostDoesNotExist();
                 }
@@ -224,6 +232,39 @@ public class PostRepository {
                docRef.update("numLikes", liked ? numLikes + 1 : numLikes - 1);
            }
        });
+    }
+
+    public void deletePost() {
+        docRef.collection("replies")
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
+                                task.getResult())) {
+                            docRef.collection("replies")
+                                    .document(snapshot1.getId())
+                                    .delete();
+                        }
+                    }
+        });
+
+        docRef.collection("userLikes")
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
+                                task.getResult())) {
+                            db.collection("users").document(snapshot1.getId())
+                                    .collection("liked")
+                                    .document(postID)
+                                    .delete();
+
+                            docRef.collection("userLikes")
+                                    .document(snapshot1.getId())
+                                    .delete();
+                        }
+                    }
+        });
+
+        docRef.delete();
     }
 
     public void removeListener() {

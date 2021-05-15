@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.posts.PostActivity">
+
     <item
         android:id="@+id/delete_post"
         android:title="@string/delete_post_btn"
-        android:onClick="deleteGroup"
+        android:onClick="deletePost"
         app:showAsAction="never" />
     <item
         android:id="@+id/edit_post"
         android:title="@string/edit_post_btn"
-        android:icon="@drawable/outline_mode_edit_white_36"
+        android:icon="@drawable/baseline_edit_white_36"
         android:onClick="editPost"
         app:showAsAction="ifRoom" />
 </menu>

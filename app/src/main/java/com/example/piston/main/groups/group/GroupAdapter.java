@@ -61,6 +61,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     public void onBindViewHolder(@NonNull GroupAdapter.GroupHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
+
+        if(post.getProfileImageLink() != null ) {
+            Glide.with(localActivity)
+                    .load(post.getProfileImageLink())
+                    .into(holder.binding.postItemProfilePicture);
+        }
+
         if (post.getImageLink() != null) {
             Glide.with(localActivity)
                     .load(post.getImageLink())

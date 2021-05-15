@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.piston.data.Reply;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
@@ -16,6 +17,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> postContent = new MutableLiveData<>("");
     private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
+    private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
     private final MutableLiveData<Boolean> postDoesNotExist = new MutableLiveData<>(false);
 
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
@@ -49,7 +51,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         this.postContent.setValue(content);
         this.postImageLink.setValue(postImageLink);
         this.profileImageLink.setValue(profileImageLink);
-
     }
 
     @Override
@@ -58,6 +59,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
             loaded.setValue(true);
             firstLoad = true;
         }
+    }
+
+    @Override
+    public void setPriority(Integer priority) {
+        this.priority.setValue(Math.min(priority, Objects.requireNonNull(this.priority.getValue())));
     }
 
     @Override
@@ -104,8 +110,16 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         return postImageLink;
     }
 
-    public MutableLiveData<String> getProfileImageLink() {
+    public LiveData<String> getProfileImageLink() {
         return profileImageLink;
+    }
+
+    public void deletePost() {
+        repository.deletePost();
+    }
+
+    public LiveData<Integer> getPriority() {
+        return priority;
     }
 
     public LiveData<Boolean> getPostDoesNotExist() { return postDoesNotExist; }

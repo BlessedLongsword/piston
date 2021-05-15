@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -48,12 +49,20 @@
                     android:layout_marginVertical="@dimen/small"
                     android:orientation="horizontal" >
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/post_item_profile_picture"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="@dimen/low_square"
                         android:layout_height="@dimen/low_square"
-                        android:src="@drawable/default_profile_picture"
-                        android:contentDescription="@string/profile_image"/>
+                        android:layout_gravity="center_horizontal"
+                        app:cardCornerRadius="100dp" >
+
+                        <ImageView
+                            android:id="@+id/post_item_profile_picture"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/default_profile_picture"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="centerCrop" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <Space
                         android:layout_width="10dp"

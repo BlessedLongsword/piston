@@ -7,7 +7,7 @@
     <item
         android:id="@+id/edit_image"
         android:title="@string/edit"
-        android:icon="@drawable/baseline_mode_edit_white_24"
+        android:icon="@drawable/baseline_edit_white_36"
         app:showAsAction="always"
         android:onClick="changeImage">
     </item>

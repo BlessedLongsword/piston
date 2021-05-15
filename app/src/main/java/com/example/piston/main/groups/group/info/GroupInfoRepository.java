@@ -103,9 +103,7 @@ public class GroupInfoRepository {
 
     public void updateMemberPriority(String memberEmail, int priority) {
         DocumentReference memberDocRef = docRef.collection("members").document(memberEmail);
-        memberDocRef.get().addOnSuccessListener(documentSnapshot -> {
-            memberDocRef.update("priority", priority);
-        });
+        memberDocRef.get().addOnSuccessListener(documentSnapshot -> memberDocRef.update("priority", priority));
     }
 
     private void listenChanges() {
@@ -120,7 +118,6 @@ public class GroupInfoRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String id = documentSnapshot.getId();
-                    deleteLiked(id);
                     DocumentReference docRef1 = docRef.collection("posts").document(id);
 
                     // Delete replies inside post
@@ -135,6 +132,24 @@ public class GroupInfoRepository {
                             }
                         }
                     });
+
+                    docRef1.collection("userLikes")
+                            .get().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful()) {
+                            for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
+                                    task2.getResult())) {
+                                db.collection("users").document(snapshot1.getId())
+                                        .collection("liked")
+                                        .document(id)
+                                        .delete();
+
+                                docRef1.collection("userLikes")
+                                        .document(snapshot1.getId())
+                                        .delete();
+                            }
+                        }
+                    });
+                    
                     docRef1.delete();
                 }
             }
@@ -143,26 +158,6 @@ public class GroupInfoRepository {
         deleteMembers();
 
         docRef.delete(); // Delete group
-    }
-
-    private void deleteLiked(String postID) {
-        docRef.collection("members").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Remove liked post from User's collection
-                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    DocumentReference docRef1 = db.collection("users")
-                            .document(documentSnapshot.getId())
-                            .collection("liked")
-                            .document(postID);
-
-                    docRef1.get().addOnCompleteListener(task1 -> {
-                                if (task1.getResult().exists())
-                                    docRef1.delete();
-                    });
-
-                }
-            }
-        });
     }
 
     private void deleteMembers() {

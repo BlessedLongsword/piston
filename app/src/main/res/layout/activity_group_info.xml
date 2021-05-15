@@ -16,6 +16,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/group_info_top_app_bar"
                 android:layout_width="match_parent"
@@ -24,6 +25,7 @@
                 app:menu="@menu/group_info_top_app_bar"
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"
                 style="@style/Theme.Piston.ToolbarStyle"/>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

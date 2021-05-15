@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -62,7 +64,10 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.setLifecycleOwner(this);
 
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
-
+        viewModel.getPriority().observe(this, priority -> {
+                binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
+                binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority == 0);
+            });
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
 
         binding.threadReplyButton.setOnClickListener(v -> replyPopUp(null, null, null));
@@ -86,16 +91,15 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
         viewModel.getLiked().observe(this, aBoolean -> binding.heartButton.setLiked(aBoolean));
+
         viewModel.getPostImageLink().observe(this, imageLink -> Glide.with(this)
                 .load(imageLink)
                 .into(binding.postPicture));
 
-        viewModel.getProfileImageLink().observe(this, profileImageLink ->{
-            if (profileImageLink != null)
-                Glide.with(this)
-                        .load(profileImageLink)
-                        .into(binding.postPicture);
-        });
+        viewModel.getProfileImageLink().observe(this, profileImageLink -> Glide.with(this)
+                .load(profileImageLink)
+                .into(binding.postProfilePicture));
+
         viewModel.getLoaded().observe(this, aBoolean -> {
             if (aBoolean && replyID != null)
                 scrollTo(getItemPositionByID(replyID));
@@ -202,5 +206,16 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             lp.alpha = 1f;
             getWindow().setAttributes(lp);
         });
+    }
+
+    public void deletePost(MenuItem menuItem) {
+        viewModel.deletePost();
+        finish();
+    }
+
+    public void editPost(MenuItem menuItem) {
+        Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
     }
 }

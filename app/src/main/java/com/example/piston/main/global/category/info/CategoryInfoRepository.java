@@ -75,7 +75,6 @@ public class CategoryInfoRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String categoryId = documentSnapshot.getId();
-                    deleteSubscribedUsers(categoryId);
                     DocumentReference docRef1 = docRef.collection("posts").document(categoryId);
 
                     // Delete replies inside post
@@ -90,31 +89,29 @@ public class CategoryInfoRepository {
                             }
                         }
                     });
+
+                    docRef1.collection("userLikes")
+                            .get().addOnCompleteListener(task2 -> {
+                        if (task2.isSuccessful()) {
+                            for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
+                                    task2.getResult())) {
+                                db.collection("users").document(snapshot1.getId())
+                                        .collection("liked")
+                                        .document(categoryId)
+                                        .delete();
+
+                                docRef1.collection("userLikes")
+                                        .document(snapshot1.getId())
+                                        .delete();
+                            }
+                        }
+                    });
+
                     docRef1.delete();
                 }
             }
         });
         docRef.delete(); // Delete category
-    }
-
-    private void deleteSubscribedUsers (String categoryId) {
-        docRef.collection("subscribedUsers").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Remove liked post from User's collection
-                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    DocumentReference docRef1 = db.collection("users")
-                            .document(documentSnapshot.getId())
-                            .collection("subscribedCategories")
-                            .document(categoryId);
-
-                    docRef1.get().addOnCompleteListener(task1 -> {
-                        if (task1.getResult().exists())
-                            docRef1.delete();
-                    });
-
-                }
-            }
-        });
     }
 
     private void isAdmin() {
