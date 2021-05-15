@@ -91,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void editName(View view) {
         profileViewModel.resetValues();
         EditPopup popup = new EditPopup(this, getString(R.string.view_profile_name),
-                Objects.requireNonNull(binding.viewProfileFullNameEditText.getText()).toString());
+                Objects.requireNonNull(binding.profileFullName.getText().toString()));
         popup.getSaveButton().setOnClickListener(v -> profileViewModel.editName(popup.getText()));
         profileViewModel.getFinished().observe(this, finished -> {
             if (finished) {
@@ -104,7 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void editPhone(View view) {
         profileViewModel.resetValues();
         EditPopup popup = new EditPopup(this, getString(R.string.view_profile_phone),
-                Objects.requireNonNull(binding.viewProfilePhoneEditText.getText()).toString());
+                Objects.requireNonNull(binding.profilePhoneNumber.getText()).toString());
         popup.getSaveButton().setOnClickListener(v -> profileViewModel.editPhone(popup.getText()));
         popup.getEditText().setInputType(InputType.TYPE_CLASS_PHONE);
         profileViewModel.getFinished().observe(this, finished -> {
@@ -118,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void editBirth(View view) {
         profileViewModel.resetValues();
         EditPopup popup = new EditPopup(this, getString(R.string.birth_date),
-                Objects.requireNonNull(binding.viewProfileDateEditText.getText()).toString());
+                Objects.requireNonNull(binding.profileDateOfBirth.getText()).toString());
         popup.getSaveButton().setOnClickListener(v -> profileViewModel.editBirth(popup.getText()));
         profileViewModel.getBirthDateError().observe(this, birthDateError -> {
             switch (birthDateError) {

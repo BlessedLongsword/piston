@@ -87,9 +87,11 @@ public class ProfileRepository {
                                             task1.getResult().getDocuments().get(0);
                                     listener.setFeaturedPost(featuredPostDocumentSnapshot
                                             .toObject(Post.class));
-                                } catch (NullPointerException e) {
+                                } catch (NullPointerException | IndexOutOfBoundsException e) {
                                     listener.setFeaturedPost(null);
                                 }
+                            } else {
+                                Log.d("DBReadTAG", Objects.requireNonNull(task1.getException()).getMessage());
                             }
                 });
             }

@@ -44,5 +44,6 @@
     <dimen name="space">4dp</dimen>
     <dimen name="one">1dp</dimen>
     <dimen name="bigger_text">16sp</dimen>
+    <dimen name="text_hint">12sp</dimen>
 
 </resources>

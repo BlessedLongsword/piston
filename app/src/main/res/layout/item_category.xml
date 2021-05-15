@@ -54,7 +54,7 @@
                     android:text="@{category.description}"
                     tools:text="@string/description"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorPrimary" />
 
                 <com.like.LikeButton
                     android:id="@+id/star_button"
