@@ -54,9 +54,7 @@ public class ProfileImageRepository {
         uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     DocumentReference docRef = db.collection("users").document(email);
-                    docRef.get().addOnSuccessListener(documentSnapshot -> {
-                       docRef.update("profilePictureLink", uri.toString());
-                    });
+                    docRef.get().addOnSuccessListener(documentSnapshot -> docRef.update("profilePictureLink", uri.toString()));
                 }));
     }
 

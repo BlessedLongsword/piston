@@ -1,7 +1,5 @@
 package com.example.piston.main.global.category.info;
 
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,7 +30,7 @@ public class CategoryInfoRepository {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         docRef = db.collection("categories").document(category);
-        docRef1 = db.collection("users").document(email);
+        docRef1 = db.collection("users").document(Objects.requireNonNull(email));
 
         docRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
