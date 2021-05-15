@@ -2,16 +2,15 @@ package com.example.piston.data;
 
 public class Reply {
 
-    private String content;
-    private String owner;
-    private String id;
+    private String content, owner, id, imageLink;
 
     public Reply() {}
 
-    public Reply(String owner, String content, String id) {
+    public Reply(String owner, String content, String id, String imageLink) {
         setContent(content);
         setOwner(owner);
         setId(id);
+        setImageLink(imageLink);
     }
 
     public String getContent() {
@@ -36,5 +35,13 @@ public class Reply {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public String getImageLink() {
+        return imageLink;
     }
 }

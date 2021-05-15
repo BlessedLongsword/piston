@@ -23,7 +23,7 @@ public class PostRepository {
     private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user;
+    private String user, profilePictureLink;
     private final String collection;
     private final String document;
     private final String postID;
@@ -32,7 +32,7 @@ public class PostRepository {
 
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
-        void setPostParams(String title, String owner, String content, String imageLink);
+        void setPostParams(String title, String owner, String content, String profilePictureLink);
         void setLoaded();
         void setIsLiked(boolean liked);
     }
@@ -42,13 +42,18 @@ public class PostRepository {
         this.collection = collection;
         this.document = document;
         this.postID = postID;
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+
         db.collection("users")
                 .document(Objects.requireNonNull(email))
                 .get()
-                .addOnCompleteListener(task ->
-                        user = (String) Objects.requireNonNull(task.getResult()).get("username"));
+                .addOnCompleteListener(task -> {
+                    user = (String) task.getResult().get("username");
+                    profilePictureLink = (String) task.getResult().get("profilePictureLink");
+                });
+
 
         if (collection.equals("folders")) {
             docRef = db.collection("users")
@@ -65,16 +70,20 @@ public class PostRepository {
                     .document(postID);
         }
 
-        docRef.get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot ds = task.getResult();
-                        listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
-                                Objects.requireNonNull(ds.get("owner")).toString(),
-                                Objects.requireNonNull(ds.get("content")).toString(),
-                                (String) ds.get("imageLink"));
-                    }
-        });
+        updateParams();
         listenChanges();
+    }
+
+    private void updateParams() {
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot ds = task.getResult();
+                listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
+                        Objects.requireNonNull(ds.get("owner")).toString(),
+                        Objects.requireNonNull(ds.get("content")).toString(),
+                        (String) ds.get("imageLink"));
+            }
+        });
     }
 
     private void loadPosts() {
@@ -106,7 +115,7 @@ public class PostRepository {
 
     public void createReply(String content) {
         String id = db.collection("users").document().getId();
-        Reply rep = new Reply(user, content, id);
+        Reply rep = new Reply(user, content, id, profilePictureLink);
         DocumentReference docRef1 = docRef.collection("replies")
                                         .document(id);
         Map<String, Object> data = new HashMap<>();
@@ -139,9 +148,10 @@ public class PostRepository {
     }
 
     public void createReply(String content, String quote, String quoteOwner, String quoteID) {
-        Log.d("DBReadTAG", content + " " + quote + " " + quoteOwner);
         String id = db.collection("users").document().getId();
-        QuoteReply rep = new QuoteReply(user, content, id, quote, quoteOwner, quoteID);
+
+
+        QuoteReply rep = new QuoteReply(user, content, id, quote, quoteOwner, quoteID, profilePictureLink);
         DocumentReference docRef1 = docRef.collection("replies")
                 .document(id);
         Map<String, Object> data = new HashMap<>();

@@ -2,14 +2,12 @@ package com.example.piston.data;
 
 public class QuoteReply extends Reply {
 
-    private String quote;
-    private String quoteOwner;
-    private String quoteID;
-
+    private String quote, quoteOwner, quoteID, imageLink;
     public QuoteReply() {}
 
-    public QuoteReply(String owner, String content, String id, String quote, String quoteOwner, String quoteID) {
-        super(owner, content, id);
+    public QuoteReply(String owner, String content, String id, String quote, String quoteOwner
+            , String quoteID, String imageLink) {
+        super(owner, content, id, imageLink);
         setQuote(quote);
         setQuoteOwner(quoteOwner);
         setQuoteID(quoteID);

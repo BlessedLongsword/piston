@@ -95,6 +95,17 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/replyQuote_profile_picture"
+                    android:layout_width="@dimen/low_square"
+                    android:layout_height="@dimen/low_square"
+                    android:src="@drawable/default_profile_picture"
+                    android:contentDescription="@string/profile_image"/>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"/>
+
                 <TextView
                     android:id="@+id/reply_owner"
                     android:layout_width="wrap_content"

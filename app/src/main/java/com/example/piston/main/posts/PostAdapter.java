@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.data.QuoteReply;
 import com.example.piston.data.Reply;
@@ -22,6 +23,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final PostViewModel viewModel;
     private final PostAdapterListener listener;
+    private final FragmentActivity localActivity;
 
     public interface PostAdapterListener {
         void quoteOnClick(View v, String quoteID);
@@ -65,6 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public PostAdapter(FragmentActivity activity, PostAdapterListener listener) {
         this.listener = listener;
+        this.localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(PostViewModel.class);
         viewModel.getReplies().observe(activity, replies -> notifyDataSetChanged());
     }
@@ -103,11 +106,22 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ReplyHolder hold = ((ReplyHolder) holder);
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
+            if (reply.getImageLink() != null ) {
+                Glide.with(localActivity)
+                        .load(reply.getImageLink())
+                        .into(hold.binding.replyProfilePicture);
+            }
+
         } else {
             QuoteReply reply = (QuoteReply) Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             QuoteReplyHolder hold = ((QuoteReplyHolder) holder);
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
+            if (reply.getImageLink() != null) {
+                Glide.with(localActivity)
+                        .load(reply.getImageLink())
+                        .into(hold.binding.replyQuoteProfilePicture);
+            }
         }
     }
 

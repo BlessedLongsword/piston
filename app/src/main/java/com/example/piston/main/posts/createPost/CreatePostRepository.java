@@ -72,6 +72,7 @@ public class CreatePostRepository {
                     path = "users/" + username;
                 else
                     path = collection + "/" + document;
+
                 String imageId = path + "/" + randomId;
                 StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
                 UploadTask uploadTask = imageRef.putFile(image);
