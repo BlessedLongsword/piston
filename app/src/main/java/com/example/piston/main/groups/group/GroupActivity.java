@@ -14,6 +14,7 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupBinding;
 import com.example.piston.main.MainActivity;
 import com.example.piston.main.groups.group.info.GroupInfoActivity;
+import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
@@ -23,6 +24,7 @@ public class GroupActivity extends AppCompatActivity {
 
     private String id;
     private boolean orphan;
+    private boolean postDidNotExist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +34,13 @@ public class GroupActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         orphan = intent.getBooleanExtra("orphan", false);
+
+        postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
+
+        if (postDidNotExist) {
+            orphan = false;
+            finish();
+        }
 
         GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(GroupViewModel.class);
@@ -58,6 +67,10 @@ public class GroupActivity extends AppCompatActivity {
         if (orphan) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 1);
+            startActivity(intent);
+        }
+        if (postDidNotExist) {
+            Intent intent = new Intent(this, NotificationsActivity.class);
             startActivity(intent);
         }
         super.finish();

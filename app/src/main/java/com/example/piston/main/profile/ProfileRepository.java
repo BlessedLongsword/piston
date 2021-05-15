@@ -81,7 +81,6 @@ public class ProfileRepository {
                         .orderBy("numLikes", Query.Direction.DESCENDING)
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                Log.d("DBReadTAG", "i got here...");
                                 try {
                                     DocumentSnapshot featuredPostDocumentSnapshot =
                                             task1.getResult().getDocuments().get(0);

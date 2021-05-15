@@ -180,5 +180,6 @@
     <string name="kick_from_group">Kick from Group</string>
     <string name="no_featured">This user has no public posts</string>
     <string name="no_featured_current">You have no public posts</string>
+    <string name="post_does_not_exist">This post does no longer exist</string>
 
 </resources>

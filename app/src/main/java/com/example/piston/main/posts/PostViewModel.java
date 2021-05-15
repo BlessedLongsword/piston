@@ -16,6 +16,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> postContent = new MutableLiveData<>("");
     private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> postDoesNotExist = new MutableLiveData<>(false);
 
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
@@ -64,6 +65,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         this.liked.setValue(liked);
     }
 
+    @Override
+    public void setPostDoesNotExist() {
+        this.postDoesNotExist.setValue(true);
+    }
+
 
     public void setLiked(Boolean bool){
         this.liked.setValue(bool);
@@ -101,4 +107,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public MutableLiveData<String> getProfileImageLink() {
         return profileImageLink;
     }
+
+    public LiveData<Boolean> getPostDoesNotExist() { return postDoesNotExist; }
 }

@@ -175,5 +175,6 @@
     <string name="kick_from_group">Echar del Grupo</string>
     <string name="no_featured">Este usuario no tiene publicaciones públicas</string>
     <string name="no_featured_current">No tienes publicaciones públicas</string>
+    <string name="post_does_not_exist">Esta publicación ya no existe</string>
 
 </resources>

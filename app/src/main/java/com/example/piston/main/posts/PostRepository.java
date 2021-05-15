@@ -23,7 +23,7 @@ public class PostRepository {
     private final PostRepository.IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user, profilePictureLink;
+    private String user, email, profilePictureLink;
     private final String collection;
     private final String document;
     private final String postID;
@@ -35,6 +35,7 @@ public class PostRepository {
         void setPostParams(String title, String owner, String content, String postImageLink, String profileImageLink);
         void setLoaded();
         void setIsLiked(boolean liked);
+        void setPostDoesNotExist();
     }
 
     public PostRepository(PostRepository.IPosts listener, String collection, String document, String postID) {
@@ -44,7 +45,7 @@ public class PostRepository {
         this.postID = postID;
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         db.collection("users")
                 .document(Objects.requireNonNull(email))
@@ -77,11 +78,15 @@ public class PostRepository {
     private void updateParams() {
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                DocumentSnapshot ds = task.getResult();
-                listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
-                        Objects.requireNonNull(ds.get("owner")).toString(),
-                        Objects.requireNonNull(ds.get("content")).toString(),
-                        (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
+                if (task.getResult().exists()) {
+                    DocumentSnapshot ds = task.getResult();
+                    listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
+                            Objects.requireNonNull(ds.get("owner")).toString(),
+                            Objects.requireNonNull(ds.get("content")).toString(),
+                            (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
+                } else {
+                    listener.setPostDoesNotExist();
+                }
             }
         });
     }
@@ -181,15 +186,22 @@ public class PostRepository {
 
     public void addLiked (boolean liked){
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
-        DocumentReference likedDocRef = db.collection("users")
+        DocumentReference likedDocRefUsers = db.collection("users")
                 .document(Objects.requireNonNull(email)).collection("liked").document(postID);
+        DocumentReference likedDocRefPosts = db.collection(collection).document(document)
+                .collection("posts").document(postID)
+                .collection("userLikes").document(email);
         if (liked) {
-            Map <String, String> data = new HashMap<>();
-            data.put("id", postID);
-            likedDocRef.set(data);
+            Map <String, String> dataUser = new HashMap<>();
+            Map <String, String> dataPost = new HashMap<>();
+            dataUser.put("id", postID);
+            dataPost.put("email", email);
+            likedDocRefUsers.set(dataUser);
+            likedDocRefPosts.set(dataPost);
         }
         else {
-            likedDocRef.delete();
+            likedDocRefUsers.delete();
+            likedDocRefPosts.delete();
         }
     }
 

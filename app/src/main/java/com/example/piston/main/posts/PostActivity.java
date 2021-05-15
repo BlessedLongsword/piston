@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     private String collection;
     private String document;
     private boolean orphan;
+    private boolean postDoesNotExist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +100,15 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             if (aBoolean && replyID != null)
                 scrollTo(getItemPositionByID(replyID));
         });
+        viewModel.getPostDoesNotExist().observe(this, aBoolean -> {
+            postDoesNotExist = aBoolean;
+            if (aBoolean) {
+                Toast toast = Toast.makeText(this, R.string.post_does_not_exist, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
+                finish();
+            }
+        });
     }
 
     public void goToReply(String replyID) {
@@ -132,6 +143,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             Intent intent = new Intent(this, (collection.equals("groups")) ?
                     GroupActivity.class : CategoryActivity.class);
             intent.putExtra("id", document);
+            intent.putExtra("postDidNotExist", postDoesNotExist);
             startActivity(intent);
         }
         super.finish();

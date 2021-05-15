@@ -26,5 +26,4 @@ public class NotificationsActivity extends AppCompatActivity {
         binding.notificationsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewNotifications.setAdapter(new NotificationsAdapter(this));
     }
-
 }

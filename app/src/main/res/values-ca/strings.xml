@@ -176,5 +176,6 @@
     <string name="kick_from_group">Expulsar del Grup</string>
     <string name="no_featured">Aquest usuari no te publicacions públiques</string>
     <string name="no_featured_current">No tens publicacions públiques</string>
+    <string name="post_does_not_exist">Aquesta publicació ja no existeix</string>
 
 </resources>

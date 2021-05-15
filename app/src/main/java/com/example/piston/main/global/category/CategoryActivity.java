@@ -14,6 +14,7 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryBinding;
 import com.example.piston.main.MainActivity;
 import com.example.piston.main.global.category.info.CategoryInfoActivity;
+import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 
@@ -23,6 +24,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private String id;
     private boolean orphan;
+    private boolean postDidNotExist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +35,13 @@ public class CategoryActivity extends AppCompatActivity {
         id = intent.getStringExtra("id");
 
         orphan = intent.getBooleanExtra("orphan", false);
+
+        postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
+
+        if (postDidNotExist) {
+            orphan = false;
+            finish();
+        }
 
         CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(id))
                 .get(CategoryViewModel.class);
@@ -59,6 +68,10 @@ public class CategoryActivity extends AppCompatActivity {
         if (orphan) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 2);
+            startActivity(intent);
+        }
+        if (postDidNotExist) {
+            Intent intent = new Intent(this, NotificationsActivity.class);
             startActivity(intent);
         }
         super.finish();

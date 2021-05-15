@@ -20,7 +20,6 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.piston", Context.MODE_PRIVATE);
 
