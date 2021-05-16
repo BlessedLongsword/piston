@@ -177,5 +177,7 @@
     <string name="no_featured">Aquest usuari no te publicacions públiques</string>
     <string name="no_featured_current">No tens publicacions públiques</string>
     <string name="post_does_not_exist">Aquesta publicació ja no existeix</string>
+    <string name="post_from">Post de\u0020</string>
+    <string name="share_post">Compartir Publicació a</string>
 
 </resources>

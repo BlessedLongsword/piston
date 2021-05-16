@@ -138,7 +138,7 @@ public class CreatePostRepository {
                                 .addOnCompleteListener(task2 -> {
                                     NotificationPost notificationPost = new NotificationPost(
                                             title, Objects.requireNonNull(task2.getResult().get("title")).toString(),
-                                            imageLink, false, collection, document, id);
+                                            imageLink, profilePictureLink, false, collection, document, id);
                                     DocumentReference docRef2 = db.collection("users")
                                             .document(documentSnapshot.getId())
                                             .collection("notifications")

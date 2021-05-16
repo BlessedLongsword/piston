@@ -146,7 +146,7 @@ public class PostRepository {
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
                                 NotificationReply notificationReply = new NotificationReply(user, content,
-                                        id, false, scope, sectionID, postID);
+                                        id, profilePictureLink, false, scope, sectionID, postID);
                                 DocumentReference docRef2 = db.collection("users")
                                         .document(Objects.requireNonNull(Objects.requireNonNull
                                                 (task1.getResult()).get("email")).toString())
@@ -178,7 +178,7 @@ public class PostRepository {
             db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     NotificationReply notificationReply = new NotificationReply(user, content, id,
-                            false, scope, sectionID, postID);
+                            profilePictureLink, false, scope, sectionID, postID);
                     DocumentReference docRef2 = db.collection("users")
                             .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
                                     .get("email")).toString())

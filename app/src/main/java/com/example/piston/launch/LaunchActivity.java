@@ -3,6 +3,7 @@ package com.example.piston.launch;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.main.MainActivity;
 import com.example.piston.authentication.login.LoginActivity;
+import com.example.piston.main.posts.PostActivity;
+import com.example.piston.utilities.Values;
+
+import java.util.List;
 
 public class LaunchActivity extends AppCompatActivity {
 
@@ -30,6 +35,16 @@ public class LaunchActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(LaunchViewModel.class);
         checkIfUserIsAuthenticated();
+
+        Uri uri = getIntent().getData();
+
+        if (uri != null) {
+            List<String> parameters = uri.getPathSegments();
+            Intent intent = new Intent(this, PostActivity.class);
+            intent.putExtra(Values.SCOPE, parameters.get(parameters.size() - 3));
+            intent.putExtra(Values.SECTION_ID, parameters.get(parameters.size() - 2));
+            intent.putExtra(Values.POST_ID, parameters.get(parameters.size() - 1));
+        }
     }
 
     private void checkIfUserIsAuthenticated() {

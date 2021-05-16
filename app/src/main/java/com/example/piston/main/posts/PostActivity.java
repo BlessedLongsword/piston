@@ -1,8 +1,12 @@
 package com.example.piston.main.posts;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -44,6 +48,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     private ActivityPostBinding binding;
     private String scope;
     private String sectionID;
+    private String postID;
     private boolean orphan;
     private boolean postDoesNotExist;
 
@@ -56,7 +61,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         scope = intent.getStringExtra(Values.SCOPE);
         sectionID = intent.getStringExtra(Values.SECTION_ID);
         orphan = intent.getBooleanExtra(Values.ORPHAN, false);
-        String postID = intent.getStringExtra(Values.POST_ID);
+        postID = intent.getStringExtra(Values.POST_ID);
         String replyID = intent.getStringExtra(Values.REPLY_ID);
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(scope, sectionID, postID))
@@ -156,6 +161,14 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
+    }
+
+    public void sharePost(View v) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + scope + "/" +
+                sectionID + "/" + postID);
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_post)));
     }
 
     @Override

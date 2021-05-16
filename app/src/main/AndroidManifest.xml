@@ -24,6 +24,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <data
+                    android:host="www.piston.com"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
@@ -53,7 +56,9 @@
 
         <activity
             android:name=".main.posts.PostActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize">
+        </activity>
+
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
 
         <activity android:name=".main.profile.ProfileActivity"

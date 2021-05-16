@@ -136,6 +136,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"/>
 
+                                <ImageButton
+                                    android:layout_width="@dimen/low_square"
+                                    android:layout_height="@dimen/low_square"
+                                    android:background="@color/transparent"
+                                    android:onClick="sharePost"
+                                    android:src="@drawable/baseline_share_black_36" />
+
                                 <com.like.LikeButton
                                     android:id="@+id/heart_button"
                                     android:layout_width="50dp"

@@ -7,9 +7,9 @@ public class NotificationReply extends Notification {
     @SuppressWarnings("unused")
     public NotificationReply() {}
 
-    public NotificationReply(String user, String content, String replyID, boolean read,
-                             String scope, String sectionID, String postID) {
-        super(scope, sectionID, postID, read);
+    public NotificationReply(String user, String content, String replyID, String userImageLink,
+                             boolean read, String scope, String sectionID, String postID) {
+        super(scope, sectionID, postID, userImageLink, read);
         this.user = user;
         this.content = content;
         this.replyID = replyID;

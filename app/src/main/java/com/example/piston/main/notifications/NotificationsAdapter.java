@@ -95,6 +95,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             NotificationsAdapter.NotificationPostHolder hold = (NotificationsAdapter
                     .NotificationPostHolder) holder;
             hold.bind(notificationPost);
+            if (notificationPost.getUserImageLink() != null) {
+                if (!notificationPost.getUserImageLink().equals("")) {
+                    Glide.with(localActivity)
+                            .load(notificationPost.getUserImageLink())
+                            .into(hold.binding.notificationProfilePicture);
+                }
+            }
             Glide.with(localActivity)
                     .load(notificationPost.getImageLink())
                     .into(hold.binding.notificationPostPicture);
@@ -108,6 +115,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             NotificationsAdapter.NotificationReplyHolder hold = (NotificationsAdapter
                     .NotificationReplyHolder) holder;
             hold.bind(notificationReply);
+            if (notificationReply.getUserImageLink() != null) {
+                if (!notificationReply.getUserImageLink().equals("")) {
+                    Glide.with(localActivity)
+                            .load(notificationReply.getUserImageLink())
+                            .into(hold.binding.notificationProfilePicture);
+                }
+            }
             hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
                     notificationReply.getScope(), notificationReply.getSectionID(),
                             notificationReply.getPostID(), notificationReply.getReplyID()));

@@ -7,9 +7,9 @@ public class NotificationPost extends Notification {
     @SuppressWarnings("unused")
     public NotificationPost() {}
 
-    public NotificationPost(String title, String sectionName, String imageLink, boolean read,
+    public NotificationPost(String title, String sectionName, String imageLink, String userImageLink, boolean read,
                             String collection, String sectionID, String postID) {
-        super(collection, sectionID, postID, read);
+        super(collection, sectionID, postID, userImageLink, read);
         this.title = title;
         this.sectionName = sectionName;
         this.imageLink = imageLink;

@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     implementation 'com.google.android.gms:play-services-basement:17.6.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //implementation 'com.karumi:dexter:6.2.2'
 }

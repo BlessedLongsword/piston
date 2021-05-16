@@ -2,16 +2,20 @@ package com.example.piston.data.notifications;
 
 public abstract class Notification {
 
-    private String scope, sectionID, postID;
+    private String scope;
+    private String sectionID;
+    private String postID;
+    private String userImageLink;
     private boolean read;
 
     public Notification() {}
 
-    public Notification(String scope, String sectionID, String postID, boolean read) {
+    public Notification(String scope, String sectionID, String postID, String userImageLink, boolean read) {
         setScope(scope);
         setSectionID(sectionID);
         setPostID(postID);
         setRead(read);
+        setUserImageLink(userImageLink);
     }
 
     public String getScope() {
@@ -44,5 +48,13 @@ public abstract class Notification {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public String getUserImageLink() {
+        return userImageLink;
+    }
+
+    public void setUserImageLink(String userImageLink) {
+        this.userImageLink = userImageLink;
     }
 }

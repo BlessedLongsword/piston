@@ -18,57 +18,89 @@
         app:cardElevation="@dimen/zero"
         android:layout_marginHorizontal="@dimen/card_margin">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/tiny_separator">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="@dimen/low_square"
+                    android:layout_height="@dimen/low_square"
+                    android:layout_marginEnd="@dimen/card_margin"
+                    app:cardCornerRadius="100dp" >
+
+                    <ImageView
+                        android:id="@+id/notification_profile_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/default_profile_picture"
+                        android:contentDescription="@string/profile"
+                        android:scaleType="centerCrop" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="@dimen/tiny_separator"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/notification_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/notification_reply_indication"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:maxLength="@integer/long_title_max_length"/>
+
+                        <TextView
+                            android:id="@+id/notification_post_section"
+                            android:paddingHorizontal="@dimen/micro_separator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Reply User"
+                            android:text="@{notification.user}"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:maxLength="@integer/long_title_max_length"/>
+
+
+                    </LinearLayout>
+
 
                     <TextView
-                        android:id="@+id/notification_text"
+                        android:id="@+id/notification_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/notification_reply_indication"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:maxLength="@integer/long_title_max_length"/>
-
-                    <TextView
-                        android:id="@+id/notification_post_section"
-                        android:paddingHorizontal="@dimen/micro_separator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Reply User"
-                        android:text="@{notification.user}"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:maxLength="@integer/long_title_max_length"/>
-
+                        android:text="@{notification.content}"
+                        tools:text="Content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textAppearance="?attr/textAppearanceBody2"/>
 
                 </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/notification_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{notification.content}"
-                    tools:text="Title"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textAppearance="?attr/textAppearanceBody2"/>
-
-                <View
-                    android:layout_marginVertical="@dimen/tiny_separator"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/dividerVertical" />
-
             </LinearLayout>
+
+            <View
+                android:layout_marginVertical="@dimen/tiny_separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/dividerVertical" />
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
