@@ -91,33 +91,6 @@
                     android:ellipsize="end"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <ImageButton
-                    android:layout_width="2dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:layout_weight="10"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description_media"
-                    android:src="@drawable/baseline_favorite_border_black_36" />
-
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="10"
-                    android:background="@null"
-                    android:contentDescription="@string/content_description_media"
-                    android:src="@drawable/baseline_share_black_36" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
