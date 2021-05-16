@@ -96,6 +96,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
         if (scope.equals("folders")){
             binding.heartButton.setVisibility(View.GONE);
+            binding.shareButton.setVisibility(View.GONE);
         }
 
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);

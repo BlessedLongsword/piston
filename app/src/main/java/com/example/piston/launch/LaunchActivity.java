@@ -21,6 +21,7 @@ import java.util.List;
 public class LaunchActivity extends AppCompatActivity {
 
     private LaunchViewModel viewModel;
+    private Uri uri;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,15 +37,7 @@ public class LaunchActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LaunchViewModel.class);
         checkIfUserIsAuthenticated();
 
-        Uri uri = getIntent().getData();
-
-        if (uri != null) {
-            List<String> parameters = uri.getPathSegments();
-            Intent intent = new Intent(this, PostActivity.class);
-            intent.putExtra(Values.SCOPE, parameters.get(parameters.size() - 3));
-            intent.putExtra(Values.SECTION_ID, parameters.get(parameters.size() - 2));
-            intent.putExtra(Values.POST_ID, parameters.get(parameters.size() - 1));
-        }
+        uri = getIntent().getData();
     }
 
     private void checkIfUserIsAuthenticated() {
@@ -59,13 +52,25 @@ public class LaunchActivity extends AppCompatActivity {
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        putUriInfo(intent);
         startActivity(intent);
         finish();
     }
 
     private void goToLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        putUriInfo(intent);
         startActivity(intent);
         finish();
+    }
+
+    private void putUriInfo(Intent intent) {
+        if (uri != null) {
+            List<String> parameters = uri.getPathSegments();
+            intent.putExtra(Values.SCOPE, parameters.get(parameters.size() - 3));
+            intent.putExtra(Values.SECTION_ID, parameters.get(parameters.size() - 2));
+            intent.putExtra(Values.POST_ID, parameters.get(parameters.size() - 1));
+            intent.putExtra(Values.FROM_SHARE, true);
+        }
     }
 }

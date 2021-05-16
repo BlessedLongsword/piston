@@ -15,6 +15,7 @@ import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.authentication.register.RegisterActivity;
 import com.example.piston.main.MainActivity;
 
+import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.Values;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -55,6 +56,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        if (getIntent().getBooleanExtra(Values.FROM_SHARE, false)) {
+            intent.putExtra(Values.SCOPE, getIntent().getStringExtra(Values.SCOPE));
+            intent.putExtra(Values.SECTION_ID, getIntent().getStringExtra(Values.SECTION_ID));
+            intent.putExtra(Values.POST_ID, getIntent().getStringExtra(Values.POST_ID));
+            intent.putExtra(Values.FROM_SHARE, true);
+            intent.putExtra(Values.ORPHAN, true);
+        }
         startActivity(intent);
         finish();
     }

@@ -136,10 +136,12 @@
                                     android:layout_weight="1"/>
 
                                 <ImageButton
+                                    android:id="@+id/share_button"
                                     android:layout_width="@dimen/low_square"
                                     android:layout_height="@dimen/low_square"
                                     android:background="@color/transparent"
                                     android:onClick="sharePost"
+                                    android:contentDescription="@string/share_post"
                                     android:src="@drawable/baseline_share_black_36" />
 
                                 <com.like.LikeButton

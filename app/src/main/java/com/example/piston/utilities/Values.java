@@ -17,6 +17,8 @@ public class Values {
     public static final String IS_ADMIN = "isAdmin";
     public static final String EMAIL = "email";
     public static final String ORPHAN = "orphan";
+    public static final String FROM_SHARE = "from_share";
+    public static final String FROM_SHARE_GROUP = "from_share_group";
     public static final String IS_CURRENT_USER = "isCurrentUser";
     public static final String POST_DOES_NOT_EXIST = "postDoesNotExist";
 }

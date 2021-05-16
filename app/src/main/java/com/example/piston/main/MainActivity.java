@@ -1,6 +1,7 @@
 package com.example.piston.main;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +14,18 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
 import com.example.piston.main.notifications.NotificationsActivity;
+import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.ScopeFragment;
 import com.example.piston.utilities.ScopePagerAdapter;
 import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.authentication.login.LoginActivity;
 import com.example.piston.main.profile.ProfileActivity;
 
+import com.example.piston.utilities.Values;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
+
+        if (getIntent().getBooleanExtra(Values.FROM_SHARE, false)) {
+            Intent intent = new Intent(this, PostActivity.class);
+            intent.putExtra(Values.SCOPE, getIntent().getStringExtra(Values.SCOPE));
+            intent.putExtra(Values.SECTION_ID, getIntent().getStringExtra(Values.SECTION_ID));
+            intent.putExtra(Values.POST_ID, getIntent().getStringExtra(Values.POST_ID));
+            intent.putExtra(Values.ORPHAN, true);
+            startActivity(intent);
+        }
 
         int tab = getIntent().getIntExtra("tab", 0);
         if (tab != 0)
