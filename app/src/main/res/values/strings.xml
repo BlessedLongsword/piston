@@ -182,6 +182,8 @@
     <string name="no_featured_current">You have no public posts</string>
     <string name="post_does_not_exist">This post does no longer exist</string>
     <string name="post_from">Post from\u0020</string>
-    <string name="share_post">Share Post to</string>
+    <string name="share_post">Share Post</string>
+    <string name="not_belongs_to_group">You do not belong to the group that contains this post!</string>
+    <string name="share_group">Share Group</string>
 
 </resources>

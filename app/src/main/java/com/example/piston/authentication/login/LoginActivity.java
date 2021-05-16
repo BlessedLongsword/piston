@@ -15,7 +15,6 @@ import com.example.piston.databinding.ActivityLoginBinding;
 import com.example.piston.authentication.register.RegisterActivity;
 import com.example.piston.main.MainActivity;
 
-import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.Values;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

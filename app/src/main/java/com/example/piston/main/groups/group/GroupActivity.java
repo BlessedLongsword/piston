@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 
+import java.util.Objects;
+
 import static com.example.piston.utilities.Values.DELETE_CODE;
 
 public class GroupActivity extends AppCompatActivity {
@@ -26,6 +29,8 @@ public class GroupActivity extends AppCompatActivity {
     private String groupID;
     private boolean orphan;
     private boolean postDidNotExist;
+    private boolean fromShareGroup;
+    GroupViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,16 +39,17 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         groupID = intent.getStringExtra(Values.SECTION_ID);
-        orphan = intent.getBooleanExtra("orphan", false);
+        orphan = intent.getBooleanExtra(Values.ORPHAN, false);
 
-        postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
+        postDidNotExist = intent.getBooleanExtra(Values.POST_DOES_NOT_EXIST, false);
+        fromShareGroup = intent.getBooleanExtra(Values.FROM_SHARE_GROUP, false);
 
         if (postDidNotExist) {
             orphan = false;
             finish();
         }
 
-        GroupViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
                 .get(GroupViewModel.class);
         ActivityGroupBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_group);
@@ -54,6 +60,14 @@ public class GroupActivity extends AppCompatActivity {
 
         binding.recyclerviewGroups.setAdapter(new GroupAdapter(this));
         viewModel.getTitle().observe(this, binding.groupTopAppBar::setTitle);
+
+        if (fromShareGroup)
+            viewModel.fromShareJoinGroup(getIntent().getStringExtra(Values.SECTION_ID));
+
+        viewModel.getFromShareJoinedGroup().observe(this, aBoolean -> {
+            if (aBoolean)
+                Toast.makeText(this, R.string.join_successful, Toast.LENGTH_LONG).show();
+        });
     }
 
     public void createPost(View view) {
@@ -86,9 +100,22 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     public void goToInfo() {
-        Intent intent = new Intent(this, GroupInfoActivity.class);
-        intent.putExtra(Values.SECTION_ID, groupID);
-        startActivityForResult(intent, DELETE_CODE);
+        if (viewModel.getFromShareJoinedGroup() != null) {
+            if (Objects.requireNonNull(viewModel.getFromShareJoinedGroup().getValue()) ||
+                    !fromShareGroup) {
+                Intent intent = new Intent(this, GroupInfoActivity.class);
+                intent.putExtra(Values.SECTION_ID, groupID);
+                startActivityForResult(intent, DELETE_CODE);
+            }
+        }
+    }
+
+    public void shareGroup(MenuItem item) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + Values.JOIN + "/" +
+                groupID);
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_post)));
     }
 
     @Override

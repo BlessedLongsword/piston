@@ -12,11 +12,16 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> title = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> fromShareJoinedGroup = new MutableLiveData<>(false);
 
     private final GroupRepository repository;
 
     public GroupViewModel(String group) {
         repository = new GroupRepository(this, group);
+    }
+
+    public void fromShareJoinGroup(String groupID) {
+        repository.fromShareJoinGroup(groupID);
     }
 
     @Override
@@ -28,6 +33,11 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
     public void setTitle(String title) { this.title.setValue(title); }
 
     @Override
+    public void setFromShareJoinedGroup() {
+        fromShareJoinedGroup.setValue(true);
+    }
+
+    @Override
     protected void onCleared () {
         repository.removeListener();
     }
@@ -37,4 +47,8 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
     }
 
     public LiveData<String> getTitle() { return title; }
+
+    public LiveData<Boolean> getFromShareJoinedGroup() {
+        return fromShareJoinedGroup;
+    }
 }

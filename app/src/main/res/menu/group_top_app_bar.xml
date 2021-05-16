@@ -11,4 +11,9 @@
         android:onClick="goToInfo"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/share"
+        android:title="@string/share_group"
+        android:onClick="shareGroup" />
+
 </menu>

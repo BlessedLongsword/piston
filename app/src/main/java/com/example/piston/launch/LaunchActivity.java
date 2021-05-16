@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.main.MainActivity;
 import com.example.piston.authentication.login.LoginActivity;
-import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.Values;
 
 import java.util.List;
@@ -67,9 +66,13 @@ public class LaunchActivity extends AppCompatActivity {
     private void putUriInfo(Intent intent) {
         if (uri != null) {
             List<String> parameters = uri.getPathSegments();
-            intent.putExtra(Values.SCOPE, parameters.get(parameters.size() - 3));
-            intent.putExtra(Values.SECTION_ID, parameters.get(parameters.size() - 2));
-            intent.putExtra(Values.POST_ID, parameters.get(parameters.size() - 1));
+            intent.putExtra(Values.SCOPE, parameters.get(0));
+            intent.putExtra(Values.SECTION_ID, parameters.get(1));
+            try {
+                intent.putExtra(Values.POST_ID, parameters.get(2));
+            } catch (Exception ignored) {
+
+            }
             intent.putExtra(Values.FROM_SHARE, true);
         }
     }

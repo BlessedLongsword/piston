@@ -1,10 +1,10 @@
 package com.example.piston.main;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.piston.R;
+import com.example.piston.main.groups.group.GroupActivity;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.ScopeFragment;
@@ -25,13 +26,14 @@ import com.example.piston.utilities.Values;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel viewModel;
     private ViewPager2 viewPager;
+    private String scope;
+    private String sectionID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        scope = getIntent().getStringExtra(Values.SCOPE);
+        sectionID = getIntent().getStringExtra(Values.SECTION_ID);
+
         ScopePagerAdapter scopePagerAdapter = new ScopePagerAdapter(this);
         viewPager = findViewById(R.id.view_pager2);
         viewPager.setAdapter(scopePagerAdapter);
@@ -54,17 +59,52 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
 
         if (getIntent().getBooleanExtra(Values.FROM_SHARE, false)) {
-            Intent intent = new Intent(this, PostActivity.class);
-            intent.putExtra(Values.SCOPE, getIntent().getStringExtra(Values.SCOPE));
-            intent.putExtra(Values.SECTION_ID, getIntent().getStringExtra(Values.SECTION_ID));
-            intent.putExtra(Values.POST_ID, getIntent().getStringExtra(Values.POST_ID));
-            intent.putExtra(Values.ORPHAN, true);
-            startActivity(intent);
+            if (scope.equals(Values.GROUPS) || scope.equals(Values.JOIN))
+                viewModel.checkFromShareBelongsToGroup(sectionID);
+            else
+                goToSharedPost();
         }
+
+        viewModel.getFromShareBelongsToGroup().observe(this, aBoolean -> {
+            if (aBoolean != null) {
+                if (aBoolean) {
+                    if (scope.equals(Values.GROUPS))
+                        goToSharedPost();
+                    else {
+                        goToSharedGroup(false);
+                        Toast.makeText(this, R.string.join_group_already, Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    if (scope.equals(Values.GROUPS))
+                        Toast.makeText(this, R.string.not_belongs_to_group, Toast.LENGTH_LONG).show();
+                    else {
+                        goToSharedGroup(true);
+                    }
+                }
+            }
+        });
 
         int tab = getIntent().getIntExtra("tab", 0);
         if (tab != 0)
             tabLayout.selectTab(tabLayout.getTabAt(tab));
+    }
+
+    private void goToSharedPost() {
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra(Values.SCOPE, scope);
+        intent.putExtra(Values.SECTION_ID, sectionID);
+        intent.putExtra(Values.POST_ID, getIntent().getStringExtra(Values.POST_ID));
+        intent.putExtra(Values.ORPHAN, true);
+        startActivity(intent);
+    }
+
+    private void goToSharedGroup(boolean alreadyJoined) {
+        Intent intent = new Intent(this, GroupActivity.class);
+        intent.putExtra(Values.SECTION_ID, sectionID);
+        intent.putExtra(Values.FROM_SHARE_GROUP, alreadyJoined);
+        intent.putExtra(Values.ORPHAN, true);
+        startActivity(intent);
     }
 
     private void goToLogin() {
