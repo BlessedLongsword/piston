@@ -11,23 +11,25 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/notification_post_card"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="@dimen/zero"
-        android:checkable="true"
-        android:layout_marginHorizontal="@dimen/card_margin">
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/notification_post_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/zero"
+            app:cardBackgroundColor="@color/transparent"
+            android:checkable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/card_margin"
+                android:layout_marginVertical="@dimen/tiny_separator"
                 android:weightSum="1">
 
                 <com.google.android.material.card.MaterialCardView
@@ -105,14 +107,15 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_marginVertical="@dimen/tiny_separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/card_margin"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
 
 </layout>

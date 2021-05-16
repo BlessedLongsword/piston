@@ -11,24 +11,25 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/notification_reply_card"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkable="true"
-        app:cardElevation="@dimen/zero"
-        android:layout_marginHorizontal="@dimen/card_margin">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/notification_reply_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/tiny_separator">
+            android:checkable="true"
+            app:cardElevation="@dimen/zero"
+            app:cardBackgroundColor="@color/transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/tiny_separator"
+                android:layout_marginHorizontal="@dimen/card_margin">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="@dimen/low_square"
@@ -95,14 +96,14 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_marginVertical="@dimen/tiny_separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+        <View
+            android:layout_marginHorizontal="@dimen/card_margin"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 </layout>

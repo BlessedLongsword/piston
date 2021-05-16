@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.posts.Post;
 import com.example.piston.data.users.User;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;

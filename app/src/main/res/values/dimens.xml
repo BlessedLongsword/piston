@@ -8,6 +8,7 @@
 
     <!-- Component margins-->
     <dimen name="medium_separator">24dp</dimen>
+    <dimen name="low_separator">20dp</dimen>
     <dimen name="small_separator">16dp</dimen>
     <dimen name="tiny_separator">10dp</dimen>
     <dimen name="micro_separator">5dp</dimen>

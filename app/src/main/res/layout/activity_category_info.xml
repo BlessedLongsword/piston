@@ -50,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/small_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
@@ -75,24 +76,19 @@
                             android:textColor="?android:attr/textColorSecondary"
                             android:maxLength="@integer/description_max_length"/>
 
-                        <com.like.LikeButton
-                            android:id="@+id/star_button"
-                            android:layout_width="@dimen/low_square"
-                            android:layout_height="@dimen/low_square"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="@dimen/tiny_separator"
-                            app:icon_size="12dp"
-                            app:icon_type="star"
-                            app:liked="false" />
-
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2" />
+                <com.like.LikeButton
+                    android:id="@+id/star_button"
+                    android:layout_width="@dimen/low_square"
+                    android:layout_height="@dimen/low_square"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/tiny_separator"
+                    app:icon_size="12dp"
+                    app:icon_type="star"
+                    app:liked="false" />
 
             </LinearLayout>
 

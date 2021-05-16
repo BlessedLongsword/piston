@@ -23,13 +23,24 @@ public class CreatePostActivity extends PickImageActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        scope = getIntent().getStringExtra(Values.SCOPE);
+        switch (scope) {
+            case Values.PERSONAL:
+                setTheme(R.style.Theme_Piston_Personal);
+                break;
+            case Values.GROUPS:
+                setTheme(R.style.Theme_Piston_Groups);
+                break;
+            case Values.GLOBAL:
+                setTheme(R.style.Theme_Piston_Global);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
         createPostViewModel = new ViewModelProvider(this).get(CreatePostViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
 
-        scope = getIntent().getStringExtra(Values.SCOPE);
         sectionID = getIntent().getStringExtra(Values.SECTION_ID);
 
         binding.setViewModel(createPostViewModel);

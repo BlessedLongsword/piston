@@ -45,11 +45,6 @@
                 tools:context=".main.personal.createFolder.CreateFolderActivity"
                 android:weightSum="2">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/create_folder_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -73,6 +68,7 @@
                     android:id="@+id/create_folder_description"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/small_separator"
                     android:layout_height="@dimen/big_text_field_description"
                     android:hint="@string/description"
                     app:counterEnabled="true"

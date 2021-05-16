@@ -54,11 +54,22 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        scope = intent.getStringExtra(Values.SCOPE);
+        switch (scope) {
+            case Values.PERSONAL:
+                setTheme(R.style.Theme_Piston_Personal);
+                break;
+            case Values.GROUPS:
+                setTheme(R.style.Theme_Piston_Groups);
+                break;
+            case Values.GLOBAL:
+                setTheme(R.style.Theme_Piston_Global);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        Intent intent = getIntent();
-        scope = intent.getStringExtra(Values.SCOPE);
         sectionID = intent.getStringExtra(Values.SECTION_ID);
         orphan = intent.getBooleanExtra(Values.ORPHAN, false);
         postID = intent.getStringExtra(Values.POST_ID);

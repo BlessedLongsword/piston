@@ -39,25 +39,41 @@
 
         <activity
             android:name=".main.global.category.CategoryActivity"
-            android:parentActivityName=".main.MainActivity" />
-        <activity android:name=".main.global.category.info.CategoryInfoActivity"/>
-        <activity android:name=".main.global.createCategory.CreateCategoryActivity"/>
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/Theme.Piston.Global"/>
+        <activity
+            android:name=".main.global.category.info.CategoryInfoActivity"
+            android:theme="@style/Theme.Piston.Global"/>
+        <activity
+            android:name=".main.global.createCategory.CreateCategoryActivity"
+            android:theme="@style/Theme.Piston.Global"/>
 
         <activity
             android:name=".main.groups.group.GroupActivity"
             android:parentActivityName=".main.MainActivity"
-            />
-        <activity android:name=".main.groups.group.info.GroupInfoActivity" />
-        <activity android:name=".main.groups.createGroup.CreateGroupActivity"/>
-        <activity android:name=".main.groups.joinGroup.JoinGroupActivity"/>
+            android:theme="@style/Theme.Piston.Groups" />
+        <activity
+            android:name=".main.groups.group.info.GroupInfoActivity"
+            android:theme="@style/Theme.Piston.Groups"/>
+        <activity
+            android:name=".main.groups.createGroup.CreateGroupActivity"
+            android:theme="@style/Theme.Piston.Groups"/>
+        <activity
+            android:name=".main.groups.joinGroup.JoinGroupActivity"
+            android:theme="@style/Theme.Piston.Groups"/>
 
         <activity android:name=".main.notifications.NotificationsActivity"/>
 
         <activity
             android:name=".main.personal.folder.info.FolderInfoActivity"
-            android:parentActivityName=".main.personal.folder.FolderActivity"/>
-        <activity android:name=".main.personal.createFolder.CreateFolderActivity"/>
-        <activity android:name=".main.personal.folder.FolderActivity"/>
+            android:parentActivityName=".main.personal.folder.FolderActivity"
+            android:theme="@style/Theme.Piston.Personal"/>
+        <activity
+            android:name=".main.personal.createFolder.CreateFolderActivity"
+            android:theme="@style/Theme.Piston.Personal"/>
+        <activity
+            android:name=".main.personal.folder.FolderActivity"
+            android:theme="@style/Theme.Piston.Personal"/>
 
         <activity
             android:name=".main.posts.PostActivity"

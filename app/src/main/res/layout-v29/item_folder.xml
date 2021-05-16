@@ -10,18 +10,19 @@
             type="com.example.piston.data.sections.Folder" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/folder_item_card"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkable="true"
-        app:cardElevation="0dp"
-        android:layout_marginHorizontal="@dimen/card_margin">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/folder_item_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:checkable="true"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/transparent">
 
             <TextView
                 android:id="@+id/folder_title"
@@ -30,18 +31,20 @@
                 tools:text="@string/title"
                 android:text="@{folder.title}"
                 android:gravity="center"
+                android:layout_marginVertical="@dimen/tiny_separator"
+                android:layout_marginHorizontal="@dimen/card_margin"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:drawableStartCompat="@drawable/folder_icon"
                 android:drawablePadding="@dimen/small_separator"/>
 
-            <View
-                android:layout_marginVertical="@dimen/tiny_separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/dividerVertical" />
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical" />
+    </LinearLayout>
+
 
 </layout>

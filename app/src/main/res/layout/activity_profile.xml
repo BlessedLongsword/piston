@@ -67,12 +67,13 @@
                     android:id="@+id/profile_username_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/tiny_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/tiny_separator"
                         android:orientation="vertical">
 
                         <TextView
@@ -105,13 +106,14 @@
                     android:layout_height="wrap_content"
                     android:clickable="@{viewModel.isCurrentUser}"
                     android:onClick="editName"
-                    android:layout_marginVertical="@dimen/tiny_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginVertical="@dimen/tiny_separator"
                         android:weightSum="1">
 
                         <LinearLayout
@@ -167,13 +169,14 @@
                     android:layout_height="wrap_content"
                     android:clickable="@{viewModel.isCurrentUser}"
                     android:onClick="editPhone"
-                    android:layout_marginVertical="@dimen/tiny_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginVertical="@dimen/tiny_separator"
                         android:weightSum="1">
 
                         <LinearLayout
@@ -227,12 +230,13 @@
                     android:id="@+id/profile_email_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/tiny_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/tiny_separator"
                         android:orientation="vertical">
 
                         <TextView
@@ -265,13 +269,14 @@
                     android:layout_height="wrap_content"
                     android:clickable="@{viewModel.isCurrentUser}"
                     android:onClick="editBirth"
-                    android:layout_marginVertical="@dimen/tiny_separator"
+                    app:cardBackgroundColor="@color/transparent"
                     app:cardElevation="@dimen/zero">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginVertical="@dimen/tiny_separator"
                         android:weightSum="1">
 
                         <LinearLayout

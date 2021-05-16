@@ -1,7 +1,9 @@
 package com.example.piston.main.personal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,6 @@ public class PersonalFragment extends ScopeFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         FragmentPersonalBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_personal, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(

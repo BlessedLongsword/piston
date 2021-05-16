@@ -38,10 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginVertical="@dimen/medium_separator"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/group_info_image"
@@ -49,101 +46,107 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/category_image" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/group_info_description_card"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/small_separator"
-                    app:cardElevation="@dimen/zero">
+                    android:layout_marginHorizontal="@dimen/low_separator"
+                    android:layout_marginBottom="@dimen/small_separator"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/group_info_description_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardElevation="@dimen/zero">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/small_separator"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_view_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/description"
+                                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                            <TextView
+                                android:id="@+id/group_info_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/small_separator"
+                                android:maxLength="@integer/description_max_length"
+                                android:text="@{viewModel.description}"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="?android:attr/textColorSecondary"
+                                tools:text="@string/description" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one"
+                        android:background="?attr/dividerVertical" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/group_link"
+                        style="@style/BlankBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/group_code"
+                        app:endIconDrawable="@drawable/baseline_content_copy_black_24"
+                        app:endIconMode="custom"
+                        app:helperText="@string/group_link_help"
+                        app:helperTextEnabled="true">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:background="@color/transparent"
+                            android:focusableInTouchMode="false"
+                            android:text="@{viewModel.ID}"
+                            android:gravity="start"
+                            android:maxLength="@integer/description_max_length" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginVertical="@dimen/small_separator">
 
                         <TextView
-                            android:id="@+id/text_view_description"
+                            android:id="@+id/number_of_members"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/description"
-                            android:textAppearance="?attr/textAppearanceHeadline6" />
+                            android:textSize="@dimen/small_title"
+                            android:text="@{viewModel.numberOfMembers}"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            tools:text="0"/>
 
                         <TextView
-                            android:id="@+id/group_info_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/small_separator"
-                            android:maxLength="@integer/description_max_length"
-                            android:text="@{viewModel.description}"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary"
-                            tools:text="@string/description" />
+                            android:textSize="@dimen/small_title"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:text="@string/members"/>
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/one"
-                    android:background="?attr/dividerVertical" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/group_link"
-                    style="@style/BlankBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/group_code"
-                    app:endIconDrawable="@drawable/baseline_content_copy_black_24"
-                    app:endIconMode="custom"
-                    app:helperText="@string/group_link_help"
-                    app:helperTextEnabled="true">
-                    <com.google.android.material.textfield.TextInputEditText
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_members"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:text="@{viewModel.ID}"
-                        android:gravity="start"
-                        android:maxLength="@integer/description_max_length" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/small_separator">
-
-                    <TextView
-                        android:id="@+id/number_of_members"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/small_title"
-                        android:text="@{viewModel.numberOfMembers}"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        tools:text="0"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/small_title"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:text="@string/members"/>
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        />
 
                 </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_members"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2" />
 
             </LinearLayout>
 

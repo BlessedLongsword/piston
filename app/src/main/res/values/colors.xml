@@ -10,6 +10,7 @@
     <color name="black">#FF000000</color>
     <color name="dark_grey">#121212</color>
     <color name="grey">#d3d3d3</color>
+    <color name="light_grey">#ECECEC</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="dark_blue">#0000EE</color>
@@ -17,6 +18,40 @@
     <color name="transparent">#00000000</color>
 
     <color name="red">#FFFF0000</color>
+    <color name="light_red">#CF6679</color>
+
+    <!-- Global main colors -->
+
+    <color name="global_primary">#c62828</color>
+    <color name="global_primary_variant">#8e0000</color>
+    <color name="global_secondary">#ffb300</color>
+    <color name="global_secondary_variant">#c68400</color>
+    <color name="global_primary_dark">#ff5f52</color>
+    <color name="global_primary_variant_dark">#8e0000</color>
+    <color name="global_secondary_dark">#ffb300</color>
+    <color name="global_secondary_variant_dark">#ffb300</color>
+
+    <!-- Groups main colors -->
+
+    <color name="groups_primary">#004d40</color>
+    <color name="groups_primary_variant">#00251a</color>
+    <color name="groups_secondary">#9ccc65</color>
+    <color name="groups_secondary_variant">#6b9b37</color>
+    <color name="groups_primary_dark">#39796b</color>
+    <color name="groups_primary_variant_dark">#00251a</color>
+    <color name="groups_secondary_dark">#9ccc65</color>
+    <color name="groups_secondary_variant_dark">#9ccc65</color>
+
+    <!-- Personal main colors -->
+
+    <color name="personal_primary">#424242</color>
+    <color name="personal_primary_variant">#1b1b1b</color>
+    <color name="personal_secondary">#bcaaa4</color>
+    <color name="personal_secondary_variant">#8c7b75</color>
+    <color name="personal_primary_dark">#6d6d6d</color>
+    <color name="personal_primary_variant_dark">#1b1b1b</color>
+    <color name="personal_secondary_dark">#bcaaa4</color>
+    <color name="personal_secondary_variant_dark">#bcaaa4</color>
 
     <color name="almost_black">#282828</color>
     
