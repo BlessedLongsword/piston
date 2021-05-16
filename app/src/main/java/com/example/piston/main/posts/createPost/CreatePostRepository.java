@@ -20,7 +20,6 @@ public class CreatePostRepository {
 
     private final CreatePostRepository.ICreatePost listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final String user;
     private String username, profilePictureLink;
@@ -35,6 +34,7 @@ public class CreatePostRepository {
 
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
         this.listener = listener;
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
                 .document(Objects.requireNonNull(user))
@@ -71,7 +71,7 @@ public class CreatePostRepository {
                 StorageReference storageRef = storage.getReference();
                 String id = db.collection("users").document().getId();
                 String path;
-                if (scope.equals("users"))
+                if (scope.equals("folders"))
                     path = "users/" + username;
                 else
                     path = scope + "/" + document;
@@ -96,7 +96,7 @@ public class CreatePostRepository {
 
         DocumentReference docRef;
         if (scope.equals("folders")) {
-            docRef = db.collection(scope)
+            docRef = db.collection("users")
                     .document(user)
                     .collection("folders")
                     .document(sectionID)

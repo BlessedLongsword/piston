@@ -191,8 +191,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-
-        int position = -1;
+        int position;
 
         try {
             position = ((PostAdapter) Objects.requireNonNull(binding.recyclerviewPosts

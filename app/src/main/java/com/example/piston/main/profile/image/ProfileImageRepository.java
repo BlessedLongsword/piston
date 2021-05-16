@@ -17,8 +17,8 @@ public class ProfileImageRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final IProfileImage listener;
-    private final String email;
     private String username;
+    private final DocumentReference userDocRef;
 
     public interface IProfileImage {
         void setImageLink(String imageLink);
@@ -27,19 +27,18 @@ public class ProfileImageRepository {
     ProfileImageRepository(IProfileImage listener, String email) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        this.email = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
-        db.collection("users")
-                .document(Objects.requireNonNull(this.email))
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful())
-                        username = (String) task.getResult().get("username");
-                });
+        String email1 = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
+        userDocRef = db.collection("users").document(Objects.requireNonNull(email1));
+
+        userDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                username = (String) task.getResult().get("username");
+        });
         loadImage();
     }
 
     public void loadImage() {
-        db.collection("users").document(email).get().addOnCompleteListener(task -> {
+        userDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setImageLink((String) task.getResult().get("profilePictureLink"));
             }
@@ -53,14 +52,12 @@ public class ProfileImageRepository {
         String imageId = path + "/" + randomId;
         StorageReference imageRef = storageRef.child(imageId);
         UploadTask uploadTask = imageRef.putFile(image);
+
         uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> {
-                    DocumentReference docRef = db.collection("users").document(email);
-                    docRef.get().addOnSuccessListener(documentSnapshot -> {
-                       docRef.update("profilePictureLink", uri.toString());
-                       loadImage();
-                    });
-                }));
+                .addOnSuccessListener(uri -> userDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                   userDocRef.update("profilePictureLink", uri.toString());
+                   loadImage();
+                })));
     }
 
 }

@@ -21,9 +21,9 @@ public class PostRepository {
     private final IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user, profilePictureLink;
+    private String user, profilePictureLink, email;
     private final String scope, sectionID, postID;
-    private final DocumentReference docRef;
+    private final DocumentReference postDocRef;
     private ListenerRegistration listenerRegistration;
 
     public interface IPosts {
@@ -43,7 +43,7 @@ public class PostRepository {
         this.postID = postID;
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         db.collection("users")
                 .document(Objects.requireNonNull(email))
@@ -54,15 +54,8 @@ public class PostRepository {
                     profilePictureLink = (String) task.getResult().get("profilePictureLink");
                 });
 
-        db.collection("admins")
-                .document(email)
-                .get().addOnCompleteListener(task -> {
-                    if(task.isSuccessful())
-                        listener.setPriority(1);
-        });
-
         if (scope.equals("folders")) {
-            docRef = db.collection("users")
+            postDocRef = db.collection("users")
                     .document(email)
                     .collection(scope)
                     .document(sectionID)
@@ -70,7 +63,7 @@ public class PostRepository {
                     .document(postID);
         }
         else {
-            docRef = db.collection(scope)
+            postDocRef = db.collection(scope)
                     .document(sectionID)
                     .collection("posts")
                     .document(postID);
@@ -81,7 +74,7 @@ public class PostRepository {
     }
 
     private void updateParams() {
-        docRef.get().addOnCompleteListener(task -> {
+        postDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (task.getResult().exists()) {
                     DocumentSnapshot ds = task.getResult();
@@ -97,11 +90,18 @@ public class PostRepository {
                 }
             }
         });
+
+        db.collection("admins")
+                .document(email)
+                .get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+                listener.setPriority(1);
+        });
     }
 
     private void loadPosts() {
         ArrayList<Reply> posts = new ArrayList<>();
-        docRef.collection("replies").orderBy("timestamp")
+        postDocRef.collection("replies").orderBy("timestamp")
                 .get().addOnCompleteListener(task1 -> {
             if (task1.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
@@ -122,14 +122,14 @@ public class PostRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = docRef.collection("replies")
+        listenerRegistration = postDocRef.collection("replies")
                     .addSnapshotListener((snapshots, e) -> PostRepository.this.loadPosts());
     }
 
     public void createReply(String content) {
         String id = db.collection("users").document().getId();
         Reply rep = new Reply(id, user, content, profilePictureLink);
-        DocumentReference docRef1 = docRef.collection("replies")
+        DocumentReference docRef1 = postDocRef.collection("replies")
                                         .document(id);
         Map<String, Object> data = new HashMap<>();
 
@@ -139,7 +139,7 @@ public class PostRepository {
         docRef1.set(rep);
         docRef1.update(data);
 
-        docRef.get().addOnCompleteListener(task -> {
+        postDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 db.collection("emails").document(Objects.requireNonNull(Objects
                         .requireNonNull(task.getResult()).get("owner")).toString())
@@ -164,7 +164,7 @@ public class PostRepository {
         String id = db.collection("users").document().getId();
 
         QuoteReply rep = new QuoteReply(id, user, content, profilePictureLink, quoteID, quoteOwner, quote);
-        DocumentReference docRef1 = docRef.collection("replies")
+        DocumentReference docRef1 = postDocRef.collection("replies")
                 .document(id);
         Map<String, Object> data = new HashMap<>();
 
@@ -192,14 +192,12 @@ public class PostRepository {
     }
 
     public void deleteReply(String replyID) {
-        docRef.collection("replies").document(replyID).delete();
+        postDocRef.collection("replies").document(replyID).delete();
     }
 
     public void editReply(String replyID, String content) {
-        DocumentReference replyDocRef = docRef.collection("replies").document(replyID);
-        replyDocRef.get().addOnSuccessListener(documentSnapshot -> {
-            replyDocRef.update("content", content);
-        });
+        DocumentReference replyDocRef = postDocRef.collection("replies").document(replyID);
+        replyDocRef.get().addOnSuccessListener(documentSnapshot -> replyDocRef.update("content", content));
     }
 
     public void addLiked (boolean liked){
@@ -236,28 +234,28 @@ public class PostRepository {
     }
 
     public void updateNumLikes(boolean liked){
-       docRef.get().addOnCompleteListener(task -> {
+       postDocRef.get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
-               docRef.update("numLikes", liked ? numLikes + 1 : numLikes - 1);
+               postDocRef.update("numLikes", liked ? numLikes + 1 : numLikes - 1);
            }
        });
     }
 
     public void deletePost() {
-        docRef.collection("replies")
+        postDocRef.collection("replies")
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
                                 task.getResult())) {
-                            docRef.collection("replies")
+                            postDocRef.collection("replies")
                                     .document(snapshot1.getId())
                                     .delete();
                         }
                     }
         });
 
-        docRef.collection("userLikes")
+        postDocRef.collection("userLikes")
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot snapshot1 : Objects.requireNonNull(
@@ -267,14 +265,14 @@ public class PostRepository {
                                     .document(postID)
                                     .delete();
 
-                            docRef.collection("userLikes")
+                            postDocRef.collection("userLikes")
                                     .document(snapshot1.getId())
                                     .delete();
                         }
                     }
         });
 
-        docRef.delete();
+        postDocRef.delete();
     }
 
     public void removeListener() {

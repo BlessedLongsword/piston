@@ -50,8 +50,7 @@ public class JoinGroupRepository {
                                                     .collection("groups")
                                                     .document(groupCode);
                     docRef2.get().addOnCompleteListener(task2 -> {
-                       DocumentSnapshot ds2 = task2.getResult();
-                       if (Objects.requireNonNull(ds2).exists()) {
+                       if (task2.getResult().exists()) {
                            listener.setLoadingFinished();
                            listener.setGroupCodeError(JoinGroupResult.JoinError.ALREADY_JOINED);
                        }
@@ -67,9 +66,7 @@ public class JoinGroupRepository {
                            data.clear();
                            data.put("id", user);
                            data.put("priority", 2);
-                           db.collection("groups")
-                                   .document(groupCode)
-                                   .collection("members")
+                           docRef.collection("members")
                                    .document(user)
                                    .set(data);
                        }

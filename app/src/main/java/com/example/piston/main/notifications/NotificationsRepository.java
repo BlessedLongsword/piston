@@ -16,7 +16,7 @@ import java.util.Objects;
 public class NotificationsRepository {
 
     private final INotifications listener;
-    private final DocumentReference docRef;
+    private final DocumentReference userDocRef;
     private ListenerRegistration listenerRegistration;
 
 
@@ -30,14 +30,15 @@ public class NotificationsRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        docRef = db.collection("users")
-                .document(Objects.requireNonNull(email));
+
+        userDocRef = db.collection("users").document(Objects.requireNonNull(email));
+
         listenChanges();
     }
 
     public void loadNotifications() {
         ArrayList<Notification> notifications = new ArrayList<>();
-        docRef.collection("notifications")
+        userDocRef.collection("notifications")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -61,7 +62,7 @@ public class NotificationsRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = docRef.collection("notifications")
+        listenerRegistration = userDocRef.collection("notifications")
                 .addSnapshotListener((snapshots, error) -> NotificationsRepository.this.loadNotifications());
     }
 

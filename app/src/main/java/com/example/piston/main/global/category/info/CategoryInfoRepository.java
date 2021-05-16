@@ -13,7 +13,7 @@ import java.util.Objects;
 public class CategoryInfoRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final DocumentReference docRef, docRef1;
+    private final DocumentReference categoryDocRef, userDocRef;
     private final String category, email;
 
     final ICategoryInfo listener;
@@ -29,10 +29,10 @@ public class CategoryInfoRepository {
         this.category = category;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        docRef = db.collection("categories").document(category);
-        docRef1 = db.collection("users").document(Objects.requireNonNull(email));
+        categoryDocRef = db.collection("categories").document(category);
+        userDocRef = db.collection("users").document(Objects.requireNonNull(email));
 
-        docRef.get().addOnCompleteListener(task -> {
+        categoryDocRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
                             (String) task.getResult().get("description"),
@@ -47,37 +47,36 @@ public class CategoryInfoRepository {
         if (sub){
             Map<String, String> data = new HashMap<>();
             data.put("id", category);
-            docRef1.collection("subscribedCategories").document(category).set(data);
+            userDocRef.collection("subscribedCategories").document(category).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
-            docRef.collection("subscribedUsers").document(email).set(data2);
+            categoryDocRef.collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            docRef1.collection("subscribedCategories").document(category).delete();
-            docRef.collection("subscribedUsers").document(email).delete();
+            userDocRef.collection("subscribedCategories").document(category).delete();
+            categoryDocRef.collection("subscribedUsers").document(email).delete();
         }
     }
 
     public void checkSub () {
-        DocumentReference dR = docRef.collection("subscribedUsers").document(email);
-        dR.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                DocumentSnapshot ds = task.getResult();
-                listener.setSubscribed(ds.exists());
-            }
+        categoryDocRef.collection("subscribedUsers").document(email)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        listener.setSubscribed(task.getResult().exists());
+                    }
         });
     }
 
     public void deleteCategory() {
-        deleteSubscribedUsers(docRef.getId());
+        deleteSubscribedUsers(categoryDocRef.getId());
 
-        docRef.collection("posts").get().addOnCompleteListener(task -> {
+        categoryDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Delete posts inside category
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String Id = documentSnapshot.getId();
-                    DocumentReference docRef1 = docRef.collection("posts").document(Id);
+                    DocumentReference docRef1 = categoryDocRef.collection("posts").document(Id);
                     deleteSubscribedUsers(Id);
 
                     // Delete replies inside post
@@ -115,11 +114,11 @@ public class CategoryInfoRepository {
                 }
             }
         });
-        docRef.delete(); // Delete category
+        categoryDocRef.delete(); // Delete category
     }
 
     private void deleteSubscribedUsers (String categoryId) {
-        docRef.collection("subscribedUsers").get().addOnCompleteListener(task -> {
+        categoryDocRef.collection("subscribedUsers").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Remove subscribedCategories from user
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
@@ -128,7 +127,7 @@ public class CategoryInfoRepository {
                             .collection("subscribedCategories")
                             .document(categoryId).delete();
 
-                    docRef.collection("subscribedUsers")
+                    categoryDocRef.collection("subscribedUsers")
                             .document(documentSnapshot.getId())
                             .delete();
                 }
@@ -140,7 +139,7 @@ public class CategoryInfoRepository {
     private void isAdmin() {
         db.collection("admins").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                listener.setIsAdmin(true);
+                listener.setIsAdmin(task.getResult().exists());
             }
         });
     }

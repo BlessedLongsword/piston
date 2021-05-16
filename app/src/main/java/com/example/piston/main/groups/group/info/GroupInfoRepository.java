@@ -15,7 +15,7 @@ public class GroupInfoRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final GroupInfoRepository.IGroupInfo listener;
-    private final DocumentReference docRef;
+    private final DocumentReference groupDocRef;
     private ListenerRegistration listenerRegistration;
 
     private final String groupID, user;
@@ -35,7 +35,7 @@ public class GroupInfoRepository {
         this.groupID = groupID;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-        docRef = db.collection("groups").document(groupID);
+        groupDocRef = db.collection("groups").document(groupID);
 
         updateParams();
         isOwner();
@@ -43,7 +43,7 @@ public class GroupInfoRepository {
     }
 
     public void updateParams() {
-        docRef.get().addOnCompleteListener(task -> {
+        groupDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
                         (String) task.getResult().get("description"),
@@ -53,21 +53,21 @@ public class GroupInfoRepository {
     }
 
     public void editDescription(String text) {
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            docRef.update("description", text);
+        groupDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            groupDocRef.update("description", text);
             listener.setFinished(true);
         });
     }
 
     public void editTitle(String text) {
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            docRef.update("title", text);
+        groupDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            groupDocRef.update("title", text);
             listener.setFinished(true);
         });
     }
 
     public void loadMembers() {
-        docRef.collection("members").orderBy("priority").get().addOnCompleteListener(task -> {
+        groupDocRef.collection("members").orderBy("priority").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 int size = Objects.requireNonNull(task.getResult()).size();
                 counter = 0;
@@ -100,29 +100,29 @@ public class GroupInfoRepository {
     }
 
     public void removeMember(String memberEmail) {
-        docRef.collection("members").document(memberEmail).delete();
+        groupDocRef.collection("members").document(memberEmail).delete();
         db.collection("users").document(memberEmail)
                 .collection("groups").document(groupID).delete();
     }
 
     public void updateMemberPriority(String memberEmail, int priority) {
-        DocumentReference memberDocRef = docRef.collection("members").document(memberEmail);
+        DocumentReference memberDocRef = groupDocRef.collection("members").document(memberEmail);
         memberDocRef.get().addOnSuccessListener(documentSnapshot -> memberDocRef.update("priority", priority));
     }
 
     private void listenChanges() {
-        listenerRegistration = docRef.collection("members")
+        listenerRegistration = groupDocRef.collection("members")
                 .addSnapshotListener((snapshots, e) -> GroupInfoRepository.this.loadMembers());
     }
 
     public void deleteGroup() {
-        docRef.collection("posts").get().addOnCompleteListener(task -> {
+        groupDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Delete posts inside group
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     String id = documentSnapshot.getId();
-                    DocumentReference docRef1 = docRef.collection("posts").document(id);
+                    DocumentReference docRef1 = groupDocRef.collection("posts").document(id);
 
                     // Delete replies inside post
                     docRef1.collection("replies")
@@ -161,11 +161,11 @@ public class GroupInfoRepository {
 
         deleteMembers();
 
-        docRef.delete(); // Delete group
+        groupDocRef.delete(); // Delete group
     }
 
     private void deleteMembers() {
-        docRef.collection("members").get().addOnCompleteListener(task -> {
+        groupDocRef.collection("members").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
@@ -179,7 +179,7 @@ public class GroupInfoRepository {
                             .delete();
 
                     // Delete members from group
-                    docRef.collection("members")
+                    groupDocRef.collection("members")
                             .document(id)
                             .delete();
                 }
@@ -188,13 +188,14 @@ public class GroupInfoRepository {
     }
 
     public void isOwner() {
-        docRef.collection("members")
+        groupDocRef.collection("members")
                 .document(user)
                 .get().addOnCompleteListener(task -> {
-                    if (task.isComplete()) {
-                        long priority = (long) Objects.requireNonNull(task.getResult().get("priority")); //Priority és null????
-                        listener.setPriority((int) priority);
-                    }
+                    if (task.isSuccessful())
+                        if (task.getResult().exists()) {
+                            long priority = (long) Objects.requireNonNull(task.getResult().get("priority"));
+                            listener.setPriority((int) priority);
+                        }
         });
     }
 

@@ -69,19 +69,22 @@ public class GlobalRepository {
     }
 
     public void addSub(boolean sub, String id){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         if (sub){
             Map<String, String> data = new HashMap<>();
             data.put("title", id);
-            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(id).set(data);
+            db.collection("users")
+                    .document(Objects.requireNonNull(email)).collection("subscribedCategories")
+                    .document(id).set(data);
             Map<String, String> data2 = new HashMap<>();
             data2.put("email", email);
-            db.collection("categories").document(id).collection("subscribedUsers").document(email).set(data2);
+            db.collection("categories").document(id)
+                    .collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            db.collection("users").document(Objects.requireNonNull(email)).collection("subscribedCategories").document(id).delete();
-            db.collection("categories").document(id).collection("subscribedUsers").document(email).delete();
+            db.collection("users").document(Objects.requireNonNull(email))
+                    .collection("subscribedCategories").document(id).delete();
+            db.collection("categories").document(id)
+                    .collection("subscribedUsers").document(email).delete();
         }
     }
 

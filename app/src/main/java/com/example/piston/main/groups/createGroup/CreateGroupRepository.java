@@ -66,6 +66,7 @@ public class CreateGroupRepository {
             String imageId = path + "/" + "groupImage";
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
             UploadTask uploadTask = imageRef.putFile(image);
+
             uploadTask.addOnFailureListener(exception -> {
                 // Handle unsuccessful uploads
             }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()

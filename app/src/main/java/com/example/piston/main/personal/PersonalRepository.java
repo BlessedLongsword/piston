@@ -2,6 +2,7 @@ package com.example.piston.main.personal;
 
 import com.example.piston.data.sections.Folder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -13,8 +14,8 @@ public class PersonalRepository {
 
     private final PersonalRepository.IPersonal listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final String user;
     private ListenerRegistration listenerRegistration;
+    private final CollectionReference foldersColRef;
 
     public interface IPersonal {
         void setFolders(ArrayList<Folder> categories);
@@ -23,33 +24,29 @@ public class PersonalRepository {
     public PersonalRepository(PersonalRepository.IPersonal listener) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+
+        foldersColRef = db.collection("users").document(Objects.requireNonNull(user)).collection("folders");
         listenChanges();
     }
 
     private void loadFolders() {
-        db.collection("users")
-                .document(user)
-                .collection("folders")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        ArrayList<Folder> folders = new ArrayList<>();
-                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
-                                task.getResult())) {
-                            Folder Folder = documentSnapshot.toObject(Folder.class);
-                            folders.add(Folder);
-                        }
-                        listener.setFolders(folders);
-                    }
-                });
+        foldersColRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ArrayList<Folder> folders = new ArrayList<>();
+                for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
+                        task.getResult())) {
+                    Folder Folder = documentSnapshot.toObject(Folder.class);
+                    folders.add(Folder);
+                }
+                listener.setFolders(folders);
+            }
+        });
     }
 
     private void listenChanges() {
-        listenerRegistration = db.collection("users")
-                .document(user)
-                .collection("folders")
-                .addSnapshotListener((snapshots, e) -> PersonalRepository.this.loadFolders());
+        listenerRegistration = foldersColRef.addSnapshotListener(
+                (snapshots, e) -> PersonalRepository.this.loadFolders());
     }
 
     public void removeListener() {

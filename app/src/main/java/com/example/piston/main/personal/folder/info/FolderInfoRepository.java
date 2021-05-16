@@ -15,18 +15,18 @@ public class FolderInfoRepository {
         void setDescription(String description);
     }
 
-    private final DocumentReference docRef;
+    private final DocumentReference folderDocRef;
 
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        docRef = db.collection("users")
+        folderDocRef = db.collection("users")
                 .document(Objects.requireNonNull(user))
                 .collection("folders")
                 .document(folderID);
 
-        docRef.get().addOnCompleteListener(task -> {
+        folderDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
                 listener.setDescription((String) task.getResult().get("description"));
@@ -35,12 +35,12 @@ public class FolderInfoRepository {
     }
 
     public void deleteFolder() {
-        docRef.collection("posts").get().addOnCompleteListener(task -> {
+        folderDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
                 // Delete sub collection
                 for (QueryDocumentSnapshot snapshot : Objects.requireNonNull(
                         task.getResult())) {
-                    DocumentReference docRef1 = docRef.collection("posts")
+                    DocumentReference docRef1 = folderDocRef.collection("posts")
                             .document(snapshot.getId());
 
                     docRef1.collection("replies")
@@ -58,7 +58,7 @@ public class FolderInfoRepository {
                 }
             }
         });
-        docRef.delete();
+        folderDocRef.delete();
     }
 
 }
