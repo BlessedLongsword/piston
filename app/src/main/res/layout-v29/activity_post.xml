@@ -169,6 +169,14 @@
                     android:layout_marginTop="@dimen/medium_separator"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
+                <TextView
+                    android:id="@+id/post_no_replies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny_separator"
+                    android:text="@string/no_replies"
+                    android:textSize="@dimen/bigger_text" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_posts"
                     android:layout_width="match_parent"

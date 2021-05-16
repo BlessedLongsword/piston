@@ -70,6 +70,13 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
+        viewModel.getReplies().observe(this, replies -> {
+            if (replies.size() == 0)
+                binding.postNoReplies.setVisibility(View.VISIBLE);
+            else
+                binding.postNoReplies.setVisibility(View.GONE);
+        });
+
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
         viewModel.getPriority().observe(this, priority -> {
                 binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
