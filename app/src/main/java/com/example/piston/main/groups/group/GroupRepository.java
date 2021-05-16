@@ -1,5 +1,7 @@
 package com.example.piston.main.groups.group;
 
+import android.util.Log;
+
 import com.example.piston.data.posts.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,6 +29,7 @@ public class GroupRepository {
 
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;
+        Log.d("what",group);
         this.groupDocRef = db.collection("groups").document(group);
 
         groupDocRef.get().addOnCompleteListener(task -> {

@@ -1,6 +1,7 @@
 package com.example.piston.main.groups.createGroup;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.piston.data.sections.Group;
 import com.example.piston.data.users.GroupMember;
@@ -61,7 +62,6 @@ public class CreateGroupRepository {
             listener.setErrorMessage("Group must have an image");
         else {
             StorageReference storageRef = storage.getReference();
-            String id = UUID.randomUUID().toString();
             String path = "groups/" + groupID;
             String imageId = path + "/" + "groupImage";
             StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
@@ -73,7 +73,7 @@ public class CreateGroupRepository {
                     .addOnSuccessListener(uri -> {
                         String imageLink = uri.toString();
 
-                        Group group = new Group(id, title, description, imageLink);
+                        Group group = new Group(groupID, title, description, imageLink);
 
                         db.collection("groups")
                                 .document(groupID)
