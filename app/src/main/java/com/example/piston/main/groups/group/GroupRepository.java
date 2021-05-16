@@ -81,6 +81,7 @@ public class GroupRepository {
                                 if (task1.isSuccessful()) {
                                     Map<String, Object> data = new HashMap<>();
                                     data.put("id", groupID);
+                                    docRef2.set(data);
                                     data.clear();
                                     data.put("id", user);
                                     data.put("priority", 2);
