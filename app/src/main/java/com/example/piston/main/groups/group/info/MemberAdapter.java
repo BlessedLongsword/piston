@@ -85,9 +85,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemMemberBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_member, parent, false);
         if (viewType == GroupMember.OWNER) {
-            binding.memberTypeIcon.setImageResource(R.drawable.outline_local_police_black_24);
+            binding.groupOwnerIcon.setVisibility(View.VISIBLE);
         } else if (viewType == GroupMember.MOD) {
-            binding.memberTypeIcon.setImageResource(R.drawable.outline_construction_black_24);
+            binding.groupModeratorIcon.setVisibility(View.VISIBLE);
         }
         return new MemberHolder(binding, Objects.requireNonNull(viewModel.getPriority().getValue()));
     }

@@ -137,7 +137,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@color/transparent"
-                            android:src="@drawable/baseline_content_copy_black_24"
+                            android:theme="@style/ClipBoard"
                             android:contentDescription="@string/share_group"
                             android:layout_gravity="center_vertical"
                             android:onClick="copyGroupID"

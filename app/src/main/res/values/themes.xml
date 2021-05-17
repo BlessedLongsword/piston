@@ -63,4 +63,17 @@
         <item name="android:src">@drawable/baseline_edit_black_24</item>
     </style>
 
+    <style name="GroupModeratorIcon">
+        <item name="android:src">@drawable/outline_construction_black_24</item>
+    </style>
+
+    <style name="GroupOwnerIcon">
+        <item name="android:src">@drawable/outline_local_police_black_24</item>
+    </style>
+
+    <style name="ClipBoard">
+        <item name="android:src">@drawable/baseline_content_copy_black_24</item>
+    </style>
+
+
 </resources>

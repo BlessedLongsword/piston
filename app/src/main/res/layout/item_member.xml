@@ -64,11 +64,23 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1" />
 
+
                             <ImageView
-                                android:id="@+id/member_type_icon"
+                                android:id="@+id/group_owner_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:theme="@style/GroupOwnerIcon"
+                                android:visibility="gone"
                                 android:contentDescription="@string/content_description_media"/>
+
+                            <ImageView
+                                android:id="@+id/group_moderator_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/GroupModeratorIcon"
+                                android:visibility="gone"
+                                android:contentDescription="@string/content_description_media"/>
+                            
                     </LinearLayout>
 
                 </LinearLayout>
