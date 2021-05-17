@@ -58,6 +58,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
     public void onBindViewHolder(@NonNull GroupsAdapter.GroupsHolder holder, int position) {
         Group group = Objects.requireNonNull(Objects.requireNonNull(viewModel.getGroups().getValue()).get(position));
         holder.bind(group);
+
         Glide.with(localActivity)
                 .load(group.getImageLink())
                 .into(holder.binding.groupImage);

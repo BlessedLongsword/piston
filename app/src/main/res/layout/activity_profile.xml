@@ -51,7 +51,6 @@
                         android:id="@+id/profile_picture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/default_profile_picture"
                         android:contentDescription="@string/profile"
                         android:onClick="clickImage"
                         android:scaleType="centerCrop" />

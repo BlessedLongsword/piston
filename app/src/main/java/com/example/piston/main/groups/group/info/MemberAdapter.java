@@ -96,11 +96,12 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberHold
     public void onBindViewHolder(@NonNull MemberAdapter.MemberHolder holder, int position) {
         GroupMember member = Objects.requireNonNull(viewModel.getMembers().getValue()).get(position);  //member és null ------------------------------------------------
         holder.bind(member);
-        if (member.getProfilePictureLink() != null) {
-            Glide.with(localActivity)
-                    .load(member.getProfilePictureLink())
-                    .into(holder.binding.memberProfilePicture);
-        }
+
+        Glide.with(localActivity)
+                .load(member.getProfilePictureLink())
+                .placeholder(R.drawable.default_profile_picture)
+                .into(holder.binding.memberProfilePicture);
+
         holder.getBinding().memberCard.setOnClickListener(openNewActivity(member.getEmail()));
         holder.getBinding().memberCard.setOnLongClickListener(v -> {
             setPosition(position);

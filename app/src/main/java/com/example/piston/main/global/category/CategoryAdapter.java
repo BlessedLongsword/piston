@@ -64,11 +64,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
 
-        if(post.getProfileImageLink() != null ) {
-            Glide.with(localActivity)
-                    .load(post.getProfileImageLink())
-                    .into(holder.binding.postItemProfilePicture);
-        }
+        Glide.with(localActivity)
+                .load(post.getProfileImageLink())
+                .placeholder(R.drawable.default_profile_picture)
+                .into(holder.binding.postItemProfilePicture);
+
 
         if (post.getImageLink() != null) {
             Glide.with(localActivity)
@@ -76,6 +76,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
                     .into(holder.binding.postPicture);
         } else
             holder.getBinding().postPicture.setVisibility(View.GONE);
+
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
         holder.getBinding().userProfile.setOnClickListener(openProfile(post.getOwnerEmail()));
     }

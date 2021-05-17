@@ -92,7 +92,6 @@
                                             android:id="@+id/post_profile_picture"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:src="@drawable/default_profile_picture"
                                             android:contentDescription="@string/profile"
                                             android:scaleType="centerCrop"
                                             tools:ignore="TooDeepLayout" />
@@ -133,14 +132,14 @@
                                 android:layout_height="wrap_content"
                                 android:weightSum="1">
 
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/thread_reply_button"
-                                    style="?attr/borderlessButtonStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/card_margin"
-                                    android:text="@string/reply"
-                                    app:icon="@drawable/outline_reply_white_24" />
+                                <com.like.LikeButton
+                                    android:id="@+id/heart_button"
+                                    android:layout_width="@dimen/low_square"
+                                    android:layout_height="@dimen/low_square"
+                                    android:layout_gravity="end"
+                                    app:icon_size="12dp"
+                                    app:icon_type="heart"
+                                    app:liked="false" />
 
                                 <Space
                                     android:layout_width="0dp"
@@ -156,14 +155,14 @@
                                     android:contentDescription="@string/share_post"
                                     android:src="@drawable/baseline_share_black_36" />
 
-                                <com.like.LikeButton
-                                    android:id="@+id/heart_button"
-                                    android:layout_width="@dimen/low_square"
-                                    android:layout_height="@dimen/low_square"
-                                    android:layout_gravity="end"
-                                    app:icon_size="12dp"
-                                    app:icon_type="heart"
-                                    app:liked="false" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/thread_reply_button"
+                                    style="?attr/borderlessButtonStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/card_margin"
+                                    android:text="@string/reply"
+                                    app:icon="@drawable/outline_reply_white_24" />
                             </LinearLayout>
 
                         </LinearLayout>

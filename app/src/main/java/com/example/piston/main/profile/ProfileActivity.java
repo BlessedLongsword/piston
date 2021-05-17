@@ -43,15 +43,12 @@ public class ProfileActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
         binding.profileToolbar.setNavigationOnClickListener(v -> finish());
 
-        profileViewModel.getImageLink().observe(this, s -> {
-            if (s != null ) {
-                if (!s.equals("")) {
-                    Glide.with(this)
-                            .load(s)
-                            .into(binding.profilePicture);
-                }
-            }
-        });
+        profileViewModel.getImageLink().observe(this, s ->
+            Glide.with(this)
+                    .load(s)
+                    .placeholder(R.drawable.default_profile_picture)
+                    .into(binding.profilePicture)
+        );
 
         profileViewModel.getFeaturedPost().observe(this, post -> {
             if (post == null) {

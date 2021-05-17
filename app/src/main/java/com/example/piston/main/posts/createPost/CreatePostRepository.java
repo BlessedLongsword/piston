@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
+import com.example.piston.data.users.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,7 +42,7 @@ public class CreatePostRepository {
                 .get()
                 .addOnCompleteListener(task -> {
                     username = (String) Objects.requireNonNull(task.getResult()).get("username");
-                    profilePictureLink = (String) task.getResult().get("profilePictureLink");
+                    profilePictureLink = (String) Objects.requireNonNull(task.getResult()).get("profilePictureLink");
         });
 
     }

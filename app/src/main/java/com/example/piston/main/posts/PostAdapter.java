@@ -20,7 +20,6 @@ import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ItemQuoteReplyBinding;
 import com.example.piston.databinding.ItemReplyBinding;
-import com.example.piston.main.groups.group.info.MemberAdapter;
 import com.example.piston.main.profile.ProfileActivity;
 import com.example.piston.utilities.Values;
 
@@ -148,17 +147,19 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ReplyHolder hold = ((ReplyHolder) holder);
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
-            if (reply.getOwnerImageLink() != null ) {
-                Glide.with(localActivity)
-                        .load(reply.getOwnerImageLink())
-                        .into(hold.binding.replyProfilePicture);
-            }
+
+            Glide.with(localActivity)
+                    .load(reply.getOwnerImageLink())
+                    .placeholder(R.drawable.default_profile_picture)
+                    .into(hold.binding.replyProfilePicture);
+
             if (viewModel.getScope().equals(Values.PERSONAL)) {
                 hold.getBinding().userProfile.setVisibility(View.GONE);
                 hold.getBinding().replyButton.setText(R.string.add_note);
                 hold.getBinding().replyButton.setIcon(ContextCompat.getDrawable(localActivity,
                         R.drawable.outline_post_add_black_24));
             }
+
             ((ReplyHolder) holder).getBinding().userProfile.setOnClickListener(openNewActivity
                     (reply.getOwnerEmail()));
             ((ReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {
@@ -170,11 +171,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             QuoteReplyHolder hold = ((QuoteReplyHolder) holder);
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
-            if (reply.getOwnerImageLink() != null) {
-                Glide.with(localActivity)
-                        .load(reply.getOwnerImageLink())
-                        .into(hold.binding.replyQuoteProfilePicture);
-            }
+
+            Glide.with(localActivity)
+                    .load(reply.getOwnerImageLink())
+                    .placeholder(R.drawable.default_profile_picture)
+                    .into(hold.binding.replyQuoteProfilePicture);
+
             if (viewModel.getScope().equals(Values.PERSONAL)) {
                 hold.getBinding().userProfile.setVisibility(View.GONE);
                 hold.getBinding().replyButton.setText(R.string.add_note);

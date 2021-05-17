@@ -41,15 +41,11 @@ public class ProfileImageActivity extends PickImageActivity {
         if (getIntent().getBooleanExtra("isCurrentUser", false))
             binding.profileToolbar.inflateMenu(R.menu.profile_image_top_app_bar);
 
-        viewModel.getImageLink().observe(this, s -> {
-            if (s != null) {
-                if (!s.equals("")) {
-                    Glide.with(this)
-                            .load(s)
-                            .into(binding.picture);
-                }
-            }
-        });
+        viewModel.getImageLink().observe(this, s -> Glide.with(this)
+                        .load(s)
+                        .placeholder(R.drawable.default_profile_picture)
+                        .into(binding.picture)
+                );
     }
 
     public void changeImage(MenuItem item) {

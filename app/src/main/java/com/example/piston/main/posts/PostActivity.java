@@ -88,6 +88,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         });
 
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
+
         viewModel.getPriority().observe(this, priority -> {
                 binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
                 binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority == 0);
@@ -111,20 +112,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             }
         });
 
-        if (scope.equals("folders")){
-            binding.heartButton.setVisibility(View.GONE);
-            binding.shareButton.setVisibility(View.GONE);
-            binding.userProfile.setVisibility(View.GONE);
-            binding.repliesText.setVisibility(View.GONE);
-            binding.threadReplyButton.setText(R.string.add_note);
-            binding.threadReplyButton.setIcon(ContextCompat.getDrawable(this,
-                    R.drawable.outline_post_add_black_24));
-            binding.postContent.setPadding(0, 0, 0, 0);
-        }
-
-        if (scope.equals("groups")) {
-            binding.heartButton.setVisibility(View.GONE);
-        }
+        setVisibility();
 
         viewModel.getPostTitle().observe(this, binding.postsTopAppBar::setTitle);
         viewModel.getLiked().observe(this, aBoolean -> binding.heartButton.setLiked(aBoolean));
@@ -133,9 +121,13 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                 .load(imageLink)
                 .into(binding.postPicture));
 
-        viewModel.getProfileImageLink().observe(this, profileImageLink -> Glide.with(this)
-                .load(profileImageLink)
-                .into(binding.postProfilePicture));
+        viewModel.getProfileImageLink().observe(this, profileImageLink ->
+                Glide.with(this)
+                        .load(profileImageLink)
+                        .placeholder(R.drawable.default_profile_picture)
+                        .into(binding.postProfilePicture)
+
+        );
 
         viewModel.getLoaded().observe(this, aBoolean -> {
             if (aBoolean && replyID != null)
@@ -150,6 +142,23 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
                 finish();
             }
         });
+    }
+
+    private void setVisibility() {
+        if (scope.equals("folders")){
+            binding.heartButton.setVisibility(View.GONE);
+            binding.shareButton.setVisibility(View.GONE);
+            binding.userProfile.setVisibility(View.GONE);
+            binding.repliesText.setVisibility(View.GONE);
+            binding.threadReplyButton.setText(R.string.add_note);
+            binding.threadReplyButton.setIcon(ContextCompat.getDrawable(this,
+                    R.drawable.outline_post_add_black_24));
+            binding.postContent.setPadding(0, 0, 0, 0);
+        }
+
+        if (scope.equals("groups")) {
+            binding.heartButton.setVisibility(View.GONE);
+        }
     }
 
     public void goToReply(String replyID) {

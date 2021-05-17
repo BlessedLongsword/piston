@@ -1,6 +1,9 @@
 package com.example.piston.main.posts;
 
+import android.util.Log;
+
 import com.example.piston.data.notifications.NotificationReply;
+import com.example.piston.data.posts.Post;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
 import com.google.firebase.auth.FirebaseAuth;
