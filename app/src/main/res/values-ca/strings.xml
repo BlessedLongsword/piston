@@ -183,5 +183,7 @@
     <string name="share_post">Compartir Publicació</string>
     <string name="not_belongs_to_group">No pertanys al grup que conté aquesta publicació!</string>
     <string name="share_group">Compartir Grup</string>
+    <string name="add_note">Afegir Nota</string>
+
 
 </resources>

@@ -187,5 +187,6 @@
     <string name="share_post">Share Post</string>
     <string name="not_belongs_to_group">You do not belong to the group that contains this post!</string>
     <string name="share_group">Share Group</string>
+    <string name="add_note">Add note</string>
 
 </resources>

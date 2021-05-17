@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -152,6 +153,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyProfilePicture);
             }
+            if (viewModel.getScope().equals(Values.PERSONAL)) {
+                hold.getBinding().userProfile.setVisibility(View.GONE);
+                hold.getBinding().replyButton.setText(R.string.add_note);
+                hold.getBinding().replyButton.setIcon(ContextCompat.getDrawable(localActivity,
+                        R.drawable.outline_post_add_black_24));
+            }
             ((ReplyHolder) holder).getBinding().userProfile.setOnClickListener(openNewActivity
                     (reply.getOwnerEmail()));
             ((ReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {
@@ -167,6 +174,13 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Glide.with(localActivity)
                         .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyQuoteProfilePicture);
+            }
+            if (viewModel.getScope().equals(Values.PERSONAL)) {
+                hold.getBinding().userProfile.setVisibility(View.GONE);
+                hold.getBinding().replyButton.setText(R.string.add_note);
+                hold.getBinding().quoteOwnerLayout.setVisibility(View.GONE);
+                hold.getBinding().replyButton.setIcon(ContextCompat.getDrawable(localActivity,
+                        R.drawable.outline_post_add_black_24));
             }
             ((QuoteReplyHolder) holder).getBinding().userProfile.setOnClickListener(openNewActivity
                     (reply.getOwnerEmail()));

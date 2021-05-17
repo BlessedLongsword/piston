@@ -70,6 +70,7 @@
                             android:paddingHorizontal="@dimen/small_separator">
 
                             <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/user_profile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardElevation="@dimen/zero"
@@ -120,7 +121,7 @@
                                 android:id="@+id/post_content"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/low_separator"
+                                android:paddingVertical="@dimen/low_separator"
                                 tools:text="@string/post_content"
                                 android:text="@{viewModel.postContent}"
                                 android:textAppearance="?attr/textAppearanceBody1"
@@ -172,6 +173,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
+                    android:id="@+id/replies_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/replies"

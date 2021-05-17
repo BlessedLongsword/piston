@@ -27,10 +27,12 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private boolean firstLoad = false;
 
     private final PostRepository repository;
+    private final String scope;
 
     public PostViewModel(String scope, String sectionID, String postID) {
         repository = new PostRepository(this, scope, sectionID, postID);
         repository.checkLiked(postID);
+        this.scope = scope;
     }
 
     public void createReply(String content) {
@@ -146,4 +148,6 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<Boolean> getPostDoesNotExist() { return postDoesNotExist; }
 
     public LiveData<String> getCurrentUser() { return currentUser; }
+
+    public String getScope() { return scope; }
 }

@@ -37,6 +37,7 @@
                     android:padding="@dimen/tiny_separator">
 
                     <LinearLayout
+                        android:id="@+id/quote_owner_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" >
