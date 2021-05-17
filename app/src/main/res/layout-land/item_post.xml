@@ -96,7 +96,33 @@
                     android:maxLines="@integer/max_desc_lines"
                     android:ellipsize="end"/>
 
+                <LinearLayout
+                    android:id="@+id/heart_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny_separator"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="@dimen/medium_separator"
+                        android:layout_height="@dimen/medium_separator"
+                        android:contentDescription="@string/heart"
+                        android:src="@drawable/heart_on"
+                        android:layout_marginEnd="@dimen/micro_separator"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="0"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@{post.numLikes}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="?android:attr/textColorPrimary"/>
+                </LinearLayout>
+
             </LinearLayout>
+
 
         </LinearLayout>
 

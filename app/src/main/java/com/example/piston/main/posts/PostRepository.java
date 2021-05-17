@@ -1,9 +1,6 @@
 package com.example.piston.main.posts;
 
-import android.util.Log;
-
 import com.example.piston.data.notifications.NotificationReply;
-import com.example.piston.data.posts.Post;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +37,7 @@ public class PostRepository {
         void setIsLiked(boolean liked);
         void setPostDoesNotExist();
         void setCurrentUser(String currentUser);
+        void setNumLikes(String numLikes);
     }
 
     public PostRepository(IPosts listener, String scope, String sectionID, String postID) {
@@ -243,7 +241,9 @@ public class PostRepository {
        postDocRef.get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
-               postDocRef.update("numLikes", liked ? numLikes + 1 : numLikes - 1);
+               long numLikes1 = liked ? numLikes + 1 : numLikes - 1;
+               listener.setNumLikes(String.valueOf(numLikes1));
+               postDocRef.update("numLikes", numLikes1);
            }
        });
     }

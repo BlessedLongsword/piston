@@ -132,20 +132,6 @@
                                 android:layout_height="wrap_content"
                                 android:weightSum="1">
 
-                                <com.like.LikeButton
-                                    android:id="@+id/heart_button"
-                                    android:layout_width="@dimen/low_square"
-                                    android:layout_height="@dimen/low_square"
-                                    android:layout_gravity="end"
-                                    app:icon_size="12dp"
-                                    app:icon_type="heart"
-                                    app:liked="false" />
-
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"/>
-
                                 <ImageButton
                                     android:id="@+id/share_button"
                                     android:layout_width="@dimen/low_square"
@@ -154,6 +140,28 @@
                                     android:onClick="sharePost"
                                     android:contentDescription="@string/share_post"
                                     android:src="@drawable/baseline_share_black_36" />
+
+                                <com.like.LikeButton
+                                    android:id="@+id/heart_button"
+                                    android:layout_width="@dimen/low_square"
+                                    android:layout_height="@dimen/low_square"
+                                    app:icon_size="12dp"
+                                    app:icon_type="heart"
+                                    app:liked="false" />
+
+                                <TextView
+                                    android:id="@+id/heart_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="0"
+                                    android:text="@{viewModel.numLikes}"
+                                    android:textAppearance="?attr/textAppearanceBody1"
+                                    android:textColor="?android:attr/textColorPrimary"/>
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"/>
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/thread_reply_button"

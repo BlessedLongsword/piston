@@ -1,5 +1,6 @@
 package com.example.piston.main.posts;
 
+import androidx.arch.core.internal.SafeIterableMap;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -18,16 +19,19 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> postContent = new MutableLiveData<>("");
     private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
-    private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
-    private final MutableLiveData<Boolean> postDoesNotExist = new MutableLiveData<>(false);
     private final MutableLiveData<String> currentUser = new MutableLiveData<>("");
 
+    private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
+    private final MutableLiveData<String> numLikes = new MutableLiveData<>( "0");
+
+    private final MutableLiveData<Boolean> postDoesNotExist = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> liked = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> loaded = new MutableLiveData<>(false);
     private boolean firstLoad = false;
 
     private final PostRepository repository;
     private final String scope;
+
 
     public PostViewModel(String scope, String sectionID, String postID) {
         repository = new PostRepository(this, scope, sectionID, postID);
@@ -95,6 +99,10 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         this.currentUser.setValue(currentUser);
     }
 
+    @Override
+    public void setNumLikes(String numLikes) {
+        this.numLikes.setValue(numLikes);
+    }
 
     public void setLiked(Boolean bool){
         this.liked.setValue(bool);
@@ -150,4 +158,8 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<String> getCurrentUser() { return currentUser; }
 
     public String getScope() { return scope; }
+
+    public LiveData<String> getNumLikes() {
+        return numLikes;
+    }
 }

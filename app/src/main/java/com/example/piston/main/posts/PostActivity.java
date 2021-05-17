@@ -3,7 +3,6 @@ package com.example.piston.main.posts;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -150,6 +149,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             binding.shareButton.setVisibility(View.GONE);
             binding.userProfile.setVisibility(View.GONE);
             binding.repliesText.setVisibility(View.GONE);
+            binding.heartCount.setVisibility(View.GONE);
             binding.threadReplyButton.setText(R.string.add_note);
             binding.threadReplyButton.setIcon(ContextCompat.getDrawable(this,
                     R.drawable.outline_post_add_black_24));
@@ -158,6 +158,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
         if (scope.equals("groups")) {
             binding.heartButton.setVisibility(View.GONE);
+            binding.heartCount.setVisibility(View.GONE);
         }
     }
 

@@ -69,6 +69,8 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
                     .into(holder.binding.postPicture);
         } else
             holder.getBinding().postPicture.setVisibility(View.GONE);
+
+        holder.getBinding().heartCount.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
     }
 

@@ -30,6 +30,7 @@
     <string name="link_copied">Link Copied</string>
     <string name="file_path">File Path</string>
     <string name="error" translatable="false">Error</string>
+    <string name="heart" translatable ="false">heart</string>
     <string name="confirmation" translatable="false">OK</string>
     <string name="confirmation_long">Got it</string>
     <string name="title_empty">This field is necessary</string>

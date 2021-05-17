@@ -56,7 +56,7 @@ public class CreateGroupRepository {
         else if (!connected) {
             listener.setErrorMessage("Need internet to create group");
         }
-        if (image == null)
+        else if (image == null)
             listener.setErrorMessage("Group must have an image");
         else {
             StorageReference storageRef = storage.getReference();

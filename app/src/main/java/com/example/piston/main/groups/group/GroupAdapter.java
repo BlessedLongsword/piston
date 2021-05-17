@@ -75,6 +75,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
                     .into(holder.binding.postPicture);
         } else
             holder.getBinding().postPicture.setVisibility(View.GONE);
+        holder.getBinding().heartCount.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
         holder.getBinding().userProfile.setOnClickListener(openProfile(post.getOwnerEmail()));
     }
