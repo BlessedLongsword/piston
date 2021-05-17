@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         tools:text="0"
                         android:layout_gravity="center_horizontal"
-                        android:text="@{post.numLikes}"
+                        android:text="@{post.numLikesString}"
                         android:textAppearance="?attr/textAppearanceBody1"
                         android:textColor="?android:attr/textColorPrimary"/>
                 </LinearLayout>

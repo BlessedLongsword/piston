@@ -49,7 +49,11 @@ public class Post extends OwnedContent {
         this.profileImageLink = profileImageLink;
     }
 
-    public String getNumLikes() {
+    public int getNumLikes() {
+        return numLikes;
+    }
+
+    public String getNumLikesString() {
         return String.valueOf(numLikes);
     }
 
