@@ -85,7 +85,7 @@
                     android:maxLines="@integer/max_desc_lines"
                     android:text="@{post.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="?android:attr/textColorPrimary"
                     tools:text="@string/post_content" />
 
             </LinearLayout>

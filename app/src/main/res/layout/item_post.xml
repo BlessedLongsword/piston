@@ -86,7 +86,7 @@
                     tools:text="@string/post_content"
                     android:text="@{post.content}"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:maxLines="@integer/max_desc_lines"
                     android:ellipsize="end"/>
             </LinearLayout>
