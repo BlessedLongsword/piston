@@ -1,5 +1,6 @@
 package com.example.piston.authentication.register;
 
+import android.annotation.SuppressLint;
 import android.util.Patterns;
 
 import com.example.piston.authentication.CommonRegisterRepository;
@@ -35,7 +36,7 @@ public class RegisterRepository extends CommonRegisterRepository {
     public void register(String username, String email, String password, String birthDate) throws ParseException {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         DocumentReference docRef = db.collection("emails").document(username);
-        Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
+        @SuppressLint("SimpleDateFormat") Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
         User user = new User(username, email, userBirthDate);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

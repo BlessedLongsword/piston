@@ -1,7 +1,5 @@
 package com.example.piston.data.users;
 
-import com.example.piston.data.posts.Post;
-
 import java.util.Date;
 
 public class User {
@@ -12,7 +10,6 @@ public class User {
     private String name;
     private String phoneNumber;
     private String profilePictureLink;
-    private Post featuredPost;
 
     public User() {}
 
@@ -50,6 +47,7 @@ public class User {
         return name;
     }
 
+    @SuppressWarnings("unused")
     public void setName(String name) {
         this.name = name;
     }
@@ -58,6 +56,7 @@ public class User {
         return phoneNumber;
     }
 
+    @SuppressWarnings("unused")
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -66,15 +65,8 @@ public class User {
         return profilePictureLink;
     }
 
+    @SuppressWarnings("unused")
     public void setProfilePictureLink(String profilePictureLink) {
         this.profilePictureLink = profilePictureLink;
-    }
-
-    public Post getFeaturedPost() {
-        return featuredPost;
-    }
-
-    public void setFeaturedPost(Post featuredPost) {
-        this.featuredPost = featuredPost;
     }
 }

@@ -39,6 +39,7 @@ public class CreateFolderActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void createFolder(MenuItem item) {
         createFolderViewModel.createFolder();
     }

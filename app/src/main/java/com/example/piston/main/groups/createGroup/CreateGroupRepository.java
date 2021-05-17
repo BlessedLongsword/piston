@@ -1,7 +1,6 @@
 package com.example.piston.main.groups.createGroup;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.piston.data.sections.Group;
 import com.example.piston.data.users.GroupMember;
@@ -15,7 +14,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 public class CreateGroupRepository {
 

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.piston.data.sections.Category;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlobal {
 

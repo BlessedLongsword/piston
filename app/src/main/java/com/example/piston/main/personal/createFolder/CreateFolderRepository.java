@@ -12,7 +12,6 @@ import java.util.Objects;
 public class CreateFolderRepository {
 
     private final CreateFolderRepository.ICreateFolder listener;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference folderColRef;
 
 
@@ -28,6 +27,7 @@ public class CreateFolderRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String user = Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getEmail());
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         this.folderColRef = db.collection("users").document(user)
                 .collection("folders");
     }

@@ -7,7 +7,6 @@ import android.text.InputType;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -83,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void clickImage(View view){
         Intent intent = new Intent(this, ProfileImageActivity.class);
         intent.putExtra(Values.EMAIL, email);
@@ -90,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void editName(View view) {
         profileViewModel.resetValues();
         EditPopup popup = new EditPopup(this, getString(R.string.view_profile_name),
@@ -103,6 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void editPhone(View view) {
         profileViewModel.resetValues();
         EditPopup popup = new EditPopup(this, getString(R.string.view_profile_phone),

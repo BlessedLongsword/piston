@@ -1,7 +1,6 @@
 package com.example.piston.main.posts;
 
 import android.view.ContextMenu;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ItemQuoteReplyBinding;
 import com.example.piston.databinding.ItemReplyBinding;
-import com.example.piston.main.groups.group.info.MemberAdapter;
 
 import java.util.Objects;
 
@@ -31,7 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int position;
 
     public interface PostAdapterListener {
-        void quoteOnClick(View v, String quoteID);
+        void quoteOnClick(String quoteID);
         void replyPopUp(String owner, String content, String quoteID, boolean editing);
     }
 
@@ -134,7 +132,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         binding.replyButton.setOnClickListener(v -> listener.replyPopUp(binding.replyOwner.getText().toString(),
                 binding.replyContent.getText().toString(), binding.getReply().getId(), false));
         binding.replyQuote.setOnClickListener(v ->
-                listener.quoteOnClick(v, holder.binding.getReply().getQuoteID()));
+                listener.quoteOnClick(holder.binding.getReply().getQuoteID()));
         return holder;
     }
 
@@ -143,7 +141,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder.getItemViewType() == 1) {
             Reply reply = Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             ReplyHolder hold = ((ReplyHolder) holder);
-            Log.d("nowaybro", "1,Setting tag: " + reply.getId());
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
             if (reply.getOwnerImageLink() != null ) {
@@ -158,7 +155,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             QuoteReply reply = (QuoteReply) Objects.requireNonNull(viewModel.getReplies().getValue()).get(position);
             QuoteReplyHolder hold = ((QuoteReplyHolder) holder);
-            Log.d("nowaybro", "2,Setting tag: " + reply.getId());
             hold.itemView.setTag(reply.getId());
             hold.bind(reply);
             if (reply.getOwnerImageLink() != null) {

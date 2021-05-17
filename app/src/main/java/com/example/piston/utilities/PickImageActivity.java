@@ -9,17 +9,19 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+
 public abstract class PickImageActivity extends AppCompatActivity {
 
-    protected byte[] image;
     protected Uri imageUri;
 
+    @SuppressWarnings("unused")
     public void imagePick(View v) {
         ImagePicker.Companion.with(this)
                 .crop()
                 .start();
     }
 
+    @SuppressWarnings("unused")
     public void imagePick(MenuItem item) {
         ImagePicker.Companion.with(this)
                 .crop()

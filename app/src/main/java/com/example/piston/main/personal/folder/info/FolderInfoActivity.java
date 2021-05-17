@@ -40,6 +40,7 @@ public class FolderInfoActivity extends AppCompatActivity {
         viewModel.getTitle().observe(this, binding.folderInfoTopAppBar::setTitle);
     }
 
+    @SuppressWarnings("unused")
     public void deleteFolder(MenuItem item) {
         viewModel.deleteFolder();
         setResult(DELETE_CODE);

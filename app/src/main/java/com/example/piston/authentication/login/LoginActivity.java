@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN && resultCode == Activity.RESULT_OK) {
             idToken = Objects.requireNonNull(GoogleSignIn.getSignedInAccountFromIntent(data).getResult()).getIdToken();
             loginViewModel.signInWithToken(idToken);
         }
@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             goToMainActivity();
     }
 
+    @SuppressWarnings("unused")
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

@@ -21,7 +21,9 @@ public class PostRepository {
     private final IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user, profilePictureLink, email;
+    private String user;
+    private String profilePictureLink;
+    private final String email;
     private final String scope, sectionID, postID;
     private final DocumentReference postDocRef;
     private ListenerRegistration listenerRegistration;

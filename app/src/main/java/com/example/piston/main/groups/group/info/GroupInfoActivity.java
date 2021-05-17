@@ -30,7 +30,6 @@ public class GroupInfoActivity extends AppCompatActivity {
 
     private GroupInfoViewModel viewModel;
     private ClipboardManager clipboard;
-    private ClipData clip;
     private ActivityGroupInfoBinding binding;
 
     @Override
@@ -71,7 +70,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
-        int position = -1;
+        int position;
 
         try {
             position = ((MemberAdapter) Objects.requireNonNull(binding.recyclerviewMembers
@@ -94,6 +93,7 @@ public class GroupInfoActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    @SuppressWarnings("unused")
     public void deleteGroup(MenuItem item) {
         viewModel.deleteGroup();
         setResult(DELETE_CODE);
@@ -114,13 +114,15 @@ public class GroupInfoActivity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("unused")
     public void copyGroupID(View v) {
-        clip = ClipData.newPlainText("GroupCode",
+        ClipData clip = ClipData.newPlainText("GroupCode",
                 Objects.requireNonNull(Objects.requireNonNull(binding.groupId).getText().toString()));
         clipboard.setPrimaryClip(clip);
         Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
     }
 
+    @SuppressWarnings("unused")
     public void editTitle(MenuItem item) {
         viewModel.reset();
         EditPopup popup = new EditPopup(this, getString(R.string.title),

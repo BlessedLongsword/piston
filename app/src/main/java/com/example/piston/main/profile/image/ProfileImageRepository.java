@@ -14,7 +14,6 @@ import java.util.UUID;
 
 public class ProfileImageRepository {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final IProfileImage listener;
     private String username;
@@ -28,6 +27,7 @@ public class ProfileImageRepository {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String email1 = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         userDocRef = db.collection("users").document(Objects.requireNonNull(email1));
 
         userDocRef.get().addOnCompleteListener(task -> {

@@ -3,9 +3,7 @@ package com.example.piston.main.global;
 import android.util.Log;
 
 import com.example.piston.data.sections.Category;
-import com.example.piston.data.sections.Group;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -116,9 +114,7 @@ public class GlobalRepository {
         listenerRegistrationSubs = db.collection("users")
                 .document(email)
                 .collection("subscribedCategories")
-                .addSnapshotListener((snapshots, e) -> {
-                    GlobalRepository.this.loadCategories();
-                });
+                .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());
     }
 
     public void removeListener() {

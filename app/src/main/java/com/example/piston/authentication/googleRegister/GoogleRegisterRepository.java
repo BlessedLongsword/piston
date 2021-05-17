@@ -1,5 +1,7 @@
 package com.example.piston.authentication.googleRegister;
 
+import android.annotation.SuppressLint;
+
 import com.example.piston.authentication.CommonRegisterRepository;
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.users.User;
@@ -31,7 +33,7 @@ public class GoogleRegisterRepository extends CommonRegisterRepository {
 
     public void register(String username, String birthDate, String idToken) throws ParseException {
         DocumentReference docRef = db.collection("emails").document(username);
-        Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
+        @SuppressLint("SimpleDateFormat") Date userBirthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDate);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             String email = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getEmail();

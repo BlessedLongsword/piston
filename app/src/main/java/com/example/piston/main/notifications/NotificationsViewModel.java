@@ -37,6 +37,7 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
     public LiveData<ArrayList<Notification>> getNotifications() {
         return notifications;
     }
+
     public LiveData<ArrayList<Notification>> getNewNotifications() {
         return newNotifications;
     }

@@ -1,16 +1,15 @@
 package com.example.piston.main.personal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -42,8 +41,8 @@ public class PersonalFragment extends ScopeFragment {
         super.onResume();
         actionButton.setVisibility(View.VISIBLE);
         actionButton.setImageResource(R.drawable.baseline_create_new_folder_black_24);
-        actionButton.setBackgroundTintList(ColorStateList.valueOf(getResources()
-                .getColor(R.color.personal_secondary)));
+        actionButton.setBackgroundTintList(ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), R.color.personal_secondary)));
     }
 
     public void add() {
