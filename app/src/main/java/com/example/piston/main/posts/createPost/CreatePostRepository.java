@@ -110,7 +110,7 @@ public class CreatePostRepository {
         }
         docRef.get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
-                Post post = new Post(id, username, content, title, sectionID, imageLink, profilePictureLink);
+                Post post = new Post(id, username, user, content, title, sectionID, imageLink, profilePictureLink);
                 docRef.set(post);
                 if (scope.equals("groups")) {
                     CollectionReference cr = db.collection(scope).document(sectionID)

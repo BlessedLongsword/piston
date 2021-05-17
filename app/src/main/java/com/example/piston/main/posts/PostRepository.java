@@ -21,14 +21,17 @@ public class PostRepository {
     private final IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String user, profilePictureLink, email;
+    private String user;
+    private String profilePictureLink;
+    private final String email;
     private final String scope, sectionID, postID;
     private final DocumentReference postDocRef;
     private ListenerRegistration listenerRegistration;
 
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
-        void setPostParams(String title, String owner, String content, String postImageLink, String profileImageLink);
+        void setPostParams(String title, String owner, String ownerEmail,
+                           String content, String postImageLink, String profileImageLink);
         void setLoaded();
         void setPriority(Integer priority);
         void setIsLiked(boolean liked);
@@ -78,12 +81,12 @@ public class PostRepository {
             if (task.isSuccessful()) {
                 if (task.getResult().exists()) {
                     DocumentSnapshot ds = task.getResult();
-                    String owner = Objects.requireNonNull(ds.get("owner")).toString();
-                    listener.setPostParams(Objects.requireNonNull(ds.get("title")).toString(),
-                            owner, Objects.requireNonNull(ds.get("content")).toString(),
+                    String owner = (String) ds.get("owner");
+                    listener.setPostParams((String) ds.get("title"), owner,
+                            (String) ds.get("ownerEmail"), (String) ds.get("content"),
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
 
-                    if (owner.equals(user))
+                    if (Objects.requireNonNull(owner).equals(user))
                         listener.setPriority(0);
                 } else {
                     listener.setPostDoesNotExist();
@@ -128,7 +131,7 @@ public class PostRepository {
 
     public void createReply(String content) {
         String id = db.collection("users").document().getId();
-        Reply rep = new Reply(id, user, content, profilePictureLink);
+        Reply rep = new Reply(id, user, email, content, profilePictureLink);
         DocumentReference docRef1 = postDocRef.collection("replies")
                                         .document(id);
         Map<String, Object> data = new HashMap<>();
@@ -163,7 +166,7 @@ public class PostRepository {
     public void createReply(String content, String quote, String quoteOwner, String quoteID) {
         String id = db.collection("users").document().getId();
 
-        QuoteReply rep = new QuoteReply(id, user, content, profilePictureLink, quoteID, quoteOwner, quote);
+        QuoteReply rep = new QuoteReply(id, user, email, content, profilePictureLink, quoteID, quoteOwner, quote);
         DocumentReference docRef1 = postDocRef.collection("replies")
                 .document(id);
         Map<String, Object> data = new HashMap<>();

@@ -7,9 +7,9 @@ public class Post extends OwnedContent {
 
     public Post() {}
 
-    public Post(String id, String owner, String content, String title, String sectionID,
+    public Post(String id, String owner, String ownerEmail, String content, String title, String sectionID,
                 String imageLink, String profileImageLink) {
-        super(id, owner, content);
+        super(id, owner, ownerEmail, content);
         setTitle(title);
         setSectionID(sectionID);
         setImageLink(imageLink);

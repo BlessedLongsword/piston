@@ -65,51 +65,61 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:paddingVertical="@dimen/tiny_separator"
+                            android:paddingTop="@dimen/low_separator"
+                            android:paddingBottom="@dimen/tiny_separator"
                             android:paddingHorizontal="@dimen/small_separator">
 
-                            <LinearLayout
+                            <com.google.android.material.card.MaterialCardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/tiny_separator"
-                                android:orientation="horizontal" >
+                                app:cardElevation="@dimen/zero"
+                                android:onClick="goToUserProfile">
 
-                                <com.google.android.material.card.MaterialCardView
-                                    android:layout_width="@dimen/low_square"
-                                    android:layout_height="@dimen/low_square"
-                                    android:layout_gravity="center_horizontal"
-                                    app:cardCornerRadius="100dp" >
-
-                                    <ImageView
-                                        android:id="@+id/post_profile_picture"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/default_profile_picture"
-                                        android:contentDescription="@string/profile"
-                                        android:scaleType="centerCrop" />
-
-                                </com.google.android.material.card.MaterialCardView>
-
-                                <Space
-                                    android:layout_width="10dp"
-                                    android:layout_height="wrap_content"/>
-
-                                <TextView
-                                    android:id="@+id/post_owner"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    tools:text="@string/username"
-                                    android:text="@{viewModel.postOwner}"
-                                    android:textAppearance="?attr/textAppearanceBody1"
-                                    android:textColor="?attr/colorPrimary" />
-                            </LinearLayout>
+                                    android:orientation="horizontal"
+                                    android:weightSum="1">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="@dimen/low_square"
+                                        android:layout_height="@dimen/low_square"
+                                        android:layout_gravity="center_horizontal"
+                                        app:cardCornerRadius="100dp" >
+
+                                        <ImageView
+                                            android:id="@+id/post_profile_picture"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/default_profile_picture"
+                                            android:contentDescription="@string/profile"
+                                            android:scaleType="centerCrop" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <Space
+                                        android:layout_width="10dp"
+                                        android:layout_height="wrap_content"/>
+
+                                    <TextView
+                                        android:id="@+id/post_owner"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        tools:text="@string/username"
+                                        android:text="@{viewModel.postOwner}"
+                                        android:textAppearance="?attr/textAppearanceBody1"
+                                        android:textColor="?attr/colorPrimary" />
+                                </LinearLayout>
+
+
+                            </com.google.android.material.card.MaterialCardView>
 
                             <TextView
                                 android:id="@+id/post_content"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/tiny_separator"
+                                android:layout_marginVertical="@dimen/low_separator"
                                 tools:text="@string/post_content"
                                 android:text="@{viewModel.postContent}"
                                 android:textAppearance="?attr/textAppearanceBody1"

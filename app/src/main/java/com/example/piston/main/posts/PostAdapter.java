@@ -1,5 +1,6 @@
 package com.example.piston.main.posts;
 
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ItemQuoteReplyBinding;
 import com.example.piston.databinding.ItemReplyBinding;
 import com.example.piston.main.groups.group.info.MemberAdapter;
+import com.example.piston.main.profile.ProfileActivity;
+import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
@@ -151,6 +154,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyProfilePicture);
             }
+            ((ReplyHolder) holder).getBinding().userProfile.setOnClickListener(openNewActivity
+                    (reply.getOwnerEmail()));
             ((ReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {
                 setPosition(position);
                 return false;
@@ -166,6 +171,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .load(reply.getOwnerImageLink())
                         .into(hold.binding.replyQuoteProfilePicture);
             }
+            ((QuoteReplyHolder) holder).getBinding().userProfile.setOnClickListener(openNewActivity
+                    (reply.getOwnerEmail()));
             ((QuoteReplyHolder) holder).getBinding().card.setOnLongClickListener(v -> {
                 setPosition(position);
                 return false;
@@ -193,6 +200,14 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             return 1;
         }
+    }
+
+    private View.OnClickListener openNewActivity(String email) {
+        return v -> {
+            Intent intent = new Intent(localActivity, ProfileActivity.class);
+            intent.putExtra(Values.EMAIL, email);
+            localActivity.startActivity(intent);
+        };
     }
 
 }

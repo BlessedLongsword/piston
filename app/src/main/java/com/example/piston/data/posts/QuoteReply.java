@@ -7,9 +7,9 @@ public class QuoteReply extends Reply {
     @SuppressWarnings("unused")
     public QuoteReply() {}
 
-    public QuoteReply(String id, String owner, String content, String ownerImageLink,
+    public QuoteReply(String id, String owner, String ownerEmail, String content, String ownerImageLink,
                       String quoteID, String quoteOwner, String quote) {
-        super(id, owner, content, ownerImageLink);
+        super(id, owner, ownerEmail, content, ownerImageLink);
         setQuoteID(quoteID);
         setQuoteOwner(quoteOwner);
         setQuote(quote);

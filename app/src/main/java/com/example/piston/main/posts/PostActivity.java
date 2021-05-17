@@ -32,6 +32,7 @@ import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ActivityPostBinding;
 import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
+import com.example.piston.main.profile.ProfileActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 import com.example.piston.utilities.textwatchers.BaseTextWatcher;
@@ -148,6 +149,12 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         View view = binding.recyclerviewPosts.findViewWithTag(replyID);
         float y = binding.recyclerviewPosts.getY() + view.getY();
         binding.postScrollView.smoothScrollTo(0, (int) y);
+    }
+
+    public void goToUserProfile(View v) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra(Values.EMAIL, viewModel.getPostOwnerEmail().getValue());
+        startActivity(intent);
     }
 
     public void scrollTo(int itemPosition) {

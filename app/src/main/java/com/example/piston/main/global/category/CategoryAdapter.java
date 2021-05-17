@@ -16,6 +16,7 @@ import com.example.piston.R;
 import com.example.piston.data.posts.Post;
 import com.example.piston.databinding.ItemPostBinding;
 import com.example.piston.main.posts.PostActivity;
+import com.example.piston.main.profile.ProfileActivity;
 import com.example.piston.utilities.Values;
 
 import java.util.Objects;
@@ -76,6 +77,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
         } else
             holder.getBinding().postPicture.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
+        holder.getBinding().userProfile.setOnClickListener(openProfile(post.getOwnerEmail()));
     }
 
     @Override
@@ -89,6 +91,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
             intent.putExtra(Values.SCOPE, Values.GLOBAL);
             intent.putExtra(Values.SECTION_ID, sectionID);
             intent.putExtra(Values.POST_ID, postID);
+            localActivity.startActivity(intent);
+        };
+    }
+
+    private View.OnClickListener openProfile(String email) {
+        return v -> {
+            Intent intent = new Intent(localActivity, ProfileActivity.class);
+            intent.putExtra(Values.EMAIL, email);
             localActivity.startActivity(intent);
         };
     }

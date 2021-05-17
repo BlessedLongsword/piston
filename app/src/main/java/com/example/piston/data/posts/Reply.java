@@ -6,8 +6,8 @@ public class Reply extends OwnedContent {
 
     public Reply() {}
 
-    public Reply(String id, String owner, String content, String ownerImageLink) {
-        super(id, owner, content);
+    public Reply(String id, String owner, String ownerEmail, String content, String ownerImageLink) {
+        super(id, owner, ownerEmail, content);
         setOwnerImageLink(ownerImageLink);
     }
 
