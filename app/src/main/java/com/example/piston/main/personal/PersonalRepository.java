@@ -26,7 +26,10 @@ public class PersonalRepository {
         String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        foldersColRef = db.collection("users").document(Objects.requireNonNull(user)).collection("folders");
+        foldersColRef = db.collection("users")
+                .document(Objects.requireNonNull(user))
+                .collection("folders");
+
         listenChanges();
     }
 

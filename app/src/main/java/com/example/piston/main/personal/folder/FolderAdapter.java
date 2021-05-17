@@ -50,12 +50,23 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         viewModel.getPosts().observe(activity, posts -> notifyDataSetChanged());
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return (Objects.requireNonNull(viewModel.getPosts().getValue()).get(position).getImageLink() == null) ? 0 : 1;
+    }
+
     @NonNull
     @Override
     public FolderAdapter.NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
+
+        if (viewType == 0)
+            binding.postPicture.setVisibility(View.GONE);
+
+        binding.heartCount.setVisibility(View.GONE);
+
         return new FolderAdapter.NoteHolder(binding);
     }
 
@@ -63,14 +74,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
     public void onBindViewHolder(@NonNull FolderAdapter.NoteHolder holder, int position) {
         Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
         holder.bind(post);
-        if (post.getImageLink() != null) {
+
+        if (post.getImageLink() != null)
             Glide.with(localActivity)
                     .load(post.getImageLink())
                     .into(holder.binding.postPicture);
-        } else
-            holder.getBinding().postPicture.setVisibility(View.GONE);
 
-        holder.getBinding().heartCount.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
     }
 

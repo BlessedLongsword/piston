@@ -50,12 +50,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
         viewModel.getPosts().observe(activity, posts -> notifyDataSetChanged());
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return (Objects.requireNonNull(viewModel.getPosts().getValue()).get(position).getImageLink() == null) ? 0 : 1;
+    }
+
     @NonNull
     @Override
     public CategoryAdapter.PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
+
+        if (viewType == 0)
+            binding.postPicture.setVisibility(View.GONE);
+
         return new CategoryAdapter.PostHolder(binding);
     }
 
@@ -69,13 +78,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
                 .placeholder(R.drawable.default_profile_picture)
                 .into(holder.binding.postItemProfilePicture);
 
-
-        if (post.getImageLink() != null) {
+        if (post.getImageLink() != null)
             Glide.with(localActivity)
                     .load(post.getImageLink())
                     .into(holder.binding.postPicture);
-        } else
-            holder.getBinding().postPicture.setVisibility(View.GONE);
+
 
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
         holder.getBinding().userProfile.setOnClickListener(openProfile(post.getOwnerEmail()));

@@ -87,6 +87,9 @@ public class PostRepository {
                             (String) ds.get("ownerEmail"), (String) ds.get("content"),
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
 
+                    long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
+                    listener.setNumLikes(String.valueOf(numLikes));
+
                     if (Objects.requireNonNull(owner).equals(user))
                         listener.setPriority(0);
                 } else {
