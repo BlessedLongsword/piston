@@ -128,6 +128,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
+    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+        if (holder.getItemViewType() == 0) {
+            ((NotificationPostHolder) holder)
+                    .getBinding().notificationPostCard.setOnClickListener(null);
+        }
+        else {
+            ((NotificationReplyHolder) holder)
+                    .getBinding().notificationReplyCard.setOnClickListener(null);
+        }
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public int getItemCount() {
         if (viewModel.getNotifications().getValue() == null) {
             return 0;

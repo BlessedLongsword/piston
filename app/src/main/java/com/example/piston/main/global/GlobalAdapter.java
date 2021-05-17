@@ -89,6 +89,13 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
     }
 
     @Override
+    public void onViewRecycled(@NonNull GlobalAdapter.CategoryHolder holder) {
+        holder.getBinding().categoryItemCard.setOnClickListener(null);
+        holder.getBinding().starButton.setOnLikeListener(null);
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public int getItemCount() {
         return Objects.requireNonNull(viewModel.getCategories().getValue()).size();
     }

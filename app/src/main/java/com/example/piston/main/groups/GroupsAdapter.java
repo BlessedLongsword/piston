@@ -62,7 +62,15 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupsHold
         Glide.with(localActivity)
                 .load(group.getImageLink())
                 .into(holder.binding.groupImage);
+
         holder.getBinding().groupItemCard.setOnClickListener(openNewActivity(group.getId()));
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull GroupsAdapter.GroupsHolder holder) {
+        holder.getBinding().groupItemCard.setOnClickListener(null);
+
+        super.onViewRecycled(holder);
     }
 
     @Override

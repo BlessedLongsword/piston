@@ -81,6 +81,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     }
 
     @Override
+    public void onViewRecycled(@NonNull GroupAdapter.GroupHolder holder) {
+        holder.getBinding().postItemCard.setOnClickListener(null);
+        holder.getBinding().userProfile.setOnClickListener(null);
+
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public int getItemCount() {
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
     }

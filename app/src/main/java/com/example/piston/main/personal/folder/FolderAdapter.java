@@ -79,6 +79,13 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
     }
 
+    @Override
+    public void onViewRecycled(@NonNull FolderAdapter.NoteHolder holder) {
+        holder.getBinding().postItemCard.setOnClickListener(null);
+        super.onViewRecycled(holder);
+    }
+
+
     private View.OnClickListener openNewActivity(String sectionID, String postID) {
         return v -> {
             Intent intent = new Intent(localActivity, PostActivity.class);

@@ -31,6 +31,7 @@
                 android:layout_marginHorizontal="@dimen/card_margin">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/reply_profile"
                     android:layout_width="@dimen/low_square"
                     android:layout_height="@dimen/low_square"
                     android:layout_marginEnd="@dimen/card_margin"

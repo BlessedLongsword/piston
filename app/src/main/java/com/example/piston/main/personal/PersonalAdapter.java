@@ -69,6 +69,12 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalAdapter.Folder
         return Objects.requireNonNull(viewModel.getFolders().getValue()).size();
     }
 
+    @Override
+    public void onViewRecycled(@NonNull FolderHolder  holder) {
+        holder.getBinding().folderItemCard.setOnClickListener(null);
+        super.onViewRecycled(holder);
+    }
+
     private View.OnClickListener openNewActivity(String folderID) {
         return v -> {
             Intent intent = new Intent(localActivity, FolderActivity.class);

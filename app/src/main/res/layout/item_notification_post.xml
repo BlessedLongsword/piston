@@ -32,6 +32,7 @@
                 android:weightSum="1">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/post_profile"
                     android:layout_width="@dimen/low_square"
                     android:layout_height="@dimen/low_square"
                     android:layout_gravity="center_vertical"

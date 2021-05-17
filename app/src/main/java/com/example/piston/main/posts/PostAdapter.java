@@ -132,7 +132,9 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         ItemQuoteReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_quote_reply, parent, false);
+
         QuoteReplyHolder holder = new QuoteReplyHolder(binding, viewModel.getCurrentUser().getValue());
+
         binding.replyButton.setOnClickListener(v -> listener.replyPopUp(binding.replyOwner.getText().toString(),
                 binding.replyContent.getText().toString(), binding.getReply().getId(), false));
         binding.replyQuote.setOnClickListener(v ->
@@ -200,10 +202,15 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
-        if (holder.getItemViewType() == 1)
+        if (holder.getItemViewType() == 1) {
             ((ReplyHolder) holder).getBinding().card.setOnLongClickListener(null);
-        else
+            ((ReplyHolder) holder).getBinding().userProfile.setOnClickListener(null);
+
+        }
+        else {
             ((QuoteReplyHolder) holder).getBinding().card.setOnLongClickListener(null);
+            ((QuoteReplyHolder) holder).getBinding().userProfile.setOnClickListener(null);
+        }
         super.onViewRecycled(holder);
     }
 

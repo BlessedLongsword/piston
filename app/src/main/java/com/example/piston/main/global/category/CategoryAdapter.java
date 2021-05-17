@@ -82,6 +82,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
     }
 
     @Override
+    public void onViewRecycled(@NonNull CategoryAdapter.PostHolder holder) {
+        holder.getBinding().postItemCard.setOnClickListener(null);
+        holder.getBinding().userProfile.setOnClickListener(null);
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public int getItemCount() {
         return Objects.requireNonNull(viewModel.getPosts().getValue()).size();
     }
