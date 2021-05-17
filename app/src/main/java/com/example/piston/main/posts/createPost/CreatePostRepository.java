@@ -139,11 +139,13 @@ public class CreatePostRepository {
                                 .addOnCompleteListener(task2 -> {
                                     NotificationPost notificationPost = new NotificationPost(
                                             title, Objects.requireNonNull(task2.getResult().get("title")).toString(),
-                                            imageLink, profilePictureLink, false, collection, document, id);
+                                            imageLink, (String) task2.getResult().get("imageLink"), false, collection, document, id);
+
                                     DocumentReference docRef2 = db.collection("users")
                                             .document(documentSnapshot.getId())
                                             .collection("notifications")
                                             .document();
+
                                     docRef2.set(notificationPost);
                                     docRef2.update("type", "post");
                                     docRef2.update("timestamp", FieldValue.serverTimestamp());

@@ -64,7 +64,6 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
 
         if (viewType == 0)
             binding.postPicture.setVisibility(View.GONE);
-
         binding.heartCount.setVisibility(View.GONE);
 
         return new FolderAdapter.NoteHolder(binding);

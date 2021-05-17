@@ -1,5 +1,7 @@
 package com.example.piston.main.posts;
 
+import android.util.Log;
+
 import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
@@ -245,10 +247,14 @@ public class PostRepository {
            if (task.isSuccessful()) {
                long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
                long numLikes1 = liked ? numLikes + 1 : numLikes - 1;
-               listener.setNumLikes(String.valueOf(numLikes1));
+               listener.setNumLikes(getLikes(numLikes));
                postDocRef.update("numLikes", numLikes1);
            }
        });
+    }
+
+    private String getLikes(long numLikes) {
+        return (numLikes/1000 > 1) ? numLikes/1000 + "k" : String.valueOf(numLikes);
     }
 
     public void deletePost() {

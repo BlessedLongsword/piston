@@ -1,6 +1,7 @@
 package com.example.piston.main.notifications;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             hold.bind(notificationPost);
 
             Glide.with(localActivity)
-                    .load(notificationPost.getUserImageLink())
+                    .load(notificationPost.getContextImageLink())
                     .placeholder(R.drawable.default_profile_picture)
                     .into(hold.binding.notificationProfilePicture);
 
@@ -117,7 +118,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             hold.bind(notificationReply);
 
             Glide.with(localActivity)
-                    .load(notificationReply.getUserImageLink())
+                    .load(notificationReply.getContextImageLink())
                     .placeholder(R.drawable.default_profile_picture)
                     .into(hold.binding.notificationProfilePicture);
 
@@ -142,9 +143,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        if (viewModel.getNotifications().getValue() == null) {
-            return 0;
-        }
+        Log.d("what size", String.valueOf(Objects.requireNonNull(viewModel.getNotifications().getValue()).size()));
         return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 

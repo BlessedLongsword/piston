@@ -27,29 +27,14 @@
                 app:navigationIcon="@drawable/baseline_arrow_back_white_24"
                 app:menu="@menu/notifications_top_app_bar"
                 style="@style/Theme.Piston.ToolbarStyle"/>
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:fillViewport="true">
-
-            <FrameLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_notifications"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".main.global.GlobalFragment">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_notifications"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="LinearLayoutManager"/>
-
-            </FrameLayout>
-
-        </androidx.core.widget.NestedScrollView>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layoutManager="LinearLayoutManager" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

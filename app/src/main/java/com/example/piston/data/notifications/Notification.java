@@ -5,17 +5,17 @@ public abstract class Notification {
     private String scope;
     private String sectionID;
     private String postID;
-    private String userImageLink;
+    private String contextImageLink;
     private boolean read;
 
     public Notification() {}
 
-    public Notification(String scope, String sectionID, String postID, String userImageLink, boolean read) {
+    public Notification(String scope, String sectionID, String postID, String contextImageLink, boolean read) {
         setScope(scope);
         setSectionID(sectionID);
         setPostID(postID);
         setRead(read);
-        setUserImageLink(userImageLink);
+        setContextImageLink(contextImageLink);
     }
 
     public String getScope() {
@@ -50,11 +50,11 @@ public abstract class Notification {
         this.read = read;
     }
 
-    public String getUserImageLink() {
-        return userImageLink;
+    public String getContextImageLink() {
+        return contextImageLink;
     }
 
-    public void setUserImageLink(String userImageLink) {
-        this.userImageLink = userImageLink;
+    public void setContextImageLink(String contextImageLink) {
+        this.contextImageLink = contextImageLink;
     }
 }
