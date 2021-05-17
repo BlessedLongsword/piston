@@ -3,7 +3,6 @@ package com.example.piston.main;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -151,9 +150,10 @@ public class MainActivity extends AppCompatActivity {
                         window.setStatusBarColor(getColor(R.color.personal_primary_variant));
                     }
                     tabLayout.setSelectedTabIndicatorColor(getColor(R.color.personal_primary));
-                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
-                            ((darkModeEnabled ? R.color.personal_primary_dark :
-                                    R.color.personal_primary))));
+                    tabLayout.setTabTextColors(getColor((darkModeEnabled ?
+                            R.color.disabled_dark : R.color.disabled)),
+                            getColor((darkModeEnabled ?
+                                    R.color.personal_primary_dark : R.color.personal_primary)));
                     break;
                 case 1:
                     if (!darkModeEnabled) {
@@ -161,9 +161,10 @@ public class MainActivity extends AppCompatActivity {
                         window.setStatusBarColor(getColor(R.color.groups_primary_variant));
                     }
                     tabLayout.setSelectedTabIndicatorColor(getColor(R.color.groups_primary));
-                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
-                            ((darkModeEnabled ? R.color.groups_primary_dark :
-                                    R.color.groups_primary))));
+                    tabLayout.setTabTextColors(getColor((darkModeEnabled ?
+                                    R.color.disabled_dark : R.color.disabled)),
+                            getColor((darkModeEnabled ?
+                                    R.color.groups_primary_dark : R.color.groups_primary)));
                     break;
                 case 2:
                     if (!darkModeEnabled) {
@@ -171,9 +172,10 @@ public class MainActivity extends AppCompatActivity {
                         window.setStatusBarColor(getColor(R.color.global_primary_variant));
                     }
                     tabLayout.setSelectedTabIndicatorColor(getColor(R.color.global_primary));
-                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
-                            ((darkModeEnabled ? R.color.global_primary_dark :
-                                    R.color.global_primary))));
+                    tabLayout.setTabTextColors(getColor((darkModeEnabled ?
+                                    R.color.disabled_dark : R.color.disabled)),
+                            getColor((darkModeEnabled ?
+                                    R.color.global_primary_dark : R.color.global_primary)));
                     break;
             }
         }
