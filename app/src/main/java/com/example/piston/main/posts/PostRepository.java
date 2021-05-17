@@ -90,7 +90,7 @@ public class PostRepository {
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
 
                     long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
-                    listener.setNumLikes(String.valueOf(numLikes));
+                    listener.setNumLikes(getLikes(numLikes));
 
                     if (Objects.requireNonNull(owner).equals(user))
                         listener.setPriority(0);
@@ -247,7 +247,7 @@ public class PostRepository {
            if (task.isSuccessful()) {
                long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
                long numLikes1 = liked ? numLikes + 1 : numLikes - 1;
-               listener.setNumLikes(getLikes(numLikes));
+               listener.setNumLikes(getLikes(numLikes1));
                postDocRef.update("numLikes", numLikes1);
            }
        });

@@ -54,7 +54,7 @@ public class Post extends OwnedContent {
     }
 
     public String getNumLikesString() {
-        return String.valueOf(numLikes);
+        return (numLikes/1000 > 1) ? numLikes/1000 + "k" : String.valueOf(numLikes);
     }
 
     public void setNumLikes(int numLikes) {

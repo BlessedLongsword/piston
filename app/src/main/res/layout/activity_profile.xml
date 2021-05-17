@@ -378,6 +378,7 @@
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 android:textColor="?attr/colorPrimary"
                                 />
+
                             <TextView
                                 android:id="@+id/post_content"
                                 android:layout_width="wrap_content"
