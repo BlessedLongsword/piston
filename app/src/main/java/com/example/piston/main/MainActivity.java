@@ -204,26 +204,31 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    @SuppressWarnings("unused")
     public void add(View view) {
         ((ScopeFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(
                 "f" + viewPager.getCurrentItem()))).add();
     }
 
+    @SuppressWarnings("unused")
     public void openViewProfile(MenuItem item) {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void openNotifications(MenuItem item) {
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void openSettings(MenuItem item) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void logout(MenuItem item) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         for (int i = 0; i < 3; i++) {

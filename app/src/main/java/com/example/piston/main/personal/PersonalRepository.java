@@ -13,7 +13,6 @@ import java.util.Objects;
 public class PersonalRepository {
 
     private final PersonalRepository.IPersonal listener;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
     private final CollectionReference foldersColRef;
 
@@ -26,6 +25,7 @@ public class PersonalRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         foldersColRef = db.collection("users").document(Objects.requireNonNull(user)).collection("folders");
         listenChanges();
     }

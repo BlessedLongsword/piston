@@ -59,6 +59,11 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
         repository.updateMemberPriority(memberEmail, priority);
     }
 
+    @Override
+    protected void onCleared() {
+        repository.removeListener();
+    }
+
     public void deleteGroup() {
         repository.deleteGroup();
     }

@@ -70,6 +70,7 @@ public class GroupActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra(Values.SCOPE, Values.GROUPS);
@@ -91,10 +92,12 @@ public class GroupActivity extends AppCompatActivity {
         super.finish();
     }
 
+    @SuppressWarnings("unused")
     public void goToInfo(View view) {
         goToInfo();
     }
 
+    @SuppressWarnings("unused")
     public void goToInfo(MenuItem item) {
         goToInfo();
     }
@@ -110,6 +113,7 @@ public class GroupActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("unused")
     public void shareGroup(MenuItem item) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + Values.JOIN + "/" +

@@ -1,6 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Piston" parent="Theme.MaterialComponents.NoActionBar">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
+    <style name="Theme.Piston" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,34 +16,27 @@
         <item name="colorOnBackground">@color/white</item>
         <item name="colorOnSurface">@color/white</item>
         <item name="colorOnError">@color/black</item>
-
     </style>
 
     <style name="Theme.Piston.Global">
-
         <item name="colorPrimary">@color/global_primary_dark</item>
         <item name="colorPrimaryVariant">@color/global_primary_variant_dark</item>
         <item name="colorSecondary">@color/global_secondary_dark</item>
         <item name="colorSecondaryVariant">@color/global_secondary_variant_dark</item>
-
     </style>
 
     <style name="Theme.Piston.Groups">
-
         <item name="colorPrimary">@color/groups_primary_dark</item>
         <item name="colorPrimaryVariant">@color/groups_primary_variant_dark</item>
         <item name="colorSecondary">@color/groups_secondary_dark</item>
         <item name="colorSecondaryVariant">@color/groups_secondary_variant_dark</item>
-
     </style>
 
     <style name="Theme.Piston.Personal">
-
         <item name="colorPrimary">@color/personal_primary_dark</item>
         <item name="colorPrimaryVariant">@color/personal_primary_variant_dark</item>
         <item name="colorSecondary">@color/personal_secondary_dark</item>
         <item name="colorSecondaryVariant">@color/personal_secondary_variant_dark</item>
-
     </style>
 
     <style name="Theme.Piston.ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">

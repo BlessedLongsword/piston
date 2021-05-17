@@ -45,6 +45,7 @@ public class FolderActivity extends AppCompatActivity {
         viewModel.getTitle().observe(this, binding.folderTopAppBar::setTitle);
     }
 
+    @SuppressWarnings("unused")
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra(Values.SCOPE, Values.PERSONAL);
@@ -52,11 +53,12 @@ public class FolderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    @SuppressWarnings("unused")
     public void goToInfo(View view) {
         goToInfo();
     }
 
+    @SuppressWarnings("unused")
     public void goToInfo(MenuItem item) {
         goToInfo();
     }

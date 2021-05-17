@@ -1,12 +1,8 @@
 package com.example.piston.main.posts;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -145,7 +141,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     public void goToReply(String replyID) {
-        Log.d("nowaybro", "Going to replyID: " + replyID);
         View view = binding.recyclerviewPosts.findViewWithTag(replyID);
         float y = binding.recyclerviewPosts.getY() + view.getY();
         binding.postScrollView.smoothScrollTo(0, (int) y);
@@ -178,17 +173,20 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         return -1;
     }
 
+    @SuppressWarnings("unused")
     public void deletePost(MenuItem menuItem) {
         viewModel.deletePost();
         finish();
     }
 
+    @SuppressWarnings("unused")
     public void editPost(MenuItem menuItem) {
         Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
     }
 
+    @SuppressWarnings("unused")
     public void sharePost(View v) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + scope + "/" +
@@ -198,7 +196,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     @Override
-    public void quoteOnClick(View v, String quoteID) {
+    public void quoteOnClick(String quoteID) {
         goToReply(quoteID);
     }
 

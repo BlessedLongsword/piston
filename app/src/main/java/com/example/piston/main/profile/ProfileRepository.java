@@ -1,11 +1,11 @@
 package com.example.piston.main.profile;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.posts.Post;
 import com.example.piston.data.users.User;
-import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -114,6 +114,7 @@ public class ProfileRepository {
         editField("phoneNumber", text);
     }
 
+    @SuppressLint("SimpleDateFormat")
     public void editBirth(String text) {
         try {
             editField("birthDate", new SimpleDateFormat("dd/MM/yyyy").parse(text));

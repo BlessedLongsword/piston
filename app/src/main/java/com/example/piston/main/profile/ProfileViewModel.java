@@ -1,5 +1,7 @@
 package com.example.piston.main.profile;
 
+import android.annotation.SuppressLint;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -75,7 +77,7 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
 
     @Override
     public void setBirthDateField(Date birthDate) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         this.birthDate.setValue(formatter.format(birthDate));
     }
 

@@ -57,6 +57,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("unused")
     public void createPost(View view) {
         Intent intent = new Intent(this, CreatePostActivity.class);
         intent.putExtra(Values.SCOPE, Values.GLOBAL);
@@ -78,10 +79,12 @@ public class CategoryActivity extends AppCompatActivity {
         super.finish();
     }
 
+    @SuppressWarnings("unused")
     public void goToInfo(View view) {
         goToInfo();
     }
 
+    @SuppressWarnings("unused")
     public void goToInfo(MenuItem item) {
         goToInfo();
     }

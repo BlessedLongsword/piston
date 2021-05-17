@@ -5,7 +5,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.google.gms:google-services:4.3.5' //4.3.6 cannot correctly sync...
+        //noinspection GradleDependency (4.3.6 cannot sync, google-services problem...)
+        classpath 'com.google.gms:google-services:4.3.5'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.6.0'
         classpath 'com.google.firebase:perf-plugin:1.4.0'
     }

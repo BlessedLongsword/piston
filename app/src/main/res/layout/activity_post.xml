@@ -93,7 +93,8 @@
                                             android:layout_height="match_parent"
                                             android:src="@drawable/default_profile_picture"
                                             android:contentDescription="@string/profile"
-                                            android:scaleType="centerCrop" />
+                                            android:scaleType="centerCrop"
+                                            tools:ignore="TooDeepLayout" />
 
                                     </com.google.android.material.card.MaterialCardView>
 

@@ -51,6 +51,7 @@ public class CreateCategoryActivity extends PickImageActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void createCategory(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
         createCategoryViewModel.createCategory(imageUri, connected);

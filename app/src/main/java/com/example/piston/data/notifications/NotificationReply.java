@@ -10,9 +10,9 @@ public class NotificationReply extends Notification {
     public NotificationReply(String user, String content, String replyID, String userImageLink,
                              boolean read, String scope, String sectionID, String postID) {
         super(scope, sectionID, postID, userImageLink, read);
-        this.user = user;
-        this.content = content;
-        this.replyID = replyID;
+        setUser(user);
+        setContent(content);
+        setReplyID(replyID);
     }
 
     public String getUser() {

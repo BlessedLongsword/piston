@@ -8,6 +8,7 @@ public class Category extends ImageSection {
 
     public Category(String id, String title, String description, String imageLink, boolean nsfw) {
         super(id, title, description, imageLink);
+        setNsfw(nsfw);
     }
 
     public boolean isNsfw() {

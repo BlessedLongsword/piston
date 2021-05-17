@@ -68,6 +68,7 @@ public class CategoryInfoActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void deleteCategory(MenuItem item) {
         viewModel.deleteCategory();
         setResult(DELETE_CODE);

@@ -66,6 +66,7 @@ public class CreatePostActivity extends PickImageActivity {
         });
     }
 
+    @SuppressWarnings("unused")
     public void createPost(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
         createPostViewModel.createPost(scope, sectionID, imageUri, connected);

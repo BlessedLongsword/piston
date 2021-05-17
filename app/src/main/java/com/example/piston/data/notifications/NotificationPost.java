@@ -10,9 +10,9 @@ public class NotificationPost extends Notification {
     public NotificationPost(String title, String sectionName, String imageLink, String userImageLink, boolean read,
                             String collection, String sectionID, String postID) {
         super(collection, sectionID, postID, userImageLink, read);
-        this.title = title;
-        this.sectionName = sectionName;
-        this.imageLink = imageLink;
+        setTitle(title);
+        setSectionName(sectionName);
+        setImageLink(imageLink);
     }
 
     public String getTitle() {
