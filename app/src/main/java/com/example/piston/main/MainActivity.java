@@ -1,9 +1,16 @@
 package com.example.piston.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +30,7 @@ import com.example.piston.authentication.login.LoginActivity;
 import com.example.piston.main.profile.ProfileActivity;
 
 import com.example.piston.utilities.Values;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -34,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private String scope;
     private String sectionID;
+    private AppBarLayout topAppBar;
+    private boolean darkModeEnabled;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        topAppBar = findViewById(R.id.app_bar);
+
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.piston", Context.MODE_PRIVATE);
+        String darkModeKey = "com.example.piston.darkMode";
+
+        boolean manualDarkModeEnabled = prefs.getBoolean(darkModeKey, false);
+
+        int nightModeFlags = getApplicationContext().getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                darkModeEnabled = true;
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                darkModeEnabled = manualDarkModeEnabled;
+                break;
+        }
+
         scope = getIntent().getStringExtra(Values.SCOPE);
         sectionID = getIntent().getStringExtra(Values.SECTION_ID);
 
@@ -54,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager2);
         viewPager.setAdapter(scopePagerAdapter);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(
                 getResources().getStringArray(R.array.tab_titles)[position])).attach();
 
@@ -88,6 +119,64 @@ public class MainActivity extends AppCompatActivity {
         int tab = getIntent().getIntExtra("tab", 0);
         if (tab != 0)
             tabLayout.selectTab(tabLayout.getTabAt(tab));
+
+        changeTabLayoutColors(tabLayout.getSelectedTabPosition());
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                changeTabLayoutColors(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void changeTabLayoutColors(int position) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            switch (position) {
+                case 0:
+                    if (!darkModeEnabled) {
+                        topAppBar.setBackgroundColor(getColor(R.color.personal_primary));
+                        window.setStatusBarColor(getColor(R.color.personal_primary_variant));
+                    }
+                    tabLayout.setSelectedTabIndicatorColor(getColor(R.color.personal_primary));
+                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
+                            ((darkModeEnabled ? R.color.personal_primary_dark :
+                                    R.color.personal_primary))));
+                    break;
+                case 1:
+                    if (!darkModeEnabled) {
+                        topAppBar.setBackgroundColor(getColor(R.color.groups_primary));
+                        window.setStatusBarColor(getColor(R.color.groups_primary_variant));
+                    }
+                    tabLayout.setSelectedTabIndicatorColor(getColor(R.color.groups_primary));
+                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
+                            ((darkModeEnabled ? R.color.groups_primary_dark :
+                                    R.color.groups_primary))));
+                    break;
+                case 2:
+                    if (!darkModeEnabled) {
+                        topAppBar.setBackgroundColor(getColor(R.color.global_primary));
+                        window.setStatusBarColor(getColor(R.color.global_primary_variant));
+                    }
+                    tabLayout.setSelectedTabIndicatorColor(getColor(R.color.global_primary));
+                    tabLayout.setTabTextColors(ColorStateList.valueOf(getColor
+                            ((darkModeEnabled ? R.color.global_primary_dark :
+                                    R.color.global_primary))));
+                    break;
+            }
+        }
     }
 
     private void goToSharedPost() {

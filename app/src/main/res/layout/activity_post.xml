@@ -109,7 +109,7 @@
                                 android:id="@+id/post_content"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/tiny_separator"
+                                android:layout_marginVertical="@dimen/tiny_separator"
                                 tools:text="@string/post_content"
                                 android:text="@{viewModel.postContent}"
                                 android:textAppearance="?attr/textAppearanceBody1"

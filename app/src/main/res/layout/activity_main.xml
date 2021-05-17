@@ -8,6 +8,7 @@
     tools:context=".main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -25,14 +26,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/personal_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@string/tab_personal"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/groups_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@string/tab_groups"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/global_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@string/tab_global"/>

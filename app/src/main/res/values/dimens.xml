@@ -28,6 +28,7 @@
     <dimen name="medium_square">64dp</dimen>
     <dimen name="big_square">128dp</dimen>
     <dimen name="bigger_square">150dp</dimen>
+    <dimen name="even_bigger_square">175dp</dimen>
     <dimen name="huge_square">256dp</dimen>
     <dimen name="list_item_height">75dp</dimen>
 
@@ -46,5 +47,7 @@
     <dimen name="one">1dp</dimen>
     <dimen name="bigger_text">16sp</dimen>
     <dimen name="text_hint">12sp</dimen>
+    <dimen name="three_lines">52dp</dimen>
+    <dimen name="six_lines">84dp</dimen>
 
 </resources>

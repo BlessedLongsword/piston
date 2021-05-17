@@ -35,8 +35,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:layout_marginVertical="@dimen/medium_separator"
                 android:orientation="vertical"
                 android:weightSum="2">
 
@@ -46,49 +44,63 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/category_image" />
 
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/small_separator"
-                    app:cardBackgroundColor="@color/transparent"
-                    app:cardElevation="@dimen/zero">
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/low_separator"
+                    android:layout_marginBottom="@dimen/small_separator"
+                    android:orientation="vertical" >
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardElevation="@dimen/zero">
 
-                        <TextView
-                            android:id="@+id/text_view_description"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/description"
-                            android:textAppearance="?attr/textAppearanceHeadline6"/>
+                            android:layout_marginVertical="@dimen/small_separator"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/category_info_description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/small_separator"
-                            tools:text="@string/description"
-                            android:text="@{viewModel.description}"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:maxLength="@integer/description_max_length"/>
+                            <TextView
+                                android:id="@+id/text_view_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/description"
+                                android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/category_info_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/small_separator"
+                                tools:text="@string/description"
+                                android:text="@{viewModel.description}"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:maxLength="@integer/description_max_length"/>
 
-                </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
 
-                <com.like.LikeButton
-                    android:id="@+id/star_button"
-                    android:layout_width="@dimen/low_square"
-                    android:layout_height="@dimen/low_square"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/tiny_separator"
-                    app:icon_size="12dp"
-                    app:icon_type="star"
-                    app:liked="false" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one"
+                        android:background="?attr/dividerVertical" />
+
+                    <com.like.LikeButton
+                        android:id="@+id/star_button"
+                        android:layout_width="@dimen/low_square"
+                        android:layout_height="@dimen/low_square"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/tiny_separator"
+                        app:icon_size="12dp"
+                        app:icon_type="star"
+                        app:liked="false" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

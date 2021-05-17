@@ -1,12 +1,17 @@
 package com.example.piston.main.global;
 
+import android.util.Log;
+
 import com.example.piston.data.sections.Category;
+import com.example.piston.data.sections.Group;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,9 +23,14 @@ public class GlobalRepository {
     private final String email;
     private ListenerRegistration listenerRegistrationCategories, listenerRegistrationSubs;
 
+    private Category[] categories;
+    private Boolean[] subscriptions;
+    private int counter;
+    private int lastRequest = 0;
+
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
-        void setSubscribed(HashMap<Integer,Boolean> subscribed);
+        void setSubscribed(ArrayList<Boolean> subscriptions);
         void setIsAdmin(boolean isAdmin);
     }
 
@@ -39,33 +49,45 @@ public class GlobalRepository {
     }
 
     private void loadCategories() {
+        Log.d("DBReadTAG", "loading");
         db.collection("categories")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        ArrayList<Category> categories = new ArrayList<>();
-                        HashMap<Integer, Boolean> subscribed = new HashMap<>();
-                        int count = 0;
+                        int size = task.getResult().size();
+                        counter = 0;
+                        categories = new Category[size];
+                        subscriptions = new Boolean[size];
+                        final int requestNumber = ++lastRequest;
+                        int position = 0;
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
-                            Category category = documentSnapshot.toObject(Category.class);
-                            categories.add(category);
-                            Integer finalCount = count;
+                            final int positionActual = position++;
                             db.collection("categories")
                                     .document(documentSnapshot.getId())
                                     .collection("subscribedUsers")
                                     .document(Objects.requireNonNull(email))
                                     .get().addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            subscribed.put(finalCount, task1.getResult().exists());
-                                            listener.setSubscribed(subscribed);
+                                            addCategory(positionActual,
+                                                    documentSnapshot.toObject(Category.class),
+                                                    task1.getResult().exists(), requestNumber);
                                         }
                                     });
-                            count++;
                         }
-                        listener.setCategories(categories);
                     }
                 });
+    }
+
+    private void addCategory(int position, Category category, Boolean isSubbed, int requestNumber) {
+        if (requestNumber == lastRequest) {
+            categories[position] = category;
+            subscriptions[position] = isSubbed;
+            if (++counter == categories.length) {
+                listener.setCategories(new ArrayList<>(Arrays.asList(categories)));
+                listener.setSubscribed(new ArrayList<>(Arrays.asList(subscriptions)));
+            }
+        }
     }
 
     public void addSub(boolean sub, String id){
@@ -81,10 +103,10 @@ public class GlobalRepository {
                     .collection("subscribedUsers").document(email).set(data2);
         }
         else{
-            db.collection("users").document(Objects.requireNonNull(email))
-                    .collection("subscribedCategories").document(id).delete();
             db.collection("categories").document(id)
                     .collection("subscribedUsers").document(email).delete();
+            db.collection("users").document(Objects.requireNonNull(email))
+                    .collection("subscribedCategories").document(id).delete();
         }
     }
 
@@ -94,7 +116,9 @@ public class GlobalRepository {
         listenerRegistrationSubs = db.collection("users")
                 .document(email)
                 .collection("subscribedCategories")
-                .addSnapshotListener((snapshots, e) -> GlobalRepository.this.loadCategories());
+                .addSnapshotListener((snapshots, e) -> {
+                    GlobalRepository.this.loadCategories();
+                });
     }
 
     public void removeListener() {

@@ -17,7 +17,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="group_code">Group Code</string>
+    <string name="group_code">Group ID</string>
     <string name="description">Description</string>
     <string name="create">Create</string>
     <string name="upload">Upload</string>

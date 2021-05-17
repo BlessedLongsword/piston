@@ -2,6 +2,7 @@ package com.example.piston.main.groups;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ public class GroupsFragment extends ScopeFragment {
         super.onResume();
         actionButton.setVisibility(View.VISIBLE);
         actionButton.setImageResource(R.drawable.baseline_group_add_black_24);
+        actionButton.setBackgroundTintList(ColorStateList.valueOf(getResources()
+                .getColor(R.color.groups_secondary)));
     }
 
     public void add() {

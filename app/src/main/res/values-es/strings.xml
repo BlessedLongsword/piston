@@ -17,7 +17,7 @@
     <string name="save_changes">Guardar Cambios</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
-    <string name="group_code">Enlace</string>
+    <string name="group_code">ID del Grupo</string>
     <string name="description">Descripción</string>
     <string name="create">Crear</string>
     <string name="upload">Subir</string>

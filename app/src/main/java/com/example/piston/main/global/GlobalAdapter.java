@@ -1,6 +1,7 @@
 package com.example.piston.main.global;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,28 +65,26 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
     public void onBindViewHolder(@NonNull GlobalAdapter.CategoryHolder holder, int position) {
         Category category = Objects.requireNonNull(viewModel.getCategories().getValue()).get(position);
         holder.bind(category);
-        Glide.with(localActivity)
-                .load(category.getImageLink())
-                .into(holder.binding.categoryImage);
-        holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getId()));
-        viewModel.getSubscribed().observe(localActivity, integerBooleanHashMap -> {
-            if (integerBooleanHashMap.get(position) != null) {
-                if (Objects.requireNonNull(integerBooleanHashMap.get(position)))
-                    holder.binding.starButton.setLiked(true);
-            }
-        });
+        if (category != null) {
+            Glide.with(localActivity)
+                    .load(category.getImageLink())
+                    .into(holder.binding.categoryImage);
+            holder.getBinding().categoryItemCard.setOnClickListener(openNewActivity(category.getId()));
+        }
+        holder.binding.starButton.setLiked(Objects.requireNonNull(viewModel.getSubscribed()
+                .getValue()).get(position));
         holder.getBinding().starButton.setOnLikeListener(new OnLikeListener() {
 
             @Override
             public void liked(LikeButton likeButton) {
                 likeButton.setLiked(true);
-                viewModel.setSub(true, category.getId());
+                viewModel.setSub(true, Objects.requireNonNull(category).getId());
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
                 likeButton.setLiked(false);
-                viewModel.setSub(false, category.getId());
+                viewModel.setSub(false, Objects.requireNonNull(category).getId());
             }
         });
     }

@@ -32,7 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="@dimen/small_separator">
+                android:paddingTop="@dimen/small_separator"
+                android:paddingHorizontal="@dimen/small_separator"
+                android:paddingBottom="@dimen/tiny_separator">
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
@@ -46,7 +48,7 @@
                 <TextView
                     android:id="@+id/category_desc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/three_lines"
                     android:layout_marginTop="@dimen/small_separator"
                     android:maxLines="@integer/max_desc_lines"
                     android:ellipsize="end"

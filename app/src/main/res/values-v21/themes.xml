@@ -9,6 +9,7 @@
         <item name="colorSecondaryVariant">@color/global_secondary_variant</item>
         <item name="android:statusBarColor">@color/global_primary_variant</item>
 
+
     </style>
 
     <style name="Theme.Piston.Groups">

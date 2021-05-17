@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Piston.Global">
+
+        <item name="colorPrimary">@color/global_primary</item>
+        <item name="colorPrimaryVariant">@color/global_primary_variant</item>
+        <item name="colorSecondary">@color/global_secondary</item>
+        <item name="colorSecondaryVariant">@color/global_secondary_variant</item>
+        <item name="android:statusBarColor">@color/global_primary_variant</item>
+
+        <item name="android:forceDarkAllowed">false</item>
+
+    </style>
+</resources>

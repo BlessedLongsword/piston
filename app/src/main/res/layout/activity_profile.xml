@@ -36,15 +36,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginHorizontal="@dimen/low_separator"
                 android:layout_marginVertical="@dimen/small_separator"
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="@dimen/even_bigger_square"
+                    android:layout_height="@dimen/even_bigger_square"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginVertical="@dimen/medium_square"
+                    android:layout_marginVertical="@dimen/low_square"
                     app:cardCornerRadius="100dp" >
 
                     <ImageView
@@ -139,7 +139,7 @@
                         </LinearLayout>
 
                         <Space
-                            android:layout_width="0dp"
+                            android:layout_width="244dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 

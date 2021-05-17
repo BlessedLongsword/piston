@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,12 +51,6 @@ public class GroupInfoActivity extends AppCompatActivity {
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
         binding.recyclerviewMembers.setAdapter(new MemberAdapter(this));
-
-        binding.groupLink.setEndIconOnClickListener(v -> {
-            clip = ClipData.newPlainText("GroupCode", Objects.requireNonNull(binding.groupLink.getEditText()).getText());
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
-        });
 
         registerForContextMenu(binding.recyclerviewMembers);
 
@@ -117,6 +112,13 @@ public class GroupInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void copyGroupID(View v) {
+        clip = ClipData.newPlainText("GroupCode",
+                Objects.requireNonNull(Objects.requireNonNull(binding.groupId).getText().toString()));
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
     }
 
     public void editTitle(MenuItem item) {

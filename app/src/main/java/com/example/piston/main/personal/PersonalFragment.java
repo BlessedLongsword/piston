@@ -2,6 +2,7 @@ package com.example.piston.main.personal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ public class PersonalFragment extends ScopeFragment {
         super.onResume();
         actionButton.setVisibility(View.VISIBLE);
         actionButton.setImageResource(R.drawable.baseline_create_new_folder_black_24);
+        actionButton.setBackgroundTintList(ColorStateList.valueOf(getResources()
+                .getColor(R.color.personal_secondary)));
     }
 
     public void add() {

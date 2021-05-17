@@ -1,5 +1,7 @@
 package com.example.piston.main.global;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,7 +14,7 @@ import java.util.HashMap;
 public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlobal {
 
     private final MutableLiveData<ArrayList<Category>> categories = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<HashMap<Integer, Boolean>> subscribed = new MutableLiveData<>(new HashMap<>());
+    private final MutableLiveData<ArrayList<Boolean>> subscribed = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
     private final GlobalRepository globalRepository = new GlobalRepository(this);
 
@@ -20,15 +22,16 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         return categories;
     }
 
-
     @Override
     public void setCategories(ArrayList<Category> categories) {
+        Log.d("DBReadTAG", "Cats: " + categories.size());
         this.categories.setValue(categories);
     }
 
     @Override
-    public void setSubscribed(HashMap<Integer, Boolean> subscribed){
-        this.subscribed.setValue(subscribed);
+    public void setSubscribed(ArrayList<Boolean> subscriptions){
+        Log.d("DBReadTAG", "Subs: " + subscriptions.size());
+        this.subscribed.setValue(subscriptions);
     }
 
     @Override
@@ -40,7 +43,7 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         globalRepository.addSub(sub,title);
     }
 
-    public LiveData<HashMap<Integer, Boolean>> getSubscribed(){
+    public LiveData<ArrayList<Boolean>> getSubscribed(){
         return this.subscribed;
     }
 

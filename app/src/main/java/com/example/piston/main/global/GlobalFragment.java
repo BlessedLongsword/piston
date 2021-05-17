@@ -2,6 +2,7 @@ package com.example.piston.main.global;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -46,6 +47,8 @@ public class GlobalFragment extends ScopeFragment {
         super.onResume();
         actionButton.setVisibility(buttonVisibility);
         actionButton.setImageResource(R.drawable.outline_collections_black_24);
+        actionButton.setBackgroundTintList(ColorStateList.valueOf(getResources()
+                .getColor(R.color.global_secondary)));
     }
 
     public void add() {
