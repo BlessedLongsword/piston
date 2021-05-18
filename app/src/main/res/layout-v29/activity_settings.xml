@@ -52,10 +52,17 @@
                     android:text="@string/settings_sub"/>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/settings_followSystem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"
+                    android:text="@string/settings_follow_theme" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/settings_darkMode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="false"
                     app:thumbTint="@drawable/switch_thumb"
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_dark" />
@@ -73,7 +80,6 @@
                     android:id="@+id/settings_blur"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="false"
                     app:thumbTint="@drawable/switch_thumb"
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_blur_nsfw" />

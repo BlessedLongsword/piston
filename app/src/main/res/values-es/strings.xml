@@ -183,5 +183,6 @@
     <string name="not_belongs_to_group">No perteneces al grupo que contiene esta publicación!</string>
     <string name="share_group">Compartir Grupo</string>
     <string name="add_note">Añadir Nota</string>
+    <string name="settings_follow_theme">Follow System Theme</string>
 
 </resources>

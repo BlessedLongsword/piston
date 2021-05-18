@@ -184,6 +184,7 @@
     <string name="not_belongs_to_group">No pertanys al grup que conté aquesta publicació!</string>
     <string name="share_group">Compartir Grup</string>
     <string name="add_note">Afegir Nota</string>
+    <string name="settings_follow_theme">Follow System Theme</string>
 
 
 </resources>

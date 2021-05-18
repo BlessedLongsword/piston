@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -25,13 +26,22 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = this.getSharedPreferences(
-                "com.example.piston", Context.MODE_PRIVATE);
 
-        String darkModeKey = "com.example.piston.darkMode";
-        boolean manualDarkModeEnabled = prefs.getBoolean(darkModeKey, false);
-        if (manualDarkModeEnabled)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+        boolean followSystem = false;
+
+        if (Build.VERSION.SDK_INT >= 29) {
+            followSystem = prefs.getBoolean(Values.THEME_FOLLOW_SYSTEM, false);
+            if (followSystem)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
+        if (!followSystem) {
+            boolean manualDarkModeEnabled = prefs.getBoolean(Values.DARK_THEME, false);
+            if (manualDarkModeEnabled)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            else
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         viewModel = new ViewModelProvider(this).get(LaunchViewModel.class);
         checkIfUserIsAuthenticated();

@@ -22,4 +22,9 @@ public class Values {
     public static final String JOIN = "join";
     public static final String IS_CURRENT_USER = "isCurrentUser";
     public static final String POST_DOES_NOT_EXIST = "postDoesNotExist";
+
+    public static final String SHARED_PREFS = "com.example.piston";
+    public static final String THEME_FOLLOW_SYSTEM = "com.example.piston.darkFollow";
+    public static final String DARK_THEME = "com.example.piston.darkMode";
+
 }

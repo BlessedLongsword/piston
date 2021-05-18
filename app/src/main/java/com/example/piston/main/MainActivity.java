@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -59,23 +60,28 @@ public class MainActivity extends AppCompatActivity {
 
         topAppBar = findViewById(R.id.app_bar);
 
-        SharedPreferences prefs = this.getSharedPreferences(
-                "com.example.piston", Context.MODE_PRIVATE);
-        String darkModeKey = "com.example.piston.darkMode";
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+        boolean followSystem = false;
 
-        boolean manualDarkModeEnabled = prefs.getBoolean(darkModeKey, false);
+        if (Build.VERSION.SDK_INT >= 29)
+            followSystem = prefs.getBoolean(Values.THEME_FOLLOW_SYSTEM, false);
 
-        int nightModeFlags = getApplicationContext().getResources().getConfiguration().uiMode &
-                Configuration.UI_MODE_NIGHT_MASK;
-        switch (nightModeFlags) {
-            case Configuration.UI_MODE_NIGHT_YES:
-                darkModeEnabled = true;
-                break;
-            case Configuration.UI_MODE_NIGHT_NO:
-            case Configuration.UI_MODE_NIGHT_UNDEFINED:
-                darkModeEnabled = manualDarkModeEnabled;
-                break;
+        if (followSystem) {
+            int nightModeFlags = getApplicationContext().getResources().getConfiguration().uiMode &
+                    Configuration.UI_MODE_NIGHT_MASK;
+            switch (nightModeFlags) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    darkModeEnabled = true;
+                    break;
+
+                case Configuration.UI_MODE_NIGHT_NO:
+                    darkModeEnabled = false;
+                    break;
+            }
         }
+
+        else
+            darkModeEnabled = prefs.getBoolean(Values.DARK_THEME, false);
 
         scope = getIntent().getStringExtra(Values.SCOPE);
         sectionID = getIntent().getStringExtra(Values.SECTION_ID);

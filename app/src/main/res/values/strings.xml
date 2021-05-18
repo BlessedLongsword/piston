@@ -189,5 +189,6 @@
     <string name="not_belongs_to_group">You do not belong to the group that contains this post!</string>
     <string name="share_group">Share Group</string>
     <string name="add_note">Add note</string>
+    <string name="settings_follow_theme">Follow System Theme</string>
 
 </resources>

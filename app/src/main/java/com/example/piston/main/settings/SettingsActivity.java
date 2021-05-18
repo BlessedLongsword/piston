@@ -2,64 +2,67 @@ package com.example.piston.main.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.piston.R;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.example.piston.databinding.ActivitySettingsBinding;
+import com.example.piston.utilities.Values;
+
+import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
-
-    SwitchMaterial subscribe;
-    SwitchMaterial dark_mode;
-    SwitchMaterial show_nsfw;
-    SwitchMaterial blur_nsfw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
 
-        subscribe = findViewById(R.id.settings_subscribe);
-        dark_mode = findViewById(R.id.settings_darkMode);
-        show_nsfw = findViewById(R.id.settings_show_nsfw);
-        blur_nsfw = findViewById(R.id.settings_blur);
+        ActivitySettingsBinding binding = DataBindingUtil.setContentView(
+                this, R.layout.activity_settings);
 
-        SharedPreferences prefs = this.getSharedPreferences(
-                "com.example.piston", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+        boolean followSystem = false;
 
-        String darkModeKey = "com.example.piston.darkMode";
-        boolean manualDarkModeEnabled = prefs.getBoolean(darkModeKey, false);
+        if (Build.VERSION.SDK_INT >= 29) {
+            followSystem = prefs.getBoolean(Values.THEME_FOLLOW_SYSTEM, false);
+            Objects.requireNonNull(binding.settingsFollowSystem).setChecked(followSystem);
+            binding.settingsDarkMode.setEnabled(!followSystem);
 
-        dark_mode.setChecked(manualDarkModeEnabled);
+            binding.settingsFollowSystem.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                prefs.edit().putBoolean(Values.THEME_FOLLOW_SYSTEM, isChecked).apply();
+                binding.settingsDarkMode.setEnabled(!isChecked);
+                if (isChecked)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                else
+                    AppCompatDelegate.setDefaultNightMode((binding.settingsDarkMode.isChecked()?
+                            AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
+            });
+        }
+        if (!followSystem) {
+            boolean darkMode = prefs.getBoolean(Values.DARK_THEME, false);
+            binding.settingsDarkMode.setChecked(darkMode);
+        }
 
-        if (manualDarkModeEnabled)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-        dark_mode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                prefs.edit().putBoolean(darkModeKey, true).apply();
-            }
-            else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                prefs.edit().putBoolean(darkModeKey, false).apply();
-            }
+        binding.settingsDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit().putBoolean(Values.DARK_THEME, isChecked).apply();
+            AppCompatDelegate.setDefaultNightMode((binding.settingsDarkMode.isChecked()?
+                    AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
         });
 
-        subscribe.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.settingsSubscribe.setOnCheckedChangeListener((buttonView, isChecked) -> {
         });
 
-        show_nsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.settingsShowNsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
         });
 
-        blur_nsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.settingsBlur.setOnCheckedChangeListener((buttonView, isChecked) -> {
         });
 
-        MaterialToolbar bar = findViewById(R.id.settings_topAppBar);
-        bar.setNavigationOnClickListener((view) -> finish());
+        binding.settingsTopAppBar.setNavigationOnClickListener((view) -> finish());
     }
 }
