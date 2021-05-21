@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.piston.main.posts.editPost.EditPostViewModel" />
+        <variable
+            name="constants"
+            type="com.example.piston.data.Constants" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.posts.editPost.EditPostActivity" >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/edit_post_topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/edit_post_activity_title"
+                app:navigationIcon="@drawable/outline_close_white_24"
+                app:menu="@menu/edit_post_top_app_bar"
+                app:layout_collapseMode="pin"
+                style="@style/Theme.Piston.ToolbarStyle"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_vertical_margin"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/choose_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title"
+                    counter="@{constants.MAX_TITLE_LENGTH}"
+                    postTitleError="@{viewModel.titleFieldError}"
+                    app:errorEnabled="true" >
+                    <!--suppress AndroidUnknownAttribute -->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textShortMessage"
+                        android:afterTextChanged="@{() -> viewModel.titleUpdate()}"
+                        android:text="@={viewModel.titleField}"
+                        android:maxLength="@integer/title_max_length" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/choose_picture_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/choose_picture"
+                        android:onClick="imagePick"/>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/post_picture"
+                        android:layout_width="@dimen/big_square"
+                        android:layout_height="@dimen/big_square"
+                        android:contentDescription="@string/post_image" />
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/post_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/post_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    app:placeholderText="@string/hint_post_content"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="@integer/post_max_length"
+                    android:inputType="textMultiLine" >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:minLines="1"
+                        android:maxLength="@integer/post_max_length"
+                        android:text="@={viewModel.contentField}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

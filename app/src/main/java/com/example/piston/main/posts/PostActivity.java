@@ -29,6 +29,7 @@ import com.example.piston.data.posts.Reply;
 import com.example.piston.databinding.ActivityPostBinding;
 import com.example.piston.main.global.category.CategoryActivity;
 import com.example.piston.main.groups.group.GroupActivity;
+import com.example.piston.main.posts.editPost.EditPostActivity;
 import com.example.piston.main.profile.ProfileActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
@@ -89,6 +90,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         viewModel.getPriority().observe(this, priority -> {
+            Log.d("priority1", String.valueOf(priority));
                 binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
                 binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority == 0);
             });
@@ -195,7 +197,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         return -1;
     }
 
-    @SuppressWarnings("unused")
     public void deletePost(MenuItem menuItem) {
         viewModel.deletePost();
         finish();
@@ -203,9 +204,11 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     @SuppressWarnings("unused")
     public void editPost(MenuItem menuItem) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM,0,0);
-        toast.show();
+        Intent intent = new Intent(this, EditPostActivity.class);
+        intent.putExtra(Values.SCOPE, scope);
+        intent.putExtra(Values.SECTION_ID, sectionID);
+        intent.putExtra(Values.POST_ID, postID);
+        startActivityForResult(intent, Values.EDIT_CODE);
     }
 
     @SuppressWarnings("unused")
@@ -317,5 +320,13 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
             lp.alpha = 1f;
             getWindow().setAttributes(lp);
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Values.EDIT_CODE) {
+            viewModel.updatePost();
+        }
     }
 }

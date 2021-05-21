@@ -14,8 +14,6 @@ import com.example.piston.databinding.ActivityFolderInfoBinding;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class FolderInfoActivity extends AppCompatActivity {
 
     FolderInfoViewModel viewModel;
@@ -43,7 +41,7 @@ public class FolderInfoActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void deleteFolder(MenuItem item) {
         viewModel.deleteFolder();
-        setResult(DELETE_CODE);
+        setResult(Values.DELETE_CODE);
         finish();
     }
 }

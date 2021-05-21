@@ -1,5 +1,7 @@
 package com.example.piston.main.posts;
 
+import android.util.Log;
+
 import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
@@ -50,18 +52,11 @@ public class PostRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
-        db.collection("users")
-                .document(Objects.requireNonNull(email))
-                .get()
-                .addOnCompleteListener(task -> {
-                    user = (String) task.getResult().get("username");
-                    listener.setCurrentUser(user);
-                    profilePictureLink = (String) task.getResult().get("profilePictureLink");
-                });
+
 
         if (scope.equals("folders")) {
             postDocRef = db.collection("users")
-                    .document(email)
+                    .document(Objects.requireNonNull(email))
                     .collection(scope)
                     .document(sectionID)
                     .collection("posts")
@@ -74,8 +69,16 @@ public class PostRepository {
                     .document(postID);
         }
 
-        updateParams();
-        listenChanges();
+        db.collection("users")
+                .document(Objects.requireNonNull(email))
+                .get()
+                .addOnCompleteListener(task -> {
+                    user = (String) task.getResult().get("username");
+                    listener.setCurrentUser(user);
+                    profilePictureLink = (String) task.getResult().get("profilePictureLink");
+                    updateParams();
+                    listenChanges();
+                });
     }
 
     private void updateParams() {
@@ -91,6 +94,7 @@ public class PostRepository {
                     long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
                     listener.setNumLikes(getLikes(numLikes));
 
+                    Log.d("pepe", owner + " "+ user);
                     if (Objects.requireNonNull(owner).equals(user))
                         listener.setPriority(0);
                 } else {
@@ -301,6 +305,9 @@ public class PostRepository {
         postDocRef.delete();
     }
 
+    public void updatePost() {
+        updateParams();
+    }
     public void removeListener() {
         listenerRegistration.remove();
     }

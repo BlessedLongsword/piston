@@ -55,6 +55,10 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         repository.editReply(replyID, content);
     }
 
+    public void updatePost() {
+        repository.updatePost();
+    }
+
     @Override
     public void setReplies(ArrayList<Reply> replies) {
         this.replies.setValue(replies);

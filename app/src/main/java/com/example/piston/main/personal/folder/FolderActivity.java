@@ -17,8 +17,6 @@ import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class FolderActivity extends AppCompatActivity {
 
     private String folderID;
@@ -66,13 +64,13 @@ public class FolderActivity extends AppCompatActivity {
     private void goToInfo() {
         Intent intent = new Intent(this, FolderInfoActivity.class);
         intent.putExtra(Values.SECTION_ID, folderID);
-        startActivityForResult(intent, DELETE_CODE);
+        startActivityForResult(intent, Values.DELETE_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == DELETE_CODE)
+        if (resultCode == Values.DELETE_CODE)
             finish();
     }
 

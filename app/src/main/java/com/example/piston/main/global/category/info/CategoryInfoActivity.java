@@ -17,11 +17,9 @@ import com.example.piston.utilities.Values;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class CategoryInfoActivity extends AppCompatActivity {
 
-    CategoryInfoViewModel viewModel;
+    private CategoryInfoViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +55,8 @@ public class CategoryInfoActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getImageLink().observe(this, aString -> Glide.with(this)
-                .load(aString)
+        viewModel.getImageLink().observe(this, imageLink -> Glide.with(this)
+                .load(imageLink)
                 .into(binding.categoryInfoImage));
 
         viewModel.getSubscribed().observe(this, aBoolean -> {
@@ -71,7 +69,7 @@ public class CategoryInfoActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void deleteCategory(MenuItem item) {
         viewModel.deleteCategory();
-        setResult(DELETE_CODE);
+        setResult(Values.DELETE_CODE);
         finish();
     }
 

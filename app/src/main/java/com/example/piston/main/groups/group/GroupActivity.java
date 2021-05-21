@@ -22,8 +22,6 @@ import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class GroupActivity extends AppCompatActivity {
 
     private String groupID;
@@ -108,7 +106,7 @@ public class GroupActivity extends AppCompatActivity {
                     !fromShareGroup) {
                 Intent intent = new Intent(this, GroupInfoActivity.class);
                 intent.putExtra(Values.SECTION_ID, groupID);
-                startActivityForResult(intent, DELETE_CODE);
+                startActivityForResult(intent, Values.DELETE_CODE);
             }
         }
     }
@@ -125,7 +123,7 @@ public class GroupActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == DELETE_CODE)
+        if (resultCode == Values.DELETE_CODE)
             finish();
     }
 }

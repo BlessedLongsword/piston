@@ -24,8 +24,6 @@ import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class GroupInfoActivity extends AppCompatActivity {
 
     private GroupInfoViewModel viewModel;
@@ -97,7 +95,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void deleteGroup(MenuItem item) {
         viewModel.deleteGroup();
-        setResult(DELETE_CODE);
+        setResult(Values.DELETE_CODE);
         finish();
     }
 

@@ -17,7 +17,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> createError = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finishCreatePost = new MutableLiveData<>(false);
-    private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> errorMessage = new MutableLiveData<>(false);
 
     private final CreatePostRepository repository = new CreatePostRepository(this);
 
@@ -53,8 +53,8 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
     }
 
     @Override
-    public void setErrorMessage(String message) {
-        errorMessage.setValue(message);
+    public void setErrorMessage() {
+        errorMessage.setValue(true);
     }
 
     public MutableLiveData<String> getTitleField() {
@@ -81,7 +81,7 @@ public class CreatePostViewModel extends ViewModel implements CreatePostReposito
         return finishCreatePost;
     }
 
-    public LiveData<String> getErrorMessage() {
+    public LiveData<Boolean> getErrorMessage() {
         return errorMessage;
     }
 }

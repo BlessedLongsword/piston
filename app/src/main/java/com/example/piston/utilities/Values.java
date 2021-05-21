@@ -3,6 +3,7 @@ package com.example.piston.utilities;
 public class Values {
 
     public static final int DELETE_CODE = 9999;
+    public static final int EDIT_CODE = 9998;
 
     public static final String SCOPE = "scope";
     public static final String SECTION_ID = "sectionID";

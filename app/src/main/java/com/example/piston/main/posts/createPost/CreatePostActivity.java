@@ -18,7 +18,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 public class CreatePostActivity extends PickImageActivity {
 
     private ActivityCreatePostBinding binding;
-    private CreatePostViewModel createPostViewModel;
+    private CreatePostViewModel viewModel;
     private String scope, sectionID;
 
     @Override
@@ -38,16 +38,16 @@ public class CreatePostActivity extends PickImageActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
-        createPostViewModel = new ViewModelProvider(this).get(CreatePostViewModel.class);
+        viewModel = new ViewModelProvider(this).get(CreatePostViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
 
         sectionID = getIntent().getStringExtra(Values.SECTION_ID);
 
-        binding.setViewModel(createPostViewModel);
+        binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.createPostTopAppBar.setNavigationOnClickListener(v -> finish());
 
-        createPostViewModel.getCreateError().observe(this, aBoolean -> {
+        viewModel.getCreateError().observe(this, aBoolean -> {
             if (aBoolean) {
                 new MaterialAlertDialogBuilder(this)
                         .setTitle(getResources().getString(R.string.error))
@@ -56,20 +56,23 @@ public class CreatePostActivity extends PickImageActivity {
                         .show();
             }
         });
-        createPostViewModel.getFinishCreatePost().observe(this, aBoolean -> {
+
+        viewModel.getFinishCreatePost().observe(this, aBoolean -> {
             if (aBoolean)
                 finish();
         });
-        createPostViewModel.getErrorMessage().observe(this, message -> {
-            if (message != null)
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+        viewModel.getErrorMessage().observe(this, aBoolean -> {
+            if (aBoolean)
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         });
     }
 
     @SuppressWarnings("unused")
     public void createPost(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createPostViewModel.createPost(scope, sectionID, imageUri, connected);
+        viewModel.createPost(scope, sectionID, imageUri, connected);
     }
 
     @Override

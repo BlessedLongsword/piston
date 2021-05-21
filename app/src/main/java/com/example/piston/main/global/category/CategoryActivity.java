@@ -19,8 +19,6 @@ import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 
-import static com.example.piston.utilities.Values.DELETE_CODE;
-
 public class CategoryActivity extends AppCompatActivity {
 
     private String categoryID;
@@ -93,13 +91,13 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CategoryInfoActivity.class);
         intent.putExtra(Values.SECTION_ID, categoryID);
         intent.putExtra(Values.IS_ADMIN, getIntent().getBooleanExtra(Values.IS_ADMIN, false));
-        startActivityForResult(intent, DELETE_CODE);
+        startActivityForResult(intent, Values.DELETE_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == DELETE_CODE)
+        if (resultCode == Values.DELETE_CODE)
             finish();
     }
 }

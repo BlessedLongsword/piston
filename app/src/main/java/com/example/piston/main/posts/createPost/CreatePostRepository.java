@@ -2,6 +2,7 @@ package com.example.piston.main.posts.createPost;
 
 import android.net.Uri;
 
+import com.example.piston.R;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
 import com.example.piston.data.users.User;
@@ -30,7 +31,7 @@ public class CreatePostRepository {
         void setCreateError();
         void setCreateFinished();
         void setLoadingFinished();
-        void setErrorMessage(String message);
+        void setErrorMessage();
     }
 
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
@@ -63,7 +64,7 @@ public class CreatePostRepository {
         }
         else {
             if (!connected) {
-                listener.setErrorMessage("No internet, uploaded without image");
+                listener.setErrorMessage();
                 uploadPost(scope, document, title, content, null);
             }
             else if (image == null)

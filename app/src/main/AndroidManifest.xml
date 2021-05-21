@@ -82,6 +82,8 @@
             android:configChanges="orientation|screenSize">
         </activity>
 
+        <activity android:name=".main.posts.editPost.EditPostActivity"/>
+
         <activity android:name=".main.posts.createPost.CreatePostActivity"/>
 
         <activity android:name=".main.profile.ProfileActivity"

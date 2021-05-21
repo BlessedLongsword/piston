@@ -33,6 +33,7 @@
     <string name="title_empty">Aquest camp és obligatori</string>
     <string name="alternative">També pots</string>
     <string name="write_your_message">Escriu el teu missatge aquí</string>
+    <string name="no_internet">Sense conexió a internet, s\'ha pujat sense imatge</string>
 
     <!-- User Data -->
     <string name="password">Contrasenya</string>

@@ -33,6 +33,7 @@
     <string name="title_empty">Este campo es obligatorio</string>
     <string name="alternative">También puedes</string>
     <string name="write_your_message">Escribe tu mensaje aquí</string>
+    <string name="no_internet">Sin conexión a internet, se ha subido sin imagen</string>
 
     <!-- User Data -->
     <string name="password">Contraseña</string>
