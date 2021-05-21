@@ -3,6 +3,7 @@ package com.example.piston.main.groups.group;
 import android.util.Log;
 
 import com.example.piston.data.posts.Post;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,6 +48,8 @@ public class GroupRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     Post post = documentSnapshot.toObject(Post.class);
+                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                    post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                     posts.add(post);
                 }
                 listener.setGroupPosts(posts);
