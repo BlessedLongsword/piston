@@ -48,8 +48,6 @@ public class LaunchActivity extends AppCompatActivity {
         checkIfUserIsAuthenticated();
 
         uri = getIntent().getData();
-
-        startService(new Intent(this, NotificationsService.class));
     }
 
     private void checkIfUserIsAuthenticated() {

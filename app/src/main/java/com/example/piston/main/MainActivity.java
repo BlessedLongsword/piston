@@ -22,6 +22,7 @@ import com.example.piston.R;
 import com.example.piston.main.groups.group.GroupActivity;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.PostActivity;
+import com.example.piston.utilities.NotificationsService;
 import com.example.piston.utilities.ScopeFragment;
 import com.example.piston.utilities.ScopePagerAdapter;
 import com.example.piston.main.settings.SettingsActivity;
@@ -142,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        startService(new Intent(this, NotificationsService.class));
     }
 
     private void changeTabLayoutColors(int position) {
@@ -242,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                 ((ScopeFragment) fragment).removeListener();
             }
         }
+        stopService(new Intent(this, NotificationsService.class));
         viewModel.logout();
     }
 }

@@ -20,10 +20,14 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.Objects;
 
 public class NotificationsService extends Service {
+
+    private boolean first = true;
+    private ListenerRegistration listener;
 
     @Nullable
     @Override
@@ -49,8 +53,6 @@ public class NotificationsService extends Service {
         }
     }
 
-    private int counter = 0;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -61,8 +63,13 @@ public class NotificationsService extends Service {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         DocumentReference userDocRef = db.collection("users").document(Objects.requireNonNull(email));
-        userDocRef.collection("notifications")
+        listener = userDocRef.collection("notifications")
                 .addSnapshotListener((snapshots, error) -> {
+
+                    if (first) {
+                        first = false;
+                        return;
+                    }
 
                     DocumentSnapshot documentSnapshot = Objects.requireNonNull(snapshots).
                             getDocumentChanges().get(0).getDocument();
@@ -74,17 +81,19 @@ public class NotificationsService extends Service {
                         if (notificationType.equals("post")) {
                             NotificationPost notification = documentSnapshot
                                     .toObject(NotificationPost.class);
-                            postNotification(notification.getTitle(), notification.getSectionID());
+                            postNotification(notification.getTitle(), notification.getSectionID(),
+                                    documentSnapshot.getId());
                         } else {
                             NotificationReply notification = documentSnapshot
                                     .toObject(NotificationReply.class);
-                            postNotification(notification.getUser(), notification.getContent());
+                            postNotification(notification.getUser(), notification.getContent(),
+                                    documentSnapshot.getId());
                         }
                     }
                 });
     }
 
-    public void postNotification(String title, String content) {
+    public void postNotification(String title, String content, String id) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.id.group_moderator_icon)
                 .setContentTitle(title)
@@ -94,6 +103,12 @@ public class NotificationsService extends Service {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
         // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(counter++, builder.build());
+        notificationManager.notify(id.hashCode(), builder.build());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        listener.remove();
     }
 }
