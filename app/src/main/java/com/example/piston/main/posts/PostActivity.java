@@ -192,6 +192,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.postScrollView.smoothScrollTo(0, (int) y);
     }
 
+    @SuppressWarnings("unused")
     public void goToUserProfile(View v) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra(Values.EMAIL, viewModel.getPostOwnerEmail().getValue());

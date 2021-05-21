@@ -129,8 +129,9 @@ public class PostRepository {
         postDocRef.collection("replies").orderBy("timestamp")
                 .get().addOnCompleteListener(task1 -> {
             if (task1.isSuccessful()) {
+                int counter = 0;
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
-                       task1.getResult())) {
+                        task1.getResult())) {
                    String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
                    if (replyType.equals("reply")) {
                        Reply post = documentSnapshot.toObject(Reply.class);
@@ -139,6 +140,8 @@ public class PostRepository {
                        QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
                        posts.add(post);
                    }
+                   if (counter++ % 10 == 0)
+                       listener.setReplies(posts);
                }
            }
            listener.setReplies(posts);

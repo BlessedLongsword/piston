@@ -153,8 +153,8 @@
     <!-- Settings Strings -->
     <string name="settings_activity_title">Settings</string>
     <string name="settings_sub">Default subscription to posts</string>
-    <string name="settings_dark">Dark mode</string>
-    <string name="settings_sfw">Show NSFW content (I am over 18)</string>
+    <string name="settings_dark">Dark Mode</string>
+    <string name="settings_sfw">Show NSFW Content</string>
     <string name="settings_blur_nsfw">Blur NSFW Images</string>
     <string name="reply_content">Reply Content</string>
     <string name="hint_reply_button">Insert your reply</string>
@@ -191,6 +191,7 @@
     <string name="share_group">Share Group</string>
     <string name="add_note">Add note</string>
     <string name="settings_follow_theme">Follow System Theme</string>
+    <string name="notifications_enabled">Push Notifications</string>
     <string name="pin_post">Pin Post</string>
     <string name="unpin_post">Unpin Post</string>
     <string name="pinned">This Post is now pinned</string>
