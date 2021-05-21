@@ -19,6 +19,10 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
         repository = new CategoryRepository(this, category);
     }
 
+    public void setFilter(String filter) {
+        repository.updateQuery(filter);
+    }
+
     @Override
     public void setCategoryPosts(ArrayList<Post> posts) {
         this.posts.setValue(posts);

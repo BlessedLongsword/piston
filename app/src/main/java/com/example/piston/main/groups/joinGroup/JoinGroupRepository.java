@@ -3,6 +3,7 @@ package com.example.piston.main.groups.joinGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class JoinGroupRepository {
                                                     .document(groupCode);
                     docRef2.get().addOnCompleteListener(task2 -> {
                        if (task2.getResult().exists()) {
+                           docRef2.update("timestamp", FieldValue.serverTimestamp());
                            listener.setLoadingFinished();
                            listener.setGroupCodeError(JoinGroupResult.JoinError.ALREADY_JOINED);
                        }

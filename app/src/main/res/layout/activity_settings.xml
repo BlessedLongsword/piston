@@ -43,13 +43,22 @@
                     android:layout_weight="0.5" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/settings_subscribe"
+                    android:id="@+id/notifications_enabled"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     app:thumbTint="@drawable/switch_thumb"
                     app:trackTint="@drawable/switch_track"
-                    android:text="@string/settings_sub"/>
+                    android:checked="true"
+                    android:text="@string/notifications_enabled"/>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    tools:targetApi="Q"
+                    android:id="@+id/settings_followSystem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"
+                    android:text="@string/settings_follow_theme" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/settings_darkMode"
@@ -59,6 +68,20 @@
                     app:thumbTint="@drawable/switch_thumb"
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_dark" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/settings_subscribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"
+                    android:text="@string/settings_sub"/>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/settings_show_nsfw"

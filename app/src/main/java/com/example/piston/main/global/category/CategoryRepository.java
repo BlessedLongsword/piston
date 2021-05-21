@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ public class CategoryRepository {
     }
 
     private final ICategory listener;
-    private final DocumentReference categoryDocRef;
+    private Query postsQuery;
     private ListenerRegistration listenerRegistration;
+    private final DocumentReference categoryDocRef;
 
     public CategoryRepository(ICategory listener, String category) {
         this.listener = listener;
@@ -30,14 +32,14 @@ public class CategoryRepository {
             if (task.isComplete())
                 listener.setTitle((String) task.getResult().get("title"));
         });
+        postsQuery = categoryDocRef.collection("posts").orderBy("timestamp",
+                Query.Direction.DESCENDING);
 
         listenChanges();
     }
 
     private void loadCategoryPosts() {
-        categoryDocRef.collection("posts")
-                .get()
-                .addOnCompleteListener(task -> {
+        postsQuery.get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         ArrayList<Post> posts = new ArrayList<>();
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
@@ -52,9 +54,14 @@ public class CategoryRepository {
                 });
     }
 
+    public void updateQuery(String field) {
+        postsQuery = categoryDocRef.collection("posts").orderBy("timestamp",
+                Query.Direction.DESCENDING).orderBy(field);
+    }
+
     private void listenChanges() {
-        listenerRegistration = categoryDocRef.collection("posts")
-                .addSnapshotListener((snapshots, e) -> CategoryRepository.this.loadCategoryPosts());
+        listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> CategoryRepository
+                .this.loadCategoryPosts());
     }
 
     public void removeListener() {

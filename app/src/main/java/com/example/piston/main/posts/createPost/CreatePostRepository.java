@@ -120,13 +120,12 @@ public class CreatePostRepository {
                 DocumentReference sectionDocRef = db.collection(scope).document(sectionID);
                 if (scope.equals("groups")) {
                     CollectionReference cr = sectionDocRef.collection("members");
-                    sendNotification(cr, sectionID, title, imageLink, scope, id);
+                    sendNotification(cr, sectionID, title, imageLink, scope, id, timestamp);
                 } else if (scope.equals("categories")) {
                     CollectionReference cr = sectionDocRef.collection("subscribedUsers");
-                    sendNotification(cr, sectionID, title, imageLink, scope, id);
-                }
-                if (scope.equals(Values.GLOBAL))
+                    sendNotification(cr, sectionID, title, imageLink, scope, id, timestamp);
                     sectionDocRef.update("timestamp", timestamp);
+                }
                 listener.setCreateFinished();
                 listener.setLoadingFinished();
             }
@@ -134,7 +133,7 @@ public class CreatePostRepository {
     }
 
     public void sendNotification(CollectionReference collectionReference, String document, String title,
-                                 String imageLink, String collection, String id) {
+                                 String imageLink, String collection, String id, FieldValue timestamp) {
         collectionReference.get().addOnCompleteListener(task1 -> {
             if (task1.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot :
@@ -153,8 +152,12 @@ public class CreatePostRepository {
 
                                     docRef2.set(notificationPost);
                                     docRef2.update("type", "post");
-                                    docRef2.update("timestamp", FieldValue.serverTimestamp());
+                                    docRef2.update("timestamp", timestamp);
                                 });
+                    }
+                    if (collection.equals(Values.GROUPS)) {
+                        db.collection("users").document(documentSnapshot.getId())
+                                .collection(Values.GROUPS).document(document).update("timestamp", timestamp);
                     }
                 }
             }

@@ -1,12 +1,13 @@
 package com.example.piston.main.groups;
 
 import com.example.piston.data.sections.Group;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class GroupsRepository {
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
-    private final CollectionReference groupsColRef;
+    private Query groupsQuery;
 
     private Group[] groups;
     private int counter;
@@ -32,13 +33,14 @@ public class GroupsRepository {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
 
-        this.groupsColRef = db.collection("users").document(Objects.requireNonNull(user)).collection("groups");
+        this.groupsQuery = db.collection("users").document(Objects.requireNonNull(user))
+                .collection("groups").orderBy("timestamp", Query.Direction.DESCENDING);
 
         listenChanges();
     }
 
     private void loadGroups() {
-        groupsColRef.get().addOnCompleteListener(task -> {
+        groupsQuery.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 int size = Objects.requireNonNull(task.getResult()).size();
                 counter = 0;
@@ -59,6 +61,12 @@ public class GroupsRepository {
         });
     }
 
+    public void updateQuery(String field) {
+        groupsQuery = db.collection(Values.GROUPS).orderBy("timestamp",
+                Query.Direction.DESCENDING).orderBy(field);
+        loadGroups();
+    }
+
     private void addGroup(int position, Group group) {
         groups[position] = group;
         if (++counter == groups.length)
@@ -66,7 +74,7 @@ public class GroupsRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = groupsColRef.addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
+        listenerRegistration = groupsQuery.addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
     }
 
     public void removeListener() {

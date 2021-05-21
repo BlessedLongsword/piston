@@ -186,6 +186,7 @@
     <string name="share_group">Compartir Grup</string>
     <string name="add_note">Afegir Nota</string>
     <string name="settings_follow_theme">Follow System Theme</string>
+    <string name="notifications_enabled">Push Notifications</string>
     <string name="pin_post">Fixar Post</string>
     <string name="unpin_post">Desfixar Post</string>
     <string name="pinned">S\'ha fixat la publicació</string>

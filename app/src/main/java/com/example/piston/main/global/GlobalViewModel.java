@@ -21,6 +21,10 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         return categories;
     }
 
+    public void setFilter(String filter) {
+        globalRepository.updateQuery(filter);
+    }
+
     @Override
     public void setCategories(ArrayList<Category> categories) {
         Log.d("DBReadTAG", "Cats: " + categories.size());

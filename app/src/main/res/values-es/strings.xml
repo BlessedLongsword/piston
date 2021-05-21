@@ -191,5 +191,6 @@
     <string name="unpinned">La publicación ya no está fijada</string>
     <string name="pinned_personal">Se ha fijado la nota</string>
     <string name="unpinned_personal">La nota ya no está fijada</string>
+    <string name="notifications_enabled">Push Notifications</string>
 
 </resources>
