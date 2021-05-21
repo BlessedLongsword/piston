@@ -88,4 +88,9 @@
         <item name="android:tint">?attr/colorOnBackground</item>
     </style>
 
+    <style name="Pin">
+        <item name="android:src">@drawable/outline_push_pin_black_18</item>
+        <item name="tint">?attr/colorOnBackground</item>
+    </style>
+
 </resources>

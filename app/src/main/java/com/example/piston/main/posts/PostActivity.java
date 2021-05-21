@@ -90,10 +90,26 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         viewModel.getPriority().observe(this, priority -> {
-            Log.d("priority1", String.valueOf(priority));
                 binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
-                binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority == 0);
+                binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority <= 1);
+                boolean pinned = Objects.requireNonNull(viewModel.getPinned().getValue());
+            if (scope.equals(Values.GROUPS) || scope.equals(Values.PERSONAL)) {
+                binding.postsTopAppBar.getMenu().getItem(2).setVisible(!pinned &&
+                        priority == 0);
+                binding.postsTopAppBar.getMenu().getItem(3).setVisible(pinned &&
+                        priority == 0);
+            }
             });
+
+        viewModel.getPinned().observe(this, aBoolean -> {
+            int priority = Objects.requireNonNull(viewModel.getPriority().getValue());
+            if (scope.equals(Values.GROUPS) || scope.equals(Values.PERSONAL)) {
+                binding.postsTopAppBar.getMenu().getItem(2).setVisible(!aBoolean &&
+                        priority == 0);
+                binding.postsTopAppBar.getMenu().getItem(3).setVisible(aBoolean &&
+                        priority == 0);
+            }
+        });
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
 
         registerForContextMenu(binding.recyclerviewPosts);
@@ -209,6 +225,22 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         intent.putExtra(Values.SECTION_ID, sectionID);
         intent.putExtra(Values.POST_ID, postID);
         startActivityForResult(intent, Values.EDIT_CODE);
+    }
+
+    @SuppressWarnings("unused")
+    public void pinPost(MenuItem menuItem) {
+        viewModel.setPinned(true);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.pinned, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
+    }
+
+    @SuppressWarnings("unused")
+    public void unpinPost(MenuItem menuItem) {
+        viewModel.setPinned(false);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.unpinned, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.show();
     }
 
     @SuppressWarnings("unused")

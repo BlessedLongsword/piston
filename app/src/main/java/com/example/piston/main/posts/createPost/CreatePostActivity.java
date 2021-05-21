@@ -15,6 +15,8 @@ import com.example.piston.utilities.CheckNetwork;
 import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Objects;
+
 public class CreatePostActivity extends PickImageActivity {
 
     private ActivityCreatePostBinding binding;
@@ -72,7 +74,8 @@ public class CreatePostActivity extends PickImageActivity {
     @SuppressWarnings("unused")
     public void createPost(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        viewModel.createPost(scope, sectionID, imageUri, connected);
+        if (!Objects.requireNonNull(viewModel.getLoading().getValue()))
+            viewModel.createPost(scope, sectionID, imageUri, connected);
     }
 
     @Override

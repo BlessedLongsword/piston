@@ -98,10 +98,11 @@
 
                 <LinearLayout
                     android:id="@+id/heart_count"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/tiny_separator"
                     android:orientation="horizontal"
+                    android:weightSum="1"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
@@ -119,6 +120,20 @@
                         android:text="@{post.numLikesString}"
                         android:textAppearance="?attr/textAppearanceBody1"
                         android:textColor="?android:attr/textColorPrimary"/>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:id="@+id/pin_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Pin"
+                        android:contentDescription="@string/content_description_media" />
+
                 </LinearLayout>
 
             </LinearLayout>

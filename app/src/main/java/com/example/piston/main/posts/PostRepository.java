@@ -34,8 +34,10 @@ public class PostRepository {
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
         void setPostParams(String title, String owner, String ownerEmail,
-                           String content, String postImageLink, String profileImageLink);
+                           String content, String postImageLink, String profileImageLink,
+                           Boolean pinned);
         void setLoaded();
+        void communicatePinned(boolean pinned);
         void setPriority(Integer priority);
         void setIsLiked(boolean liked);
         void setPostDoesNotExist();
@@ -89,14 +91,15 @@ public class PostRepository {
                     String owner = (String) ds.get("owner");
                     listener.setPostParams((String) ds.get("title"), owner,
                             (String) ds.get("ownerEmail"), (String) ds.get("content"),
-                            (String) ds.get("imageLink"), (String) ds.get("profileImageLink"));
+                            (String) ds.get("imageLink"), (String) ds.get("profileImageLink"),
+                            (Boolean) ds.get("pinned"));
 
                     long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
                     listener.setNumLikes(getLikes(numLikes));
 
                     Log.d("pepe", owner + " "+ user);
                     if (Objects.requireNonNull(owner).equals(user))
-                        listener.setPriority(0);
+                        listener.setPriority(1);
                 } else {
                     listener.setPostDoesNotExist();
                 }
@@ -108,7 +111,7 @@ public class PostRepository {
                     .document(email)
                     .get().addOnCompleteListener(task -> {
                 if(task.isSuccessful())
-                    listener.setPriority(1);
+                    listener.setPriority(0);
             });
         }
 
@@ -117,7 +120,7 @@ public class PostRepository {
                     .document(email).get().addOnCompleteListener(task -> {
                if (task.isSuccessful() &&
                        (long) Objects.requireNonNull(task.getResult().get("priority")) < 2) {
-                        listener.setPriority(1);
+                        listener.setPriority(0);
                }
             });
         }
@@ -222,6 +225,11 @@ public class PostRepository {
     public void editReply(String replyID, String content) {
         DocumentReference replyDocRef = postDocRef.collection("replies").document(replyID);
         replyDocRef.get().addOnSuccessListener(documentSnapshot -> replyDocRef.update("content", content));
+    }
+
+    public void setPinned(boolean pinned) {
+        postDocRef.update("pinned", pinned);
+        listener.communicatePinned(pinned);
     }
 
     public void addLiked (boolean liked){

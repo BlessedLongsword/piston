@@ -185,5 +185,9 @@
     <string name="share_group">Compartir Grupo</string>
     <string name="add_note">Añadir Nota</string>
     <string name="settings_follow_theme">Follow System Theme</string>
+    <string name="pin_post">Fijar Post</string>
+    <string name="unpin_post">Desfijar Post</string>
+    <string name="pinned">Se ha fijado la publicación</string>
+    <string name="unpinned">La publicación ya no está fijada</string>
 
 </resources>

@@ -13,6 +13,8 @@ import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.CheckNetwork;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Objects;
+
 public class CreateCategoryActivity extends PickImageActivity {
 
     private ActivityCreateCategoryBinding binding;
@@ -54,7 +56,8 @@ public class CreateCategoryActivity extends PickImageActivity {
     @SuppressWarnings("unused")
     public void createCategory(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createCategoryViewModel.createCategory(imageUri, connected);
+        if (!Objects.requireNonNull(createCategoryViewModel.getLoading().getValue()))
+            createCategoryViewModel.createCategory(imageUri, connected);
     }
 
     @Override

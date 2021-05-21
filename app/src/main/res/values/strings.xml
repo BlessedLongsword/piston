@@ -191,5 +191,9 @@
     <string name="share_group">Share Group</string>
     <string name="add_note">Add note</string>
     <string name="settings_follow_theme">Follow System Theme</string>
+    <string name="pin_post">Pin Post</string>
+    <string name="unpin_post">Unpin Post</string>
+    <string name="pinned">This Post is now pinned</string>
+    <string name="unpinned">This Post is no longer pinned</string>
 
 </resources>

@@ -15,4 +15,18 @@
         android:icon="@drawable/baseline_edit_white_36"
         android:onClick="editPost"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/pin_post"
+        android:title="@string/pin_post"
+        android:onClick="pinPost"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/unpin_post"
+        android:title="@string/unpin_post"
+        android:visible="false"
+        android:onClick="unpinPost"
+        app:showAsAction="never" />
 </menu>

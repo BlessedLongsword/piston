@@ -126,15 +126,11 @@
 
                 <ProgressBar
                     android:id="@+id/category_progress_bar"
+                    android:layout_marginVertical="@dimen/small_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     setVisible="@{viewModel.loading}"/>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
 
             </LinearLayout>
 

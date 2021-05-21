@@ -4,6 +4,7 @@ public class Post extends OwnedContent {
 
     private String title, sectionID, imageLink, profileImageLink;
     private int numLikes;
+    private boolean pinned;
 
     public Post() {}
 
@@ -15,6 +16,7 @@ public class Post extends OwnedContent {
         setImageLink(imageLink);
         setProfileImageLink(profileImageLink);
         setNumLikes(0);
+        pinned = false;
     }
 
     public String getTitle() {
@@ -59,5 +61,13 @@ public class Post extends OwnedContent {
 
     public void setNumLikes(int numLikes) {
         this.numLikes = numLikes;
+    }
+
+    public boolean getPinned() {
+        return pinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
     }
 }

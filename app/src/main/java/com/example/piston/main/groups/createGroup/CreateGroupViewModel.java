@@ -24,7 +24,6 @@ public class CreateGroupViewModel extends ViewModel implements CreateGroupReposi
 
     public void generateGroupID() {
         repository.generateGroupID();
-        loading.setValue(true);
     }
 
     public void titleUpdate() {
