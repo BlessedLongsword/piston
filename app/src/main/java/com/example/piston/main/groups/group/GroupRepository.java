@@ -63,6 +63,7 @@ public class GroupRepository {
     public void updateQuery(String field) {
         postsQuery = groupDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
                 .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING).orderBy(field);
+        loadGroupPosts();
     }
 
     private void listenChanges() {

@@ -57,6 +57,7 @@ public class CategoryRepository {
     public void updateQuery(String field) {
         postsQuery = categoryDocRef.collection("posts").orderBy(field).orderBy("timestamp",
                 Query.Direction.DESCENDING);
+        loadCategoryPosts();
     }
 
     private void listenChanges() {

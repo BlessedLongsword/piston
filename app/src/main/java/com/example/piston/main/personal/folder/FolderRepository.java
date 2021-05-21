@@ -66,6 +66,7 @@ public class FolderRepository {
     public void updateQuery(String field) {
         postsQuery = folderDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
                 .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING);
+        loadFolderPosts();
     }
 
     private void listenChanges() {
