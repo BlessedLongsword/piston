@@ -65,6 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
         if (viewType == 0)
             binding.postPicture.setVisibility(View.GONE);
 
+        binding.pinImage.setVisibility(View.GONE);
         return new CategoryAdapter.PostHolder(binding);
     }
 

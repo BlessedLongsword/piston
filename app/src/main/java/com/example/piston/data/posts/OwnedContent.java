@@ -1,11 +1,11 @@
 package com.example.piston.data.posts;
 
+import com.github.marlonlom.utilities.timeago.TimeAgo;
+
 public abstract class OwnedContent {
 
-    private String id;
-    private String owner;
-    private String ownerEmail;
-    private String content;
+    private String id, owner, ownerEmail, content;
+    private long time;
 
     public OwnedContent() {}
 
@@ -46,5 +46,13 @@ public abstract class OwnedContent {
 
     public void setOwnerEmail(String ownerEmail) {
         this.ownerEmail = ownerEmail;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return TimeAgo.using(time*1000);
     }
 }

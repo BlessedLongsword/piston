@@ -1,6 +1,7 @@
 package com.example.piston.main.personal.folder;
 
 import com.example.piston.data.posts.Post;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,6 +49,8 @@ public class FolderRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     Post post = documentSnapshot.toObject(Post.class);
+                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                    post.setTime(Objects.requireNonNull(timestamp).getSeconds());
                     posts.add(post);
                 }
                 listener.setFolderPosts(posts);

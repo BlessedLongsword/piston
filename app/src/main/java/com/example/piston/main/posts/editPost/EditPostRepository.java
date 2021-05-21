@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -45,6 +46,7 @@ public class EditPostRepository {
                 listener.setParams((String) task.getResult().get("title"),
                         (String) task.getResult().get("content"),
                         (String) task.getResult().get("imageLink"));
+
                 username = (String) task.getResult().get("owner");
             }
         });
@@ -92,6 +94,7 @@ public class EditPostRepository {
                 postDocRef.update("title", title);
                 postDocRef.update("imageLink", imageLink);
                 postDocRef.update("content", content);
+                postDocRef.update("timestamp", FieldValue.serverTimestamp());
                 listener.setEditFinished();
                 listener.setLoadingFinished();
             }

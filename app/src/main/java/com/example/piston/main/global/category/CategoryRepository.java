@@ -1,6 +1,7 @@
 package com.example.piston.main.global.category;
 
 import com.example.piston.data.posts.Post;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -42,6 +43,8 @@ public class CategoryRepository {
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
                             Post post = documentSnapshot.toObject(Post.class);
+                            Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                            post.setTime(Objects.requireNonNull(timestamp).getSeconds());
                             posts.add(post);
                         }
                         listener.setCategoryPosts(posts);

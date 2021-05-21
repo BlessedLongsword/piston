@@ -1,11 +1,10 @@
 package com.example.piston.main.posts;
 
-import android.util.Log;
-
 import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
 import com.example.piston.utilities.Values;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -13,6 +12,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class PostRepository {
     public interface IPosts {
         void setReplies(ArrayList<Reply> replies);
         void setPostParams(String title, String owner, String ownerEmail,
-                           String content, String postImageLink, String profileImageLink,
+                           String content, String postImageLink, String profileImageLink, String time,
                            Boolean pinned);
         void setLoaded();
         void communicatePinned(boolean pinned);
@@ -87,15 +87,16 @@ public class PostRepository {
                 if (task.getResult().exists()) {
                     DocumentSnapshot ds = task.getResult();
                     String owner = (String) ds.get("owner");
+                    Timestamp time = (Timestamp) ds.get("timestamp");
                     listener.setPostParams((String) ds.get("title"), owner,
                             (String) ds.get("ownerEmail"), (String) ds.get("content"),
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"),
+                            TimeAgo.using(Objects.requireNonNull(time).getSeconds()*1000),
                             (Boolean) ds.get("pinned"));
 
                     long numLikes = (long) Objects.requireNonNull(task.getResult().get("numLikes"));
                     listener.setNumLikes(getLikes(numLikes));
 
-                    Log.d("pepe", owner + " "+ user);
                     if (Objects.requireNonNull(owner).equals(user))
                         listener.setPriority(1);
                 } else {
@@ -134,9 +135,13 @@ public class PostRepository {
                    String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
                    if (replyType.equals("reply")) {
                        Reply post = documentSnapshot.toObject(Reply.class);
+                       Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                       post.setTime(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    } else {
                        QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
+                       Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                       post.setTime(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    }
                }
