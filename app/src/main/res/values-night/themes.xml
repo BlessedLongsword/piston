@@ -49,21 +49,4 @@
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
     </style>
 
-
-    <style name="EditTextButton">
-        <item name="android:src">@drawable/baseline_mode_edit_white_24</item>
-    </style>
-
-    <style name="GroupModeratorIcon">
-        <item name="android:src">@drawable/baseline_construction_white_24</item>
-    </style>
-
-    <style name="GroupOwnerIcon">
-        <item name="android:src">@drawable/outline_local_police_white_24</item>
-    </style>
-
-    <style name="ClipBoard">
-        <item name="android:src">@drawable/outline_content_copy_white_24</item>
-    </style>
-
 </resources>
