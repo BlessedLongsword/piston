@@ -87,7 +87,7 @@
                             android:layout_marginStart="@dimen/tiny_separator"
                             android:layout_gravity="center_vertical"
                             tools:text="@string/reg_date_format"
-                            android:text="@{post.time}"
+                            android:text="@{post.timeAgo}"
                             android:textColor="?android:attr/textColorSecondary"/>
                     </LinearLayout>
 

@@ -5,7 +5,7 @@ import com.github.marlonlom.utilities.timeago.TimeAgo;
 public abstract class OwnedContent {
 
     private String id, owner, ownerEmail, content;
-    private long time;
+    private long timeAgo;
 
     public OwnedContent() {}
 
@@ -48,11 +48,11 @@ public abstract class OwnedContent {
         this.ownerEmail = ownerEmail;
     }
 
-    public void setTime(long time) {
-        this.time = time;
+    public void setTimeAgo(long timeAgo) {
+        this.timeAgo = timeAgo;
     }
 
-    public String getTime() {
-        return TimeAgo.using(time*1000);
+    public String getTimeAgo() {
+        return TimeAgo.using(timeAgo *1000);
     }
 }

@@ -137,12 +137,12 @@ public class PostRepository {
                    if (replyType.equals("reply")) {
                        Reply post = documentSnapshot.toObject(Reply.class);
                        Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
-                       post.setTime(Objects.requireNonNull(timestamp).getSeconds());
+                       post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    } else {
                        QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
                        Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
-                       post.setTime(Objects.requireNonNull(timestamp).getSeconds());
+                       post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    }
                    if (counter++ % 10 == 0)

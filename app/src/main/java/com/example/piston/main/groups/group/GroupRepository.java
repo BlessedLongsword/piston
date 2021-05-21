@@ -49,7 +49,7 @@ public class GroupRepository {
                         task.getResult())) {
                     Post post = documentSnapshot.toObject(Post.class);
                     Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
-                    post.setTime(Objects.requireNonNull(timestamp).getSeconds());
+                    post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                     posts.add(post);
                 }
                 listener.setGroupPosts(posts);

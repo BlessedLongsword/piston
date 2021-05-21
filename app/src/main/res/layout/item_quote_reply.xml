@@ -30,7 +30,7 @@
                 android:layout_marginTop="@dimen/tiny_separator"
                 android:layout_gravity="center_vertical"
                 tools:text="@string/reg_date_format"
-                android:text="@{reply.time}"
+                android:text="@{reply.timeAgo}"
                 android:textColor="?android:attr/textColorSecondary"/>
 
             <com.google.android.material.card.MaterialCardView
