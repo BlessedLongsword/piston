@@ -1,12 +1,12 @@
-package com.example.piston.utilities;
+package com.example.piston.main.notifications;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -15,8 +15,9 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.piston.R;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.notifications.NotificationReply;
+import com.example.piston.main.settings.SettingsActivity;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -59,6 +60,24 @@ public class NotificationsService extends Service {
 
         createNotificationChannel();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            Intent intent = new Intent(this, SettingsActivity.class);
+            intent.putExtra(Values.NOTIFICATIONS_END, true);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                    intent, 0);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setSmallIcon(R.mipmap.logo)
+                    .setContentTitle("Piston is running")
+                    .setContentText("Tap to stop listening for notifications")
+                    .setGroup("pistonAlone")
+                    .setContentIntent(contentIntent);
+
+            startForeground(1, builder.build());
+        }
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
@@ -94,11 +113,18 @@ public class NotificationsService extends Service {
     }
 
     public void postNotification(String title, String content, String id) {
+
+        PendingIntent contentIntent =
+                PendingIntent.getActivity(this, 0, new Intent(this,
+                        NotificationsActivity.class), 0);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.id.group_moderator_icon)
                 .setContentTitle(title)
                 .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 

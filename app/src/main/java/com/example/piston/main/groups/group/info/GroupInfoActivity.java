@@ -121,6 +121,7 @@ public class GroupInfoActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
     }
 
+    @SuppressWarnings("unused")
     public void shareGroup(MenuItem item) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + Values.JOIN + "/" +

@@ -22,6 +22,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_separator"
+                android:layout_marginTop="@dimen/tiny_separator"
+                android:layout_gravity="center_vertical"
+                tools:text="@string/reg_date_format"
+                android:text="@{reply.timeAgo}"
+                android:textColor="?android:attr/textColorSecondary"/>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/reply_quote"
                 android:layout_width="match_parent"

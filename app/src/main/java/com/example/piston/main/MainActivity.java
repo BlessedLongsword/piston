@@ -22,7 +22,7 @@ import com.example.piston.R;
 import com.example.piston.main.groups.group.GroupActivity;
 import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.PostActivity;
-import com.example.piston.utilities.NotificationsService;
+import com.example.piston.main.notifications.NotificationsService;
 import com.example.piston.utilities.ScopeFragment;
 import com.example.piston.utilities.ScopePagerAdapter;
 import com.example.piston.main.settings.SettingsActivity;
@@ -134,17 +134,28 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        startService(new Intent(this, NotificationsService.class));
+        startNotifications();
+    }
+
+    private void startNotifications() {
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+
+        boolean notificationsEnabled = prefs.getBoolean(Values.NOTIFICATIONS_ENABLED, false);
+
+        if (notificationsEnabled) {
+            Intent intent = new Intent(this, NotificationsService.class);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                startForegroundService(intent);
+            else
+                startService(intent);
+
+        }
     }
 
     private void changeTabLayoutColors(int position) {

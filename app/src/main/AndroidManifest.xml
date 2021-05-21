@@ -3,6 +3,7 @@
     package="com.example.piston">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:icon="@mipmap/logo"
@@ -36,8 +37,6 @@
         </activity>
 
         <activity android:name=".main.MainActivity" />
-
-
 
         <activity
             android:name=".main.global.category.CategoryActivity"
@@ -94,9 +93,8 @@
         <activity android:name=".main.settings.SettingsActivity"/>
 
         <service
-            android:name=".utilities.NotificationsService"
-            android:enabled="true"
-            android:stopWithTask="false"/>
+            android:name=".main.notifications.NotificationsService"
+            android:enabled="true"/>
 
     </application>
 

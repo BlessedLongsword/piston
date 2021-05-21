@@ -15,8 +15,6 @@
     <color name="light_grey">#ECECEC</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="dark_blue">#0000EE</color>
-    <color name="azure">#007FFF</color>
     <color name="transparent">#00000000</color>
 
     <color name="red">#FFFF0000</color>
@@ -56,9 +54,5 @@
     <color name="personal_secondary_variant_dark">#bcaaa4</color>
 
     <color name="almost_black">#282828</color>
-    
-    <color name="lime_green">#32CD32</color>
-
-    <color name="dark_yellow1">#CCCC00</color>
 
 </resources>

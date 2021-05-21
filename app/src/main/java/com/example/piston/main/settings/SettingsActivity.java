@@ -1,10 +1,10 @@
 package com.example.piston.main.settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.piston.R;
 import com.example.piston.databinding.ActivitySettingsBinding;
+import com.example.piston.main.notifications.NotificationsService;
 import com.example.piston.utilities.Values;
 
 import java.util.Objects;
@@ -22,12 +23,35 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+
+        boolean notificationsEnd = getIntent().getBooleanExtra(Values.NOTIFICATIONS_END, false);
+        if (notificationsEnd) {
+            stopService(new Intent(this, NotificationsService.class));
+            prefs.edit().putBoolean(Values.NOTIFICATIONS_ENABLED, false).apply();
+            finish();
+        }
+
         ActivitySettingsBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_settings);
 
-        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
-        boolean followSystem = false;
+        boolean notificationsEnabled = prefs.getBoolean(Values.NOTIFICATIONS_ENABLED, false);
+        binding.notificationsEnabled.setChecked(notificationsEnabled);
 
+        binding.notificationsEnabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Intent intent = new Intent(this, NotificationsService.class);
+            if (!isChecked)
+                stopService(intent);
+            else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    startForegroundService(intent);
+                else
+                    startService(intent);
+            }
+            prefs.edit().putBoolean(Values.NOTIFICATIONS_ENABLED, isChecked).apply();
+        });
+
+        boolean followSystem = false;
         if (Build.VERSION.SDK_INT >= 29) {
             followSystem = prefs.getBoolean(Values.THEME_FOLLOW_SYSTEM, false);
             Objects.requireNonNull(binding.settingsFollowSystem).setChecked(followSystem);

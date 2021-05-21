@@ -3,9 +3,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">32dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="appbar_padding_top">8dp</dimen>
 
     <!-- Component margins-->
     <dimen name="medium_separator">24dp</dimen>
@@ -21,31 +19,19 @@
     <dimen name="medium_high_btn">50dp</dimen>
     <dimen name="big_text_field_description">150dp</dimen>
     <dimen name="big_edit_text_description">125dp</dimen>
-    <dimen name="big_text_field_post">300dp</dimen>
-    <dimen name="big_edit_text_post">275dp</dimen>
-    <dimen name="tiny_square">16dp</dimen>
-    <dimen name="small_square">32dp</dimen>
-    <dimen name="lower_square">36</dimen>
     <dimen name="low_square">48dp</dimen>
     <dimen name="medium_square">64dp</dimen>
     <dimen name="big_square">128dp</dimen>
     <dimen name="bigger_square">150dp</dimen>
     <dimen name="even_bigger_square">175dp</dimen>
-    <dimen name="huge_square">256dp</dimen>
-    <dimen name="list_item_height">75dp</dimen>
 
     <!-- Font sizes -->
     <dimen name="title">24sp</dimen>
     <dimen name="small_title">18sp</dimen>
-    <dimen name="text">14sp</dimen>
-    <dimen name="small">10sp</dimen>
     <dimen name="huge">45sp</dimen>
     <dimen name="card_image">194dp</dimen>
-    <dimen name="profile_activity_image_height">400dp</dimen>
     <dimen name="long_button">200dp</dimen>
-    <dimen name="half_screen">400dp</dimen>
     <dimen name="quote_elevation">5dp</dimen>
-    <dimen name="space">4dp</dimen>
     <dimen name="one">1dp</dimen>
     <dimen name="bigger_text">16sp</dimen>
     <dimen name="text_hint">12sp</dimen>

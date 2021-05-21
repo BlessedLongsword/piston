@@ -80,6 +80,15 @@
                             android:text="@{post.owner}"
                             android:textAppearance="?attr/textAppearanceBody1"
                             android:textColor="?attr/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/post_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            tools:text="@string/reg_date_format"
+                            android:text="@{post.timeAgo}"
+                            android:textColor="?android:attr/textColorSecondary"/>
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
