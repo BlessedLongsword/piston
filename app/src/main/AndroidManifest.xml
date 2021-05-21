@@ -91,6 +91,11 @@
 
         <activity android:name=".main.settings.SettingsActivity"/>
 
+        <service
+            android:name=".utilities.NotificationsService"
+            android:enabled="true"
+            android:stopWithTask="false"/>
+
     </application>
 
 </manifest>

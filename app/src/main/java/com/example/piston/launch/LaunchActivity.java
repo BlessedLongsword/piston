@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.main.MainActivity;
 import com.example.piston.authentication.login.LoginActivity;
+import com.example.piston.utilities.NotificationsService;
 import com.example.piston.utilities.Values;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public class LaunchActivity extends AppCompatActivity {
         checkIfUserIsAuthenticated();
 
         uri = getIntent().getData();
+
+        startService(new Intent(this, NotificationsService.class));
     }
 
     private void checkIfUserIsAuthenticated() {
