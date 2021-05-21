@@ -97,6 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardBackgroundColor="@color/transparent"
+                        android:onClick="copyGroupID"
                         app:cardElevation="@dimen/zero">
 
                         <LinearLayout
@@ -140,7 +141,6 @@
                             android:theme="@style/ClipBoard"
                             android:contentDescription="@string/share_group"
                             android:layout_gravity="center_vertical"
-                            android:onClick="copyGroupID"
                             android:layout_marginEnd="10dp"/>
 
                     </LinearLayout>

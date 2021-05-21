@@ -11,6 +11,8 @@ import com.example.piston.R;
 import com.example.piston.databinding.ActivityCreateFolderBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Objects;
+
 public class CreateFolderActivity extends AppCompatActivity {
 
     CreateFolderViewModel createFolderViewModel;
@@ -41,6 +43,7 @@ public class CreateFolderActivity extends AppCompatActivity {
 
     @SuppressWarnings("unused")
     public void createFolder(MenuItem item) {
-        createFolderViewModel.createFolder();
+        if (!Objects.requireNonNull(createFolderViewModel.getLoading().getValue()))
+            createFolderViewModel.createFolder();
     }
 }

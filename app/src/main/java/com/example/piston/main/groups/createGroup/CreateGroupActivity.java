@@ -73,7 +73,8 @@ public class CreateGroupActivity extends PickImageActivity {
     @SuppressWarnings("unused")
     public void createGroup(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        createGroupViewModel.createGroup(imageUri, connected);
+        if (!Objects.requireNonNull(createGroupViewModel.getLoading().getValue()))
+            createGroupViewModel.createGroup(imageUri, connected);
     }
 
     @Override

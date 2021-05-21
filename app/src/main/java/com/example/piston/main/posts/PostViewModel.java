@@ -20,6 +20,7 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     private final MutableLiveData<String> postImageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> profileImageLink = new MutableLiveData<>("");
     private final MutableLiveData<String> currentUser = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> pinned = new MutableLiveData<>(false);
 
     private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
     private final MutableLiveData<String> numLikes = new MutableLiveData<>( "0");
@@ -59,6 +60,10 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
         repository.updatePost();
     }
 
+    public void setPinned(boolean pinned) {
+        repository.setPinned(pinned);
+    }
+
     @Override
     public void setReplies(ArrayList<Reply> replies) {
         this.replies.setValue(replies);
@@ -66,13 +71,14 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
 
     @Override
     public void setPostParams(String title, String owner, String ownerEmail, String content,
-                              String postImageLink, String profileImageLink) {
+                              String postImageLink, String profileImageLink, Boolean pinned) {
         this.postTitle.setValue(title);
         this.postOwner.setValue(owner);
         this.postOwnerEmail.setValue(ownerEmail);
         this.postContent.setValue(content);
         this.postImageLink.setValue(postImageLink);
         this.profileImageLink.setValue(profileImageLink);
+        this.pinned.setValue(pinned);
     }
 
     @Override
@@ -101,6 +107,11 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     @Override
     public void setCurrentUser(String currentUser) {
         this.currentUser.setValue(currentUser);
+    }
+
+    @Override
+    public void communicatePinned(boolean pinned) {
+        this.pinned.setValue(pinned);
     }
 
     @Override
@@ -148,6 +159,8 @@ public class PostViewModel extends ViewModel implements PostRepository.IPosts{
     public LiveData<String> getProfileImageLink() {
         return profileImageLink;
     }
+
+    public LiveData<Boolean> getPinned() { return pinned; }
 
     public void deletePost() {
         repository.deletePost();

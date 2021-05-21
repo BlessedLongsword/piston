@@ -1,6 +1,7 @@
 package com.example.piston.main.groups.group;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,17 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     @Override
     public int getItemViewType(int position) {
-        return (Objects.requireNonNull(viewModel.getPosts().getValue()).get(position).getImageLink() == null) ? 0 : 1;
+        Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
+        if (post.getImageLink() == null) {
+            if (post.getPinned())
+                return 2;
+            else return 0;
+        } else {
+            if (post.getPinned())
+                return 3;
+            else
+                return 1;
+        }
     }
 
     @NonNull
@@ -62,8 +73,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
 
-        if (viewType == 0)
+        if (viewType == 0 || viewType == 2)
             binding.postPicture.setVisibility(View.GONE);
+
+        if (viewType == 2 || viewType == 3) {
+            binding.pinImage.setVisibility(View.VISIBLE);
+        }
 
         return new GroupAdapter.GroupHolder(binding);
     }

@@ -114,6 +114,14 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <ProgressBar
+                    android:id="@+id/category_progress_bar"
+                    android:layout_marginVertical="@dimen/small_separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    setVisible="@{viewModel.loading}"/>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

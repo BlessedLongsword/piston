@@ -114,15 +114,17 @@ public class CreatePostRepository {
             if (task.isComplete()) {
                 Post post = new Post(id, username, user, content, title, sectionID, imageLink, profilePictureLink);
                 docRef.set(post);
+                FieldValue timestamp = FieldValue.serverTimestamp();
+                docRef.update("timestamp", timestamp);
+                DocumentReference sectionDocRef = db.collection(scope).document(sectionID);
                 if (scope.equals("groups")) {
-                    CollectionReference cr = db.collection(scope).document(sectionID)
-                            .collection("members");
-                            sendNotification(cr, sectionID, title, imageLink, scope, id);
+                    CollectionReference cr = sectionDocRef.collection("members");
+                    sendNotification(cr, sectionID, title, imageLink, scope, id);
                 } else if (scope.equals("categories")) {
-                    CollectionReference cr = db.collection(scope).document(sectionID)
-                            .collection("subscribedUsers");
+                    CollectionReference cr = sectionDocRef.collection("subscribedUsers");
                     sendNotification(cr, sectionID, title, imageLink, scope, id);
                 }
+                sectionDocRef.update("timestamp", timestamp);
                 listener.setCreateFinished();
                 listener.setLoadingFinished();
             }
