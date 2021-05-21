@@ -12,6 +12,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
+
 public class FolderRepository {
 
     public interface IFolder {
@@ -54,7 +56,7 @@ public class FolderRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     Post post = documentSnapshot.toObject(Post.class);
-                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp", ESTIMATE);
                     post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                     posts.add(post);
                 }

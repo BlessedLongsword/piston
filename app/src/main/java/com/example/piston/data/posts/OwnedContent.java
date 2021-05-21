@@ -1,10 +1,12 @@
 package com.example.piston.data.posts;
 
 import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.google.firebase.firestore.Exclude;
 
 public abstract class OwnedContent {
 
     private String id, owner, ownerEmail, content;
+    @Exclude
     private long timeAgo;
 
     public OwnedContent() {}
@@ -52,7 +54,8 @@ public abstract class OwnedContent {
         this.timeAgo = timeAgo;
     }
 
+    @Exclude
     public String getTimeAgo() {
-        return TimeAgo.using(timeAgo *1000);
+        return TimeAgo.using(timeAgo*1000);
     }
 }

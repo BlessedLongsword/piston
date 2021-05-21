@@ -12,6 +12,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
+import static java.lang.Thread.sleep;
+
 public class EditPostRepository {
 
     private final EditPostRepository.IEditPost listener;
@@ -91,10 +93,11 @@ public class EditPostRepository {
     private void updatePost(String title, String content, String imageLink) {
         postDocRef.get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
+                postDocRef.update("timestamp", FieldValue.serverTimestamp());
                 postDocRef.update("title", title);
                 postDocRef.update("imageLink", imageLink);
                 postDocRef.update("content", content);
-                postDocRef.update("timestamp", FieldValue.serverTimestamp());
+
                 listener.setEditFinished();
                 listener.setLoadingFinished();
             }

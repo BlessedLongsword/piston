@@ -1,5 +1,7 @@
 package com.example.piston.data.posts;
 
+import com.google.firebase.firestore.Exclude;
+
 public class Post extends OwnedContent {
 
     private String title, sectionID, imageLink, profileImageLink;
@@ -55,6 +57,7 @@ public class Post extends OwnedContent {
         return numLikes;
     }
 
+    @Exclude
     public String getNumLikesString() {
         return (numLikes/1000 > 1) ? numLikes/1000 + "k" : String.valueOf(numLikes);
     }

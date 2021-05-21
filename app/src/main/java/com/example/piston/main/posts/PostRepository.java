@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
+
 public class PostRepository {
 
     private final IPosts listener;
@@ -87,7 +89,7 @@ public class PostRepository {
                 if (task.getResult().exists()) {
                     DocumentSnapshot ds = task.getResult();
                     String owner = (String) ds.get("owner");
-                    Timestamp time = (Timestamp) ds.get("timestamp");
+                    Timestamp time = (Timestamp) ds.get("timestamp", ESTIMATE);
                     listener.setPostParams((String) ds.get("title"), owner,
                             (String) ds.get("ownerEmail"), (String) ds.get("content"),
                             (String) ds.get("imageLink"), (String) ds.get("profileImageLink"),
@@ -129,19 +131,18 @@ public class PostRepository {
         ArrayList<Reply> posts = new ArrayList<>();
         postDocRef.collection("replies").orderBy("timestamp")
                 .get().addOnCompleteListener(task1 -> {
-            if (task1.isSuccessful()) {
+            if (task1.isComplete()) {
                 int counter = 0;
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task1.getResult())) {
                    String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
+                   Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp", ESTIMATE);
                    if (replyType.equals("reply")) {
                        Reply post = documentSnapshot.toObject(Reply.class);
-                       Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
                        post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    } else {
                        QuoteReply post = documentSnapshot.toObject(QuoteReply.class);
-                       Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
                        post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                        posts.add(post);
                    }

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
+
 public class GroupRepository {
 
     public interface IGroup {
@@ -51,7 +53,7 @@ public class GroupRepository {
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
                     Post post = documentSnapshot.toObject(Post.class);
-                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp", ESTIMATE);
                     post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                     posts.add(post);
                 }

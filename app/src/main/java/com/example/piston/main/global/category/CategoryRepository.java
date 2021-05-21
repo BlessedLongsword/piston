@@ -3,6 +3,7 @@ package com.example.piston.main.global.category;
 import com.example.piston.data.posts.Post;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
@@ -10,6 +11,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
 
 public class CategoryRepository {
 
@@ -45,7 +48,7 @@ public class CategoryRepository {
                         for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                                 task.getResult())) {
                             Post post = documentSnapshot.toObject(Post.class);
-                            Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp");
+                            Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp", ESTIMATE);
                             post.setTimeAgo(Objects.requireNonNull(timestamp).getSeconds());
                             posts.add(post);
                         }
