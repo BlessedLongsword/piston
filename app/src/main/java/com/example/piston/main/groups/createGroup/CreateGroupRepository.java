@@ -6,6 +6,7 @@ import com.example.piston.data.sections.Group;
 import com.example.piston.data.users.GroupMember;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -84,12 +85,12 @@ public class CreateGroupRepository {
                         });
                         Map<String, Object> data = new HashMap<>();
                         data.put("id", groupID);
-                        db.collection("users")
-                                .document(user)
-                                .collection("groups")
-                                .document(groupID)
-                                .set(data);
-
+                        DocumentReference userGroupDocRef = db.collection("users")
+                                                                .document(user)
+                                                                .collection("groups")
+                                                                .document(groupID);
+                        userGroupDocRef.set(data);
+                        userGroupDocRef.update("timestamp", FieldValue.serverTimestamp());
                         data.clear();
                         data.put("id", user);
                         data.put("priority", GroupMember.OWNER);

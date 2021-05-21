@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.example.piston.data.sections.Category;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -79,7 +80,9 @@ public class CreateCategoryRepository {
                                     listener.setCreateError();
                                 } else {
                                     Category category = new Category(id, title, description, imageLink, nsfw);
-                                    db.collection("categories").document(id).set(category);
+                                    DocumentReference categoryDocRef = db.collection("categories").document(id);
+                                    categoryDocRef.set(category);
+                                    categoryDocRef.update("timestamp", FieldValue.serverTimestamp());
                                     listener.setCreateFinished();
                                 }
                                 listener.setLoadingFinished();

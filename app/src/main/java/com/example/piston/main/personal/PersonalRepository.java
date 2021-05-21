@@ -2,9 +2,9 @@ package com.example.piston.main.personal;
 
 import com.example.piston.data.sections.Folder;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class PersonalRepository {
 
     private final PersonalRepository.IPersonal listener;
     private ListenerRegistration listenerRegistration;
-    private final CollectionReference foldersColRef;
+    private final Query foldersQuery;
 
     public interface IPersonal {
         void setFolders(ArrayList<Folder> categories);
@@ -26,15 +26,17 @@ public class PersonalRepository {
         String user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        foldersColRef = db.collection("users")
+        foldersQuery = db.collection("users")
                 .document(Objects.requireNonNull(user))
-                .collection("folders");
+                .collection("folders")
+                .orderBy("title")
+                .orderBy("timestamp");
 
         listenChanges();
     }
 
     private void loadFolders() {
-        foldersColRef.get().addOnCompleteListener(task -> {
+        foldersQuery.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 ArrayList<Folder> folders = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
@@ -48,7 +50,7 @@ public class PersonalRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = foldersColRef.addSnapshotListener(
+        listenerRegistration = foldersQuery.addSnapshotListener(
                 (snapshots, e) -> PersonalRepository.this.loadFolders());
     }
 
