@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.personal.group.GroupInfoActivity">
+
+    <item
+        android:id="@+id/share_group"
+        android:title="@string/share_group"
+        android:onClick="shareGroup"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/delete_group"
         android:title="@string/delete_group"

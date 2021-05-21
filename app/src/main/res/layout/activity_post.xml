@@ -132,14 +132,16 @@
                                 android:layout_height="wrap_content"
                                 android:weightSum="1">
 
-                                <ImageButton
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/share_button"
                                     android:layout_width="@dimen/low_square"
                                     android:layout_height="@dimen/low_square"
-                                    android:background="@color/transparent"
+                                    app:icon="@drawable/baseline_share_black_36"
+                                    app:iconGravity="textStart"
+                                    style="?attr/borderlessButtonStyle"
+                                    app:iconPadding="0dp"
                                     android:onClick="sharePost"
-                                    android:contentDescription="@string/share_post"
-                                    android:src="@drawable/baseline_share_black_36" />
+                                    android:contentDescription="@string/share_post" />
 
                                 <com.like.LikeButton
                                     android:id="@+id/heart_button"

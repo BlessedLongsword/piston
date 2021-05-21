@@ -25,6 +25,7 @@
     <dimen name="big_edit_text_post">275dp</dimen>
     <dimen name="tiny_square">16dp</dimen>
     <dimen name="small_square">32dp</dimen>
+    <dimen name="lower_square">36</dimen>
     <dimen name="low_square">48dp</dimen>
     <dimen name="medium_square">64dp</dimen>
     <dimen name="big_square">128dp</dimen>

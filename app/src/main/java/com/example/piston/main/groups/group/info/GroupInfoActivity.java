@@ -31,6 +31,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     private GroupInfoViewModel viewModel;
     private ClipboardManager clipboard;
     private ActivityGroupInfoBinding binding;
+    String groupID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class GroupInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_info);
 
         Intent intent = getIntent();
-        String groupID = intent.getStringExtra(Values.SECTION_ID);
+        groupID = intent.getStringExtra(Values.SECTION_ID);
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
                 .get(GroupInfoViewModel.class);
@@ -55,8 +56,8 @@ public class GroupInfoActivity extends AppCompatActivity {
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
         viewModel.getPriority().observe(this, priority -> {
-            binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority==0);
             binding.groupInfoTopAppBar.getMenu().getItem(1).setVisible(priority<=1);
+            binding.groupInfoTopAppBar.getMenu().getItem(2).setVisible(priority<=1);
             if (priority<=1) {
                 binding.groupInfoDescriptionCard.setOnClickListener(v -> editDescription());
             }
@@ -120,6 +121,14 @@ public class GroupInfoActivity extends AppCompatActivity {
                 Objects.requireNonNull(Objects.requireNonNull(binding.groupId).getText().toString()));
         clipboard.setPrimaryClip(clip);
         Toast.makeText(this, R.string.link_copied, Toast.LENGTH_LONG).show();
+    }
+
+    public void shareGroup(MenuItem item) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + Values.JOIN + "/" +
+                groupID);
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_post)));
     }
 
     @SuppressWarnings("unused")

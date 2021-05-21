@@ -3,6 +3,7 @@ package com.example.piston.main.posts;
 import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.data.posts.QuoteReply;
 import com.example.piston.data.posts.Reply;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -98,12 +99,24 @@ public class PostRepository {
             }
         });
 
-        db.collection("admins")
-                .document(email)
-                .get().addOnCompleteListener(task -> {
-            if(task.isSuccessful())
-                listener.setPriority(1);
-        });
+        if (scope.equals(Values.GLOBAL)) {
+            db.collection("admins")
+                    .document(email)
+                    .get().addOnCompleteListener(task -> {
+                if(task.isSuccessful())
+                    listener.setPriority(1);
+            });
+        }
+
+        if (scope.equals(Values.GROUPS)) {
+            db.collection(scope).document(sectionID).collection("members")
+                    .document(email).get().addOnCompleteListener(task -> {
+               if (task.isSuccessful() &&
+                       (long) Objects.requireNonNull(task.getResult().get("priority")) < 2) {
+                        listener.setPriority(1);
+               }
+            });
+        }
     }
 
     private void loadPosts() {
