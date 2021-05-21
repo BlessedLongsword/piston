@@ -95,7 +95,8 @@ public class EditPostRepository {
             if (task.isComplete()) {
                 postDocRef.update("timestamp", FieldValue.serverTimestamp());
                 postDocRef.update("title", title);
-                postDocRef.update("imageLink", imageLink);
+                if(imageLink != null)
+                    postDocRef.update("imageLink", imageLink);
                 postDocRef.update("content", content);
 
                 listener.setEditFinished();
