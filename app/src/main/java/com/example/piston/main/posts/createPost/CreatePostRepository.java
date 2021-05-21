@@ -2,10 +2,8 @@ package com.example.piston.main.posts.createPost;
 
 import android.net.Uri;
 
-import com.example.piston.R;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
-import com.example.piston.data.users.User;
 import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;

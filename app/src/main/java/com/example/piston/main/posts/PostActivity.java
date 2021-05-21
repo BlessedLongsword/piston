@@ -220,6 +220,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         return -1;
     }
 
+    @SuppressWarnings("unused")
     public void deletePost(MenuItem menuItem) {
         viewModel.deletePost();
         finish();

@@ -15,7 +15,6 @@
     <!-- General purpose -->
     <string name="cancel">Cancel·lar</string>
     <string name="save">Desar</string>
-    <string name="save_changes">Desa els canvis</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
     <string name="group_code">ID del Grup</string>
@@ -28,7 +27,6 @@
     <string name="notifications">Notificacions</string>
     <string name="settings">Configuració</string>
     <string name="link_copied">Enllaç Copiat</string>
-    <string name="file_path">Camí del Arxiu</string>
     <string name="confirmation_long">Entès</string>
     <string name="title_empty">Aquest camp és obligatori</string>
     <string name="alternative">També pots</string>
@@ -43,12 +41,9 @@
 
     <!-- Sign in strings -->
     <string name="sign_in">Inicia sessió</string>
-    <string name="sign_up">Registrar-se</string>
     <string name="user_hint">Nom d\'Usuari o Correu Electrònic</string>
-    <string name="forgot_pass">Ha oblidat la seva contrasenya?</string>
     <string name="sign_up_msg">No disposa d\'un compte?</string>
     <string name="sign_up_button"> Registrar-se ara</string>
-    <string name="welcome">Benvingut</string>
 
     <!-- Register strings -->
     <string name="reg_title">Registrar-se</string>
@@ -56,43 +51,27 @@
     <string name="reg_date_format">dd/mm/aaaa</string>
     <string name="terms_text">He llegit i acceptat els termes de privacitat</string>
     <string name="reg_btn">Registrar-se</string>
-    <string name="reg_successful">Registre amb exit</string>
 
     <!-- View Profile Strings -->
     <string name="view_profile_name">Nom i Cognoms</string>
     <string name="view_profile_phone">Teléfon</string>
-    <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicació destacada</string>
-    <string name="view_profile_edit">Editar perfil</string>
-    <string name="insert_name">Introdueix el teu nom</string>
-    <string name="insert_phone_number">Introdueix el teu número de telèfon</string>
-    <string name="insert_birth_date">Introdueix la teva data de naixement</string>
 
     <!-- Create Post Strings -->
     <string name="create_post_activity_title">NOVA PUBLICACIÓ</string>
     <string name="post_content">Contingut</string>
     <string name="hint_post_content">Expliqui la seva experiència</string>
-    <string name="hint_input_title">Insertar Títol</string>
     <string name="choose_picture">Insertar Imatge</string>
-    <string name="attach_file">Adjuntar Arxiu</string>
     <string name="create_post_error_message">Sisuplau inserti un nom vàlid pel post</string>
 
     <!-- Edit Post Strings -->
-    <string name="edit_post_activity_title">EDITAR PUBLICACIO</string>
+    <string name="edit_post_activity_title">Editar Publicació</string>
     <string name="edit_post_btn">Editar</string>
-    <string name="change_picture">Editar Imatge</string>
-    <string name="change_file">Editar Arxiu</string>
     <string name="delete_post_btn">Eliminar Post</string>
-
-    <!-- Reply Post Strings -->
-    <string name="reply_post_activity_title">RESPONDRE PUBLICACIO</string>
-    <string name="reply_btn">Respondre</string>
 
     <!-- Create and edit Folder Strings -->
     <string name="create_folder_activity_title">CREAR CARPETA</string>
     <string name="folder_name">Nom de la Carpeta</string>
-    <string name="edit_folder_activity_title">EDITAR CARPETA</string>
-    <string name="create_folder_title_taken">Aquesta carpeta ja existeix</string>
     <string name="create_folder_error_message">Siusplau inserti un nom vàlid per la Carpeta</string>
     <string name="delete_folder">Eliminar carpeta</string>
 
@@ -104,29 +83,25 @@
     <string name="join_group_already">Ja pertanys a aquest grup</string>
 
     <!-- Create and edit Group Strings -->
-    <string name="create_group_activity_title">CREAR GRUP</string>
+    <string name="create_group_activity_title">Crear Grup</string>
     <string name="create_group_name">Nom del Grup</string>
-    <string name="create_group_members">Membres</string>
     <string name="group_link_help">Obtenir invitacions per nou membres</string>
     <string name="create_group_error_message">Has d\'insertar un nom pel grup</string>
 
     <!-- Moderate Group Strings -->
-    <string name="group_settings_activity_title">CONFIGURACIO DEL GRUP</string>
     <string name="delete_group">Eliminar Grup</string>
-    <string name="delete_selected">Eliminar seleccionats</string>
 
 
     <!-- Create and edit Category Strings -->
-    <string name="create_category_activity_title">CREAR CATEGORIA</string>
+    <string name="create_category_activity_title">Crear Categoria</string>
     <string name="create_category_name">Nom de la Categoria</string>
     <string name="create_category_nsfw">Categoria +18</string>
-    <string name="category_link_help">Obtenir enllaç per compartir la categoria</string>
     <string name="create_category_error_message">Siusplau inserti un nom vàlid per la Categoria</string>
     <string name="create_category_title_taken">Aquesta categoria ja existeix</string>
     <string name="delete_category">Eliminar categoria</string>
 
     <!-- Notifications Strings -->
-    <string name="notifications_activity_title">NOTIFICACIONS</string>
+    <string name="notifications_activity_title">Notificacions</string>
     <string name="notifications_mark_as_read">Marcar com llegit</string>
 
     <!-- Error Strings -->
@@ -134,7 +109,6 @@
     <string name="wrong_password">Contrasenya incorrecta</string>
     <string name="invalid_username">Ja existeix un usuari amb aquest nom</string>
     <string name="invalid_password">La contrasenya ha de contenir com a mínim 6 caràters</string>
-    <string name="invalid_password2">Les contrasenyes no coincideixen</string>
     <string name="invalid_date">Introdueixi una data vàlida: dd/mm/aaaa</string>
     <string name="email_taken">Correu electrònic ja enregistrat</string>
     <string name="username_req">Cal introduir un nom d\'usuari</string>
@@ -142,17 +116,13 @@
     <string name="email_invalid">L\'adreça de correu electrònic no es vàlida</string>
     <string name="pwd_req">Cal introduir una contrasenya</string>
     <string name="passwords_not_match">Les contrasenyes no coincideixen</string>
-    <string name="verify_reg_field">Confirmi tots els camps i provi una altra vegada</string>
     <string name="unexpected_error">Error Inesperat</string>
 
     <!-- Settings Strings -->
-    <string name="settings_activity_title">CONFIGURACIÓ</string>
     <string name="settings_sub">Suscripció a publicacions per defecte</string>
     <string name="settings_dark">Mode fosc</string>
     <string name="settings_sfw">Vull veure publicacions +18 (Sóc major d\'edat)</string>
     <string name="settings_blur_nsfw">Difuminar imatges +18</string>
-    <string name="reply_content">Contingut de la resposta</string>
-    <string name="hint_reply_button">Escrigui la seva resposta</string>
     <string name="content_description_media">Text d\'exemple</string>
     <string name="reply">Respondre</string>
     <string name="post_image">Imatge de la Publicació</string>
@@ -161,8 +131,6 @@
     <string name="category_name">Nom Categoria</string>
     <string name="category_info">Informació de Categoria</string>
     <string name="group_name">Nom Grup</string>
-    <string name="folder_icon">Folder Icon</string>
-    <string name="owner_header">De:</string>
     <string name="quote_header">ha dit:</string>
     <string name="group_info">Group Info</string>
     <string name="create_category_image_error_message">Has d\'afegir una imatge a la categoria. Assegura\'t de que tens connexió a internet.</string>
@@ -180,7 +148,6 @@
     <string name="no_featured_current">No tens publicacions públiques</string>
     <string name="no_replies">Aquesta publicació no té cap resposta, sigueu el primer!</string>
     <string name="post_does_not_exist">Aquesta publicació ja no existeix</string>
-    <string name="post_from">Post de\u0020</string>
     <string name="share_post">Compartir Publicació</string>
     <string name="not_belongs_to_group">No pertanys al grup que conté aquesta publicació!</string>
     <string name="share_group">Compartir Grup</string>
@@ -193,6 +160,5 @@
     <string name="unpinned">La publicació ja no està fixada</string>
     <string name="pinned_personal">S\'ha fixat la nota</string>
     <string name="unpinned_personal">La nota ja no està fixada</string>
-
 
 </resources>

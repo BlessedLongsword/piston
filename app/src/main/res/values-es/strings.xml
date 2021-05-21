@@ -15,7 +15,6 @@
     <!-- General purpose -->
     <string name="cancel">Cancelar</string>
     <string name="save">Guardar</string>
-    <string name="save_changes">Guardar Cambios</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
     <string name="group_code">ID del Grupo</string>
@@ -28,7 +27,6 @@
     <string name="notifications">Notificaciones</string>
     <string name="settings">Configuración</string>
     <string name="link_copied">Enlace Copiado</string>
-    <string name="file_path">Dirección del archivo</string>
     <string name="confirmation_long">Entendido</string>
     <string name="title_empty">Este campo es obligatorio</string>
     <string name="alternative">También puedes</string>
@@ -43,12 +41,9 @@
 
     <!-- Sign in strings -->
     <string name="sign_in">Iniciar sesión</string>
-    <string name="sign_up">Registrarse</string>
     <string name="user_hint">Nombre de usuario o Correo Electrónico</string>
-    <string name="forgot_pass">¿Ha olvidado su contraseña?</string>
     <string name="sign_up_msg">¿No tiene una cuenta?</string>
     <string name="sign_up_button"> ¡Regístrese ahora!</string>
-    <string name="welcome">Bienvenido</string>
 
     <!-- Register strings -->
     <string name="reg_title">Registrarse</string>
@@ -56,43 +51,27 @@
     <string name="reg_date_format">dd/mm/aaaa</string>
     <string name="terms_text">He leído y aceptado los términos de privacidad</string>
     <string name="reg_btn">Registrarse</string>
-    <string name="reg_successful">Registro exitoso</string>
 
     <!-- View Profile Strings -->
     <string name="view_profile_name">Nombre y Apellidos</string>
     <string name="view_profile_phone">Teléfono</string>
-    <string name="view_profile_activity_title">PERFIL</string>
     <string name="view_profile_post">Publicacion destacada</string>
-    <string name="view_profile_edit">Editar perfil</string>
-    <string name="insert_name">Introduce tu nombre</string>
-    <string name="insert_phone_number">Introduce tu número de teléfono</string>
-    <string name="insert_birth_date">Introduce tu fecha de nacimiento</string>
 
     <!-- Create Post Strings -->
-    <string name="create_post_activity_title">CREAR PUBLICACION</string>
+    <string name="create_post_activity_title">Crear Publicación</string>
     <string name="post_content">Contenido</string>
     <string name="hint_post_content">Explique la sucedura</string>
-    <string name="hint_input_title">Insertar Título</string>
     <string name="choose_picture">Insertar Imagen</string>
-    <string name="attach_file">Adjuntar Archivo</string>
     <string name="create_post_error_message">Porfavor inserte un nombre válido para el post</string>
 
     <!-- Edit Post Strings -->
-    <string name="edit_post_activity_title">EDITAR PUBLICACIÓN</string>
+    <string name="edit_post_activity_title">Editar Publicación</string>
     <string name="edit_post_btn">Editar</string>
-    <string name="change_picture">Editar Imagen</string>
-    <string name="change_file">Editar Archivo</string>
     <string name="delete_post_btn">Eliminar Post</string>
 
-    <!-- Reply Post Strings -->
-    <string name="reply_post_activity_title">RESPONDER PUBLICACIÓN</string>
-    <string name="reply_btn">Responder</string>
-
     <!-- Create and edit Folder Strings -->
-    <string name="create_folder_activity_title">CREAR CARPETA</string>
+    <string name="create_folder_activity_title">Crear Carpeta</string>
     <string name="folder_name">Nombre de la Carpeta</string>
-    <string name="edit_folder_activity_title">EDITAR CARPETA</string>
-    <string name="create_folder_title_taken">Esta carpeta ya existe</string>
     <string name="create_folder_error_message">Porfavor inserte un Nombre válido para la Carpeta</string>
     <string name="delete_folder">Eliminar carpeta</string>
 
@@ -104,28 +83,24 @@
     <string name="join_group_already">Ya estás en este grupo</string>
 
     <!-- Create and edit Group Strings -->
-    <string name="create_group_activity_title">CREAR GRUPO</string>
+    <string name="create_group_activity_title">Crear Grupo</string>
     <string name="create_group_name">Nombre del Grupo</string>
-    <string name="create_group_members">Miembros</string>
     <string name="group_link_help">Use esto para invitar nuevos miembros</string>
     <string name="create_group_error_message">Debes insertar un nombre para el grupo</string>
 
     <!-- Moderate Group Strings -->
-    <string name="group_settings_activity_title">AJUSTES DEL GRUPO</string>
     <string name="delete_group">Eliminar Grupo</string>
-    <string name="delete_selected">Eliminar seleccionados</string>
 
     <!-- Create and edit Category Strings -->
-    <string name="create_category_activity_title">CREAR CATEGORIA</string>
+    <string name="create_category_activity_title">Crear Categoría</string>
     <string name="create_category_name">Nombre de la Categoría</string>
     <string name="create_category_nsfw">Categoría +18</string>
-    <string name="category_link_help">Use esto para compartir la categoría</string>
     <string name="create_category_error_message">Porfavor inserte un Nombre válido para la Categoría</string>
     <string name="create_category_title_taken">Esta categoría ya existe</string>
     <string name="delete_category">Eliminar categoría</string>
 
     <!-- Notifications Strings -->
-    <string name="notifications_activity_title">NOTIFICACIONES</string>
+    <string name="notifications_activity_title">Notificaciones</string>
     <string name="notifications_mark_as_read">Marcar como leído</string>
 
     <!-- Error Strings -->
@@ -133,7 +108,6 @@
     <string name="wrong_password">Contraseña incorrecta</string>
     <string name="invalid_username">Ya existe un usuario con este nombre</string>
     <string name="invalid_password">La contraseña debe tener por lo menos 6 caracteres</string>
-    <string name="invalid_password2">Las contraseñas no coinciden</string>
     <string name="invalid_date">Introduzca una fecha válida: dd/mm/aaaa</string>
     <string name="email_taken">Dirección de correo ya registrada</string>
     <string name="username_req">Es necesario introducir un nombre de usuario</string>
@@ -141,17 +115,13 @@
     <string name="email_invalid">La dirección de correo electrónico no es válida</string>
     <string name="pwd_req">Es necesaria una contraseña</string>
     <string name="passwords_not_match">Las contraseñas no coinciden</string>
-    <string name="verify_reg_field">Confirme los campos e inténtelo de nuevo</string>
     <string name="unexpected_error">Error Inesperado</string>
 
     <!-- Settings Strings -->
-    <string name="settings_activity_title">AJUSTES</string>
     <string name="settings_sub">Suscripción a publicaciones por defecto</string>
     <string name="settings_dark">Modo oscuro</string>
     <string name="settings_sfw">Mostrarme publicaciones +18 (Soy mayor de edad)</string>
     <string name="settings_blur_nsfw">Difuminar imágenes +18</string>
-    <string name="reply_content">Contenido de la respuesta</string>
-    <string name="hint_reply_button">Redacte su respuesta</string>
     <string name="content_description_media">Texto de ejemplo</string>
     <string name="reply">Responder</string>
     <string name="post_image">Imagen de la Publicación</string>
@@ -160,8 +130,6 @@
     <string name="category_name">Nombre Categoría</string>
     <string name="category_info">Información de Categoría</string>
     <string name="group_name">Nombre Grupo</string>
-    <string name="folder_icon">Folder Icon</string>
-    <string name="owner_header">De:</string>
     <string name="quote_header">dijo:</string>
     <string name="group_info">Group Info</string>
     <string name="create_category_image_error_message">Debes añadir una imagen a la categoría. Asegúrate de que tienes conexión a internet.</string>
@@ -170,8 +138,8 @@
     <string name="replies">Respuestas</string>
     <string name="show_information">Info</string>
     <string name="members">\u0020Miembros</string>
-    <string name="field">Field</string>
-    <string name="edit_group_btn">Edit Title</string>
+    <string name="field">Campo</string>
+    <string name="edit_group_btn">Editar título</string>
     <string name="make_moderator">Hacer Moderador</string>
     <string name="dismiss_as_moderator">Deshacer Moderator</string>
     <string name="kick_from_group">Echar del Grupo</string>
@@ -179,7 +147,6 @@
     <string name="no_featured_current">No tienes publicaciones públicas</string>
     <string name="no_replies">Esta publicación no tiene respuestas, sé el primero!</string>
     <string name="post_does_not_exist">Esta publicación ya no existe</string>
-    <string name="post_from">Post de\u0020</string>
     <string name="share_post">Compartir Publicación</string>
     <string name="not_belongs_to_group">No perteneces al grupo que contiene esta publicación!</string>
     <string name="share_group">Compartir Grupo</string>

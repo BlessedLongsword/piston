@@ -79,7 +79,7 @@
                     android:layout_width="@dimen/long_button"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    app:icon="@drawable/outline_groups_black_24"
+                    app:icon="@drawable/baseline_groups_black_24"
                     android:onClick="@{() -> viewModel.setCreateGroup()}"
                     android:text="@string/create_group_activity_title" />
 

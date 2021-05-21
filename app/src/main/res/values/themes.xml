@@ -64,10 +64,6 @@
         <item name="boxBackgroundColor">@color/transparent</item>
     </style>
 
-    <style name="BlankBox.NoStroke" >
-        <item name="boxStrokeWidth">0dp</item>
-    </style>
-
     <style name="EditTextButton">
         <item name="android:src">@drawable/baseline_edit_black_24</item>
         <item name="android:tint">?attr/colorOnBackground</item>

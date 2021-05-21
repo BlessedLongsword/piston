@@ -1,7 +1,5 @@
 package com.example.piston.main.global;
 
-import android.util.Log;
-
 import com.example.piston.data.sections.Category;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
