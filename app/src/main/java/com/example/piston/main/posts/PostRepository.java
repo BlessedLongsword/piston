@@ -52,8 +52,6 @@ public class PostRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
-
-
         if (scope.equals("folders")) {
             postDocRef = db.collection("users")
                     .document(Objects.requireNonNull(email))

@@ -27,12 +27,22 @@ public class EditPostActivity extends PickImageActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        String scope = intent.getStringExtra(Values.SCOPE);
+        switch (scope) {
+            case Values.PERSONAL:
+                setTheme(R.style.Theme_Piston_Personal);
+                break;
+            case Values.GROUPS:
+                setTheme(R.style.Theme_Piston_Groups);
+                break;
+            case Values.GLOBAL:
+                setTheme(R.style.Theme_Piston_Global);
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_post);
 
-        Intent intent = getIntent();
-
-        String scope = intent.getStringExtra(Values.SCOPE);
         String sectionID = intent.getStringExtra(Values.SECTION_ID);
         String postID = intent.getStringExtra(Values.POST_ID);
 
