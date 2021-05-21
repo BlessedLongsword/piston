@@ -76,9 +76,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         if (viewType == 0 || viewType == 2)
             binding.postPicture.setVisibility(View.GONE);
 
-        if (viewType == 2 || viewType == 3) {
-            binding.pinImage.setVisibility(View.VISIBLE);
+        if (!(viewType == 2 || viewType == 3)) {
+            Objects.requireNonNull(binding.extraInfoLayout).setVisibility(View.GONE);
         }
+
+        Objects.requireNonNull(binding.heartIcon).setVisibility(View.GONE);
+        binding.heartCount.setVisibility(View.GONE);
 
         return new GroupAdapter.GroupHolder(binding);
     }
@@ -98,7 +101,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
                     .load(post.getImageLink())
                     .into(holder.binding.postPicture);
 
-        holder.getBinding().heartCount.setVisibility(View.GONE);
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));
         holder.getBinding().userProfile.setOnClickListener(openProfile(post.getOwnerEmail()));
     }

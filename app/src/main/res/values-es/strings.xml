@@ -189,5 +189,7 @@
     <string name="unpin_post">Desfijar Post</string>
     <string name="pinned">Se ha fijado la publicación</string>
     <string name="unpinned">La publicación ya no está fijada</string>
+    <string name="pinned_personal">Se ha fijado la nota</string>
+    <string name="unpinned_personal">La nota ya no está fijada</string>
 
 </resources>

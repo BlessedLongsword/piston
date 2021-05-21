@@ -96,7 +96,7 @@
                     android:ellipsize="end"/>
 
                 <LinearLayout
-                    android:id="@+id/heart_count"
+                    android:id="@+id/extra_info_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/tiny_separator"
@@ -105,6 +105,7 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
+                        android:id="@+id/heart_icon"
                         android:layout_width="@dimen/medium_separator"
                         android:layout_height="@dimen/medium_separator"
                         android:contentDescription="@string/heart"
@@ -112,6 +113,7 @@
                         android:layout_marginEnd="@dimen/micro_separator"/>
 
                     <TextView
+                        android:id="@+id/heart_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="0"

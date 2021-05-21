@@ -52,7 +52,17 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
 
     @Override
     public int getItemViewType(int position) {
-        return (Objects.requireNonNull(viewModel.getPosts().getValue()).get(position).getImageLink() == null) ? 0 : 1;
+        Post post = Objects.requireNonNull(viewModel.getPosts().getValue()).get(position);
+        if (post.getImageLink() == null) {
+            if (post.getPinned())
+                return 2;
+            else return 0;
+        } else {
+            if (post.getPinned())
+                return 3;
+            else
+                return 1;
+        }
     }
 
     @NonNull
@@ -64,7 +74,12 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
 
         if (viewType == 0)
             binding.postPicture.setVisibility(View.GONE);
+        Objects.requireNonNull(binding.heartIcon).setVisibility(View.GONE);
         binding.heartCount.setVisibility(View.GONE);
+
+        if (!(viewType == 2 || viewType == 3)) {
+            Objects.requireNonNull(binding.extraInfoLayout).setVisibility(View.GONE);
+        }
 
         return new FolderAdapter.NoteHolder(binding);
     }

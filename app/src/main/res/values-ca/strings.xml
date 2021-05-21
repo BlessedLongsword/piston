@@ -190,6 +190,8 @@
     <string name="unpin_post">Desfixar Post</string>
     <string name="pinned">S\'ha fixat la publicació</string>
     <string name="unpinned">La publicació ja no està fixada</string>
+    <string name="pinned_personal">S\'ha fixat la nota</string>
+    <string name="unpinned_personal">La nota ja no està fixada</string>
 
 
 </resources>

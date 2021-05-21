@@ -6,6 +6,7 @@ import com.example.piston.R;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
 import com.example.piston.data.users.User;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -124,7 +125,8 @@ public class CreatePostRepository {
                     CollectionReference cr = sectionDocRef.collection("subscribedUsers");
                     sendNotification(cr, sectionID, title, imageLink, scope, id);
                 }
-                sectionDocRef.update("timestamp", timestamp);
+                if (scope.equals(Values.GLOBAL))
+                    sectionDocRef.update("timestamp", timestamp);
                 listener.setCreateFinished();
                 listener.setLoadingFinished();
             }

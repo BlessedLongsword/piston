@@ -90,24 +90,30 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         binding.postsTopAppBar.setNavigationOnClickListener((view) -> finish());
 
         viewModel.getPriority().observe(this, priority -> {
-                binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
-                binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority <= 1);
-                boolean pinned = Objects.requireNonNull(viewModel.getPinned().getValue());
-            if (scope.equals(Values.GROUPS) || scope.equals(Values.PERSONAL)) {
+            binding.postsTopAppBar.getMenu().getItem(0).setVisible(priority <= 1);
+            binding.postsTopAppBar.getMenu().getItem(1).setVisible(priority <= 1);
+            boolean pinned = Objects.requireNonNull(viewModel.getPinned().getValue());
+            if (scope.equals(Values.GROUPS)) {
                 binding.postsTopAppBar.getMenu().getItem(2).setVisible(!pinned &&
                         priority == 0);
                 binding.postsTopAppBar.getMenu().getItem(3).setVisible(pinned &&
                         priority == 0);
+            } else if (scope.equals(Values.PERSONAL)) {
+                binding.postsTopAppBar.getMenu().getItem(2).setVisible(!pinned);
+                binding.postsTopAppBar.getMenu().getItem(3).setVisible(pinned);
             }
-            });
+        });
 
         viewModel.getPinned().observe(this, aBoolean -> {
             int priority = Objects.requireNonNull(viewModel.getPriority().getValue());
-            if (scope.equals(Values.GROUPS) || scope.equals(Values.PERSONAL)) {
+            if (scope.equals(Values.GROUPS)) {
                 binding.postsTopAppBar.getMenu().getItem(2).setVisible(!aBoolean &&
                         priority == 0);
                 binding.postsTopAppBar.getMenu().getItem(3).setVisible(aBoolean &&
                         priority == 0);
+            } else if (scope.equals(Values.PERSONAL)) {
+                binding.postsTopAppBar.getMenu().getItem(2).setVisible(!aBoolean);
+                binding.postsTopAppBar.getMenu().getItem(3).setVisible(aBoolean);
             }
         });
         binding.recyclerviewPosts.setAdapter(new PostAdapter(this, this));
@@ -230,7 +236,9 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     @SuppressWarnings("unused")
     public void pinPost(MenuItem menuItem) {
         viewModel.setPinned(true);
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.pinned, Toast.LENGTH_LONG);
+        String message = (scope.equals(Values.PERSONAL)) ? getResources().getString(R.string.pinned_personal) :
+                getResources().getString(R.string.pinned);
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
     }
@@ -238,7 +246,9 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     @SuppressWarnings("unused")
     public void unpinPost(MenuItem menuItem) {
         viewModel.setPinned(false);
-        Toast toast = Toast.makeText(getApplicationContext(), R.string.unpinned, Toast.LENGTH_LONG);
+        String message = (scope.equals(Values.PERSONAL)) ? getResources().getString(R.string.unpinned_personal) :
+                getResources().getString(R.string.unpinned);
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM,0,0);
         toast.show();
     }
