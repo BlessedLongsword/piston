@@ -22,6 +22,7 @@ public class GlobalRepository {
     private final String email;
     private ListenerRegistration listenerRegistrationCategories, listenerRegistrationSubs;
 
+    private Query categoriesQuery;
     private Category[] categories;
     private Boolean[] subscriptions;
     private int counter;
@@ -44,14 +45,13 @@ public class GlobalRepository {
                     if (task.isSuccessful())
                         listener.setIsAdmin(task.getResult().exists());
                 });
-            listenChanges();
+        listenChanges();
+        categoriesQuery =  db.collection("categories").orderBy("timestamp",
+                Query.Direction.DESCENDING);
     }
 
     private void loadCategories() {
-        Log.d("DBReadTAG", "loading");
-        db.collection("categories")
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
+                categoriesQuery.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         int size = task.getResult().size();
@@ -108,6 +108,12 @@ public class GlobalRepository {
             db.collection("users").document(Objects.requireNonNull(email))
                     .collection("subscribedCategories").document(id).delete();
         }
+    }
+
+    public void updateQuery(String field) {
+        categoriesQuery = db.collection("categories").orderBy("timestamp",
+                Query.Direction.DESCENDING).orderBy(field);
+        loadCategories();
     }
 
     private void listenChanges() {

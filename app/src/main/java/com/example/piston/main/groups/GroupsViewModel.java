@@ -17,6 +17,10 @@ public class GroupsViewModel extends ViewModel implements GroupsRepository.IGrou
         return groups;
     }
 
+    public void setFilter(String filter) {
+        repository.updateQuery(filter);
+    }
+
     @Override
     public void setGroups(ArrayList<Group> groups) {
         this.groups.setValue(groups);

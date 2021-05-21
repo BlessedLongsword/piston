@@ -1,6 +1,7 @@
 package com.example.piston.main.groups;
 
 import com.example.piston.data.sections.Group;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,7 +19,7 @@ public class GroupsRepository {
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
-    private final Query groupsQuery;
+    private Query groupsQuery;
 
     private Group[] groups;
     private int counter;
@@ -58,6 +59,12 @@ public class GroupsRepository {
                 }
             }
         });
+    }
+
+    public void updateQuery(String field) {
+        groupsQuery = db.collection(Values.GROUPS).orderBy("timestamp",
+                Query.Direction.DESCENDING).orderBy(field);
+        loadGroups();
     }
 
     private void addGroup(int position, Group group) {
