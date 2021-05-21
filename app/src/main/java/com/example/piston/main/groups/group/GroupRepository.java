@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -26,22 +27,24 @@ public class GroupRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
     private final DocumentReference groupDocRef;
+    private Query postsQuery;
 
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;
         Log.d("what",group);
         this.groupDocRef = db.collection("groups").document(group);
-
         groupDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
             }
         });
+        postsQuery = groupDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING);
         listenChanges();
     }
 
     private void loadGroupPosts() {
-        groupDocRef.collection("posts").get().addOnCompleteListener(task -> {
+        postsQuery.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 ArrayList<Post> posts = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
@@ -54,9 +57,14 @@ public class GroupRepository {
         });
     }
 
+    public void updateQuery(String field) {
+        postsQuery = groupDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
+                .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING).orderBy(field);
+    }
+
     private void listenChanges() {
-        listenerRegistration = groupDocRef.collection("posts")
-                .addSnapshotListener((snapshots, e) -> GroupRepository.this.loadGroupPosts());
+        listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> GroupRepository
+                .this.loadGroupPosts());
     }
 
     public void fromShareJoinGroup(String groupID) {

@@ -84,7 +84,26 @@ public class GlobalRepository {
             categories[position] = category;
             subscriptions[position] = isSubbed;
             if (++counter == categories.length) {
-                listener.setCategories(new ArrayList<>(Arrays.asList(categories)));
+                Category[] finalCategories = new Category[categories.length];
+                Category[] subsCategories = new Category[categories.length];
+                Category[] nonSubsCategories = new Category[categories.length];
+                int subCount = 0, nonSubCount = 0;
+                for (int i = 0; i < categories.length; i++) {
+                    if (subscriptions[i]) {
+                        subsCategories[subCount] = categories[i];
+                        subCount++;
+                    } else {
+                        nonSubsCategories[nonSubCount] = categories[i];
+                        nonSubCount++;
+                    }
+                }
+                for (int i = 0; i < subCount; i++)
+                    subscriptions[i] = true;
+                for (int i = subCount; i < categories.length; i++)
+                    subscriptions[i] = false;
+                System.arraycopy(subsCategories, 0, finalCategories, 0, subCount);
+                System.arraycopy(nonSubsCategories, 0, finalCategories, subCount, nonSubCount);
+                listener.setCategories(new ArrayList<>(Arrays.asList(finalCategories)));
                 listener.setSubscribed(new ArrayList<>(Arrays.asList(subscriptions)));
             }
         }

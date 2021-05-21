@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class FolderRepository {
     private final FolderRepository.IFolder listener;
     private ListenerRegistration listenerRegistration;
     private final DocumentReference folderDocRef;
+    private Query postsQuery;
 
     public FolderRepository(FolderRepository.IFolder listener, String folder) {
         this.listener = listener;
@@ -38,11 +40,14 @@ public class FolderRepository {
             }
         });
 
+        postsQuery = folderDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING);
+
         listenChanges();
     }
 
     private void loadFolderPosts() {
-        folderDocRef.collection("posts").get().addOnCompleteListener(task -> {
+        postsQuery.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 ArrayList<Post> posts = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
@@ -55,9 +60,14 @@ public class FolderRepository {
         });
     }
 
+    public void updateQuery(String field) {
+        postsQuery = folderDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
+                .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING);
+    }
+
     private void listenChanges() {
-        listenerRegistration = folderDocRef.collection("posts")
-                .addSnapshotListener((snapshots, e) -> FolderRepository.this.loadFolderPosts());
+        listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> FolderRepository
+                .this.loadFolderPosts());
     }
 
     public void removeListener() {

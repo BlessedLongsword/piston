@@ -20,6 +20,10 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
         repository = new GroupRepository(this, group);
     }
 
+    public void setFilter(String filter) {
+        repository.updateQuery(filter);
+    }
+
     public void fromShareJoinGroup(String groupID) {
         repository.fromShareJoinGroup(groupID);
     }

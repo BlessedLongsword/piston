@@ -19,6 +19,10 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
         repository = new FolderRepository(this, folder);
     }
 
+    public void setFilter(String filter) {
+        repository.updateQuery(filter);
+    }
+
     @Override
     public void setFolderPosts(ArrayList<Post> posts) {
         this.posts.setValue(posts);
