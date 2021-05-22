@@ -1,7 +1,6 @@
 package com.example.piston.main.posts.createPost;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
