@@ -1,6 +1,7 @@
 package com.example.piston.main.posts.createPost;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.posts.Post;
@@ -22,7 +23,7 @@ public class CreatePostRepository {
     private final CreatePostRepository.ICreatePost listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
-    private final String user;
+    private final String email;
     private String username, profilePictureLink;
 
     public interface ICreatePost {
@@ -36,9 +37,9 @@ public class CreatePostRepository {
     public CreatePostRepository(CreatePostRepository.ICreatePost listener) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        user = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
+        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         db.collection("users")
-                .document(Objects.requireNonNull(user))
+                .document(Objects.requireNonNull(email))
                 .get()
                 .addOnCompleteListener(task -> {
                     username = (String) Objects.requireNonNull(task.getResult()).get("username");
@@ -55,73 +56,63 @@ public class CreatePostRepository {
         }
     }
 
-    public void createPost(String scope, String document, String title, String content, Uri image, boolean connected) {
+    public void createPost(String scope, String sectionID, String title, String content,
+                           Uri image, boolean connected) {
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreatePostResult.TitleError.EMPTY);
             listener.setCreateError();
             listener.setLoadingFinished();
         }
         else {
+            DocumentReference base = FirebaseFirestore.getInstance().document("");
+            if (scope.equals(Values.PERSONAL))
+                base = base.collection("users").document(email);
+            CollectionReference parent = base.collection(scope).document(sectionID).
+                    collection("posts");
+            DocumentReference postReference = parent.document();
+            String postID = postReference.getId();
+
             if (!connected) {
                 listener.setErrorMessage();
-                uploadPost(scope, document, title, content, null);
+                uploadPost(scope, sectionID, postID, title, content, null, postReference);
             }
             else if (image == null)
-                uploadPost(scope, document, title, content, null);
+                uploadPost(scope, sectionID, postID, title, content, null, postReference);
             else {
-                StorageReference storageRef = storage.getReference();
-                String id = db.collection("users").document().getId();
-                String path;
-                if (scope.equals("folders"))
-                    path = "users/" + username;
-                else
-                    path = scope + "/" + document;
+                StorageReference storageBase = storage.getReference();
+                if (scope.equals(Values.PERSONAL))
+                    storageBase = storageBase.child("users").child(email);
+                StorageReference storageParent = storageBase.child(scope).child(sectionID);
+                StorageReference storagePost = storageParent.child(postID);
 
-                String imageId = path + "/" + id;
-                StorageReference imageRef = storageRef.child(imageId);
-                UploadTask uploadTask = imageRef.putFile(image);
-                uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                        .addOnSuccessListener(uri -> {
-                            String imageLink = uri.toString();
-                            uploadPost(scope, document, title, content, imageLink);
-                        })
-                );
+                UploadTask uploadTask = storagePost.putFile(image);
+                uploadTask.addOnSuccessListener(taskSnapshot -> storagePost.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    String imageLink = uri.toString();
+                    uploadPost(scope, sectionID, postID, title, content, imageLink, postReference);
+                }));
             }
         }
     }
 
-    private void uploadPost(String scope, String sectionID, String title, String content,
-                            String imageLink) {
+    private void uploadPost(String scope, String sectionID, String postID, String title,
+                            String content, String imageLink, DocumentReference postReference) {
 
-        String id = db.collection("users").document().getId();
-
-        DocumentReference docRef;
-        if (scope.equals("folders")) {
-            docRef = db.collection("users")
-                    .document(user)
-                    .collection("folders")
-                    .document(sectionID)
-                    .collection("posts")
-                    .document(id);
-        } else {
-            docRef = db.collection(scope)
-                    .document(sectionID)
-                    .collection("posts")
-                    .document(id);
-        }
-        docRef.get().addOnCompleteListener(task -> {
+        postReference.get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
-                Post post = new Post(id, username, user, content, title, sectionID, imageLink, profilePictureLink);
-                docRef.set(post);
+                Post post = new Post(postID, username, email, content, title, sectionID, imageLink,
+                        profilePictureLink);
+                postReference.set(post);
                 FieldValue timestamp = FieldValue.serverTimestamp();
-                docRef.update("timestamp", timestamp);
+                postReference.update("timestamp", timestamp);
+
                 DocumentReference sectionDocRef = db.collection(scope).document(sectionID);
-                if (scope.equals("groups")) {
+                if (scope.equals(Values.GROUPS)) {
                     CollectionReference cr = sectionDocRef.collection("members");
-                    sendNotification(cr, sectionID, title, imageLink, scope, id, timestamp);
-                } else if (scope.equals("categories")) {
+                    sendNotification(cr, sectionID, title, imageLink, scope, postID, timestamp);
+                } else if (scope.equals(Values.GLOBAL)) {
                     CollectionReference cr = sectionDocRef.collection("subscribedUsers");
-                    sendNotification(cr, sectionID, title, imageLink, scope, id, timestamp);
+                    sendNotification(cr, sectionID, title, imageLink, scope, postID, timestamp);
                     sectionDocRef.update("timestamp", timestamp);
                 }
                 listener.setCreateFinished();
@@ -136,7 +127,7 @@ public class CreatePostRepository {
             if (task1.isSuccessful()) {
                 for (QueryDocumentSnapshot documentSnapshot :
                         Objects.requireNonNull(task1.getResult())) {
-                    if (!documentSnapshot.getId().equals(user)) {
+                    if (!documentSnapshot.getId().equals(email)) {
                         db.collection(collection).document(document).get()
                                 .addOnCompleteListener(task2 -> {
                                     NotificationPost notificationPost = new NotificationPost(

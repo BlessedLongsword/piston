@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.example.piston.data.sections.Group;
 import com.example.piston.data.users.GroupMember;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -39,7 +40,7 @@ public class CreateGroupRepository {
     }
 
     public void generateGroupID() {
-        listener.setGroupID(db.collection("groups").document().getId());
+        listener.setGroupID(db.collection(Values.GROUPS).document().getId());
     }
 
     public void checkTitle(String title) {
