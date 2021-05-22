@@ -16,12 +16,9 @@ import java.util.Objects;
 public class EditPostRepository {
 
     private final EditPostRepository.IEditPost listener;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final String email, scope, sectionID, postID;
     private final DocumentReference postDocRef;
-
-    private String username;
 
     public interface IEditPost {
         void setTitleStatus(EditPostResult.TitleError titleError);
@@ -49,7 +46,6 @@ public class EditPostRepository {
                         (String) task.getResult().get("content"),
                         (String) task.getResult().get("imageLink"));
 
-                username = (String) task.getResult().get("owner");
             }
         });
 

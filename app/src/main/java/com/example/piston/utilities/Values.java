@@ -1,9 +1,5 @@
 package com.example.piston.utilities;
 
-import com.example.piston.R;
-
-import java.util.ArrayList;
-
 public class Values {
 
     public static final int DELETE_CODE = 9999;

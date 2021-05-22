@@ -20,7 +20,6 @@ import com.example.piston.utilities.ScopeFragment;
 import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class GlobalFragment extends ScopeFragment {
@@ -68,23 +67,21 @@ public class GlobalFragment extends ScopeFragment {
     }
 
     private View.OnClickListener chooseFilter() {
-        return v -> {
-            new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
-                    .setTitle(getString(R.string.filter_by))
-                    .setItems(R.array.global_filters, (dialog, which) -> {
-                        switch (which) {
-                            case 0:
-                                updateFilter(Values.FILTER_DEFAULT, false);
-                                break;
-                            case 1:
-                                updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true);
-                                break;
-                            case 2:
-                                updateFilter(Values.FILTER_ALPHABETICALLY, false);
-                                break;
-                        }
-                    }).show();
-        };
+        return v -> new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
+                .setTitle(getString(R.string.filter_by))
+                .setItems(R.array.global_filters, (dialog, which) -> {
+                    switch (which) {
+                        case 0:
+                            updateFilter(Values.FILTER_DEFAULT, false);
+                            break;
+                        case 1:
+                            updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true);
+                            break;
+                        case 2:
+                            updateFilter(Values.FILTER_ALPHABETICALLY, false);
+                            break;
+                    }
+                }).show();
     }
 
     private void updateFilter(String filter, boolean descending) {
