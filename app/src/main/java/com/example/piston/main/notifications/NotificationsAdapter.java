@@ -2,6 +2,7 @@ package com.example.piston.main.notifications;
 
 import android.content.Intent;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,22 @@ import com.example.piston.databinding.ItemNotificationReplyBinding;
 import com.example.piston.main.posts.PostActivity;
 import com.example.piston.utilities.Values;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final FragmentActivity localActivity;
     private final NotificationsViewModel viewModel;
+    private OnItemClick itemClick;
+    private List<Notification> list;
+    private SparseBooleanArray selectedItems;
+    private int selectedIndex = -1;
+
+    public void setItemClick(OnItemClick itemClick) {
+        this.itemClick = itemClick;
+    }
 
     public static class NotificationPostHolder extends RecyclerView.ViewHolder {
 
@@ -65,6 +76,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
         viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
+        selectedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -106,9 +118,21 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .load(notificationPost.getImageLink())
                     .into(hold.binding.notificationPostPicture);
 
+            hold.getBinding().notificationPostCard.setActivated(selectedItems.get(position,false));
+
             hold.getBinding().notificationPostCard.setOnClickListener(openNewActivity(
                     notificationPost.getScope(), notificationPost.getSectionID(),
                             notificationPost.getPostID(), null));
+            hold.getBinding().notificationPostCard.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (itemClick == null) {
+                        return false;
+                    } else {
+                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                        return true;
+                    }                }
+            });
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -122,9 +146,21 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     .placeholder(R.drawable.default_profile_picture)
                     .into(hold.binding.notificationProfilePicture);
 
+            hold.getBinding().notificationReplyCard.setActivated(selectedItems.get(position,false));
+
             hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
                     notificationReply.getScope(), notificationReply.getSectionID(),
                             notificationReply.getPostID(), notificationReply.getReplyID()));
+            hold.getBinding().notificationReplyCard.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (itemClick == null) {
+                        return false;
+                    } else {
+                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                        return true;
+                    }                }
+            });
         }
     }
 
@@ -166,6 +202,42 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             localActivity.startActivity(intent);
             localActivity.finish();
         };
+    }
+
+    public interface OnItemClick {
+        void onLongPress(View view, Notification notification, int position);
+    }
+
+    public List<Integer> getSelectedItems() {
+        List<Integer> items = new ArrayList<>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            items.add(selectedItems.keyAt(i));
+        }
+        return items;
+    }
+
+    public void removeItems(int position) {
+        list.remove(position);
+        selectedIndex = -1;
+    }
+
+    public void clearSelection() {
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void toggleSelection(int position) {
+        selectedIndex = position;
+        if (selectedItems.get(position, false)) {
+            selectedItems.delete(position);
+        } else {
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    public int selectedItemCount() {
+        return selectedItems.size();
     }
 
 }

@@ -55,4 +55,10 @@
 
     <color name="almost_black">#282828</color>
 
+    <color name="dark_yellow1">#CCCC00</color>
+
+    <!-- Notifcations colors -->
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_600">#546E7A</color>
+
 </resources>
