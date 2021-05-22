@@ -8,8 +8,8 @@ public class NotificationPost extends Notification {
     public NotificationPost() {}
 
     public NotificationPost(String title, String sectionName, String imageLink, String userImageLink, boolean read,
-                            String collection, String sectionID, String postID) {
-        super(collection, sectionID, postID, userImageLink, read);
+                            String collection, String sectionID, String postID, String notificationID) {
+        super(collection, sectionID, postID, userImageLink, read,notificationID);
         setTitle(title);
         setSectionName(sectionName);
         setImageLink(imageLink);

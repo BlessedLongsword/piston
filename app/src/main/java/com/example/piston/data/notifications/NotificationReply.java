@@ -8,8 +8,8 @@ public class NotificationReply extends Notification {
     public NotificationReply() {}
 
     public NotificationReply(String user, String content, String replyID, String userImageLink,
-                             boolean read, String scope, String sectionID, String postID) {
-        super(scope, sectionID, postID, userImageLink, read);
+                             boolean read, String scope, String sectionID, String postID, String notificationID) {
+        super(scope, sectionID, postID, userImageLink, read, notificationID);
         setUser(user);
         setContent(content);
         setReplyID(replyID);

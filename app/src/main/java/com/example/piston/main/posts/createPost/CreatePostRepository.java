@@ -129,14 +129,14 @@ public class CreatePostRepository {
                     if (!documentSnapshot.getId().equals(email)) {
                         db.collection(collection).document(document).get()
                                 .addOnCompleteListener(task2 -> {
-                                    NotificationPost notificationPost = new NotificationPost(
-                                            title, Objects.requireNonNull(task2.getResult().get("title")).toString(),
-                                            imageLink, (String) task2.getResult().get("imageLink"), false, collection, document, id);
-
                                     DocumentReference docRef2 = db.collection("users")
                                             .document(documentSnapshot.getId())
                                             .collection("notifications")
                                             .document();
+                                    String notificationID = docRef2.getId();
+                                    NotificationPost notificationPost = new NotificationPost(
+                                            title, Objects.requireNonNull(task2.getResult().get("title")).toString(),
+                                            imageLink, (String) task2.getResult().get("imageLink"), false, collection, document, id, notificationID);
 
                                     docRef2.set(notificationPost);
                                     docRef2.update("type", "post");

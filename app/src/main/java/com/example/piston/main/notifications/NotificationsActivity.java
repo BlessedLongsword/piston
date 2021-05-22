@@ -1,6 +1,5 @@
 package com.example.piston.main.notifications;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.data.notifications.Notification;
 import com.example.piston.databinding.ActivityNotificationsBinding;
-import com.example.piston.utilities.NotificationMultiSelection;
-
 
 
 public class NotificationsActivity extends AppCompatActivity {
@@ -86,7 +83,8 @@ public class NotificationsActivity extends AppCompatActivity {
         public boolean onActionItemClicked(androidx.appcompat.view.ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.notification_delete:
-                    Toast.makeText(NotificationsActivity.this, "You clicked delete ", Toast.LENGTH_SHORT).show();
+                    adapter.deleteNotifications();
+                    mode.finish();
                     return true;
                 case R.id.notification_read:
                     Toast.makeText(NotificationsActivity.this, "You clicked mark as read ", Toast.LENGTH_SHORT).show();

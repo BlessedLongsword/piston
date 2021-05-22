@@ -1,4 +1,4 @@
-package com.example.piston.utilities;
+package com.example.piston.main.notifications;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

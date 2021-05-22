@@ -6,16 +6,18 @@ public abstract class Notification {
     private String sectionID;
     private String postID;
     private String contextImageLink;
+    private String notificationID;
     private boolean read;
 
     public Notification() {}
 
-    public Notification(String scope, String sectionID, String postID, String contextImageLink, boolean read) {
+    public Notification(String scope, String sectionID, String postID, String contextImageLink, boolean read, String notificationID) {
         setScope(scope);
         setSectionID(sectionID);
         setPostID(postID);
         setRead(read);
         setContextImageLink(contextImageLink);
+        setNotificationID(notificationID);
     }
 
     public String getScope() {
@@ -56,5 +58,13 @@ public abstract class Notification {
 
     public void setContextImageLink(String contextImageLink) {
         this.contextImageLink = contextImageLink;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

@@ -18,6 +18,8 @@ public class NotificationsRepository {
     private final INotifications listener;
     private final DocumentReference userDocRef;
     private ListenerRegistration listenerRegistration;
+    String email;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public interface INotifications {
@@ -28,8 +30,7 @@ public class NotificationsRepository {
     public NotificationsRepository(INotifications listener) {
         this.listener = listener;
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
         userDocRef = db.collection("users").document(Objects.requireNonNull(email));
 
@@ -68,5 +69,9 @@ public class NotificationsRepository {
 
     public void removeListener() {
         listenerRegistration.remove();
+    }
+
+    public void deleteNotification(String id){
+        db.collection("users").document(email).collection("notifications").document(id).delete();
     }
 }

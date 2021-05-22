@@ -41,4 +41,8 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
     public LiveData<ArrayList<Notification>> getNewNotifications() {
         return newNotifications;
     }
+
+    public void deleteNotification(String id){
+        repository.deleteNotification(id);
+    }
 }

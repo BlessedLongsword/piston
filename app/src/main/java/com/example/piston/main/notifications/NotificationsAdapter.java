@@ -32,8 +32,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final FragmentActivity localActivity;
     private final NotificationsViewModel viewModel;
     private OnItemClick itemClick;
-    private List<Notification> list;
     private SparseBooleanArray selectedItems;
+    private SparseBooleanArray deletedItems;
     private int selectedIndex = -1;
 
     public void setItemClick(OnItemClick itemClick) {
@@ -77,6 +77,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
         viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
         selectedItems = new SparseBooleanArray();
+        deletedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -133,6 +134,18 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         return true;
                     }                }
             });
+            if (selectedItems.get(position, false)) {
+                hold.getBinding().postProfile.setVisibility(View.GONE);
+                hold.getBinding().postCheck.setVisibility(View.VISIBLE);
+                if (selectedIndex == position) selectedIndex = -1;
+            } else {
+                hold.getBinding().postProfile.setVisibility(View.VISIBLE);
+                hold.getBinding().postCheck.setVisibility(View.GONE);
+                if (selectedIndex == position) selectedIndex = -1;
+            }
+            if(deletedItems.get(position,false)){
+                viewModel.deleteNotification(notificationPost.getNotificationID());
+            }
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -161,6 +174,18 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         return true;
                     }                }
             });
+            if (selectedItems.get(position, false)) {
+                hold.getBinding().replyProfile.setVisibility(View.GONE);
+                hold.getBinding().replyCheck.setVisibility(View.VISIBLE);
+                if (selectedIndex == position) selectedIndex = -1;
+            } else {
+                hold.getBinding().replyProfile.setVisibility(View.VISIBLE);
+                hold.getBinding().replyCheck.setVisibility(View.GONE);
+                if (selectedIndex == position) selectedIndex = -1;
+            }
+            if(deletedItems.get(position,true)){
+                viewModel.deleteNotification(notificationReply.getNotificationID());
+            }
         }
     }
 
@@ -216,11 +241,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         return items;
     }
 
-    public void removeItems(int position) {
-        list.remove(position);
-        selectedIndex = -1;
-    }
-
     public void clearSelection() {
         selectedItems.clear();
         notifyDataSetChanged();
@@ -238,6 +258,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public int selectedItemCount() {
         return selectedItems.size();
+    }
+
+    public void deleteNotifications(){
+        for(int i = getSelectedItems().size() - 1; i >= 0; i--){
+            deletedItems.put(getSelectedItems().get(i),true);
+            notifyItemChanged(getSelectedItems().get(i));
+        }
+
     }
 
 }

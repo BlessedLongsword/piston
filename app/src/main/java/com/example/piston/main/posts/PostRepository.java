@@ -179,13 +179,14 @@ public class PostRepository {
                         .requireNonNull(task.getResult()).get("owner")).toString())
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
-                                NotificationReply notificationReply = new NotificationReply(user, content,
-                                        id, profilePictureLink, false, scope, sectionID, postID);
                                 DocumentReference docRef2 = db.collection("users")
                                         .document(Objects.requireNonNull(Objects.requireNonNull
                                                 (task1.getResult()).get("email")).toString())
                                         .collection("notifications")
                                         .document();
+                                String notificationID = docRef2.getId();
+                                NotificationReply notificationReply = new NotificationReply(user, content,
+                                        id, profilePictureLink, false, scope, sectionID, postID, notificationID);
                                 docRef2.set(notificationReply);
                                 docRef2.update(data);
                             }
@@ -211,13 +212,14 @@ public class PostRepository {
         if (!quoteOwner.equals(user)) {
             db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    NotificationReply notificationReply = new NotificationReply(user, content, id,
-                            profilePictureLink, false, scope, sectionID, postID);
                     DocumentReference docRef2 = db.collection("users")
                             .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
                                     .get("email")).toString())
                             .collection("notifications")
                             .document();
+                    String notificationID = docRef2.getId();
+                    NotificationReply notificationReply = new NotificationReply(user, content, id,
+                            profilePictureLink, false, scope, sectionID, postID, notificationID);
                     docRef2.set(notificationReply);
                     docRef2.update(data);
                 }
