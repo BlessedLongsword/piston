@@ -6,6 +6,7 @@ import com.example.piston.data.posts.Post;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
@@ -76,33 +77,39 @@ public class GroupRepository {
     public void fromShareJoinGroup(String groupID) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             String user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
-            db.collection("groups").document(groupID)
-                    .get().addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            DocumentReference docRef2 = db.collection("users")
-                                    .document(Objects.requireNonNull(user))
-                                    .collection("groups")
-                                    .document(groupID);
-                            docRef2.get().addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful()) {
-                                    Map<String, Object> data = new HashMap<>();
-                                    data.put("id", groupID);
-                                    docRef2.set(data);
-                                    data.clear();
-                                    data.put("id", user);
-                                    data.put("priority", 2);
-                                    db.collection("groups")
-                                            .document(groupID)
-                                            .collection("members")
-                                            .document(user)
-                                            .set(data).addOnCompleteListener(task2 -> {
-                                                if (task2.isSuccessful()) {
-                                                    listener.setFromShareJoinedGroup();
-                                                }
-                                    });
-                                }
-                            });
-                        }
+            DocumentReference docRef = db.collection("groups").document(groupID);
+            docRef.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        long numMembers = (long) Objects.requireNonNull(task.getResult().get("numMembers"));
+                        docRef.update("numMembers", ++numMembers);
+                        DocumentReference docRef2 = db.collection("users")
+                                .document(Objects.requireNonNull(user))
+                                .collection("groups")
+                                .document(groupID);
+                        long finalNumMembers = numMembers;
+                        docRef2.get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                Map<String, Object> data = new HashMap<>();
+                                data.put("id", groupID);
+                                data.put("title", task.getResult().get("title"));
+                                data.put("timestamp", FieldValue.serverTimestamp());
+                                data.put("numMembers", finalNumMembers);
+                                docRef2.set(data);
+                                data.clear();
+                                data.put("id", user);
+                                data.put("priority", 2);
+                                db.collection("groups")
+                                        .document(groupID)
+                                        .collection("members")
+                                        .document(user)
+                                        .set(data).addOnCompleteListener(task2 -> {
+                                            if (task2.isSuccessful()) {
+                                                listener.setFromShareJoinedGroup();
+                                            }
+                                });
+                            }
+                        });
+                    }
             });
     }
 

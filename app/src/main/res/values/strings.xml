@@ -34,6 +34,9 @@
     <string name="alternative">You can also</string>
     <string name="write_your_message">Enter your message here</string>
     <string name="no_internet">No internet connection, uploaded without image</string>
+    <string name="order_ascending" translatable="false">ASC</string>
+    <string name="order_descending" translatable="false">DESC</string>
+
 
     <!-- User Data -->
     <string name="password">Password</string>
@@ -164,5 +167,27 @@
     <string name="unpinned">This Post is no longer pinned</string>
     <string name="pinned_personal">This Note is now pinned</string>
     <string name="unpinned_personal">This Note is no longer pinned</string>
+    <string name="filter">Filter</string>
+    <string name="filter_by">Filter by</string>
+    <string name="order">Order</string>
+    <string name="order_by">Order by</string>
+    <string name="filter_default">Default</string>
+    <string name="filter_most_members">Most Members</string>
+    <string name="filter_most_subscribers">Most Subscribers</string>
+    <string name="filter_most_liked">Most Liked</string>
+    <string name="filter_alphabetically">Alphabetically</string>
+
+    <string-array name="global_filters">
+        <item>Default</item>
+        <item>Most Subscribers</item>
+        <item>Alphabetically</item>
+    </string-array>
+
+    <string-array name="groups_filters">
+        <item>Default</item>
+        <item>Most Members</item>
+        <item>Alphabetically</item>
+    </string-array>
+
 
 </resources>

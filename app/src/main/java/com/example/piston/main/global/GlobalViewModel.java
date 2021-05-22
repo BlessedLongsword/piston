@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.sections.Category;
+import com.example.piston.utilities.Values;
 
 import java.util.ArrayList;
 
@@ -15,14 +16,15 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
     private final MutableLiveData<ArrayList<Category>> categories = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<ArrayList<Boolean>> subscribed = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
+    private final MutableLiveData<String> filter = new MutableLiveData<>(Values.FILTER_DEFAULT);
     private final GlobalRepository globalRepository = new GlobalRepository(this);
 
     public LiveData<ArrayList<Category>> getCategories() {
         return categories;
     }
 
-    public void setFilter(String filter) {
-        globalRepository.updateQuery(filter);
+    public void updateFilter(String filter, boolean descending) {
+        globalRepository.updateQuery(filter, descending);
     }
 
     @Override
@@ -42,6 +44,11 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         this.isAdmin.setValue(isAdmin);
     }
 
+    @Override
+    public void setFilter(String filter) {
+        this.filter.setValue(filter);
+    }
+
     public void setSub(boolean sub, String title){
         globalRepository.addSub(sub,title);
     }
@@ -56,5 +63,9 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     public void removeListener() {
         globalRepository.removeListener();
+    }
+
+    public LiveData<String> getFilter() {
+        return filter;
     }
 }

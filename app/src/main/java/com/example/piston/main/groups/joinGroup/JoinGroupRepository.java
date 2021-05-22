@@ -52,13 +52,17 @@ public class JoinGroupRepository {
                                                     .document(groupCode);
                     docRef2.get().addOnCompleteListener(task2 -> {
                        if (task2.getResult().exists()) {
-                           docRef2.update("timestamp", FieldValue.serverTimestamp());
                            listener.setLoadingFinished();
                            listener.setGroupCodeError(JoinGroupResult.JoinError.ALREADY_JOINED);
                        }
                        else {
                            Map<String, Object> data = new HashMap<>();
+                           long numMembers = (long) Objects.requireNonNull(task.getResult().get("numMembers"));
+                           docRef.update("numMembers", ++numMembers);
                            data.put("id", groupCode);
+                           data.put("title", task.getResult().get("title"));
+                           data.put("timestamp", FieldValue.serverTimestamp());
+                           data.put("numMembers", numMembers);
                            docRef2.set(data).addOnCompleteListener(task3 -> {
                                if (task3.isSuccessful()) {
                                    listener.setLoadingFinished();

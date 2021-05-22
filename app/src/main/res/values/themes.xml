@@ -89,4 +89,19 @@
         <item name="tint">?attr/colorOnBackground</item>
     </style>
 
+    <style name="FilterButton">
+        <item name="android:src">@drawable/outline_filter_alt_black_24</item>
+        <item name="tint">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="OrderButtonDown">
+        <item name="android:src">@drawable/outline_arrow_downward_black_24</item>
+        <item name="tint">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="OrderButtonUp">
+        <item name="android:src">@drawable/outline_arrow_upward_black_24</item>
+        <item name="tint">?attr/colorOnBackground</item>
+    </style>
+
 </resources>

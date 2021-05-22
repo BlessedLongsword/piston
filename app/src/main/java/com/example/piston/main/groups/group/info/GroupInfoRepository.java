@@ -100,9 +100,13 @@ public class GroupInfoRepository {
     }
 
     public void removeMember(String memberEmail) {
-        groupDocRef.collection("members").document(memberEmail).delete();
-        db.collection("users").document(memberEmail)
-                .collection("groups").document(groupID).delete();
+        groupDocRef.get().addOnCompleteListener(task -> {
+            groupDocRef.collection("members").document(memberEmail).delete();
+            long numMembers = (long) Objects.requireNonNull(task.getResult().get("numMembers"));
+            groupDocRef.update("numMembers", --numMembers);
+            db.collection("users").document(memberEmail)
+                    .collection("groups").document(groupID).delete();
+        });
     }
 
     public void updateMemberPriority(String memberEmail, int priority) {

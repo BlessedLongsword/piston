@@ -160,5 +160,27 @@
     <string name="unpinned">La publicació ja no està fixada</string>
     <string name="pinned_personal">S\'ha fixat la nota</string>
     <string name="unpinned_personal">La nota ja no està fixada</string>
+    <string name="filter">Filtrar</string>
+    <string name="filter_by">Filtrar per</string>
+    <string name="order">Ordre</string>
+    <string name="order_by">Ordenar per</string>
+    <string name="filter_default">Defecte</string>
+    <string name="filter_most_members">Més membres</string>
+    <string name="filter_most_subscribers">Més Subscriptors</string>
+    <string name="filter_most_liked">Més Agradats</string>
+    <string name="filter_alphabetically">Alfabéticament</string>
+
+    <string-array name="global_filters">
+        <item>Defecte</item>
+        <item>Més Subscriptors</item>
+        <item>Alfabéticament</item>
+    </string-array>
+
+    <string-array name="groups_filters">
+        <item>Defecte</item>
+        <item>Més membres</item>
+        <item>Alfabéticament</item>
+    </string-array>
+
 
 </resources>

@@ -20,18 +20,21 @@ public class GroupsRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ListenerRegistration listenerRegistration;
     private Query groupsQuery;
+    private final String user;
 
     private Group[] groups;
     private int counter;
+    private int lastRequest = 0;
 
     public interface IGroup {
         void setGroups(ArrayList<Group> groups);
+        void setFilter(String filter);
     }
 
     public GroupsRepository(IGroup listener) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        user = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
 
         this.groupsQuery = db.collection("users").document(Objects.requireNonNull(user))
                 .collection("groups").orderBy("timestamp", Query.Direction.DESCENDING);
@@ -45,6 +48,7 @@ public class GroupsRepository {
                 int size = Objects.requireNonNull(task.getResult()).size();
                 counter = 0;
                 groups = new Group[size];
+                final int requestNumber = ++lastRequest;
                 int position = 0;
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
@@ -54,23 +58,32 @@ public class GroupsRepository {
                     docRef.get().addOnCompleteListener(task1 -> {
                         DocumentSnapshot ds = task1.getResult();
                         if (Objects.requireNonNull(ds).exists())
-                            addGroup(positionActual, ds.toObject(Group.class));
+                            addGroup(positionActual, ds.toObject(Group.class), requestNumber);
                     });
                 }
             }
         });
     }
 
-    public void updateQuery(String field) {
-        groupsQuery = db.collection(Values.GROUPS).orderBy("timestamp",
-                Query.Direction.DESCENDING).orderBy(field);
-        loadGroups();
+    private void addGroup(int position, Group group, int requestNumber) {
+        if (requestNumber == lastRequest) {
+            groups[position] = group;
+            if (++counter == groups.length)
+                listener.setGroups(new ArrayList<>(Arrays.asList(groups)));
+        }
     }
 
-    private void addGroup(int position, Group group) {
-        groups[position] = group;
-        if (++counter == groups.length)
-            listener.setGroups(new ArrayList<>(Arrays.asList(groups)));
+    public void updateQuery(String field, boolean descending) {
+        if (field.equals(Values.FILTER_DEFAULT))
+            groupsQuery = db.collection("users").document(Objects.requireNonNull(user))
+                    .collection("groups").orderBy("timestamp", Query.Direction.DESCENDING);
+        else
+            groupsQuery = db.collection("users").document(Objects.requireNonNull(user))
+                    .collection("groups").orderBy(field, (descending) ?
+                    Query.Direction.DESCENDING : Query.Direction.ASCENDING)
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
+        loadGroups();
+        listener.setFilter(field);
     }
 
     private void listenChanges() {

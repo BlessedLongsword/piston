@@ -159,5 +159,26 @@
     <string name="pinned_personal">Se ha fijado la nota</string>
     <string name="unpinned_personal">La nota ya no está fijada</string>
     <string name="notifications_enabled">Push Notifications</string>
+    <string name="filter">Filtrar</string>
+    <string name="filter_by">Filtrar por</string>
+    <string name="order">Orden</string>
+    <string name="order_by">Ordenar por</string>
+    <string name="filter_default">Defecto</string>
+    <string name="filter_most_members">Más miembros</string>
+    <string name="filter_most_subscribers">Más Suscriptores</string>
+    <string name="filter_most_liked">Más Gustados</string>
+    <string name="filter_alphabetically">Alfabéticamente</string>
+
+    <string-array name="global_filters">
+        <item>Defecto</item>
+        <item>Más Suscriptores</item>
+        <item>Alfabéticamente</item>
+    </string-array>
+
+    <string-array name="groups_filters">
+        <item>Defecto</item>
+        <item>Más miembros</item>
+        <item>Alfabéticamente</item>
+    </string-array>
 
 </resources>

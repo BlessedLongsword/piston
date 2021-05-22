@@ -17,7 +17,10 @@ import com.example.piston.R;
 import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.main.global.createCategory.CreateCategoryActivity;
 import com.example.piston.utilities.ScopeFragment;
+import com.example.piston.utilities.Values;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GlobalFragment extends ScopeFragment {
@@ -38,6 +41,20 @@ public class GlobalFragment extends ScopeFragment {
         binding.recyclerviewGlobal.setAdapter(new GlobalAdapter(requireActivity()));
         viewModel.getIsAdmin().observe(Objects.requireNonNull(binding.getLifecycleOwner()),
                 aBoolean -> buttonVisibility = aBoolean ? View.VISIBLE : View.GONE);
+        viewModel.getFilter().observe(binding.getLifecycleOwner(), s -> {
+            switch (s) {
+                case (Values.FILTER_MOST_SUBSCRIBERS):
+                    binding.filterFieldText.setText(R.string.filter_most_subscribers);
+                    break;
+                case (Values.FILTER_ALPHABETICALLY):
+                    binding.filterFieldText.setText(R.string.filter_alphabetically);
+                    break;
+                default:
+                    binding.filterFieldText.setText(R.string.filter_default);
+                    break;
+            }
+        });
+        binding.filterField.setOnClickListener(chooseFilter());
         return binding.getRoot();
     }
 
@@ -48,6 +65,30 @@ public class GlobalFragment extends ScopeFragment {
         actionButton.setImageResource(R.drawable.outline_collections_black_24);
         actionButton.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(requireContext(), R.color.global_secondary)));
+    }
+
+    private View.OnClickListener chooseFilter() {
+        return v -> {
+            new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
+                    .setTitle(getString(R.string.filter_by))
+                    .setItems(R.array.global_filters, (dialog, which) -> {
+                        switch (which) {
+                            case 0:
+                                updateFilter(Values.FILTER_DEFAULT, false);
+                                break;
+                            case 1:
+                                updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true);
+                                break;
+                            case 2:
+                                updateFilter(Values.FILTER_ALPHABETICALLY, false);
+                                break;
+                        }
+                    }).show();
+        };
+    }
+
+    private void updateFilter(String filter, boolean descending) {
+        viewModel.updateFilter(filter, descending);
     }
 
     public void add() {

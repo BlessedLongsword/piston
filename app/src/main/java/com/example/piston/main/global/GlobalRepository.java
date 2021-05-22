@@ -1,7 +1,9 @@
 package com.example.piston.main.global;
 
 import com.example.piston.data.sections.Category;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
@@ -30,6 +32,7 @@ public class GlobalRepository {
         void setCategories(ArrayList<Category> categories);
         void setSubscribed(ArrayList<Boolean> subscriptions);
         void setIsAdmin(boolean isAdmin);
+        void setFilter(String filter);
     }
 
     public GlobalRepository(IGlobal listener) {
@@ -108,29 +111,40 @@ public class GlobalRepository {
     }
 
     public void addSub(boolean sub, String id){
-        if (sub){
-            Map<String, String> data = new HashMap<>();
-            data.put("title", id);
-            db.collection("users")
-                    .document(Objects.requireNonNull(email)).collection("subscribedCategories")
-                    .document(id).set(data);
-            Map<String, String> data2 = new HashMap<>();
-            data2.put("email", email);
-            db.collection("categories").document(id)
-                    .collection("subscribedUsers").document(email).set(data2);
-        }
-        else{
-            db.collection("categories").document(id)
-                    .collection("subscribedUsers").document(email).delete();
-            db.collection("users").document(Objects.requireNonNull(email))
-                    .collection("subscribedCategories").document(id).delete();
-        }
+        DocumentReference categoryDocRef = db.collection("categories").document(id);
+        DocumentReference userDocRef = db.collection("users")
+                .document(Objects.requireNonNull(email)).collection("subscribedCategories")
+                .document(id);
+        categoryDocRef.get().addOnCompleteListener(task -> {
+            long numSubs = (long) Objects.requireNonNull(task.getResult().get("numSubs"));
+            if (task.isSuccessful()) {
+                if (sub) {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("title", id);
+                    userDocRef.set(data);
+                    Map<String, String> data2 = new HashMap<>();
+                    data2.put("email", email);
+                    categoryDocRef.update("numSubs", ++numSubs);
+                    categoryDocRef.collection("subscribedUsers").document(email).set(data2);
+                } else {
+                    categoryDocRef.update("numSubs", --numSubs);
+                    categoryDocRef.collection("subscribedUsers").document(email).delete();
+                    userDocRef.delete();
+                }
+            }
+        });
     }
 
-    public void updateQuery(String field) {
-        categoriesQuery = db.collection("categories").orderBy("timestamp",
-                Query.Direction.DESCENDING).orderBy(field);
+    public void updateQuery(String field, boolean descending) {
+        if (field.equals(Values.FILTER_DEFAULT))
+            categoriesQuery = db.collection(Values.GLOBAL).orderBy("timestamp",
+                    Query.Direction.DESCENDING);
+        else
+            categoriesQuery = db.collection(Values.GLOBAL).orderBy(field, (descending) ?
+                    Query.Direction.DESCENDING : Query.Direction.ASCENDING)
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
         loadCategories();
+        listener.setFilter(field);
     }
 
     private void listenChanges() {

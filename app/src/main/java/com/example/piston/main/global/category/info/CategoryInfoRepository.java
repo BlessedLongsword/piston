@@ -12,7 +12,7 @@ import java.util.Objects;
 public class CategoryInfoRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final DocumentReference categoryDocRef, userDocRef;
+    private final DocumentReference categoryDocRef;
     private final String category, email;
 
     final ICategoryInfo listener;
@@ -29,7 +29,6 @@ public class CategoryInfoRepository {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         this.email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         categoryDocRef = db.collection("categories").document(category);
-        userDocRef = db.collection("users").document(Objects.requireNonNull(email));
 
         categoryDocRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -43,18 +42,28 @@ public class CategoryInfoRepository {
     }
 
     public void addSub(boolean sub){
-        if (sub){
-            Map<String, String> data = new HashMap<>();
-            data.put("id", category);
-            userDocRef.collection("subscribedCategories").document(category).set(data);
-            Map<String, String> data2 = new HashMap<>();
-            data2.put("email", email);
-            categoryDocRef.collection("subscribedUsers").document(email).set(data2);
-        }
-        else{
-            userDocRef.collection("subscribedCategories").document(category).delete();
-            categoryDocRef.collection("subscribedUsers").document(email).delete();
-        }
+        DocumentReference categoryDocRef = db.collection("categories").document(category);
+        DocumentReference userDocRef = db.collection("users")
+                .document(Objects.requireNonNull(email)).collection("subscribedCategories")
+                .document(category);
+        categoryDocRef.get().addOnCompleteListener(task -> {
+            long numSubs = (long) Objects.requireNonNull(task.getResult().get("numSubs"));
+            if (task.isSuccessful()) {
+                if (sub) {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("title", category);
+                    userDocRef.set(data);
+                    Map<String, String> data2 = new HashMap<>();
+                    data2.put("email", email);
+                    categoryDocRef.update("numSubs", ++numSubs);
+                    categoryDocRef.collection("subscribedUsers").document(email).set(data2);
+                } else {
+                    categoryDocRef.update("numSubs", --numSubs);
+                    categoryDocRef.collection("subscribedUsers").document(email).delete();
+                    userDocRef.delete();
+                }
+            }
+        });
     }
 
     public void checkSub () {
