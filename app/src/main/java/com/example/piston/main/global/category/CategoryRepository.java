@@ -25,6 +25,7 @@ public class CategoryRepository {
     private final ICategory listener;
     private Query postsQuery;
     private ListenerRegistration listenerRegistration;
+    private ListenerRegistration listenerRegistrationCategory;
     private final DocumentReference categoryDocRef;
 
     public CategoryRepository(ICategory listener, String category) {
@@ -32,10 +33,7 @@ public class CategoryRepository {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         categoryDocRef = db.collection("categories").document(category);
-        categoryDocRef.get().addOnCompleteListener(task -> {
-            if (task.isComplete())
-                listener.setTitle((String) task.getResult().get("title"));
-        });
+
         postsQuery = categoryDocRef.collection("posts").orderBy("timestamp",
                 Query.Direction.DESCENDING);
 
@@ -74,9 +72,18 @@ public class CategoryRepository {
     private void listenChanges() {
         listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> CategoryRepository
                 .this.loadCategoryPosts());
+        listenerRegistrationCategory = categoryDocRef.addSnapshotListener((value, error) ->
+                CategoryRepository.this.updatePaprams());
     }
 
+    private void updatePaprams() {
+        categoryDocRef.get().addOnCompleteListener(task -> {
+            if (task.isComplete())
+                listener.setTitle((String) task.getResult().get("title"));
+        });
+    }
     public void removeListener() {
+        listenerRegistrationCategory.remove();
         listenerRegistration.remove();
     }
 

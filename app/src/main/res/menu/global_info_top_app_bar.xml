@@ -8,4 +8,11 @@
         android:title="@string/delete_category"
         android:onClick="deleteCategory"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/edit_title"
+        android:title="@string/edit_group_btn"
+        android:icon="@drawable/baseline_edit_white_36"
+        android:onClick="editTitle"
+        app:showAsAction="ifRoom" />
 </menu>

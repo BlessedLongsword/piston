@@ -5,8 +5,15 @@
     tools:context=".main.personal.folder.FolderInfoActivity">
 
     <item
-        android:id="@+id/delete_group"
+        android:id="@+id/delete_folder"
         android:title="@string/delete_folder"
         android:onClick="deleteFolder"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/edit_title"
+        android:title="@string/edit_group_btn"
+        android:icon="@drawable/baseline_edit_white_36"
+        android:onClick="editTitle"
+        app:showAsAction="ifRoom" />
 </menu>

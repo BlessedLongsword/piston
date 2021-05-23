@@ -12,7 +12,9 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
     private final MutableLiveData<Boolean> subscribed = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
 
-    final CategoryInfoRepository repository;
+    private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
+
+    private final CategoryInfoRepository repository;
 
     public CategoryInfoViewModel(String category) {
         repository = new CategoryInfoRepository(this, category);
@@ -61,6 +63,30 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
 
     public void deleteCategory() {
         repository.deleteCategory();
+    }
+
+    public void editDescription(String text) {
+        repository.editDescription(text);
+    }
+
+    public void setFinished() {
+        finished.setValue(true);
+    }
+
+    public void update() {
+        repository.updateParams();
+    }
+
+    public LiveData<Boolean> getFinished() {
+        return finished;
+    }
+
+    public void editTitle(String text) {
+        repository.editTitle(text);
+    }
+
+    public void reset() {
+        finished.setValue(false);
     }
 
 }

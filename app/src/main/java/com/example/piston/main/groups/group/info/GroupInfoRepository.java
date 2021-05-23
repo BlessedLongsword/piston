@@ -27,7 +27,7 @@ public class GroupInfoRepository {
         void setParams(String title, String description, String imageLink, String groupID, boolean modMode);
         void setMembers(ArrayList<GroupMember> members);
         void setPriority(Integer priority);
-        void setFinished(boolean finished);
+        void setFinished();
     }
 
     public GroupInfoRepository(GroupInfoRepository.IGroupInfo listener, String groupID) {
@@ -56,14 +56,14 @@ public class GroupInfoRepository {
     public void editDescription(String text) {
         groupDocRef.get().addOnSuccessListener(documentSnapshot -> {
             groupDocRef.update("description", text);
-            listener.setFinished(true);
+            listener.setFinished();
         });
     }
 
     public void editTitle(String text) {
         groupDocRef.get().addOnSuccessListener(documentSnapshot -> {
             groupDocRef.update("title", text);
-            listener.setFinished(true);
+            listener.setFinished();
         });
     }
 

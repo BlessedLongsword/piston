@@ -23,6 +23,7 @@ public class CategoryInfoRepository {
         void setParams(String title, String description, String imageLink);
         void setSubscribed(boolean subscribed);
         void setIsAdmin(boolean admin);
+        void setFinished();
     }
 
     public CategoryInfoRepository(ICategoryInfo listener, String category) {
@@ -32,14 +33,7 @@ public class CategoryInfoRepository {
         this.email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         categoryDocRef = db.collection("categories").document(category);
 
-        categoryDocRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
-                            (String) task.getResult().get("description"),
-                            (String) task.getResult().get("imageLink"));
-                }
-        });
-
+        updateParams();
         isAdmin();
     }
 
@@ -156,6 +150,30 @@ public class CategoryInfoRepository {
         db.collection("admins").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 listener.setIsAdmin(task.getResult().exists());
+            }
+        });
+    }
+
+    public void editDescription(String text) {
+        categoryDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            categoryDocRef.update("description", text);
+            listener.setFinished();
+        });
+    }
+
+    public void editTitle(String text) {
+        categoryDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            categoryDocRef.update("title", text);
+            listener.setFinished();
+        });
+    }
+
+    public void updateParams() {
+        categoryDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
+                        (String) task.getResult().get("description"),
+                        (String) task.getResult().get("imageLink"));
             }
         });
     }

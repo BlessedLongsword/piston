@@ -130,7 +130,6 @@ public class CategoryActivity extends AppCompatActivity {
     private void goToInfo() {
         Intent intent = new Intent(this, CategoryInfoActivity.class);
         intent.putExtra(Values.SECTION_ID, categoryID);
-        intent.putExtra(Values.IS_ADMIN, getIntent().getBooleanExtra(Values.IS_ADMIN, false));
         startActivityForResult(intent, Values.DELETE_CODE);
     }
 

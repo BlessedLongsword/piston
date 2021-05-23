@@ -25,6 +25,7 @@ public class FolderRepository {
 
     private final FolderRepository.IFolder listener;
     private ListenerRegistration listenerRegistration;
+    private ListenerRegistration listenerRegistrationFolder;
     private final DocumentReference folderDocRef;
     private Query postsQuery;
 
@@ -39,15 +40,9 @@ public class FolderRepository {
                 .collection("folders")
                 .document(folder);
 
-        folderDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
-            }
-        });
-
         postsQuery = folderDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
                 .orderBy("timestamp", Query.Direction.DESCENDING);
-
+        updateParams();
         listenChanges();
     }
 
@@ -80,12 +75,23 @@ public class FolderRepository {
         listener.setFilter(field);
     }
 
+    public void updateParams() {
+        folderDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+            }
+        });
+    }
+
     private void listenChanges() {
         listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> FolderRepository
                 .this.loadFolderPosts());
+        listenerRegistrationFolder = folderDocRef.addSnapshotListener((value, error) ->
+                FolderRepository.this.updateParams());
     }
 
     public void removeListener() {
+        listenerRegistrationFolder.remove();
         listenerRegistration.remove();
     }
 }

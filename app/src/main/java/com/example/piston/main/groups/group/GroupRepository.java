@@ -145,6 +145,7 @@ public class GroupRepository {
     }
 
     public void removeListener() {
+        listenerRegistrationGroup.remove();
         listenerRegistrationPosts.remove();
     }
 }

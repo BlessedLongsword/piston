@@ -49,8 +49,8 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     }
 
     @Override
-    public void setFinished(boolean finished) {
-        this.finished.setValue(finished);
+    public void setFinished() {
+        this.finished.setValue(true);
     }
 
     public void removeMember(String memberEmail) {

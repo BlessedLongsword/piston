@@ -29,7 +29,7 @@ public class GroupInfoActivity extends AppCompatActivity {
     private GroupInfoViewModel viewModel;
     private ClipboardManager clipboard;
     private ActivityGroupInfoBinding binding;
-    String groupID;
+    private String groupID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,9 +67,8 @@ public class GroupInfoActivity extends AppCompatActivity {
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
             .into(binding.groupInfoImage));
-        viewModel.getModMode().observe(this, aBoolean -> {
-            binding.moderatorModeSwitch.setChecked(aBoolean);
-        });
+        viewModel.getModMode().observe(this, aBoolean ->
+                binding.moderatorModeSwitch.setChecked(aBoolean));
         binding.moderatorModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
                 viewModel.setModMode(isChecked));
     }
@@ -83,7 +82,6 @@ public class GroupInfoActivity extends AppCompatActivity {
             position = ((MemberAdapter) Objects.requireNonNull(binding.recyclerviewMembers
                     .getAdapter())).getPosition();
         } catch (Exception e) {
-            Log.w("DBReadTAG", e.getLocalizedMessage(), e);
             return super.onContextItemSelected(item);
         }
 
@@ -118,7 +116,6 @@ public class GroupInfoActivity extends AppCompatActivity {
                 viewModel.update();
             }
         });
-
     }
 
     @SuppressWarnings("unused")

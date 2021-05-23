@@ -9,7 +9,9 @@ public class FolderInfoViewModel extends ViewModel implements FolderInfoReposito
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<String> description = new MutableLiveData<>("");
 
-    final FolderInfoRepository repository;
+    private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
+
+    private final FolderInfoRepository repository;
 
     public FolderInfoViewModel(String folder) {
         repository = new FolderInfoRepository(this, folder);
@@ -21,11 +23,21 @@ public class FolderInfoViewModel extends ViewModel implements FolderInfoReposito
     }
 
     @Override
+    public void setFinished() {
+        finished.setValue(true);
+    }
+
+    @Override
     public void setDescription(String description) {
         this.description.setValue(description);
     }
 
+    public void editDescription(String text) {
+        repository.editDescription(text);
+    }
+
     public LiveData<String> getTitle() { return title; }
+
 
     public LiveData<String> getDescription() {
         return description;
@@ -35,4 +47,19 @@ public class FolderInfoViewModel extends ViewModel implements FolderInfoReposito
         repository.deleteFolder();
     }
 
+    public void reset() {
+        finished.setValue(false);
+    }
+
+    public LiveData<Boolean> getFinished() {
+        return finished;
+    }
+
+    public void update() {
+        repository.updateParams();
+    }
+
+    public void editTitle(String text) {
+        repository.editTitle(text);
+    }
 }

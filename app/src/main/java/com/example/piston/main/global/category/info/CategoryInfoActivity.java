@@ -3,6 +3,7 @@ package com.example.piston.main.global.category.info;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryInfoBinding;
+import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 import com.like.LikeButton;
@@ -20,6 +22,7 @@ import com.like.OnLikeListener;
 public class CategoryInfoActivity extends AppCompatActivity {
 
     private CategoryInfoViewModel viewModel;
+    private ActivityCategoryInfoBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,17 +31,24 @@ public class CategoryInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String sectionID = intent.getStringExtra(Values.SECTION_ID);
-        boolean isAdmin = intent.getBooleanExtra(Values.IS_ADMIN,false);
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(sectionID))
                 .get(CategoryInfoViewModel.class);
-        ActivityCategoryInfoBinding binding = DataBindingUtil.setContentView(
+        binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category_info);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
         viewModel.getTitle().observe(this, binding.categoryInfoTopAppBar::setTitle);
-        binding.categoryInfoTopAppBar.getMenu().getItem(0).setVisible(isAdmin);
+
+        viewModel.getIsAdmin().observe(this, admin -> {
+            if (admin) {
+                binding.categoryInfoTopAppBar.getMenu().getItem(0).setVisible(true);
+                binding.categoryInfoTopAppBar.getMenu().getItem(1).setVisible(true);
+                binding.categoryInfoDescriptionCard.setOnClickListener(v -> editDescription());
+            }
+        });
+
         binding.categoryInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.starButton.setOnLikeListener(new OnLikeListener() {
 
@@ -71,6 +81,33 @@ public class CategoryInfoActivity extends AppCompatActivity {
         viewModel.deleteCategory();
         setResult(Values.DELETE_CODE);
         finish();
+    }
+
+    @SuppressWarnings("unused")
+    public void editTitle(MenuItem item) {
+        viewModel.reset();
+        EditPopup popup = new EditPopup(this, getString(R.string.title),
+                binding.categoryInfoTopAppBar.getTitle().toString());
+        popup.getSaveButton().setOnClickListener(v -> viewModel.editTitle(popup.getText()));
+        viewModel.getFinished().observe(this, finished -> {
+            if (finished) {
+                popup.dismiss();
+                viewModel.update();
+            }
+        });
+    }
+
+    public void editDescription() {
+        viewModel.reset();
+        EditPopup popup = new EditPopup(this, getString(R.string.description),
+                binding.categoryInfoDescription.getText().toString());
+        popup.getSaveButton().setOnClickListener(v -> viewModel.editDescription(popup.getText()));
+        viewModel.getFinished().observe(this, finished -> {
+            if (finished) {
+                popup.dismiss();
+                viewModel.update();
+            }
+        });
     }
 
 }

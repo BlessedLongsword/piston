@@ -12,26 +12,23 @@ public class FolderInfoRepository {
 
     public interface IFolderInfo {
         void setTitle(String title);
+        void setFinished();
         void setDescription(String description);
     }
 
     private final DocumentReference folderDocRef;
+    private FolderInfoRepository.IFolderInfo listener;
 
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
+        this.listener = listener;
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         folderDocRef = db.collection("users")
                 .document(Objects.requireNonNull(user))
                 .collection("folders")
                 .document(folderID);
-
-        folderDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                listener.setTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
-                listener.setDescription((String) task.getResult().get("description"));
-            }
-        });
+        
+        updateParams();
     }
 
     public void deleteFolder() {
@@ -61,4 +58,26 @@ public class FolderInfoRepository {
         folderDocRef.delete();
     }
 
+    public void updateParams() {
+        folderDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setTitle((String) Objects.requireNonNull(task.getResult()).get("title"));
+                listener.setDescription((String) task.getResult().get("description"));
+            }
+        });
+    }
+
+    public void editTitle(String text) {
+        folderDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            folderDocRef.update("title", text);
+            listener.setFinished();
+        });
+    }
+
+    public void editDescription(String text) {
+        folderDocRef.get().addOnSuccessListener(documentSnapshot -> {
+            folderDocRef.update("description", text);
+            listener.setFinished();
+        });
+    }
 }
