@@ -75,9 +75,9 @@ public class GroupRepository {
                             if (task.isSuccessful()) {
                                 Object priority = task1.getResult().get("priority");
                                 if (priority != null) {
-                                    long longPrio = (long) priority;
+                                    long priority1 = (long) priority;
                                     listener.setPermissions((boolean) Objects.requireNonNull
-                                            (task.getResult().get("modMode")), (int) longPrio);
+                                            (task.getResult().get("modMode")), (int) priority1);
                                 }
                             }
                         });
