@@ -72,7 +72,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.NoteHolder
         ItemPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                 R.layout.item_post, parent, false);
 
-        if (viewType == 0)
+        if (viewType == 0 || viewType == 2)
             binding.postPicture.setVisibility(View.GONE);
         Objects.requireNonNull(binding.heartIcon).setVisibility(View.GONE);
         binding.heartCount.setVisibility(View.GONE);
