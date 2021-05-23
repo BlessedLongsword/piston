@@ -1,10 +1,10 @@
 package com.example.piston.main.notifications;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.R;
-import com.example.piston.data.notifications.Notification;
 import com.example.piston.databinding.ActivityNotificationsBinding;
 
 
@@ -79,6 +78,7 @@ public class NotificationsActivity extends AppCompatActivity {
             return false;
         }
 
+        @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onActionItemClicked(androidx.appcompat.view.ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {

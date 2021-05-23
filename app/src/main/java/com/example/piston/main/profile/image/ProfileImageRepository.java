@@ -10,7 +10,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class ProfileImageRepository {
 

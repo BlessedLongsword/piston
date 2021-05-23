@@ -73,10 +73,10 @@ public class CategoryRepository {
         listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> CategoryRepository
                 .this.loadCategoryPosts());
         listenerRegistrationCategory = categoryDocRef.addSnapshotListener((value, error) ->
-                CategoryRepository.this.updatePaprams());
+                CategoryRepository.this.updateParams());
     }
 
-    private void updatePaprams() {
+    private void updateParams() {
         categoryDocRef.get().addOnCompleteListener(task -> {
             if (task.isComplete())
                 listener.setTitle((String) task.getResult().get("title"));

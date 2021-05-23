@@ -57,7 +57,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/check_icon"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/profile_image"/>
+
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout

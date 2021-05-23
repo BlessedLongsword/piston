@@ -17,7 +17,7 @@ public class FolderInfoRepository {
     }
 
     private final DocumentReference folderDocRef;
-    private FolderInfoRepository.IFolderInfo listener;
+    private final FolderInfoRepository.IFolderInfo listener;
 
     public FolderInfoRepository(FolderInfoRepository.IFolderInfo listener, String folderID) {
         this.listener = listener;

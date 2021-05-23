@@ -34,9 +34,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final FragmentActivity localActivity;
     private final NotificationsViewModel viewModel;
     private OnItemClick itemClick;
-    private SparseBooleanArray selectedItems;
-    private SparseBooleanArray deletedItems;
-    private SparseBooleanArray readItems;
+    private final SparseBooleanArray selectedItems;
+    private final SparseBooleanArray deletedItems;
+    private final SparseBooleanArray readItems;
     private int selectedIndex = -1;
     ColorStateList color;
 
@@ -143,24 +143,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         notificationPost.getPostID(), null));
             }
             else{
-                hold.getBinding().notificationPostCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
-                    }
-                });
+                hold.getBinding().notificationPostCard.setOnClickListener(view ->
+                        itemClick.onLongPress(view, viewModel.getNotifications()
+                                .getValue().get(position), position));
             }
-            hold.getBinding().notificationPostCard.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    if (itemClick == null) {
-                        return false;
-                    } else {
-                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
-                        notifyDataSetChanged();
-                        return true;
-                    }                }
-            });
+            hold.getBinding().notificationPostCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications()
+                            .getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
             if (selectedItems.get(position, false)) {
                 hold.getBinding().postProfile.setVisibility(View.GONE);
                 hold.getBinding().postCheck.setVisibility(View.VISIBLE);
@@ -200,24 +195,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         notificationReply.getPostID(), notificationReply.getReplyID()));
             }
             else{
-                hold.getBinding().notificationReplyCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
-                    }
-                });
+                hold.getBinding().notificationReplyCard.setOnClickListener(view ->
+                        itemClick.onLongPress(view, viewModel.getNotifications()
+                                .getValue().get(position), position));
             }
-            hold.getBinding().notificationReplyCard.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    if (itemClick == null) {
-                        return false;
-                    } else {
-                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
-                        notifyDataSetChanged();
-                        return true;
-                    }                }
-            });
+            hold.getBinding().notificationReplyCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications()
+                            .getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
             if (selectedItems.get(position, false)) {
                 hold.getBinding().replyProfile.setVisibility(View.GONE);
                 hold.getBinding().replyCheck.setVisibility(View.VISIBLE);

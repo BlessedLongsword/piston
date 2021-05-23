@@ -20,8 +20,6 @@ import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.Objects;
-
 public class CategoryActivity extends AppCompatActivity {
 
     private String categoryID;
