@@ -125,9 +125,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             hold.getBinding().notificationPostCard.setActivated(selectedItems.get(position,false));
 
-            hold.getBinding().notificationPostCard.setOnClickListener(openNewActivity(
-                    notificationPost.getScope(), notificationPost.getSectionID(),
-                            notificationPost.getPostID(), null));
+            if(selectedItemCount()==0){
+                hold.getBinding().notificationPostCard.setOnClickListener(openNewActivity(
+                        notificationPost.getScope(), notificationPost.getSectionID(),
+                        notificationPost.getPostID(), null));
+            }
+            else{
+                hold.getBinding().notificationPostCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                    }
+                });
+            }
             hold.getBinding().notificationPostCard.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -135,6 +145,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         return false;
                     } else {
                         itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                        notifyDataSetChanged();
                         return true;
                     }                }
             });
@@ -172,9 +183,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             hold.getBinding().notificationReplyCard.setActivated(selectedItems.get(position,false));
 
-            hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
-                    notificationReply.getScope(), notificationReply.getSectionID(),
-                            notificationReply.getPostID(), notificationReply.getReplyID()));
+            if (selectedItemCount()==0){
+                hold.getBinding().notificationReplyCard.setOnClickListener(openNewActivity(
+                        notificationReply.getScope(), notificationReply.getSectionID(),
+                        notificationReply.getPostID(), notificationReply.getReplyID()));
+            }
+            else{
+                hold.getBinding().notificationReplyCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                    }
+                });
+            }
             hold.getBinding().notificationReplyCard.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -182,6 +203,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         return false;
                     } else {
                         itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                        notifyDataSetChanged();
                         return true;
                     }                }
             });
