@@ -183,7 +183,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().replyCheck.setVisibility(View.GONE);
                 if (selectedIndex == position) selectedIndex = -1;
             }
-            if(deletedItems.get(position,true)){
+            if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationReply.getNotificationID());
             }
         }
