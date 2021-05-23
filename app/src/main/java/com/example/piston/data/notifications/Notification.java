@@ -44,7 +44,7 @@ public abstract class Notification {
         this.postID = postID;
     }
 
-    public boolean getIsRead() {
+    public boolean getRead() {
         return read;
     }
 

@@ -98,19 +98,20 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (viewType == 0 || viewType == 2) {
             ItemNotificationPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_notification_post, parent, false);
-            if (viewType == 2){
-                binding.notificationTitle.setTextColor(R.color.grey);
-            }
             color = binding.notificationPostCard.getCardBackgroundColor();
+            if (viewType == 2){
+                binding.notificationTitle.setTextColor(R.color.selected);
+            }
+            Log.d("luka", String.valueOf(viewType));
             return new NotificationsAdapter.NotificationPostHolder(binding);
         }
         else {
             ItemNotificationReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_notification_reply, parent, false);
-            if (viewType == 3){
-                binding.notificationTitle.setTextColor(R.color.grey);
-            }
             color = binding.notificationReplyCard.getCardBackgroundColor();
+            if (viewType == 3){
+                binding.notificationTitle.setTextColor(R.color.selected);
+            }
             return new NotificationsAdapter.NotificationReplyHolder(binding);
         }
     }
@@ -178,7 +179,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 viewModel.markAsRead(notificationPost.getNotificationID());
                 hold.getBinding().notificationTitle.setTextColor(R.color.selected);
             }
-
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -234,14 +234,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationReply.getNotificationID());
-                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
+                hold.getBinding().notificationTitle.setTextColor(R.color.selected);
             }
         }
     }
 
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
-        if (holder.getItemViewType() == 0) {
+        if (holder.getItemViewType() == 0 || holder.getItemViewType() == 2) {
             ((NotificationPostHolder) holder)
                     .getBinding().notificationPostCard.setOnClickListener(null);
         }
@@ -260,14 +260,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public int getNotificationType(Notification notification) {
         if (notification instanceof NotificationPost) {
-            if (notification.getIsRead()){
+            if (notification.getRead()){
                 return 2;
             }
             else{
                 return 0;
             }
         } else {
-            if (notification.getIsRead()){
+            if (notification.getRead()){
                 return 1;
             }
             else{
