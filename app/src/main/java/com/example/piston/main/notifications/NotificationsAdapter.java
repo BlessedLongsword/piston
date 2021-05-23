@@ -2,6 +2,7 @@ package com.example.piston.main.notifications;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private SparseBooleanArray deletedItems;
     private SparseBooleanArray readItems;
     private int selectedIndex = -1;
+    ColorStateList color;
 
     public void setItemClick(OnItemClick itemClick) {
         this.itemClick = itemClick;
@@ -88,6 +90,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         return getNotificationType(Objects.requireNonNull(viewModel.getNotifications().getValue()).get(position));
     }
 
+    @SuppressLint("ResourceAsColor")
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -95,11 +98,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (viewType == 0 || viewType == 2) {
             ItemNotificationPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_notification_post, parent, false);
+            if (viewType == 2){
+                binding.notificationTitle.setTextColor(R.color.grey);
+            }
+            color = binding.notificationPostCard.getCardBackgroundColor();
             return new NotificationsAdapter.NotificationPostHolder(binding);
         }
         else {
             ItemNotificationReplyBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_notification_reply, parent, false);
+            if (viewType == 3){
+                binding.notificationTitle.setTextColor(R.color.grey);
+            }
+            color = binding.notificationReplyCard.getCardBackgroundColor();
             return new NotificationsAdapter.NotificationReplyHolder(binding);
         }
     }
@@ -153,17 +164,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().postProfile.setVisibility(View.GONE);
                 hold.getBinding().postCheck.setVisibility(View.VISIBLE);
                 if (selectedIndex == position) selectedIndex = -1;
+                hold.getBinding().notificationPostCard.setCardBackgroundColor(R.color.selected);
             } else {
                 hold.getBinding().postProfile.setVisibility(View.VISIBLE);
                 hold.getBinding().postCheck.setVisibility(View.GONE);
                 if (selectedIndex == position) selectedIndex = -1;
+                hold.getBinding().notificationPostCard.setCardBackgroundColor(color);
             }
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationPost.getNotificationID());
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationPost.getNotificationID());
-                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
+                hold.getBinding().notificationTitle.setTextColor(R.color.selected);
             }
 
         }
@@ -209,10 +222,12 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().replyProfile.setVisibility(View.GONE);
                 hold.getBinding().replyCheck.setVisibility(View.VISIBLE);
                 if (selectedIndex == position) selectedIndex = -1;
+                hold.getBinding().notificationReplyCard.setCardBackgroundColor(R.color.selected);
             } else {
                 hold.getBinding().replyProfile.setVisibility(View.VISIBLE);
                 hold.getBinding().replyCheck.setVisibility(View.GONE);
                 if (selectedIndex == position) selectedIndex = -1;
+                hold.getBinding().notificationReplyCard.setCardBackgroundColor(color);
             }
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationReply.getNotificationID());
@@ -245,9 +260,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public int getNotificationType(Notification notification) {
         if (notification instanceof NotificationPost) {
-            return 0;
+            if (notification.getIsRead()){
+                return 2;
+            }
+            else{
+                return 0;
+            }
         } else {
-            return 1;
+            if (notification.getIsRead()){
+                return 1;
+            }
+            else{
+                return 3;
+            }
         }
     }
 
