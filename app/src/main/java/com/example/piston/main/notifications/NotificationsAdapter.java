@@ -92,7 +92,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        if (viewType == 0) {
+        if (viewType == 0 || viewType == 2) {
             ItemNotificationPostBinding binding = DataBindingUtil.inflate(layoutInflater,
                     R.layout.item_notification_post, parent, false);
             return new NotificationsAdapter.NotificationPostHolder(binding);
@@ -107,7 +107,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 0) {
+        if (holder.getItemViewType() == 0 || holder.getItemViewType() == 2) {
             NotificationPost notificationPost = Objects.requireNonNull((NotificationPost) Objects.requireNonNull(viewModel
                     .getNotifications().getValue()).get(position));
             NotificationsAdapter.NotificationPostHolder hold = (NotificationsAdapter
@@ -165,9 +165,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 viewModel.markAsRead(notificationPost.getNotificationID());
                 hold.getBinding().notificationTitle.setTextColor(R.color.grey);
             }
-            if(viewModel.getNotifications().getValue().get(position).getIsRead()){
-                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
-            }
+
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -221,9 +219,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationReply.getNotificationID());
-                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
-            }
-            if(viewModel.getNotifications().getValue().get(position).getIsRead()){
                 hold.getBinding().notificationTitle.setTextColor(R.color.grey);
             }
         }

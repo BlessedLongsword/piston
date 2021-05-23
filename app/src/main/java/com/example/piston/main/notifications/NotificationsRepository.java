@@ -25,7 +25,6 @@ public class NotificationsRepository {
     public interface INotifications {
         void setNotifications(ArrayList<Notification> notifications);
         void setNewNotifications(ArrayList<Notification> notifications);
-        void setRead(ArrayList<Boolean> read);
     }
 
     public NotificationsRepository(INotifications listener) {

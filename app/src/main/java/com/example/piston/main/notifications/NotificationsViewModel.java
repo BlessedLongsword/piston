@@ -12,7 +12,6 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
 
     private final MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<ArrayList<Notification>> newNotifications = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<ArrayList<Boolean>> isRead = new MutableLiveData<>(new ArrayList<>());
 
     private final NotificationsRepository repository;
 
@@ -28,11 +27,6 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
     @Override
     public void setNewNotifications(ArrayList<Notification> notifications) {
         this.newNotifications.setValue(notifications);
-    }
-
-    @Override
-    public void setRead(ArrayList<Boolean> read){
-        this.isRead.setValue(read);
     }
 
     @Override
