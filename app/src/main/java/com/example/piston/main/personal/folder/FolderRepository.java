@@ -1,6 +1,7 @@
 package com.example.piston.main.personal.folder;
 
 import com.example.piston.data.posts.Post;
+import com.example.piston.utilities.Values;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -19,6 +20,7 @@ public class FolderRepository {
     public interface IFolder {
         void setFolderPosts(ArrayList<Post> posts);
         void setTitle(String title);
+        void setFilter(String filter);
     }
 
     private final FolderRepository.IFolder listener;
@@ -65,10 +67,17 @@ public class FolderRepository {
         });
     }
 
-    public void updateQuery(String field) {
-        postsQuery = folderDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
-                .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING);
+    public void updateQuery(String field, boolean descending) {
+        if (field.equals(Values.FILTER_DEFAULT))
+            postsQuery = folderDocRef.collection("posts").orderBy("pinned",
+                    Query.Direction.DESCENDING).orderBy("timestamp", Query.Direction.DESCENDING);
+        else
+            postsQuery = folderDocRef.collection("posts").orderBy("pinned",
+                    Query.Direction.DESCENDING).orderBy(field, (descending) ?
+                    Query.Direction.DESCENDING : Query.Direction.ASCENDING)
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
         loadFolderPosts();
+        listener.setFilter(field);
     }
 
     private void listenChanges() {

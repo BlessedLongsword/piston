@@ -134,7 +134,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
-                        <com.google.android.material.button.MaterialButton
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@color/transparent"
@@ -157,6 +157,16 @@
                         android:layout_height="wrap_content"
                         android:text="@string/group_link_help"
                         android:textSize="@dimen/text_hint"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/moderator_mode_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:thumbTint="@drawable/switch_thumb_groups"
+                        app:trackTint="@drawable/switch_track_groups"
+                        android:visibility="gone"
+                        android:text="@string/moderator_mode"
+                        android:contentDescription="@string/mod_mode_cd"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

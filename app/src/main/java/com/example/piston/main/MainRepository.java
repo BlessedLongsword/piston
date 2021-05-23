@@ -16,7 +16,6 @@ public class MainRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final IMain listener;
     private final CollectionReference userGroupsCollection;
-    private ListenerRegistration listenerRegistration;
 
     public interface IMain {
         void setSignedIn(boolean signedIn);
@@ -28,7 +27,6 @@ public class MainRepository {
         userGroupsCollection = db.collection("users").document(Objects.requireNonNull
                 (Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
                 .collection(Values.GROUPS);
-        listenChanges();
     }
 
     public void checkFromShareBelongsToGroup(String groupID) {
@@ -39,37 +37,7 @@ public class MainRepository {
         });
     }
 
-    public void updateGroupParamsForCurrentUser() {
-        userGroupsCollection.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (DocumentSnapshot ds : task.getResult()) {
-                    db.collection(Values.GROUPS).document(ds.getId()).get().addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            DocumentReference dr = ds.getReference();
-                            dr.get().addOnCompleteListener(task2 -> {
-                               if (task2.isSuccessful()) {
-                                   dr.update("title", task1.getResult().get("title"));
-                                   dr.update("numMembers", task1.getResult().get("numMembers"));
-                               }
-                            });
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-    private void listenChanges() {
-        listenerRegistration = db.collection(Values.GROUPS).addSnapshotListener((snapshots, e) ->
-                MainRepository.this.updateGroupParamsForCurrentUser());
-    }
-
-    private void removeListener() {
-        listenerRegistration.remove();
-    }
-
     public void logout() {
-        removeListener();
         mAuth.signOut();
         listener.setSignedIn(false);
     }

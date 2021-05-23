@@ -25,66 +25,59 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/filter_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    app:cardElevation="@dimen/zero">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/filter_field"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardElevation="@dimen/zero">
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="@dimen/tiny_separator"
+                        android:weightSum="1">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginHorizontal="@dimen/tiny_separator"
-                            android:weightSum="1">
+                            android:layout_marginVertical="@dimen/tiny_separator"
+                            android:orientation="vertical">
 
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/tiny_separator"
-                                android:orientation="vertical">
+                                android:text="@string/filter_by"
+                                android:textSize="@dimen/text_hint"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/filter_by"
-                                    android:textSize="@dimen/text_hint"/>
-
-                                <TextView
-                                    android:id="@+id/filter_field_text"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/bigger_text"
-                                    android:hint="@string/filter"
-                                    android:textColor="?android:attr/textColorPrimary" />
-
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <ImageButton
+                            <TextView
+                                android:id="@+id/filter_field_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/transparent"
-                                android:theme="@style/FilterButton"
-                                android:layout_margin="@dimen/tiny_separator"
-                                android:contentDescription="@string/filter"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="10dp"/>
+                                android:textSize="@dimen/bigger_text"
+                                android:hint="@string/filter"
+                                android:textColor="?android:attr/textColorPrimary" />
 
                         </LinearLayout>
 
-                    </com.google.android.material.card.MaterialCardView>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
-                </LinearLayout>
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:theme="@style/FilterButton"
+                            android:layout_margin="@dimen/tiny_separator"
+                            android:contentDescription="@string/filter"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="10dp"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <View

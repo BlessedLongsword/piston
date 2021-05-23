@@ -1,6 +1,7 @@
 package com.example.piston.main.global.category;
 
 import com.example.piston.data.posts.Post;
+import com.example.piston.utilities.Values;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +19,7 @@ public class CategoryRepository {
     public interface ICategory {
         void setCategoryPosts(ArrayList<Post> posts);
         void setTitle(String title);
+        void setFilter(String filter);
     }
 
     private final ICategory listener;
@@ -56,10 +58,17 @@ public class CategoryRepository {
                 });
     }
 
-    public void updateQuery(String field) {
-        postsQuery = categoryDocRef.collection("posts").orderBy(field).orderBy("timestamp",
-                Query.Direction.DESCENDING);
+    public void updateQuery(String field, boolean descending) {
+        if (field.equals(Values.FILTER_DEFAULT))
+            postsQuery = categoryDocRef.collection("posts")
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
+        else
+            postsQuery = categoryDocRef.collection("posts")
+                    .orderBy(field, (descending) ? Query.Direction.DESCENDING
+                            : Query.Direction.ASCENDING).orderBy("timestamp",
+                    Query.Direction.DESCENDING);
         loadCategoryPosts();
+        listener.setFilter(field);
     }
 
     private void listenChanges() {

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.posts.Post;
+import com.example.piston.utilities.Values;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,9 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> fromShareJoinedGroup = new MutableLiveData<>(false);
+    private final MutableLiveData<String> filter = new MutableLiveData<>(Values.FILTER_DEFAULT);
+    private final MutableLiveData<Boolean> modMode = new MutableLiveData<>(false);
+    private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
 
     private final GroupRepository repository;
 
@@ -20,12 +24,23 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
         repository = new GroupRepository(this, group);
     }
 
-    public void setFilter(String filter) {
-        repository.updateQuery(filter);
+    public void updateFilter(String filter, boolean descending) {
+        repository.updateQuery(filter, descending);
     }
 
     public void fromShareJoinGroup(String groupID) {
         repository.fromShareJoinGroup(groupID);
+    }
+
+    @Override
+    public void setFilter(String filter) {
+        this.filter.setValue(filter);
+    }
+
+    @Override
+    public void setPermissions(boolean modMode, Integer priority) {
+        this.modMode.setValue(modMode);
+        this.priority.setValue(priority);
     }
 
     @Override
@@ -54,5 +69,17 @@ public class GroupViewModel extends ViewModel implements GroupRepository.IGroup 
 
     public LiveData<Boolean> getFromShareJoinedGroup() {
         return fromShareJoinedGroup;
+    }
+
+    public LiveData<Boolean> getModMode() {
+        return modMode;
+    }
+
+    public LiveData<String> getFilter() {
+        return filter;
+    }
+
+    public LiveData<Integer> getPriority() {
+        return priority;
     }
 }

@@ -58,12 +58,20 @@ public class GroupInfoActivity extends AppCompatActivity {
             binding.groupInfoTopAppBar.getMenu().getItem(2).setVisible(priority<=1);
             if (priority<=1) {
                 binding.groupInfoDescriptionCard.setOnClickListener(v -> editDescription());
+                if (priority == 0) {
+                    binding.moderatorModeSwitch.setVisibility(View.VISIBLE);
+                }
             }
         });
         viewModel.getTitle().observe(this, binding.groupInfoTopAppBar::setTitle);
         viewModel.getImageLink().observe(this, aString -> Glide.with(this)
             .load(aString)
             .into(binding.groupInfoImage));
+        viewModel.getModMode().observe(this, aBoolean -> {
+            binding.moderatorModeSwitch.setChecked(aBoolean);
+        });
+        binding.moderatorModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
+                viewModel.setModMode(isChecked));
     }
 
     @Override

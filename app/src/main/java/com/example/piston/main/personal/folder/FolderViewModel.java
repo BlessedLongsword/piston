@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.piston.data.posts.Post;
+import com.example.piston.utilities.Values;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
 
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> title = new MutableLiveData<>("");
+    private final MutableLiveData<String> filter = new MutableLiveData<>(Values.FILTER_DEFAULT);
 
     private final FolderRepository repository;
 
@@ -19,8 +21,13 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
         repository = new FolderRepository(this, folder);
     }
 
+    public void updateFilter(String filter, boolean descending) {
+        repository.updateQuery(filter, descending);
+    }
+
+    @Override
     public void setFilter(String filter) {
-        repository.updateQuery(filter);
+        this.filter.setValue(filter);
     }
 
     @Override
@@ -44,5 +51,9 @@ public class FolderViewModel extends ViewModel implements FolderRepository.IFold
 
     public LiveData<String> getTitle() {
         return title;
+    }
+
+    public LiveData<String> getFilter() {
+        return filter;
     }
 }

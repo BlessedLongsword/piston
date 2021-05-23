@@ -17,6 +17,7 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     private final MutableLiveData<String> numberOfMembers = new MutableLiveData<>("");
     private final MutableLiveData<ArrayList<GroupMember>> members = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Integer> priority = new MutableLiveData<>(2);
+    private final MutableLiveData<Boolean> modMode = new MutableLiveData<>(false);
 
     private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
 
@@ -28,10 +29,11 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     }
 
     @Override
-    public void setParams(String title, String description, String imageLink, String groupID) {
+    public void setParams(String title, String description, String imageLink, String groupID, boolean modMode) {
         this.title.setValue(title);
         this.description.setValue(description);
         this.imageLink.setValue(imageLink);
+        this.modMode.setValue(modMode);
         id.setValue(groupID);
     }
 
@@ -88,6 +90,10 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
         return priority;
     }
 
+    public LiveData<Boolean> getModMode() {
+        return modMode;
+    }
+
     public void editDescription(String text) {
         repository.editDescription(text);
     }
@@ -103,6 +109,8 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     public void editTitle(String text) {
         repository.editTitle(text);
     }
+
+    public void setModMode(boolean modMode) { repository.setModMode(modMode); }
 
     public void reset() {
         finished.setValue(false);

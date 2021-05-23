@@ -86,8 +86,31 @@ public class GroupsRepository {
         listener.setFilter(field);
     }
 
+    public void updateGroupParamsForCurrentUser() {
+        groupsQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot ds : task.getResult()) {
+                    db.collection(Values.GROUPS).document(ds.getId()).get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            DocumentReference dr = ds.getReference();
+                            dr.get().addOnCompleteListener(task2 -> {
+                                if (task2.isSuccessful()) {
+                                    dr.update("title", task1.getResult().get("title"));
+                                    dr.update("numMembers", task1.getResult().get("numMembers"));
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     private void listenChanges() {
-        listenerRegistration = groupsQuery.addSnapshotListener((snapshots, e) -> GroupsRepository.this.loadGroups());
+        listenerRegistration = groupsQuery.addSnapshotListener((snapshots, e) -> {
+            GroupsRepository.this.loadGroups();
+            GroupsRepository.this.updateGroupParamsForCurrentUser();
+        });
     }
 
     public void removeListener() {

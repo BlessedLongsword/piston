@@ -18,12 +18,16 @@ import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 public class CategoryActivity extends AppCompatActivity {
 
     private String categoryID;
     private boolean orphan;
     private boolean postDidNotExist;
+    private CategoryViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class CategoryActivity extends AppCompatActivity {
             finish();
         }
 
-        CategoryViewModel viewModel = new ViewModelProvider(this, new MyViewModelFactory(categoryID))
+        viewModel = new ViewModelProvider(this, new MyViewModelFactory(categoryID))
                 .get(CategoryViewModel.class);
         ActivityCategoryBinding binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_category);
@@ -50,6 +54,20 @@ public class CategoryActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         viewModel.getTitle().observe(this, binding.viewPostsTopAppBar::setTitle);
+        viewModel.getFilter().observe(this, s -> {
+            switch (s) {
+                case (Values.FILTER_MOST_LIKED):
+                    binding.filterFieldText.setText(R.string.filter_most_liked);
+                    break;
+                case (Values.FILTER_ALPHABETICALLY):
+                    binding.filterFieldText.setText(R.string.filter_alphabetically);
+                    break;
+                default:
+                    binding.filterFieldText.setText(R.string.filter_default);
+                    break;
+            }
+        });
+        binding.filterField.setOnClickListener(chooseFilter());
         binding.viewPostsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewCategory.setAdapter(new CategoryAdapter(this));
 
@@ -61,6 +79,28 @@ public class CategoryActivity extends AppCompatActivity {
         intent.putExtra(Values.SCOPE, Values.GLOBAL);
         intent.putExtra(Values.SECTION_ID, categoryID);
         startActivity(intent);
+    }
+
+    private View.OnClickListener chooseFilter() {
+        return v -> new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.filter_by))
+                .setItems(R.array.category_filters, (dialog, which) -> {
+                    switch (which) {
+                        case 0:
+                            updateFilter(Values.FILTER_DEFAULT, false);
+                            break;
+                        case 1:
+                            updateFilter(Values.FILTER_MOST_LIKED, true);
+                            break;
+                        case 2:
+                            updateFilter(Values.FILTER_ALPHABETICALLY, false);
+                            break;
+                    }
+                }).show();
+    }
+
+    private void updateFilter(String filter, boolean descending) {
+        viewModel.updateFilter(filter, descending);
     }
 
     @Override

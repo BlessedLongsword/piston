@@ -165,9 +165,12 @@
     <string name="order_by">Ordenar por</string>
     <string name="filter_default">Defecto</string>
     <string name="filter_most_members">Más miembros</string>
-    <string name="filter_most_subscribers">Más Suscriptores</string>
-    <string name="filter_most_liked">Más Gustados</string>
+    <string name="filter_most_subscribers">Más suscriptores</string>
+    <string name="filter_most_liked">Más gustados</string>
     <string name="filter_alphabetically">Alfabéticamente</string>
+    <string name="no_notifications">No tienes notificaciones ahora mismo</string>
+    <string name="moderator_mode">Modo solo moderadores</string>
+    <string name="mod_mode_cd">Solo los moderadores podran publicar posts</string>
 
     <string-array name="global_filters">
         <item>Defecto</item>
@@ -178,6 +181,22 @@
     <string-array name="groups_filters">
         <item>Defecto</item>
         <item>Más miembros</item>
+        <item>Alfabéticamente</item>
+    </string-array>
+
+    <string-array name="category_filters">
+        <item>Defecto</item>
+        <item>Más gustados</item>
+        <item>Alfabéticamente</item>
+    </string-array>
+
+    <string-array name="group_filters">
+        <item>Defecto</item>
+        <item>Alfabéticamente</item>
+    </string-array>
+
+    <string-array name="folder_filters">
+        <item>Defecto</item>
         <item>Alfabéticamente</item>
     </string-array>
 

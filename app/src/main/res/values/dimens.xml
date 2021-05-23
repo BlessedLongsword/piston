@@ -37,5 +37,6 @@
     <dimen name="text_hint">12sp</dimen>
     <dimen name="three_lines">52dp</dimen>
     <dimen name="six_lines">84dp</dimen>
+    <dimen name="normal_text">14sp</dimen>
 
 </resources>

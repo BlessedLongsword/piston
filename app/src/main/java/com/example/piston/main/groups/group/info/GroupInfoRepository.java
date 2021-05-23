@@ -24,7 +24,7 @@ public class GroupInfoRepository {
     private int lastRequest = 0;
 
     public interface IGroupInfo {
-        void setParams(String title, String description, String imageLink, String groupID);
+        void setParams(String title, String description, String imageLink, String groupID, boolean modMode);
         void setMembers(ArrayList<GroupMember> members);
         void setPriority(Integer priority);
         void setFinished(boolean finished);
@@ -47,7 +47,8 @@ public class GroupInfoRepository {
             if (task.isSuccessful()) {
                 listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
                         (String) task.getResult().get("description"),
-                        (String) task.getResult().get("imageLink"), groupID);
+                        (String) task.getResult().get("imageLink"), groupID,
+                        (boolean) Objects.requireNonNull(task.getResult().get("modMode")));
             }
         });
     }
@@ -112,6 +113,10 @@ public class GroupInfoRepository {
     public void updateMemberPriority(String memberEmail, int priority) {
         DocumentReference memberDocRef = groupDocRef.collection("members").document(memberEmail);
         memberDocRef.get().addOnSuccessListener(documentSnapshot -> memberDocRef.update("priority", priority));
+    }
+
+    public void setModMode(boolean modMode) {
+        groupDocRef.update("modMode", modMode);
     }
 
     private void listenChanges() {

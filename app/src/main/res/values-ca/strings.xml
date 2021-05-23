@@ -166,20 +166,39 @@
     <string name="order_by">Ordenar per</string>
     <string name="filter_default">Defecte</string>
     <string name="filter_most_members">Més membres</string>
-    <string name="filter_most_subscribers">Més Subscriptors</string>
-    <string name="filter_most_liked">Més Agradats</string>
-    <string name="filter_alphabetically">Alfabéticament</string>
+    <string name="filter_most_subscribers">Més subscriptors</string>
+    <string name="filter_most_liked">Més agradats</string>
+    <string name="filter_alphabetically">Alfabèticament</string>
+    <string name="no_notifications">No tens notificacions ara mateix</string>
+    <string name="moderator_mode">Mode només moderadors</string>
+    <string name="mod_mode_cd">Només els moderadors podran publicar posts</string>
 
     <string-array name="global_filters">
         <item>Defecte</item>
         <item>Més Subscriptors</item>
-        <item>Alfabéticament</item>
+        <item>Alfabèticament</item>
     </string-array>
 
     <string-array name="groups_filters">
         <item>Defecte</item>
         <item>Més membres</item>
-        <item>Alfabéticament</item>
+        <item>Alfabèticament</item>
+    </string-array>
+
+    <string-array name="category_filters">
+        <item>Defecte</item>
+        <item>Més agradats</item>
+        <item>Alfabèticament</item>
+    </string-array>
+
+    <string-array name="group_filters">
+        <item>Defecte</item>
+        <item>Alfabèticament</item>
+    </string-array>
+
+    <string-array name="folder_filters">
+        <item>Defecte</item>
+        <item>Alfabèticament</item>
     </string-array>
 
 

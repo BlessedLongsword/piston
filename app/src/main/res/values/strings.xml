@@ -172,22 +172,40 @@
     <string name="order">Order</string>
     <string name="order_by">Order by</string>
     <string name="filter_default">Default</string>
-    <string name="filter_most_members">Most Members</string>
-    <string name="filter_most_subscribers">Most Subscribers</string>
-    <string name="filter_most_liked">Most Liked</string>
+    <string name="filter_most_members">Most members</string>
+    <string name="filter_most_subscribers">Most subscribers</string>
+    <string name="filter_most_liked">Most liked</string>
     <string name="filter_alphabetically">Alphabetically</string>
+    <string name="no_notifications">You don\'t have any notifications right now</string>
+    <string name="moderator_mode">Only Moderators Mode</string>
+    <string name="mod_mode_cd">Only moderators will be able to publish posts</string>
 
     <string-array name="global_filters">
         <item>Default</item>
-        <item>Most Subscribers</item>
+        <item>Most subscribers</item>
         <item>Alphabetically</item>
     </string-array>
 
     <string-array name="groups_filters">
         <item>Default</item>
-        <item>Most Members</item>
+        <item>Most members</item>
         <item>Alphabetically</item>
     </string-array>
 
+    <string-array name="category_filters">
+        <item>Default</item>
+        <item>Most liked</item>
+        <item>Alphabetically</item>
+    </string-array>
+
+    <string-array name="group_filters">
+        <item>Default</item>
+        <item>Alphabetically</item>
+    </string-array>
+
+    <string-array name="folder_filters">
+        <item>Default</item>
+        <item>Alphabetically</item>
+    </string-array>
 
 </resources>

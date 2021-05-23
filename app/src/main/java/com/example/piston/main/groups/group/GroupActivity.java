@@ -19,6 +19,7 @@ import com.example.piston.main.notifications.NotificationsActivity;
 import com.example.piston.main.posts.createPost.CreatePostActivity;
 import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.Values;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -66,6 +67,34 @@ public class GroupActivity extends AppCompatActivity {
             if (aBoolean)
                 Toast.makeText(this, R.string.join_successful, Toast.LENGTH_LONG).show();
         });
+        viewModel.getFilter().observe(this, s -> {
+            if (Values.FILTER_ALPHABETICALLY.equals(s)) {
+                binding.filterFieldText.setText(R.string.filter_alphabetically);
+            } else {
+                binding.filterFieldText.setText(R.string.filter_default);
+            }
+        });
+        binding.filterField.setOnClickListener(chooseFilter());
+        viewModel.getModMode().observe(this, aBoolean -> {
+            if (aBoolean) {
+                int priority = Objects.requireNonNull(viewModel.getPriority().getValue());
+                if (priority > 1)
+                    binding.addButton.setVisibility(View.GONE);
+                else
+                    binding.addButton.setVisibility(View.VISIBLE);
+            } else
+                binding.addButton.setVisibility(View.VISIBLE);
+        });
+        viewModel.getPriority().observe(this, integer -> {
+            if (integer > 1) {
+                boolean modMode = Objects.requireNonNull(viewModel.getModMode().getValue());
+                if (modMode)
+                    binding.addButton.setVisibility(View.GONE);
+                else
+                    binding.addButton.setVisibility(View.VISIBLE);
+            } else
+                binding.addButton.setVisibility(View.VISIBLE);
+        });
     }
 
     @SuppressWarnings("unused")
@@ -74,6 +103,25 @@ public class GroupActivity extends AppCompatActivity {
         intent.putExtra(Values.SCOPE, Values.GROUPS);
         intent.putExtra(Values.SECTION_ID, groupID);
         startActivity(intent);
+    }
+
+    private View.OnClickListener chooseFilter() {
+        return v -> new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.filter_by))
+                .setItems(R.array.group_filters, (dialog, which) -> {
+                    switch (which) {
+                        case 0:
+                            updateFilter(Values.FILTER_DEFAULT);
+                            break;
+                        case 1:
+                            updateFilter(Values.FILTER_ALPHABETICALLY);
+                            break;
+                    }
+                }).show();
+    }
+
+    private void updateFilter(String filter) {
+        viewModel.updateFilter(filter, false);
     }
 
     @Override

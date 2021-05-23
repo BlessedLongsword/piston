@@ -3,6 +3,8 @@ package com.example.piston.main.groups.group;
 import android.util.Log;
 
 import com.example.piston.data.posts.Post;
+import com.example.piston.main.groups.GroupsRepository;
+import com.example.piston.utilities.Values;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,23 +27,24 @@ public class GroupRepository {
         void setGroupPosts(ArrayList<Post> posts);
         void setTitle(String title);
         void setFromShareJoinedGroup();
+        void setFilter(String filter);
+        void setPermissions(boolean modMode, Integer priority);
     }
 
     private final GroupRepository.IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ListenerRegistration listenerRegistration;
+    private ListenerRegistration listenerRegistrationPosts;
+    private ListenerRegistration listenerRegistrationGroup;
     private final DocumentReference groupDocRef;
     private Query postsQuery;
+    private String email;
 
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;
         Log.d("what",group);
         this.groupDocRef = db.collection("groups").document(group);
-        groupDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
-            }
-        });
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         postsQuery = groupDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
                 .orderBy("timestamp", Query.Direction.DESCENDING);
         listenChanges();
@@ -63,15 +66,43 @@ public class GroupRepository {
         });
     }
 
-    public void updateQuery(String field) {
-        postsQuery = groupDocRef.collection("posts").orderBy("pinned", Query.Direction.DESCENDING)
-                .orderBy(field).orderBy("timestamp", Query.Direction.DESCENDING).orderBy(field);
+    private void loadGroupParams() {
+        groupDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+                groupDocRef.collection("members").document(email).get()
+                        .addOnCompleteListener(task1 -> {
+                            if (task.isSuccessful()) {
+                                Object priority = task1.getResult().get("priority");
+                                if (priority != null) {
+                                    long longPrio = (long) priority;
+                                    listener.setPermissions((boolean) Objects.requireNonNull
+                                            (task.getResult().get("modMode")), (int) longPrio);
+                                }
+                            }
+                        });
+            }
+        });
+    }
+
+    public void updateQuery(String field, boolean descending) {
+        if (field.equals(Values.FILTER_DEFAULT))
+            postsQuery = groupDocRef.collection("posts").orderBy("pinned",
+                    Query.Direction.DESCENDING).orderBy("timestamp", Query.Direction.DESCENDING);
+        else
+            postsQuery = groupDocRef.collection("posts").orderBy("pinned",
+                    Query.Direction.DESCENDING).orderBy(field, (descending) ?
+                    Query.Direction.DESCENDING : Query.Direction.ASCENDING)
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
         loadGroupPosts();
+        listener.setFilter(field);
     }
 
     private void listenChanges() {
-        listenerRegistration = postsQuery.addSnapshotListener((snapshots, e) -> GroupRepository
+        listenerRegistrationPosts = postsQuery.addSnapshotListener((snapshots, e) -> GroupRepository
                 .this.loadGroupPosts());
+        listenerRegistrationGroup = groupDocRef.addSnapshotListener((value, error) -> GroupRepository
+                .this.loadGroupParams());
     }
 
     public void fromShareJoinGroup(String groupID) {
@@ -114,6 +145,6 @@ public class GroupRepository {
     }
 
     public void removeListener() {
-        listenerRegistration.remove();
+        listenerRegistrationPosts.remove();
     }
 }

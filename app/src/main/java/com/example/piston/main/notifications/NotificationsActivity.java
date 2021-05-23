@@ -38,13 +38,13 @@ public class NotificationsActivity extends AppCompatActivity {
 
         binding.notificationsTopAppBar.setNavigationOnClickListener((view) -> finish());
         binding.recyclerviewNotifications.setAdapter(adapter);
-        adapter.setItemClick(new NotificationsAdapter.OnItemClick() {
-            @Override
-            public void onLongPress(View view, Notification notification, int position) {
-                toggleActionBar(position);
-            }
+        adapter.setItemClick((view, notification, position) -> toggleActionBar(position));
+        viewModel.getNotifications().observe(this, notifications -> {
+            if (notifications.size() > 0)
+                binding.noNotifications.setVisibility(View.GONE);
+            else
+                binding.noNotifications.setVisibility(View.VISIBLE);
         });
-
     }
 
     private void toggleActionBar(int position) {
