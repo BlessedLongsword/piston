@@ -1,8 +1,10 @@
 package com.example.piston.main.global.createCategory;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.example.piston.data.sections.Category;
+import com.example.piston.utilities.Values;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -49,7 +51,9 @@ public class CreateCategoryRepository {
         }
     }
 
-    public void createCategory(String title, String description, boolean nsfw, Uri image, boolean connected) {
+    public void createCategory(String title, String description, boolean nsfw,
+                               Uri image, boolean connected) {
+
         if (title.trim().equals("")) {
             listener.setTitleStatus(CreateCategoryResult.TitleError.EMPTY);
             listener.setCreateError();
@@ -60,35 +64,37 @@ public class CreateCategoryRepository {
             listener.setLoadingFinished();
         }
         else {
-            StorageReference storageRef = storage.getReference();
-            String id = UUID.randomUUID().toString(); //Check if it's new?
-            String path = "categories/" + id;
-            String imageId = path + "/" + "categoryImage";
-            StorageReference imageRef = storageRef.child(imageId);
-            UploadTask uploadTask = imageRef.putFile(image);
-            uploadTask.addOnFailureListener(exception -> {
-                // Handle unsuccessful uploads?
-            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                    .addOnSuccessListener(uri -> {
-                        String imageLink = uri.toString();
-                        DocumentReference docRef = db.collection("categories").document(id);
-                        docRef.get().addOnCompleteListener(task -> {
-                            if (task.isComplete()) {
-                                DocumentSnapshot ds = task.getResult();
-                                if (Objects.requireNonNull(ds).exists()) {
-                                    listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
-                                    listener.setCreateError();
-                                } else {
-                                    Category category = new Category(id, title, description, imageLink, nsfw);
-                                    DocumentReference categoryDocRef = db.collection("categories").document(id);
-                                    categoryDocRef.set(category);
-                                    categoryDocRef.update("timestamp", FieldValue.serverTimestamp());
-                                    listener.setCreateFinished();
-                                }
-                                listener.setLoadingFinished();
-                            }
-                        });
-                    }));
+            db.collection(Values.GLOBAL).whereEqualTo("title", title).get()
+                    .addOnCompleteListener(task -> {
+                        if (!task.getResult().isEmpty()) {
+                            listener.setTitleStatus(CreateCategoryResult.TitleError.EXISTS);
+                            listener.setCreateError();
+                            listener.setLoadingFinished();
+                        }
+                        else {
+                            createCategory(title, description, nsfw, image);
+                        }
+                    });
+
         }
+    }
+
+    private void createCategory(String title, String description, boolean nsfw, Uri image) {
+        DocumentReference categoryReference = db.collection(Values.GLOBAL).document();
+        String categoryID = categoryReference.getId();
+
+        StorageReference categoryStorage = storage.getReference().child(Values.GLOBAL).
+                child(categoryID).child("categoryImage");
+
+        UploadTask uploadTask = categoryStorage.putFile(image);
+        uploadTask.addOnSuccessListener(taskSnapshot -> categoryStorage.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    String imageLink = uri.toString();
+                    Category category = new Category(categoryID, title, description, imageLink, nsfw);
+                    categoryReference.set(category);
+                    categoryReference.update("timestamp", FieldValue.serverTimestamp());
+                    listener.setLoadingFinished();
+                    listener.setCreateFinished();
+                }));
     }
 }

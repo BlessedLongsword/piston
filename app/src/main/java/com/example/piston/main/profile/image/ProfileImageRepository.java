@@ -46,11 +46,8 @@ public class ProfileImageRepository {
     }
 
     public void setImage(Uri image) {
-        StorageReference storageRef = storage.getReference();
-        String randomId = UUID.randomUUID().toString();
-        String path = "users/" + username + "/profile";
-        String imageId = path + "/" + randomId;
-        StorageReference imageRef = storageRef.child(imageId);
+        StorageReference imageRef = storage.getReference().child("users").child(username)
+                .child("profilePicture");
         UploadTask uploadTask = imageRef.putFile(image);
 
         uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()

@@ -50,34 +50,33 @@ public class CreateGroupRepository {
             listener.setTitleStatus(CreateGroupResult.TitleError.NONE);
     }
 
-    public void createGroup(String title, String description, String groupID, Uri image, boolean connected) {
+    public void createGroup(String title, String description, String groupID,
+                            Uri image, boolean connected) {
+
         if (title.trim().equals("")) {
             listener.setLoadingFinished();
             listener.setCreateError();
         }
         else if (!connected) {
+            listener.setLoadingFinished();
             listener.setErrorMessage("Need internet to create group");
         }
-        else if (image == null)
+        else if (image == null) {
+            listener.setLoadingFinished();
             listener.setErrorMessage("Group must have an image");
+        }
         else {
-            StorageReference storageRef = storage.getReference();
-            String path = "groups/" + groupID;
-            String imageId = path + "/" + "groupImage";
-            StorageReference imageRef = storageRef.child(imageId); //Check if it's new?
+            StorageReference imageRef = storage.getReference().child(Values.GROUPS)
+                    .child(groupID).child("groupImage");
             UploadTask uploadTask = imageRef.putFile(image);
 
-            uploadTask.addOnFailureListener(exception -> {
-                // Handle unsuccessful uploads
-            }).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+            uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
                     .addOnSuccessListener(uri -> {
                         String imageLink = uri.toString();
 
                         Group group = new Group(groupID, title, description, imageLink);
 
-                        db.collection("groups")
-                                .document(groupID)
-                                .set(group)
+                        db.collection(Values.GROUPS).document(groupID).set(group)
                                 .addOnCompleteListener(task -> {
                             if (task.isComplete()) {
                                 listener.setLoadingFinished();

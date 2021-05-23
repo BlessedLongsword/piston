@@ -4,6 +4,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +80,9 @@ public class CategoryInfoRepository {
     public void deleteCategory() {
         deleteSubscribedUsers(categoryDocRef.getId());
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                .child("categories").child(categoryDocRef.getId());
+
         categoryDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Delete posts inside category
@@ -118,10 +123,13 @@ public class CategoryInfoRepository {
                         }
                     });
 
+                    storageReference.child(Id).delete();
+
                     docRef1.delete();
                 }
             }
         });
+        storageReference.child("categoryImage").delete();
         categoryDocRef.delete(); // Delete category
     }
 
