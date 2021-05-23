@@ -69,7 +69,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
         @Override
         public boolean onCreateActionMode(androidx.appcompat.view.ActionMode mode, Menu menu) {
-            NotificationMultiSelection.toggleStatusBarColor(NotificationsActivity.this, R.color.almost_black);
+            NotificationMultiSelection.toggleStatusBarColor(NotificationsActivity.this, R.color.black);
             mode.getMenuInflater().inflate(R.menu.notifications_top_app_bar, menu);
             return true;
         }
@@ -87,7 +87,8 @@ public class NotificationsActivity extends AppCompatActivity {
                     mode.finish();
                     return true;
                 case R.id.notification_read:
-                    Toast.makeText(NotificationsActivity.this, "You clicked mark as read ", Toast.LENGTH_SHORT).show();
+                    adapter.markAsRead();
+                    mode.finish();
                     return true;
             }
             return false;
@@ -97,7 +98,7 @@ public class NotificationsActivity extends AppCompatActivity {
         public void onDestroyActionMode(androidx.appcompat.view.ActionMode mode) {
             adapter.clearSelection();
             actionMode = null;
-            NotificationMultiSelection.toggleStatusBarColor(NotificationsActivity.this, R.color.colorPrimary);
+            NotificationMultiSelection.toggleStatusBarColor(NotificationsActivity.this, R.color.design_default_color_primary_variant);
 
         }
     }

@@ -1,5 +1,6 @@
 package com.example.piston.main.notifications;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -34,6 +35,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private OnItemClick itemClick;
     private SparseBooleanArray selectedItems;
     private SparseBooleanArray deletedItems;
+    private SparseBooleanArray readItems;
     private int selectedIndex = -1;
 
     public void setItemClick(OnItemClick itemClick) {
@@ -78,6 +80,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
         selectedItems = new SparseBooleanArray();
         deletedItems = new SparseBooleanArray();
+        readItems = new SparseBooleanArray();
     }
 
     @Override
@@ -101,6 +104,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
@@ -146,6 +150,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationPost.getNotificationID());
             }
+            if(readItems.get(position,false)){
+                viewModel.markAsRead(notificationPost.getNotificationID());
+                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
+            }
+            if(viewModel.getNotifications().getValue().get(position).getIsRead()){
+                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
+            }
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -185,6 +196,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationReply.getNotificationID());
+            }
+            if(readItems.get(position,false)){
+                viewModel.markAsRead(notificationReply.getNotificationID());
+                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
+            }
+            if(viewModel.getNotifications().getValue().get(position).getIsRead()){
+                hold.getBinding().notificationTitle.setTextColor(R.color.grey);
             }
         }
     }
@@ -266,6 +284,13 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             notifyItemChanged(getSelectedItems().get(i));
         }
 
+    }
+
+    public void markAsRead(){
+        for(int i = getSelectedItems().size() - 1; i >= 0; i--){
+            readItems.put(getSelectedItems().get(i),true);
+            notifyItemChanged(getSelectedItems().get(i));
+        }
     }
 
 }

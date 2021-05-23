@@ -25,6 +25,7 @@ public class NotificationsRepository {
     public interface INotifications {
         void setNotifications(ArrayList<Notification> notifications);
         void setNewNotifications(ArrayList<Notification> notifications);
+        void setRead(ArrayList<Boolean> read);
     }
 
     public NotificationsRepository(INotifications listener) {
@@ -73,5 +74,8 @@ public class NotificationsRepository {
 
     public void deleteNotification(String id){
         db.collection("users").document(email).collection("notifications").document(id).delete();
+    }
+    public void markAsRead(String id){
+        db.collection("users").document(email).collection("notifications").document(id).update("isRead",true);
     }
 }
