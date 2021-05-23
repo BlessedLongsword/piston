@@ -20,8 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/transparent">
+                app:cardElevation="0dp">
 
                 <TextView
                     android:id="@+id/folder_title"
