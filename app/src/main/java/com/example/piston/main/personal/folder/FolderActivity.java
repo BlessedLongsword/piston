@@ -2,7 +2,6 @@ package com.example.piston.main.personal.folder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -53,8 +52,6 @@ public class FolderActivity extends AppCompatActivity {
             }
         });
         binding.filterField.setOnClickListener(chooseFilter());
-
-        Log.d("nowaybro", "folder finish onCreate");
     }
 
     @SuppressWarnings("unused")
@@ -103,8 +100,6 @@ public class FolderActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("nowaybro", "onActivityResult");
-        Log.d("nowaybro", "resultCode: " + resultCode);
         if (resultCode == Values.DELETE_CODE)
             finish();
     }

@@ -66,9 +66,9 @@ public class EditPostRepository {
             else {
                 StorageReference storageBase;
                 if (scope.equals(Values.PERSONAL))
-                    storageBase = FirebaseStorage.getInstance().getReference().child("users").child(email);
+                    storageBase = storage.getReference().child("users").child(email);
                 else
-                    storageBase = FirebaseStorage.getInstance().getReference().child(scope);
+                    storageBase = storage.getReference().child(scope);
                 StorageReference storagePost = storageBase.child(sectionID).child(postID);
 
                 UploadTask uploadTask = storagePost.putFile(image);
