@@ -3,17 +3,13 @@ package com.example.piston.main;
 import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.Objects;
 
 public class MainRepository {
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final IMain listener;
     private final CollectionReference userGroupsCollection;
 
@@ -24,6 +20,7 @@ public class MainRepository {
 
     public MainRepository(IMain listener) {
         this.listener = listener;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         userGroupsCollection = db.collection("users").document(Objects.requireNonNull
                 (Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
                 .collection(Values.GROUPS);

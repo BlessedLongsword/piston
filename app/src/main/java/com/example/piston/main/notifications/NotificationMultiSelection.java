@@ -2,13 +2,8 @@ package com.example.piston.main.notifications;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
-
-import androidx.annotation.RequiresApi;
-
-import com.example.piston.R;
 
 public class NotificationMultiSelection {
 

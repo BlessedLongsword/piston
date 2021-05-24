@@ -18,8 +18,8 @@ public class NotificationsRepository {
     private final INotifications listener;
     private final DocumentReference userDocRef;
     private ListenerRegistration listenerRegistration;
-    String email;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String email;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public interface INotifications {

@@ -1,8 +1,6 @@
 package com.example.piston.main.global.createCategory;
 
 import android.net.Uri;
-import android.util.Log;
-
 import com.example.piston.data.sections.Category;
 import com.example.piston.utilities.Values;
 import com.google.firebase.firestore.DocumentReference;
@@ -14,8 +12,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
-import java.util.UUID;
-
 public class CreateCategoryRepository {
 
     private final ICreateCategory listener;

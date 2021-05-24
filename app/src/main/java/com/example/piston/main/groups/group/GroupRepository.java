@@ -3,7 +3,6 @@ package com.example.piston.main.groups.group;
 import android.util.Log;
 
 import com.example.piston.data.posts.Post;
-import com.example.piston.main.groups.GroupsRepository;
 import com.example.piston.utilities.Values;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +36,7 @@ public class GroupRepository {
     private ListenerRegistration listenerRegistrationGroup;
     private final DocumentReference groupDocRef;
     private Query postsQuery;
-    private String email;
+    private final String email;
 
     public GroupRepository(GroupRepository.IGroup listener, String group) {
         this.listener = listener;

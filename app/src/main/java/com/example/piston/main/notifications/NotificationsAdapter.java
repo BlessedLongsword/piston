@@ -150,12 +150,24 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             else{
                 hold.getBinding().notificationPostCard.setOnClickListener(view -> itemClick
                         .onLongPress(view, viewModel.getNotifications().getValue().get(position), position));
+                hold.getBinding().notificationPostCard.setOnClickListener(view ->
+                        itemClick.onLongPress(view, viewModel.getNotifications()
+                                .getValue().get(position), position));
             }
             hold.getBinding().notificationPostCard.setOnLongClickListener(view -> {
                 if (itemClick == null) {
                     return false;
                 } else {
                     itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
+            hold.getBinding().notificationPostCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications()
+                            .getValue().get(position), position);
                     notifyDataSetChanged();
                     return true;
                 }                });
@@ -198,9 +210,21 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         notificationReply.getPostID(), notificationReply.getReplyID()));
             }
             else{
+                hold.getBinding().notificationReplyCard.setOnClickListener(view ->
+                        itemClick.onLongPress(view, viewModel.getNotifications()
+                                .getValue().get(position), position));
                 hold.getBinding().notificationReplyCard.setOnClickListener(view -> itemClick
                         .onLongPress(view, viewModel.getNotifications().getValue().get(position), position));
             }
+            hold.getBinding().notificationReplyCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications()
+                            .getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
             hold.getBinding().notificationReplyCard.setOnLongClickListener(view -> {
                 if (itemClick == null) {
                     return false;
