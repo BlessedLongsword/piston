@@ -13,6 +13,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,20 +58,7 @@ public class PostRepository {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
 
-        if (scope.equals("folders")) {
-            postDocRef = db.collection("users")
-                    .document(Objects.requireNonNull(email))
-                    .collection(scope)
-                    .document(sectionID)
-                    .collection("posts")
-                    .document(postID);
-        }
-        else {
-            postDocRef = db.collection(scope)
-                    .document(sectionID)
-                    .collection("posts")
-                    .document(postID);
-        }
+        postDocRef = getPostDocRef();
 
         db.collection("users")
                 .document(Objects.requireNonNull(email))
@@ -81,6 +70,14 @@ public class PostRepository {
                     updateParams();
                     listenChanges();
                 });
+    }
+
+    private DocumentReference getPostDocRef () {
+        DocumentReference base = FirebaseFirestore.getInstance().document("");
+        if (scope.equals(Values.PERSONAL))
+            base = base.collection("users").document(email);
+        return base.collection(scope).document(sectionID).collection("posts")
+                .document(postID);
     }
 
     private void updateParams() {
@@ -301,7 +298,6 @@ public class PostRepository {
                         }
                     }
         });
-
         postDocRef.collection("userLikes")
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -318,6 +314,13 @@ public class PostRepository {
                         }
                     }
         });
+        StorageReference storageBase;
+        if (scope.equals(Values.PERSONAL))
+            storageBase = FirebaseStorage.getInstance().getReference().child("users").child(email);
+        else
+            storageBase = FirebaseStorage.getInstance().getReference().child(scope);
+        StorageReference storagePost = storageBase.child(sectionID).child(postID);
+        storagePost.delete();
 
         postDocRef.delete();
     }
@@ -325,8 +328,8 @@ public class PostRepository {
     public void updatePost() {
         updateParams();
     }
+
     public void removeListener() {
         listenerRegistration.remove();
     }
-
-    }
+}

@@ -78,7 +78,7 @@ public class CategoryRepository {
 
     private void updateParams() {
         categoryDocRef.get().addOnCompleteListener(task -> {
-            if (task.isComplete())
+            if (task.isComplete() && task.getResult().exists())
                 listener.setTitle((String) task.getResult().get("title"));
         });
     }

@@ -15,24 +15,20 @@ public class ProfileImageRepository {
 
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final IProfileImage listener;
-    private String username;
+    private final String email;
     private final DocumentReference userDocRef;
 
     public interface IProfileImage {
         void setImageLink(String imageLink);
     }
 
-    ProfileImageRepository(IProfileImage listener, String email) {
+    ProfileImageRepository(IProfileImage listener, String email2) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String email1 = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
+        email = (email2 == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email2;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        userDocRef = db.collection("users").document(Objects.requireNonNull(email1));
+        userDocRef = db.collection("users").document(Objects.requireNonNull(email));
 
-        userDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful())
-                username = (String) task.getResult().get("username");
-        });
         loadImage();
     }
 
@@ -45,7 +41,7 @@ public class ProfileImageRepository {
     }
 
     public void setImage(Uri image) {
-        StorageReference imageRef = storage.getReference().child("users").child(username)
+        StorageReference imageRef = storage.getReference().child("users").child(email)
                 .child("profilePicture");
         UploadTask uploadTask = imageRef.putFile(image);
 

@@ -6,6 +6,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,6 +127,9 @@ public class GroupInfoRepository {
     }
 
     public void deleteGroup() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                .child("groups").child(groupDocRef.getId());
+
         groupDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // Delete posts inside group
@@ -145,7 +150,6 @@ public class GroupInfoRepository {
                             }
                         }
                     });
-
                     docRef1.collection("userLikes")
                             .get().addOnCompleteListener(task2 -> {
                         if (task2.isSuccessful()) {
@@ -162,14 +166,15 @@ public class GroupInfoRepository {
                             }
                         }
                     });
-                    
+                    if (documentSnapshot.get("imageLink") != null)
+                        storageReference.child(id).delete();
                     docRef1.delete();
                 }
             }
         });
-
         deleteMembers();
 
+        storageReference.child("groupImage").delete();
         groupDocRef.delete(); // Delete group
     }
 
