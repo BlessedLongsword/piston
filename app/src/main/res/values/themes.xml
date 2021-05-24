@@ -19,7 +19,8 @@
 
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:actionModeBackground">@color/blue_grey_600</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
     
     <style name="Theme.Piston.Global">
@@ -104,6 +105,15 @@
     <style name="OrderButtonUp">
         <item name="android:src">@drawable/outline_arrow_upward_black_24</item>
         <item name="tint">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimary</item>
+        <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
+    </style>
+
+    <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

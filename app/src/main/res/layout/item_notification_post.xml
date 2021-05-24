@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="@dimen/zero"
-                app:cardBackgroundColor="@color/transparent"
                 android:checkable="true">
 
             <LinearLayout
@@ -50,7 +49,7 @@
                     android:id="@+id/post_check"
                     android:layout_width="@dimen/low_square"
                     android:layout_height="@dimen/low_square"
-                    android:layout_marginEnd="@dimen/card_margin"
+                    android:layout_gravity="center_vertical"
                     app:cardCornerRadius="100dp" >
 
                     <ImageView
