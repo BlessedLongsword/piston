@@ -5,6 +5,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
 
@@ -32,13 +34,18 @@ public class FolderInfoRepository {
     }
 
     public void deleteFolder() {
+        String email = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                .child("users").child(Objects.requireNonNull(email)).child(folderDocRef.getId());
+
         folderDocRef.collection("posts").get().addOnCompleteListener(task -> {
             if (task.isComplete()) {
                 // Delete sub collection
                 for (QueryDocumentSnapshot snapshot : Objects.requireNonNull(
                         task.getResult())) {
+                    String id = snapshot.getId();
                     DocumentReference docRef1 = folderDocRef.collection("posts")
-                            .document(snapshot.getId());
+                            .document(id);
 
                     docRef1.collection("replies")
                             .get().addOnCompleteListener(task1 -> {
@@ -51,6 +58,8 @@ public class FolderInfoRepository {
                                     }
                                 }
                     });
+                    if (snapshot.get("imageLink") != null)
+                        storageReference.child(id).delete();
                     docRef1.delete();
                 }
             }

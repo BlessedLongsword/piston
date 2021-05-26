@@ -45,7 +45,6 @@ public class EditPostRepository {
                 listener.setParams((String) task.getResult().get("title"),
                         (String) task.getResult().get("content"),
                         (String) task.getResult().get("imageLink"));
-
             }
         });
 
@@ -65,11 +64,12 @@ public class EditPostRepository {
             else if (image == null)
                 updatePost(title, content, null);
             else {
-                StorageReference storageBase = storage.getReference();
+                StorageReference storageBase;
                 if (scope.equals(Values.PERSONAL))
-                    storageBase = storageBase.child("users").child(email);
-                StorageReference storageParent = storageBase.child(scope).child(sectionID);
-                StorageReference storagePost = storageParent.child(postID);
+                    storageBase = storage.getReference().child("users").child(email);
+                else
+                    storageBase = storage.getReference().child(scope);
+                StorageReference storagePost = storageBase.child(sectionID).child(postID);
 
                 UploadTask uploadTask = storagePost.putFile(image);
                 uploadTask.addOnSuccessListener(taskSnapshot -> storagePost.getDownloadUrl()

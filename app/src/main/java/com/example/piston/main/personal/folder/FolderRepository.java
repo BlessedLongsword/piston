@@ -77,8 +77,8 @@ public class FolderRepository {
 
     public void updateParams() {
         folderDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+            if (task.isSuccessful() && task.getResult().exists()) {
+                listener.setTitle((String) task.getResult().get("title"));
             }
         });
     }

@@ -82,9 +82,9 @@ public class CategoryInfoRepository {
                 // Delete posts inside category
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task.getResult())) {
-                    String Id = documentSnapshot.getId();
-                    DocumentReference docRef1 = categoryDocRef.collection("posts").document(Id);
-                    deleteSubscribedUsers(Id);
+                    String id = documentSnapshot.getId();
+                    DocumentReference docRef1 = categoryDocRef.collection("posts").document(id);
+                    deleteSubscribedUsers(id);
 
                     // Delete replies inside post
                     docRef1.collection("replies")
@@ -107,7 +107,7 @@ public class CategoryInfoRepository {
                                     task2.getResult())) {
                                 db.collection("users").document(snapshot1.getId())
                                         .collection("liked")
-                                        .document(Id)
+                                        .document(id)
                                         .delete();
 
                                 docRef1.collection("userLikes")
@@ -116,9 +116,8 @@ public class CategoryInfoRepository {
                             }
                         }
                     });
-
-                    storageReference.child(Id).delete();
-
+                    if (documentSnapshot.get("imageLink") != null)
+                        storageReference.child(id).delete();
                     docRef1.delete();
                 }
             }

@@ -78,11 +78,12 @@ public class CreatePostRepository {
             else if (image == null)
                 uploadPost(scope, sectionID, postID, title, content, null, postReference);
             else {
-                StorageReference storageBase = storage.getReference();
+                StorageReference storageBase;
                 if (scope.equals(Values.PERSONAL))
-                    storageBase = storageBase.child("users").child(email);
-                StorageReference storageParent = storageBase.child(scope).child(sectionID);
-                StorageReference storagePost = storageParent.child(postID);
+                    storageBase = storage.getReference().child("users").child(email);
+                else
+                    storageBase = storage.getReference().child(scope);
+                StorageReference storagePost = storageBase.child(sectionID).child(postID);
 
                 UploadTask uploadTask = storagePost.putFile(image);
                 uploadTask.addOnSuccessListener(taskSnapshot -> storagePost.getDownloadUrl()
