@@ -60,7 +60,7 @@
     <!-- Create Post Strings -->
     <string name="create_post_activity_title">Crear Publicación</string>
     <string name="post_content">Contenido</string>
-    <string name="hint_post_content">Explique la sucedura</string>
+    <string name="hint_post_content">Exponga su contenido</string>
     <string name="choose_picture">Insertar Imagen</string>
     <string name="create_post_error_message">Porfavor inserte un nombre válido para el post</string>
 
