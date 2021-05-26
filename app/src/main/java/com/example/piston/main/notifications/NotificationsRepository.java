@@ -75,6 +75,6 @@ public class NotificationsRepository {
         db.collection("users").document(email).collection("notifications").document(id).delete();
     }
     public void markAsRead(String id){
-        db.collection("users").document(email).collection("notifications").document(id).update("isRead",true);
+        db.collection("users").document(email).collection("notifications").document(id).update("read",true);
     }
 }
