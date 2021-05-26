@@ -121,7 +121,7 @@
     <!-- Settings Strings -->
     <string name="settings_sub">Suscripció a publicacions per defecte</string>
     <string name="settings_dark">Mode fosc</string>
-    <string name="settings_sfw">Vull veure publicacions +18 (Sóc major d\'edat)</string>
+    <string name="settings_sfw">Mostrar categoria +18</string>
     <string name="settings_blur_nsfw">Difuminar imatges +18</string>
     <string name="content_description_media">Text d\'exemple</string>
     <string name="reply">Respondre</string>
