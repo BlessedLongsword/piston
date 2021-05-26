@@ -27,7 +27,6 @@ public class PostRepository {
 
     private final IPosts listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private String user;
     private String profilePictureLink;
     private final String email;
@@ -239,7 +238,6 @@ public class PostRepository {
     }
 
     public void addLiked (boolean liked){
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         DocumentReference likedDocRefUsers = db.collection("users")
                 .document(Objects.requireNonNull(email)).collection("liked").document(postID);
         DocumentReference likedDocRefPosts = db.collection(scope).document(sectionID)
@@ -260,7 +258,6 @@ public class PostRepository {
     }
 
     public void checkLiked (String postID) {
-        String email = Objects.requireNonNull(auth.getCurrentUser()).getEmail();
         DocumentReference dR = db.collection("users")
                 .document(Objects.requireNonNull(email)).collection("liked").document(postID);
         dR.get().addOnCompleteListener(task -> {

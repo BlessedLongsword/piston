@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.piston.authentication.googleRegister.GoogleRegisterViewModel;
+import com.example.piston.main.global.GlobalViewModel;
 import com.example.piston.main.global.category.CategoryViewModel;
 import com.example.piston.main.global.category.info.CategoryInfoViewModel;
 import com.example.piston.main.groups.group.GroupViewModel;
@@ -21,17 +22,27 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
     private final String mParam;
     private final String mParam1;
     private final String mParam2;
+    private final boolean mParam3;
 
     public MyViewModelFactory(String param) {
         mParam = param;
         mParam1 = null;
         mParam2 = null;
+        mParam3 = false;
+    }
+
+    public MyViewModelFactory(boolean param3) {
+        mParam = null;
+        mParam1 = null;
+        mParam2 = null;
+        mParam3 = param3;
     }
 
     public MyViewModelFactory(String param, String param1, String param2) {
         mParam = param;
         mParam1 = param1;
         mParam2 = param2;
+        mParam3 = false;
     }
 
     @NonNull
@@ -60,6 +71,8 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
             return (T) new PostViewModel(mParam, mParam1, mParam2);
         if(modelClass.isAssignableFrom(EditPostViewModel.class))
             return (T) new EditPostViewModel(mParam, mParam1, mParam2);
+        if(modelClass.isAssignableFrom(GlobalViewModel.class))
+            return (T) new GlobalViewModel(mParam3);
         throw new IllegalArgumentException("Unable to construct ViewModel");
     }
 

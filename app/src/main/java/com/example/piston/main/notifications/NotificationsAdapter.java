@@ -3,7 +3,6 @@ package com.example.piston.main.notifications;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final SparseBooleanArray deletedItems;
     private final SparseBooleanArray readItems;
     private int selectedIndex = -1;
-    ColorStateList color;
+    private ColorStateList color;
 
     public void setItemClick(OnItemClick itemClick) {
         this.itemClick = itemClick;
@@ -102,7 +101,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             if (viewType == 2){
                 binding.notificationTitle.setTextColor(R.color.selected);
             }
-            Log.d("luka", String.valueOf(viewType));
+
             return new NotificationsAdapter.NotificationPostHolder(binding);
         }
         else {
@@ -244,7 +243,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        Log.d("what size", String.valueOf(Objects.requireNonNull(viewModel.getNotifications().getValue()).size()));
         return Objects.requireNonNull(viewModel.getNotifications().getValue()).size();
     }
 

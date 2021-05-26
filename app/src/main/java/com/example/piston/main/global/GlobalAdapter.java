@@ -49,6 +49,7 @@ public class GlobalAdapter extends RecyclerView.Adapter<GlobalAdapter.CategoryHo
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(GlobalViewModel.class);
         viewModel.getCategories().observe(activity, item -> notifyDataSetChanged());
+
     }
 
     @NonNull

@@ -17,14 +17,18 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
     private final MutableLiveData<ArrayList<Boolean>> subscribed = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Boolean> isAdmin = new MutableLiveData<>(false);
     private final MutableLiveData<String> filter = new MutableLiveData<>(Values.FILTER_DEFAULT);
-    private final GlobalRepository globalRepository = new GlobalRepository(this);
+    private final GlobalRepository globalRepository;
+
+    public GlobalViewModel (boolean nsfw) {
+        globalRepository = new GlobalRepository(this, nsfw);
+    }
 
     public LiveData<ArrayList<Category>> getCategories() {
         return categories;
     }
 
-    public void updateFilter(String filter, boolean descending) {
-        globalRepository.updateQuery(filter, descending);
+    public void updateFilter(String filter, boolean descending, boolean nsfw) {
+        globalRepository.updateQuery(filter, descending, nsfw);
     }
 
     @Override
@@ -67,5 +71,9 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     public LiveData<String> getFilter() {
         return filter;
+    }
+
+    public void showNsfw(boolean nsfwVisiblity) {
+        globalRepository.showNsfw(nsfwVisiblity);
     }
 }
