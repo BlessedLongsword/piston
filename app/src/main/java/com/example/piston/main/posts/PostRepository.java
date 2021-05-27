@@ -107,7 +107,7 @@ public class PostRepository {
             db.collection("admins")
                     .document(email)
                     .get().addOnCompleteListener(task -> {
-                if(task.isSuccessful())
+                if(task.isSuccessful() && task.getResult().exists())
                     listener.setPriority(0);
             });
         }

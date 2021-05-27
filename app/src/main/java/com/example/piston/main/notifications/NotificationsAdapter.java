@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,6 +38,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final SparseBooleanArray deletedItems;
     private final SparseBooleanArray readItems;
     private int selectedIndex = -1;
+    boolean darkModeEnabled;
     private ColorStateList color;
 
     public void setItemClick(OnItemClick itemClick) {
@@ -75,13 +77,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     }
 
-    public NotificationsAdapter(FragmentActivity activity){
+    public NotificationsAdapter(FragmentActivity activity, boolean darkModeEnabled){
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
         viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
         selectedItems = new SparseBooleanArray();
         deletedItems = new SparseBooleanArray();
         readItems = new SparseBooleanArray();
+        this.darkModeEnabled = darkModeEnabled;
     }
 
     @Override
@@ -99,7 +102,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     R.layout.item_notification_post, parent, false);
             color = binding.notificationPostCard.getCardBackgroundColor();
             if (viewType == 2){
-                binding.notificationTitle.setTextColor(R.color.selected);
+                binding.notificationTitle.setTextColor(ContextCompat.getColor(localActivity,
+                        (darkModeEnabled) ? R.color.disabled_dark : R.color.disabled));
             }
 
             return new NotificationsAdapter.NotificationPostHolder(binding);
@@ -109,7 +113,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     R.layout.item_notification_reply, parent, false);
             color = binding.notificationReplyCard.getCardBackgroundColor();
             if (viewType == 3){
-                binding.notificationTitle.setTextColor(R.color.selected);
+                binding.notificationTitle.setTextColor(ContextCompat.getColor(localActivity,
+                        (darkModeEnabled) ? R.color.disabled_dark : R.color.disabled));
             }
             return new NotificationsAdapter.NotificationReplyHolder(binding);
         }
@@ -142,10 +147,20 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                         notificationPost.getPostID(), null));
             }
             else{
+                hold.getBinding().notificationPostCard.setOnClickListener(view -> itemClick
+                        .onLongPress(view, viewModel.getNotifications().getValue().get(position), position));
                 hold.getBinding().notificationPostCard.setOnClickListener(view ->
                         itemClick.onLongPress(view, viewModel.getNotifications()
                                 .getValue().get(position), position));
             }
+            hold.getBinding().notificationPostCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
             hold.getBinding().notificationPostCard.setOnLongClickListener(view -> {
                 if (itemClick == null) {
                     return false;
@@ -159,7 +174,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().postProfile.setVisibility(View.GONE);
                 hold.getBinding().postCheck.setVisibility(View.VISIBLE);
                 if (selectedIndex == position) selectedIndex = -1;
-                hold.getBinding().notificationPostCard.setCardBackgroundColor(R.color.selected);
+                hold.getBinding().notificationPostCard.setCardBackgroundColor(ContextCompat
+                        .getColor(localActivity, R.color.selected));
             } else {
                 hold.getBinding().postProfile.setVisibility(View.VISIBLE);
                 hold.getBinding().postCheck.setVisibility(View.GONE);
@@ -171,7 +187,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationPost.getNotificationID());
-                hold.getBinding().notificationTitle.setTextColor(R.color.selected);
             }
         }
         else {
@@ -197,6 +212,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().notificationReplyCard.setOnClickListener(view ->
                         itemClick.onLongPress(view, viewModel.getNotifications()
                                 .getValue().get(position), position));
+                hold.getBinding().notificationReplyCard.setOnClickListener(view -> itemClick
+                        .onLongPress(view, viewModel.getNotifications().getValue().get(position), position));
             }
             hold.getBinding().notificationReplyCard.setOnLongClickListener(view -> {
                 if (itemClick == null) {
@@ -207,11 +224,20 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     notifyDataSetChanged();
                     return true;
                 }                });
+            hold.getBinding().notificationReplyCard.setOnLongClickListener(view -> {
+                if (itemClick == null) {
+                    return false;
+                } else {
+                    itemClick.onLongPress(view, viewModel.getNotifications().getValue().get(position), position);
+                    notifyDataSetChanged();
+                    return true;
+                }                });
             if (selectedItems.get(position, false)) {
                 hold.getBinding().replyProfile.setVisibility(View.GONE);
                 hold.getBinding().replyCheck.setVisibility(View.VISIBLE);
                 if (selectedIndex == position) selectedIndex = -1;
-                hold.getBinding().notificationReplyCard.setCardBackgroundColor(R.color.selected);
+                hold.getBinding().notificationReplyCard.setCardBackgroundColor(ContextCompat
+                        .getColor(localActivity, R.color.selected));
             } else {
                 hold.getBinding().replyProfile.setVisibility(View.VISIBLE);
                 hold.getBinding().replyCheck.setVisibility(View.GONE);
@@ -256,10 +282,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         } else {
             if (notification.getRead()){
-                return 1;
+                return 3;
             }
             else{
-                return 3;
+                return 1;
             }
         }
     }

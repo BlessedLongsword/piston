@@ -33,13 +33,11 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
 
     @Override
     public void setCategories(ArrayList<Category> categories) {
-        Log.d("DBReadTAG", "Cats: " + categories.size());
         this.categories.setValue(categories);
     }
 
     @Override
     public void setSubscribed(ArrayList<Boolean> subscriptions){
-        Log.d("DBReadTAG", "Subs: " + subscriptions.size());
         this.subscribed.setValue(subscriptions);
     }
 
