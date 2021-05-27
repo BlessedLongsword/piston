@@ -38,7 +38,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final SparseBooleanArray deletedItems;
     private final SparseBooleanArray readItems;
     private int selectedIndex = -1;
-    boolean darkModeEnabled;
+    final boolean darkModeEnabled;
     private ColorStateList color;
 
     public void setItemClick(OnItemClick itemClick) {
@@ -322,11 +322,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public void toggleSelection(int position) {
         selectedIndex = position;
-        if (selectedItems.get(position, false)) {
+        if (selectedItems.get(position, false))
             selectedItems.delete(position);
-        } else {
+        else
             selectedItems.put(position, true);
-        }
         notifyItemChanged(position);
     }
 
@@ -339,7 +338,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             deletedItems.put(getSelectedItems().get(i),true);
             notifyItemChanged(getSelectedItems().get(i));
         }
-
     }
 
     public void markAsRead(){

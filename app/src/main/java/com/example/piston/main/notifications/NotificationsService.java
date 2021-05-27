@@ -6,18 +6,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -29,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.piston.R;
-import com.example.piston.data.notifications.Notification;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.notifications.NotificationReply;
 import com.example.piston.main.posts.PostActivity;
@@ -41,14 +31,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class NotificationsService extends Service {
 
     private boolean first = true;
     private ListenerRegistration listener;
-    private Bitmap sectionImage;
 
     @Nullable
     @Override

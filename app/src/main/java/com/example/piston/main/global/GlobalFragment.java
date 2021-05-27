@@ -29,7 +29,7 @@ public class GlobalFragment extends ScopeFragment {
 
     private GlobalViewModel viewModel;
     private SharedPreferences prefs;
-    private boolean nsfwVisiblity;
+    private boolean nsfwVisibility;
     private int buttonVisibility;
     private FragmentGlobalBinding binding;
 
@@ -38,12 +38,12 @@ public class GlobalFragment extends ScopeFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         prefs = requireActivity().getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
-        nsfwVisiblity = prefs.getBoolean(Values.NSFW_ENABLED, false);
+        nsfwVisibility = prefs.getBoolean(Values.NSFW_ENABLED, false);
 
 
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_global, container, false);
-        viewModel = new ViewModelProvider(requireActivity(), new MyViewModelFactory(nsfwVisiblity))
+        viewModel = new ViewModelProvider(requireActivity(), new MyViewModelFactory(nsfwVisibility))
                 .get(GlobalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -75,8 +75,8 @@ public class GlobalFragment extends ScopeFragment {
         actionButton.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(requireContext(), R.color.global_secondary)));
 
-        nsfwVisiblity = prefs.getBoolean(Values.NSFW_ENABLED, false);
-        viewModel.showNsfw(nsfwVisiblity);
+        nsfwVisibility = prefs.getBoolean(Values.NSFW_ENABLED, false);
+        viewModel.showNsfw(nsfwVisibility);
     }
 
     private View.OnClickListener chooseFilter() {
@@ -85,13 +85,13 @@ public class GlobalFragment extends ScopeFragment {
                 .setItems(R.array.global_filters, (dialog, which) -> {
                     switch (which) {
                         case 0:
-                            updateFilter(Values.FILTER_DEFAULT, false, nsfwVisiblity);
+                            updateFilter(Values.FILTER_DEFAULT, false, nsfwVisibility);
                             break;
                         case 1:
-                            updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true, nsfwVisiblity);
+                            updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true, nsfwVisibility);
                             break;
                         case 2:
-                            updateFilter(Values.FILTER_ALPHABETICALLY, false, nsfwVisiblity);
+                            updateFilter(Values.FILTER_ALPHABETICALLY, false, nsfwVisibility);
                             break;
                     }
                 }).show();

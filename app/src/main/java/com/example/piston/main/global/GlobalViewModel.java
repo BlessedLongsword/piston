@@ -1,7 +1,5 @@
 package com.example.piston.main.global;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -71,7 +69,7 @@ public class GlobalViewModel extends ViewModel implements GlobalRepository.IGlob
         return filter;
     }
 
-    public void showNsfw(boolean nsfwVisiblity) {
-        globalRepository.showNsfw(nsfwVisiblity);
+    public void showNsfw(boolean nsfwVisibility) {
+        globalRepository.showNsfw(nsfwVisibility);
     }
 }
