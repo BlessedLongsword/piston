@@ -14,7 +14,6 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
     private final MutableLiveData<ArrayList<Post>> posts = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<String> title = new MutableLiveData<>("");
     private final MutableLiveData<String> filter = new MutableLiveData<>(Values.FILTER_DEFAULT);
-
     private final CategoryRepository repository;
 
     public CategoryViewModel(String category) {
@@ -54,6 +53,4 @@ public class CategoryViewModel extends ViewModel implements CategoryRepository.I
     public LiveData<String> getFilter() {
         return filter;
     }
-
-
 }

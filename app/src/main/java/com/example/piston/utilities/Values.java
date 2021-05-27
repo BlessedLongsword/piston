@@ -29,7 +29,6 @@ public class Values {
     public static final String THEME_FOLLOW_SYSTEM = "com.example.piston.darkFollow";
     public static final String DARK_THEME = "com.example.piston.darkMode";
     public static final String NSFW_ENABLED = "com.example.piston.nsfw";
-    public static final String NSFW_BLUR = "com.example.piston.nsfwBlur";
     public static final String NOTIFICATIONS_END = "notificationsEnd";
 
     public static final String FILTER_DEFAULT = "default";
