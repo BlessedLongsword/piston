@@ -155,7 +155,7 @@ public class NotificationsService extends Service {
                                     .into(new CustomTarget<Bitmap>() {
                                 @Override
                                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                    postNotificationReply(notification, getCircleBitmap(resource));
+                                    postNotificationReply(notification, resource);
                                 }
                                 @Override
                                 public void onLoadCleared(@Nullable Drawable placeholder) {
@@ -175,7 +175,8 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.ORPHAN, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.outline_post_add_black_24)
@@ -204,7 +205,8 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.ORPHAN, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.outline_post_add_black_24)
@@ -230,7 +232,8 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.ORPHAN, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.outline_reply_white_24)
@@ -252,30 +255,5 @@ public class NotificationsService extends Service {
     public void onDestroy() {
         super.onDestroy();
         listener.remove();
-    }
-
-    private Bitmap getCircleBitmap(Bitmap bitmap) {
-        if (bitmap == null)
-            return null;
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(output);
-
-        final int color = Color.RED;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawOval(rectF, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-
-        bitmap.recycle();
-
-        return output;
     }
 }
