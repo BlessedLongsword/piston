@@ -97,6 +97,7 @@ public class NotificationsActivity extends AppCompatActivity {
         public boolean onCreateActionMode(androidx.appcompat.view.ActionMode mode, Menu menu) {
             NotificationMultiSelection.toggleStatusBarColor(NotificationsActivity.this,
                     (darkModeEnabled) ? R.color.design_default_color_secondary_variant : R.color.black);
+            mode.getMenuInflater().inflate(R.menu.notifications_top_app_bar, menu);
             return true;
         }
 
