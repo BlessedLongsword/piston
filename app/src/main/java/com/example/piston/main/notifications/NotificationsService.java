@@ -119,7 +119,7 @@ public class NotificationsService extends Service {
                         NotificationsActivity.class), 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.id.group_moderator_icon)
+                .setSmallIcon(R.mipmap.logo)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
