@@ -120,7 +120,7 @@
     <!-- Settings Strings -->
     <string name="settings_sub">Suscripción a publicaciones por defecto</string>
     <string name="settings_dark">Modo oscuro</string>
-    <string name="settings_sfw">Mostrarme publicaciones +18 (Soy mayor de edad)</string>
+    <string name="settings_sfw">Mostrar categoría +18</string>
     <string name="settings_blur_nsfw">Difuminar imágenes +18</string>
     <string name="content_description_media">Texto de ejemplo</string>
     <string name="reply">Responder</string>

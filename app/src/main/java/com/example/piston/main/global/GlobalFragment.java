@@ -1,6 +1,8 @@
 package com.example.piston.main.global;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.piston.R;
 import com.example.piston.databinding.FragmentGlobalBinding;
 import com.example.piston.main.global.createCategory.CreateCategoryActivity;
+import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.ScopeFragment;
 import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -25,16 +28,23 @@ import java.util.Objects;
 public class GlobalFragment extends ScopeFragment {
 
     private GlobalViewModel viewModel;
-    int buttonVisibility;
+    private SharedPreferences prefs;
+    private boolean nsfwVisiblity;
+    private int buttonVisibility;
+    private FragmentGlobalBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        FragmentGlobalBinding binding = DataBindingUtil.inflate(
+        prefs = requireActivity().getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+        nsfwVisiblity = prefs.getBoolean(Values.NSFW_ENABLED, false);
+
+
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_global, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(
-                GlobalViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), new MyViewModelFactory(nsfwVisiblity))
+                .get(GlobalViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.recyclerviewGlobal.setAdapter(new GlobalAdapter(requireActivity()));
@@ -64,6 +74,9 @@ public class GlobalFragment extends ScopeFragment {
         actionButton.setImageResource(R.drawable.outline_collections_black_24);
         actionButton.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(requireContext(), R.color.global_secondary)));
+
+        nsfwVisiblity = prefs.getBoolean(Values.NSFW_ENABLED, false);
+        viewModel.showNsfw(nsfwVisiblity);
     }
 
     private View.OnClickListener chooseFilter() {
@@ -72,20 +85,20 @@ public class GlobalFragment extends ScopeFragment {
                 .setItems(R.array.global_filters, (dialog, which) -> {
                     switch (which) {
                         case 0:
-                            updateFilter(Values.FILTER_DEFAULT, false);
+                            updateFilter(Values.FILTER_DEFAULT, false, nsfwVisiblity);
                             break;
                         case 1:
-                            updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true);
+                            updateFilter(Values.FILTER_MOST_SUBSCRIBERS, true, nsfwVisiblity);
                             break;
                         case 2:
-                            updateFilter(Values.FILTER_ALPHABETICALLY, false);
+                            updateFilter(Values.FILTER_ALPHABETICALLY, false, nsfwVisiblity);
                             break;
                     }
                 }).show();
     }
 
-    private void updateFilter(String filter, boolean descending) {
-        viewModel.updateFilter(filter, descending);
+    private void updateFilter(String filter, boolean descending, boolean nsfw) {
+        viewModel.updateFilter(filter, descending, nsfw);
     }
 
     public void add() {

@@ -22,11 +22,11 @@ public class GlobalRepository {
     private final String email;
     private ListenerRegistration listenerRegistrationCategories, listenerRegistrationSubs;
 
-    private Query categoriesQuery;
+    private Query categoriesQuery, base;
     private Category[] categories;
     private Boolean[] subscriptions;
-    private int counter;
-    private int lastRequest = 0;
+    private int counter, lastRequest = 0;
+    private String filter;
 
     public interface IGlobal {
         void setCategories(ArrayList<Category> categories);
@@ -35,7 +35,7 @@ public class GlobalRepository {
         void setFilter(String filter);
     }
 
-    public GlobalRepository(IGlobal listener) {
+    public GlobalRepository(IGlobal listener, boolean nsfw) {
         this.listener = listener;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
@@ -46,38 +46,41 @@ public class GlobalRepository {
                     if (task.isSuccessful())
                         listener.setIsAdmin(task.getResult().exists());
                 });
+
+        nsfwBase(nsfw);
+        categoriesQuery = base.orderBy("timestamp", Query.Direction.DESCENDING);
+
         listenChanges();
-        categoriesQuery =  db.collection("categories").orderBy("timestamp",
-                Query.Direction.DESCENDING);
+
     }
 
     private void loadCategories() {
-                categoriesQuery.get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        int size = task.getResult().size();
-                        counter = 0;
-                        categories = new Category[size];
-                        subscriptions = new Boolean[size];
-                        final int requestNumber = ++lastRequest;
-                        int position = 0;
-                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
-                                task.getResult())) {
-                            final int positionActual = position++;
-                            db.collection("categories")
-                                    .document(documentSnapshot.getId())
-                                    .collection("subscribedUsers")
-                                    .document(Objects.requireNonNull(email))
-                                    .get().addOnCompleteListener(task1 -> {
-                                        if (task1.isSuccessful()) {
-                                            addCategory(positionActual,
-                                                    documentSnapshot.toObject(Category.class),
-                                                    task1.getResult().exists(), requestNumber);
-                                        }
-                                    });
-                        }
-                    }
-                });
+
+        categoriesQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int size = task.getResult().size();
+                counter = 0;
+                categories = new Category[size];
+                subscriptions = new Boolean[size];
+                final int requestNumber = ++lastRequest;
+                int position = 0;
+                for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
+                        task.getResult())) {
+                    final int positionActual = position++;
+                    db.collection("categories")
+                            .document(documentSnapshot.getId())
+                            .collection("subscribedUsers")
+                            .document(Objects.requireNonNull(email))
+                            .get().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    addCategory(positionActual,
+                                            documentSnapshot.toObject(Category.class),
+                                            task1.getResult().exists(), requestNumber);
+                                }
+                            });
+                }
+            }
+        });
     }
 
     private void addCategory(int position, Category category, Boolean isSubbed, int requestNumber) {
@@ -135,16 +138,40 @@ public class GlobalRepository {
         });
     }
 
-    public void updateQuery(String field, boolean descending) {
+    public void updateQuery(String field, boolean descending, boolean nsfw) {
+        filter = field;
+        nsfwBase(nsfw);
         if (field.equals(Values.FILTER_DEFAULT))
-            categoriesQuery = db.collection(Values.GLOBAL).orderBy("timestamp",
-                    Query.Direction.DESCENDING);
+            categoriesQuery = base.orderBy("timestamp", Query.Direction.DESCENDING);
         else
-            categoriesQuery = db.collection(Values.GLOBAL).orderBy(field, (descending) ?
-                    Query.Direction.DESCENDING : Query.Direction.ASCENDING)
+            categoriesQuery = base.orderBy(field,
+                    (descending) ? Query.Direction.DESCENDING : Query.Direction.ASCENDING)
                     .orderBy("timestamp", Query.Direction.DESCENDING);
+
         loadCategories();
         listener.setFilter(field);
+    }
+
+    public void showNsfw(boolean nsfw) {
+        nsfwBase(nsfw);
+        if (filter != null) {
+            if (filter.equals(Values.FILTER_MOST_SUBSCRIBERS))
+                categoriesQuery = base.orderBy(filter, Query.Direction.DESCENDING)
+                        .orderBy("timestamp", Query.Direction.DESCENDING);
+            else
+                categoriesQuery = base.orderBy(filter, Query.Direction.ASCENDING)
+                        .orderBy("timestamp", Query.Direction.DESCENDING);
+        }
+        else
+            categoriesQuery = base.orderBy("timestamp", Query.Direction.DESCENDING);
+        loadCategories();
+    }
+
+    private void nsfwBase(boolean nsfw) {
+        if (nsfw)
+            base = db.collection(Values.GLOBAL);
+        else
+            base = db.collection(Values.GLOBAL).whereEqualTo("nsfw", false);
     }
 
     private void listenChanges() {

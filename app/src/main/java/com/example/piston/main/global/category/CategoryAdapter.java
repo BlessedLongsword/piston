@@ -1,6 +1,8 @@
 package com.example.piston.main.global.category;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.piston.R;
 import com.example.piston.data.posts.Post;
 import com.example.piston.databinding.ItemPostBinding;
@@ -21,10 +24,13 @@ import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHolder> {
 
     private final FragmentActivity localActivity;
     private final CategoryViewModel viewModel;
+    private final boolean nsfwBlur;
 
     public static class PostHolder extends RecyclerView.ViewHolder {
 
@@ -48,6 +54,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
         localActivity = activity;
         viewModel = new ViewModelProvider(activity).get(CategoryViewModel.class);
         viewModel.getPosts().observe(activity, posts -> notifyDataSetChanged());
+        SharedPreferences pref = localActivity.getSharedPreferences(
+                Values.SHARED_PREFS, Context.MODE_PRIVATE);
+
+        nsfwBlur = pref.getBoolean(Values.NSFW_BLUR, false);
     }
 
     @Override
@@ -79,10 +89,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.PostHo
                 .placeholder(R.drawable.default_profile_picture)
                 .into(holder.binding.postItemProfilePicture);
 
-        if (post.getImageLink() != null)
-            Glide.with(localActivity)
-                    .load(post.getImageLink())
-                    .into(holder.binding.postPicture);
+        if (post.getImageLink() != null) {
+            if (nsfwBlur) {
+                Glide.with(localActivity)
+                        .load(post.getImageLink())
+                        .apply(RequestOptions.bitmapTransform(
+                                new BlurTransformation(25, 3)))
+                        .into(holder.binding.postPicture);
+
+            } else {
+                Glide.with(localActivity)
+                        .load(post.getImageLink())
+                        .into(holder.binding.postPicture);
+            }
+        }
 
 
         holder.getBinding().postItemCard.setOnClickListener(openNewActivity(post.getSectionID(), post.getId()));

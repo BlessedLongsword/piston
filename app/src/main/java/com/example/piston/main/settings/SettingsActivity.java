@@ -78,14 +78,24 @@ public class SettingsActivity extends AppCompatActivity {
                     AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
         });
 
+
+        //TODO
         binding.settingsSubscribe.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
         });
+
+        boolean nsfw = prefs.getBoolean(Values.NSFW_ENABLED, false);
+        binding.settingsBlur.setEnabled(nsfw);
+        binding.settingsShowNsfw.setChecked(nsfw);
 
         binding.settingsShowNsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            binding.settingsBlur.setEnabled(isChecked);
+            prefs.edit().putBoolean(Values.NSFW_ENABLED, isChecked).apply();
         });
 
-        binding.settingsBlur.setOnCheckedChangeListener((buttonView, isChecked) -> {
-        });
+        binding.settingsBlur.setOnCheckedChangeListener((buttonView, isChecked) ->
+            prefs.edit().putBoolean(Values.NSFW_BLUR, isChecked).apply()
+        );
 
         binding.settingsTopAppBar.setNavigationOnClickListener((view) -> finish());
     }
