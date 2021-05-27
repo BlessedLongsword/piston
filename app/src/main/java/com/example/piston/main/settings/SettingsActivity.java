@@ -85,16 +85,10 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         boolean nsfw = prefs.getBoolean(Values.NSFW_ENABLED, false);
-        binding.settingsBlur.setEnabled(nsfw);
         binding.settingsShowNsfw.setChecked(nsfw);
 
-        binding.settingsShowNsfw.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            binding.settingsBlur.setEnabled(isChecked);
-            prefs.edit().putBoolean(Values.NSFW_ENABLED, isChecked).apply();
-        });
-
-        binding.settingsBlur.setOnCheckedChangeListener((buttonView, isChecked) ->
-            prefs.edit().putBoolean(Values.NSFW_BLUR, isChecked).apply()
+        binding.settingsShowNsfw.setOnCheckedChangeListener((buttonView, isChecked) ->
+            prefs.edit().putBoolean(Values.NSFW_ENABLED, isChecked).apply()
         );
 
         binding.settingsTopAppBar.setNavigationOnClickListener((view) -> finish());

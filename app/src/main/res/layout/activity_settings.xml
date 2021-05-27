@@ -92,15 +92,6 @@
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_sfw" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/settings_blur"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    app:thumbTint="@drawable/switch_thumb"
-                    app:trackTint="@drawable/switch_track"
-                    android:text="@string/settings_blur_nsfw" />
-
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

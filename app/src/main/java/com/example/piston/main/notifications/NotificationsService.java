@@ -89,7 +89,7 @@ public class NotificationsService extends Service {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setPriority(NotificationCompat.PRIORITY_LOW)
-                    .setSmallIcon(R.mipmap.logo)
+                    .setSmallIcon(R.mipmap.ic_launcher_foreground)
                     .setContentTitle("Piston is running")
                     .setContentText("Tap to stop listening for notifications")
                     .setGroup("pistonAlone")
