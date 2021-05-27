@@ -120,11 +120,11 @@ public class NotificationsService extends Service {
                             NotificationPost notification = documentSnapshot
                                     .toObject(NotificationPost.class);
                             Glide.with(this).asBitmap()
-                                    .load(notification.getContextImageLink())
+                                    .load(notification.getImageLink())
                                     .into(new CustomTarget<Bitmap>() {
                                         @Override
                                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                            postNotificationPost(notification, resource, getCircleBitmap(sectionImage));
+                                            postNotificationPost(notification, resource);
                                         }
                                         @Override
                                         public void onLoadCleared(@Nullable Drawable placeholder) {
@@ -149,26 +149,26 @@ public class NotificationsService extends Service {
                 });
     }
 
-    public void postNotificationPost(NotificationPost notification, Bitmap postImage, Bitmap sectionImage) {
+    public void postNotificationPost(NotificationPost notification, Bitmap postImage) {
 
         Intent intent = new Intent(getApplicationContext(), PostActivity.class);
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
         intent.putExtra(Values.ORPHAN, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getBroadcast(getApplicationContext(),
-                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.outline_post_add_black_24)
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getSectionName())
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setLargeIcon(sectionImage)
+                .setLargeIcon(postImage)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(postImage)
-                        .bigLargeIcon(sectionImage))
+                        .bigLargeIcon(null))
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true);
 
@@ -185,9 +185,9 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
         intent.putExtra(Values.ORPHAN, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent contentIntent = PendingIntent.getBroadcast(getApplicationContext(),
-                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.outline_reply_white_24)
@@ -212,6 +212,8 @@ public class NotificationsService extends Service {
     }
 
     private Bitmap getCircleBitmap(Bitmap bitmap) {
+        if (bitmap == null)
+            return null;
         final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
