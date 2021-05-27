@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -119,17 +120,33 @@ public class NotificationsService extends Service {
                         if (notificationType.equals("post")) {
                             NotificationPost notification = documentSnapshot
                                     .toObject(NotificationPost.class);
-                            Glide.with(this).asBitmap()
-                                    .load(notification.getImageLink())
-                                    .into(new CustomTarget<Bitmap>() {
-                                        @Override
-                                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                            postNotificationPost(notification, resource);
-                                        }
-                                        @Override
-                                        public void onLoadCleared(@Nullable Drawable placeholder) {
-                                        }
-                                    });
+                            Log.d("DBReadTAG", "i got here :D" + notification.getImageLink());
+                            if (notification.getImageLink() != null)
+                                Glide.with(this).asBitmap()
+                                        .load(notification.getImageLink())
+                                        .into(new CustomTarget<Bitmap>() {
+                                            @Override
+                                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                postNotificationPost(notification, resource);
+                                            }
+                                            @Override
+                                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                            }
+                                        });
+                            else {
+                                Glide.with(this).asBitmap()
+                                        .load(notification.getContextImageLink())
+                                        .into(new CustomTarget<Bitmap>() {
+                                            @Override
+                                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                postNotificationPostNoImage(notification, resource);
+                                            }
+
+                                            @Override
+                                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                            }
+                                        });
+                            }
                         } else {
                             NotificationReply notification = documentSnapshot
                                     .toObject(NotificationReply.class);
@@ -178,6 +195,32 @@ public class NotificationsService extends Service {
         notificationManager.notify(notification.getNotificationID().hashCode(), builder.build());
     }
 
+    public void postNotificationPostNoImage(NotificationPost notification, Bitmap image) {
+
+        Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+        intent.putExtra(Values.SCOPE, notification.getScope());
+        intent.putExtra(Values.SECTION_ID, notification.getSectionID());
+        intent.putExtra(Values.POST_ID, notification.getPostID());
+        intent.putExtra(Values.ORPHAN, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.outline_post_add_black_24)
+                .setContentTitle(notification.getTitle())
+                .setContentText(notification.getSectionName())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setLargeIcon(image)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(notification.getNotificationID().hashCode(), builder.build());
+    }
+
     public void postNotificationReply(NotificationReply notification, Bitmap userImage) {
 
         Intent intent = new Intent(getApplicationContext(), PostActivity.class);
@@ -185,7 +228,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
         intent.putExtra(Values.ORPHAN, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent, 0);
 
