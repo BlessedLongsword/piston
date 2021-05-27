@@ -171,6 +171,7 @@
     <string name="no_notifications">No tienes notificaciones ahora mismo</string>
     <string name="moderator_mode">Modo solo moderadores</string>
     <string name="mod_mode_cd">Solo los moderadores podran publicar posts</string>
+    <string name="replied">respondió</string>
 
     <string-array name="global_filters">
         <item>Defecto</item>

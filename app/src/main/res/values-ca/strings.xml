@@ -172,6 +172,7 @@
     <string name="no_notifications">No tens notificacions ara mateix</string>
     <string name="moderator_mode">Mode només moderadors</string>
     <string name="mod_mode_cd">Només els moderadors podran publicar posts</string>
+    <string name="replied">ha respòs</string>
 
     <string-array name="global_filters">
         <item>Defecte</item>

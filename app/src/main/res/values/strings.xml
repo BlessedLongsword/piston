@@ -179,6 +179,7 @@
     <string name="no_notifications">You don\'t have any notifications right now</string>
     <string name="moderator_mode">Only Moderators Mode</string>
     <string name="mod_mode_cd">Only moderators will be able to publish posts</string>
+    <string name="replied">replied</string>
 
     <string-array name="global_filters">
         <item>Default</item>
