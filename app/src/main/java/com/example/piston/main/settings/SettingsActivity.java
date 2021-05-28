@@ -78,12 +78,6 @@ public class SettingsActivity extends AppCompatActivity {
                     AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
         });
 
-
-        //TODO
-        binding.settingsSubscribe.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-        });
-
         boolean nsfw = prefs.getBoolean(Values.NSFW_ENABLED, false);
         binding.settingsShowNsfw.setChecked(nsfw);
 

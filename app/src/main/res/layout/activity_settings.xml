@@ -37,11 +37,6 @@
                 android:orientation="vertical"
                 android:weightSum="2">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5" />
-
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/notifications_enabled"
                     android:layout_width="match_parent"
@@ -69,20 +64,6 @@
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_dark" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/settings_subscribe"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    app:thumbTint="@drawable/switch_thumb"
-                    app:trackTint="@drawable/switch_track"
-                    android:text="@string/settings_sub"/>
-
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/settings_show_nsfw"
                     android:layout_width="match_parent"
@@ -91,11 +72,6 @@
                     app:thumbTint="@drawable/switch_thumb"
                     app:trackTint="@drawable/switch_track"
                     android:text="@string/settings_sfw" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
 
             </LinearLayout>
 

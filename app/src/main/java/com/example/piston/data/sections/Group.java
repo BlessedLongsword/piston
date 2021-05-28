@@ -13,6 +13,7 @@ public class Group extends ImageSection {
         setModMode(false);
     }
 
+    @SuppressWarnings("unused")
     public int getNumMembers() {
         return numMembers;
     }
@@ -21,6 +22,7 @@ public class Group extends ImageSection {
         this.numMembers = numMembers;
     }
 
+    @SuppressWarnings("unused")
     public boolean getModMode() {
         return modMode;
     }

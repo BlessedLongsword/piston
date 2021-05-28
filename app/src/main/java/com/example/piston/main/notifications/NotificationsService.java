@@ -168,7 +168,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.FROM_NOTIF, true);
+        intent.putExtra(Values.FROM_NOTIFICATION, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
@@ -198,7 +198,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.FROM_NOTIF, true);
+        intent.putExtra(Values.FROM_NOTIFICATION, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
@@ -225,7 +225,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.FROM_NOTIF, true);
+        intent.putExtra(Values.FROM_NOTIFICATION, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,

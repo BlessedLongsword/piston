@@ -34,8 +34,6 @@
     <string name="alternative">You can also</string>
     <string name="write_your_message">Enter your message here</string>
     <string name="no_internet">No internet connection, uploaded without image</string>
-    <string name="order_ascending" translatable="false">ASC</string>
-    <string name="order_descending" translatable="false">DESC</string>
 
 
     <!-- User Data -->
@@ -126,10 +124,8 @@
     <string name="unexpected_error">Unexpected Error</string>
 
     <!-- Settings Strings -->
-    <string name="settings_sub">Default subscription to posts</string>
     <string name="settings_dark">Dark Mode</string>
     <string name="settings_sfw">Show NSFW Content</string>
-    <string name="settings_blur_nsfw">Blur NSFW Images</string>
     <string name="content_description_media">Sample content description</string>
     <string name="reply">Reply</string>
     <string name="post_image">Post Image</string>
@@ -169,8 +165,6 @@
     <string name="unpinned_personal">This Note is no longer pinned</string>
     <string name="filter">Filter</string>
     <string name="filter_by">Filter by</string>
-    <string name="order">Order</string>
-    <string name="order_by">Order by</string>
     <string name="filter_default">Default</string>
     <string name="filter_most_members">Most members</string>
     <string name="filter_most_subscribers">Most subscribers</string>

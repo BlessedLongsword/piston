@@ -118,10 +118,8 @@
     <string name="unexpected_error">Error Inesperado</string>
 
     <!-- Settings Strings -->
-    <string name="settings_sub">Suscripción a publicaciones por defecto</string>
     <string name="settings_dark">Modo oscuro</string>
     <string name="settings_sfw">Mostrar categoría +18</string>
-    <string name="settings_blur_nsfw">Difuminar imágenes +18</string>
     <string name="content_description_media">Texto de ejemplo</string>
     <string name="reply">Responder</string>
     <string name="post_image">Imagen de la Publicación</string>
@@ -161,8 +159,6 @@
     <string name="notifications_enabled">Push Notifications</string>
     <string name="filter">Filtrar</string>
     <string name="filter_by">Filtrar por</string>
-    <string name="order">Orden</string>
-    <string name="order_by">Ordenar por</string>
     <string name="filter_default">Defecto</string>
     <string name="filter_most_members">Más miembros</string>
     <string name="filter_most_subscribers">Más suscriptores</string>

@@ -38,7 +38,7 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         groupID = intent.getStringExtra(Values.SECTION_ID);
-        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIF, false);
+        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIFICATION, false);
 
         postDidNotExist = intent.getBooleanExtra(Values.POST_DOES_NOT_EXIST, false);
         fromShareGroup = intent.getBooleanExtra(Values.FROM_SHARE_GROUP, false);

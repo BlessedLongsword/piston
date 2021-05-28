@@ -59,9 +59,7 @@ public class ProfileImageRepository {
 
         DocumentReference docRef = FirebaseFirestore.getInstance().collection("users")
                 .document(email);
-        docRef.get().addOnSuccessListener(documentSnapshot -> {
-            docRef.update("profilePictureLink", null);
-        });
+        docRef.get().addOnSuccessListener(documentSnapshot -> docRef.update("profilePictureLink", null));
         listener.setImageLink(null);
     }
 

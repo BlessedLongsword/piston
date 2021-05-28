@@ -22,7 +22,6 @@
     <color name="light_red">#CF6679</color>
 
     <!-- Global main colors -->
-
     <color name="global_primary">#c62828</color>
     <color name="global_primary_variant">#8e0000</color>
     <color name="global_secondary">#ffb300</color>
@@ -33,7 +32,6 @@
     <color name="global_secondary_variant_dark">#ffb300</color>
 
     <!-- Groups main colors -->
-
     <color name="groups_primary">#004d40</color>
     <color name="groups_primary_variant">#00251a</color>
     <color name="groups_secondary">#9ccc65</color>
@@ -44,7 +42,6 @@
     <color name="groups_secondary_variant_dark">#9ccc65</color>
 
     <!-- Personal main colors -->
-
     <color name="personal_primary">#424242</color>
     <color name="personal_primary_variant">#1b1b1b</color>
     <color name="personal_secondary">#bcaaa4</color>
@@ -55,11 +52,5 @@
     <color name="personal_secondary_variant_dark">#bcaaa4</color>
 
     <color name="almost_black">#282828</color>
-
-    <color name="dark_yellow1">#CCCC00</color>
-
-    <!-- Notifications colors -->
-    <color name="blue_grey_700">#455A64</color>
-    <color name="blue_grey_600">#546E7A</color>
 
 </resources>

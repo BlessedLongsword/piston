@@ -49,7 +49,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     private String sectionID;
     private String postID;
     private boolean orphan;
-    private boolean fromNotif;
+    private boolean fromNotification;
     private boolean postDoesNotExist;
 
     @Override
@@ -72,7 +72,7 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
         sectionID = intent.getStringExtra(Values.SECTION_ID);
         orphan = intent.getBooleanExtra(Values.ORPHAN, false);
-        fromNotif = intent.getBooleanExtra(Values.FROM_NOTIF, false);
+        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIFICATION, false);
         postID = intent.getStringExtra(Values.POST_ID);
         String replyID = intent.getStringExtra(Values.REPLY_ID);
 
@@ -266,11 +266,6 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_post)));
     }
 
-    @SuppressWarnings("unused")
-    public void deleteImage(MenuItem item) {
-
-    }
-
     @Override
     public void quoteOnClick(String quoteID) {
         goToReply(quoteID);
@@ -278,12 +273,12 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
 
     @Override
     public void finish() {
-        if (orphan || fromNotif) {
+        if (orphan || fromNotification) {
             Intent intent = new Intent(this, (scope.equals(Values.GROUPS)) ?
                     GroupActivity.class : CategoryActivity.class);
             intent.putExtra(Values.SECTION_ID, sectionID);
             intent.putExtra(Values.POST_DOES_NOT_EXIST, postDoesNotExist);
-            intent.putExtra(Values.FROM_NOTIF, fromNotif);
+            intent.putExtra(Values.FROM_NOTIFICATION, fromNotification);
             startActivity(intent);
         }
         super.finish();

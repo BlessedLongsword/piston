@@ -35,7 +35,7 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         categoryID = intent.getStringExtra(Values.SECTION_ID);
 
-        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIF, false);
+        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIFICATION, false);
 
         postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
 

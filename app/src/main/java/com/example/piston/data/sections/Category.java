@@ -13,6 +13,7 @@ public class Category extends ImageSection {
         setNumSubs(0);
     }
 
+    @SuppressWarnings("unused")
     public boolean isNsfw() {
         return nsfw;
     }
@@ -21,6 +22,7 @@ public class Category extends ImageSection {
         this.nsfw = nsfw;
     }
 
+    @SuppressWarnings("unused")
     public int getNumSubs() {
         return numSubs;
     }

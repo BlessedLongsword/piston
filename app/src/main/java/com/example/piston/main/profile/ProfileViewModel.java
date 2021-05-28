@@ -24,7 +24,6 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     private final MutableLiveData<Post> featuredPost = new MutableLiveData<>(null);
 
     /*PupUps*/
-    private final MutableLiveData<Boolean> editBirthDateSaveEnabled = new MutableLiveData<>(false);
     private final MutableLiveData<RegisterResult.BirthDateError> birthDateError = new MutableLiveData<>(RegisterResult.BirthDateError.NONE);
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> finished = new MutableLiveData<>(false);
@@ -40,7 +39,6 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
     }
 
     public void resetValues() {
-        editBirthDateSaveEnabled.setValue(false);
         birthDateError.setValue(RegisterResult.BirthDateError.NONE);
         loading.setValue(false);
         finished.setValue(false);
@@ -51,11 +49,6 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
 
     public void birthdayUpdate(String birth) {
         profileRepository.checkBirthDate(birth);
-        onEditBirthDateFieldChange();
-    }
-
-    public void onEditBirthDateFieldChange() {
-        editBirthDateSaveEnabled.setValue(birthDateError.getValue() == RegisterResult.BirthDateError.NONE);
     }
 
     /*-----------------------------------   Interface Methods   ----------------------------------*/
@@ -133,10 +126,6 @@ public class ProfileViewModel extends ViewModel implements ProfileRepository.IPr
 
     public LiveData<String> getBirthDate() {
         return birthDate;
-    }
-
-    public LiveData<Boolean> getEditBirthDateSaveEnabled() {
-        return editBirthDateSaveEnabled;
     }
 
     public LiveData<RegisterResult.BirthDateError> getBirthDateError() {

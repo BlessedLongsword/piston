@@ -53,6 +53,7 @@ public class Post extends OwnedContent {
         this.profileImageLink = profileImageLink;
     }
 
+    @SuppressWarnings("unused")
     public int getNumLikes() {
         return numLikes;
     }
@@ -70,6 +71,7 @@ public class Post extends OwnedContent {
         return pinned;
     }
 
+    @SuppressWarnings("unused")
     public void setPinned(boolean pinned) {
         this.pinned = pinned;
     }

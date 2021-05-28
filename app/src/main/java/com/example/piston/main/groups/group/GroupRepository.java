@@ -1,6 +1,5 @@
 package com.example.piston.main.groups.group;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.example.piston.data.posts.Post;
@@ -13,9 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;

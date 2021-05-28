@@ -97,16 +97,6 @@
         <item name="tint">?attr/colorOnBackground</item>
     </style>
 
-    <style name="OrderButtonDown">
-        <item name="android:src">@drawable/outline_arrow_downward_black_24</item>
-        <item name="tint">?attr/colorOnBackground</item>
-    </style>
-
-    <style name="OrderButtonUp">
-        <item name="android:src">@drawable/outline_arrow_upward_black_24</item>
-        <item name="tint">?attr/colorOnBackground</item>
-    </style>
-
     <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
         <item name="background">@color/colorPrimary</item>
         <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>

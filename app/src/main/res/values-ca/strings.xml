@@ -119,10 +119,8 @@
     <string name="unexpected_error">Error Inesperat</string>
 
     <!-- Settings Strings -->
-    <string name="settings_sub">Suscripció a publicacions per defecte</string>
     <string name="settings_dark">Mode fosc</string>
     <string name="settings_sfw">Mostrar categoria +18</string>
-    <string name="settings_blur_nsfw">Difuminar imatges +18</string>
     <string name="content_description_media">Text d\'exemple</string>
     <string name="reply">Respondre</string>
     <string name="post_image">Imatge de la Publicació</string>
@@ -162,8 +160,6 @@
     <string name="unpinned_personal">La nota ja no està fixada</string>
     <string name="filter">Filtrar</string>
     <string name="filter_by">Filtrar per</string>
-    <string name="order">Ordre</string>
-    <string name="order_by">Ordenar per</string>
     <string name="filter_default">Defecte</string>
     <string name="filter_most_members">Més membres</string>
     <string name="filter_most_subscribers">Més subscriptors</string>
