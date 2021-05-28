@@ -1,6 +1,9 @@
 package com.example.piston.main.groups.group.info;
 
+import android.net.Uri;
+
 import com.example.piston.data.users.GroupMember;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -8,6 +11,7 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +19,7 @@ import java.util.Objects;
 
 public class GroupInfoRepository {
 
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final GroupInfoRepository.IGroupInfo listener;
     private final DocumentReference groupDocRef;
@@ -30,6 +35,7 @@ public class GroupInfoRepository {
         void setMembers(ArrayList<GroupMember> members);
         void setPriority(Integer priority);
         void setFinished();
+        void setImageLink(String imageLink);
     }
 
     public GroupInfoRepository(GroupInfoRepository.IGroupInfo listener, String groupID) {
@@ -215,6 +221,26 @@ public class GroupInfoRepository {
 
     public void removeListener() {
         listenerRegistration.remove();
+    }
+
+    public void loadImage() {
+        groupDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setImageLink((String) task.getResult().get("imageLink"));
+            }
+        });
+    }
+
+    public void setImage(Uri image) {
+        StorageReference imageRef = storage.getReference().child(Values.GROUPS).child(groupID)
+                .child("imageLink");
+        UploadTask uploadTask = imageRef.putFile(image);
+
+        uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> groupDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                    groupDocRef.update("imageLink", uri.toString());
+                    loadImage();
+                })));
     }
 
 }

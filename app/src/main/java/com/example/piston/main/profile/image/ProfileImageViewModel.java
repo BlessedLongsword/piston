@@ -20,6 +20,8 @@ public class ProfileImageViewModel extends ViewModel implements ProfileImageRepo
         repository.setImage(image);
     }
 
+    public void deleteImage() { repository.deleteImage(); }
+
     @Override
     public void setImageLink(String imageLink) {
         this.imageLink.setValue(imageLink);

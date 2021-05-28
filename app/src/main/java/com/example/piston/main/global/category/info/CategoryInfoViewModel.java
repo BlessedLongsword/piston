@@ -1,5 +1,7 @@
 package com.example.piston.main.global.category.info;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -21,10 +23,19 @@ public class CategoryInfoViewModel extends ViewModel implements CategoryInfoRepo
         repository.checkSub();
     }
 
+    public void setImage(Uri image) {
+        repository.setImage(image);
+    }
+
     @Override
     public void setParams(String title, String description, String imageLink) {
         this.title.setValue(title);
         this.description.setValue(description);
+        this.imageLink.setValue(imageLink);
+    }
+
+    @Override
+    public void setImageLink(String imageLink) {
         this.imageLink.setValue(imageLink);
     }
 

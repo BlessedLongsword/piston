@@ -26,7 +26,7 @@ import java.util.Objects;
 public class GroupActivity extends AppCompatActivity {
 
     private String groupID;
-    private boolean orphan;
+    private boolean fromNotification;
     private boolean postDidNotExist;
     private boolean fromShareGroup;
     GroupViewModel viewModel;
@@ -38,15 +38,13 @@ public class GroupActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         groupID = intent.getStringExtra(Values.SECTION_ID);
-        orphan = intent.getBooleanExtra(Values.ORPHAN, false);
+        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIF, false);
 
         postDidNotExist = intent.getBooleanExtra(Values.POST_DOES_NOT_EXIST, false);
         fromShareGroup = intent.getBooleanExtra(Values.FROM_SHARE_GROUP, false);
 
-        if (postDidNotExist) {
-            orphan = false;
+        if (postDidNotExist)
             finish();
-        }
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(groupID))
                 .get(GroupViewModel.class);
@@ -126,7 +124,7 @@ public class GroupActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        if (orphan) {
+        if (fromNotification) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 1);
             startActivity(intent);

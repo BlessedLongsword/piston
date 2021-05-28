@@ -172,6 +172,8 @@
     <string name="moderator_mode">Modo solo moderadores</string>
     <string name="mod_mode_cd">Solo los moderadores podran publicar posts</string>
     <string name="replied">respondió</string>
+    <string name="delete_image">Eliminar Imagen</string>
+    <string name="change_image">Cambiar Imagen</string>
 
     <string-array name="global_filters">
         <item>Defecto</item>

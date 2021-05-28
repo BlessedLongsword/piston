@@ -3,6 +3,7 @@ package com.example.piston.main.groups.group.info;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +18,15 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityGroupInfoBinding;
+import com.example.piston.utilities.CheckNetwork;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.Values;
 
 import java.util.Objects;
 
-public class GroupInfoActivity extends AppCompatActivity {
+public class GroupInfoActivity extends PickImageActivity {
 
     private GroupInfoViewModel viewModel;
     private ClipboardManager clipboard;
@@ -53,8 +56,9 @@ public class GroupInfoActivity extends AppCompatActivity {
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
         viewModel.getPriority().observe(this, priority -> {
-            binding.groupInfoTopAppBar.getMenu().getItem(1).setVisible(priority<=1);
+            binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority<1);
             binding.groupInfoTopAppBar.getMenu().getItem(2).setVisible(priority<=1);
+            binding.groupInfoTopAppBar.getMenu().getItem(3).setVisible(priority<=1);
             if (priority<=1) {
                 binding.groupInfoDescriptionCard.setOnClickListener(v -> editDescription());
                 if (priority == 0) {
@@ -146,5 +150,18 @@ public class GroupInfoActivity extends AppCompatActivity {
                 viewModel.update();
             }
         });
+    }
+
+    @SuppressWarnings("unused")
+    public void changeImage(MenuItem item) {
+        if (CheckNetwork.isConnected(getApplicationContext()))
+            imagePick(item);
+        else
+            Toast.makeText(getApplicationContext(), "No connection!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void setUri(Uri imageUri) {
+        viewModel.setImage(imageUri);
     }
 }

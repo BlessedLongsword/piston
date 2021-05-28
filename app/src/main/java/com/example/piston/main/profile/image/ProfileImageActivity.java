@@ -59,4 +59,9 @@ public class ProfileImageActivity extends PickImageActivity {
     protected void setUri(Uri imageUri) {
         viewModel.setImage(imageUri);
     }
+
+    @SuppressWarnings("unused")
+    public void deleteImage(MenuItem item) {
+        viewModel.deleteImage();
+    }
 }

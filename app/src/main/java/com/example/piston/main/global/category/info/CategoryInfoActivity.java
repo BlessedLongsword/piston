@@ -1,8 +1,10 @@
 package com.example.piston.main.global.category.info;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,13 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.piston.R;
 import com.example.piston.databinding.ActivityCategoryInfoBinding;
+import com.example.piston.utilities.CheckNetwork;
 import com.example.piston.utilities.EditPopup;
 import com.example.piston.utilities.MyViewModelFactory;
+import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.Values;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
-public class CategoryInfoActivity extends AppCompatActivity {
+public class CategoryInfoActivity extends PickImageActivity {
 
     private CategoryInfoViewModel viewModel;
     private ActivityCategoryInfoBinding binding;
@@ -44,6 +48,7 @@ public class CategoryInfoActivity extends AppCompatActivity {
             if (admin) {
                 binding.categoryInfoTopAppBar.getMenu().getItem(0).setVisible(true);
                 binding.categoryInfoTopAppBar.getMenu().getItem(1).setVisible(true);
+                binding.categoryInfoTopAppBar.getMenu().getItem(2).setVisible(true);
                 binding.categoryInfoDescriptionCard.setOnClickListener(v -> editDescription());
             }
         });
@@ -109,4 +114,16 @@ public class CategoryInfoActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("unused")
+    public void changeImage(MenuItem item) {
+        if (CheckNetwork.isConnected(getApplicationContext()))
+            imagePick(item);
+        else
+            Toast.makeText(getApplicationContext(), "No connection!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void setUri(Uri imageUri) {
+        viewModel.setImage(imageUri);
+    }
 }

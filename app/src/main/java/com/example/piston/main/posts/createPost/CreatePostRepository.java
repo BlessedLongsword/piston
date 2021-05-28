@@ -44,7 +44,6 @@ public class CreatePostRepository {
                     username = (String) Objects.requireNonNull(task.getResult()).get("username");
                     profilePictureLink = (String) Objects.requireNonNull(task.getResult()).get("profilePictureLink");
         });
-
     }
 
     public void checkTitle(String title) {

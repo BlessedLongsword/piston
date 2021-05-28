@@ -19,6 +19,7 @@ public class EditPostRepository {
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final String email, scope, sectionID, postID;
     private final DocumentReference postDocRef;
+    private boolean hadImage;
 
     public interface IEditPost {
         void setTitleStatus(EditPostResult.TitleError titleError);
@@ -42,9 +43,11 @@ public class EditPostRepository {
 
         postDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                String imageLink = (String) task.getResult().get("imageLink");
+                hadImage = imageLink != null;
                 listener.setParams((String) task.getResult().get("title"),
                         (String) task.getResult().get("content"),
-                        (String) task.getResult().get("imageLink"));
+                        imageLink);
             }
         });
 
@@ -61,8 +64,18 @@ public class EditPostRepository {
                 listener.setErrorMessage();
                 updatePost(title, content, null);
             }
-            else if (image == null)
+            else if (image == null) {
                 updatePost(title, content, null);
+                if (hadImage) {
+                    StorageReference storageBase;
+                    if (scope.equals(Values.PERSONAL))
+                        storageBase = storage.getReference().child("users").child(email);
+                    else
+                        storageBase = storage.getReference().child(scope);
+                    StorageReference storagePost = storageBase.child(sectionID).child(postID);
+                    storagePost.delete();
+                }
+            }
             else {
                 StorageReference storageBase;
                 if (scope.equals(Values.PERSONAL))

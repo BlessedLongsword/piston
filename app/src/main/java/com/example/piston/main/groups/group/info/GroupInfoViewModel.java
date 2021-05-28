@@ -1,5 +1,7 @@
 package com.example.piston.main.groups.group.info;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -26,6 +28,15 @@ public class GroupInfoViewModel extends ViewModel implements GroupInfoRepository
     public GroupInfoViewModel(String group) {
         id.setValue(group);
         repository = new GroupInfoRepository(this, id.getValue());
+    }
+
+    public void setImage(Uri image) {
+        repository.setImage(image);
+    }
+
+    @Override
+    public void setImageLink(String imageLink) {
+        this.imageLink.setValue(imageLink);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.example.piston.utilities.MyViewModelFactory;
 import com.example.piston.utilities.PickImageActivity;
 import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 
 public class EditPostActivity extends PickImageActivity {
@@ -52,9 +55,13 @@ public class EditPostActivity extends PickImageActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        viewModel.getImageLink().observe(this, imageLink -> Glide.with(this)
-                .load(imageLink)
-                .into(binding.postPicture));
+        viewModel.getImageLink().observe(this, imageLink -> {
+            if (imageLink != null && !imageLink.equals(""))
+                binding.deletePictureBtn.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(imageLink)
+                    .into(binding.postPicture);
+        });
 
         binding.editPostTopAppBar.setNavigationOnClickListener((view) -> finish());
 
@@ -83,11 +90,20 @@ public class EditPostActivity extends PickImageActivity {
     @SuppressWarnings("unused")
     public void editPost(MenuItem item) {
         boolean connected = CheckNetwork.isConnected(getApplicationContext());
-        viewModel.editPost(imageUri, connected);
+        if (!Objects.requireNonNull(viewModel.getLoading().getValue()))
+            viewModel.editPost(imageUri, connected);
+    }
+
+    @SuppressWarnings("unused")
+    public void deleteImage(View item) {
+        binding.postPicture.setImageURI(null);
+        binding.deletePictureBtn.setVisibility(View.GONE);
+        imageUri = null;
     }
 
     @Override
     protected void setUri(Uri imageUri) {
         binding.postPicture.setImageURI(imageUri);
+        binding.deletePictureBtn.setVisibility(View.VISIBLE);
     }
 }

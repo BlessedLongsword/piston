@@ -173,6 +173,8 @@
     <string name="moderator_mode">Mode només moderadors</string>
     <string name="mod_mode_cd">Només els moderadors podran publicar posts</string>
     <string name="replied">ha respòs</string>
+    <string name="delete_image">Eliminar Imatge</string>
+    <string name="change_image">Canviar Imatge</string>
 
     <string-array name="global_filters">
         <item>Defecte</item>

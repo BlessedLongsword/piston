@@ -52,4 +52,11 @@ public class ProfileImageRepository {
                 })));
     }
 
+    public void deleteImage() {
+        StorageReference profileImageReference = storage.getReference().child("users").child(email)
+                .child("profilePicture");
+        profileImageReference.delete();
+        listener.setImageLink(null);
+    }
+
 }

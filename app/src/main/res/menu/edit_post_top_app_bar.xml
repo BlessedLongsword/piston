@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/edit_post_btn"
-        android:title="@string/upload"
+        android:title="@string/save"
         app:showAsAction="always"
         android:onClick="editPost">
     </item>

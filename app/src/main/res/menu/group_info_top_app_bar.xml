@@ -5,6 +5,13 @@
     tools:context=".main.personal.group.GroupInfoActivity">
 
     <item
+        android:id="@+id/delete_image"
+        android:title="@string/change_image"
+        app:showAsAction="never"
+        android:onClick="changeImage">
+    </item>
+
+    <item
         android:id="@+id/share_group"
         android:title="@string/share_group"
         android:onClick="shareGroup"
@@ -21,4 +28,5 @@
         android:icon="@drawable/baseline_edit_white_36"
         android:onClick="editTitle"
         app:showAsAction="ifRoom" />
+
 </menu>

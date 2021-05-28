@@ -73,13 +73,31 @@
                     android:layout_marginVertical="@dimen/activity_vertical_margin"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/choose_picture_btn"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="@dimen/wider_btn"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/choose_picture"
-                        android:onClick="imagePick"/>
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/choose_picture_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/choose_picture"
+                            android:onClick="imagePick"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/delete_picture_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/delete_image"
+                            android:textColor="?attr/colorError"
+                            android:visibility="gone"
+                            android:onClick="deleteImage"/>
+
+                    </LinearLayout>
 
                     <Space
                         android:layout_width="0dp"
@@ -113,6 +131,14 @@
                         android:text="@={viewModel.contentField}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar
+                    android:id="@+id/category_progress_bar"
+                    android:layout_marginVertical="@dimen/small_separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    setVisible="@{viewModel.loading}"/>
 
             </LinearLayout>
 

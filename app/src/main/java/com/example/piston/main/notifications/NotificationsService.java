@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -150,17 +151,24 @@ public class NotificationsService extends Service {
                         } else {
                             NotificationReply notification = documentSnapshot
                                     .toObject(NotificationReply.class);
-                            Glide.with(this).asBitmap()
-                                    .load(notification.getContextImageLink())
-                                    .into(new CustomTarget<Bitmap>() {
-                                @Override
-                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                    postNotificationReply(notification, resource);
-                                }
-                                @Override
-                                public void onLoadCleared(@Nullable Drawable placeholder) {
-                                }
-                            });
+                            if (notification.getContextImageLink() != null) {
+                                Glide.with(this).asBitmap()
+                                        .load(notification.getContextImageLink())
+                                        .into(new CustomTarget<Bitmap>() {
+                                            @Override
+                                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                postNotificationReply(notification, resource);
+                                            }
+
+                                            @Override
+                                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                            }
+                                        });
+                            } else {
+                                Bitmap userImage = BitmapFactory.decodeResource(getResources(),
+                                        R.drawable.default_profile_picture);
+                                postNotificationReply(notification, userImage);
+                            }
                         }
                     }
                 });
@@ -172,7 +180,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.ORPHAN, true);
+        intent.putExtra(Values.FROM_NOTIF, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
@@ -202,7 +210,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.ORPHAN, true);
+        intent.putExtra(Values.FROM_NOTIF, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
@@ -229,7 +237,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SCOPE, notification.getScope());
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
-        intent.putExtra(Values.ORPHAN, true);
+        intent.putExtra(Values.FROM_NOTIF, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,

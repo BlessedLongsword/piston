@@ -1,11 +1,15 @@
 package com.example.piston.main.global.category.info;
 
+import android.net.Uri;
+
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +17,7 @@ import java.util.Objects;
 
 public class CategoryInfoRepository {
 
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final DocumentReference categoryDocRef;
     private final String category, email;
@@ -21,6 +26,7 @@ public class CategoryInfoRepository {
 
     public interface ICategoryInfo {
         void setParams(String title, String description, String imageLink);
+        void setImageLink(String imageLink);
         void setSubscribed(boolean subscribed);
         void setIsAdmin(boolean admin);
         void setFinished();
@@ -173,6 +179,26 @@ public class CategoryInfoRepository {
                 listener.setParams((String) Objects.requireNonNull(task.getResult()).get("title"),
                         (String) task.getResult().get("description"),
                         (String) task.getResult().get("imageLink"));
+            }
+        });
+    }
+
+    public void setImage(Uri image) {
+        StorageReference imageRef = storage.getReference().child(Values.GLOBAL).child(category)
+                .child("categoryImage");
+        UploadTask uploadTask = imageRef.putFile(image);
+
+        uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> categoryDocRef.get().addOnSuccessListener(documentSnapshot -> {
+                    categoryDocRef.update("imageLink", uri.toString());
+                    loadImage();
+                })));
+    }
+
+    public void loadImage() {
+        categoryDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.setImageLink((String) task.getResult().get("imageLink"));
             }
         });
     }

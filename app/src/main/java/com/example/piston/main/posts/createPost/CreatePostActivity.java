@@ -3,6 +3,7 @@ package com.example.piston.main.posts.createPost;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -78,9 +79,17 @@ public class CreatePostActivity extends PickImageActivity {
             viewModel.createPost(scope, sectionID, imageUri, connected);
     }
 
+    @SuppressWarnings("unused")
+    public void deleteImage(View item) {
+        binding.postPicture.setImageURI(null);
+        binding.deletePictureBtn.setVisibility(View.GONE);
+        imageUri = null;
+    }
+
     @Override
     protected void setUri(Uri imageUri) {
         binding.postPicture.setImageURI(imageUri);
+        binding.deletePictureBtn.setVisibility(View.VISIBLE);
     }
 
 }

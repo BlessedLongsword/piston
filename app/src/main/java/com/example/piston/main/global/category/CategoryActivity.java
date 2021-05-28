@@ -23,7 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 public class CategoryActivity extends AppCompatActivity {
 
     private String categoryID;
-    private boolean orphan;
+    private boolean fromNotification;
     private boolean postDidNotExist;
     private CategoryViewModel viewModel;
 
@@ -35,14 +35,12 @@ public class CategoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         categoryID = intent.getStringExtra(Values.SECTION_ID);
 
-        orphan = intent.getBooleanExtra("orphan", false);
+        fromNotification = intent.getBooleanExtra(Values.FROM_NOTIF, false);
 
         postDidNotExist = intent.getBooleanExtra("postDidNotExist", false);
 
-        if (postDidNotExist) {
-            orphan = false;
+        if (postDidNotExist)
             finish();
-        }
 
         viewModel = new ViewModelProvider(this, new MyViewModelFactory(categoryID))
                 .get(CategoryViewModel.class);
@@ -103,7 +101,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        if (orphan) {
+        if (fromNotification) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("tab", 2);
             startActivity(intent);
