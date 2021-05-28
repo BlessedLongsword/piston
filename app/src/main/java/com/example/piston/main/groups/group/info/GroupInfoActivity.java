@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -56,8 +55,8 @@ public class GroupInfoActivity extends PickImageActivity {
 
         binding.groupInfoTopAppBar.setNavigationOnClickListener((view) -> finish());
         viewModel.getPriority().observe(this, priority -> {
-            binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority<1);
-            binding.groupInfoTopAppBar.getMenu().getItem(2).setVisible(priority<=1);
+            binding.groupInfoTopAppBar.getMenu().getItem(0).setVisible(priority<=1);
+            binding.groupInfoTopAppBar.getMenu().getItem(2).setVisible(priority<1);
             binding.groupInfoTopAppBar.getMenu().getItem(3).setVisible(priority<=1);
             if (priority<=1) {
                 binding.groupInfoDescriptionCard.setOnClickListener(v -> editDescription());

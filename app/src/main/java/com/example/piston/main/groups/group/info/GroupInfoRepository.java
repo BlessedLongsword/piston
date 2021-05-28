@@ -233,7 +233,7 @@ public class GroupInfoRepository {
 
     public void setImage(Uri image) {
         StorageReference imageRef = storage.getReference().child(Values.GROUPS).child(groupID)
-                .child("imageLink");
+                .child("groupImage");
         UploadTask uploadTask = imageRef.putFile(image);
 
         uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()

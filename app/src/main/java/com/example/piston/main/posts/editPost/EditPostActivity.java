@@ -3,6 +3,7 @@ package com.example.piston.main.posts.editPost;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,7 +22,6 @@ import com.example.piston.utilities.Values;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
-
 
 public class EditPostActivity extends PickImageActivity {
 
@@ -96,7 +96,7 @@ public class EditPostActivity extends PickImageActivity {
 
     @SuppressWarnings("unused")
     public void deleteImage(View item) {
-        binding.postPicture.setImageURI(null);
+        binding.postPicture.setImageDrawable(null);
         binding.deletePictureBtn.setVisibility(View.GONE);
         imageUri = null;
     }

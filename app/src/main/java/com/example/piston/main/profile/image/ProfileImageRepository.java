@@ -56,6 +56,12 @@ public class ProfileImageRepository {
         StorageReference profileImageReference = storage.getReference().child("users").child(email)
                 .child("profilePicture");
         profileImageReference.delete();
+
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("users")
+                .document(email);
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            docRef.update("profilePictureLink", null);
+        });
         listener.setImageLink(null);
     }
 

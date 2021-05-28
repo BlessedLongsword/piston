@@ -50,7 +50,6 @@ public class EditPostRepository {
                         imageLink);
             }
         });
-
     }
 
     public void editPost(String title, String content, Uri image, boolean connected) {
@@ -99,8 +98,7 @@ public class EditPostRepository {
             if (task.isComplete()) {
                 postDocRef.update("timestamp", FieldValue.serverTimestamp());
                 postDocRef.update("title", title);
-                if(imageLink != null)
-                    postDocRef.update("imageLink", imageLink);
+                postDocRef.update("imageLink", imageLink);
                 postDocRef.update("content", content);
 
                 listener.setEditFinished();

@@ -8,8 +8,7 @@
         android:id="@+id/delete_image"
         android:title="@string/change_image"
         app:showAsAction="never"
-        android:onClick="changeImage">
-    </item>
+        android:onClick="changeImage" />
 
     <item
         android:id="@+id/share_group"
@@ -22,6 +21,7 @@
         android:title="@string/delete_group"
         android:onClick="deleteGroup"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/edit_title"
         android:title="@string/edit_group_btn"
