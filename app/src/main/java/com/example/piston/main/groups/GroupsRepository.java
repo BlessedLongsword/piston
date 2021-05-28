@@ -18,7 +18,7 @@ public class GroupsRepository {
 
     private final IGroup listener;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ListenerRegistration listenerRegistration;
+    private ListenerRegistration listenerRegistrationUser, listenerRegistrationGroups;
     private Query groupsQuery;
     private final String user;
 
@@ -107,14 +107,18 @@ public class GroupsRepository {
     }
 
     private void listenChanges() {
-        listenerRegistration = groupsQuery.addSnapshotListener((snapshots, e) -> {
+        listenerRegistrationUser = groupsQuery.addSnapshotListener((snapshots, e) -> {
+            GroupsRepository.this.loadGroups();
+            GroupsRepository.this.updateGroupParamsForCurrentUser();
+        });
+        listenerRegistrationGroups = db.collection(Values.GROUPS).addSnapshotListener((snapshots, e) -> {
             GroupsRepository.this.loadGroups();
             GroupsRepository.this.updateGroupParamsForCurrentUser();
         });
     }
 
     public void removeListener() {
-        listenerRegistration.remove();
+        listenerRegistrationUser.remove();
     }
 
 }
