@@ -13,6 +13,7 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:screenOrientation="sensorPortrait"
+        android:supportsRtl="true"
         android:requestLegacyExternalStorage="true" >
 
         <activity android:name=".authentication.login.LoginActivity"/>
