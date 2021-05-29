@@ -115,7 +115,6 @@ public class NotificationsService extends Service {
                                     .toObject(NotificationPost.class);
                             if (notification.getRead())
                                 return;
-                            Log.d("DBReadTAG", "i got here :D" + notification.getImageLink());
                             if (notification.getImageLink() != null)
                                 Glide.with(this).asBitmap()
                                         .load(notification.getImageLink())
@@ -147,6 +146,7 @@ public class NotificationsService extends Service {
                                     .toObject(NotificationReply.class);
                             if (notification.getRead())
                                 return;
+                            Log.d("DBReadTAG", "got here: " + notification.getContextImageLink());
                             if (notification.getContextImageLink() != null) {
                                 Glide.with(this).asBitmap()
                                         .load(notification.getContextImageLink())
@@ -177,7 +177,7 @@ public class NotificationsService extends Service {
         intent.putExtra(Values.SECTION_ID, notification.getSectionID());
         intent.putExtra(Values.POST_ID, notification.getPostID());
         intent.putExtra(Values.FROM_NOTIFICATION, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);

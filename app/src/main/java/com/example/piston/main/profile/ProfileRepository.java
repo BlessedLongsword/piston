@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.piston.authentication.register.RegisterResult;
 import com.example.piston.data.posts.Post;
 import com.example.piston.data.users.User;
+import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +29,9 @@ public class ProfileRepository {
 
     private final String email;
 
+    private Post featuredPost;
+    private long highestNumLikes;
+
     public interface IProfile {
         void setUserNameField(String username);
         void setEmailField(String email);
@@ -46,6 +50,8 @@ public class ProfileRepository {
         this.email = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
         listener.setIsCurrentUser(Objects.equals(this.email,
                 Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()));
+        featuredPost = null;
+        highestNumLikes = -1;
         listenChanges();
     }
 
@@ -66,10 +72,9 @@ public class ProfileRepository {
     }
 
     public void loadFeaturedPost() {
-        db.collection("categories").get().addOnCompleteListener(task -> {
+        db.collection(Values.GLOBAL).get().addOnCompleteListener(task -> {
             for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-                db.collection("categories").document(ds.getId())
-                        .collection("posts")
+                ds.getReference().collection("posts")
                         .whereEqualTo("ownerEmail", email)
                         .orderBy("numLikes", Query.Direction.DESCENDING)
                         .get().addOnCompleteListener(task1 -> {
@@ -77,11 +82,14 @@ public class ProfileRepository {
                                 try {
                                     DocumentSnapshot featuredPostDocumentSnapshot =
                                             task1.getResult().getDocuments().get(0);
-                                    listener.setFeaturedPost(featuredPostDocumentSnapshot
-                                            .toObject(Post.class));
-                                } catch (NullPointerException | IndexOutOfBoundsException e) {
-                                    listener.setFeaturedPost(null);
-                                }
+                                    long numLikes = (long) Objects.requireNonNull
+                                            (featuredPostDocumentSnapshot.get("numLikes"));
+                                    if (numLikes > highestNumLikes) {
+                                        highestNumLikes = numLikes;
+                                        featuredPost = featuredPostDocumentSnapshot.toObject(Post.class);
+                                        listener.setFeaturedPost(featuredPost);
+                                    }
+                                } catch (NullPointerException | IndexOutOfBoundsException ignored){}
                             } else {
                                 Log.d("DBReadTAG", Objects.requireNonNull(task1.getException()).getMessage());
                             }
