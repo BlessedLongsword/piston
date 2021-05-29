@@ -27,6 +27,7 @@ import com.example.piston.main.posts.PostActivity;
 import com.example.piston.main.settings.SettingsActivity;
 import com.example.piston.utilities.Values;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -102,6 +103,9 @@ public class NotificationsService extends Service {
                     DocumentSnapshot documentSnapshot = Objects.requireNonNull(snapshots).
                             getDocumentChanges().get(0).getDocument();
 
+                    if (snapshots.getDocumentChanges().get(0).getType().equals(DocumentChange.Type.REMOVED))
+                        return;
+
                     Object type = documentSnapshot.get("type");
 
                     if (type != null) {
@@ -109,6 +113,8 @@ public class NotificationsService extends Service {
                         if (notificationType.equals("post")) {
                             NotificationPost notification = documentSnapshot
                                     .toObject(NotificationPost.class);
+                            if (notification.getRead())
+                                return;
                             Log.d("DBReadTAG", "i got here :D" + notification.getImageLink());
                             if (notification.getImageLink() != null)
                                 Glide.with(this).asBitmap()
@@ -139,6 +145,8 @@ public class NotificationsService extends Service {
                         } else {
                             NotificationReply notification = documentSnapshot
                                     .toObject(NotificationReply.class);
+                            if (notification.getRead())
+                                return;
                             if (notification.getContextImageLink() != null) {
                                 Glide.with(this).asBitmap()
                                         .load(notification.getContextImageLink())

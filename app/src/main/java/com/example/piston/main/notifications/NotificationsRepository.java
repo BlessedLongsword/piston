@@ -1,5 +1,7 @@
 package com.example.piston.main.notifications;
 
+import android.util.Log;
+
 import com.example.piston.data.notifications.Notification;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.notifications.NotificationReply;
@@ -70,7 +72,8 @@ public class NotificationsRepository {
         listenerRegistration.remove();
     }
 
-    public void deleteNotification(String id){
+    public void deleteNotification(String id) {
+        Log.d("nowaybro", "deletingNotification: " + id);
         db.collection("users").document(email).collection("notifications").document(id).delete();
     }
     public void markAsRead(String id){

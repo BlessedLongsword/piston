@@ -184,6 +184,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationPost.getNotificationID());
+                deletedItems.put(position, false);
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationPost.getNotificationID());
@@ -246,10 +247,10 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             if(deletedItems.get(position,false)){
                 viewModel.deleteNotification(notificationReply.getNotificationID());
+                deletedItems.put(position, false);
             }
             if(readItems.get(position,false)){
                 viewModel.markAsRead(notificationReply.getNotificationID());
-                hold.getBinding().notificationTitle.setTextColor(R.color.selected);
             }
         }
     }
@@ -333,14 +334,14 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         return selectedItems.size();
     }
 
-    public void deleteNotifications(){
+    public void deleteNotifications() {
         for(int i = getSelectedItems().size() - 1; i >= 0; i--){
             deletedItems.put(getSelectedItems().get(i),true);
             notifyItemChanged(getSelectedItems().get(i));
         }
     }
 
-    public void markAsRead(){
+    public void markAsRead() {
         for(int i = getSelectedItems().size() - 1; i >= 0; i--){
             readItems.put(getSelectedItems().get(i),true);
             notifyItemChanged(getSelectedItems().get(i));
