@@ -27,7 +27,6 @@ public class ProfileRepository {
     private final IProfile listener;
 
     private final String email;
-    private String username;
 
     public interface IProfile {
         void setUserNameField(String username);
@@ -47,12 +46,6 @@ public class ProfileRepository {
         this.email = (email == null) ? Objects.requireNonNull(mAuth.getCurrentUser()).getEmail() : email;
         listener.setIsCurrentUser(Objects.equals(this.email,
                 Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()));
-        db.collection("users").document(Objects.requireNonNull(this.email)).get()
-                .addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                username = (String) task.getResult().get("username");
-            }
-        });
         listenChanges();
     }
 
@@ -77,7 +70,7 @@ public class ProfileRepository {
             for (DocumentSnapshot ds : task.getResult().getDocuments()) {
                 db.collection("categories").document(ds.getId())
                         .collection("posts")
-                        .whereEqualTo("owner", username)
+                        .whereEqualTo("ownerEmail", email)
                         .orderBy("numLikes", Query.Direction.DESCENDING)
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {

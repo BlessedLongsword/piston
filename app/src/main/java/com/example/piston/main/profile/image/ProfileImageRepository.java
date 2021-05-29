@@ -67,6 +67,7 @@ public class ProfileImageRepository {
                 .document(email);
         docRef.get().addOnSuccessListener(documentSnapshot -> docRef.update("profilePictureLink", null));
         listener.setImageLink(null);
+        updatePostsProfilePicture(null);
     }
 
     private void updatePostsProfilePicture(String profileImageLink) {
