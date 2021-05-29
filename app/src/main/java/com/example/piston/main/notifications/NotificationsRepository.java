@@ -6,6 +6,7 @@ import com.example.piston.data.notifications.Notification;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.notifications.NotificationReply;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -44,6 +45,7 @@ public class NotificationsRepository {
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        int counter = 0;
                         for (QueryDocumentSnapshot documentSnapshot : Objects.
                                 requireNonNull(task.getResult())) {
                             String notificationType = Objects.requireNonNull(documentSnapshot
@@ -57,6 +59,8 @@ public class NotificationsRepository {
                                         .toObject(NotificationReply.class);
                                 notifications.add(notification);
                             }
+                            if (counter++ % 10 == 0)
+                                    listener.setNotifications(notifications);
                         }
                         listener.setNotifications(notifications);
                     }
@@ -65,7 +69,10 @@ public class NotificationsRepository {
 
     private void listenChanges() {
         listenerRegistration = userDocRef.collection("notifications")
-                .addSnapshotListener((snapshots, error) -> NotificationsRepository.this.loadNotifications());
+                .addSnapshotListener((snapshots, error) -> {
+                    if (Objects.requireNonNull(snapshots).getDocumentChanges().get(0).getType().equals(DocumentChange.Type.ADDED))
+                        NotificationsRepository.this.loadNotifications();
+                });
     }
 
     public void removeListener() {
@@ -73,7 +80,6 @@ public class NotificationsRepository {
     }
 
     public void deleteNotification(String id) {
-        Log.d("nowaybro", "deletingNotification: " + id);
         db.collection("users").document(email).collection("notifications").document(id).delete();
     }
     public void markAsRead(String id){

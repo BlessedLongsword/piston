@@ -35,8 +35,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final NotificationsViewModel viewModel;
     private OnItemClick itemClick;
     private final SparseBooleanArray selectedItems;
-    private final SparseBooleanArray deletedItems;
-    private final SparseBooleanArray readItems;
     private int selectedIndex = -1;
     final boolean darkModeEnabled;
     private ColorStateList color;
@@ -58,7 +56,9 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             binding.setNotification(item);
         }
 
-        public ItemNotificationPostBinding getBinding() { return binding; }
+        public ItemNotificationPostBinding getBinding() {
+            return binding;
+        }
 
     }
 
@@ -82,8 +82,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         viewModel = new ViewModelProvider(activity).get(NotificationsViewModel.class);
         viewModel.getNotifications().observe(activity, notifications -> notifyDataSetChanged());
         selectedItems = new SparseBooleanArray();
-        deletedItems = new SparseBooleanArray();
-        readItems = new SparseBooleanArray();
         this.darkModeEnabled = darkModeEnabled;
     }
 
@@ -182,13 +180,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 if (selectedIndex == position) selectedIndex = -1;
                 hold.getBinding().notificationPostCard.setCardBackgroundColor(color);
             }
-            if(deletedItems.get(position,false)){
-                viewModel.deleteNotification(notificationPost.getNotificationID());
-                deletedItems.put(position, false);
-            }
-            if(readItems.get(position,false)){
-                viewModel.markAsRead(notificationPost.getNotificationID());
-            }
         }
         else {
             NotificationReply notificationReply = Objects.requireNonNull((NotificationReply) Objects.requireNonNull(viewModel
@@ -244,13 +235,6 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 hold.getBinding().replyCheck.setVisibility(View.GONE);
                 if (selectedIndex == position) selectedIndex = -1;
                 hold.getBinding().notificationReplyCard.setCardBackgroundColor(color);
-            }
-            if(deletedItems.get(position,false)){
-                viewModel.deleteNotification(notificationReply.getNotificationID());
-                deletedItems.put(position, false);
-            }
-            if(readItems.get(position,false)){
-                viewModel.markAsRead(notificationReply.getNotificationID());
             }
         }
     }
@@ -335,17 +319,25 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public void deleteNotifications() {
-        for(int i = getSelectedItems().size() - 1; i >= 0; i--){
-            deletedItems.put(getSelectedItems().get(i),true);
-            notifyItemChanged(getSelectedItems().get(i));
+        for (int i = getSelectedItems().size() - 1; i >= 0; i--) {
+            viewModel.deleteNotification(Objects.requireNonNull(viewModel.getNotifications()
+                    .getValue()).get(getSelectedItems().get(i)).getNotificationID());
         }
+        viewModel.updateNotifications();
     }
 
     public void markAsRead() {
-        for(int i = getSelectedItems().size() - 1; i >= 0; i--){
-            readItems.put(getSelectedItems().get(i),true);
-            notifyItemChanged(getSelectedItems().get(i));
+        boolean changed = false;
+        for(int i = getSelectedItems().size() - 1; i >= 0; i--) {
+            Notification notification = Objects.requireNonNull(viewModel.getNotifications()
+                    .getValue()).get(getSelectedItems().get(i));
+            if (!notification.getRead()) {
+                changed = true;
+                viewModel.markAsRead(notification.getNotificationID());
+            }
         }
+        if (changed)
+            viewModel.updateNotifications();
     }
 
 }

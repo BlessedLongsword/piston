@@ -36,5 +36,11 @@ public class NotificationsViewModel extends ViewModel implements NotificationsRe
         repository.deleteNotification(id);
     }
 
-    public void markAsRead(String id){repository.markAsRead(id);}
+    public void markAsRead(String id){
+        repository.markAsRead(id);
+    }
+
+    public void updateNotifications() {
+        repository.loadNotifications();
+    }
 }
