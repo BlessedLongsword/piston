@@ -189,9 +189,11 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
     }
 
     public void goToReply(String replyID) {
-        View view = binding.recyclerviewPosts.findViewWithTag(replyID);
-        float y = binding.recyclerviewPosts.getY() + view.getY();
-        binding.postScrollView.smoothScrollTo(0, (int) y);
+        try {
+            View view = binding.recyclerviewPosts.findViewWithTag(replyID);
+            float y = binding.recyclerviewPosts.getY() + view.getY();
+            binding.postScrollView.smoothScrollTo(0, (int) y);
+        } catch (Exception ignored) {}
     }
 
     @SuppressWarnings("unused")
