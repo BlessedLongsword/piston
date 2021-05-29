@@ -58,6 +58,7 @@ public class ProfileImageActivity extends PickImageActivity {
     @Override
     protected void setUri(Uri imageUri) {
         viewModel.setImage(imageUri);
+        binding.picture.setImageURI(imageUri);
     }
 
     @SuppressWarnings("unused")
