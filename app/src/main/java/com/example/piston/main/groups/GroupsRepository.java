@@ -119,6 +119,7 @@ public class GroupsRepository {
 
     public void removeListener() {
         listenerRegistrationUser.remove();
+        listenerRegistrationGroups.remove();
     }
 
 }

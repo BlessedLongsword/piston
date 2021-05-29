@@ -1,7 +1,5 @@
 package com.example.piston.main.notifications;
 
-import android.util.Log;
-
 import com.example.piston.data.notifications.Notification;
 import com.example.piston.data.notifications.NotificationPost;
 import com.example.piston.data.notifications.NotificationReply;
