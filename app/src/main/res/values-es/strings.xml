@@ -139,7 +139,7 @@
     <string name="field">Campo</string>
     <string name="edit_group_btn">Editar título</string>
     <string name="make_moderator">Hacer Moderador</string>
-    <string name="dismiss_as_moderator">Deshacer Moderator</string>
+    <string name="dismiss_as_moderator">Deshacer Moderador</string>
     <string name="kick_from_group">Echar del Grupo</string>
     <string name="no_featured">Este usuario no tiene publicaciones públicas</string>
     <string name="no_featured_current">No tienes publicaciones públicas</string>
@@ -149,14 +149,14 @@
     <string name="not_belongs_to_group">No perteneces al grupo que contiene esta publicación!</string>
     <string name="share_group">Compartir Grupo</string>
     <string name="add_note">Añadir Nota</string>
-    <string name="settings_follow_theme">Follow System Theme</string>
+    <string name="settings_follow_theme">Seguir Tema del Sistema</string>
     <string name="pin_post">Fijar Post</string>
     <string name="unpin_post">Desfijar Post</string>
     <string name="pinned">Se ha fijado la publicación</string>
     <string name="unpinned">La publicación ya no está fijada</string>
     <string name="pinned_personal">Se ha fijado la nota</string>
     <string name="unpinned_personal">La nota ya no está fijada</string>
-    <string name="notifications_enabled">Push Notifications</string>
+    <string name="notifications_enabled">Notificaciones push</string>
     <string name="filter">Filtrar</string>
     <string name="filter_by">Filtrar por</string>
     <string name="filter_default">Defecto</string>
