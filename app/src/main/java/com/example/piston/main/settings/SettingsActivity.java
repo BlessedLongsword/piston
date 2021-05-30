@@ -19,6 +19,8 @@ import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private ActivitySettingsBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         }
 
-        ActivitySettingsBinding binding = DataBindingUtil.setContentView(
+        binding = DataBindingUtil.setContentView(
                 this, R.layout.activity_settings);
 
         boolean notificationsEnabled = prefs.getBoolean(Values.NOTIFICATIONS_ENABLED, false);
@@ -86,5 +88,13 @@ public class SettingsActivity extends AppCompatActivity {
         );
 
         binding.settingsTopAppBar.setNavigationOnClickListener((view) -> finish());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences(Values.SHARED_PREFS, Context.MODE_PRIVATE);
+        boolean notificationsEnabled = prefs.getBoolean(Values.NOTIFICATIONS_ENABLED, false);
+        binding.notificationsEnabled.setChecked(notificationsEnabled);
     }
 }
