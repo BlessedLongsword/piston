@@ -3,6 +3,8 @@ package com.example.piston.utilities;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,6 @@ public class EditPopup {
         saveButton = popupView.findViewById(R.id.save_button);
         getEditText().setText(value);
         getEditText().selectAll();
-
         // Show keyboard once pop up has finished the animation
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {

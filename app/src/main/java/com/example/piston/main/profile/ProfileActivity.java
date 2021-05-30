@@ -121,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
         EditPopup popup = new EditPopup(this, getString(R.string.birth_date),
                 Objects.requireNonNull(binding.profileDateOfBirth.getText()).toString());
         popup.getSaveButton().setOnClickListener(v -> profileViewModel.editBirth(popup.getText()));
+        popup.getEditText().setInputType(InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
         profileViewModel.getBirthDateError().observe(this, birthDateError -> {
             switch (birthDateError) {
                 case NONE:

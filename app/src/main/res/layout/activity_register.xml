@@ -131,6 +131,7 @@
                     android:id="@+id/reg_birthday_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="date"
                     android:maxLength="@integer/date_max_length"
                     android:text="@={viewModel.birthDate}"
                     onFocusLost="@{() -> viewModel.birthdayUpdate()}"/>
