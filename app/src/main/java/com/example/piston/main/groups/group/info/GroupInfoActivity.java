@@ -134,7 +134,7 @@ public class GroupInfoActivity extends PickImageActivity {
         shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.piston.com/" + Values.JOIN + "/" +
                 groupID);
         shareIntent.setType("text/plain");
-        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_post)));
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_group)));
     }
 
     @SuppressWarnings("unused")
