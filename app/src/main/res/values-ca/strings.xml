@@ -171,6 +171,8 @@
     <string name="replied">ha respòs</string>
     <string name="delete_image">Eliminar Imatge</string>
     <string name="change_image">Canviar Imatge</string>
+    <string name="foreground_notification_title">En execució</string>
+    <string name="foreground_notification_text">Clica per parar d\'escoltar notificacions</string>
 
     <string-array name="global_filters">
         <item>Defecte</item>

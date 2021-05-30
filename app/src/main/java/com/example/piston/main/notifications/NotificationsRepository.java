@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class NotificationsRepository {
@@ -68,7 +69,8 @@ public class NotificationsRepository {
     private void listenChanges() {
         listenerRegistration = userDocRef.collection("notifications")
                 .addSnapshotListener((snapshots, error) -> {
-                    if (Objects.requireNonNull(snapshots).getDocumentChanges().get(0).getType().equals(DocumentChange.Type.ADDED))
+                    List<DocumentChange> documentChanges = Objects.requireNonNull(snapshots).getDocumentChanges();
+                    if (!documentChanges.isEmpty() && documentChanges.get(0).getType().equals(DocumentChange.Type.ADDED))
                         NotificationsRepository.this.loadNotifications();
                 });
     }

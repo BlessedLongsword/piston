@@ -80,8 +80,8 @@ public class NotificationsService extends Service {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setPriority(NotificationCompat.PRIORITY_LOW)
                     .setSmallIcon(R.mipmap.ic_launcher_foreground)
-                    .setContentTitle("Piston is running")
-                    .setContentText("Tap to stop listening for notifications")
+                    .setContentTitle(getString(R.string.foreground_notification_title))
+                    .setContentText(getString(R.string.foreground_notification_text))
                     .setGroup("pistonAlone")
                     .setContentIntent(contentIntent);
 

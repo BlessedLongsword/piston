@@ -176,6 +176,8 @@
     <string name="replied">replied</string>
     <string name="delete_image">Delete Image</string>
     <string name="change_image">Change Image</string>
+    <string name="foreground_notification_title">Running</string>
+    <string name="foreground_notification_text">Tap to stop listening for notifications</string>
 
     <string-array name="global_filters">
         <item>Default</item>

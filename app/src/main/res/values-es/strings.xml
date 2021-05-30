@@ -170,6 +170,8 @@
     <string name="replied">respondió</string>
     <string name="delete_image">Eliminar Imagen</string>
     <string name="change_image">Cambiar Imagen</string>
+    <string name="foreground_notification_title">En ejecución</string>
+    <string name="foreground_notification_text">Pulsa para dejar de escuchar notificaciones</string>
 
     <string-array name="global_filters">
         <item>Defecto</item>
