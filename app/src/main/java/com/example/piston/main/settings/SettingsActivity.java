@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -68,6 +69,9 @@ public class SettingsActivity extends AppCompatActivity {
                     AppCompatDelegate.setDefaultNightMode((binding.settingsDarkMode.isChecked()?
                             AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
             });
+        }
+        else {
+            binding.settingsFollowSystem.setVisibility(View.GONE);
         }
         if (!followSystem) {
             boolean darkMode = prefs.getBoolean(Values.DARK_THEME, false);
