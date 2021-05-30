@@ -68,7 +68,7 @@ public class GroupRepository {
     private void loadGroupParams() {
         groupDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult().exists()) {
-                listener.setTitle(Objects.requireNonNull(task.getResult().get("title")).toString());
+                listener.setTitle((String) Objects.requireNonNull(task.getResult().get("title")));
                 groupDocRef.collection("members").document(email).get()
                         .addOnCompleteListener(task1 -> {
                             if (task.isSuccessful()) {

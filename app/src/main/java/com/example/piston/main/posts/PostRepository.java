@@ -131,7 +131,7 @@ public class PostRepository {
                 int counter = 0;
                 for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(
                         task1.getResult())) {
-                   String replyType = Objects.requireNonNull(documentSnapshot.get("type")).toString();
+                   String replyType = (String) Objects.requireNonNull(documentSnapshot.get("type"));
                    Timestamp timestamp = (Timestamp) documentSnapshot.get("timestamp", ESTIMATE);
                    if (replyType.equals("reply")) {
                        Reply post = documentSnapshot.toObject(Reply.class);
@@ -171,13 +171,13 @@ public class PostRepository {
 
         postDocRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                db.collection("emails").document(Objects.requireNonNull(Objects
-                        .requireNonNull(task.getResult()).get("owner")).toString())
+                db.collection("emails").document(
+                        (String) Objects.requireNonNull(task.getResult().get("owner")))
                         .get().addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful() && !task1.getResult().getId().equals(user)) {
                                 DocumentReference docRef2 = db.collection("users")
-                                        .document(Objects.requireNonNull(Objects.requireNonNull
-                                                (task1.getResult()).get("email")).toString())
+                                        .document((String) Objects.requireNonNull(
+                                                task1.getResult().get("email")))
                                         .collection("notifications")
                                         .document();
                                 String notificationID = docRef2.getId();
@@ -209,8 +209,7 @@ public class PostRepository {
             db.collection("emails").document(quoteOwner).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DocumentReference docRef2 = db.collection("users")
-                            .document(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
-                                    .get("email")).toString())
+                            .document((String) Objects.requireNonNull(task.getResult().get("email")))
                             .collection("notifications")
                             .document();
                     String notificationID = docRef2.getId();

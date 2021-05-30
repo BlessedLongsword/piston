@@ -173,7 +173,8 @@ public class PostActivity extends AppCompatActivity implements PostAdapter.PostA
         if (scope.equals("folders")){
             binding.heartButton.setVisibility(View.GONE);
             binding.shareButton.setVisibility(View.GONE);
-            binding.userProfile.setVisibility(View.GONE);
+            binding.postProfilePictureCard.setVisibility(View.GONE);
+            binding.postOwner.setVisibility(View.GONE);
             binding.repliesText.setVisibility(View.GONE);
             binding.heartCount.setVisibility(View.GONE);
             binding.threadReplyButton.setText(R.string.add_note);
