@@ -22,6 +22,7 @@ public class RegisterViewModel extends CommonRegisterViewModel implements Regist
     private final RegisterRepository registerRepository = new RegisterRepository(this);
 
     public void register() {
+        registerRepository.checkBirthDate(birthDate.getValue());
         try {
             registerRepository.register(username.getValue(), Objects.requireNonNull(email.getValue()).toLowerCase(),
                     password.getValue(), birthDate.getValue());
